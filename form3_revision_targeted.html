@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Form 3 Physics — Targeted Revision Paper</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
+
+  :root {
+    --bg: #f7f6f3;
+    --white: #ffffff;
+    --ink: #1c1c1e;
+    --ink2: #44444a;
+    --ink3: #888894;
+    --border: #e2e2e8;
+    --border2: #d0d0da;
+    --blue: #1a56db;
+    --blue-bg: #eff4ff;
+    --blue-border: #c3d4fa;
+    --green: #057a55;
+    --green-bg: #f0fdf4;
+    --green-border: #a7f3d0;
+    --amber: #92400e;
+    --amber-bg: #fffbeb;
+    --amber-border: #fcd34d;
+    --red: #991b1b;
+    --red-bg: #fef2f2;
+    --red-border: #fecaca;
+    --purple: #5b21b6;
+    --purple-bg: #f5f3ff;
+    --purple-border: #c4b5fd;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    padding: 20px 16px 40px;
+    line-height: 1.6;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  /* HEADER */
+  .header {
+    background: var(--ink);
+    color: #fff;
+    border-radius: 14px;
+    padding: 20px 24px;
+    margin-bottom: 20px;
+  }
+  .header-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .header h1 { font-size: 18px; font-weight: 700; color: #fff; }
+  .header .sub { font-size: 12px; color: #aaa; margin-top: 2px; }
+  .meta-pills { display: flex; gap: 8px; flex-wrap: wrap; }
+  .pill {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.2);
+    color: #ddd;
+  }
+  .pill.hi { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.25); color: #fff; }
+  .warn-strip {
+    background: rgba(252,211,77,0.15);
+    border: 1px solid rgba(252,211,77,0.35);
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 12px;
+    color: #fcd34d;
+    margin-top: 10px;
+  }
+
+  /* SECTION HEADER */
+  .sec-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 22px 0 12px;
+  }
+  .sec-label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--ink3);
+    white-space: nowrap;
+  }
+  .sec-line { flex: 1; height: 1px; background: var(--border); }
+  .sec-marks {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--ink3);
+    white-space: nowrap;
+  }
+
+  /* QUESTION CARD */
+  .qcard {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px 18px;
+    margin-bottom: 12px;
+    position: relative;
+  }
+  .qcard:hover { border-color: var(--border2); }
+
+  .qtop {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+  }
+  .qnum {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--ink);
+    min-width: 28px;
+  }
+  .chapter-tag {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: .4px;
+  }
+  .tag-blue   { background: var(--blue-bg);   color: var(--blue);   border: 1px solid var(--blue-border); }
+  .tag-green  { background: var(--green-bg);  color: var(--green);  border: 1px solid var(--green-border); }
+  .tag-amber  { background: var(--amber-bg);  color: var(--amber);  border: 1px solid var(--amber-border); }
+  .tag-purple { background: var(--purple-bg); color: var(--purple); border: 1px solid var(--purple-border); }
+  .tag-red    { background: var(--red-bg);    color: var(--red);    border: 1px solid var(--red-border); }
+
+  .marks-tag {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--ink3);
+    margin-left: auto;
+  }
+
+  .qtext {
+    font-size: 13.5px;
+    color: var(--ink);
+    line-height: 1.7;
+    margin-bottom: 10px;
+  }
+  .qtext b { color: var(--ink); }
+
+  .options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5px 16px;
+    margin-bottom: 10px;
+  }
+  .opt {
+    font-size: 13px;
+    color: var(--ink2);
+    padding: 3px 0;
+  }
+
+  /* ANSWER */
+  .ans-btn {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 5px 14px;
+    border-radius: 6px;
+    border: 1px solid var(--border2);
+    background: var(--bg);
+    color: var(--ink2);
+    cursor: pointer;
+    font-family: 'Inter', Arial, sans-serif;
+    transition: all .15s;
+  }
+  .ans-btn:hover { background: var(--white); border-color: var(--blue); color: var(--blue); }
+  .ans-btn.open { background: var(--green-bg); border-color: var(--green-border); color: var(--green); }
+
+  .ans-box {
+    display: none;
+    margin-top: 10px;
+    padding: 12px 14px;
+    background: var(--green-bg);
+    border: 1px solid var(--green-border);
+    border-radius: 8px;
+    font-size: 13px;
+    line-height: 1.75;
+    color: #065f46;
+  }
+  .ans-box.show { display: block; }
+  .ans-box .correct { font-weight: 700; color: var(--green); }
+  .ans-box .warn { color: #92400e; font-weight: 600; }
+  .ans-box code {
+    font-family: 'JetBrains Mono', monospace;
+    background: rgba(0,0,0,0.06);
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-size: 12px;
+  }
+
+  /* WORK SPACE */
+  .workspace {
+    margin-top: 10px;
+    border: 1.5px dashed var(--border2);
+    border-radius: 8px;
+    padding: 10px 12px;
+    min-height: 64px;
+  }
+  .workspace-label {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--ink3);
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    margin-bottom: 4px;
+  }
+
+  /* INLINE TABLE */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin: 8px 0;
+  }
+  th {
+    background: var(--bg);
+    padding: 7px 10px;
+    font-weight: 700;
+    font-size: 11px;
+    border-bottom: 1.5px solid var(--border2);
+    text-align: left;
+    text-transform: uppercase;
+    letter-spacing: .4px;
+    color: var(--ink2);
+  }
+  td {
+    padding: 7px 10px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+    color: var(--ink2);
+  }
+  tr:last-child td { border-bottom: none; }
+
+  /* KNOWLEDGE REMINDER BOX */
+  .remind {
+    border-radius: 10px;
+    padding: 12px 15px;
+    margin-bottom: 14px;
+    font-size: 13px;
+    line-height: 1.7;
+    border: 1px solid;
+  }
+  .remind-blue   { background: var(--blue-bg);   border-color: var(--blue-border);   color: #1e3a8a; }
+  .remind-amber  { background: var(--amber-bg);  border-color: var(--amber-border);  color: #78350f; }
+  .remind-purple { background: var(--purple-bg); border-color: var(--purple-border); color: #4c1d95; }
+  .remind-red    { background: var(--red-bg);    border-color: var(--red-border);    color: #7f1d1d; }
+  .remind-title  { font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: .5px; margin-bottom: 5px; }
+
+  /* SVG diagrams */
+  .dia-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 12px;
+  }
+  .dia-title {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    color: var(--ink3);
+    margin-bottom: 10px;
+  }
+
+  /* SCORE BOX */
+  .score-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px,1fr));
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .score-cell {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 14px;
+    text-align: center;
+  }
+  .score-cell .slabel { font-size: 10px; font-weight: 600; color: var(--ink3); text-transform: uppercase; letter-spacing: .4px; margin-bottom: 4px; }
+  .score-cell .sval { font-size: 22px; font-weight: 700; color: var(--ink); }
+  .score-cell .sdenom { font-size: 13px; font-weight: 400; color: var(--ink3); }
+
+  .divider { height: 1px; background: var(--border); margin: 24px 0; }
+
+  @media (max-width: 520px) {
+    .options { grid-template-columns: 1fr; }
+    .header-top { flex-direction: column; }
+  }
+
+  @media print {
+    body { background: #fff; padding: 10px; }
+    .header { background: #1c1c1e !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    .ans-btn, .ans-box { display: none !important; }
+    .qcard, .dia-card, .remind { break-inside: avoid; page-break-inside: avoid; }
+    .workspace { min-height: 90px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-top">
+    <div>
+      <h1>Form 3 Physics — Targeted Revision Paper</h1>
+      <div class="sub">Ch.1 Speed &amp; Graphs &nbsp;·&nbsp; Ch.10 Waves &nbsp;·&nbsp; Ch.11 EM Spectrum</div>
+    </div>
+    <div class="meta-pills">
+      <div class="pill hi">45 marks</div>
+      <div class="pill">~55 min</div>
+      <div class="pill">No acceleration needed</div>
+    </div>
+  </div>
+  <div class="warn-strip">
+    ⚠️ Key reminder: <strong>Speed</strong> is a scalar (no direction). <strong>Velocity</strong> is a vector (needs direction). Never mix them up!
+  </div>
+</div>
+
+<!-- ══════════════ SECTION A ══════════════ -->
+<div class="sec-head">
+  <div class="sec-label">Section A — Multiple Choice</div>
+  <div class="sec-line"></div>
+  <div class="sec-marks">15 marks · 1 mark each</div>
+</div>
+
+<!-- Q1 -->
+<div class="qcard">
+  <div class="qtop">
+    <div class="qnum">Q1</div>
+    <div class="chapter-tag tag-blue">Ch.1 Speed</div>
+    <div class="marks-tag">1 mark</div>
+  </div>
+  <div class="qtext">A mouse runs 600 m in 5 minutes. What is its average speed in m/s?</div>
+  <div class="options">
+    <div class="opt">A. 0.5 m/s</div>
+    <div class="opt">B. 2 m/s</div>
+    <div class="opt">C. 120 m/s</div>
+    <div class="opt">D. 300 m/s</div>
+  </div>
+  <button class="ans-btn" onclick="tog(this)">▶ Show Answer</button>
+  <div class="ans-box">
+    <span class="correct">✅ Answer: B. 2 m/s</span><br>
+    First convert: 5 min = 5 × 60 = 300 s<br>
+    <code>speed = 600 ÷ 300 = 2 m/s</code><br>
+    <span class="warn">⚠️ Common mistake: forgetting to convert minutes → seconds!</span>
+  </div>
+</div>
+
+<!-- Q2 -->
+<div class="qcard">
+  <div class="qtop">
+    <div class="qnum">Q2</div>
+    <div class="chapter-tag tag-blue">Ch.1 Speed vs Velocity</div>
+    <div class="marks-tag">1 mark</div>
+  </div>
+  <div class="qtext">A cat runs 400 m north, then 300 m east. The total time taken is 100 s. Which of the following is correct?</div>
+  <div class="options">
+    <div class="opt">A. Average speed = 7 m/s, average velocity = 7 m/s</div>
+    <div class="opt">B. Average speed = 7 m/s, average velocity = 5 m/s N53°E</div>
+    <div class="opt">C. Average speed = 5 m/s, average velocity = 7 m/s</div>
+    <div class="opt">D. Average speed = 5 m/s, average velocity = 5 m/s</div>
+  </div>
+  <button class="ans-btn" onclick="tog(this)">▶ Show Answer</button>
+  <div class="ans-box">
+    <span class="correct">✅ Answer: B</span><br>
+    Total distance = 400 + 300 = 700 m &nbsp;→&nbsp; <code>speed = 700 ÷ 100 = 7 m/s</code><br>
+    Displacement = √(400² + 300²) = √250000 = 500 m (straight line)<br>
+    <code>velocity = 500 ÷ 100 = 5 m/s</code>, direction N53°E<br>
+    <span class="warn">⚠️ Speed uses total distance. Velocity uses displacement (straight line) + must state direction.</span>
+  </div>
+</div>
+
+<!-- Q3 -->
+<div class="qcard">
+  <div class="qtop">
+    <div class="qnum">Q3</div>
+    <div class="chapter-tag tag-blue">Ch.1 d-t Graph</div>
+    <div class="marks-tag">1 mark</div>
+  </div>
+  <div class="qtext">On a distance-time graph, a straight line with a steep positive gradient means the object is:</div>
+  <div class="options">
+    <div class="opt">A. Stationary</div>
+    <div class="opt">B. Moving slowly at constant speed</div>
+    <div class="opt">C. Moving fast at constant speed</div>
+    <div class="opt">D. Accelerating</div>
+  </div>
+  <button class="ans-btn" onclick="tog(this)">▶ Show Answer</button>
+  <div class="ans-box">
+    <span class="correct">✅ Answer: C. Moving fast at constant speed</span><br>
+    On a d-t graph: gradient = speed. Steeper slope = faster speed. A straight line (not curved) = constant speed.
+  </div>
+</div>
+
+<!-- Q4 -->
+<div class="qcard">
+  <div class="qtop">
+    <div class="qnum">Q4</div>
+    <div class="chapter-tag tag-blue">Ch.1 d-t Graph</div>
+    <div class="marks-tag">1 mark</div>
+  </div>
+  <div class="qtext">The graph below shows object P and object Q on the same distance-time graph. P is a straight line with gentle slope. Q is a straight line with steeper slope. Which statement is correct?</div>
+  <div class="options">
+    <div class="opt">A. P is faster than Q</div>
+    <div class="opt">B. P and Q have the same speed</div>
+    <div class="opt">C. Q is faster than P</div>
+    <div class="opt">D. Both are stationary</div>
+  </div>
+  <button class="ans-btn" onclick="tog(this)">▶ Show Answer</button>
+  <div class="ans-box">
+    <span class="correct">✅ Answer: C. Q is faster than P</span><br>
+    Steeper gradient on a d-t graph = greater speed. Q has the steeper slope, so Q is moving faster.
+  </div>
+</div>
+
+<!-- Q5 -->
+<div class="qcard">
+  <div class="qtop">
+    <div class="qnum">Q5</div>
+    <div class="chapter-tag tag-blue">Ch.1 Calculation</div>
+    <div class="marks-tag">1 mark</div>
+  </div>
+  <div class="qtext">Two animals start from the same point. Animal A travels 300 m in 60 s. Animal B travels 300 m in 50 s. Who arrives first and what is the difference in their arrival times?</div>
+  <div class="options">
+    <div class="opt">A. A arrives first, 10 s difference</div>
+    <div class="opt">B. B arrives first, 10 s difference</div>
+    <div class="opt">C. B arrives first, 0.6 s difference</div>
+    <div class="opt">D. They arrive at the same time</div>
+  </div>
+  <button class="ans-btn" onclick="tog(this)">▶ Show Answer</button>
+  <div class="ans-box">
+    <span class="correct">✅ Answer: B. B arrives first, 10 s difference</span><br>
+    A takes 60 s, B takes 50 s. B is faster → arrives 60 − 50 = <strong>10 s earlier</strong>.
+  </div>
+</div>
+
+<!-- Q6 -->
+<div class="qcard">
+  <div class="qtop">
+    <div class="qnum">Q6</div>
+    <div class="chapter-tag tag-green">Ch.10 Wave Types</div>
+    <div class="marks-tag">1 mark</div>
+  </div>
+  <div class="qtext">In a transverse wave, how do particles vibrate relative to the direction the wave travels?</div>
+  <div class="options">
+    <div class="opt">A. Parallel to wave direction</div>
+    <div class="opt">B. Perpendicular (at 90°) to wave direction</div>
+    <div class="opt">C. In circles</div>
+    <div class="opt">D. They do not vibrate</div>
+  </div>
+  <button class="ans-btn" onclick="tog(this)">▶ Show Answer</button>
+  <div class="ans-box">
+    <span class="correct">✅ Answer: B. Perpendicular to wave direction</span><br>
+    Transverse = particles vibrate at 90° to the direction of travel. Examples: light, water waves, all EM waves.<br>
+    Longitudinal = particles vibrate parallel (along) the direction of travel. Example: sound.
+  </div>
+</div>
+
+<!-- Q7 -->
+<div class="qcard">
+  <div class="qtop">
+    <div class="qnum">Q7</div>
+    <div class="chapter-tag tag-green">Ch.10 Wave Equation</div>
+    <div class="marks-tag">1 mark</div>
+  </div>
+  <div class="qtext">A wave has frequency 200 Hz and wavelength 0.5 m. What is its wave speed?</div>
+  <div class="options">
+    <div class="opt">A. 400 m/s</div>
+    <div class="opt">B. 100 m/s</div>
+    <div class="opt">C. 0.0025 m/s</div>
+    <div class="opt">D. 200.5 m/s</div>
+  </div>
+  <button class="ans-btn" onclick="tog(this)">▶ Show Answer</button>
+  <div class="ans-box">
+    <span class="correct">✅ Answer: B. 100 m/s</span><br>
+    <code>v = f × λ = 200 × 0.5 = 100 m/s</code>
+  </div>
+</div>
+
+<!-- Q8 -->
+<div class="qcard">
+  <div class="qtop">
+    <div class="qnum">Q8</div>
+    <div class="chapter-tag tag-green">Ch.10 Period</div>
+    <div class="marks-tag">1 mark</div>
+  </div>
+  <div class="qtext">A wave completes 25 cycles in 5 seconds. What is its period?</div>
+  <div class="options">
+    <div class="opt">A. 125 s</div>
+    <div class="opt">B. 5 s</div>
+    <div class="opt">C. 0.2 s</div>
+    <div class="opt">D. 0.04 s</div>
+  </div>
+  <button class="ans-btn" onclick="tog(this)">▶ Show Answer</button>
+  <div class="ans-box">
+    <span class="correct">✅ Answer: C. 0.2 s</span><br>
+    First find frequency: <code>f = 25 ÷ 5 = 5 Hz</code><br>
+    Then: <code>T = 1 ÷ f = 1 ÷ 5 = 0.2 s</code>
+  </div>
+</div>
+
+<!-- Q9 -->
+<div class="qcard">
+  <div class="qtop">
+    <div class="qnum">Q9</div>
+    <div class="chapter-tag tag-amber">Ch.11 EM Spectrum Order</div>
+    <div class="marks-tag">1 mark</div>
+  </div>
+  <div class="qtext">Which of the following lists the EM spectrum in order from LOWEST to HIGHEST frequency?</div>
+  <div class="options">
+    <div class="opt">A. Gamma → X-ray → UV → Visible → IR → Microwave → Radio</div>
+    <div class="opt">B. Radio → Microwave → IR → Visible → UV → X-ray → Gamma</div>
+    <div class="opt">C. Radio → UV → IR → Visible → Microwave → X-ray → Gamma</div>
+    <div class="opt">D. Visible → Radio → IR → Microwave → UV → X-ray → Gamma</div>
+  </div>
+  <button class="ans-btn" onclick="tog(this)">▶ Show Answer</button>
+  <div class="ans-box">
+    <span class="correct">✅ Answer: B</span><br>
+    Radio → Microwave → Infrared → Visible → UV → X-rays → Gamma<br>
+    <span class="warn">🧠 Mnemonic: <b>R</b>ather <b>M</b>ighty <b>I</b>ntelligent <b>V</b>ery <b>U</b>seful <b>X</b>-tra <b>G</b>reat</span>
+  </div>
+</div>
+
+<!-- Q10 -->
+<div class="qcard">
+  <div class="qtop">
+    <div class="qnum">Q10</div>
+    <div class="chapter-tag tag-amber">Ch.11 EM Properties</div>
+    <div class="marks-tag">1 mark</div>
+  </div>
+  <div class="qtext">Which of the following is TRUE about ALL electromagnetic waves?</div>
+  <div class="options">
+    <div class="opt">A. They require air to travel</div>
+    <div class="opt">B. They are longitudinal waves</div>
+    <div class="opt">C. They travel at 3 × 10⁸ m/s in vacuum</div>
+    <div class="opt">D. They are all visible to the human eye</div>
+  </div>
+  <button class="ans-btn" onclick="tog(this)">▶ Show Answer</button>
+  <div class="ans-box">
+    <span class="correct">✅ Answer: C</span><br>
+    All EM waves: travel at speed of light (3×10⁸ m/s) in vacuum, are transverse, and can travel through vacuum without a medium.
+  </div>
+</div>
+
+<!-- Q11 -->
+<div class="qcard">
+  <div class="qtop">
+    <div class="qnum">Q11</div>
+    <div class="chapter-tag tag-amber">Ch.11 Uses</div>
+    <div class="marks-tag">1 mark</div>
+  </div>
+  <div class="qtext">Which type of EM wave is used to sterilise medical equipment and treat cancer?</div>
+  <div class="options">
+    <div class="opt">A. Infrared</div>
+    <div class="opt">B. Microwaves</div>
+    <div class="opt">C. Ultraviolet</div>
+    <div class="opt">D. Gamma rays</div>
+  </div>
+  <button class="ans-btn" onclick="tog(this)">▶ Show Answer</button>
+  <div class="ans-box">
+    <span class="correct">✅ Answer: D. Gamma rays</span><br>
+    Gamma rays are used in cancer radiotherapy and to sterilise medical/food equipment.<br>
+    UV is used for sterilisation too but NOT for cancer treatment inside the body.
+  </div>
+</div>
+
+<!-- Q12 -->
+<div class="qcard">
+  <div class="qtop">
+    <div class="qnum">Q12</div>
+    <div class="chapter-tag tag-amber">Ch.11 Dangers</div>
+    <div class="marks-tag">1 mark</div>
+  </div>
+  <div class="qtext">Prolonged exposure to ultraviolet (UV) radiation is most likely to cause:</div>
+  <div class="options">
+    <div class="opt">A. Internal tissue heating</div>
+    <div class="opt">B. Skin burns and skin cancer</div>
+    <div class="opt">C. Radiation sickness and DNA damage</div>
+    <div class="opt">D. Broken bones</div>
+  </div>
+  <button class="ans-btn" onclick="tog(this)">▶ Show Answer</button>
+  <div class="ans-box">
+    <span class="correct">✅ Answer: B. Skin burns and skin cancer</span><br>
+    UV → skin cancer, sunburn, eye cataracts.<br>
+    Internal tissue heating = microwaves. DNA damage at high dose = gamma/X-rays (more penetrating).
+  </div>
+</div>
+
+<!-- Q13 -->
+<div class="qcard">
+  <div class="qtop">
+    <div class="qnum">Q13</div>
+    <div class="chapter-tag tag-amber">Ch.11 Wavelength vs Frequency</div>
+    <div class="marks-tag">1 mark</div>
+  </div>
+  <div class="qtext">As frequency increases across the EM spectrum, what happens to wavelength?</div>
+  <div class="options">
+    <div class="opt">A. It also increases</div>
+    <div class="opt">B. It decreases</div>
+    <div class="opt">C. It stays the same</div>
+    <div class="opt">D. It depends on the medium</div>
+  </div>
+  <button class="ans-btn" onclick="tog(this)">▶ Show Answer</button>
+  <div class="ans-box">
+    <span class="correct">✅ Answer: B. It decreases</span><br>
+    Since <code>c = f × λ</code> and c is constant (3×10⁸ m/s), if f goes up, λ must go down. They are inversely proportional.
+  </div>
+</div>
+
+<!-- Q14 -->
+<div class="qcard">
+  <div class="qtop">
+    <div class="qnum">Q14</div>
+    <div class="chapter-tag tag-green">Ch.10 Wave diagram</div>
+    <div class="marks-tag">1 mark</div>
+  </div>
+  <div class="qtext">On a transverse wave diagram, the amplitude is measured as:</div>
+  <div class="options">
+    <div class="opt">A. Horizontal distance from one crest to the next</div>
+    <div class="opt">B. Vertical distance from crest to trough</div>
+    <div class="opt">C. Vertical distance from rest position to a crest</div>
+    <div class="opt">D. The speed of the wave</div>
+  </div>
+  <button class="ans-btn" onclick="tog(this)">▶ Show Answer</button>
+  <div class="ans-box">
+    <span class="correct">✅ Answer: C</span><br>
+    Amplitude = distance from the <b>rest/equilibrium position</b> to a crest (or to a trough).<br>
+    <span class="warn">⚠️ NOT crest to trough — that is 2× the amplitude.</span>
+  </div>
+</div>
+
+<!-- Q15 -->
+<div class="qcard">
+  <div class="qtop">
+    <div class="qnum">Q15</div>
+    <div class="chapter-tag tag-amber">Ch.11 Identify wave type</div>
+    <div class="marks-tag">1 mark</div>
+  </div>
+  <div class="qtext">A remote control sends a signal to a TV. A microwave oven heats food. Which waves are being used, in that order?</div>
+  <div class="options">
+    <div class="opt">A. Radio waves; Infrared</div>
+    <div class="opt">B. Infrared; Microwaves</div>
+    <div class="opt">C. Visible light; X-rays</div>
+    <div class="opt">D. UV; Gamma rays</div>
+  </div>
+  <button class="ans-btn" onclick="tog(this)">▶ Show Answer</button>
+  <div class="ans-box">
+    <span class="correct">✅ Answer: B. Infrared; Microwaves</span><br>
+    Remote controls use infrared. Microwave ovens use microwaves (which heat food by causing water molecules to vibrate).
+  </div>
+</div>
+
+<!-- ══════════════ SECTION B ══════════════ -->
+<div class="sec-head">
+  <div class="sec-label">Section B — Structured Questions</div>
+  <div class="sec-line"></div>
+  <div class="sec-marks">22 marks</div>
+</div>
+
+<!-- Q16 — The Mouse Question (targeted) -->
+<div class="remind remind-red">
+  <div class="remind-title">⚠️ Focus Question — Speed vs Velocity (This is where you lost marks last time!)</div>
+  Always ask yourself: does the question ask for <b>speed</b> (use total distance) or <b>velocity</b> (use displacement + state direction)?
+</div>
+
+<div class="qcard">
+  <div class="qtop">
+    <div class="qnum">Q16</div>
+    <div class="chapter-tag tag-blue">Ch.1 — Speed vs Velocity</div>
+    <div class="marks-tag">7 marks</div>
+  </div>
+  <div class="qtext">
+    A dog runs from point P to point R via point Q. PQ = 400 m (heading east), QR = 300 m (heading south). The dog's average speed is 2 m/s.<br><br>
+    <b>(a)</b> Find the total distance travelled and the time taken. <em>(2 marks)</em><br>
+    <b>(b)</b> Find the dog's displacement (magnitude and direction) from P to R. <em>(2 marks)</em><br>
+    <b>(c)</b> Find the dog's average velocity. <em>(2 marks)</em><br>
+    <b>(d)</b> A cat starts from P at the same time. The cat travels in a straight line directly from P to R. The cat's average speed is the same as the dog's average speed (2 m/s). Who arrives at R first? Show working. <em>(1 mark)</em>
+  </div>
+  <div class="workspace">
+    <div class="workspace-label">Working space</div>
+  </div>
+  <button class="ans-btn" onclick="tog(this)">▶ Show Answer</button>
+  <div class="ans-box">
+    <b>(a)</b> Total distance = 400 + 300 = <span class="correct">700 m</span><br>
+    <code>time = distance ÷ speed = 700 ÷ 2 = 350 s</code><br><br>
+    <b>(b)</b> Displacement = √(400² + 300²) = √(160000 + 90000) = √250000 = <span class="correct">500 m</span><br>
+    Direction: <span class="correct">S53°E</span> (or bearing 127°) — from P to R, east then south<br><br>
+    <b>(c)</b> Average velocity = displacement ÷ time = 500 ÷ 350 = <span class="correct">1.43 m/s, direction S53°E</span><br>
+    <span class="warn">⚠️ Must state the direction! A number alone is NOT a velocity.</span><br><br>
+    <b>(d)</b> Cat travels straight line PR = 500 m at 2 m/s<br>
+    <code>cat's time = 500 ÷ 2 = 250 s</code><br>
+    Dog's time = 350 s &gt; 250 s → <span class="correct">Cat arrives first</span> (100 s earlier)
+  </div>
+</div>
+
+<!-- Q17 — Speed graph reading -->
+<div class="qcard">
+  <div class="qtop">
+    <div class="qnum">Q17</div>
+    <div class="chapter-tag tag-blue">Ch.1 — d-t Graph Reading</div>
+    <div class="marks-tag">5 marks</div>
+  </div>
+  <div class="qtext">
+    A distance-time graph shows the journey of a cyclist:
+    <svg width="100%" viewBox="0 0 480 220" style="display:block;margin:12px 0;font-family:Arial,sans-serif">
+      <!-- axes -->
+      <line x1="55" y1="15" x2="55" y2="185" stroke="#333" stroke-width="1.5"/>
+      <line x1="55" y1="185" x2="445" y2="185" stroke="#333" stroke-width="1.5"/>
+      <!-- axis labels -->
+      <text font-size="12" fill="#333" x="50" y="12" text-anchor="end">d (m)</text>
+      <text font-size="12" fill="#333" x="448" y="189">t (s)</text>
+      <!-- y gridlines and labels -->
+      <line x1="52" y1="185" x2="445" y2="185" stroke="#eee" stroke-width="1"/>
+      <line x1="52" y1="145" x2="445" y2="145" stroke="#eee" stroke-width="1"/>
+      <line x1="52" y1="105" x2="445" y2="105" stroke="#eee" stroke-width="1"/>
+      <line x1="52" y1="65" x2="445" y2="65" stroke="#eee" stroke-width="1"/>
+      <line x1="52" y1="25" x2="445" y2="25" stroke="#eee" stroke-width="1"/>
+      <text font-size="11" fill="#666" x="50" y="189" text-anchor="end">0</text>
+      <text font-size="11" fill="#666" x="50" y="149" text-anchor="end">100</text>
+      <text font-size="11" fill="#666" x="50" y="109" text-anchor="end">200</text>
+      <text font-size="11" fill="#666" x="50" y="69" text-anchor="end">300</text>
+      <text font-size="11" fill="#666" x="50" y="29" text-anchor="end">400</text>
+      <!-- x labels -->
+      <text font-size="11" fill="#666" x="55" y="200" text-anchor="middle">0</text>
+      <text font-size="11" fill="#666" x="135" y="200" text-anchor="middle">20</text>
+      <text font-size="11" fill="#666" x="215" y="200" text-anchor="middle">40</text>
+      <text font-size="11" fill="#666" x="295" y="200" text-anchor="middle">60</text>
+      <text font-size="11" fill="#666" x="375" y="200" text-anchor="middle">80</text>
+      <text font-size="11" fill="#666" x="440" y="200" text-anchor="middle">100</text>
+      <!-- x gridlines -->
+      <line x1="135" y1="15" x2="135" y2="185" stroke="#eee" stroke-width="1"/>
+      <line x1="215" y1="15" x2="215" y2="185" stroke="#eee" stroke-width="1"/>
+      <line x1="295" y1="15" x2="295" y2="185" stroke="#eee" stroke-width="1"/>
+      <line x1="375" y1="15" x2="375" y2="185" stroke="#eee" stroke-width="1"/>
+      <!-- journey: 0→200m in 0→40s, then stationary 40→60s, then 200→400m in 60→100s -->
+      <line x1="55" y1="185" x2="215" y2="105" stroke="#1a56db" stroke-width="2.5"/>
+      <line x1="215" y1="105" x2="295" y2="105" stroke="#1a56db" stroke-width="2.5"/>
+      <line x1="295" y1="105" x2="440" y2="25" stroke="#1a56db" stroke-width="2.5"/>
+      <!-- region labels -->
+      <text font-size="11" fill="#1a56db" x="135" y="158" text-anchor="middle" font-weight="600">Stage 1</text>
+      <text font-size="11" fill="#1a56db" x="255" y="98" text-anchor="middle" font-weight="600">Stage 2</text>
+      <text font-size="11" fill="#1a56db" x="368" y="75" text-anchor="middle" font-weight="600">Stage 3</text>
+    </svg>
+    <b>(a)</b> Describe the motion in each stage. <em>(3 marks)</em><br>
+    <b>(b)</b> Calculate the speed in Stage 1. <em>(1 mark)</em><br>
+    <b>(c)</b> Calculate the speed in Stage 3. <em>(1 mark)</em>
+  </div>
+  <div class="workspace">
+    <div class="workspace-label">Working space</div>
+  </div>
+  <button class="ans-btn" onclick="tog(this)">▶ Show Answer</button>
+  <div class="ans-box">
+    <b>(a)</b><br>
+    Stage 1 (0–40 s): <span class="correct">Moving at constant speed</span> (straight line, positive gradient)<br>
+    Stage 2 (40–60 s): <span class="correct">Stationary</span> (flat/horizontal line, gradient = 0)<br>
+    Stage 3 (60–100 s): <span class="correct">Moving at constant speed</span> (straight line, positive gradient — different slope to stage 1)<br><br>
+    <b>(b)</b> Speed in Stage 1 = gradient = <code>(200 − 0) ÷ (40 − 0) = 200 ÷ 40 = <span class="correct">5 m/s</span></code><br><br>
+    <b>(c)</b> Speed in Stage 3 = gradient = <code>(400 − 200) ÷ (100 − 60) = 200 ÷ 40 = <span class="correct">5 m/s</span></code><br>
+    (Same speed in both stages in this case!)
+  </div>
+</div>
+
+<!-- Q18 — Wave calculation -->
+<div class="remind remind-blue">
+  <div class="remind-title">📐 Wave Formula Reminder</div>
+  <b>v = f × λ</b> &nbsp;&nbsp; (wave speed = frequency × wavelength)<br>
+  <b>T = 1 ÷ f</b> &nbsp;&nbsp; (period = 1 ÷ frequency)<br>
+  Units: v in m/s · f in Hz · λ in m · T in s
+</div>
+
+<div class="qcard">
+  <div class="qtop">
+    <div class="qnum">Q18</div>
+    <div class="chapter-tag tag-green">Ch.10 — Wave Calculations</div>
+    <div class="marks-tag">6 marks</div>
+  </div>
+  <div class="qtext">
+    A sound wave travels at 340 m/s and has a wavelength of 0.85 m.<br><br>
+    <b>(a)</b> Calculate the frequency of the sound wave. <em>(2 marks)</em><br>
+    <b>(b)</b> Calculate the period of the wave. <em>(2 marks)</em><br>
+    <b>(c)</b> The sound wave enters water, where its speed increases to 1500 m/s. The frequency does NOT change. Calculate the new wavelength in water. <em>(2 marks)</em>
+  </div>
+  <div class="workspace">
+    <div class="workspace-label">Working space</div>
+  </div>
+  <button class="ans-btn" onclick="tog(this)">▶ Show Answer</button>
+  <div class="ans-box">
+    <b>(a)</b> Rearrange v = fλ: <code>f = v ÷ λ = 340 ÷ 0.85 = <span class="correct">400 Hz</span></code><br><br>
+    <b>(b)</b> <code>T = 1 ÷ f = 1 ÷ 400 = <span class="correct">0.0025 s</span></code> (= 2.5 × 10⁻³ s)<br><br>
+    <b>(c)</b> Rearrange v = fλ: <code>λ = v ÷ f = 1500 ÷ 400 = <span class="correct">3.75 m</span></code><br>
+    Notice: when speed increases and frequency stays the same, wavelength increases too.
+  </div>
+</div>
+
+<!-- Q19 — EM spectrum fill table -->
+<div class="remind remind-amber">
+  <div class="remind-title">📡 EM Spectrum Reminder</div>
+  Low → High frequency: <b>R</b>adio · <b>M</b>icrowave · <b>I</b>nfrared · <b>V</b>isible · <b>U</b>V · <b>X</b>-ray · <b>G</b>amma<br>
+  All EM waves travel at <b>3 × 10⁸ m/s</b> in vacuum and are <b>transverse waves</b>.
+</div>
+
+<div class="qcard">
+  <div class="qtop">
+    <div class="qnum">Q19</div>
+    <div class="chapter-tag tag-amber">Ch.11 — EM Spectrum Uses &amp; Dangers</div>
+    <div class="marks-tag">4 marks</div>
+  </div>
+  <div class="qtext">
+    Complete the table by filling in ONE use and ONE danger for each type of EM wave. (4 marks — ½ mark each)
+    <table style="margin-top:10px">
+      <tr><th>EM Wave</th><th>ONE Use</th><th>ONE Danger</th></tr>
+      <tr><td>Microwave</td><td style="color:#ccc;font-style:italic">write here</td><td style="color:#ccc;font-style:italic">write here</td></tr>
+      <tr><td>Infrared</td><td style="color:#ccc;font-style:italic">write here</td><td style="color:#ccc;font-style:italic">write here</td></tr>
+      <tr><td>Ultraviolet</td><td style="color:#ccc;font-style:italic">write here</td><td style="color:#ccc;font-style:italic">write here</td></tr>
+      <tr><td>X-rays</td><td style="color:#ccc;font-style:italic">write here</td><td style="color:#ccc;font-style:italic">write here</td></tr>
+    </table>
+  </div>
+  <button class="ans-btn" onclick="tog(this)">▶ Show Answer</button>
+  <div class="ans-box">
+    <table>
+      <tr><th>EM Wave</th><th>Use</th><th>Danger</th></tr>
+      <tr><td><b>Microwave</b></td><td>Cooking / mobile phones / satellites</td><td>Heats internal body tissues</td></tr>
+      <tr><td><b>Infrared</b></td><td>Remote controls / thermal imaging</td><td>Skin burns</td></tr>
+      <tr><td><b>Ultraviolet</b></td><td>Sterilisation / detecting forged banknotes</td><td>Skin cancer / eye damage</td></tr>
+      <tr><td><b>X-rays</b></td><td>Medical imaging (bones) / airport security</td><td>Cell/DNA damage, cancer risk (ionising)</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- ══════════════ SECTION C ══════════════ -->
+<div class="sec-head">
+  <div class="sec-label">Section C — Extended / Explain</div>
+  <div class="sec-line"></div>
+  <div class="sec-marks">8 marks</div>
+</div>
+
+<div class="qcard">
+  <div class="qtop">
+    <div class="qnum">Q20</div>
+    <div class="chapter-tag tag-green">Ch.10 — Compare Wave Types</div>
+    <div class="marks-tag">4 marks</div>
+  </div>
+  <div class="qtext">
+    <b>(a)</b> State TWO differences between transverse waves and longitudinal waves. Give one example of each. <em>(4 marks)</em>
+  </div>
+  <div class="workspace" style="min-height:90px">
+    <div class="workspace-label">Working space</div>
+  </div>
+  <button class="ans-btn" onclick="tog(this)">▶ Show Answer</button>
+  <div class="ans-box">
+    Any two differences (1 mark each), plus examples (1 mark each):<br><br>
+    <b>Difference 1:</b> In transverse waves, particles vibrate perpendicular (90°) to the direction of wave travel. In longitudinal waves, particles vibrate parallel (along) the direction of travel.<br><br>
+    <b>Difference 2:</b> Transverse waves have crests and troughs. Longitudinal waves have compressions and rarefactions.<br><br>
+    <b>Examples:</b> Transverse = light / water waves / all EM waves. Longitudinal = sound.
+  </div>
+</div>
+
+<div class="qcard">
+  <div class="qtop">
+    <div class="qnum">Q21</div>
+    <div class="chapter-tag tag-amber">Ch.11 — Explain &amp; Apply</div>
+    <div class="marks-tag">4 marks</div>
+  </div>
+  <div class="qtext">
+    <b>(a)</b> State THREE properties shared by ALL electromagnetic waves. <em>(3 marks)</em><br><br>
+    <b>(b)</b> A radio wave has frequency 100 MHz (= 1 × 10⁸ Hz). Calculate its wavelength. (Speed of light = 3 × 10⁸ m/s) <em>(1 mark)</em>
+  </div>
+  <div class="workspace" style="min-height:80px">
+    <div class="workspace-label">Working space</div>
+  </div>
+  <button class="ans-btn" onclick="tog(this)">▶ Show Answer</button>
+  <div class="ans-box">
+    <b>(a)</b> Any three of:<br>
+    1. All travel at 3 × 10⁸ m/s in vacuum (speed of light)<br>
+    2. All are transverse waves<br>
+    3. All can travel through a vacuum (no medium needed)<br>
+    4. All transfer energy<br>
+    5. All obey c = fλ<br><br>
+    <b>(b)</b> <code>λ = c ÷ f = (3 × 10⁸) ÷ (1 × 10⁸) = <span class="correct">3 m</span></code>
+  </div>
+</div>
+
+<!-- SCORE BOX -->
+<div class="divider"></div>
+<div class="score-grid">
+  <div class="score-cell">
+    <div class="slabel">Section A MCQ</div>
+    <div class="sval">__ <span class="sdenom">/ 15</span></div>
+  </div>
+  <div class="score-cell">
+    <div class="slabel">Section B Structured</div>
+    <div class="sval">__ <span class="sdenom">/ 22</span></div>
+  </div>
+  <div class="score-cell">
+    <div class="slabel">Section C Extended</div>
+    <div class="sval">__ <span class="sdenom">/ 8</span></div>
+  </div>
+  <div class="score-cell">
+    <div class="slabel">Total</div>
+    <div class="sval">__ <span class="sdenom">/ 45</span></div>
+  </div>
+</div>
+
+<script>
+function tog(btn) {
+  const box = btn.nextElementSibling;
+  const showing = box.classList.toggle('show');
+  btn.classList.toggle('open', showing);
+  btn.textContent = showing ? '▼ Hide Answer' : '▶ Show Answer';
+}
+</script>
+</body>
+</html>
