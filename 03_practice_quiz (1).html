@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>F3 Chemistry — Practice Quiz</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;600;700;800&display=swap');
+  :root {
+    --bg:#f8f7f3; --card:#fff; --ink:#1a1a2e; --muted:#64748b; --rule:#e5e3db;
+    --blue:#2563eb; --green:#16a34a; --red:#dc2626; --amber:#d97706; --purple:#7c3aed;
+    --cbg:#f0fdf4; --cbr:#86efac; --wbg:#fef2f2; --wbr:#fca5a5;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;font-size:14px;line-height:1.7;}
+
+  /* COVER */
+  #cover{min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--ink);color:#fff;padding:40px 24px;text-align:center;}
+  #cover .inner{max-width:560px;}
+  .cover-badge{font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:#94a3b8;margin-bottom:16px;}
+  #cover h1{font-family:'Space Grotesk',sans-serif;font-size:38px;font-weight:800;line-height:1.1;margin-bottom:8px;}
+  #cover h1 em{color:#f59e0b;font-style:normal;}
+  #cover p{color:#94a3b8;font-size:14px;margin-bottom:32px;}
+  .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:32px;text-align:left;}
+  .info-item{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:14px 16px;}
+  .info-item .lbl{font-size:11px;color:#64748b;margin-bottom:2px;}
+  .info-item .val{font-weight:700;font-size:18px;}
+  .name-input{width:100%;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);border-radius:8px;padding:12px 16px;color:#fff;font-family:'Inter',sans-serif;font-size:16px;margin-bottom:20px;outline:none;transition:border-color .2s;}
+  .name-input:focus{border-color:#f59e0b;}
+  .name-input::placeholder{color:#64748b;}
+  .btn-start{width:100%;padding:16px;background:#f59e0b;color:#1a1a2e;border:none;border-radius:8px;font-family:'Space Grotesk',sans-serif;font-size:16px;font-weight:700;cursor:pointer;transition:background .15s;}
+  .btn-start:hover{background:#d97706;}
+
+  /* QUIZ */
+  #quiz-screen{display:none;}
+  .quiz-hdr{background:var(--ink);color:#fff;padding:16px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.15);}
+  .quiz-hdr .left{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px;}
+  .quiz-hdr .left span{color:#94a3b8;font-weight:400;font-size:13px;}
+  .prog-bar{flex:1;margin:0 20px;height:4px;background:rgba(255,255,255,.1);border-radius:2px;}
+  .prog-fill{height:100%;background:#f59e0b;border-radius:2px;transition:width .3s;}
+  .q-ctr{font-family:'Space Grotesk',sans-serif;font-size:13px;color:#94a3b8;white-space:nowrap;}
+  .quiz-body{max-width:820px;margin:0 auto;padding:32px 20px 80px;}
+
+  .sec-div{display:flex;align-items:center;gap:12px;margin:32px 0 20px;}
+  .sec-div .stag{font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:4px 12px;border-radius:4px;white-space:nowrap;}
+  .sec-div::after{content:'';flex:1;height:1px;background:var(--rule);}
+
+  .q-card{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:22px 24px;margin-bottom:16px;}
+  .q-num{font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;letter-spacing:.08em;color:var(--muted);margin-bottom:8px;}
+  .q-text{font-size:14px;font-weight:500;line-height:1.65;margin-bottom:16px;}
+  .q-table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13px;}
+  .q-table th{background:#f1f5f9;padding:8px 12px;text-align:left;font-weight:600;border:1px solid var(--rule);}
+  .q-table td{padding:8px 12px;border:1px solid var(--rule);}
+
+  .options{display:flex;flex-direction:column;gap:8px;}
+  .option{display:flex;align-items:flex-start;gap:12px;padding:11px 14px;border:1.5px solid var(--rule);border-radius:8px;cursor:pointer;transition:border-color .15s,background .15s;font-size:13px;line-height:1.5;user-select:none;}
+  .option:hover{border-color:#93c5fd;background:#f8faff;}
+  .option.selected{border-color:var(--blue);background:#eff6ff;}
+  .option.correct{border-color:var(--cbr);background:var(--cbg);}
+  .option.wrong{border-color:var(--wbr);background:var(--wbg);}
+  .option.reveal-correct{border-color:var(--cbr);background:var(--cbg);}
+  .opt-letter{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:13px;min-width:22px;height:22px;border-radius:50%;background:#f1f5f9;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;transition:background .15s,color .15s;}
+  .option.selected .opt-letter{background:var(--blue);color:#fff;}
+  .option.correct .opt-letter{background:var(--green);color:#fff;}
+  .option.wrong .opt-letter{background:var(--red);color:#fff;}
+  .option.reveal-correct .opt-letter{background:var(--green);color:#fff;}
+
+  .explanation{display:none;margin-top:12px;padding:12px 14px;background:#fffbeb;border:1px solid #fde68a;border-radius:8px;font-size:13px;line-height:1.65;}
+  .explanation .exp-title{font-weight:700;color:#92400e;margin-bottom:4px;}
+  .explanation.show{display:block;}
+
+  .submit-row{display:flex;justify-content:center;margin-top:40px;}
+  .btn-submit{padding:14px 48px;background:var(--ink);color:#fff;border:none;border-radius:8px;font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:background .15s;}
+  .btn-submit:hover{background:#2d3748;}
+  .btn-submit:disabled{background:#94a3b8;cursor:not-allowed;}
+
+  /* RESULT */
+  #result-screen{display:none;}
+  .res-hero{background:var(--ink);color:#fff;text-align:center;padding:60px 24px 48px;}
+  .res-hero .grade{font-family:'Space Grotesk',sans-serif;font-size:80px;font-weight:800;line-height:1;margin-bottom:8px;}
+  .grade.A{color:#4ade80;} .grade.B{color:#60a5fa;} .grade.C{color:#fbbf24;} .grade.F{color:#f87171;}
+  .res-hero .score-txt{font-size:18px;color:#94a3b8;margin-bottom:4px;}
+  .res-hero .name-txt{font-size:14px;color:#64748b;}
+  .res-body{max-width:820px;margin:0 auto;padding:40px 20px 80px;}
+  .stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:32px;}
+  .stat-box{background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:20px;text-align:center;}
+  .stat-box .sv{font-family:'Space Grotesk',sans-serif;font-size:28px;font-weight:800;margin-bottom:4px;}
+  .stat-box .sl{font-size:12px;color:var(--muted);}
+  .sv.green{color:var(--green);} .sv.red{color:var(--red);} .sv.blue{color:var(--blue);}
+  .review-title{font-family:'Space Grotesk',sans-serif;font-size:14px;font-weight:700;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:16px;}
+  .rev-card{background:var(--card);border:1px solid var(--rule);border-radius:10px;padding:18px 20px;margin-bottom:12px;}
+  .rev-card .rq{font-weight:600;margin-bottom:8px;font-size:14px;}
+  .rans{font-size:13px;padding:6px 10px;border-radius:6px;margin-bottom:6px;}
+  .rans.wrong-a{background:var(--wbg);color:var(--red);}
+  .rans.right-a{background:var(--cbg);color:var(--green);}
+  .rev-card .rexp{font-size:13px;color:#475569;margin-top:8px;padding-top:8px;border-top:1px solid var(--rule);}
+  .btn-retry{display:block;width:100%;max-width:320px;margin:32px auto 0;padding:14px;background:#f59e0b;color:#1a1a2e;border:none;border-radius:8px;font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:700;cursor:pointer;text-align:center;}
+  .btn-retry:hover{background:#d97706;}
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div id="cover">
+  <div class="inner">
+    <div class="cover-badge">F3 Chemistry · Term 2</div>
+    <h1>Chemical Bonding<br><em>Practice Quiz</em></h1>
+    <p>Ch 5–6 Calculations · Ch 7 Ionic · Ch 8 Covalent · Ch 9 Metallic<br>20 MCQ Questions · Suggested time: 25 minutes</p>
+    <div class="info-grid">
+      <div class="info-item"><div class="lbl">Questions</div><div class="val">20</div></div>
+      <div class="info-item"><div class="lbl">Marks each</div><div class="val">1</div></div>
+      <div class="info-item"><div class="lbl">Time allowed</div><div class="val">25 min</div></div>
+      <div class="info-item"><div class="lbl">Chapters</div><div class="val">Ch 5–9</div></div>
+    </div>
+    <input type="text" class="name-input" id="student-name" placeholder="Enter your name" />
+    <button class="btn-start" onclick="startQuiz()">Start Quiz →</button>
+  </div>
+</div>
+
+<!-- QUIZ SCREEN -->
+<div id="quiz-screen">
+  <div class="quiz-hdr">
+    <div class="left">F3 Chemistry <span id="hdr-name"></span></div>
+    <div class="prog-bar"><div class="prog-fill" id="prog-fill" style="width:0%"></div></div>
+    <div class="q-ctr" id="q-ctr">0 / 20 answered</div>
+  </div>
+  <div class="quiz-body" id="quiz-body"></div>
+  <div class="submit-row">
+    <button class="btn-submit" id="btn-submit" onclick="submitQuiz()">Submit Quiz</button>
+  </div>
+</div>
+
+<!-- RESULT SCREEN -->
+<div id="result-screen">
+  <div class="res-hero">
+    <div class="grade" id="res-grade">A</div>
+    <div class="score-txt" id="res-score">18 / 20</div>
+    <div class="name-txt" id="res-name"></div>
+  </div>
+  <div class="res-body">
+    <div class="stats-row">
+      <div class="stat-box"><div class="sv green" id="res-correct">0</div><div class="sl">Correct</div></div>
+      <div class="stat-box"><div class="sv red" id="res-wrong">0</div><div class="sl">Wrong</div></div>
+      <div class="stat-box"><div class="sv blue" id="res-pct">0%</div><div class="sl">Accuracy</div></div>
+    </div>
+    <div class="review-title">Answer Review</div>
+    <div id="review-list"></div>
+    <button class="btn-retry" onclick="retryQuiz()">Retry Quiz</button>
+  </div>
+</div>
+
+<script>
+const questions = [
+  // ── Ch 7 Ionic Bonding ──
+  {
+    section:"Ch 7 — Ionic Bonding", color:"#2563eb",
+    text:"Which of the following best explains why sodium chloride (NaCl) has a high melting point?",
+    options:["The covalent bonds in NaCl are very strong.","There are strong electrostatic attractions between oppositely charged ions.","The NaCl molecules are very large.","NaCl has many delocalized electrons."],
+    answer:1,
+    exp:"NaCl is an ionic compound with a giant ionic lattice. Its high melting point is due to <strong>strong electrostatic attractions between oppositely charged ions</strong> (Na⁺ and Cl⁻). NaCl has no covalent bonds, no discrete molecules, and no delocalized electrons — those belong to metals."
+  },
+  {
+    section:"Ch 7 — Ionic Bonding", color:"#2563eb",
+    text:"Calcium oxide (CaO) has a higher melting point than sodium chloride (NaCl). What is the main reason?",
+    options:["CaO has more atoms than NaCl.","Ca²⁺ and O²⁻ have higher charges than Na⁺ and Cl⁻, leading to stronger electrostatic forces.","CaO is less soluble in water.","CaO has a simpler crystal structure."],
+    answer:1,
+    exp:"CaO contains Ca²⁺ (+2) and O²⁻ (−2), while NaCl contains Na⁺ (+1) and Cl⁻ (−1). <strong>Higher ionic charges → stronger electrostatic attraction → higher melting point</strong>. This is the key principle for comparing ionic melting points."
+  },
+  {
+    section:"Ch 7 — Ionic Bonding", color:"#2563eb",
+    text:"Ionic compounds are brittle and crack when a force is applied. What is the correct explanation?",
+    options:["The ionic bonds are not strong enough to hold the crystal.","The lattice is held by weak intermolecular forces.","Layers of ions shift so that same-charge ions align and repel each other.","Delocalized electrons escape, weakening the structure."],
+    answer:2,
+    exp:"When force is applied, <strong>layers of ions shift</strong>. Same-charge ions (e.g. Na⁺ next to Na⁺) now align, causing <strong>repulsion</strong>, which causes the crystal to crack or shatter. This contrasts with metals, where layers slide without same-charge repulsion."
+  },
+  {
+    section:"Ch 7 — Ionic Bonding", color:"#2563eb",
+    text:"Which correctly describes the electrical conductivity of potassium chloride (KCl)?",
+    options:["Conducts in solid state only.","Conducts in all states.","Conducts when molten or dissolved in water, but not in solid state.","Does not conduct in any state."],
+    answer:2,
+    exp:"In the <strong>solid state</strong>, KCl ions are fixed in the lattice — they cannot move, so it does <strong>not conduct</strong>. When <strong>molten</strong> or dissolved in water, the ions become free to move (<strong>mobile ions</strong>), so it conducts. This is the key rule for all ionic compounds."
+  },
+  {
+    section:"Ch 7 — Ionic Bonding", color:"#2563eb",
+    text:"When an ionic solid dissolves in water, cations are attracted to which part of the water molecule?",
+    options:["The hydrogen end (δ⁺)","The oxygen end (δ⁻)","The centre of the water molecule","No attraction occurs"],
+    answer:1,
+    exp:"Water is a polar molecule. The oxygen end carries a partial negative charge (δ⁻) and the hydrogen end carries a partial positive charge (δ⁺). <strong>Cations (positive ions) are attracted to the oxygen end (δ⁻)</strong>. Anions are attracted to the hydrogen end (δ⁺)."
+  },
+  // ── Ch 8 Covalent Bonding ──
+  {
+    section:"Ch 8 — Covalent Bonding", color:"#16a34a",
+    text:"Iodine (I₂) has a low melting point. Which best explains this?",
+    options:["The covalent bonds in I₂ molecules are weak.","Iodine atoms are very small.","The intermolecular forces between I₂ molecules are weak.","Iodine does not form a lattice structure."],
+    answer:2,
+    exp:"<strong>Most common mistake!</strong> The low melting point of I₂ is due to <strong>weak intermolecular forces between molecules</strong> — NOT weak covalent bonds. The I–I covalent bond is actually fairly strong. When iodine melts, intermolecular forces are broken, not covalent bonds."
+  },
+  {
+    section:"Ch 8 — Covalent Bonding", color:"#16a34a",
+    text:"Which of the following statements about iodine (I₂) is INCORRECT?",
+    options:["It is a solid at room temperature and pressure.","It is a halogen.","It is soluble in water and organic solvents.","It reacts with sodium to form an ionic compound."],
+    answer:2,
+    exp:"Iodine is <strong>insoluble in water</strong> (non-polar molecule) but <strong>soluble in organic solvents</strong> (e.g. hexane). Option C — 'soluble in water AND organic solvents' — is incorrect. A is correct (solid at RTP); B is correct (Group 17 halogen); D is correct (2Na + I₂ → 2NaI)."
+  },
+  {
+    section:"Ch 8 — Covalent Bonding", color:"#16a34a",
+    text:"Which of the following has a giant covalent structure?",
+    options:["N₂H₄","OF₂","Silicon dioxide (SiO₂)","Carbon dioxide (CO₂)"],
+    answer:2,
+    exp:"<strong>SiO₂ (quartz/sand)</strong> has a giant covalent structure with a very high melting point and no electrical conductivity. N₂H₄ and OF₂ are both simple molecular; CO₂ is also simple molecular. Note: OF₂ is NOT giant covalent — a common exam trap!"
+  },
+  {
+    section:"Ch 8 — Covalent Bonding", color:"#16a34a",
+    text:"Which statement about diamond is INCORRECT?",
+    options:["It has a giant covalent structure.","It has a high melting point.","It dissolves in water to give a colourless solution.","It does not dissolve in hexane."],
+    answer:2,
+    exp:"Diamond does <strong>not dissolve in water</strong>, nor in organic solvents such as hexane. Option C is incorrect. A is correct (giant covalent); B is correct (m.p. ~3550°C); D is correct (insoluble in hexane)."
+  },
+  {
+    section:"Ch 8 — Covalent Bonding", color:"#16a34a",
+    text:"Graphite can conduct electricity but diamond cannot. What explains graphite's conductivity?",
+    options:["Graphite has mobile ions in its structure.","Graphite has delocalized electrons that can move within the layers.","Graphite dissolves in water to release charged particles.","Graphite has a simple molecular structure with free electrons."],
+    answer:1,
+    exp:"In graphite, each C atom bonds to 3 other C atoms, leaving <strong>one electron per atom delocalized</strong>. These delocalized electrons can move freely within the layers, allowing graphite to conduct. In diamond, each C bonds to 4 others — no free electrons, so no conduction."
+  },
+  {
+    section:"Ch 8 — Covalent Bonding", color:"#16a34a",
+    text:"The table below gives information about four substances. Which is most likely a simple molecular compound?\n\nSubstance | Melting point | Solid conductivity | Liquid conductivity | Solubility\nW | 17°C | Poor | Poor | Soluble\nX | 455°C | Poor | Good | Soluble\nY | 1064°C | Good | Good | Insoluble\nZ | 3550°C | Poor | Poor | Insoluble",
+    options:["W (m.p. 17°C, poor conductivity in all states)","X (m.p. 455°C, poor solid but good liquid conductivity)","Y (m.p. 1064°C, good conductivity in all states)","Z (m.p. 3550°C, poor conductivity in all states)"],
+    answer:0,
+    exp:"Simple molecular: <strong>low melting point + poor conductivity in all states</strong>. W (17°C, poor conductivity, soluble) fits perfectly. X conducts when liquid → ionic. Y conducts in all states → metallic. Z very high m.p. + no conductivity → giant covalent (like diamond)."
+  },
+  {
+    section:"Ch 8 — Covalent Bonding", color:"#16a34a",
+    text:"Cubic boron nitride (BN) is used as an abrasive. Which statement about cubic BN is correct?",
+    options:["It is a soft material.","It is an electrical conductor.","It has a structure similar to diamond.","It is brittle like ionic compounds."],
+    answer:2,
+    exp:"Cubic BN has a <strong>diamond-like giant covalent structure</strong> with alternating B and N atoms. It is extremely hard (hence used as an abrasive), does not conduct electricity, and is <strong>not brittle</strong> — brittleness is a characteristic of ionic compounds, not giant covalent structures."
+  },
+  // ── Ch 9 Metallic Bonding ──
+  {
+    section:"Ch 9 — Metallic Bonding", color:"#d97706",
+    text:"Metals are good electrical conductors because",
+    options:["the metal ions in the metal lattice are mobile.","the metal atoms in the metal lattice are mobile.","the outermost shell electrons of metal atoms are delocalized and can move freely.","metals dissolve in water to release ions."],
+    answer:2,
+    exp:"Metals conduct because their <strong>delocalized electrons can move freely</strong> throughout the metallic lattice. The metal ions themselves are <strong>fixed</strong> in position — they do not move. This is different from ionic conduction, which relies on mobile ions."
+  },
+  {
+    section:"Ch 9 — Metallic Bonding", color:"#d97706",
+    text:"Mercury (Hg) is a liquid at room temperature. Which statements about mercury are correct?\n(1) Mercury(II) ions and delocalized electrons are held together by metallic bonds.\n(2) Mercury is composed of discrete molecules.\n(3) Mercury is the only liquid metal at room temperature.",
+    options:["(1) only","(2) only","(1) and (3) only","(2) and (3) only"],
+    answer:2,
+    exp:"(1) Correct — Hg has metallic bonding: Hg²⁺ ions + delocalized electrons. (2) <strong>Wrong</strong> — mercury is NOT discrete molecules; it has a metallic structure. (3) Correct — mercury is the only liquid metal at room temperature and pressure. Answer = (1) and (3) only."
+  },
+  {
+    section:"Ch 9 — Metallic Bonding", color:"#d97706",
+    text:"Metals are malleable (can be hammered into sheets). What is the best explanation?",
+    options:["Metal ions repel each other when force is applied, causing layers to crack.","Layers of metal ions can slide over each other while delocalized electrons redistribute to maintain bonding.","Metallic bonds are weak and break easily.","Metal atoms become ions when a force is applied."],
+    answer:1,
+    exp:"When force is applied to a metal, <strong>layers of metal ions slide</strong> over each other. The <strong>delocalized electrons redistribute</strong> around the new positions, maintaining the metallic bonding throughout. This prevents cracking — unlike ionic crystals, where sliding causes same-charge repulsion."
+  },
+  {
+    section:"Ch 9 — Metallic Bonding", color:"#d97706",
+    text:"Which substance can conduct electricity in the solid state?",
+    options:["Sodium chloride (NaCl)","Silicon dioxide (SiO₂)","Copper (Cu)","Iodine (I₂)"],
+    answer:2,
+    exp:"<strong>Copper</strong> is a metal — its delocalized electrons can move freely in the solid state, allowing conduction. NaCl (ionic) — ions are fixed in solid state, no conduction. SiO₂ (giant covalent) — no free charge carriers. I₂ (simple molecular) — no free charge carriers."
+  },
+  // ── Ch 5-6 Calculations ──
+  {
+    section:"Ch 5–6 — Formulae & Calculations", color:"#7c3aed",
+    text:"Element A has electronic arrangement 2, 8, 1 and element B has electronic arrangement 2, 8, 6. What is the formula of the compound formed between A and B?",
+    options:["AB","A₂B","AB₂","A₂B₃"],
+    answer:1,
+    exp:"A (2,8,1) loses 1 electron → A⁺ (Group I, like Na). B (2,8,6) gains 2 electrons → B²⁻ (Group VI, like O). Using the cross-charge method: A⁺ and B²⁻ → <strong>A₂B</strong> (like Na₂O). Check: 2×(+1) + 1×(−2) = 0 ✅"
+  },
+  {
+    section:"Ch 5–6 — Formulae & Calculations", color:"#7c3aed",
+    text:"What is the number of moles in 22 g of CO₂? (Molar mass of CO₂ = 44 g/mol)",
+    options:["0.25 mol","0.5 mol","1 mol","2 mol"],
+    answer:1,
+    exp:"Using <strong>n = m ÷ M</strong>: n = 22 ÷ 44 = <strong>0.5 mol</strong>. Remember: n = moles, m = mass in grams, M = molar mass in g/mol."
+  },
+  {
+    section:"Ch 5–6 — Formulae & Calculations", color:"#7c3aed",
+    text:"Which is the correct formula for aluminium oxide?",
+    options:["AlO","Al₂O","Al₂O₃","AlO₃"],
+    answer:2,
+    exp:"Al forms Al³⁺ (+3); O forms O²⁻ (−2). Using the cross-charge method: swap the charges as subscripts → <strong>Al₂O₃</strong>. Verify: 2×(+3) + 3×(−2) = +6 − 6 = 0 ✅"
+  },
+  {
+    section:"Ch 5–6 — Formulae & Calculations", color:"#7c3aed",
+    text:"A student has 0.5 mol of hydrogen gas (H₂). What is the volume at room temperature and pressure (RTP)? (Molar volume at RTP = 24 dm³/mol)",
+    options:["6 dm³","12 dm³","24 dm³","48 dm³"],
+    answer:1,
+    exp:"Using <strong>V = n × molar volume</strong>: V = 0.5 × 24 = <strong>12 dm³</strong>. At RTP (25°C, 1 atm), the molar volume of any gas is 24 dm³/mol. Do not confuse with STP (0°C) where molar volume = 22.4 dm³/mol."
+  },
+  {
+    section:"Ch 5–6 — Formulae & Calculations", color:"#7c3aed",
+    text:"The concentration of a NaOH solution is 2 mol/dm³. What is the number of moles of NaOH in 250 cm³ of this solution?",
+    options:["0.25 mol","0.5 mol","1 mol","2 mol"],
+    answer:1,
+    exp:"Using <strong>n = c × V</strong>. First convert volume: 250 cm³ = 0.25 dm³. Then: n = 2 × 0.25 = <strong>0.5 mol</strong>. Always convert cm³ to dm³ (divide by 1000) before using the formula."
+  }
+];
+
+let studentName='', userAnswers=new Array(questions.length).fill(null), submitted=false;
+const LETTERS=['A','B','C','D'];
+
+function startQuiz(){
+  studentName=document.getElementById('student-name').value.trim()||'Student';
+  document.getElementById('cover').style.display='none';
+  document.getElementById('quiz-screen').style.display='block';
+  document.getElementById('hdr-name').textContent='— '+studentName;
+  renderQuiz(); updateProgress();
+}
+
+function renderQuiz(){
+  const body=document.getElementById('quiz-body'); body.innerHTML='';
+  let lastSec=null;
+  questions.forEach((q,qi)=>{
+    if(q.section!==lastSec){
+      const d=document.createElement('div'); d.className='sec-div';
+      d.innerHTML=`<span class="stag" style="background:${q.color}22;color:${q.color}">${q.section}</span>`;
+      body.appendChild(d); lastSec=q.section;
+    }
+    const card=document.createElement('div'); card.className='q-card'; card.id='qcard-'+qi;
+    card.innerHTML=`
+      <div class="q-num">Q${qi+1}</div>
+      <div class="q-text">${q.text.replace(/\n/g,'<br>')}</div>
+      <div class="options" id="opts-${qi}">
+        ${q.options.map((o,oi)=>`
+          <div class="option" id="opt-${qi}-${oi}" onclick="selectOpt(${qi},${oi})">
+            <div class="opt-letter">${LETTERS[oi]}</div><div>${o}</div>
+          </div>`).join('')}
+      </div>
+      <div class="explanation" id="exp-${qi}"><div class="exp-title">💡 Explanation</div>${q.exp}</div>`;
+    body.appendChild(card);
+  });
+}
+
+function selectOpt(qi,oi){
+  if(submitted)return;
+  for(let i=0;i<questions[qi].options.length;i++) document.getElementById(`opt-${qi}-${i}`).classList.remove('selected');
+  document.getElementById(`opt-${qi}-${oi}`).classList.add('selected');
+  userAnswers[qi]=oi; updateProgress();
+}
+
+function updateProgress(){
+  const ans=userAnswers.filter(a=>a!==null).length;
+  document.getElementById('prog-fill').style.width=(ans/questions.length*100)+'%';
+  document.getElementById('q-ctr').textContent=`${ans} / ${questions.length} answered`;
+}
+
+function submitQuiz(){
+  const un=userAnswers.filter(a=>a===null).length;
+  if(un>0&&!confirm(`You have ${un} unanswered question(s). Submit anyway?`))return;
+  submitted=true; document.getElementById('btn-submit').disabled=true;
+  questions.forEach((q,qi)=>{
+    const ua=userAnswers[qi], ca=q.answer;
+    for(let i=0;i<q.options.length;i++){const el=document.getElementById(`opt-${qi}-${i}`);el.onclick=null;el.style.cursor='default';}
+    if(ua!==null){
+      const uel=document.getElementById(`opt-${qi}-${ua}`); uel.classList.remove('selected');
+      if(ua===ca){uel.classList.add('correct');}
+      else{uel.classList.add('wrong');document.getElementById(`opt-${qi}-${ca}`).classList.add('reveal-correct');}
+    } else { document.getElementById(`opt-${qi}-${ca}`).classList.add('reveal-correct'); }
+    document.getElementById(`exp-${qi}`).classList.add('show');
+  });
+  setTimeout(showResults,1000);
+}
+
+function showResults(){
+  document.getElementById('quiz-screen').style.display='none';
+  document.getElementById('result-screen').style.display='block';
+  window.scrollTo(0,0);
+  let correct=0; const wrong=[];
+  questions.forEach((q,qi)=>{ if(userAnswers[qi]===q.answer)correct++; else wrong.push(qi); });
+  const pct=Math.round(correct/questions.length*100);
+  const g=pct>=80?'A':pct>=65?'B':pct>=50?'C':'F';
+  document.getElementById('res-grade').textContent=g;
+  document.getElementById('res-grade').className='grade '+g;
+  document.getElementById('res-score').textContent=`${correct} / ${questions.length}`;
+  document.getElementById('res-name').textContent=studentName+' · '+new Date().toLocaleDateString('en-GB');
+  document.getElementById('res-correct').textContent=correct;
+  document.getElementById('res-wrong').textContent=questions.length-correct;
+  document.getElementById('res-pct').textContent=pct+'%';
+  const rl=document.getElementById('review-list'); rl.innerHTML='';
+  if(wrong.length===0){rl.innerHTML='<div style="text-align:center;padding:32px;color:#16a34a;font-weight:700;font-size:16px;">🎉 Perfect Score! All correct!</div>';}
+  else{
+    wrong.forEach(qi=>{
+      const q=questions[qi],ua=userAnswers[qi];
+      const c=document.createElement('div'); c.className='rev-card';
+      c.innerHTML=`
+        <div class="rq">Q${qi+1}. ${q.text.replace(/\n.*$/s,'')}</div>
+        ${ua!==null?`<div class="rans wrong-a">❌ Your answer: ${LETTERS[ua]}. ${q.options[ua]}</div>`:`<div class="rans wrong-a">❌ Not answered</div>`}
+        <div class="rans right-a">✅ Correct answer: ${LETTERS[q.answer]}. ${q.options[q.answer]}</div>
+        <div class="rexp">💡 ${q.exp}</div>`;
+      rl.appendChild(c);
+    });
+  }
+}
+
+function retryQuiz(){
+  submitted=false; userAnswers=new Array(questions.length).fill(null);
+  document.getElementById('result-screen').style.display='none';
+  document.getElementById('btn-submit').disabled=false;
+  document.getElementById('quiz-screen').style.display='block';
+  renderQuiz(); updateProgress(); window.scrollTo(0,0);
+}
+</script>
+</body>
+</html>

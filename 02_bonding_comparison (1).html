@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>F3 Chemistry — Bonding Comparison</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;600;700;800&display=swap');
+  :root {
+    --bg:#0f172a; --surface:#1e293b; --surface2:#263248; --border:#334155;
+    --text:#f1f5f9; --muted:#94a3b8;
+    --ionic:#60a5fa; --simple:#34d399; --giant:#a78bfa; --metal:#fbbf24;
+    --yes:#4ade80; --no:#f87171; --maybe:#fbbf24;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-size:14px;line-height:1.65;}
+
+  header{padding:48px 40px 36px;background:linear-gradient(135deg,#0f172a 0%,#1e1b4b 100%);border-bottom:1px solid var(--border);text-align:center;}
+  .eyebrow{font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;}
+  header h1{font-family:'Space Grotesk',sans-serif;font-size:36px;font-weight:800;line-height:1.15;margin-bottom:6px;}
+  .grad{background:linear-gradient(90deg,var(--ionic),var(--simple),var(--giant),var(--metal));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+  header p{color:var(--muted);font-size:14px;}
+
+  main{max-width:1200px;margin:0 auto;padding:40px 20px 80px;}
+  .sec-label{font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin:40px 0 14px;display:flex;align-items:center;gap:10px;}
+  .sec-label::after{content:'';flex:1;height:1px;background:var(--border);}
+
+  /* 5-col grid */
+  .grid5{display:grid;grid-template-columns:160px repeat(4,1fr);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:32px;}
+  .ch{padding:18px 14px;text-align:center;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:13px;}
+  .ch .sub{font-size:11px;font-weight:400;color:var(--muted);margin-top:2px;}
+  .ch.lbl{background:var(--surface2);color:var(--muted);font-size:12px;display:flex;align-items:center;justify-content:center;}
+  .ch.ih{background:#1e3a5f;color:var(--ionic);border-bottom:3px solid var(--ionic);}
+  .ch.sh{background:#0c3528;color:var(--simple);border-bottom:3px solid var(--simple);}
+  .ch.gh{background:#2d1b5e;color:var(--giant);border-bottom:3px solid var(--giant);}
+  .ch.mh{background:#3d2a00;color:var(--metal);border-bottom:3px solid var(--metal);}
+  .cell{padding:12px 14px;border-top:1px solid var(--border);font-size:13px;vertical-align:top;}
+  .cell.lbl{background:var(--surface2);color:var(--muted);font-size:12px;font-weight:600;display:flex;align-items:center;gap:6px;}
+  .cell.ic{background:#0d1f35;} .cell.sc{background:#061b13;} .cell.gc{background:#160d30;} .cell.mc{background:#1e1400;}
+  small{color:#64748b;font-size:12px;}
+  .yes{color:var(--yes);font-weight:700;} .no{color:var(--no);font-weight:700;} .maybe{color:var(--maybe);font-weight:700;}
+  .tag{display:inline-block;font-size:11px;font-weight:600;padding:2px 7px;border-radius:4px;margin:2px 2px 2px 0;}
+  .ti{background:rgba(96,165,250,.15);color:var(--ionic);}
+  .ts{background:rgba(52,211,153,.15);color:var(--simple);}
+  .tg{background:rgba(167,139,250,.15);color:var(--giant);}
+  .tm{background:rgba(251,191,36,.15);color:var(--metal);}
+
+  /* substance cards */
+  .sub-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-bottom:32px;}
+  .scard{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px;}
+  .scard .nm{font-family:'Space Grotesk',sans-serif;font-size:18px;font-weight:700;margin-bottom:6px;}
+  .scard .tp{font-size:11px;font-weight:600;padding:2px 8px;border-radius:4px;display:inline-block;margin-bottom:10px;}
+  .scard ul{padding-left:16px;}
+  .scard ul li{font-size:12px;color:var(--muted);margin-bottom:3px;}
+  .scard ul li strong{color:var(--text);}
+
+  /* decision tree */
+  .tree{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:28px 32px;margin-bottom:32px;}
+  .tree-title{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:16px;margin-bottom:20px;}
+  .node{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:12px 16px;margin-bottom:8px;font-size:13px;}
+  .node .q{color:var(--muted);font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;margin-bottom:4px;}
+  .branches{display:flex;gap:12px;margin-top:8px;flex-wrap:wrap;}
+  .br{border-radius:6px;padding:6px 12px;font-size:12px;font-weight:600;}
+  .bry{background:rgba(74,222,128,.1);color:var(--yes);border:1px solid rgba(74,222,128,.3);}
+  .brn{background:rgba(248,113,113,.1);color:var(--no);border:1px solid rgba(248,113,113,.3);}
+  .brg{background:rgba(167,139,250,.15);color:var(--giant);border:1px solid rgba(167,139,250,.3);}
+
+  /* error table */
+  .etbl{background:var(--surface);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-bottom:32px;}
+  .etbl table{width:100%;border-collapse:collapse;}
+  .etbl thead tr{background:var(--surface2);}
+  .etbl thead th{padding:12px 16px;text-align:left;font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:700;letter-spacing:.05em;color:var(--muted);}
+  .etbl tbody td{padding:11px 16px;border-top:1px solid var(--border);font-size:13px;vertical-align:top;}
+
+  footer{text-align:center;padding:24px;font-size:12px;color:var(--muted);border-top:1px solid var(--border);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">F3 Chemistry · Structure &amp; Bonding</div>
+  <h1><span class="grad">Types of Bonding</span><br>Complete Comparison</h1>
+  <p>Ionic · Simple Molecular · Giant Covalent · Metallic</p>
+</header>
+
+<main>
+
+<div class="sec-label">Master Comparison Table</div>
+<div class="grid5">
+  <div class="ch lbl">Property</div>
+  <div class="ch ih">⬡ Ionic<div class="sub">Ionic Bonding</div></div>
+  <div class="ch sh">◎ Simple Molecular<div class="sub">Covalent</div></div>
+  <div class="ch gh">◉ Giant Covalent<div class="sub">Covalent</div></div>
+  <div class="ch mh">◈ Metallic<div class="sub">Metallic Bonding</div></div>
+
+  <div class="cell lbl">🔵 Particles</div>
+  <div class="cell ic">Cations &amp; Anions<br><small>oppositely charged ions</small></div>
+  <div class="cell sc">Discrete molecules<br><small>small, separate units</small></div>
+  <div class="cell gc">Atoms in 3D network<br><small>no discrete molecules</small></div>
+  <div class="cell mc">Positive metal ions + sea of delocalized electrons</div>
+
+  <div class="cell lbl">🔗 Bonding Force</div>
+  <div class="cell ic">Electrostatic attraction between oppositely charged ions</div>
+  <div class="cell sc">Weak intermolecular forces between molecules</div>
+  <div class="cell gc">Many strong covalent bonds throughout the lattice</div>
+  <div class="cell mc">Attraction between positive ions and delocalized electrons</div>
+
+  <div class="cell lbl">🌡️ Melting Point</div>
+  <div class="cell ic"><span class="yes">High</span><br><small>strong electrostatic attraction</small></div>
+  <div class="cell sc"><span class="no">Low</span><br><small>weak intermolecular forces<br><strong style="color:#f87171">NOT weak covalent bonds!</strong></small></div>
+  <div class="cell gc"><span class="yes">Very high</span><br><small>many strong covalent bonds must be broken</small></div>
+  <div class="cell mc"><span class="yes">Generally high</span><br><small>strong metallic bonds (Hg exception)</small></div>
+
+  <div class="cell lbl">⚡ Conducts<br>(Solid)</div>
+  <div class="cell ic"><span class="no">❌ No</span><br><small>ions are fixed, cannot move</small></div>
+  <div class="cell sc"><span class="no">❌ No</span><br><small>no free charge carriers</small></div>
+  <div class="cell gc"><span class="no">❌ No</span><br><small>(Graphite only: ✅)</small></div>
+  <div class="cell mc"><span class="yes">✅ Yes</span><br><small>delocalized electrons move freely</small></div>
+
+  <div class="cell lbl">⚡ Conducts<br>(Molten)</div>
+  <div class="cell ic"><span class="yes">✅ Yes</span><br><small>mobile ions</small></div>
+  <div class="cell sc"><span class="no">❌ No</span></div>
+  <div class="cell gc"><span class="no">❌ No</span></div>
+  <div class="cell mc"><span class="yes">✅ Yes</span><br><small>delocalized electrons</small></div>
+
+  <div class="cell lbl">⚡ Conducts<br>(Aqueous)</div>
+  <div class="cell ic"><span class="yes">✅ Yes</span><br><small>dissociated ions</small></div>
+  <div class="cell sc"><span class="maybe">Depends</span><br><small>most do not conduct</small></div>
+  <div class="cell gc"><span class="no">Insoluble</span></div>
+  <div class="cell mc">— (reacts or insoluble)</div>
+
+  <div class="cell lbl">💧 Solubility<br>in Water</div>
+  <div class="cell ic"><span class="yes">Most dissolve</span></div>
+  <div class="cell sc"><span class="maybe">Depends on polarity</span><br><small>I₂: insoluble; HCl: soluble</small></div>
+  <div class="cell gc"><span class="no">Insoluble</span></div>
+  <div class="cell mc"><span class="maybe">Depends on metal</span></div>
+
+  <div class="cell lbl">💪 Mechanical<br>Properties</div>
+  <div class="cell ic"><span class="no">Brittle</span><br><small>layers shift → same charges align → repel → cracks</small></div>
+  <div class="cell sc">Soft (when solid)<br><small>weak intermolecular forces</small></div>
+  <div class="cell gc">Very hard (diamond = hardest)<br><small>not brittle</small></div>
+  <div class="cell mc"><span class="yes">Malleable &amp; Ductile</span><br><small>layers slide; electrons redistribute</small></div>
+
+  <div class="cell lbl">📦 Examples</div>
+  <div class="cell ic"><span class="tag ti">NaCl</span><span class="tag ti">KCl</span><span class="tag ti">CaO</span><span class="tag ti">MgO</span><span class="tag ti">K₃N</span></div>
+  <div class="cell sc"><span class="tag ts">H₂O</span><span class="tag ts">CO₂</span><span class="tag ts">HCl</span><span class="tag ts">Br₂</span><span class="tag ts">I₂</span><span class="tag ts">OF₂</span><span class="tag ts">N₂H₄</span></div>
+  <div class="cell gc"><span class="tag tg">Diamond</span><span class="tag tg">Graphite</span><span class="tag tg">SiO₂</span><span class="tag tg">Cubic BN</span></div>
+  <div class="cell mc"><span class="tag tm">Na</span><span class="tag tm">Cu</span><span class="tag tm">Fe</span><span class="tag tm">Hg</span><span class="tag tm">Al</span></div>
+</div>
+
+<div class="sec-label">Key Substances — Quick Reference</div>
+<div class="sub-grid">
+  <div class="scard" style="border-left:3px solid var(--simple)">
+    <div class="nm">I₂ (Iodine)</div>
+    <span class="tp" style="background:rgba(52,211,153,.15);color:var(--simple)">Simple Molecular</span>
+    <ul>
+      <li>Room temp: <strong>solid</strong> (but low m.p.)</li>
+      <li>Conducts: <strong>No</strong></li>
+      <li>Soluble in water: <strong>No ❌</strong></li>
+      <li>Soluble in organic solvents: <strong>Yes ✅</strong></li>
+      <li>Low m.p. — weak intermolecular forces</li>
+    </ul>
+  </div>
+  <div class="scard" style="border-left:3px solid var(--metal)">
+    <div class="nm">Hg (Mercury)</div>
+    <span class="tp" style="background:rgba(251,191,36,.15);color:var(--metal)">Metallic</span>
+    <ul>
+      <li>Room temp: <strong>liquid</strong> (only liquid metal)</li>
+      <li>Conducts: <strong>Yes ✅</strong> (delocalized e⁻)</li>
+      <li><strong>Not</strong> discrete molecules</li>
+      <li>Hg²⁺ ions + delocalized electrons</li>
+      <li>Metallic bonds (weaker than most metals)</li>
+    </ul>
+  </div>
+  <div class="scard" style="border-left:3px solid var(--giant)">
+    <div class="nm">Diamond</div>
+    <span class="tp" style="background:rgba(167,139,250,.15);color:var(--giant)">Giant Covalent</span>
+    <ul>
+      <li>M.p.: <strong>~3550°C</strong> (very high)</li>
+      <li>Conducts: <strong>No ❌</strong> (no free e⁻)</li>
+      <li>Soluble in water/organic solvents: <strong>No</strong></li>
+      <li>Hardest natural substance</li>
+      <li>Each C bonded to 4 C atoms</li>
+    </ul>
+  </div>
+  <div class="scard" style="border-left:3px solid var(--giant)">
+    <div class="nm">Graphite</div>
+    <span class="tp" style="background:rgba(167,139,250,.15);color:var(--giant)">Giant Covalent</span>
+    <ul>
+      <li>M.p.: <strong>high</strong></li>
+      <li>Conducts: <strong>Yes ✅</strong> (delocalized e⁻ within layers)</li>
+      <li>Layered structure (weak forces between layers)</li>
+      <li>Each C bonded to 3 C atoms</li>
+      <li>Used as lubricant</li>
+    </ul>
+  </div>
+  <div class="scard" style="border-left:3px solid var(--giant)">
+    <div class="nm">Cubic BN</div>
+    <span class="tp" style="background:rgba(167,139,250,.15);color:var(--giant)">Giant Covalent</span>
+    <ul>
+      <li>Diamond-like structure</li>
+      <li>Conducts: <strong>No ❌</strong></li>
+      <li>Very hard (used as abrasive)</li>
+      <li><strong>Not brittle</strong> (brittleness = ionic property)</li>
+      <li>B and N atoms alternate</li>
+    </ul>
+  </div>
+  <div class="scard" style="border-left:3px solid var(--simple)">
+    <div class="nm">OF₂</div>
+    <span class="tp" style="background:rgba(52,211,153,.15);color:var(--simple)">Simple Molecular</span>
+    <ul>
+      <li><strong>NOT</strong> giant covalent!</li>
+      <li>O bonded to 2 F atoms (bent shape)</li>
+      <li>Low melting point</li>
+      <li>Does not conduct</li>
+      <li style="color:#f87171">Common exam trap!</li>
+    </ul>
+  </div>
+  <div class="scard" style="border-left:3px solid var(--ionic)">
+    <div class="nm">CaO vs NaCl</div>
+    <span class="tp" style="background:rgba(96,165,250,.15);color:var(--ionic)">Ionic</span>
+    <ul>
+      <li>CaO: Ca²⁺ + O²⁻ (charges ±2)</li>
+      <li>NaCl: Na⁺ + Cl⁻ (charges ±1)</li>
+      <li>CaO has a <strong>higher</strong> melting point</li>
+      <li>Reason: higher charges → stronger electrostatic attraction</li>
+    </ul>
+  </div>
+  <div class="scard" style="border-left:3px solid var(--ionic)">
+    <div class="nm">NaCl Structure</div>
+    <span class="tp" style="background:rgba(96,165,250,.15);color:var(--ionic)">Ionic</span>
+    <ul>
+      <li>Each Na⁺ surrounded by <strong>6</strong> Cl⁻</li>
+      <li>Each Cl⁻ surrounded by <strong>6</strong> Na⁺</li>
+      <li>Co-ordination number = 6</li>
+      <li>Giant ionic lattice</li>
+    </ul>
+  </div>
+</div>
+
+<div class="sec-label">How to Identify Bonding Type — Exam Strategy</div>
+<div class="tree">
+  <div class="tree-title">📋 Decision Steps (given data table)</div>
+  <div class="node">
+    <div class="q">Step 1 — Check solid-state conductivity</div>
+    Conducts electricity in the solid state?
+    <div class="branches">
+      <span class="br bry">✅ Yes → <strong>Metallic</strong> (delocalized electrons)</span>
+      <span class="br brn">❌ No → Go to Step 2</span>
+    </div>
+  </div>
+  <div class="node">
+    <div class="q">Step 2 — Check melting point</div>
+    Low melting point (near room temperature)?
+    <div class="branches">
+      <span class="br bry">✅ Low m.p. → <strong>Simple Molecular</strong></span>
+      <span class="br brn">❌ High m.p. → Go to Step 3</span>
+    </div>
+  </div>
+  <div class="node">
+    <div class="q">Step 3 — Check molten / aqueous conductivity</div>
+    Conducts when molten or dissolved in water?
+    <div class="branches">
+      <span class="br bry">✅ Yes → <strong>Ionic</strong> (mobile ions)</span>
+      <span class="br brn">❌ No → <strong>Giant Covalent</strong></span>
+    </div>
+  </div>
+  <div class="node">
+    <div class="q">If Giant Covalent — narrow it down further</div>
+    <div class="branches">
+      <span class="br brg">Conducts → Graphite</span>
+      <span class="br brg">Does not conduct + hardest → Diamond</span>
+      <span class="br brg">Does not conduct + hard → SiO₂ / Cubic BN</span>
+    </div>
+  </div>
+</div>
+
+<div class="sec-label">Common Errors — Wrong vs Correct Phrasing</div>
+<div class="etbl">
+  <table>
+    <thead><tr><th>Topic</th><th>❌ Wrong phrasing</th><th>✅ Correct phrasing</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Simple molecular — low m.p.</strong></td><td style="color:var(--no)">The covalent bonds are weak</td><td style="color:var(--yes)">The intermolecular forces are weak</td></tr>
+      <tr><td><strong>Ionic — high m.p.</strong></td><td style="color:var(--no)">The ionic bonds are very strong</td><td style="color:var(--yes)">There are strong electrostatic attractions between oppositely charged ions</td></tr>
+      <tr><td><strong>Metal conducts</strong></td><td style="color:var(--no)">Metal ions can move</td><td style="color:var(--yes)">Delocalized electrons can move freely</td></tr>
+      <tr><td><strong>Ionic solid does not conduct</strong></td><td style="color:var(--no)">No electrons to carry charge</td><td style="color:var(--yes)">Ions are fixed in the lattice and cannot move</td></tr>
+      <tr><td><strong>Ionic — brittle</strong></td><td style="color:var(--no)">The bonds are weak</td><td style="color:var(--yes)">Layers shift → same-charge ions align → repel → crystal cracks</td></tr>
+      <tr><td><strong>OF₂ structure</strong></td><td style="color:var(--no)">Giant covalent structure</td><td style="color:var(--yes)">Simple molecular structure</td></tr>
+      <tr><td><strong>Mercury structure</strong></td><td style="color:var(--no)">Composed of discrete molecules</td><td style="color:var(--yes)">Hg²⁺ ions + delocalized electrons (metallic bonding)</td></tr>
+      <tr><td><strong>Iodine solubility</strong></td><td style="color:var(--no)">Soluble in water and organic solvents</td><td style="color:var(--yes)">Insoluble in water; soluble in organic solvents</td></tr>
+    </tbody>
+  </table>
+</div>
+
+</main>
+<footer>F3 Chemistry Term 2 · Bonding Comparison · Tutoring Resource</footer>
+</body>
+</html>
