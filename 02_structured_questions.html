@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>F3 Chemistry — Structured Questions</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;600;700;800&display=swap');
+  :root{
+    --bg:#f7f6f2;--card:#fff;--ink:#1a1a2e;--muted:#64748b;--rule:#e5e3db;
+    --blue:#2563eb;--green:#16a34a;--red:#dc2626;--amber:#f59e0b;--purple:#7c3aed;
+    --cbg:#f0fdf4;--cbr:#86efac;--wbg:#fef2f2;--wbr:#fca5a5;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{background:var(--bg);color:var(--ink);font-family:'Inter',sans-serif;font-size:14px;line-height:1.7;}
+
+  header{background:var(--ink);color:#fff;padding:32px 40px 24px;display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+  .eyebrow{font-family:'Space Grotesk',sans-serif;font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:#94a3b8;margin-bottom:6px;}
+  header h1{font-family:'Space Grotesk',sans-serif;font-size:26px;font-weight:800;}
+  header h1 em{color:var(--amber);font-style:normal;}
+  .pills{display:flex;gap:8px;flex-wrap:wrap;}
+  .pill{font-size:11px;font-weight:600;padding:3px 10px;border-radius:999px;border:1px solid rgba(255,255,255,.2);color:#fff;}
+  .pill.red{border-color:#f87171;color:#f87171;}
+
+  /* TABS */
+  nav{background:var(--card);border-bottom:1px solid var(--rule);display:flex;overflow-x:auto;position:sticky;top:0;z-index:50;}
+  nav button{padding:14px 20px;font-size:13px;font-weight:600;border:none;background:transparent;color:var(--muted);cursor:pointer;border-bottom:3px solid transparent;white-space:nowrap;transition:color .15s,border-color .15s;}
+  nav button.active{color:var(--ink);border-color:var(--amber);}
+
+  main{max-width:900px;margin:0 auto;padding:32px 20px 80px;}
+  .section{display:none;}
+  .section.active{display:block;}
+
+  /* SECTION HEADER */
+  .sec-hdr{margin-bottom:24px;}
+  .sec-badge{font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 10px;border-radius:4px;display:inline-block;margin-bottom:8px;}
+  .sb-blue{background:#dbeafe;color:var(--blue);}
+  .sb-green{background:#dcfce7;color:var(--green);}
+  .sb-purple{background:#ede9fe;color:var(--purple);}
+  .sb-amber{background:#fef3c7;color:var(--amber);}
+  .sec-hdr h2{font-family:'Space Grotesk',sans-serif;font-size:22px;font-weight:800;}
+  .sec-hdr p{font-size:13px;color:var(--muted);margin-top:4px;}
+
+  /* Q CARD */
+  .q-card{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:24px;margin-bottom:20px;}
+  .q-label{font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px;}
+  .q-text{font-size:14px;font-weight:500;margin-bottom:16px;line-height:1.65;}
+  .q-text sub,sup{font-size:11px;}
+
+  /* CLASSIFY DRAG */
+  .classify-wrap{margin-top:12px;}
+  .substance-pool{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;padding:14px;background:#f8f7f3;border:2px dashed var(--rule);border-radius:10px;min-height:56px;}
+  .substance-chip{padding:6px 12px;background:var(--ink);color:#fff;border-radius:6px;font-size:12px;font-weight:600;cursor:grab;user-select:none;font-family:'Space Grotesk',sans-serif;}
+  .substance-chip:active{cursor:grabbing;}
+  .classify-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
+  .classify-box{background:var(--card);border:2px dashed var(--rule);border-radius:10px;padding:12px;min-height:80px;transition:border-color .15s,background .15s;}
+  .classify-box.drag-over{border-color:var(--blue);background:#eff6ff;}
+  .classify-box .box-label{font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;}
+  .classify-box .dropped{display:flex;flex-wrap:wrap;gap:6px;min-height:32px;}
+  .classify-box .substance-chip{background:var(--blue);cursor:grab;}
+
+  .check-btn{margin-top:14px;padding:10px 24px;background:var(--blue);color:#fff;border:none;border-radius:8px;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;cursor:pointer;}
+  .check-btn:hover{background:#1d4ed8;}
+  .reset-btn{margin-top:14px;margin-left:8px;padding:10px 20px;background:var(--card);color:var(--ink);border:1px solid var(--rule);border-radius:8px;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;cursor:pointer;}
+
+  .classify-result{margin-top:12px;font-size:13px;padding:12px;border-radius:8px;display:none;}
+  .classify-result.show{display:block;}
+  .cr-correct{background:var(--cbg);border:1px solid var(--cbr);color:#166534;}
+  .cr-wrong{background:var(--wbg);border:1px solid var(--wbr);color:#991b1b;}
+
+  /* DIAGRAMS */
+  .diagram-tabs{display:flex;gap:6px;margin-bottom:16px;flex-wrap:wrap;}
+  .dtab{padding:7px 14px;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer;border:1.5px solid var(--rule);background:transparent;color:var(--muted);font-family:'Space Grotesk',sans-serif;transition:all .15s;}
+  .dtab.active{background:var(--ink);color:#fff;border-color:var(--ink);}
+  .diagram-panel{display:none;}
+  .diagram-panel.active{display:block;}
+  .diagram-frame{background:#f8f7f3;border:1px solid var(--rule);border-radius:10px;padding:20px;text-align:center;margin-bottom:16px;}
+  svg text{font-family:'Space Grotesk','Inter',sans-serif;}
+
+  /* PROPERTY TABLE */
+  .prop-table{width:100%;border-collapse:collapse;font-size:13px;margin:14px 0;}
+  .prop-table th{background:var(--ink);color:#fff;padding:10px 12px;text-align:left;}
+  .prop-table td{padding:9px 12px;border-bottom:1px solid var(--rule);vertical-align:top;}
+  .prop-table tr:nth-child(even) td{background:#f8f8f8;}
+  .yes{color:var(--green);font-weight:700;} .no{color:var(--red);font-weight:700;} .high{color:var(--blue);font-weight:700;}
+
+  /* EXPLANATION CARDS */
+  .exp-card{background:var(--card);border:1px solid var(--rule);border-radius:10px;margin-bottom:12px;overflow:hidden;}
+  .exp-q{padding:14px 18px;font-weight:600;font-size:13px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;user-select:none;}
+  .exp-q:hover{background:#f8f7f3;}
+  .exp-a{padding:0 18px;max-height:0;overflow:hidden;transition:max-height .3s,padding .3s;}
+  .exp-a.open{max-height:300px;padding:14px 18px;}
+  .exp-a .ans-box{background:#f8f7f3;border-radius:8px;padding:12px 14px;font-size:13px;line-height:1.7;color:#374151;}
+  .exp-a .ans-box strong{color:var(--ink);}
+  .chevron{transition:transform .3s;}
+  .exp-a.open + .exp-q .chevron, .chevron.open{transform:rotate(180deg);}
+
+  /* MOLE CALC */
+  .calc-card{background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:24px;margin-bottom:16px;}
+  .calc-q{font-size:14px;font-weight:500;margin-bottom:16px;line-height:1.65;padding:14px 16px;background:#f8f7f3;border-radius:8px;border-left:4px solid var(--purple);}
+  .calc-q sub,sup{font-size:11px;}
+  .step-list{list-style:none;counter-reset:step;}
+  .step-list li{counter-increment:step;display:flex;gap:14px;align-items:flex-start;margin-bottom:12px;}
+  .step-list li::before{content:counter(step);font-family:'Space Grotesk',sans-serif;font-weight:800;font-size:13px;min-width:26px;height:26px;background:var(--purple);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;}
+  .step-list li .step-text{font-size:13px;line-height:1.65;}
+  .step-list li .step-text code{font-family:'Space Grotesk',monospace;background:#ede9fe;color:var(--purple);padding:1px 6px;border-radius:4px;font-size:13px;}
+  .show-sol-btn{padding:9px 20px;background:var(--purple);color:#fff;border:none;border-radius:8px;font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:700;cursor:pointer;margin-bottom:14px;}
+  .show-sol-btn:hover{background:#6d28d9;}
+  .solution{display:none;border-top:1px solid var(--rule);padding-top:16px;margin-top:4px;}
+  .solution.show{display:block;}
+  .formula-ref{background:#f8f7f3;border:1px solid var(--rule);border-radius:8px;padding:12px 16px;margin-bottom:16px;display:flex;gap:24px;flex-wrap:wrap;}
+  .formula-ref .f{font-family:'Space Grotesk',monospace;font-size:14px;font-weight:700;color:var(--purple);}
+  .formula-ref .fl{font-size:11px;color:var(--muted);}
+
+  /* warn box */
+  .warn{background:#fff7ed;border:1px solid #fed7aa;border-left:4px solid var(--red);border-radius:8px;padding:12px 16px;font-size:13px;margin:12px 0;}
+  .warn strong{color:var(--red);display:block;margin-bottom:3px;}
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="eyebrow">F3 Chemistry · Exam 2026/6/26</div>
+    <h1>Structured Questions <em>Practice</em></h1>
+  </div>
+  <div class="pills">
+    <span class="pill">~45% of Exam</span>
+    <span class="pill red">⚑ Tomorrow!</span>
+  </div>
+</header>
+
+<nav>
+  <button class="active" onclick="showSection('classify',this)">1. Classify Structures</button>
+  <button onclick="showSection('diagrams',this)">2. Diagrams</button>
+  <button onclick="showSection('properties',this)">3. Physical Properties</button>
+  <button onclick="showSection('mole',this)">4. Mole Calculations</button>
+</nav>
+
+<main>
+
+<!-- ═══════════ 1. CLASSIFY ═══════════ -->
+<div class="section active" id="classify">
+  <div class="sec-hdr">
+    <span class="sec-badge sb-blue">Part 1</span>
+    <h2>Classify Structures</h2>
+    <p>Drag each substance into the correct category. Substances may share properties.</p>
+  </div>
+
+  <div class="q-card">
+    <div class="q-label">Exercise — Drag & Drop Classification</div>
+    <div class="q-text">Classify each substance below into the correct structural type.</div>
+    <div class="classify-wrap">
+      <div class="substance-pool" id="pool">
+        <!-- chips added by JS -->
+      </div>
+      <div class="classify-grid">
+        <div class="classify-box" id="box-giant-ionic" ondragover="allowDrop(event)" ondrop="drop(event,'box-giant-ionic')">
+          <div class="box-label">Giant Ionic Structure</div>
+          <div class="dropped" id="dropped-box-giant-ionic"></div>
+        </div>
+        <div class="classify-box" id="box-giant-covalent" ondragover="allowDrop(event)" ondrop="drop(event,'box-giant-covalent')">
+          <div class="box-label">Giant Covalent Structure</div>
+          <div class="dropped" id="dropped-box-giant-covalent"></div>
+        </div>
+        <div class="classify-box" id="box-giant-metallic" ondragover="allowDrop(event)" ondrop="drop(event,'box-giant-metallic')">
+          <div class="box-label">Giant Metallic Structure</div>
+          <div class="dropped" id="dropped-box-giant-metallic"></div>
+        </div>
+        <div class="classify-box" id="box-simple-mol" ondragover="allowDrop(event)" ondrop="drop(event,'box-simple-mol')">
+          <div class="box-label">Simple Molecular Structure</div>
+          <div class="dropped" id="dropped-box-simple-mol"></div>
+        </div>
+      </div>
+      <button class="check-btn" onclick="checkClassify()">Check Answers</button>
+      <button class="reset-btn" onclick="resetClassify()">Reset</button>
+      <div class="classify-result" id="classify-result"></div>
+    </div>
+  </div>
+
+  <!-- KEY POINTS -->
+  <div class="q-card">
+    <div class="q-label">Key Identification Rules</div>
+    <table class="prop-table">
+      <thead><tr><th>Structure Type</th><th>Conducts (solid)</th><th>Conducts (molten/aq)</th><th>Melting Point</th><th>Other Clues</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Giant Ionic</strong></td><td><span class="no">No</span></td><td><span class="yes">Yes (mobile ions)</span></td><td><span class="high">High</span></td><td>Brittle; dissolves in water</td></tr>
+        <tr><td><strong>Giant Covalent</strong></td><td><span class="no">No*</span></td><td><span class="no">No</span></td><td><span class="high">Very high</span></td><td>Very hard; insoluble; *graphite exception</td></tr>
+        <tr><td><strong>Giant Metallic</strong></td><td><span class="yes">Yes (deloc. e⁻)</span></td><td><span class="yes">Yes</span></td><td><span class="high">High</span></td><td>Malleable; ductile; shiny</td></tr>
+        <tr><td><strong>Simple Molecular</strong></td><td><span class="no">No</span></td><td><span class="no">No</span></td><td><span class="no">Low</span></td><td>Often gases/liquids at RTP; I₂ insoluble in water</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ═══════════ 2. DIAGRAMS ═══════════ -->
+<div class="section" id="diagrams">
+  <div class="sec-hdr">
+    <span class="sec-badge sb-green">Part 2</span>
+    <h2>Structure Diagrams</h2>
+    <p>Study the key diagrams — these may be asked in the exam.</p>
+  </div>
+
+  <div class="q-card">
+    <div class="diagram-tabs">
+      <button class="dtab active" onclick="showDiagram('diamond',this)">Diamond</button>
+      <button class="dtab" onclick="showDiagram('graphite',this)">Graphite</button>
+      <button class="dtab" onclick="showDiagram('ionic',this)">Ionic (NaCl)</button>
+      <button class="dtab" onclick="showDiagram('metal',this)">Metal</button>
+    </div>
+
+    <!-- DIAMOND -->
+    <div class="diagram-panel active" id="dp-diamond">
+      <div class="diagram-frame">
+        <svg viewBox="0 0 340 260" width="340" height="260" xmlns="http://www.w3.org/2000/svg">
+          <!-- tetrahedral diamond unit cell approximation -->
+          <defs>
+            <radialGradient id="cg" cx="40%" cy="35%"><stop offset="0%" stop-color="#94a3b8"/><stop offset="100%" stop-color="#1e293b"/></radialGradient>
+          </defs>
+          <!-- bonds -->
+          <line x1="170" y1="60" x2="110" y2="130" stroke="#64748b" stroke-width="2.5"/>
+          <line x1="170" y1="60" x2="230" y2="130" stroke="#64748b" stroke-width="2.5"/>
+          <line x1="170" y1="60" x2="170" y2="140" stroke="#64748b" stroke-width="2.5"/>
+          <line x1="110" y1="130" x2="90" y2="200" stroke="#64748b" stroke-width="2.5"/>
+          <line x1="110" y1="130" x2="155" y2="200" stroke="#64748b" stroke-width="2.5"/>
+          <line x1="230" y1="130" x2="210" y2="200" stroke="#64748b" stroke-width="2.5"/>
+          <line x1="230" y1="130" x2="260" y2="200" stroke="#64748b" stroke-width="2.5"/>
+          <line x1="170" y1="140" x2="130" y2="200" stroke="#64748b" stroke-width="2.5"/>
+          <line x1="170" y1="140" x2="200" y2="200" stroke="#64748b" stroke-width="2.5"/>
+          <!-- atoms -->
+          <circle cx="170" cy="60" r="14" fill="url(#cg)"/>
+          <circle cx="110" cy="130" r="14" fill="url(#cg)"/>
+          <circle cx="230" cy="130" r="14" fill="url(#cg)"/>
+          <circle cx="170" cy="140" r="14" fill="url(#cg)"/>
+          <circle cx="90"  cy="200" r="12" fill="url(#cg)"/>
+          <circle cx="155" cy="200" r="12" fill="url(#cg)"/>
+          <circle cx="210" cy="200" r="12" fill="url(#cg)"/>
+          <circle cx="260" cy="200" r="12" fill="url(#cg)"/>
+          <circle cx="130" cy="200" r="12" fill="url(#cg)"/>
+          <circle cx="200" cy="200" r="12" fill="url(#cg)"/>
+          <!-- labels -->
+          <text x="170" y="30" text-anchor="middle" font-size="14" font-weight="700" fill="#1a1a2e">Diamond Structure</text>
+          <text x="170" y="240" text-anchor="middle" font-size="12" fill="#64748b">C</text>
+          <text x="170" y="253" text-anchor="middle" font-size="11" fill="#64748b">Each C bonded to 4 other C atoms (tetrahedral)</text>
+        </svg>
+      </div>
+      <ul style="font-size:13px;padding-left:18px;line-height:1.9;color:#374151;">
+        <li>Each carbon atom forms <strong>4 covalent bonds</strong> to 4 other carbon atoms</li>
+        <li>Forms a <strong>3D tetrahedral network</strong> — giant covalent structure</li>
+        <li>Very high melting point (~3550°C)</li>
+        <li><strong>Does NOT conduct</strong> electricity — no free electrons</li>
+        <li>Hardest natural substance</li>
+        <li>Insoluble in water and organic solvents</li>
+      </ul>
+    </div>
+
+    <!-- GRAPHITE -->
+    <div class="diagram-panel" id="dp-graphite">
+      <div class="diagram-frame">
+        <svg viewBox="0 0 340 260" width="340" height="260" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="gg" cx="40%" cy="35%"><stop offset="0%" stop-color="#94a3b8"/><stop offset="100%" stop-color="#1e293b"/></radialGradient>
+          </defs>
+          <!-- Layer 1 hexagons (lower) -->
+          <g opacity="0.5" transform="translate(0,60)">
+            <polygon points="80,100 100,87 120,100 120,126 100,139 80,126" fill="none" stroke="#94a3b8" stroke-width="2"/>
+            <polygon points="120,100 140,87 160,100 160,126 140,139 120,126" fill="none" stroke="#94a3b8" stroke-width="2"/>
+            <polygon points="160,100 180,87 200,100 200,126 180,139 160,126" fill="none" stroke="#94a3b8" stroke-width="2"/>
+            <polygon points="200,100 220,87 240,100 240,126 220,139 200,126" fill="none" stroke="#94a3b8" stroke-width="2"/>
+            <circle cx="80" cy="100" r="5" fill="url(#gg)"/><circle cx="100" cy="87" r="5" fill="url(#gg)"/>
+            <circle cx="120" cy="100" r="5" fill="url(#gg)"/><circle cx="80" cy="126" r="5" fill="url(#gg)"/>
+            <circle cx="100" cy="139" r="5" fill="url(#gg)"/><circle cx="120" cy="126" r="5" fill="url(#gg)"/>
+            <circle cx="140" cy="87" r="5" fill="url(#gg)"/><circle cx="160" cy="100" r="5" fill="url(#gg)"/>
+            <circle cx="160" cy="126" r="5" fill="url(#gg)"/><circle cx="140" cy="139" r="5" fill="url(#gg)"/>
+            <circle cx="180" cy="87" r="5" fill="url(#gg)"/><circle cx="200" cy="100" r="5" fill="url(#gg)"/>
+            <circle cx="200" cy="126" r="5" fill="url(#gg)"/><circle cx="180" cy="139" r="5" fill="url(#gg)"/>
+            <circle cx="220" cy="87" r="5" fill="url(#gg)"/><circle cx="240" cy="100" r="5" fill="url(#gg)"/>
+            <circle cx="240" cy="126" r="5" fill="url(#gg)"/><circle cx="220" cy="139" r="5" fill="url(#gg)"/>
+          </g>
+          <!-- Layer 2 hexagons (upper) -->
+          <g transform="translate(20,20)">
+            <polygon points="80,100 100,87 120,100 120,126 100,139 80,126" fill="none" stroke="#1e293b" stroke-width="2.5"/>
+            <polygon points="120,100 140,87 160,100 160,126 140,139 120,126" fill="none" stroke="#1e293b" stroke-width="2.5"/>
+            <polygon points="160,100 180,87 200,100 200,126 180,139 160,126" fill="none" stroke="#1e293b" stroke-width="2.5"/>
+            <polygon points="200,100 220,87 240,100 240,126 220,139 200,126" fill="none" stroke="#1e293b" stroke-width="2.5"/>
+            <circle cx="80" cy="100" r="6" fill="url(#gg)"/><circle cx="100" cy="87" r="6" fill="url(#gg)"/>
+            <circle cx="120" cy="100" r="6" fill="url(#gg)"/><circle cx="80" cy="126" r="6" fill="url(#gg)"/>
+            <circle cx="100" cy="139" r="6" fill="url(#gg)"/><circle cx="120" cy="126" r="6" fill="url(#gg)"/>
+            <circle cx="140" cy="87" r="6" fill="url(#gg)"/><circle cx="160" cy="100" r="6" fill="url(#gg)"/>
+            <circle cx="160" cy="126" r="6" fill="url(#gg)"/><circle cx="140" cy="139" r="6" fill="url(#gg)"/>
+            <circle cx="180" cy="87" r="6" fill="url(#gg)"/><circle cx="200" cy="100" r="6" fill="url(#gg)"/>
+            <circle cx="200" cy="126" r="6" fill="url(#gg)"/><circle cx="180" cy="139" r="6" fill="url(#gg)"/>
+          </g>
+          <!-- weak forces arrow -->
+          <path d="M 54 115 L 54 145" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr)"/>
+          <text x="10" y="132" font-size="10" fill="#d97706" font-weight="600">weak</text>
+          <text x="6" y="143" font-size="10" fill="#d97706" font-weight="600">forces</text>
+          <text x="170" y="22" text-anchor="middle" font-size="14" font-weight="700" fill="#1a1a2e">Graphite Structure</text>
+          <text x="170" y="248" text-anchor="middle" font-size="11" fill="#64748b">Hexagonal layers; weak forces between layers</text>
+        </svg>
+      </div>
+      <ul style="font-size:13px;padding-left:18px;line-height:1.9;color:#374151;">
+        <li>Each carbon atom forms <strong>3 covalent bonds</strong> — hexagonal layers</li>
+        <li>One electron per atom is <strong>delocalised</strong> — moves freely between layers</li>
+        <li><strong>Conducts electricity</strong> — due to delocalised electrons</li>
+        <li><strong>Weak forces between layers</strong> — layers can slide (lubricant)</li>
+        <li>High melting point (many covalent bonds to break)</li>
+        <li>Giant covalent structure</li>
+      </ul>
+    </div>
+
+    <!-- IONIC NaCl -->
+    <div class="diagram-panel" id="dp-ionic">
+      <div class="diagram-frame">
+        <svg viewBox="0 0 340 260" width="340" height="260" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="nag" cx="40%" cy="35%"><stop offset="0%" stop-color="#93c5fd"/><stop offset="100%" stop-color="#1d4ed8"/></radialGradient>
+            <radialGradient id="clg" cx="40%" cy="35%"><stop offset="0%" stop-color="#6ee7b7"/><stop offset="100%" stop-color="#065f46"/></radialGradient>
+          </defs>
+          <!-- 3x3x2 NaCl lattice approximation (2D projection) -->
+          <!-- Row 1 -->
+          <circle cx="90"  cy="80"  r="16" fill="url(#nag)"/>
+          <circle cx="140" cy="80"  r="20" fill="url(#clg)"/>
+          <circle cx="190" cy="80"  r="16" fill="url(#nag)"/>
+          <circle cx="240" cy="80"  r="20" fill="url(#clg)"/>
+          <!-- Row 2 -->
+          <circle cx="90"  cy="140" r="20" fill="url(#clg)"/>
+          <circle cx="140" cy="140" r="16" fill="url(#nag)"/>
+          <circle cx="190" cy="140" r="20" fill="url(#clg)"/>
+          <circle cx="240" cy="140" r="16" fill="url(#nag)"/>
+          <!-- Row 3 -->
+          <circle cx="90"  cy="200" r="16" fill="url(#nag)"/>
+          <circle cx="140" cy="200" r="20" fill="url(#clg)"/>
+          <circle cx="190" cy="200" r="16" fill="url(#nag)"/>
+          <circle cx="240" cy="200" r="20" fill="url(#clg)"/>
+          <!-- labels -->
+          <text x="170" y="25" text-anchor="middle" font-size="14" font-weight="700" fill="#1a1a2e">Ionic Lattice (NaCl)</text>
+          <!-- legend -->
+          <circle cx="60" cy="235" r="7" fill="url(#nag)"/>
+          <text x="72" y="239" font-size="12" fill="#1a1a2e">Na⁺</text>
+          <circle cx="110" cy="235" r="9" fill="url(#clg)"/>
+          <text x="124" y="239" font-size="12" fill="#1a1a2e">Cl⁻</text>
+          <text x="220" cy="239" text-anchor="middle" font-size="11" fill="#64748b"/>
+          <text x="200" y="239" font-size="11" fill="#64748b">alternating +/− ions</text>
+        </svg>
+      </div>
+      <ul style="font-size:13px;padding-left:18px;line-height:1.9;color:#374151;">
+        <li>Oppositely charged ions arranged in a <strong>regular 3D lattice</strong></li>
+        <li>Each Na⁺ surrounded by <strong>6 Cl⁻</strong>; each Cl⁻ surrounded by <strong>6 Na⁺</strong></li>
+        <li>Held by <strong>strong electrostatic attraction</strong> → high melting point</li>
+        <li><strong>Does NOT conduct in solid state</strong> — ions are fixed</li>
+        <li><strong>Conducts when molten or dissolved</strong> — ions become mobile</li>
+        <li><strong>Brittle</strong> — force causes same-charge ions to align and repel</li>
+      </ul>
+    </div>
+
+    <!-- METAL -->
+    <div class="diagram-panel" id="dp-metal">
+      <div class="diagram-frame">
+        <svg viewBox="0 0 340 260" width="340" height="260" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <radialGradient id="mg" cx="40%" cy="35%"><stop offset="0%" stop-color="#fcd34d"/><stop offset="100%" stop-color="#92400e"/></radialGradient>
+          </defs>
+          <!-- electron sea background -->
+          <rect x="40" y="45" width="260" height="175" rx="10" fill="#fef3c7" opacity="0.5"/>
+          <!-- roaming electrons -->
+          <text x="60"  y="75"  font-size="14" fill="#d97706" font-weight="700">e⁻</text>
+          <text x="105" y="95"  font-size="14" fill="#d97706" font-weight="700">e⁻</text>
+          <text x="230" y="70"  font-size="14" fill="#d97706" font-weight="700">e⁻</text>
+          <text x="270" y="100" font-size="14" fill="#d97706" font-weight="700">e⁻</text>
+          <text x="55"  y="185" font-size="14" fill="#d97706" font-weight="700">e⁻</text>
+          <text x="150" y="205" font-size="14" fill="#d97706" font-weight="700">e⁻</text>
+          <text x="265" y="190" font-size="14" fill="#d97706" font-weight="700">e⁻</text>
+          <text x="95"  y="165" font-size="14" fill="#d97706" font-weight="700">e⁻</text>
+          <text x="225" y="155" font-size="14" fill="#d97706" font-weight="700">e⁻</text>
+          <!-- metal ions grid -->
+          <circle cx="100" cy="110" r="18" fill="url(#mg)"/>
+          <circle cx="160" cy="110" r="18" fill="url(#mg)"/>
+          <circle cx="220" cy="110" r="18" fill="url(#mg)"/>
+          <circle cx="100" cy="160" r="18" fill="url(#mg)"/>
+          <circle cx="160" cy="160" r="18" fill="url(#mg)"/>
+          <circle cx="220" cy="160" r="18" fill="url(#mg)"/>
+          <text x="100" y="115" text-anchor="middle" font-size="11" fill="#fff" font-weight="700">M⁺</text>
+          <text x="160" y="115" text-anchor="middle" font-size="11" fill="#fff" font-weight="700">M⁺</text>
+          <text x="220" y="115" text-anchor="middle" font-size="11" fill="#fff" font-weight="700">M⁺</text>
+          <text x="100" y="165" text-anchor="middle" font-size="11" fill="#fff" font-weight="700">M⁺</text>
+          <text x="160" y="165" text-anchor="middle" font-size="11" fill="#fff" font-weight="700">M⁺</text>
+          <text x="220" y="165" text-anchor="middle" font-size="11" fill="#fff" font-weight="700">M⁺</text>
+          <!-- labels -->
+          <text x="170" y="25" text-anchor="middle" font-size="14" font-weight="700" fill="#1a1a2e">Metallic Structure</text>
+          <text x="170" y="240" text-anchor="middle" font-size="11" fill="#64748b">Positive metal ions (M⁺) in a sea of delocalised electrons (e⁻)</text>
+        </svg>
+      </div>
+      <ul style="font-size:13px;padding-left:18px;line-height:1.9;color:#374151;">
+        <li>Positive metal ions in a <strong>sea of delocalised electrons</strong></li>
+        <li><strong>Conducts in solid AND molten state</strong> — electrons move freely</li>
+        <li>High melting point — strong metallic bonds</li>
+        <li><strong>Malleable and ductile</strong> — layers slide; electrons redistribute</li>
+        <li>Mercury (Hg) exception: liquid at RTP but still metallic bonding</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ 3. PROPERTIES ═══════════ -->
+<div class="section" id="properties">
+  <div class="sec-hdr">
+    <span class="sec-badge sb-purple">Part 3</span>
+    <h2>State &amp; Explain Physical Properties</h2>
+    <p>Click each question to reveal the model answer. Learn the exact phrasing!</p>
+  </div>
+
+  <div class="warn"><strong>⚠ Exam tip:</strong> Always state the property first ("It has a high melting point"), then give the reason using the correct scientific explanation.</div>
+
+  <!-- accordion items -->
+  <script>
+  const expQs = [
+    {
+      q:"Why does NaCl have a HIGH melting point?",
+      a:"NaCl has a <strong>high melting point</strong> because it has a <strong>giant ionic lattice structure</strong>. There are <strong>strong electrostatic attractions between the oppositely charged Na⁺ and Cl⁻ ions</strong> throughout the lattice. A large amount of energy is needed to overcome these forces."
+    },
+    {
+      q:"Why does NaCl NOT conduct electricity in the solid state?",
+      a:"In the <strong>solid state</strong>, the <strong>ions are fixed in the lattice</strong> and <strong>cannot move</strong>. Since there are no mobile charge carriers, NaCl does not conduct electricity."
+    },
+    {
+      q:"Why does NaCl conduct electricity when molten or dissolved in water?",
+      a:"When NaCl is molten or dissolved in water, the ions become <strong>free to move (mobile ions)</strong>. These mobile Na⁺ and Cl⁻ ions can carry electrical charge, so NaCl conducts electricity."
+    },
+    {
+      q:"Why are ionic compounds BRITTLE?",
+      a:"When a force is applied, <strong>layers of ions shift</strong>. Ions of the <strong>same charge</strong> come to be next to each other, causing <strong>repulsion between like-charged ions</strong>. This repulsion causes the crystal to <strong>crack or shatter</strong>."
+    },
+    {
+      q:"Why does CaO have a HIGHER melting point than NaCl?",
+      a:"CaO contains <strong>Ca²⁺ and O²⁻ ions (charge ±2)</strong>, while NaCl contains Na⁺ and Cl⁻ ions (charge ±1). The <strong>higher ionic charges</strong> in CaO result in <strong>stronger electrostatic attraction</strong> between the ions, so more energy is needed to break the lattice → higher melting point."
+    },
+    {
+      q:"Why does diamond have a VERY HIGH melting point?",
+      a:"Diamond has a <strong>giant covalent structure</strong>. Each carbon atom is bonded to <strong>4 other carbon atoms by strong covalent bonds</strong> in a 3D network. A very large amount of energy is needed to break these many strong covalent bonds → very high melting point."
+    },
+    {
+      q:"Why does diamond NOT conduct electricity?",
+      a:"In diamond, all four outer electrons of each carbon atom are used to form <strong>covalent bonds</strong>. There are <strong>no free (delocalised) electrons</strong> available to carry charge, so diamond does not conduct electricity."
+    },
+    {
+      q:"Why does graphite conduct electricity?",
+      a:"In graphite, each carbon atom forms <strong>3 covalent bonds</strong>, leaving <strong>one electron per atom delocalised</strong>. These delocalised electrons are <strong>free to move</strong> within the layers, allowing graphite to conduct electricity."
+    },
+    {
+      q:"Why does graphite have a LOW density / act as a lubricant?",
+      a:"Graphite has a <strong>layered structure</strong>. The layers are held together only by <strong>weak intermolecular forces</strong>, so the layers can <strong>easily slide over each other</strong>. This makes graphite useful as a lubricant."
+    },
+    {
+      q:"Why do simple molecular substances (e.g. I₂, CO₂) have LOW melting points?",
+      a:"Simple molecular substances have <strong>weak intermolecular forces between molecules</strong>. Only a <strong>small amount of energy</strong> is needed to overcome these weak forces → low melting point. Note: the covalent bonds within molecules are strong but are NOT broken on melting."
+    },
+    {
+      q:"Why are metals good conductors of electricity?",
+      a:"Metals contain a <strong>sea of delocalised electrons</strong> that are free to move throughout the metallic lattice. When a voltage is applied, these electrons <strong>flow as an electric current</strong>, allowing metals to conduct electricity in both solid and molten states."
+    },
+    {
+      q:"Why are metals MALLEABLE and DUCTILE?",
+      a:"In a metal, when a force is applied, <strong>layers of positive metal ions can slide over each other</strong>. The <strong>sea of delocalised electrons</strong> redistributes around the new positions, <strong>maintaining the metallic bonding</strong>. Unlike ionic crystals, no repulsion occurs, so the metal can be deformed without breaking."
+    },
+    {
+      q:"Why does iodine (I₂) dissolve in organic solvents but NOT in water?",
+      a:"Iodine (I₂) is a <strong>non-polar simple molecular substance</strong>. The principle 'like dissolves like' applies — non-polar iodine dissolves in <strong>non-polar organic solvents</strong> (e.g. hexane). Water is a <strong>polar solvent</strong> and cannot effectively interact with non-polar I₂, so iodine does not dissolve in water."
+    }
+  ];
+  </script>
+  <div id="exp-accordion"></div>
+</div>
+
+<!-- ═══════════ 4. MOLE CALC ═══════════ -->
+<div class="section" id="mole">
+  <div class="sec-hdr">
+    <span class="sec-badge sb-amber">Part 4</span>
+    <h2>Mole Calculations — Gas Volume</h2>
+    <p>Practice the exact question types from the exam syllabus.</p>
+  </div>
+
+  <div class="formula-ref">
+    <div><div class="f">n = m / M</div><div class="fl">moles = mass ÷ molar mass</div></div>
+    <div><div class="f">n = V / 24</div><div class="fl">gas moles = volume ÷ 24 dm³ (RTP)</div></div>
+    <div><div class="f">c = n / V</div><div class="fl">concentration = moles ÷ volume (dm³)</div></div>
+  </div>
+
+  <!-- Q1: CaCO3 + HCl -->
+  <div class="calc-card">
+    <div class="q-label">Question 1 — from Exam Syllabus (Worksheet p.2)</div>
+    <div class="calc-q">
+      Calculate the volume of carbon dioxide produced at room temperature and pressure when an excess of dilute hydrochloric acid is added to <strong>1.000 g of calcium carbonate</strong>.<br><br>
+      CaCO₃ + 2HCl → CaCl₂ + CO₂ + H₂O<br><br>
+      (Relative atomic masses: Ca = 40, C = 12, O = 16)
+    </div>
+    <button class="show-sol-btn" onclick="toggleSol('sol1',this)">Show Solution ▾</button>
+    <div class="solution" id="sol1">
+      <ol class="step-list">
+        <li><div class="step-text"><strong>Find molar mass of CaCO₃:</strong><br>M(CaCO₃) = 40 + 12 + (16×3) = <code>100 g/mol</code></div></li>
+        <li><div class="step-text"><strong>Find moles of CaCO₃:</strong><br>n(CaCO₃) = m ÷ M = 1.000 ÷ 100 = <code>0.01 mol</code></div></li>
+        <li><div class="step-text"><strong>Find moles of CO₂ (from equation):</strong><br>Mole ratio CaCO₃ : CO₂ = 1 : 1<br>∴ n(CO₂) = <code>0.01 mol</code></div></li>
+        <li><div class="step-text"><strong>Find volume of CO₂ at RTP:</strong><br>V = n × 24 = 0.01 × 24 = <code>0.24 dm³</code><br>= 240 cm³</div></li>
+      </ol>
+      <div style="background:#f0fdf4;border:1px solid #86efac;border-radius:8px;padding:12px 16px;font-size:13px;color:#166534;font-weight:600;margin-top:8px;">
+        ✅ Answer: Volume of CO₂ = <strong>0.24 dm³ (240 cm³)</strong>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q2: Al + HCl -->
+  <div class="calc-card">
+    <div class="q-label">Question 2 — from Exam Syllabus (Worksheet p.2)</div>
+    <div class="calc-q">
+      Aluminium reacts with dilute hydrochloric acid.<br><br>
+      <strong>Balance the equation:</strong> Al + HCl → AlCl₃ + H₂<br><br>
+      Then calculate the volume of hydrogen gas produced at RTP when <strong>2.70 g of aluminium</strong> reacts completely with excess HCl.<br><br>
+      (Relative atomic mass: Al = 27)
+    </div>
+    <button class="show-sol-btn" onclick="toggleSol('sol2',this)">Show Solution ▾</button>
+    <div class="solution" id="sol2">
+      <ol class="step-list">
+        <li><div class="step-text"><strong>Balance the equation:</strong><br><code>2Al + 6HCl → 2AlCl₃ + 3H₂</code></div></li>
+        <li><div class="step-text"><strong>Find moles of Al:</strong><br>n(Al) = 2.70 ÷ 27 = <code>0.1 mol</code></div></li>
+        <li><div class="step-text"><strong>Find moles of H₂ (from equation):</strong><br>Mole ratio Al : H₂ = 2 : 3<br>n(H₂) = 0.1 × (3/2) = <code>0.15 mol</code></div></li>
+        <li><div class="step-text"><strong>Find volume of H₂ at RTP:</strong><br>V = n × 24 = 0.15 × 24 = <code>3.6 dm³</code></div></li>
+      </ol>
+      <div style="background:#f0fdf4;border:1px solid #86efac;border-radius:8px;padding:12px 16px;font-size:13px;color:#166534;font-weight:600;margin-top:8px;">
+        ✅ Answer: Volume of H₂ = <strong>3.6 dm³</strong>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q3: extra practice -->
+  <div class="calc-card">
+    <div class="q-label">Question 3 — Extra Practice</div>
+    <div class="calc-q">
+      Zinc reacts with dilute sulfuric acid according to:<br><br>
+      Zn + H₂SO₄ → ZnSO₄ + H₂<br><br>
+      Calculate the volume of hydrogen gas produced at RTP when <strong>6.54 g of zinc</strong> reacts with excess sulfuric acid.<br><br>
+      (Relative atomic mass: Zn = 65.4)
+    </div>
+    <button class="show-sol-btn" onclick="toggleSol('sol3',this)">Show Solution ▾</button>
+    <div class="solution" id="sol3">
+      <ol class="step-list">
+        <li><div class="step-text"><strong>Moles of Zn:</strong><br>n(Zn) = 6.54 ÷ 65.4 = <code>0.1 mol</code></div></li>
+        <li><div class="step-text"><strong>Moles of H₂:</strong><br>Mole ratio Zn : H₂ = 1 : 1<br>n(H₂) = <code>0.1 mol</code></div></li>
+        <li><div class="step-text"><strong>Volume at RTP:</strong><br>V = 0.1 × 24 = <code>2.4 dm³</code></div></li>
+      </ol>
+      <div style="background:#f0fdf4;border:1px solid #86efac;border-radius:8px;padding:12px 16px;font-size:13px;color:#166534;font-weight:600;margin-top:8px;">
+        ✅ Answer: Volume of H₂ = <strong>2.4 dm³</strong>
+      </div>
+    </div>
+  </div>
+
+  <!-- Q4: reverse -->
+  <div class="calc-card">
+    <div class="q-label">Question 4 — Reverse Calculation</div>
+    <div class="calc-q">
+      When excess zinc reacts with dilute sulfuric acid, <strong>4.8 dm³ of hydrogen gas</strong> is collected at RTP.<br><br>
+      Zn + H₂SO₄ → ZnSO₄ + H₂<br><br>
+      Calculate the mass of zinc that reacted.<br><br>
+      (Relative atomic mass: Zn = 65.4)
+    </div>
+    <button class="show-sol-btn" onclick="toggleSol('sol4',this)">Show Solution ▾</button>
+    <div class="solution" id="sol4">
+      <ol class="step-list">
+        <li><div class="step-text"><strong>Moles of H₂:</strong><br>n(H₂) = V ÷ 24 = 4.8 ÷ 24 = <code>0.2 mol</code></div></li>
+        <li><div class="step-text"><strong>Moles of Zn:</strong><br>Mole ratio Zn : H₂ = 1 : 1<br>n(Zn) = <code>0.2 mol</code></div></li>
+        <li><div class="step-text"><strong>Mass of Zn:</strong><br>m = n × M = 0.2 × 65.4 = <code>13.08 g</code></div></li>
+      </ol>
+      <div style="background:#f0fdf4;border:1px solid #86efac;border-radius:8px;padding:12px 16px;font-size:13px;color:#166534;font-weight:600;margin-top:8px;">
+        ✅ Answer: Mass of Zn = <strong>13.08 g</strong>
+      </div>
+    </div>
+  </div>
+
+</div>
+</main>
+
+<script>
+// ── SECTION TABS ──
+function showSection(id,btn){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ── DIAGRAMS ──
+function showDiagram(id,btn){
+  document.querySelectorAll('.diagram-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.dtab').forEach(b=>b.classList.remove('active'));
+  document.getElementById('dp-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ── CLASSIFY ──
+const correctAnswers={
+  'NaCl':'box-giant-ionic','MgO':'box-giant-ionic','KBr':'box-giant-ionic','CaO':'box-giant-ionic',
+  'Diamond':'box-giant-covalent','Graphite':'box-giant-covalent','SiO₂':'box-giant-covalent','Cubic BN':'box-giant-covalent',
+  'Cu':'box-giant-metallic','Na':'box-giant-metallic','Fe':'box-giant-metallic','Hg':'box-giant-metallic',
+  'CO₂':'box-simple-mol','I₂':'box-simple-mol','H₂O':'box-simple-mol','HCl':'box-simple-mol','OF₂':'box-simple-mol','N₂H₄':'box-simple-mol'
+};
+const substances=Object.keys(correctAnswers);
+let draggedChip=null, chipOrigin=null;
+
+function buildPool(){
+  const pool=document.getElementById('pool'); pool.innerHTML='';
+  substances.forEach(s=>{
+    const c=document.createElement('div');
+    c.className='substance-chip'; c.textContent=s; c.draggable=true; c.id='chip-'+s;
+    c.ondragstart=e=>{draggedChip=c; chipOrigin='pool'; e.dataTransfer.setData('text',s);};
+    pool.appendChild(c);
+  });
+  // clear boxes
+  Object.keys(correctAnswers).forEach(_=>{});
+  document.querySelectorAll('.dropped').forEach(d=>d.innerHTML='');
+  document.getElementById('classify-result').classList.remove('show','cr-correct','cr-wrong');
+}
+
+function allowDrop(e){e.preventDefault(); e.currentTarget.classList.add('drag-over');}
+
+function drop(e,boxId){
+  e.preventDefault();
+  e.currentTarget.classList.remove('drag-over');
+  const s=e.dataTransfer.getData('text');
+  const chip=document.getElementById('chip-'+s);
+  const dropped=document.getElementById('dropped-'+boxId);
+  const newChip=chip.cloneNode(true);
+  newChip.style.background='#1d4ed8';
+  newChip.draggable=true;
+  newChip.ondragstart=ev=>{draggedChip=newChip; chipOrigin=boxId; ev.dataTransfer.setData('text',s);};
+  newChip.ondblclick=()=>{
+    newChip.remove();
+    const p=document.getElementById('pool');
+    const orig=document.getElementById('chip-'+s);
+    if(!orig) p.appendChild(chip);
+  };
+  dropped.appendChild(newChip);
+  // remove from pool or previous box
+  if(chipOrigin==='pool'){chip.remove();}
+  else if(chipOrigin!==boxId){const prev=document.getElementById('dropped-'+chipOrigin);const old=[...prev.children].find(c=>c.textContent===s);if(old)old.remove();}
+  document.querySelectorAll('.classify-box').forEach(b=>b.classList.remove('drag-over'));
+}
+
+function checkClassify(){
+  let correct=0,total=substances.length;
+  substances.forEach(s=>{
+    const correctBox=correctAnswers[s];
+    const dropped=document.getElementById('dropped-'+correctBox);
+    const found=[...dropped.children].some(c=>c.textContent===s);
+    if(found)correct++;
+  });
+  const r=document.getElementById('classify-result');
+  r.className='classify-result show '+(correct===total?'cr-correct':'cr-wrong');
+  r.innerHTML=correct===total
+    ?`✅ Perfect! All ${total} substances correctly classified!`
+    :`❌ ${correct}/${total} correct. Check: double-click a chip to return it to the pool, then try again.`;
+}
+
+function resetClassify(){buildPool();}
+
+// ── PROPERTIES ACCORDION ──
+function buildAccordion(){
+  const c=document.getElementById('exp-accordion'); c.innerHTML='';
+  expQs.forEach((item,i)=>{
+    const div=document.createElement('div'); div.className='exp-card';
+    div.innerHTML=`
+      <div class="exp-q" onclick="toggleExp(${i},this)">
+        <span>${i+1}. ${item.q}</span>
+        <span class="chevron" id="ch-${i}">▾</span>
+      </div>
+      <div class="exp-a" id="ea-${i}">
+        <div class="ans-box">${item.a}</div>
+      </div>`;
+    c.appendChild(div);
+  });
+}
+function toggleExp(i,el){
+  const a=document.getElementById('ea-'+i); const ch=document.getElementById('ch-'+i);
+  a.classList.toggle('open'); ch.style.transform=a.classList.contains('open')?'rotate(180deg)':'rotate(0deg)';
+}
+
+// ── MOLE SOLUTIONS ──
+function toggleSol(id,btn){
+  const s=document.getElementById(id);
+  s.classList.toggle('show');
+  btn.textContent=s.classList.contains('show')?'Hide Solution ▴':'Show Solution ▾';
+}
+
+// init
+buildPool();
+buildAccordion();
+</script>
+</body>
+</html>
