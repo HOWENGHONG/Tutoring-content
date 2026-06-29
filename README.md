@@ -5,8 +5,6 @@
 
 ## 📘 數學（DSE EMI 中三）
 
-- [數學考前精華（中文）](https://howenghong.github.io/Tutoring-content/01_knowledge_summary%20zh.html)
-- [數學考前精華（英文）](https://howenghong.github.io/Tutoring-content/01_knowledge_summary.html)
 - [數學模擬卷 v2（完整範圍）](https://howenghong.github.io/Tutoring-content/mock_exam_v2.html)
 - [數學考試預備筆記](https://howenghong.github.io/Tutoring-content/math_exam_prep.html)
 
@@ -21,7 +19,8 @@
 - [鍵合比較表 (1)](https://howenghong.github.io/Tutoring-content/02_bonding_comparison%20(1).html)
 - [鍵合比較表 (2)](https://howenghong.github.io/Tutoring-content/02_bonding_comparison.html)
 - [結構化問題練習](https://howenghong.github.io/Tutoring-content/02_structured_questions.html)
-
+- [考前精華（英文）](https://howenghong.github.io/Tutoring-content/01_knowledge_summary.html)
+  
 ## 📝 多項選擇題練習
 
 - [MCQ 模擬試卷](https://howenghong.github.io/Tutoring-content/03_mcq_exam_practice.html)
