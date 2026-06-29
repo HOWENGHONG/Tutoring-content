@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>F3 Mock Exam v2 — Full Scope</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap');
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --bg:#faf9f7;--surface:#ffffff;--card:#f4f3f0;--border:#e0ddd6;
+    --border-s:#bbb8b0;--text:#1a1916;--muted:#68665e;--dim:#a09d96;
+    --accent:#1d4ed8;--accent-bg:#eff6ff;--accent-bd:#bfdbfe;
+    --gold:#92400e;--gold-bg:#fef3c7;
+    --red:#991b1b;--red-bg:#fef2f2;--red-bd:#fecaca;
+    --green:#14532d;--green-bg:#f0fdf4;--green-bd:#bbf7d0;
+    --teal:#0e5a60;--teal-bg:#ecfeff;--teal-bd:#a5f3fc;
+    --r:8px;
+  }
+  html{scroll-behavior:smooth}
+  body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;font-size:15px}
+
+  /* COVER */
+  .cover{background:var(--surface);border-bottom:2px solid var(--text);padding:2.5rem 2rem 1.75rem;max-width:920px;margin:0 auto}
+  .cover-top{display:flex;justify-content:space-between;align-items:flex-start;gap:1rem;flex-wrap:wrap;padding-bottom:1.25rem;border-bottom:1px solid var(--border);margin-bottom:1.25rem}
+  .school{font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
+  .exam-title{font-size:22px;font-weight:700;margin-top:.35rem;line-height:1.3}
+  .exam-sub{font-size:13px;color:var(--muted);margin-top:.2rem}
+  .meta-grid{display:grid;grid-template-columns:1fr 1fr;gap:.5rem 2rem;font-size:13px}
+  .meta-item{display:flex;gap:.5rem;align-items:baseline}
+  .meta-lbl{color:var(--muted);min-width:56px}
+  .meta-val{font-weight:500}
+  .score-strip{display:flex;gap:1.5rem;flex-wrap:wrap;font-size:13px;color:var(--muted);padding-top:1rem}
+  .score-strip span b{color:var(--text);font-weight:500}
+
+  /* TAB NAV */
+  .tab-bar{position:sticky;top:0;z-index:50;background:var(--surface);border-bottom:1px solid var(--border);display:flex;gap:2px;padding:0 2rem;overflow-x:auto;max-width:920px;margin:0 auto}
+  .tab-bar::-webkit-scrollbar{display:none}
+  .tab-btn{font-family:inherit;font-size:13px;font-weight:500;padding:.75rem 1.1rem;background:transparent;border:none;border-bottom:2.5px solid transparent;color:var(--muted);cursor:pointer;white-space:nowrap;transition:color .15s,border-color .15s}
+  .tab-btn:hover{color:var(--text)}
+  .tab-btn.active{color:var(--accent);border-bottom-color:var(--accent)}
+
+  .pane{display:none}
+  .pane.active{display:block}
+
+  /* MAIN */
+  main{max-width:920px;margin:0 auto;padding:0 2rem 4rem}
+
+  /* SECTION HEADER */
+  .sec-hd{display:flex;align-items:center;gap:1rem;margin:2.5rem 0 1.25rem;padding-bottom:.6rem;border-bottom:1.5px solid var(--text)}
+  .sec-tag{font-size:10px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;padding:3px 10px;border-radius:20px;white-space:nowrap}
+  .t-mc{background:var(--accent-bg);color:var(--accent);border:1px solid var(--accent-bd)}
+  .t-easy{background:var(--green-bg);color:var(--green);border:1px solid var(--green-bd)}
+  .t-mid{background:var(--gold-bg);color:var(--gold);border:1px solid #fcd34d}
+  .t-hard{background:var(--red-bg);color:var(--red);border:1px solid var(--red-bd)}
+  .t-trig{background:var(--teal-bg);color:var(--teal);border:1px solid var(--teal-bd)}
+  .sec-title{font-size:15px;font-weight:600}
+  .sec-marks{font-size:13px;color:var(--muted);margin-left:auto}
+
+  /* QUESTION CARD */
+  .q{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.25rem 1.5rem;margin-bottom:.75rem}
+  .q:hover{border-color:var(--border-s)}
+  .q-top{display:flex;align-items:flex-start;gap:.9rem;margin-bottom:.7rem}
+  .q-num{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;color:var(--muted);flex-shrink:0;padding-top:2px;min-width:26px}
+  .q-body{flex:1}
+  .q-mb{font-size:11px;color:var(--muted);border:1px solid var(--border);padding:1px 8px;border-radius:20px;white-space:nowrap;flex-shrink:0}
+  .q-text{font-size:14.5px;line-height:1.75}
+  .mc-opts{list-style:none;margin-top:.75rem;display:grid;grid-template-columns:1fr 1fr;gap:.35rem 1.5rem}
+  .mc-opts li{font-size:14px;display:flex;gap:.5rem;align-items:baseline}
+  .opt{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--muted);flex-shrink:0}
+  .subs{margin-top:.75rem;display:flex;flex-direction:column;gap:.45rem}
+  .sub{display:flex;gap:.6rem;font-size:14.5px;line-height:1.7}
+  .sub-lbl{font-weight:500;color:var(--muted);flex-shrink:0;font-size:13px;padding-top:2px}
+
+  /* ANSWER */
+  .ans-row{margin-top:.9rem}
+  .ans-btn{font-family:inherit;font-size:12px;font-weight:500;color:var(--muted);background:transparent;border:1px solid var(--border);border-radius:6px;padding:4px 12px;cursor:pointer;transition:all .15s}
+  .ans-btn:hover{color:var(--accent);border-color:var(--accent-bd);background:var(--accent-bg)}
+  .ans-block{display:none;margin-top:.75rem;background:var(--card);border-left:3px solid var(--accent);border-radius:0 6px 6px 0;padding:.9rem 1.1rem;font-size:13.5px;line-height:1.85}
+  .ans-block.open{display:block}
+  .ans-block .st{margin-bottom:.15rem}
+  .ans-block .fin{color:var(--accent);font-weight:600}
+  .ans-block .nt{margin-top:.5rem;font-size:12px;color:var(--muted);font-style:italic}
+  .ans-block .warn{margin-top:.5rem;font-size:12px;color:var(--red)}
+
+  /* WORK SPACE */
+  .ws{margin-top:.85rem;border:1px dashed var(--border);border-radius:6px;height:80px;display:flex;align-items:center;justify-content:center}
+  .ws span{font-size:12px;color:var(--dim)}
+  .ws.md{height:120px}.ws.lg{height:160px}.ws.xl{height:200px}
+
+  /* FOOTER */
+  .exam-footer{max-width:920px;margin:0 auto;border-top:1px solid var(--border);padding:1.25rem 2rem;display:flex;justify-content:space-between;font-size:12px;color:var(--dim)}
+
+  @media(max-width:600px){
+    main,.cover,.exam-footer{padding-left:1rem;padding-right:1rem}
+    .mc-opts{grid-template-columns:1fr}
+    .tab-bar{padding:0 1rem}
+  }
+  @media print{
+    .tab-bar,.ans-btn{display:none}
+    .pane{display:block!important}
+    .ans-block{display:none!important}
+    .q{break-inside:avoid;border:1px solid #ccc}
+    .sec-hd{margin-top:1.5rem}
+  }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-top">
+    <div>
+      <div class="school">F3 Mathematics · Mock Examination · Version 2 (Corrected)</div>
+      <div class="exam-title">Coordinate Geometry, Straight Lines &amp; Trigonometry</div>
+      <div class="exam-sub">Book 3B Ch.8 (Trigonometry) &nbsp;·&nbsp; Book 3B Ch.9 (Coordinate Geometry) &nbsp;·&nbsp; Book 4A Ch.3 (Equations of Straight Lines)</div>
+    </div>
+    <div class="meta-grid">
+      <div class="meta-item"><span class="meta-lbl">Date</span><span class="meta-val">________</span></div>
+      <div class="meta-item"><span class="meta-lbl">Name</span><span class="meta-val">____________________</span></div>
+      <div class="meta-item"><span class="meta-lbl">Class</span><span class="meta-val">________</span></div>
+      <div class="meta-item"><span class="meta-lbl">Score</span><span class="meta-val">_______ / 85</span></div>
+    </div>
+  </div>
+  <div class="score-strip">
+    <span>Section A MC: <b>5 × 2 = 10</b></span>
+    <span>Section B Trig: <b>3 qs = 12</b></span>
+    <span>Section C Short: <b>6 qs = 18</b></span>
+    <span>Section D Medium: <b>5 qs = 27</b></span>
+    <span>Section E Hard: <b>4 qs = 18</b></span>
+    <span>Time: <b>85 min</b></span>
+  </div>
+</div>
+
+<!-- TAB BAR -->
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="tab('a',this)">Section A · MC</button>
+  <button class="tab-btn" onclick="tab('b',this)">Section B · Trigonometry</button>
+  <button class="tab-btn" onclick="tab('c',this)">Section C · Short</button>
+  <button class="tab-btn" onclick="tab('d',this)">Section D · Medium</button>
+  <button class="tab-btn" onclick="tab('e',this)">Section E · Hard</button>
+</div>
+
+<main>
+
+<!-- ════════════════════════════════════════
+     SECTION A — Multiple Choice (10 marks)
+════════════════════════════════════════ -->
+<div class="pane active" id="tab-a">
+<div class="sec-hd"><span class="sec-tag t-mc">Section A</span><span class="sec-title">Multiple Choice</span><span class="sec-marks">5 questions · 2 marks each · 10 marks</span></div>
+
+<!-- A1 -->
+<div class="q">
+  <div class="q-top">
+    <span class="q-num">1.</span>
+    <div class="q-body">
+      <div class="q-text">The coordinates of points A and B are (−3, 5) and (9, −3) respectively. What is the slope of AB?</div>
+      <ul class="mc-opts">
+        <li><span class="opt">A.</span> −3/2</li>
+        <li><span class="opt">B.</span> −2/3</li>
+        <li><span class="opt">C.</span> 2/3</li>
+        <li><span class="opt">D.</span> 3/2</li>
+      </ul>
+    </div>
+    <span class="q-mb">2 marks</span>
+  </div>
+  <div class="ans-row"><button class="ans-btn" onclick="tog(this)">▸ Show Answer</button>
+  <div class="ans-block">
+    <div class="st">slope = (−3 − 5) / (9 − (−3)) = −8 / 12 = −2/3</div>
+    <div class="fin">Answer: B</div>
+  </div></div>
+</div>
+
+<!-- A2 -->
+<div class="q">
+  <div class="q-top">
+    <span class="q-num">2.</span>
+    <div class="q-body">
+      <div class="q-text">The straight line L: 3x − 5y + 30 = 0 cuts the y-axis at point Q. What are the coordinates of Q?</div>
+      <ul class="mc-opts">
+        <li><span class="opt">A.</span> (0, −6)</li>
+        <li><span class="opt">B.</span> (0, 6)</li>
+        <li><span class="opt">C.</span> (−10, 0)</li>
+        <li><span class="opt">D.</span> (10, 0)</li>
+      </ul>
+    </div>
+    <span class="q-mb">2 marks</span>
+  </div>
+  <div class="ans-row"><button class="ans-btn" onclick="tog(this)">▸ Show Answer</button>
+  <div class="ans-block">
+    <div class="st">At y-axis, x = 0: −5y + 30 = 0 → y = 6</div>
+    <div class="fin">Answer: B &nbsp; Q = (0, 6)</div>
+  </div></div>
+</div>
+
+<!-- A3 -->
+<div class="q">
+  <div class="q-top">
+    <span class="q-num">3.</span>
+    <div class="q-body">
+      <div class="q-text">P(2, −1) and Q(8, 5) are two points. R divides PQ internally in the ratio 1 : 2. What are the coordinates of R?</div>
+      <ul class="mc-opts">
+        <li><span class="opt">A.</span> (4, 1)</li>
+        <li><span class="opt">B.</span> (5, 2)</li>
+        <li><span class="opt">C.</span> (6, 3)</li>
+        <li><span class="opt">D.</span> (4, 3)</li>
+      </ul>
+    </div>
+    <span class="q-mb">2 marks</span>
+  </div>
+  <div class="ans-row"><button class="ans-btn" onclick="tog(this)">▸ Show Answer</button>
+  <div class="ans-block">
+    <div class="st">m : n = 1 : 2 → m pairs with Q, n pairs with P</div>
+    <div class="st">x = (1×8 + 2×2) / 3 = 12/3 = 4</div>
+    <div class="st">y = (1×5 + 2×(−1)) / 3 = 3/3 = 1</div>
+    <div class="fin">Answer: A &nbsp; R = (4, 1)</div>
+  </div></div>
+</div>
+
+<!-- A4 -->
+<div class="q">
+  <div class="q-top">
+    <span class="q-num">4.</span>
+    <div class="q-body">
+      <div class="q-text">Which of the following pairs of straight lines are perpendicular to each other?<br>I. &nbsp;2x − 3y + 1 = 0 &nbsp;and&nbsp; 3x − 2y + 5 = 0<br>II. &nbsp;x + 4y − 7 = 0 &nbsp;and&nbsp; 4x − y + 3 = 0<br>III. &nbsp;5x − y + 2 = 0 &nbsp;and&nbsp; x + 5y − 4 = 0</div>
+      <ul class="mc-opts">
+        <li><span class="opt">A.</span> I only</li>
+        <li><span class="opt">B.</span> II only</li>
+        <li><span class="opt">C.</span> II and III only</li>
+        <li><span class="opt">D.</span> I, II and III</li>
+      </ul>
+    </div>
+    <span class="q-mb">2 marks</span>
+  </div>
+  <div class="ans-row"><button class="ans-btn" onclick="tog(this)">▸ Show Answer</button>
+  <div class="ans-block">
+    <div class="st">I: slopes 2/3 and 3/2 → product = 1 ≠ −1 ✗</div>
+    <div class="st">II: slopes −1/4 and 4 → product = −1 ✓</div>
+    <div class="st">III: slopes 5 and −1/5 → product = −1 ✓</div>
+    <div class="fin">Answer: C (II and III only)</div>
+  </div></div>
+</div>
+
+<!-- A5 -->
+<div class="q">
+  <div class="q-top">
+    <span class="q-num">5.</span>
+    <div class="q-body">
+      <div class="q-text">The straight lines L₁: kx − 4y + 8 = 0 and L₂: 3x + 6y − 5 = 0 are parallel. Find k.</div>
+      <ul class="mc-opts">
+        <li><span class="opt">A.</span> k = −2</li>
+        <li><span class="opt">B.</span> k = 2</li>
+        <li><span class="opt">C.</span> k = −½</li>
+        <li><span class="opt">D.</span> k = ½</li>
+      </ul>
+    </div>
+    <span class="q-mb">2 marks</span>
+  </div>
+  <div class="ans-row"><button class="ans-btn" onclick="tog(this)">▸ Show Answer</button>
+  <div class="ans-block">
+    <div class="st">Slope of L₁ = k/4 &nbsp;|&nbsp; Slope of L₂ = −3/6 = −1/2</div>
+    <div class="st">Parallel → k/4 = −1/2 → k = −2</div>
+    <div class="fin">Answer: A &nbsp; k = −2</div>
+  </div></div>
+</div>
+</div><!-- /pane-a -->
+
+<!-- ════════════════════════════════════════
+     SECTION B — Trigonometry (12 marks)
+════════════════════════════════════════ -->
+<div class="pane" id="tab-b">
+<div class="sec-hd"><span class="sec-tag t-trig">Section B</span><span class="sec-title">Trigonometry Applications (Ch.8)</span><span class="sec-marks">3 questions · 12 marks</span></div>
+
+<!-- B1 -->
+<div class="q">
+  <div class="q-top">
+    <span class="q-num">6.</span>
+    <div class="q-body">
+      <div class="q-text">A road rises 4 m for every 25 m of horizontal distance.</div>
+      <div class="subs">
+        <div class="sub"><span class="sub-lbl">(a)</span><span>Find the angle of inclination θ of the road, correct to 3 significant figures.</span></div>
+        <div class="sub"><span class="sub-lbl">(b)</span><span>A cyclist travels 200 m along the road (i.e. along the slope). Find the actual vertical height gained. Give your answer correct to 3 significant figures.</span></div>
+      </div>
+    </div>
+    <span class="q-mb">4 marks</span>
+  </div>
+  <div class="ws md"><span>Working space</span></div>
+  <div class="ans-row"><button class="ans-btn" onclick="tog(this)">▸ Show Answer</button>
+  <div class="ans-block">
+    <div class="st">(a) tan θ = rise / run = 4 / 25 = 0.16</div>
+    <div class="st">θ = arctan(0.16) = <span class="fin">9.09° (3 s.f.)</span></div>
+    <div class="st">(b) Height gained = 200 × sin 9.09° = 200 × 0.1579 = <span class="fin">31.6 m (3 s.f.)</span></div>
+    <div class="nt">Note: slope ≠ horizontal distance. The 200 m is along the hypotenuse, so use sin.</div>
+  </div></div>
+</div>
+
+<!-- B2 -->
+<div class="q">
+  <div class="q-top">
+    <span class="q-num">7.</span>
+    <div class="q-body">
+      <div class="q-text">From the top of a lighthouse 120 m above sea level, a coastguard observes a boat at sea. The angle of depression of the boat is 25°. At the same moment, the angle of elevation of the top of a cliff directly behind the lighthouse (from the same observation point) is 18°. The cliff is 80 m horizontally from the lighthouse.</div>
+      <div class="subs">
+        <div class="sub"><span class="sub-lbl">(a)</span><span>Find the horizontal distance between the lighthouse and the boat. Give your answer correct to the nearest metre.</span></div>
+        <div class="sub"><span class="sub-lbl">(b)</span><span>Find the height of the cliff above sea level. Give your answer correct to 3 significant figures.</span></div>
+      </div>
+    </div>
+    <span class="q-mb">4 marks</span>
+  </div>
+  <div class="ws lg"><span>Working space</span></div>
+  <div class="ans-row"><button class="ans-btn" onclick="tog(this)">▸ Show Answer</button>
+  <div class="ans-block">
+    <div class="st">(a) Draw diagram. Angle of depression = alternate angle inside triangle = 25°</div>
+    <div class="st">tan 25° = 120 / d → d = 120 / tan 25° = 120 / 0.4663 ≈ <span class="fin">257 m</span></div>
+    <div class="warn">⚠ Do NOT use the depression angle directly without marking it as the alternate angle in the triangle!</div>
+    <div class="st">(b) Height of cliff above lighthouse top = 80 × tan 18° = 80 × 0.3249 = 26.0 m</div>
+    <div class="st">Total height of cliff above sea level = 120 + 26.0 = <span class="fin">146 m (3 s.f.)</span></div>
+  </div></div>
+</div>
+
+<!-- B3 -->
+<div class="q">
+  <div class="q-top">
+    <span class="q-num">8.</span>
+    <div class="q-body">
+      <div class="q-text">A ship leaves port A and sails on a bearing of 130° for 90 km to reach port B. It then changes course and sails on a bearing of 040° for 60 km to reach port C.</div>
+      <div class="subs">
+        <div class="sub"><span class="sub-lbl">(a)</span><span>Find how far south of A that B is located. (Give your answer correct to 3 s.f.)</span></div>
+        <div class="sub"><span class="sub-lbl">(b)</span><span>Find how far east of A that B is located. (Give your answer correct to 3 s.f.)</span></div>
+        <div class="sub"><span class="sub-lbl">(c)</span><span>Find the total displacement eastward from A to C. (Give your answer correct to 3 s.f.)</span></div>
+      </div>
+    </div>
+    <span class="q-mb">4 marks</span>
+  </div>
+  <div class="ws lg"><span>Working space</span></div>
+  <div class="ans-row"><button class="ans-btn" onclick="tog(this)">▸ Show Answer</button>
+  <div class="ans-block">
+    <div class="st">(a) Bearing 130° → angle from South = 50° (or angle from North = 130°)</div>
+    <div class="st">Southward component of AB = 90 cos 50° = 90 × 0.6428 = <span class="fin">57.9 km south</span></div>
+    <div class="st">(b) Eastward component of AB = 90 sin 50° = 90 × 0.7660 = <span class="fin">68.9 km east</span></div>
+    <div class="st">(c) Bearing 040° → angle from North = 40°</div>
+    <div class="st">Eastward component of BC = 60 sin 40° = 60 × 0.6428 = 38.6 km</div>
+    <div class="st">Total eastward from A to C = 68.9 + 38.6 = <span class="fin">107 km east (3 s.f.)</span></div>
+    <div class="nt">Tip: For any bearing θ from North → North component = distance × cos θ, East component = distance × sin θ</div>
+  </div></div>
+</div>
+</div><!-- /pane-b -->
+
+<!-- ════════════════════════════════════════
+     SECTION C — Short Questions (18 marks)
+════════════════════════════════════════ -->
+<div class="pane" id="tab-c">
+<div class="sec-hd"><span class="sec-tag t-easy">Section C</span><span class="sec-title">Short Questions</span><span class="sec-marks">6 questions · 18 marks</span></div>
+
+<!-- C1 -->
+<div class="q">
+  <div class="q-top">
+    <span class="q-num">9.</span>
+    <div class="q-body">
+      <div class="q-text">The coordinates of points A and B are (−4, 3) and (8, −1) respectively.</div>
+      <div class="subs">
+        <div class="sub"><span class="sub-lbl">(a)</span><span>Find the distance AB.</span></div>
+        <div class="sub"><span class="sub-lbl">(b)</span><span>Find the coordinates of the midpoint M of AB.</span></div>
+      </div>
+    </div>
+    <span class="q-mb">3 marks</span>
+  </div>
+  <div class="ws"><span>Working space</span></div>
+  <div class="ans-row"><button class="ans-btn" onclick="tog(this)">▸ Show Answer</button>
+  <div class="ans-block">
+    <div class="st">(a) AB = √[(8−(−4))² + (−1−3)²] = √[144 + 16] = √160 = <span class="fin">4√10</span></div>
+    <div class="st">(b) M = ((−4+8)/2, (3+(−1))/2) = <span class="fin">(2, 1)</span></div>
+  </div></div>
+</div>
+
+<!-- C2 -->
+<div class="q">
+  <div class="q-top">
+    <span class="q-num">10.</span>
+    <div class="q-body">
+      <div class="q-text">The straight line L: 5x − 2y + 20 = 0 cuts the x-axis at A and the y-axis at B.</div>
+      <div class="subs">
+        <div class="sub"><span class="sub-lbl">(a)</span><span>Find the coordinates of A and B.</span></div>
+        <div class="sub"><span class="sub-lbl">(b)</span><span>Find the slope of L.</span></div>
+      </div>
+    </div>
+    <span class="q-mb">3 marks</span>
+  </div>
+  <div class="ws"><span>Working space</span></div>
+  <div class="ans-row"><button class="ans-btn" onclick="tog(this)">▸ Show Answer</button>
+  <div class="ans-block">
+    <div class="st">(a) x-axis (y=0): 5x+20=0 → x=−4 → <span class="fin">A=(−4, 0)</span></div>
+    <div class="st">&nbsp;&nbsp;&nbsp;&nbsp; y-axis (x=0): −2y+20=0 → y=10 → <span class="fin">B=(0, 10)</span></div>
+    <div class="st">(b) From 5x−2y+20=0: slope = −5/(−2) = <span class="fin">5/2</span></div>
+    <div class="nt">Slope from general form ax+by+c=0: slope = −a/b. Here a=5, b=−2 → slope = −5/(−2) = 5/2</div>
+  </div></div>
+</div>
+
+<!-- C3 -->
+<div class="q">
+  <div class="q-top">
+    <span class="q-num">11.</span>
+    <div class="q-body">
+      <div class="q-text">Find the equation of the straight line passing through (−2, 7) with slope −3. Give your answer in the general form.</div>
+    </div>
+    <span class="q-mb">3 marks</span>
+  </div>
+  <div class="ws"><span>Working space</span></div>
+  <div class="ans-row"><button class="ans-btn" onclick="tog(this)">▸ Show Answer</button>
+  <div class="ans-block">
+    <div class="st">y − 7 = −3(x − (−2)) = −3(x + 2)</div>
+    <div class="st">y − 7 = −3x − 6 → 3x + y − 1 = 0</div>
+    <div class="fin">3x + y − 1 = 0</div>
+    <div class="warn">⚠ General form must have no fractions. Check: no fractions here ✓</div>
+  </div></div>
+</div>
+
+<!-- C4 -->
+<div class="q">
+  <div class="q-top">
+    <span class="q-num">12.</span>
+    <div class="q-body">
+      <div class="q-text">It is given that the straight line L₁: 4x − 3y + 9 = 0. Find the equation of L₂ which is perpendicular to L₁ and passes through the point (8, −2). Give your answer in the general form.</div>
+    </div>
+    <span class="q-mb">3 marks</span>
+  </div>
+  <div class="ws"><span>Working space</span></div>
+  <div class="ans-row"><button class="ans-btn" onclick="tog(this)">▸ Show Answer</button>
+  <div class="ans-block">
+    <div class="st">Slope of L₁ = 4/3 → slope of L₂ = −3/4 (perpendicular: m₁ × m₂ = −1)</div>
+    <div class="st">y − (−2) = −3/4 · (x − 8) → 4(y+2) = −3(x−8)</div>
+    <div class="st">4y + 8 = −3x + 24 → 3x + 4y − 16 = 0</div>
+    <div class="fin">3x + 4y − 16 = 0</div>
+  </div></div>
+</div>
+
+<!-- C5 -->
+<div class="q">
+  <div class="q-top">
+    <span class="q-num">13.</span>
+    <div class="q-body">
+      <div class="q-text">The straight lines L₁: 3x + 4y − 12 = 0 and L₂: x − 2y + 4 = 0 intersect at point A. Find the coordinates of A.</div>
+    </div>
+    <span class="q-mb">3 marks</span>
+  </div>
+  <div class="ws"><span>Working space</span></div>
+  <div class="ans-row"><button class="ans-btn" onclick="tog(this)">▸ Show Answer</button>
+  <div class="ans-block">
+    <div class="st">From L₂: x = 2y − 4</div>
+    <div class="st">Sub into L₁: 3(2y−4) + 4y − 12 = 0 → 10y = 24 → y = 12/5</div>
+    <div class="st">x = 2(12/5) − 4 = 24/5 − 20/5 = 4/5</div>
+    <div class="fin">A = (4/5, 12/5)</div>
+  </div></div>
+</div>
+
+<!-- C6 -->
+<div class="q">
+  <div class="q-top">
+    <span class="q-num">14.</span>
+    <div class="q-body">
+      <div class="q-text">P(4, k) lies on the line segment joining A(−2, 1) and B(10, 7). Find the value of k and the ratio AP : PB.</div>
+    </div>
+    <span class="q-mb">3 marks</span>
+  </div>
+  <div class="ws"><span>Working space</span></div>
+  <div class="ans-row"><button class="ans-btn" onclick="tog(this)">▸ Show Answer</button>
+  <div class="ans-block">
+    <div class="st">Let AP : PB = m : n. x-coord of P: (m×10 + n×(−2)) / (m+n) = 4</div>
+    <div class="st">10m − 2n = 4m + 4n → 6m = 6n → <span class="fin">AP : PB = 1 : 1</span></div>
+    <div class="st">So P is the midpoint of AB: k = (1+7)/2 = <span class="fin">k = 4</span></div>
+  </div></div>
+</div>
+</div><!-- /pane-c -->
+
+<!-- ════════════════════════════════════════
+     SECTION D — Medium (27 marks)
+════════════════════════════════════════ -->
+<div class="pane" id="tab-d">
+<div class="sec-hd"><span class="sec-tag t-mid">Section D</span><span class="sec-title">Medium Questions</span><span class="sec-marks">5 questions · 27 marks</span></div>
+
+<!-- D1 -->
+<div class="q">
+  <div class="q-top">
+    <span class="q-num">15.</span>
+    <div class="q-body">
+      <div class="q-text">It is given that straight lines L₁: hx + 3y − 15 = 0 and L₂: (h + 6)x + 12y + 11 = 0 are parallel.</div>
+      <div class="subs">
+        <div class="sub"><span class="sub-lbl">(a)</span><span>Find h.</span></div>
+        <div class="sub"><span class="sub-lbl">(b)</span><span>Find the y-intercepts of L₁ and L₂ respectively. Hence find the distance between the two y-intercepts.</span></div>
+      </div>
+    </div>
+    <span class="q-mb">5 marks</span>
+  </div>
+  <div class="ws md"><span>Working space</span></div>
+  <div class="ans-row"><button class="ans-btn" onclick="tog(this)">▸ Show Answer</button>
+  <div class="ans-block">
+    <div class="st">(a) Slope of L₁ = −h/3 &nbsp;|&nbsp; Slope of L₂ = −(h+6)/12</div>
+    <div class="st">Parallel: −h/3 = −(h+6)/12 → 12h = 3(h+6) → 12h = 3h+18 → 9h = 18 → <span class="fin">h = 2</span></div>
+    <div class="st">(b) L₁: 2x+3y−15=0 → x=0: 3y=15 → y=5 → y-int = <span class="fin">(0, 5)</span></div>
+    <div class="st">&nbsp;&nbsp;&nbsp;&nbsp; L₂: 8x+12y+11=0 → x=0: 12y=−11 → y=−11/12 → y-int = <span class="fin">(0, −11/12)</span></div>
+    <div class="st">Distance = 5 − (−11/12) = 5 + 11/12 = <span class="fin">71/12 units</span></div>
+  </div></div>
+</div>
+
+<!-- D2 -->
+<div class="q">
+  <div class="q-top">
+    <span class="q-num">16.</span>
+    <div class="q-body">
+      <div class="q-text">It is given that the straight line L₁: 2x − 5y + 10 = 0 and the straight line L₂ are perpendicular to each other and intersect at a point on the y-axis.</div>
+      <div class="subs">
+        <div class="sub"><span class="sub-lbl">(a)</span><span>Find the equation of L₂ in the general form.</span></div>
+        <div class="sub"><span class="sub-lbl">(b)</span><span>Find the area of the triangle bounded by L₁, L₂ and the x-axis.</span></div>
+      </div>
+    </div>
+    <span class="q-mb">5 marks</span>
+  </div>
+  <div class="ws md"><span>Working space</span></div>
+  <div class="ans-row"><button class="ans-btn" onclick="tog(this)">▸ Show Answer</button>
+  <div class="ans-block">
+    <div class="st">(a) L₁ meets y-axis (x=0): −5y+10=0 → y=2 → intersection = (0, 2)</div>
+    <div class="st">Slope of L₁ = 2/5 → slope of L₂ = −5/2 (perpendicular)</div>
+    <div class="st">L₂ through (0, 2): y−2 = −5/2 · x → 2y−4 = −5x → <span class="fin">5x + 2y − 4 = 0</span></div>
+    <div class="st">(b) L₁ x-int (y=0): 2x+10=0 → x=−5 → A=(−5, 0)</div>
+    <div class="st">&nbsp;&nbsp;&nbsp;&nbsp; L₂ x-int (y=0): 5x−4=0 → x=4/5 → B=(4/5, 0)</div>
+    <div class="st">Base = |4/5 − (−5)| = 29/5 &nbsp;|&nbsp; Height = 2 (y-coord of vertex)</div>
+    <div class="fin">Area = ½ × 29/5 × 2 = 29/5 = 5.8 sq. units</div>
+  </div></div>
+</div>
+
+<!-- D3 -->
+<div class="q">
+  <div class="q-top">
+    <span class="q-num">17.</span>
+    <div class="q-body">
+      <div class="q-text">The coordinates of P are (5, −7). P is reflected along the y-axis to Q. Q is then rotated anticlockwise about the origin O through 90° to R. The straight line L passes through Q and R.</div>
+      <div class="subs">
+        <div class="sub"><span class="sub-lbl">(a)</span><span>Find the coordinates of Q and R.</span></div>
+        <div class="sub"><span class="sub-lbl">(b)</span><span>Find the equation of L in the general form.</span></div>
+        <div class="sub"><span class="sub-lbl">(c)</span><span>Find the y-intercept of L.</span></div>
+      </div>
+    </div>
+    <span class="q-mb">6 marks</span>
+  </div>
+  <div class="ws md"><span>Working space</span></div>
+  <div class="ans-row"><button class="ans-btn" onclick="tog(this)">▸ Show Answer</button>
+  <div class="ans-block">
+    <div class="st">(a) Reflect P(5,−7) along y-axis: x → −x → <span class="fin">Q = (−5, −7)</span></div>
+    <div class="st">Rotate Q 90° anticlockwise: (x, y) → (−y, x) → (7, −5) → <span class="fin">R = (7, −5)</span></div>
+    <div class="st">(b) Slope of QR = (−5−(−7)) / (7−(−5)) = 2/12 = 1/6</div>
+    <div class="st">Through Q(−5,−7): y+7 = (1/6)(x+5) → 6y+42 = x+5 → <span class="fin">x − 6y − 37 = 0</span></div>
+    <div class="st">(c) x=0: −6y−37=0 → y = −37/6 → <span class="fin">y-intercept = −37/6</span></div>
+    <div class="nt">Rotation rule: 90° anticlockwise → (x, y) maps to (−y, x)</div>
+  </div></div>
+</div>
+
+<!-- D4 -->
+<div class="q">
+  <div class="q-top">
+    <span class="q-num">18.</span>
+    <div class="q-body">
+      <div class="q-text">The coordinates of points A, B and C are (−2, 0), (4, 12) and (3, 5) respectively. M is the midpoint of AB.</div>
+      <div class="subs">
+        <div class="sub"><span class="sub-lbl">(a)</span><span>Find the slope of AB and the coordinates of M.</span></div>
+        <div class="sub"><span class="sub-lbl">(b)</span><span>Show that CM ⊥ AB.</span></div>
+        <div class="sub"><span class="sub-lbl">(c)</span><span>Hence prove that △ABC is an isosceles triangle with CA = CB. Also find the area of △ABC.</span></div>
+      </div>
+    </div>
+    <span class="q-mb">6 marks</span>
+  </div>
+  <div class="ws md"><span>Working space</span></div>
+  <div class="ans-row"><button class="ans-btn" onclick="tog(this)">▸ Show Answer</button>
+  <div class="ans-block">
+    <div class="st">(a) Slope of AB = (12−0)/(4−(−2)) = 12/6 = 2</div>
+    <div class="st">M = ((−2+4)/2, (0+12)/2) = <span class="fin">(1, 6)</span></div>
+    <div class="st">(b) Slope of CM = (5−6)/(3−1) = −1/2</div>
+    <div class="st">Slope AB × slope CM = 2 × (−1/2) = −1 ✓</div>
+    <div class="st">∴ CM ⊥ AB &nbsp;(Q.E.D.)</div>
+    <div class="st">(c) Since CM is the perpendicular bisector of AB (CM⊥AB and M is midpoint of AB),</div>
+    <div class="st">every point on CM is equidistant from A and B.</div>
+    <div class="st">Since C lies on CM → CA = CB → △ABC is isosceles. &nbsp;(Q.E.D.)</div>
+    <div class="st">CA² = (3−(−2))² + (5−0)² = 25+25 = 50 → CA = 5√2</div>
+    <div class="st">CB² = (3−4)² + (5−12)² = 1+49 = 50 → CB = 5√2 ✓</div>
+    <div class="st">AB = √[(4−(−2))²+(12−0)²] = √[36+144] = √180 = 6√5</div>
+    <div class="st">CM = √[(3−1)²+(5−6)²] = √[4+1] = √5</div>
+    <div class="fin">Area △ABC = ½ × AB × CM = ½ × 6√5 × √5 = ½ × 6 × 5 = 15 sq. units</div>
+  </div></div>
+</div>
+
+<!-- D5 -->
+<div class="q">
+  <div class="q-top">
+    <span class="q-num">19.</span>
+    <div class="q-body">
+      <div class="q-text">It is given that the straight lines L₁: kx − 3y + 15 = 0 and L₂: 5x + (2−k)y + 30 = 0 are parallel to each other.</div>
+      <div class="subs">
+        <div class="sub"><span class="sub-lbl">(a)</span><span>Find k.</span></div>
+        <div class="sub"><span class="sub-lbl">(b)</span><span>Find the area of the parallelogram bounded by L₁, L₂, the straight line y = −5 and the x-axis.</span></div>
+      </div>
+    </div>
+    <span class="q-mb">5 marks</span>
+  </div>
+  <div class="ws md"><span>Working space</span></div>
+  <div class="ans-row"><button class="ans-btn" onclick="tog(this)">▸ Show Answer</button>
+  <div class="ans-block">
+    <div class="st">(a) Slope of L₁ = k/3 &nbsp;|&nbsp; Slope of L₂ = −5/(2−k)</div>
+    <div class="st">Parallel: k/3 = −5/(2−k) → k(2−k) = −15 → 2k−k² = −15 → k²−2k−15 = 0</div>
+    <div class="st">(k−5)(k+3) = 0 → k = 5 or k = −3</div>
+    <div class="st">If k=5: slope L₁ = 5/3, slope L₂ = −5/(−3) = 5/3 ✓ | L₂: 5x−3y+30=0 (parallel ✓)</div>
+    <div class="st">If k=−3: slope L₁ = −1, slope L₂ = −5/5 = −1 ✓ | both work</div>
+    <div class="fin">k = 5 or k = −3</div>
+    <div class="st">(b) Take k=5: L₁: 5x−3y+15=0, L₂: 5x−3y+30=0</div>
+    <div class="st">Slope = 5/3. The region is between y=0 (x-axis) and y=−5.</div>
+    <div class="st">Height of parallelogram = |−5 − 0| = 5</div>
+    <div class="st">L₁ meets x-axis: 5x+15=0 → x=−3 → (−3,0)</div>
+    <div class="st">L₂ meets x-axis: 5x+30=0 → x=−6 → (−6,0)</div>
+    <div class="st">Base (along x-axis between the two lines) = |−3−(−6)| = 3</div>
+    <div class="fin">Area = base × height = 3 × 5 = 15 sq. units</div>
+    <div class="nt">Note: For k=−3 the answer differs; check which value your teacher prefers.</div>
+  </div></div>
+</div>
+</div><!-- /pane-d -->
+
+<!-- ════════════════════════════════════════
+     SECTION E — Hard (18 marks)
+════════════════════════════════════════ -->
+<div class="pane" id="tab-e">
+<div class="sec-hd"><span class="sec-tag t-hard">Section E</span><span class="sec-title">Challenging Questions</span><span class="sec-marks">4 questions · 18 marks</span></div>
+
+<!-- E1 -->
+<div class="q">
+  <div class="q-top">
+    <span class="q-num">20.</span>
+    <div class="q-body">
+      <div class="q-text">In a rectangular coordinate plane, the coordinates of points A, B and C are (2, 10), (6, −2) and (14, 4) respectively. Let P be a point on AC such that BP is an altitude of △ABC.</div>
+      <div class="subs">
+        <div class="sub"><span class="sub-lbl">(a)</span><span>Find the equation of the straight line which passes through B and P.</span></div>
+        <div class="sub"><span class="sub-lbl">(b)</span><span>Find the coordinates of P.</span></div>
+        <div class="sub"><span class="sub-lbl">(c)</span><span>Find the ratio of the area of △ABC to the area of △BCP.</span></div>
+      </div>
+    </div>
+    <span class="q-mb">6 marks</span>
+  </div>
+  <div class="ws lg"><span>Working space</span></div>
+  <div class="ans-row"><button class="ans-btn" onclick="tog(this)">▸ Show Answer</button>
+  <div class="ans-block">
+    <div class="st">(a) Slope of AC = (4−10)/(14−2) = −6/12 = −1/2</div>
+    <div class="st">BP ⊥ AC → slope of BP = 2</div>
+    <div class="st">Line BP through B(6,−2): y+2 = 2(x−6) → 2x−y−14 = 0</div>
+    <div class="fin">Equation of BP: 2x − y − 14 = 0</div>
+    <div class="st">(b) Line AC through A(2,10), slope −1/2: y−10 = −1/2(x−2) → x+2y = 22</div>
+    <div class="st">Solve simultaneously: 2x−y=14 and x+2y=22</div>
+    <div class="st">From first: y=2x−14. Sub: x+2(2x−14)=22 → 5x=50 → x=10, y=6</div>
+    <div class="fin">P = (10, 6)</div>
+    <div class="st">(c) △ABC and △BCP share the same height from B perpendicular to AC.</div>
+    <div class="st">Area ratio = AC : PC (same height h from B)</div>
+    <div class="st">AP² = (10−2)²+(6−10)² = 64+16 = 80 → AP = 4√5</div>
+    <div class="st">PC² = (14−10)²+(4−6)² = 16+4 = 20 → PC = 2√5</div>
+    <div class="st">AC = AP + PC = 4√5 + 2√5 = 6√5</div>
+    <div class="fin">Area △ABC : Area △BCP = AC : PC = 6√5 : 2√5 = <b>3 : 1</b></div>
+    <div class="nt">Verify: Area △ABC = ½|det| = ½|(6−2)(4−10)−(14−2)(−2−10)| = ½|−24+144| = 60; Area △BCP = ½×20 = 20. Ratio = 3:1 ✓</div>
+  </div></div>
+</div>
+
+<!-- E2 -->
+<div class="q">
+  <div class="q-top">
+    <span class="q-num">21.</span>
+    <div class="q-body">
+      <div class="q-text">In a rectangular coordinate plane, P(30, 30) and Q(36, 0) are two points. Denote O as the origin.</div>
+      <div class="subs">
+        <div class="sub"><span class="sub-lbl">(a)</span><span>Find the equation of the perpendicular bisector of PQ.</span></div>
+        <div class="sub"><span class="sub-lbl">(b)</span><span>Find the coordinates of the circumcentre of △OPQ.</span></div>
+      </div>
+    </div>
+    <span class="q-mb">5 marks</span>
+  </div>
+  <div class="ws lg"><span>Working space</span></div>
+  <div class="ans-row"><button class="ans-btn" onclick="tog(this)">▸ Show Answer</button>
+  <div class="ans-block">
+    <div class="st">(a) Midpoint of PQ = ((30+36)/2, (30+0)/2) = (33, 15)</div>
+    <div class="st">Slope of PQ = (0−30)/(36−30) = −5</div>
+    <div class="st">Slope of perp. bisector = 1/5</div>
+    <div class="st">Through (33,15): y−15 = 1/5(x−33) → 5y−75 = x−33 → <span class="fin">x − 5y + 42 = 0</span></div>
+    <div class="st">(b) The circumcentre lies on all three perpendicular bisectors. Find perp. bisector of OP:</div>
+    <div class="st">O=(0,0), P=(30,30). Midpoint=(15,15). Slope OP=1 → perp slope=−1</div>
+    <div class="st">Perp bisector of OP: y−15=−(x−15) → x+y=30 &nbsp; ... (ii)</div>
+    <div class="st">Solve (i) x−5y=−42 and (ii) x+y=30:</div>
+    <div class="st">(ii)−(i): 6y=72 → y=12. x=30−12=18</div>
+    <div class="fin">Circumcentre = (18, 12)</div>
+    <div class="nt">Check: distance to O=√(324+144)=√468; to P=√(144+324)=√468; to Q=√(324+144)=√468 ✓</div>
+  </div></div>
+</div>
+
+<!-- E3 -->
+<div class="q">
+  <div class="q-top">
+    <span class="q-num">22.</span>
+    <div class="q-body">
+      <div class="q-text">In a rectangular coordinate plane, A(−39, 0), B(0, −52) and C(26, 0) are the vertices of △ABC. Denote the orthocentre of △ABC by H.</div>
+      <div class="subs">
+        <div class="sub"><span class="sub-lbl">(a) (i)</span><span>Find the equation of the altitude from vertex A to base BC.</span></div>
+        <div class="sub"><span class="sub-lbl">&nbsp;&nbsp;&nbsp;(ii)</span><span>Hence find the coordinates of H.</span></div>
+        <div class="sub"><span class="sub-lbl">(b)</span><span>Someone claims that A, H and the centroid G of △ABC are collinear. Do you agree? Explain your answer.</span></div>
+      </div>
+    </div>
+    <span class="q-mb">5 marks</span>
+  </div>
+  <div class="ws lg"><span>Working space</span></div>
+  <div class="ans-row"><button class="ans-btn" onclick="tog(this)">▸ Show Answer</button>
+  <div class="ans-block">
+    <div class="st">(a)(i) Slope of BC = (0−(−52))/(26−0) = 52/26 = 2</div>
+    <div class="st">Altitude from A ⊥ BC → slope = −1/2</div>
+    <div class="st">Through A(−39,0): y = −1/2(x+39) → x+2y+39=0 → <span class="fin">x + 2y + 39 = 0</span></div>
+    <div class="st">(ii) Altitude from C to AB: slope AB=(−52−0)/(0−(−39))=−4/3 → slope=3/4</div>
+    <div class="st">Through C(26,0): y=(3/4)(x−26) → 3x−4y−78=0</div>
+    <div class="st">Solve x+2y=−39 and 3x−4y=78:</div>
+    <div class="st">×2: 2x+4y=−78; add: 5x=0 → x=0, y=−39/2</div>
+    <div class="fin">H = (0, −39/2)</div>
+    <div class="st">(b) Centroid G = ((−39+0+26)/3, (0+(−52)+0)/3) = (−13/3, −52/3)</div>
+    <div class="st">Slope of AH = (−39/2−0)/(0−(−39)) = (−39/2)/39 = −1/2</div>
+    <div class="st">Slope of AG = (−52/3−0)/(−13/3−(−39)) = (−52/3)/((−13+117)/3) = (−52/3)/(104/3) = −1/2</div>
+    <div class="st">Both slopes = −1/2 and both pass through A → A, H, G collinear.</div>
+    <div class="fin">Agree ✓ — A, H, and G all lie on the same line (the Euler line of △ABC).</div>
+  </div></div>
+</div>
+
+<!-- E4 -->
+<div class="q">
+  <div class="q-top">
+    <span class="q-num">23.</span>
+    <div class="q-body">
+      <div class="q-text">△ABC is bounded by the straight lines L₁: x + y − 10 = 0, L₂: x − 7y + 38 = 0 and L₃: 3x − y + 14 = 0.</div>
+      <div class="subs">
+        <div class="sub"><span class="sub-lbl">(a)</span><span>Find the vertices A, B, C of △ABC (A = L₁∩L₂, B = L₁∩L₃, C = L₂∩L₃).</span></div>
+        <div class="sub"><span class="sub-lbl">(b)</span><span>Show that △ABC is an isosceles triangle by computing the lengths of its sides.</span></div>
+      </div>
+    </div>
+    <span class="q-mb">2 marks + 2 marks</span>
+  </div>
+  <div class="ws lg"><span>Working space</span></div>
+  <div class="ans-row"><button class="ans-btn" onclick="tog(this)">▸ Show Answer</button>
+  <div class="ans-block">
+    <div class="st">(a) A = L₁∩L₂: x+y=10 and x−7y=−38</div>
+    <div class="st">Subtract: 8y=48 → y=6, x=4 → <span class="fin">A=(4,6)</span></div>
+    <div class="st">B = L₁∩L₃: x+y=10 and 3x−y=−14</div>
+    <div class="st">Add: 4x=−4 → x=−1, y=11 → <span class="fin">B=(−1,11)</span></div>
+    <div class="st">C = L₂∩L₃: x−7y=−38 and 3x−y=−14</div>
+    <div class="st">×3: 3x−21y=−114; subtract: −20y=−100 → y=5, x=−3 → <span class="fin">C=(−3,5)</span></div>
+    <div class="st">(b) AB²=(−1−4)²+(11−6)²=25+25=50 → AB=5√2</div>
+    <div class="st">BC²=(−3−(−1))²+(5−11)²=4+36=40 → BC=2√10</div>
+    <div class="st">AC²=(−3−4)²+(5−6)²=49+1=50 → AC=5√2</div>
+    <div class="fin">AB = AC = 5√2 → △ABC is isosceles ✓</div>
+  </div></div>
+</div>
+</div><!-- /pane-e -->
+
+</main>
+
+<div class="exam-footer">
+  <span>Book 3B Ch.8·9 · Book 4A Ch.3 · Version 2 (Corrected)</span>
+  <span>Total: 85 marks · 85 minutes</span>
+  <span>— End of Paper —</span>
+</div>
+
+<script>
+function tab(name, btn) {
+  document.querySelectorAll('.pane').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+name).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function tog(btn) {
+  const b = btn.nextElementSibling;
+  const o = b.classList.toggle('open');
+  btn.textContent = o ? '▾ Hide Answer' : '▸ Show Answer';
+}
+</script>
+</body>
+</html>

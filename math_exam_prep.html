@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>F3 Maths 考前精華</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0f1117;
+    --surface: #161b27;
+    --card: #1e2535;
+    --card-hover: #232b3e;
+    --border: #2a3350;
+    --border-light: #1e2a42;
+    --text: #e8eaf0;
+    --muted: #7a8299;
+    --dim: #4a5270;
+    --accent: #4f8ef7;
+    --accent-bg: rgba(79,142,247,0.10);
+    --accent-border: rgba(79,142,247,0.30);
+    --gold: #f5c842;
+    --gold-bg: rgba(245,200,66,0.10);
+    --red: #f06060;
+    --red-bg: rgba(240,96,96,0.10);
+    --green: #4fd18a;
+    --green-bg: rgba(79,209,138,0.10);
+    --radius: 10px;
+    --radius-lg: 14px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.65;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 1.25rem 1.5rem;
+    position: sticky; top: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 1rem;
+  }
+  .header-left { display: flex; align-items: center; gap: 0.75rem; }
+  .exam-badge {
+    background: var(--red-bg); border: 1px solid var(--red);
+    color: var(--red); font-size: 11px; font-weight: 600;
+    padding: 3px 10px; border-radius: 20px; letter-spacing: 0.04em;
+  }
+  header h1 {
+    font-size: 15px; font-weight: 600; color: var(--text);
+  }
+  header h1 span { color: var(--muted); font-weight: 400; }
+
+  /* ── TABS ── */
+  .tab-bar {
+    display: flex; gap: 4px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    padding: 0 1.5rem;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .tab-bar::-webkit-scrollbar { display: none; }
+
+  .tab-btn {
+    font-family: inherit; font-size: 13px; font-weight: 500;
+    padding: 0.8rem 1.1rem;
+    background: transparent; border: none; border-bottom: 2px solid transparent;
+    color: var(--muted); cursor: pointer; white-space: nowrap;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .tab-btn:hover { color: var(--text); }
+  .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* ── CONTENT ── */
+  .pane { display: none; }
+  .pane.active { display: block; }
+
+  main { max-width: 860px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+  /* ── SECTION TITLES ── */
+  .section-label {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
+    color: var(--dim); text-transform: uppercase;
+    margin: 2.5rem 0 1rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .section-label::after {
+    content: ''; flex: 1; height: 1px; background: var(--border);
+  }
+
+  /* ── QUESTION CARDS ── */
+  .q-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 0.75rem;
+    transition: border-color 0.15s;
+  }
+  .q-card:hover { border-color: var(--border-light); }
+
+  .q-meta {
+    display: flex; align-items: center; gap: 0.6rem;
+    margin-bottom: 0.75rem; flex-wrap: wrap;
+  }
+  .q-num {
+    font-size: 12px; font-weight: 600; color: var(--accent);
+    background: var(--accent-bg); padding: 2px 9px; border-radius: 20px;
+  }
+  .q-marks { font-size: 12px; color: var(--muted); }
+  .q-tag {
+    font-size: 11px; color: var(--gold); background: var(--gold-bg);
+    padding: 2px 8px; border-radius: 20px; margin-left: auto;
+  }
+
+  .q-body {
+    font-size: 14px; color: var(--text); line-height: 1.75;
+    white-space: pre-line;
+  }
+
+  .ans-toggle {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    font-family: inherit; font-size: 12px; font-weight: 500;
+    color: var(--muted); background: transparent;
+    border: 1px solid var(--border); border-radius: 6px;
+    padding: 5px 12px; cursor: pointer; margin-top: 1rem;
+    transition: color 0.15s, border-color 0.15s, background 0.15s;
+  }
+  .ans-toggle:hover { color: var(--accent); border-color: var(--accent-border); background: var(--accent-bg); }
+
+  .ans-block {
+    display: none; margin-top: 0.75rem;
+    background: var(--surface);
+    border-left: 3px solid var(--green);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    padding: 1rem 1.25rem;
+    font-size: 13.5px; line-height: 1.85;
+    color: var(--text);
+  }
+  .ans-block.open { display: block; }
+  .ans-block .ans-line { margin-bottom: 0.2rem; }
+  .ans-block strong { color: var(--green); }
+  .ans-block .note {
+    font-size: 12px; color: var(--muted);
+    margin-top: 0.5rem; font-style: italic;
+  }
+
+  /* ── TIPS CARDS ── */
+  .tip-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 0.75rem;
+  }
+  .tip-card-title {
+    font-size: 14px; font-weight: 600; color: var(--text);
+    margin-bottom: 0.75rem;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  .tip-pill {
+    font-size: 11px; padding: 2px 8px; border-radius: 20px; font-weight: 500;
+  }
+  .pill-blue { background: var(--accent-bg); color: var(--accent); }
+  .pill-red  { background: var(--red-bg);    color: var(--red); }
+
+  .tip-list {
+    list-style: none; padding: 0;
+    font-size: 13.5px; color: var(--muted);
+    display: flex; flex-direction: column; gap: 0.55rem;
+  }
+  .tip-list li { display: flex; gap: 0.6rem; line-height: 1.6; }
+  .tip-list li::before { content: '·'; color: var(--dim); flex-shrink: 0; margin-top: 2px; }
+  .tip-list li b { color: var(--text); font-weight: 500; }
+  .tip-list li.trap { color: var(--red); }
+  .tip-list li.trap::before { content: '⚠'; color: var(--red); }
+
+  /* ── FORMULA SHEET ── */
+  .trig-table {
+    width: 100%; border-collapse: collapse;
+    font-size: 14px; margin-bottom: 1.5rem;
+    border-radius: var(--radius-lg); overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .trig-table th {
+    background: var(--surface); color: var(--muted);
+    font-size: 12px; font-weight: 500; letter-spacing: 0.04em;
+    padding: 10px 14px; text-align: center; border-bottom: 1px solid var(--border);
+  }
+  .trig-table td {
+    padding: 11px 14px; text-align: center;
+    border-bottom: 1px solid var(--border-light);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13.5px;
+  }
+  .trig-table tr:last-child td { border-bottom: none; }
+  .trig-table tr.hero td { color: var(--gold); }
+  .trig-table td:first-child {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600; color: var(--text); font-size: 15px;
+  }
+
+  .formula-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 10px;
+  }
+  .f-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 0.9rem 1.1rem;
+  }
+  .f-card.must { border-color: rgba(79,142,247,0.4); }
+  .f-label {
+    font-size: 11px; color: var(--muted); font-weight: 500;
+    margin-bottom: 0.35rem;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .must-badge {
+    font-size: 10px; background: var(--accent-bg);
+    color: var(--accent); padding: 1px 7px; border-radius: 20px;
+  }
+  .f-formula {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px; color: var(--text); line-height: 1.5;
+    margin-bottom: 0.2rem;
+  }
+  .f-zh { font-size: 12px; color: var(--dim); }
+
+  .warn-box {
+    background: rgba(240,96,96,0.08); border: 1px solid rgba(240,96,96,0.3);
+    border-radius: var(--radius); padding: 0.9rem 1.1rem;
+    font-size: 13px; color: var(--red); margin-top: 1.5rem; line-height: 1.65;
+  }
+  .warn-box strong { font-weight: 600; }
+
+  .memory-tip {
+    background: var(--green-bg); border: 1px solid rgba(79,209,138,0.25);
+    border-radius: var(--radius); padding: 0.75rem 1rem;
+    font-size: 13px; color: var(--green); margin-top: 1rem;
+  }
+
+  code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9em; color: var(--accent);
+    background: var(--accent-bg); padding: 1px 5px; border-radius: 4px;
+  }
+
+  @media (max-width: 600px) {
+    main { padding: 1.5rem 1rem 3rem; }
+    header { padding: 1rem; }
+    .tab-btn { padding: 0.7rem 0.85rem; font-size: 12px; }
+    .q-tag { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-left">
+    <span class="exam-badge">考試明天</span>
+    <h1>F3 Mathematics <span>考前精華</span></h1>
+  </div>
+</header>
+
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="switchTab('paper', this)">📝 考前精華卷</button>
+  <button class="tab-btn" onclick="switchTab('tips', this)">💡 三大考點解析</button>
+  <button class="tab-btn" onclick="switchTab('formula', this)">📌 必背公式清單</button>
+</div>
+
+<main>
+
+<!-- ══════════════════════════════════════════
+     TAB 1: PAPER
+══════════════════════════════════════════ -->
+<div class="pane active" id="tab-paper">
+
+  <div class="section-label">Book 3B · Ch.8 — Applications of Trigonometry</div>
+
+  <div class="q-card">
+    <div class="q-meta">
+      <span class="q-num">Q1</span>
+      <span class="q-marks">3 marks</span>
+      <span class="q-tag">Inclination &amp; Simple Trig</span>
+    </div>
+    <div class="q-body">A ladder of length 5 m leans against a vertical wall. The foot of the ladder is 3 m from the base of the wall on level ground.
+
+(a) Find the angle of inclination of the ladder.
+(b) Find the height reached by the top of the ladder on the wall.</div>
+    <button class="ans-toggle" onclick="toggleAns(this)">▸ Show Answer</button>
+    <div class="ans-block">
+      <div class="ans-line">(a) cos θ = 3 / 5 = 0.6 → <strong>θ = 53.1°</strong></div>
+      <div class="ans-line">(b) height = √(5² − 3²) = √(25 − 9) = √16 = <strong>4 m</strong></div>
+      <div class="note">或：height = 5 sin 53.1° ≈ 4 m ✓ 兩種方法都可以</div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-meta">
+      <span class="q-num">Q2</span>
+      <span class="q-marks">4 marks</span>
+      <span class="q-tag">Angle of Depression ⚠️</span>
+    </div>
+    <div class="q-body">From the top of a cliff 80 m high, the angle of depression of a boat at sea is 32°. Find the horizontal distance from the cliff to the boat. (Give your answer correct to 3 significant figures.)</div>
+    <button class="ans-toggle" onclick="toggleAns(this)">▸ Show Answer</button>
+    <div class="ans-block">
+      <div class="ans-line">先畫圖：angle of depression = alternate angle 在三角形內 = 32°</div>
+      <div class="ans-line">tan 32° = 80 / d</div>
+      <div class="ans-line">d = 80 / tan 32° = 80 / 0.6249 ≈ <strong>128 m</strong></div>
+      <div class="note">⚠️ 陷阱：不能直接把 32° 放在三角形底角，需用 alternate angles！</div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-meta">
+      <span class="q-num">Q3</span>
+      <span class="q-marks">3 marks</span>
+      <span class="q-tag">Bearings</span>
+    </div>
+    <div class="q-body">A ship sails from port P on a bearing of 065° for 12 km to reach point Q.
+(a) How far is Q due north of P?
+(b) How far is Q due east of P?</div>
+    <button class="ans-toggle" onclick="toggleAns(this)">▸ Show Answer</button>
+    <div class="ans-block">
+      <div class="ans-line">Bearing 065° → angle from North = 65°</div>
+      <div class="ans-line">(a) North component = 12 cos 65° ≈ <strong>5.07 km</strong></div>
+      <div class="ans-line">(b) East component = 12 sin 65° ≈ <strong>10.9 km</strong></div>
+      <div class="note">記憶口訣：由北量角 → North 用 cos，East 用 sin</div>
+    </div>
+  </div>
+
+  <div class="section-label">Book 3B · Ch.9 — Coordinate Geometry</div>
+
+  <div class="q-card">
+    <div class="q-meta">
+      <span class="q-num">Q4</span>
+      <span class="q-marks">5 marks</span>
+      <span class="q-tag">Distance / Slope / Midpoint / Perp.</span>
+    </div>
+    <div class="q-body">A(−2, 5) and B(4, −3) are two points.
+(a) Find the distance AB.
+(b) Find the slope of AB.
+(c) Find the midpoint M of AB.
+(d) Find the slope of a line perpendicular to AB.</div>
+    <button class="ans-toggle" onclick="toggleAns(this)">▸ Show Answer</button>
+    <div class="ans-block">
+      <div class="ans-line">(a) AB = √[(4−(−2))² + (−3−5)²] = √[36 + 64] = √100 = <strong>10</strong></div>
+      <div class="ans-line">(b) slope = (−3 − 5) / (4 − (−2)) = −8 / 6 = <strong>−4/3</strong></div>
+      <div class="ans-line">(c) M = ((−2+4)/2 , (5+(−3))/2) = <strong>(1, 1)</strong></div>
+      <div class="ans-line">(d) perpendicular slope = −1 ÷ (−4/3) = <strong>3/4</strong></div>
+      <div class="note">垂直斜率 = 倒數取負。(−4/3) → 倒數 (3/4) → 取負 → (−3/4)? 不對！−1 ÷ (−4/3) = 3/4 ✓</div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-meta">
+      <span class="q-num">Q5</span>
+      <span class="q-marks">3 marks</span>
+      <span class="q-tag">Internal Point of Division ⚠️</span>
+    </div>
+    <div class="q-body">P(1, 2) and Q(7, 8) are two points. Find the coordinates of point R which divides PQ internally in the ratio 1 : 2.</div>
+    <button class="ans-toggle" onclick="toggleAns(this)">▸ Show Answer</button>
+    <div class="ans-block">
+      <div class="ans-line">比例 1:2 → m = 1, n = 2</div>
+      <div class="ans-line">x = (1×7 + 2×1) / (1+2) = (7+2) / 3 = <strong>3</strong></div>
+      <div class="ans-line">y = (1×8 + 2×2) / (1+2) = (8+4) / 3 = <strong>4</strong></div>
+      <div class="ans-line"><strong>R = (3, 4)</strong></div>
+      <div class="note">口訣：m 配 Q（第二點），n 配 P（第一點）</div>
+    </div>
+  </div>
+
+  <div class="section-label">Book 4A · Ch.3 — Equations of Straight Lines</div>
+
+  <div class="q-card">
+    <div class="q-meta">
+      <span class="q-num">Q6</span>
+      <span class="q-marks">5 marks</span>
+      <span class="q-tag">Point-Slope / General Form / Intersection</span>
+    </div>
+    <div class="q-body">Line L passes through A(2, 1) with slope 3.
+(a) Write the equation of L in slope-intercept form.
+(b) Convert to general form.
+(c) Find the intersection of L with the line y = −x + 7.</div>
+    <button class="ans-toggle" onclick="toggleAns(this)">▸ Show Answer</button>
+    <div class="ans-block">
+      <div class="ans-line">(a) y − 1 = 3(x − 2) → y = 3x − 6 + 1 → <strong>y = 3x − 5</strong></div>
+      <div class="ans-line">(b) 移項：3x − y − 5 = 0 → <strong>3x − y − 5 = 0</strong></div>
+      <div class="ans-line">(c) 聯立：3x − 5 = −x + 7 → 4x = 12 → x = 3，y = 4</div>
+      <div class="ans-line"><strong>交點 = (3, 4)</strong></div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-meta">
+      <span class="q-num">Q7</span>
+      <span class="q-marks">4 marks</span>
+      <span class="q-tag">Parallel Lines / General Form</span>
+    </div>
+    <div class="q-body">Find the equation of the line passing through (−1, 4) and parallel to the line 2x − 3y + 6 = 0. Give your answer in general form.</div>
+    <button class="ans-toggle" onclick="toggleAns(this)">▸ Show Answer</button>
+    <div class="ans-block">
+      <div class="ans-line">由 2x − 3y + 6 = 0 讀出斜率：slope = −(2)/(−3) = <strong>2/3</strong></div>
+      <div class="ans-line">平行 → 斜率相同 = 2/3</div>
+      <div class="ans-line">y − 4 = (2/3)(x − (−1)) → 兩邊 × 3</div>
+      <div class="ans-line">3y − 12 = 2x + 2 → <strong>2x − 3y + 14 = 0</strong></div>
+      <div class="note">⚠️ 從 ax+by+c=0 讀斜率：slope = −a/b，不是 a/b！</div>
+    </div>
+  </div>
+
+  <div class="q-card">
+    <div class="q-meta">
+      <span class="q-num">Q8</span>
+      <span class="q-marks">3 marks</span>
+      <span class="q-tag">Special Angles — No Calculator!</span>
+    </div>
+    <div class="q-body">Without using a calculator, find the exact value of:
+(tan 60° × tan 30°) + (tan 45°)²</div>
+    <button class="ans-toggle" onclick="toggleAns(this)">▸ Show Answer</button>
+    <div class="ans-block">
+      <div class="ans-line">tan 30° = 1/√3，tan 45° = 1，tan 60° = √3</div>
+      <div class="ans-line">= (√3 × 1/√3) + 1²</div>
+      <div class="ans-line">= 1 + 1</div>
+      <div class="ans-line"><strong>= 2</strong></div>
+    </div>
+  </div>
+
+</div><!-- /tab-paper -->
+
+<!-- ══════════════════════════════════════════
+     TAB 2: TIPS
+══════════════════════════════════════════ -->
+<div class="pane" id="tab-tips">
+
+  <div class="section-label">Book 3B · Ch.8 — Applications of Trigonometry</div>
+
+  <div class="tip-card">
+    <div class="tip-card-title">三大核心考點 <span class="tip-pill pill-blue">Core</span></div>
+    <ul class="tip-list">
+      <li><b>傾角 (Inclination) 與斜率 (Gradient)：</b>tan θ = gradient = rise/run。記住斜率愈大，傾角愈大，但傾角永遠在 0° 至 90° 之間。</li>
+      <li><b>仰角/俯角 (Elevation / Depression)：</b>兩個角都由水平線量度，不是由垂直線量度。仰角向上，俯角向下。</li>
+      <li><b>方位角 (Bearing)：</b>由正北 (North) 開始，順時針量度，永遠寫成三位數字——例如 065° 而非 65°。</li>
+    </ul>
+  </div>
+
+  <div class="tip-card">
+    <div class="tip-card-title">最容易失分的陷阱 <span class="tip-pill pill-red">Traps</span></div>
+    <ul class="tip-list">
+      <li class="trap"><b>俯角陷阱：</b>angle of depression 在俯瞰圖中，那個角和三角形內的底角是 alternate angles（交錯角），需先把角移入三角形才能代入 tan/sin/cos！直接用俯角做計算是最常見的扣分原因。</li>
+      <li class="trap"><b>Bearing 方向搞混：</b>sin 和 cos 哪個對應 N/S，哪個對應 E/W，不畫圖就很容易搞錯。每道 bearing 題必須先畫示意圖標明方向。</li>
+      <li><b>計算機模式：</b>確認是 DEG 模式，不是 RAD。考試前先按 MODE 查一查。</li>
+    </ul>
+  </div>
+
+  <div class="section-label">Book 3B · Ch.9 — Coordinate Geometry</div>
+
+  <div class="tip-card">
+    <div class="tip-card-title">三大核心考點 <span class="tip-pill pill-blue">Core</span></div>
+    <ul class="tip-list">
+      <li><b>斜率方向：</b>向右上斜 → 正斜率 (+)；向右下斜 → 負斜率 (−)；水平線 → slope = 0；垂直線 → slope undefined（不存在）。</li>
+      <li><b>平行 / 垂直關係：</b>平行線斜率相等 (m₁ = m₂)；垂直線斜率之積等於 −1 (m₁ × m₂ = −1)，即各取倒數再加負號。</li>
+      <li><b>內分點：</b>公式 R = ((m·x₂ + n·x₁)/(m+n), (m·y₂ + n·y₁)/(m+n))，比例 m:n 中 m 對應第二個點 (x₂, y₂)，n 對應第一個點 (x₁, y₁)。</li>
+    </ul>
+  </div>
+
+  <div class="tip-card">
+    <div class="tip-card-title">最容易失分的陷阱 <span class="tip-pill pill-red">Traps</span></div>
+    <ul class="tip-list">
+      <li class="trap"><b>內分點 m/n 搞反：</b>幾乎每年都有學生把 m 和 n 對應的點寫錯。背口訣：「m 配 P₂（靠近的第二點），n 配 P₁」。</li>
+      <li class="trap"><b>距離公式忘記開根號：</b>算完 (x₂−x₁)² + (y₂−y₁)² 之後就停下來——這是距離的「平方」，還沒開根號！最終答案必須加 √。</li>
+      <li><b>垂直線的斜率：</b>水平線 slope = 0，垂直於水平線的斜率是 undefined，不是 0，也不是 ∞——寫 "undefined" 或 "does not exist"。</li>
+    </ul>
+  </div>
+
+  <div class="section-label">Book 4A · Ch.3 — Equations of Straight Lines</div>
+
+  <div class="tip-card">
+    <div class="tip-card-title">三大核心考點 <span class="tip-pill pill-blue">Core</span></div>
+    <ul class="tip-list">
+      <li><b>Point-slope form 點斜式：</b>y − y₁ = m(x − x₁)，已知一個點和斜率就能直接寫方程，是寫方程最快的入手方式。</li>
+      <li><b>General form 一般式：</b>ax + by + c = 0，整理後 a、b、c 必須全是整數，不能有分數或小數。從 ax + by + c = 0 讀斜率：slope = −a/b。</li>
+      <li><b>求兩線交點：</b>聯立兩條方程，用代入法（substitution）或消元法（elimination）解出 x 和 y，再代回確認。</li>
+    </ul>
+  </div>
+
+  <div class="tip-card">
+    <div class="tip-card-title">最容易失分的陷阱 <span class="tip-pill pill-red">Traps</span></div>
+    <ul class="tip-list">
+      <li class="trap"><b>General form 有分數：</b>整理方程後出現分數，要兩邊同乘以分母消除分數才算完成。例如得出 y = (2/3)x + 4，不能這樣交，要整理成 2x − 3y + 12 = 0。</li>
+      <li class="trap"><b>格式答錯：</b>題目問 general form，你交 slope-intercept form——兩者都正確，但格式不符合要求不得分！留意題目要求哪種形式。</li>
+      <li><b>從 general form 讀斜率：</b>slope = −a/b（很多人記成 a/b）。例如 3x − 2y + 5 = 0，slope = −3/(−2) = 3/2，不是 3/2 的負數。</li>
+    </ul>
+  </div>
+
+</div><!-- /tab-tips -->
+
+<!-- ══════════════════════════════════════════
+     TAB 3: FORMULA
+══════════════════════════════════════════ -->
+<div class="pane" id="tab-formula">
+
+  <div class="section-label">Special Angles — 必背數值（不能用計算機的題目靠它）</div>
+
+  <table class="trig-table">
+    <thead>
+      <tr>
+        <th>角度</th><th>sin</th><th>cos</th><th>tan</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="hero">
+        <td>30°</td>
+        <td>1/2</td>
+        <td>√3 / 2</td>
+        <td>1/√3 = √3/3</td>
+      </tr>
+      <tr class="hero">
+        <td>45°</td>
+        <td>1/√2 = √2/2</td>
+        <td>1/√2 = √2/2</td>
+        <td>1</td>
+      </tr>
+      <tr class="hero">
+        <td>60°</td>
+        <td>√3 / 2</td>
+        <td>1/2</td>
+        <td>√3</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="memory-tip">
+    💡 <b>記憶 tan 的捷徑：</b>tan 30° → 45° → 60° 依次是 1/√3 → 1 → √3，每步乘以 √3，非常有規律。
+  </div>
+
+  <div class="section-label">必背公式 <span style="font-size:11px;color:var(--dim);letter-spacing:0;text-transform:none">🔴 = 幾乎必出</span></div>
+
+  <div class="formula-grid">
+
+    <div class="f-card must">
+      <div class="f-label">距離公式 Distance <span class="must-badge">🔴 必出</span></div>
+      <div class="f-formula">d = √[(x₂−x₁)² + (y₂−y₁)²]</div>
+      <div class="f-zh">兩點之間距離，最後記得開根號</div>
+    </div>
+
+    <div class="f-card must">
+      <div class="f-label">斜率 Slope <span class="must-badge">🔴 必出</span></div>
+      <div class="f-formula">m = (y₂ − y₁) / (x₂ − x₁)</div>
+      <div class="f-zh">rise over run，正 = 向右上，負 = 向右下</div>
+    </div>
+
+    <div class="f-card must">
+      <div class="f-label">中點公式 Midpoint <span class="must-badge">🔴 必出</span></div>
+      <div class="f-formula">M = ((x₁+x₂)/2 , (y₁+y₂)/2)</div>
+      <div class="f-zh">兩坐標各取平均值</div>
+    </div>
+
+    <div class="f-card must">
+      <div class="f-label">點斜式 Point-slope form <span class="must-badge">🔴 必出</span></div>
+      <div class="f-formula">y − y₁ = m(x − x₁)</div>
+      <div class="f-zh">已知一個點和斜率，直接代入</div>
+    </div>
+
+    <div class="f-card must">
+      <div class="f-label">垂直斜率 Perpendicular <span class="must-badge">🔴 必出</span></div>
+      <div class="f-formula">m₁ × m₂ = −1</div>
+      <div class="f-zh">即 m₂ = −1/m₁（倒數取負）</div>
+    </div>
+
+    <div class="f-card must">
+      <div class="f-label">內分點 Internal Division <span class="must-badge">🔴 必出</span></div>
+      <div class="f-formula">R = ((m·x₂+n·x₁)/(m+n) ,<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(m·y₂+n·y₁)/(m+n))</div>
+      <div class="f-zh">比例 m:n，m 配 P₂，n 配 P₁</div>
+    </div>
+
+    <div class="f-card">
+      <div class="f-label">平行線 Parallel</div>
+      <div class="f-formula">m₁ = m₂</div>
+      <div class="f-zh">平行線斜率相等</div>
+    </div>
+
+    <div class="f-card">
+      <div class="f-label">一般式讀斜率 Slope from general form</div>
+      <div class="f-formula">ax + by + c = 0<br>→ slope = −a/b</div>
+      <div class="f-zh">負號不能忘！不是 a/b</div>
+    </div>
+
+    <div class="f-card">
+      <div class="f-label">傾角與斜率 Inclination</div>
+      <div class="f-formula">tan θ = gradient = m</div>
+      <div class="f-zh">斜率等於傾角的 tangent</div>
+    </div>
+
+    <div class="f-card">
+      <div class="f-label">方位角 Bearing</div>
+      <div class="f-formula">從正北，順時針量度<br>三位數字（如 065°）</div>
+      <div class="f-zh">North → clockwise → 3 digits</div>
+    </div>
+
+  </div>
+
+  <div class="warn-box">
+    <strong>⚠️ 最後考試提醒：</strong><br>
+    做每道題之前，先畫一個清楚的示意圖。三角學題畫對了圖，幾乎就是代公式；坐標幾何題把點標在坐標軸上，方向就不會搞錯。<br><br>
+    General form 的答案整理完記得掃一眼：有沒有分數？有的話兩邊乘分母清除。有沒有用對格式？題目問哪種就交哪種。<br><br>
+    <strong>加油，你可以的！💪</strong>
+  </div>
+
+</div><!-- /tab-formula -->
+
+</main>
+
+<script>
+function switchTab(name, btn) {
+  document.querySelectorAll('.pane').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  btn.classList.add('active');
+}
+
+function toggleAns(btn) {
+  const block = btn.nextElementSibling;
+  const isOpen = block.classList.toggle('open');
+  btn.textContent = isOpen ? '▾ Hide Answer' : '▸ Show Answer';
+}
+</script>
+</body>
+</html>
