@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>F1 General English - Exam Practice Mock Paper 1</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    font-family: "Segoe UI", "Microsoft JhengHei", Arial, sans-serif;
+    background: #f4f6f9;
+    margin: 0;
+    padding: 20px;
+    color: #2b2b2b;
+    line-height: 1.65;
+  }
+  .paper {
+    max-width: 880px;
+    margin: 0 auto;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+    padding: 30px 40px 50px;
+  }
+  .header { text-align: center; border-bottom: 3px solid #2c5f8a; padding-bottom: 15px; margin-bottom: 20px; }
+  .header h1 { color: #2c5f8a; margin: 0 0 5px; font-size: 23px; }
+  .header p { margin: 2px 0; color: #555; font-size: 14px; }
+  .info-row {
+    display: flex; justify-content: space-between; flex-wrap: wrap;
+    background: #eef4fa; border-radius: 6px; padding: 10px 15px; margin-bottom: 20px; font-size: 14px;
+  }
+  .info-row span { margin-right: 15px; }
+  .fill-line { display: inline-block; border-bottom: 1px solid #888; min-width: 110px; height: 18px; }
+  h2.section-title {
+    background: #2c5f8a; color: #fff; padding: 8px 14px; border-radius: 6px;
+    font-size: 15px; margin-top: 32px; margin-bottom: 5px; display: flex; justify-content: space-between;
+  }
+  .section-sub { font-size: 13px; color: #666; margin-bottom: 14px; font-style: italic; }
+  .question { margin-bottom: 12px; padding: 10px 14px; background: #fafbfc; border: 1px solid #e2e6ea; border-radius: 6px; }
+  .q-text { font-weight: 600; margin-bottom: 6px; }
+  .options label { display: block; margin: 3px 0 3px 10px; cursor: pointer; font-weight: normal; font-size: 14px; }
+  .options input { margin-right: 8px; }
+  .blank-input { padding: 5px 8px; border: 1px solid #bbb; border-radius: 4px; font-size: 14px; width: 170px; }
+  .blank-input.wide { width: 320px; }
+  .passage { background: #fff9e8; border: 1px solid #f0e2b0; border-radius: 6px; padding: 15px 18px; margin-bottom: 16px; font-size: 15px; }
+  .passage h3 { margin-top: 0; color: #8a6d1c; }
+  .word-bank { background: #eafaf0; border: 1px dashed #7bc99a; border-radius: 6px; padding: 10px 15px; margin-bottom: 12px; font-size: 14px; }
+  .btn { background: #2c5f8a; color: #fff; border: none; padding: 9px 20px; border-radius: 6px; font-size: 14px; cursor: pointer; margin-top: 8px; margin-right: 10px; }
+  .btn:hover { background: #1e4664; }
+  .btn.secondary { background: #888; }
+  .btn.secondary:hover { background: #666; }
+  .feedback-correct { color: #1a7a3d; font-weight: bold; margin-top: 6px; font-size: 13px; }
+  .feedback-wrong { color: #c0392b; font-weight: bold; margin-top: 6px; font-size: 13px; }
+  .score-box { position: sticky; top: 10px; background: #2c5f8a; color: #fff; text-align: center; padding: 14px;
+    border-radius: 8px; font-size: 15px; font-weight: bold; margin-bottom: 20px; z-index: 10; }
+  .model-answer { display: none; background: #fff3e0; border-left: 4px solid #e08e0b; padding: 10px 14px; margin-top: 10px; font-size: 13px; border-radius: 4px; }
+  .g-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+  .g-table th, .g-table td { border: 1px solid #ddd; padding: 8px 10px; font-size: 14px; text-align: left; }
+  .g-table th { background: #eef4fa; }
+  .g-table input { width: 100%; padding: 4px 6px; border: 1px solid #bbb; border-radius: 4px; }
+  .marks { font-weight: normal; font-size: 12px; color: #2c5f8a; }
+  @media print { .btn, .score-box { display: none !important; } body { background: #fff; padding: 0; } .paper { box-shadow: none; } }
+</style>
+</head>
+<body>
+<div class="paper">
+
+  <div class="score-box" id="scoreBox">客觀題總分 Objective Score: -- / 80 (Section F 20% 為主觀寫作題，另計)</div>
+
+  <div class="header">
+    <h1>Form 1 General English — Exam Practice</h1>
+    <p>中一英文科 溫習補考模擬卷 (一) Mock Paper 1</p>
+    <p>Time Allowed 考試時間: 75 minutes 分鐘 &nbsp;|&nbsp; Total: 100%</p>
+    <p style="font-size:12px; color:#888;">Vocabulary Scope 涵蓋範圍: Unit 5 Tasty Treats &amp; Unit 6 Amazing Holiday (Vocabulary, Word Chart, Dependent Prepositions)</p>
+  </div>
+
+  <div class="info-row">
+    <span>Name 姓名: <span class="fill-line"></span></span>
+    <span>Class 班別: <span class="fill-line"></span></span>
+    <span>Date 日期: <span class="fill-line"></span></span>
+  </div>
+
+  <!-- SECTION A -->
+  <h2 class="section-title"><span>Section A — Vocabulary Choice</span><span class="marks">(10% @1)</span></h2>
+  <p class="section-sub">Choose the correct words to complete the following sentences. Write the letters only. 選出正確答案。</p>
+
+  <div class="question" data-qid="A1" data-answer="A"><div class="q-text">1. Since we had a fight, he always gives me a ______ look.</div>
+    <div class="options">
+      <label><input type="radio" name="A1" value="A"> A. frosty</label>
+      <label><input type="radio" name="A1" value="B"> B. tempting</label>
+      <label><input type="radio" name="A1" value="C"> C. crunchy</label>
+      <label><input type="radio" name="A1" value="D"> D. dazzling</label>
+    </div></div>
+
+  <div class="question" data-qid="A2" data-answer="B"><div class="q-text">2. He is just an ______ of mine; we only met once at a party.</div>
+    <div class="options">
+      <label><input type="radio" name="A2" value="A"> A. official</label>
+      <label><input type="radio" name="A2" value="B"> B. acquaintance</label>
+      <label><input type="radio" name="A2" value="C"> C. legend</label>
+      <label><input type="radio" name="A2" value="D"> D. atmosphere</label>
+    </div></div>
+
+  <div class="question" data-qid="A3" data-answer="A"><div class="q-text">3. Students have to ______ for the summer course before 30 June.</div>
+    <div class="options">
+      <label><input type="radio" name="A3" value="A"> A. register</label>
+      <label><input type="radio" name="A3" value="B"> B. beckon</label>
+      <label><input type="radio" name="A3" value="C"> C. reckon</label>
+      <label><input type="radio" name="A3" value="D"> D. craft</label>
+    </div></div>
+
+  <div class="question" data-qid="A4" data-answer="A"><div class="q-text">4. After the long swimming lesson, my legs felt very ______.</div>
+    <div class="options">
+      <label><input type="radio" name="A4" value="A"> A. tender</label>
+      <label><input type="radio" name="A4" value="B"> B. adorable</label>
+      <label><input type="radio" name="A4" value="C"> C. crunchy</label>
+      <label><input type="radio" name="A4" value="D"> D. photogenic</label>
+    </div></div>
+
+  <div class="question" data-qid="A5" data-answer="A"><div class="q-text">5. We were completely ______ after climbing the mountain all day.</div>
+    <div class="options">
+      <label><input type="radio" name="A5" value="A"> A. exhausted</label>
+      <label><input type="radio" name="A5" value="B"> B. curious</label>
+      <label><input type="radio" name="A5" value="C"> C. official</label>
+      <label><input type="radio" name="A5" value="D"> D. typical</label>
+    </div></div>
+
+  <div class="question" data-qid="A6" data-answer="B"><div class="q-text">6. The night market was ______ with people buying snacks and souvenirs.</div>
+    <div class="options">
+      <label><input type="radio" name="A6" value="A"> A. ordinary</label>
+      <label><input type="radio" name="A6" value="B"> B. bustling</label>
+      <label><input type="radio" name="A6" value="C"> C. frosty</label>
+      <label><input type="radio" name="A6" value="D"> D. elaborate</label>
+    </div></div>
+
+  <div class="question" data-qid="A7" data-answer="A"><div class="q-text">7. Italian ______ is famous for its pasta and pizza.</div>
+    <div class="options">
+      <label><input type="radio" name="A7" value="A"> A. cuisine</label>
+      <label><input type="radio" name="A7" value="B"> B. destination</label>
+      <label><input type="radio" name="A7" value="C"> C. fortune</label>
+      <label><input type="radio" name="A7" value="D"> D. legend</label>
+    </div></div>
+
+  <div class="question" data-qid="A8" data-answer="A"><div class="q-text">8. She sent a card to show her ______ for the gift.</div>
+    <div class="options">
+      <label><input type="radio" name="A8" value="A"> A. gratitude</label>
+      <label><input type="radio" name="A8" value="B"> B. disappointment</label>
+      <label><input type="radio" name="A8" value="C"> C. appetite</label>
+      <label><input type="radio" name="A8" value="D"> D. curiosity</label>
+    </div></div>
+
+  <div class="question" data-qid="A9" data-answer="B"><div class="q-text">9. The puppy in the pet shop window was so ______ that everyone stopped to look.</div>
+    <div class="options">
+      <label><input type="radio" name="A9" value="A"> A. creepy</label>
+      <label><input type="radio" name="A9" value="B"> B. adorable</label>
+      <label><input type="radio" name="A9" value="C"> C. ordinary</label>
+      <label><input type="radio" name="A9" value="D"> D. commercial</label>
+    </div></div>
+
+  <div class="question" data-qid="A10" data-answer="A"><div class="q-text">10. We had to stay indoors because of the sudden ______.</div>
+    <div class="options">
+      <label><input type="radio" name="A10" value="A"> A. thunderstorm</label>
+      <label><input type="radio" name="A10" value="B"> B. tutorial</label>
+      <label><input type="radio" name="A10" value="C"> C. attraction</label>
+      <label><input type="radio" name="A10" value="D"> D. selection</label>
+    </div></div>
+
+  <button class="btn" onclick="checkSection('A', 10)">Check Section A</button><span id="A-result"></span>
+
+  <!-- SECTION B -->
+  <h2 class="section-title"><span>Section B — Vocabulary in Context</span><span class="marks">(10% @1)</span></h2>
+  <p class="section-sub">Fill in the blanks with the most suitable words to complete the paragraph. 從方框中選字填空。</p>
+  <div class="word-bank">hang out &nbsp;|&nbsp; curious &nbsp;|&nbsp; skim &nbsp;|&nbsp; scrambled &nbsp;|&nbsp; mouth-watering &nbsp;|&nbsp; impatiently &nbsp;|&nbsp; refreshing &nbsp;|&nbsp; disappointment &nbsp;|&nbsp; chewy &nbsp;|&nbsp; selection &nbsp;|&nbsp; enthusiastically</div>
+
+  <div class="passage">
+    Last Saturday, my friends and I decided to <b>__1__</b> at a new brunch café downtown. We were so <b>__2__</b> about the menu that we could not wait to order. While we waited <b>__3__</b> for our food, we <b>__4__</b> through the menu again to check the dessert list. When the food arrived, the <b>__5__</b> smell of the pancakes filled the air. I ordered <b>__6__</b> eggs with toast, and my friend chose a candy that was very <b>__7__</b> to eat. After the meal, we walked to a juice stand for something <b>__8__</b> to drink. Sadly, my favourite mango flavour was sold out, which was a slight <b>__9__</b>. Still, the waiter recommended a good <b>__10__</b> of other fruit flavours, and we left the café feeling very happy.
+  </div>
+
+  <div style="display:grid; grid-template-columns: repeat(5, 1fr); gap:8px;">
+    <div>1. <input type="text" class="blank-input" style="width:100%" id="B1" data-answer="hang out"></div>
+    <div>2. <input type="text" class="blank-input" style="width:100%" id="B2" data-answer="curious"></div>
+    <div>3. <input type="text" class="blank-input" style="width:100%" id="B3" data-answer="impatiently"></div>
+    <div>4. <input type="text" class="blank-input" style="width:100%" id="B4" data-answer="skim|skimmed"></div>
+    <div>5. <input type="text" class="blank-input" style="width:100%" id="B5" data-answer="mouth-watering"></div>
+    <div>6. <input type="text" class="blank-input" style="width:100%" id="B6" data-answer="scrambled"></div>
+    <div>7. <input type="text" class="blank-input" style="width:100%" id="B7" data-answer="chewy"></div>
+    <div>8. <input type="text" class="blank-input" style="width:100%" id="B8" data-answer="refreshing"></div>
+    <div>9. <input type="text" class="blank-input" style="width:100%" id="B9" data-answer="disappointment"></div>
+    <div>10. <input type="text" class="blank-input" style="width:100%" id="B10" data-answer="selection"></div>
+  </div>
+
+  <button class="btn" onclick="checkInputSection('B', 10)">Check Section B</button><span id="B-result"></span>
+
+  <!-- SECTION C -->
+  <h2 class="section-title"><span>Section C — Word Replacement</span><span class="marks">(10% @1)</span></h2>
+  <p class="section-sub">Use one suitable word to replace the words in brackets. Write the whole word as your answer. 用一個合適的字取代括號中的意思，寫出完整的字。</p>
+
+  <div class="passage">
+    Macau's old town is a wonderful travel <b>(1) d________</b> (place) for tourists. Unlike the busy casino area, the historic centre feels less <b>(2) c________</b> (business-like) and more charming. Walking along the narrow streets, you can enjoy quiet <b>(3) s__________</b> (the activity of visiting interesting places) among old churches and temples. Many buildings here follow <b>(4) t__________</b> (conventional) Portuguese and Chinese styles, giving the area a unique <b>(5) a_________</b> (ambience). There is even an old <b>(6) l_____</b> (myth) about a fisherman who found gold near the harbour. Locals often show great <b>(7) g________</b> (thankfulness) to visitors who respect their culture. According to the story, the fisherman's <b>(8) f______</b> (treasure) is still buried somewhere nearby! Even today, an <b>(9) a_______</b> (lovely) little cat often sits outside the temple gate, greeting visitors. If you want something less <b>(10) o_______</b> (usual), this hidden old town is the perfect place to explore.
+  </div>
+
+  <div style="display:grid; grid-template-columns: repeat(5, 1fr); gap:8px;">
+    <div>1. <input type="text" class="blank-input" style="width:100%" id="C1" data-answer="destination"></div>
+    <div>2. <input type="text" class="blank-input" style="width:100%" id="C2" data-answer="commercial"></div>
+    <div>3. <input type="text" class="blank-input" style="width:100%" id="C3" data-answer="sightseeing"></div>
+    <div>4. <input type="text" class="blank-input" style="width:100%" id="C4" data-answer="traditional"></div>
+    <div>5. <input type="text" class="blank-input" style="width:100%" id="C5" data-answer="atmosphere"></div>
+    <div>6. <input type="text" class="blank-input" style="width:100%" id="C6" data-answer="legend"></div>
+    <div>7. <input type="text" class="blank-input" style="width:100%" id="C7" data-answer="gratitude"></div>
+    <div>8. <input type="text" class="blank-input" style="width:100%" id="C8" data-answer="fortune"></div>
+    <div>9. <input type="text" class="blank-input" style="width:100%" id="C9" data-answer="adorable"></div>
+    <div>10. <input type="text" class="blank-input" style="width:100%" id="C10" data-answer="ordinary"></div>
+  </div>
+
+  <button class="btn" onclick="checkInputSection('C', 10)">Check Section C</button><span id="C-result"></span>
+
+  <!-- SECTION D -->
+  <h2 class="section-title"><span>Section D — Word Forms</span><span class="marks">(16% @1)</span></h2>
+  <p class="section-sub">Fill in the correct forms of the given word to complete each sentence. 用括號內生字的正確詞性形式填空。</p>
+
+  <div class="question"><div class="q-text">1. Full of [A] ______, she joined the cooking competition [B] ______. (enthusiastic)</div>
+    [A] <input type="text" class="blank-input" id="D1A" data-answer="enthusiasm">
+    [B] <input type="text" class="blank-input" id="D1B" data-answer="enthusiastically"></div>
+
+  <div class="question"><div class="q-text">2. The little boy's [A] ______ about the old house made him peek inside [B] ______. (curious)</div>
+    [A] <input type="text" class="blank-input" id="D2A" data-answer="curiosity">
+    [B] <input type="text" class="blank-input" id="D2B" data-answer="curiously"></div>
+
+  <div class="question"><div class="q-text">3. We felt great [A] ______ after such [B] ______ service at the restaurant. (satisfy)</div>
+    [A] <input type="text" class="blank-input" id="D3A" data-answer="satisfaction">
+    [B] <input type="text" class="blank-input" id="D3B" data-answer="satisfactory"></div>
+
+  <div class="question"><div class="q-text">4. After careful [A] ______, she was very [B] ______ about which hotel to choose. (select)</div>
+    [A] <input type="text" class="blank-input" id="D4A" data-answer="selection">
+    [B] <input type="text" class="blank-input" id="D4B" data-answer="selective"></div>
+
+  <div class="question"><div class="q-text">5. The festival showed great [A] ______, with dancers dressed [B] ______ in costumes from many countries. (diverse)</div>
+    [A] <input type="text" class="blank-input" id="D5A" data-answer="diversity">
+    [B] <input type="text" class="blank-input" id="D5B" data-answer="diversely"></div>
+
+  <div class="question"><div class="q-text">6. The roller coaster ride was [A] ______, and everyone screamed [B] ______ the whole time. (thrill)</div>
+    [A] <input type="text" class="blank-input" id="D6A" data-answer="thrilling">
+    [B] <input type="text" class="blank-input" id="D6B" data-answer="thrillingly"></div>
+
+  <div class="question"><div class="q-text">7. [A] ______, families gather every year to cook the [B] ______ recipes passed down from their grandparents. (tradition)</div>
+    [A] <input type="text" class="blank-input" id="D7A" data-answer="traditionally">
+    [B] <input type="text" class="blank-input" id="D7B" data-answer="traditional"></div>
+
+  <div class="question"><div class="q-text">8. Our teacher had high [A] ______ for the class, but not everyone did as [B] ______. (expect)</div>
+    [A] <input type="text" class="blank-input" id="D8A" data-answer="expectations|expectation">
+    [B] <input type="text" class="blank-input" id="D8B" data-answer="expected"></div>
+
+  <button class="btn" onclick="checkInputSection('D', 16)">Check Section D</button><span id="D-result"></span>
+
+  <!-- SECTION E -->
+  <h2 class="section-title"><span>Section E — Part of Speech Check</span><span class="marks">(12% @1)</span></h2>
+  <p class="section-sub">Decide whether the part of speech of the underlined word is correct. Type "correct" if it is right, or type the correct form if it is wrong. 判斷底線字的詞性是否正確，正確請寫 correct，錯誤請寫出正確形式。</p>
+
+  <div class="question"><div class="q-text">1. (Noun) The final score was announced with great <u>enthusiasm</u>.</div><input type="text" class="blank-input" id="E1" data-answer="correct"></div>
+  <div class="question"><div class="q-text">2. (Adjective) She looked at me with a very <u>curiosity</u> expression.</div><input type="text" class="blank-input" id="E2" data-answer="curious"></div>
+  <div class="question"><div class="q-text">3. (Noun) His <u>selection</u> of songs for the party was excellent.</div><input type="text" class="blank-input" id="E3" data-answer="correct"></div>
+  <div class="question"><div class="q-text">4. (Adverb) The dancers performed <u>diverse</u> across the stage.</div><input type="text" class="blank-input" id="E4" data-answer="diversely"></div>
+  <div class="question"><div class="q-text">5. (Adjective) The concert was absolutely <u>thrilling</u> from start to end.</div><input type="text" class="blank-input" id="E5" data-answer="correct"></div>
+  <div class="question"><div class="q-text">6. (Noun) Every family has its own <u>tradition</u> during the New Year.</div><input type="text" class="blank-input" id="E6" data-answer="correct"></div>
+  <div class="question"><div class="q-text">7. (Verb) I always <u>expectation</u> good grades before an exam.</div><input type="text" class="blank-input" id="E7" data-answer="expect"></div>
+  <div class="question"><div class="q-text">8. (Adjective) The <u>refreshment</u> air after the rain made me feel great.</div><input type="text" class="blank-input" id="E8" data-answer="refreshing"></div>
+  <div class="question"><div class="q-text">9. (Noun) The hikers reached the peak feeling total <u>exhaustion</u>.</div><input type="text" class="blank-input" id="E9" data-answer="correct"></div>
+  <div class="question"><div class="q-text">10. (Adjective) Her <u>embarrassed</u> face turned red when she tripped on stage.</div><input type="text" class="blank-input" id="E10" data-answer="correct"></div>
+  <div class="question"><div class="q-text">11. (Noun) The old man spoke about his good <u>fortune</u> during the war.</div><input type="text" class="blank-input" id="E11" data-answer="correct"></div>
+  <div class="question"><div class="q-text">12. (Adjective) It was a real <u>satisfaction</u> meal after the long hike.</div><input type="text" class="blank-input" id="E12" data-answer="satisfactory"></div>
+
+  <button class="btn" onclick="checkInputSection('E', 12)">Check Section E</button><span id="E-result"></span>
+
+  <!-- SECTION F -->
+  <h2 class="section-title"><span>Section F — Sentence Rearrangement</span><span class="marks">(20% @5)</span></h2>
+  <p class="section-sub">Rearrange the following words or phrases to form a complete sentence. Change the forms of the words and add extra words where necessary. 排列句子，可改變詞形及加字。</p>
+
+  <div class="question"><div class="q-text">1. Be keen on somebody/something/doing something<br>( my sister / trying / new recipes / be / always )</div>
+    <textarea rows="2" style="width:100%; padding:6px; border-radius:4px; border:1px solid #bbb;" id="F1"></textarea>
+    <button class="btn secondary" style="margin-top:6px;" onclick="toggleAnswer('F1a')">看答案</button>
+    <div class="model-answer" id="F1a">參考答案: My sister is always keen on trying new recipes.</div></div>
+
+  <div class="question"><div class="q-text">2. Stay away from somebody/something/doing something<br>( children / should / junk food / stay / eating )</div>
+    <textarea rows="2" style="width:100%; padding:6px; border-radius:4px; border:1px solid #bbb;" id="F2"></textarea>
+    <button class="btn secondary" style="margin-top:6px;" onclick="toggleAnswer('F2a')">看答案</button>
+    <div class="model-answer" id="F2a">參考答案: Children should stay away from eating junk food.</div></div>
+
+  <div class="question"><div class="q-text">3. Participate in something/doing something<br>( all students / the sports day / next Friday / participate / will )</div>
+    <textarea rows="2" style="width:100%; padding:6px; border-radius:4px; border:1px solid #bbb;" id="F3"></textarea>
+    <button class="btn secondary" style="margin-top:6px;" onclick="toggleAnswer('F3a')">看答案</button>
+    <div class="model-answer" id="F3a">參考答案: All students will participate in the sports day next Friday.</div></div>
+
+  <div class="question"><div class="q-text">4. Be proud of somebody/something/doing something<br>( parents / their son / winning / be / the competition / proud )</div>
+    <textarea rows="2" style="width:100%; padding:6px; border-radius:4px; border:1px solid #bbb;" id="F4"></textarea>
+    <button class="btn secondary" style="margin-top:6px;" onclick="toggleAnswer('F4a')">看答案</button>
+    <div class="model-answer" id="F4a">參考答案: Parents are proud of their son for winning the competition.</div></div>
+
+  <!-- SECTION G -->
+  <h2 class="section-title"><span>Section G — Error Correction</span><span class="marks">(14% @2)</span></h2>
+  <p class="section-sub">The following sentences contain a wrong preposition. Underline the mistake and write the correction. 以下句子有介詞錯誤，請寫出正確介詞。</p>
+
+  <table class="g-table">
+    <tr><th style="width:70%">Sentence</th><th>Correction 正確介詞</th></tr>
+    <tr><td>1. My father is keen <u>for</u> cooking on weekends.</td><td><input type="text" id="G1" data-answer="on"></td></tr>
+    <tr><td>2. The coach penalised the team <u>on</u> being late.</td><td><input type="text" id="G2" data-answer="for"></td></tr>
+    <tr><td>3. Sunscreen protects our skin <u>of</u> sunburn.</td><td><input type="text" id="G3" data-answer="from"></td></tr>
+    <tr><td>4. This app is intended <u>to</u> teenagers who love music.</td><td><input type="text" id="G4" data-answer="for"></td></tr>
+    <tr><td>5. We should stay away <u>with</u> strangers online.</td><td><input type="text" id="G5" data-answer="from"></td></tr>
+    <tr><td>6. He is very passionate <u>for</u> painting landscapes.</td><td><input type="text" id="G6" data-answer="about"></td></tr>
+    <tr><td>7. I am proud <u>for</u> my little sister's speech today.</td><td><input type="text" id="G7" data-answer="of"></td></tr>
+  </table>
+
+  <button class="btn" onclick="checkInputSection('G', 7)">Check Section G</button><span id="G-result"></span>
+
+  <!-- SECTION H -->
+  <h2 class="section-title"><span>Section H — Cloze Passage by Part of Speech</span><span class="marks">(8% @1)</span></h2>
+  <p class="section-sub">Fill in each blank with a suitable word of the given part of speech to complete the passage. 根據括號內詞性填入合適的字，完成短文。</p>
+
+  <div class="passage">
+    My family and I had a <b>(1)______ [Adjective]</b> holiday in Macau last summer. We stayed near a quiet <b>(2)______ [Noun]</b> close to the old town. Every morning, we would <b>(3)______ [Verb]</b> around the old streets to find good food. The <b>(4)______ [Adjective]</b> smell of egg tarts filled the air near every bakery. The fireworks on the last night completely <b>(5)______ [Verb]</b> my little sister. Under the night sky, the square looked <b>(6)______ [Adverb]</b> beautiful with colourful lights. We felt a strong sense of <b>(7)______ [Noun]</b> for such a wonderful trip. Everyone agreed it was a truly <b>(8)______ [Adjective]</b> experience.
+  </div>
+
+  <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap:8px;">
+    <div>1. <input type="text" class="blank-input" style="width:100%" id="H1" data-answer="dazzling"></div>
+    <div>2. <input type="text" class="blank-input" style="width:100%" id="H2" data-answer="neighbourhood"></div>
+    <div>3. <input type="text" class="blank-input" style="width:100%" id="H3" data-answer="hang out"></div>
+    <div>4. <input type="text" class="blank-input" style="width:100%" id="H4" data-answer="mouth-watering"></div>
+    <div>5. <input type="text" class="blank-input" style="width:100%" id="H5" data-answer="thrilled"></div>
+    <div>6. <input type="text" class="blank-input" style="width:100%" id="H6" data-answer="entirely"></div>
+    <div>7. <input type="text" class="blank-input" style="width:100%" id="H7" data-answer="gratitude"></div>
+    <div>8. <input type="text" class="blank-input" style="width:100%" id="H8" data-answer="elaborate"></div>
+  </div>
+
+  <button class="btn" onclick="checkInputSection('H', 8)">Check Section H</button><span id="H-result"></span>
+
+  <hr style="margin-top:40px; border:none; border-top:1px solid #ddd;">
+  <p style="text-align:center; font-size:12px; color:#999;">— End of Paper 全卷完 —</p>
+
+</div>
+
+<script>
+function normalize(s) { return (s || '').toLowerCase().trim().replace(/\s+/g, ' '); }
+
+function isMatch(userAnswer, answerAttr) {
+  const accepted = answerAttr.split('|').map(a => normalize(a));
+  return accepted.includes(normalize(userAnswer));
+}
+
+// For MC radio-based sections (A)
+function checkSection(prefix, total) {
+  let correct = 0;
+  document.querySelectorAll('[data-qid^="' + prefix + '"]').forEach(function(q) {
+    const answer = q.getAttribute('data-answer');
+    let userAnswer = '';
+    const radios = q.querySelectorAll('input[type="radio"]');
+    radios.forEach(function(r) { if (r.checked) userAnswer = r.value; });
+
+    let existingFb = q.querySelector('.feedback-correct, .feedback-wrong');
+    if (existingFb) existingFb.remove();
+    const fb = document.createElement('div');
+    if (userAnswer === answer) {
+      fb.className = 'feedback-correct'; fb.textContent = '✓ Correct'; correct++;
+    } else {
+      fb.className = 'feedback-wrong'; fb.textContent = '✗ Answer: ' + answer;
+    }
+    q.appendChild(fb);
+  });
+  document.getElementById(prefix + '-result').textContent = '  ' + correct + ' / ' + total;
+  updateTotalScore();
+}
+
+// For text-input based sections (B, C, D, E, G, H) — inputs have id starting with prefix and data-answer
+function checkInputSection(prefix, total) {
+  let correct = 0;
+  const inputs = document.querySelectorAll('input[type="text"][id^="' + prefix + '"]');
+  inputs.forEach(function(inp) {
+    const answer = inp.getAttribute('data-answer');
+    if (!answer) return;
+    // remove old feedback
+    let next = inp.parentElement.querySelector('.inline-fb-' + inp.id);
+    if (next) next.remove();
+
+    const span = document.createElement('span');
+    span.className = 'inline-fb-' + inp.id;
+    span.style.marginLeft = '6px';
+    span.style.fontSize = '12px';
+    span.style.fontWeight = 'bold';
+
+    if (isMatch(inp.value, answer)) {
+      span.style.color = '#1a7a3d';
+      span.textContent = '✓';
+      correct++;
+    } else {
+      span.style.color = '#c0392b';
+      span.textContent = '✗ (' + answer.split('|')[0] + ')';
+    }
+    inp.insertAdjacentElement('afterend', span);
+  });
+  document.getElementById(prefix + '-result').textContent = '  ' + correct + ' / ' + total;
+  updateTotalScore();
+}
+
+function updateTotalScore() {
+  let total = 0;
+  const weights = {A:10, B:10, C:10, D:16, E:12, G:14, H:8};
+  Object.keys(weights).forEach(function(p) {
+    const el = document.getElementById(p + '-result');
+    if (el && el.textContent) {
+      const match = el.textContent.match(/(\d+)\s*\/\s*(\d+)/);
+      if (match) total += parseInt(match[1]);
+    }
+  });
+  document.getElementById('scoreBox').textContent =
+    '客觀題總分 Objective Score: ' + total + ' / 80  (Section F 20% 為主觀寫作題，另計)';
+}
+
+function toggleAnswer(id) {
+  const el = document.getElementById(id);
+  el.style.display = el.style.display === 'block' ? 'none' : 'block';
+}
+</script>
+
+</body>
+</html>
