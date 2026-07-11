@@ -59,6 +59,9 @@
 | `F1_English_Mock_Paper_1.html` | 中一英文模擬卷（卷一） | [🔗 預覽](https://howenghong.github.io/Tutoring-content/F1_English_Mock_Paper_1.html) |
 | `F1_English_Mock_Paper_2.html` | 中一英文模擬卷（卷二） | [🔗 預覽](https://howenghong.github.io/Tutoring-content/F1_English_Mock_Paper_2.html) |
 | `F1_English_Mock_Paper_3.html` | 中一英文模擬卷（卷三） | [🔗 預覽](https://howenghong.github.io/Tutoring-content/F1_English_Mock_Paper_3.html) |
+| `F1_English_Mock_Paper_1.html(NEW)` | 中一英文模擬卷（卷一）(NEW) | [🔗 預覽](https://howenghong.github.io/Tutoring-content/F1_English_Paper_1.html) |
+| `F1_English_Mock_Paper_2.html(NEW)` | 中一英文模擬卷（卷二）(NEW) | [🔗 預覽](https://howenghong.github.io/Tutoring-content/F1_English_Paper_2.html) |
+| `F1_English_Mock_Paper_3.html(NEW)` | 中一英文模擬卷（卷三）(NEW) | [🔗 預覽](https://howenghong.github.io/Tutoring-content/F1_English_Paper_3.html) |
 
 ---
 
