@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CISC3012 AI — Mock Midterm Test 1</title>
+<style>
+:root{--fg:#1a1a1a;--muted:#666;--accent:#1155CC;--border:#ddd;--bg:#fff;--bg2:#f7f7f9;--good:#0a7d2c;}
+*{box-sizing:border-box;}
+body{font-family:-apple-system,"Segoe UI","Noto Sans TC","PingFang TC","Microsoft JhengHei",Arial,sans-serif;
+  max-width:920px;margin:0 auto;padding:0 20px 60px;color:var(--fg);line-height:1.65;background:var(--bg);}
+h1{font-size:1.55em;margin:18px 0 4px;}
+.subtitle{color:var(--muted);font-size:0.95em;margin-bottom:14px;}
+h2{margin-top:2em;border-bottom:2px solid var(--accent);padding-bottom:6px;font-size:1.25em;}
+h3{margin-top:1.5em;color:var(--accent);font-size:1.05em;}
+h4{margin-top:1.2em;font-size:1em;}
+table{border-collapse:collapse;width:100%;margin:1em 0;font-size:0.95em;}
+th,td{border:1px solid var(--border);padding:7px 9px;text-align:left;vertical-align:top;}
+th{background:var(--bg2);}
+tr:nth-child(even) td{background:#fbfbfc;}
+ul{padding-left:1.3em;}
+li{margin-bottom:0.5em;}
+.toggle-bar{position:sticky;top:0;background:rgba(255,255,255,0.97);backdrop-filter:blur(4px);
+  padding:12px 0;border-bottom:1px solid var(--border);z-index:50;display:flex;gap:8px;align-items:center;
+  margin-bottom:1.2em;flex-wrap:wrap;}
+.toggle-label{font-size:0.82em;color:var(--muted);margin-right:2px;}
+.toggle-bar button{padding:6px 16px;border:1.5px solid var(--accent);background:#fff;color:var(--accent);
+  border-radius:20px;cursor:pointer;font-size:0.88em;font-weight:600;transition:all .15s;}
+.toggle-bar button.active{background:var(--accent);color:#fff;}
+.toggle-bar button:hover{opacity:0.85;}
+body.mode-en .lang-zh{display:none;}
+body.mode-zh .lang-en{display:none;}
+body.mode-en .sep, body.mode-zh .sep{display:none;}
+.zh{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;}
+.tag{display:inline-block;background:#eef2ff;color:var(--accent);border-radius:4px;padding:1px 7px;
+  font-size:0.78em;font-weight:700;margin-right:6px;}
+.hint{color:var(--muted);font-size:0.9em;}
+.note-box{background:var(--bg2);border-left:4px solid var(--accent);padding:10px 14px;margin:1em 0;border-radius:4px;}
+hr{border:none;border-top:1px solid var(--border);margin:2em 0;}
+.opt{margin:2px 0 2px 1.4em;}
+.qblock{margin-bottom:1.3em;padding-bottom:0.2em;}
+.qstem{font-weight:600;}
+.marks{color:var(--muted);font-weight:400;font-size:0.9em;}
+.answer-key{background:#f6fff6;border:1px solid #cfe9cf;border-radius:6px;padding:14px 18px;margin-top:1em;}
+.answer-key summary{cursor:pointer;font-weight:700;color:var(--good);padding:4px 0;}
+code{background:var(--bg2);padding:1px 5px;border-radius:3px;font-size:0.92em;}
+@media print{.toggle-bar{position:static;}}
+</style>
+</head>
+<body class="mode-both">
+<h1>CISC3012 AI — Mock Midterm Test 1</h1>
+<div class="subtitle"><span class="lang-en">Chapter 1-3 practice exam</span><span class="lang-zh zh"><br>第一至三章模擬考</span></div>
+
+<div class="toggle-bar">
+  <span class="toggle-label">Display 顯示：</span>
+  <button id="btn-both" class="active" onclick="setMode('both')">中英對照 Both</button>
+  <button id="btn-en" onclick="setMode('en')">English Only</button>
+  <button id="btn-zh" onclick="setMode('zh')">中文 Only</button>
+</div>
+
+
+<p><span class="lang-en"><strong>EN:</strong> <strong>Coverage:</strong> Chapter 1-3 | <strong>Total: 100 marks</strong> | Suggested time: 90 minutes. Section A: 1 long question (40 marks). Section B: 30 MCQs × 2 marks (60 marks). Attempt everything before checking the Answer Key.</span><span class="lang-zh zh"><br><strong>中文：</strong><strong>範圍：</strong>第一至三章 | <strong>總分：100分</strong> | 建議時間：90分鐘。Section A：1題長題（40分）。Section B：30題選擇題 × 2分（60分）。作答完畢再查看答案。</span></p>
+<hr>
+
+<h2>Section A — Long Question (40 marks)</h2>
+<p><span class="lang-en"><strong>EN:</strong> A university library is introducing a robot to collect returned books from a drop-box and re-shelve them in the correct location.</span><span class="lang-zh zh"><br><strong>中文：</strong>一所大學圖書館正引進一台機器人，從還書箱收集歸還的書籍並放回正確的位置。</span></p>
+<p><strong>(a) [10 marks]</strong> <span class="lang-en"><strong>EN:</strong> Describe this robot's task environment using the <strong>PEAS</strong> framework (Performance measure, Environment, Actuators, Sensors).</span><span class="lang-zh zh"><br><strong>中文：</strong>用 <strong>PEAS</strong> 框架（績效指標、環境、執行器、感測器）描述這台機器人的任務環境。</span></p>
+<p><strong>(b) [12 marks]</strong> <span class="lang-en"><strong>EN:</strong> Classify this environment according to the <strong>six pairs of environment properties</strong> covered in Chapter 2. Justify your classification for <strong>each</strong> pair with one sentence.</span><span class="lang-zh zh"><br><strong>中文：</strong>根據第二章的<strong>六對環境性質</strong>為這個環境分類。每一對都要用一句話說明理由。</span></p>
+<p><strong>(c) [10 marks]</strong> <span class="lang-en"><strong>EN:</strong> The robot operates in a library where it cannot always see the full state of every shelf (i.e., the environment is partially observable), but it does have a clear goal (return each book to its correct shelf location). Explain which of the <strong>five agent types</strong> would be most appropriate here, and justify your answer.</span><span class="lang-zh zh"><br><strong>中文：</strong>機器人所在的圖書館無法隨時看到每個書架的完整狀態（即環境是部分可觀察的），但有明確目標（把每本書放回正確位置）。說明<strong>五種代理人類型</strong>中哪一種最適合，並說明理由。</span></p>
+<p><strong>(d) [8 marks]</strong> <span class="lang-en"><strong>EN:</strong> Explain how the book-shelving task could be formulated as a search problem. State the <strong>four components of a well-defined problem</strong> as they would apply to this scenario.</span><span class="lang-zh zh"><br><strong>中文：</strong>說明如何把上架書籍的任務形式化為搜尋問題，並針對此情境說明<strong>良定義問題的四個要素</strong>。</span></p>
+
+<hr>
+<h2>Section B — Multiple Choice Questions (30 × 2 = 60 marks)</h2>
+<div class="qblock">
+<div class="qstem">1. <span class="lang-en">Which of the following best describes AI's capability limitation, according to Chapter 1?</span><span class="lang-zh zh"><br>根據第一章，以下何者最能描述AI的能力限制？</span></div>
+<div class="opt">A. <span class="lang-en">AI can achieve unlimited application but limited capability, mainly excelling at labor-intensive jobs</span><span class="sep"> — </span><span class="lang-zh zh">AI應用範圍沒有限制，但能力有限，主要擅長勞力密集的工作</span></div><div class="opt">B. <span class="lang-en">AI has no limitations in either application or capability</span><span class="sep"> — </span><span class="lang-zh zh">AI在應用與能力上都沒有限制</span></div><div class="opt">C. <span class="lang-en">AI can only be applied to intelligence-intensive jobs</span><span class="sep"> — </span><span class="lang-zh zh">AI只能應用在智力密集的工作</span></div><div class="opt">D. <span class="lang-en">AI has never been shown to outperform humans in any task</span><span class="sep"> — </span><span class="lang-zh zh">AI從未被證明在任何任務上超越人類</span></div>
+</div>
+<div class="qblock">
+<div class="qstem">2. <span class="lang-en">In the AI vs. traditional algorithm comparison, what is the key difference?</span><span class="lang-zh zh"><br>在AI與傳統演算法的比較中，關鍵差異是什麼？</span></div>
+<div class="opt">A. <span class="lang-en">AI programs are always faster than traditional algorithms</span><span class="sep"> — </span><span class="lang-zh zh">AI程式總是比傳統演算法快</span></div><div class="opt">B. <span class="lang-en">Traditional algorithms are designed by humans; AI programs are learned/created directly from data</span><span class="sep"> — </span><span class="lang-zh zh">傳統演算法由人類設計；AI程式直接從資料中學習／產生</span></div><div class="opt">C. <span class="lang-en">AI programs cannot use logical rules</span><span class="sep"> — </span><span class="lang-zh zh">AI程式不能使用邏輯規則</span></div><div class="opt">D. <span class="lang-en">Traditional algorithms require large datasets while AI does not</span><span class="sep"> — </span><span class="lang-zh zh">傳統演算法需要大量資料集，AI則不需要</span></div>
+</div>
+<div class="qblock">
+<div class="qstem">3. <span class="lang-en">In the transition described under “New Adaptation,” what does an AI LLM agent translate?</span><span class="lang-zh zh"><br>在「New Adaptation」提到的轉變中，AI LLM agent 翻譯的是什麼？</span></div>
+<div class="opt">A. <span class="lang-en">Machine code into assembly language</span><span class="sep"> — </span><span class="lang-zh zh">把機器碼翻成組合語言</span></div><div class="opt">B. <span class="lang-en">Natural language into machine code</span><span class="sep"> — </span><span class="lang-zh zh">把自然語言翻成機器碼</span></div><div class="opt">C. <span class="lang-en">High-level language into assembly language</span><span class="sep"> — </span><span class="lang-zh zh">把高階語言翻成組合語言</span></div><div class="opt">D. <span class="lang-en">Assembly language into natural language</span><span class="sep"> — </span><span class="lang-zh zh">把組合語言翻成自然語言</span></div>
+</div>
+<div class="qblock">
+<div class="qstem">4. <span class="lang-en">According to the four-category table of AI definitions, which pair of axes is used?</span><span class="lang-zh zh"><br>根據AI定義的四分類表，用的是哪一對維度？</span></div>
+<div class="opt">A. <span class="lang-en">Speed vs. Accuracy</span><span class="sep"> — </span><span class="lang-zh zh">速度 vs. 準確度</span></div><div class="opt">B. <span class="lang-en">Human vs. Machine</span><span class="sep"> — </span><span class="lang-zh zh">人類 vs. 機器</span></div><div class="opt">C. <span class="lang-en">Thought vs. Behavior, and Human-like vs. Rational</span><span class="sep"> — </span><span class="lang-zh zh">思考 vs. 行為，以及像人 vs. 理性</span></div><div class="opt">D. <span class="lang-en">Hardware vs. Software</span><span class="sep"> — </span><span class="lang-zh zh">硬體 vs. 軟體</span></div>
+</div>
+<div class="qblock">
+<div class="qstem">5. <span class="lang-en">The Turing Test judges intelligence based on:</span><span class="lang-zh zh"><br>圖靈測試根據什麼來判斷智能？</span></div>
+<div class="opt">A. <span class="lang-en">Whether a robot can physically move objects</span><span class="sep"> — </span><span class="lang-zh zh">機器人能否實際移動物體</span></div><div class="opt">B. <span class="lang-en">Whether a human questioner can distinguish a computer from a human via text communication</span><span class="sep"> — </span><span class="lang-zh zh">提問者能否透過文字通訊分辨對方是電腦還是人</span></div><div class="opt">C. <span class="lang-en">Whether a system can solve mathematical proofs</span><span class="sep"> — </span><span class="lang-zh zh">系統能否解數學證明</span></div><div class="opt">D. <span class="lang-en">Whether a system passes a vision test</span><span class="sep"> — </span><span class="lang-zh zh">系統能否通過視覺測試</span></div>
+</div>
+<div class="qblock">
+<div class="qstem">6. <span class="lang-en">Which of the following is NOT one of the four cognitive tasks required by the (basic) Turing Test?</span><span class="lang-zh zh"><br>以下何者不是（基本）圖靈測試所需的四項認知任務之一？</span></div>
+<div class="opt">A. <span class="lang-en">Natural language processing</span><span class="sep"> — </span><span class="lang-zh zh">自然語言處理</span></div><div class="opt">B. <span class="lang-en">Knowledge representation</span><span class="sep"> — </span><span class="lang-zh zh">知識表示</span></div><div class="opt">C. <span class="lang-en">Computer vision</span><span class="sep"> — </span><span class="lang-zh zh">電腦視覺</span></div><div class="opt">D. <span class="lang-en">Automated reasoning</span><span class="sep"> — </span><span class="lang-zh zh">自動推理</span></div>
+</div>
+<div class="qblock">
+<div class="qstem">7. <span class="lang-en">The Total Turing Test adds which two additional capabilities to the standard Turing Test?</span><span class="lang-zh zh"><br>完整圖靈測試比標準圖靈測試多了哪兩項能力？</span></div>
+<div class="opt">A. <span class="lang-en">Machine learning and reasoning</span><span class="sep"> — </span><span class="lang-zh zh">機器學習與推理</span></div><div class="opt">B. <span class="lang-en">Computer vision and robotics</span><span class="sep"> — </span><span class="lang-zh zh">電腦視覺與機器人學</span></div><div class="opt">C. <span class="lang-en">Language translation and speech recognition</span><span class="sep"> — </span><span class="lang-zh zh">語言翻譯與語音辨識</span></div><div class="opt">D. <span class="lang-en">Memory and planning</span><span class="sep"> — </span><span class="lang-zh zh">記憶與規劃</span></div>
+</div>
+<div class="qblock">
+<div class="qstem">8. <span class="lang-en">Why is it currently considered impossible to build a fully “humanly” AI system?</span><span class="lang-zh zh"><br>為什麼目前認為不可能建構完全「像人」的AI系統？</span></div>
+<div class="opt">A. <span class="lang-en">Computers are too slow</span><span class="sep"> — </span><span class="lang-zh zh">電腦太慢</span></div><div class="opt">B. <span class="lang-en">We lack a precise theory of mind for how humans think</span><span class="sep"> — </span><span class="lang-zh zh">我們缺乏精確描述人類思考方式的心智理論</span></div><div class="opt">C. <span class="lang-en">There is not enough data available</span><span class="sep"> — </span><span class="lang-zh zh">沒有足夠的資料</span></div><div class="opt">D. <span class="lang-en">Humans refuse to cooperate with AI systems</span><span class="sep"> — </span><span class="lang-zh zh">人類拒絕與AI系統合作</span></div>
+</div>
+<div class="qblock">
+<div class="qstem">9. <span class="lang-en">A “rational” system, as defined in Chapter 1, is one that:</span><span class="lang-zh zh"><br>根據第一章的定義，「理性」系統是：</span></div>
+<div class="opt">A. <span class="lang-en">Always imitates human behavior exactly</span><span class="sep"> — </span><span class="lang-zh zh">總是精確模仿人類行為</span></div><div class="opt">B. <span class="lang-en">Cares only about correctness of the outcome, regardless of method</span><span class="sep"> — </span><span class="lang-zh zh">只在乎結果是否正確，不在乎方法</span></div><div class="opt">C. <span class="lang-en">Uses only biological/neural methods</span><span class="sep"> — </span><span class="lang-zh zh">只使用生物／神經方法</span></div><div class="opt">D. <span class="lang-en">Cannot use mathematics or logic</span><span class="sep"> — </span><span class="lang-zh zh">不能使用數學或邏輯</span></div>
+</div>
+<div class="qblock">
+<div class="qstem">10. <span class="lang-en">A Rational Agent is defined as an agent that:</span><span class="lang-zh zh"><br>Rational Agent 的定義是一個能：</span></div>
+<div class="opt">A. <span class="lang-en">Perceives the environment and outputs correct actions to achieve goals</span><span class="sep"> — </span><span class="lang-zh zh">感知環境並輸出正確行動以達成目標的代理人</span></div><div class="opt">B. <span class="lang-en">Only stores data without acting</span><span class="sep"> — </span><span class="lang-zh zh">只儲存資料而不行動的代理人</span></div><div class="opt">C. <span class="lang-en">Acts randomly regardless of input</span><span class="sep"> — </span><span class="lang-zh zh">不論輸入為何都隨機行動的代理人</span></div><div class="opt">D. <span class="lang-en">Only mimics human emotions</span><span class="sep"> — </span><span class="lang-zh zh">只模仿人類情緒的代理人</span></div>
+</div>
+<div class="qblock">
+<div class="qstem">11. <span class="lang-en">In the agent definition, “sensors” and “actuators” correspond respectively to:</span><span class="lang-zh zh"><br>在代理人的定義中，「sensors」和「actuators」分別對應到：</span></div>
+<div class="opt">A. <span class="lang-en">Output and Input</span><span class="sep"> — </span><span class="lang-zh zh">輸出和輸入</span></div><div class="opt">B. <span class="lang-en">Input and Output</span><span class="sep"> — </span><span class="lang-zh zh">輸入和輸出</span></div><div class="opt">C. <span class="lang-en">Memory and Processing</span><span class="sep"> — </span><span class="lang-zh zh">記憶和處理</span></div><div class="opt">D. <span class="lang-en">Goal and Utility</span><span class="sep"> — </span><span class="lang-zh zh">目標和效用</span></div>
+</div>
+<div class="qblock">
+<div class="qstem">12. <span class="lang-en">In the vacuum-cleaner world example, which of the following is a valid action?</span><span class="lang-zh zh"><br>在吸塵機世界範例中，以下何者是有效的動作？</span></div>
+<div class="opt">A. <span class="lang-en">Jump</span><span class="sep"> — </span><span class="lang-zh zh">跳躍</span></div><div class="opt">B. <span class="lang-en">Suck</span><span class="sep"> — </span><span class="lang-zh zh">吸</span></div><div class="opt">C. <span class="lang-en">Rotate</span><span class="sep"> — </span><span class="lang-zh zh">旋轉</span></div><div class="opt">D. <span class="lang-en">Charge</span><span class="sep"> — </span><span class="lang-zh zh">充電</span></div>
+</div>
+<div class="qblock">
+<div class="qstem">13. <span class="lang-en">Why is a lookup table an infeasible way to implement an agent's processing?</span><span class="lang-zh zh"><br>為什麼用查表法實現代理人的處理過程不可行？</span></div>
+<div class="opt">A. <span class="lang-en">Lookup tables are too fast</span><span class="sep"> — </span><span class="lang-zh zh">查表法太快</span></div><div class="opt">B. <span class="lang-en">The number of possible input combinations is infinite, making the table impossible to construct</span><span class="sep"> — </span><span class="lang-zh zh">可能的輸入組合數量是無限的，使表格不可能建構出來</span></div><div class="opt">C. <span class="lang-en">Lookup tables cannot store numbers</span><span class="sep"> — </span><span class="lang-zh zh">查表法不能儲存數字</span></div><div class="opt">D. <span class="lang-en">Lookup tables violate rationality</span><span class="sep"> — </span><span class="lang-zh zh">查表法違反理性</span></div>
+</div>
+<div class="qblock">
+<div class="qstem">14. <span class="lang-en">Rationality of an agent depends on which FOUR factors?</span><span class="lang-zh zh"><br>代理人的理性取決於哪四個要素？</span></div>
+<div class="opt">A. <span class="lang-en">Speed, memory, cost, and accuracy</span><span class="sep"> — </span><span class="lang-zh zh">速度、記憶體、成本、準確度</span></div><div class="opt">B. <span class="lang-en">Performance measure, prior knowledge, actions, and percept sequence</span><span class="sep"> — </span><span class="lang-zh zh">績效指標、先驗知識、行動、感知序列</span></div><div class="opt">C. <span class="lang-en">Sensors, actuators, environment, and processor</span><span class="sep"> — </span><span class="lang-zh zh">感測器、執行器、環境、處理器</span></div><div class="opt">D. <span class="lang-en">Goal, utility, model, and reflex</span><span class="sep"> — </span><span class="lang-zh zh">目標、效用、模型、反射</span></div>
+</div>
+<div class="qblock">
+<div class="qstem">15. <span class="lang-en">In PEAS, what does the “E” stand for?</span><span class="lang-zh zh"><br>在PEAS中，「E」代表什麼？</span></div>
+<div class="opt">A. <span class="lang-en">Efficiency</span><span class="sep"> — </span><span class="lang-zh zh">效率</span></div><div class="opt">B. <span class="lang-en">Environment</span><span class="sep"> — </span><span class="lang-zh zh">環境</span></div><div class="opt">C. <span class="lang-en">Evaluation</span><span class="sep"> — </span><span class="lang-zh zh">評估</span></div><div class="opt">D. <span class="lang-en">Execution</span><span class="sep"> — </span><span class="lang-zh zh">執行</span></div>
+</div>
+<div class="qblock">
+<div class="qstem">16. <span class="lang-en">Which environment property describes a scenario where an agent's sensors cannot access the complete state of the world?</span><span class="lang-zh zh"><br>哪個環境性質描述代理人的感測器無法取得世界完整狀態的情況？</span></div>
+<div class="opt">A. <span class="lang-en">Fully observable</span><span class="sep"> — </span><span class="lang-zh zh">完全可觀察</span></div><div class="opt">B. <span class="lang-en">Partially observable</span><span class="sep"> — </span><span class="lang-zh zh">部分可觀察</span></div><div class="opt">C. <span class="lang-en">Deterministic</span><span class="sep"> — </span><span class="lang-zh zh">確定性</span></div><div class="opt">D. <span class="lang-en">Static</span><span class="sep"> — </span><span class="lang-zh zh">靜態</span></div>
+</div>
+<div class="qblock">
+<div class="qstem">17. <span class="lang-en">Chess (with a clock running) is best classified as which type of environment regarding the static/dynamic property?</span><span class="lang-zh zh"><br>西洋棋（計時中）在靜態／動態這個性質上最適合歸類為？</span></div>
+<div class="opt">A. <span class="lang-en">Static</span><span class="sep"> — </span><span class="lang-zh zh">靜態</span></div><div class="opt">B. <span class="lang-en">Dynamic</span><span class="sep"> — </span><span class="lang-zh zh">動態</span></div><div class="opt">C. <span class="lang-en">Discrete</span><span class="sep"> — </span><span class="lang-zh zh">離散</span></div><div class="opt">D. <span class="lang-en">Episodic</span><span class="sep"> — </span><span class="lang-zh zh">單一事件式</span></div>
+</div>
+<div class="qblock">
+<div class="qstem">18. <span class="lang-en">An environment where the current action does not affect future decisions is called:</span><span class="lang-zh zh"><br>目前的行動不會影響未來決策的環境稱為：</span></div>
+<div class="opt">A. <span class="lang-en">Sequential</span><span class="sep"> — </span><span class="lang-zh zh">連續式</span></div><div class="opt">B. <span class="lang-en">Episodic</span><span class="sep"> — </span><span class="lang-zh zh">單一事件式</span></div><div class="opt">C. <span class="lang-en">Dynamic</span><span class="sep"> — </span><span class="lang-zh zh">動態</span></div><div class="opt">D. <span class="lang-en">Continuous</span><span class="sep"> — </span><span class="lang-zh zh">連續</span></div>
+</div>
+<div class="qblock">
+<div class="qstem">19. <span class="lang-en">A simple reflex agent works correctly only when the environment is:</span><span class="lang-zh zh"><br>簡單反射型代理人只有在環境是以下何者時才能正常運作？</span></div>
+<div class="opt">A. <span class="lang-en">Partially observable</span><span class="sep"> — </span><span class="lang-zh zh">部分可觀察</span></div><div class="opt">B. <span class="lang-en">Fully observable</span><span class="sep"> — </span><span class="lang-zh zh">完全可觀察</span></div><div class="opt">C. <span class="lang-en">Stochastic</span><span class="sep"> — </span><span class="lang-zh zh">隨機性</span></div><div class="opt">D. <span class="lang-en">Continuous</span><span class="sep"> — </span><span class="lang-zh zh">連續</span></div>
+</div>
+<div class="qblock">
+<div class="qstem">20. <span class="lang-en">A model-based reflex agent maintains an internal state mainly to handle:</span><span class="lang-zh zh"><br>基於模型的反射型代理人維護內部狀態，主要是為了應付：</span></div>
+<div class="opt">A. <span class="lang-en">Fully observable environments</span><span class="sep"> — </span><span class="lang-zh zh">完全可觀察的環境</span></div><div class="opt">B. <span class="lang-en">Partially observable environments</span><span class="sep"> — </span><span class="lang-zh zh">部分可觀察的環境</span></div><div class="opt">C. <span class="lang-en">Multiagent competition</span><span class="sep"> — </span><span class="lang-zh zh">多代理人競爭</span></div><div class="opt">D. <span class="lang-en">Static environments</span><span class="sep"> — </span><span class="lang-zh zh">靜態環境</span></div>
+</div>
+<div class="qblock">
+<div class="qstem">21. <span class="lang-en">What key limitation motivates the use of “utility” instead of just a “goal”?</span><span class="lang-zh zh"><br>什麼關鍵限制促使使用「utility」而非只用「goal」？</span></div>
+<div class="opt">A. <span class="lang-en">Goals are too easy to achieve</span><span class="sep"> — </span><span class="lang-zh zh">目標太容易達成</span></div><div class="opt">B. <span class="lang-en">A goal only tells us if something is achieved, not how well, and cannot resolve conflicting goals</span><span class="sep"> — </span><span class="lang-zh zh">目標只告訴我們有沒有達成，不能告訴我們達成得多好，也無法解決目標衝突</span></div><div class="opt">C. <span class="lang-en">Utility functions are simpler to compute than goals</span><span class="sep"> — </span><span class="lang-zh zh">效用函數比目標更容易計算</span></div><div class="opt">D. <span class="lang-en">Goals cannot be represented mathematically</span><span class="sep"> — </span><span class="lang-zh zh">目標無法用數學表示</span></div>
+</div>
+<div class="qblock">
+<div class="qstem">22. <span class="lang-en">Which agent type requires machine learning techniques to improve its performance over time from feedback?</span><span class="lang-zh zh"><br>哪種代理人類型需要機器學習技術，依回饋隨時間改善表現？</span></div>
+<div class="opt">A. <span class="lang-en">Simple reflex agent</span><span class="sep"> — </span><span class="lang-zh zh">簡單反射型代理人</span></div><div class="opt">B. <span class="lang-en">Model-based reflex agent</span><span class="sep"> — </span><span class="lang-zh zh">基於模型的反射型代理人</span></div><div class="opt">C. <span class="lang-en">Goal-based agent</span><span class="sep"> — </span><span class="lang-zh zh">目標導向型代理人</span></div><div class="opt">D. <span class="lang-en">Learning agent</span><span class="sep"> — </span><span class="lang-zh zh">學習型代理人</span></div>
+</div>
+<div class="qblock">
+<div class="qstem">23. <span class="lang-en">In problem formulation, “Initial state + Actions + Goal states” together define:</span><span class="lang-zh zh"><br>在問題形式化中，「初始狀態＋動作＋目標狀態」共同定義了：</span></div>
+<div class="opt">A. <span class="lang-en">A performance measure</span><span class="sep"> — </span><span class="lang-zh zh">績效指標</span></div><div class="opt">B. <span class="lang-en">A search tree</span><span class="sep"> — </span><span class="lang-zh zh">搜尋樹</span></div><div class="opt">C. <span class="lang-en">A closed list</span><span class="sep"> — </span><span class="lang-zh zh">關閉列表</span></div><div class="opt">D. <span class="lang-en">A utility function</span><span class="sep"> — </span><span class="lang-zh zh">效用函數</span></div>
+</div>
+<div class="qblock">
+<div class="qstem">24. <span class="lang-en">Which of the following is NOT one of the four components of a well-defined problem?</span><span class="lang-zh zh"><br>以下何者不是「良定義問題」四要素之一？</span></div>
+<div class="opt">A. <span class="lang-en">Initial state</span><span class="sep"> — </span><span class="lang-zh zh">初始狀態</span></div><div class="opt">B. <span class="lang-en">Successor function</span><span class="sep"> — </span><span class="lang-zh zh">後繼函數</span></div><div class="opt">C. <span class="lang-en">Performance measure of the agent's designer</span><span class="sep"> — </span><span class="lang-zh zh">代理人設計者的績效指標</span></div><div class="opt">D. <span class="lang-en">Goal test</span><span class="sep"> — </span><span class="lang-zh zh">目標測試</span></div>
+</div>
+<div class="qblock">
+<div class="qstem">25. <span class="lang-en">Why is a “goal test” used instead of listing all goal states explicitly?</span><span class="lang-zh zh"><br>為什麼用「目標測試」而不是明確列出所有目標狀態？</span></div>
+<div class="opt">A. <span class="lang-en">Because listing states is always faster</span><span class="sep"> — </span><span class="lang-zh zh">因為列出狀態總是比較快</span></div><div class="opt">B. <span class="lang-en">Because some goals are described by properties that cannot be enumerated (e.g., checkmate in chess)</span><span class="sep"> — </span><span class="lang-zh zh">因為有些目標是用無法窮舉的性質描述的（例如西洋棋將死）</span></div><div class="opt">C. <span class="lang-en">Because goal tests use less memory than goal states</span><span class="sep"> — </span><span class="lang-zh zh">因為目標測試比目標狀態用更少記憶體</span></div><div class="opt">D. <span class="lang-en">Because goal states do not exist in most problems</span><span class="sep"> — </span><span class="lang-zh zh">因為大多數問題中目標狀態並不存在</span></div>
+</div>
+<div class="qblock">
+<div class="qstem">26. <span class="lang-en">In the 8-queens problem, the incremental formulation starts from:</span><span class="lang-zh zh"><br>在八皇后問題中，漸進式形式化從什麼開始？</span></div>
+<div class="opt">A. <span class="lang-en">8 queens already placed on the board</span><span class="sep"> — </span><span class="lang-zh zh">棋盤上已放置8個皇后</span></div><div class="opt">B. <span class="lang-en">An empty board with 0 queens</span><span class="sep"> — </span><span class="lang-zh zh">0個皇后的空棋盤</span></div><div class="opt">C. <span class="lang-en">A randomly filled board</span><span class="sep"> — </span><span class="lang-zh zh">隨機填滿的棋盤</span></div><div class="opt">D. <span class="lang-en">A board with only 1 queen fixed</span><span class="sep"> — </span><span class="lang-zh zh">只固定1個皇后的棋盤</span></div>
+</div>
+<div class="qblock">
+<div class="qstem">27. <span class="lang-en">Which search strategy expands the node with the lowest path cost g(n) first?</span><span class="lang-zh zh"><br>哪種搜尋策略優先展開路徑成本g(n)最低的節點？</span></div>
+<div class="opt">A. <span class="lang-en">Depth-first search</span><span class="sep"> — </span><span class="lang-zh zh">深度優先搜尋</span></div><div class="opt">B. <span class="lang-en">Breadth-first search</span><span class="sep"> — </span><span class="lang-zh zh">廣度優先搜尋</span></div><div class="opt">C. <span class="lang-en">Uniform-cost search</span><span class="sep"> — </span><span class="lang-zh zh">均勻成本搜尋</span></div><div class="opt">D. <span class="lang-en">Bidirectional search</span><span class="sep"> — </span><span class="lang-zh zh">雙向搜尋</span></div>
+</div>
+<div class="qblock">
+<div class="qstem">28. <span class="lang-en">Which of the following is a disadvantage of breadth-first search?</span><span class="lang-zh zh"><br>以下何者是廣度優先搜尋的缺點？</span></div>
+<div class="opt">A. <span class="lang-en">It is not complete</span><span class="sep"> — </span><span class="lang-zh zh">它不具完備性</span></div><div class="opt">B. <span class="lang-en">Its time and space complexity explode when the branching factor is large</span><span class="sep"> — </span><span class="lang-zh zh">當分支因子很大時，時間與空間複雜度會暴增</span></div><div class="opt">C. <span class="lang-en">It is never optimal</span><span class="sep"> — </span><span class="lang-zh zh">它從不是最優的</span></div><div class="opt">D. <span class="lang-en">It cannot be implemented with a queue</span><span class="sep"> — </span><span class="lang-zh zh">它無法用queue實現</span></div>
+</div>
+<div class="qblock">
+<div class="qstem">29. <span class="lang-en">Iterative deepening search (IDS) combines the benefits of which two strategies?</span><span class="lang-zh zh"><br>迭代加深搜尋（IDS）結合了哪兩種策略的優點？</span></div>
+<div class="opt">A. <span class="lang-en">BFS and Uniform-cost search</span><span class="sep"> — </span><span class="lang-zh zh">BFS和均勻成本搜尋</span></div><div class="opt">B. <span class="lang-en">DFS and BFS</span><span class="sep"> — </span><span class="lang-zh zh">DFS和BFS</span></div><div class="opt">C. <span class="lang-en">Bidirectional search and DLS</span><span class="sep"> — </span><span class="lang-zh zh">雙向搜尋和DLS</span></div><div class="opt">D. <span class="lang-en">Uniform-cost search and DLS</span><span class="sep"> — </span><span class="lang-zh zh">均勻成本搜尋和DLS</span></div>
+</div>
+<div class="qblock">
+<div class="qstem">30. <span class="lang-en">A “closed list” is used in search to:</span><span class="lang-zh zh"><br>搜尋中使用「closed list」是為了：</span></div>
+<div class="opt">A. <span class="lang-en">Store the goal state only</span><span class="sep"> — </span><span class="lang-zh zh">只儲存目標狀態</span></div><div class="opt">B. <span class="lang-en">Store every expanded node so far, to avoid regenerating repeated states</span><span class="sep"> — </span><span class="lang-zh zh">儲存至今所有已展開的節點，以避免重複產生相同狀態</span></div><div class="opt">C. <span class="lang-en">Store only the initial state</span><span class="sep"> — </span><span class="lang-zh zh">只儲存初始狀態</span></div><div class="opt">D. <span class="lang-en">Limit the maximum depth of the search tree</span><span class="sep"> — </span><span class="lang-zh zh">限制搜尋樹的最大深度</span></div>
+</div>
+
+<div class="answer-key">
+<details>
+<summary><span class="lang-en">Answer Key — click to reveal (don't peek before attempting!)</span><span class="lang-zh zh"><br>答案——點擊展開（作答前別偷看！）</span></summary>
+<h4><span class="lang-en">Section A — Marking Guide</span><span class="lang-zh zh"><br>Section A——評分要點</span></h4>
+<ul>
+<li><span class="lang-en">(a) PEAS: award marks for a reasonable P (books correctly shelved, speed, minimal damage/misplacement), E (library layout, shelves, other patrons, books/drop-box), A (gripper/arm, wheels/motors, drop-box scanner), S (camera, RFID/barcode reader, location sensor). (~2.5 marks each)</span><span class="lang-zh zh"><br>(a) PEAS：合理的P（正確上架、速度、減少損壞／放錯）、E（圖書館格局、書架、其他讀者、書籍／還書箱）、A（夾爪／手臂、輪子馬達、還書箱掃描器）、S（攝影機、RFID／條碼讀取器、位置感測器）皆可給分（每項約2.5分）</span></li>
+<li><span class="lang-en">(b) 2 marks per pair × 6 pairs, for a correct classification + reasonable one-line justification.</span><span class="lang-zh zh"><br>(b) 每對2分 × 6對，答對分類＋合理的一句話理由即可給分</span></li>
+<li><span class="lang-en">(c) Model-based reflex agent or goal-based agent are both defensible; full marks require correctly explaining that a purely simple reflex agent will not work because the environment is partially observable.</span><span class="lang-zh zh"><br>(c) 基於模型的反射型代理人或目標導向型代理人皆可接受；需正確說明純粹的簡單反射型代理人行不通，因為環境是部分可觀察的，才能拿滿分</span></li>
+<li><span class="lang-en">(d) Initial state (robot's starting position, book to be shelved), Successor function (possible moves), Goal test (book placed correctly), Path cost (e.g., time/distance/number of moves).</span><span class="lang-zh zh"><br>(d) 初始狀態（機器人起始位置、待上架的書）、後繼函數（可能的移動）、目標測試（書本正確放置）、路徑成本（例如時間／距離／移動次數）</span></li>
+</ul>
+<h4><span class="lang-en">Section B — MCQ Answers</span><span class="lang-zh zh"><br>Section B——選擇題答案</span></h4>
+<p>1-A, 2-B, 3-B, 4-C, 5-B, 6-C, 7-B, 8-B, 9-B, 10-A, 11-B, 12-B, 13-B, 14-B, 15-B, 16-B, 17-B, 18-B, 19-B, 20-B, 21-B, 22-D, 23-B, 24-C, 25-B, 26-B, 27-C, 28-B, 29-B, 30-B</p>
+</details>
+</div>
+
+
+<script>
+function setMode(m){
+  document.body.classList.remove('mode-en','mode-zh','mode-both');
+  document.body.classList.add('mode-'+m);
+  document.querySelectorAll('.toggle-bar button').forEach(function(b){b.classList.remove('active');});
+  document.getElementById('btn-'+m).classList.add('active');
+}
+</script>
+</body>
+</html>
