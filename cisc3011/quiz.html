@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>模擬測驗 — CISC3011 溫習站</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="topbar"><div class="topbar-in">
+  <a class="brand" href="index.html">CISC3011 溫習站<small>數位影像處理 · 期中考 Ch1–6</small></a>
+  <nav class="navlinks">
+    <a href="index.html">首頁</a>
+    <a href="ch1.html">1 基礎</a><a href="ch2.html">2 點運算</a><a href="ch3.html">3 直方圖</a>
+    <a href="ch4.html">4 濾波</a><a href="ch5.html">5 邊緣</a><a href="ch6.html">6 形態學</a>
+    <a href="cheatsheet.html">速記</a><a class="on" href="quiz.html">測驗</a>
+  </nav>
+</div></div>
+
+<div class="wrap">
+
+<h1>模擬測驗</h1>
+<p class="sub">照真實考卷格式：Part A 多選（全對才給分）+ Part B 計算（寫過程）</p>
+
+<div class="box warn">
+  <span class="t">⚠️ Part A 的計分方式很殘酷</span>
+  真實考卷寫明：<strong>題目可能有多於一個正確答案，必須全部選對才得分，否則不給分</strong>（沒有部分分）。<br>
+  所以作答時請<strong>逐一判斷每個選項是對是錯</strong>，不要只挑「看起來最好的那個」。<br>
+  下面每題可複選，選好後按「對答案」。
+</div>
+
+<h2>Part A · 多選題（每題 5 分）</h2>
+
+<div class="mq q" data-ans="1,3">
+  <div class="qt">A-1. 關於取樣（sampling）與量化（quantization），下列敘述正確的有哪些？</div>
+  <div class="opt">取樣決定影像有多少灰階級數</div>
+  <div class="opt">量化不足會使平滑的漸層出現偽輪廓（false contour）</div>
+  <div class="opt">提高量化位元數可以消除馬賽克方塊</div>
+  <div class="opt">取樣不足會讓影像看起來一格一格的</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>正確：B、D</strong><br>
+  A 錯 —— 取樣決定的是<strong>空間解析度</strong>（幾乘幾），灰階級數是<strong>量化</strong>決定的。<br>
+  C 錯 —— 馬賽克是<strong>取樣</strong>不足造成的，加大位元數（量化）沒用。</div>
+</div>
+
+<div class="mq q" data-ans="0,2">
+  <div class="qt">A-2. 下列哪些屬於<strong>點運算</strong>（point operation）？</div>
+  <div class="opt">影像反相 s = 255 − r</div>
+  <div class="opt">3×3 中位數濾波</div>
+  <div class="opt">Gamma 轉換 s = c·r^γ</div>
+  <div class="opt">Sobel 邊緣偵測</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>正確：A、C</strong><br>
+  點運算的定義是<strong>新值只取決於同一位置的舊值</strong>。<br>
+  中位數濾波和 Sobel 都要讀取<strong>鄰居</strong>，屬於鄰域運算。</div>
+</div>
+
+<div class="mq q" data-ans="0,3">
+  <div class="qt">A-3. 關於冪次（Gamma）轉換 s = c·r<sup>γ</sup>，正確的有？</div>
+  <div class="opt">γ &lt; 1 時影像整體變亮</div>
+  <div class="opt">γ &gt; 1 時影像整體變亮</div>
+  <div class="opt">γ = 1 時影像會變成全黑</div>
+  <div class="opt">對 8-bit 影像運算前應先將像素正規化到 0~1，否則容易溢位</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>正確：A、D</strong><br>
+  0~1 之間的數，次方越大值越小 → <strong>γ&gt;1 變暗、γ&lt;1 變亮</strong>，所以 B 錯。<br>
+  γ=1 是恆等轉換，影像不變，C 錯。<br>
+  D 正確：若直接算 255<sup>1.6</sup> 會遠超 uint8 範圍。</div>
+</div>
+
+<div class="mq q" data-ans="1,2,3">
+  <div class="qt">A-4. 關於直方圖，正確的有？</div>
+  <div class="opt">從直方圖可以還原出原始影像</div>
+  <div class="opt">累積直方圖 cdf 必為遞增，且最後一項等於總像素數 N</div>
+  <div class="opt">兩張內容完全不同的影像，可能擁有相同的直方圖</div>
+  <div class="opt">直方圖擠在左側一小段，表示影像偏暗且對比低</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>正確：B、C、D</strong><br>
+  A 錯 —— 直方圖<strong>不記錄位置</strong>，把像素打亂重排直方圖不變，所以無法還原影像。這也正是 C 成立的原因。</div>
+</div>
+
+<div class="mq q" data-ans="0,2">
+  <div class="qt">A-5. 關於直方圖均衡化，正確的有？</div>
+  <div class="opt">轉換公式為 s = round((L−1)/N × cdf(r))</div>
+  <div class="opt">處理後直方圖會變成完全水平的直線</div>
+  <div class="opt">原影像中最大的灰階值，處理後會被對應到 L−1</div>
+  <div class="opt">此操作可逆，能完整還原原影像</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>正確：A、C</strong><br>
+  B 錯 —— 灰階是<strong>離散整數</strong>，多個灰階會被合併、某些新值沒人對應，所以直方圖呈「梳子狀」而非全平。<br>
+  D 錯 —— 灰階被合併後資訊已損失，<strong>不可逆</strong>。<br>
+  C 正確：最大灰階的 cdf = N，代入得 s = L−1（這是很好的驗算點）。</div>
+</div>
+
+<div class="mq q" data-ans="0,1,3">
+  <div class="qt">A-6. 關於相關（correlation）與卷積（convolution），正確的有？</div>
+  <div class="opt">卷積需要先將核旋轉 180°，相關則不用</div>
+  <div class="opt">若核本身左右上下對稱，兩者結果相同</div>
+  <div class="opt">相關滿足結合律，所以可以先合併多個核</div>
+  <div class="opt">用脈衝訊號做卷積，會得到原樣的核</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>正確：A、B、D</strong><br>
+  C 錯 —— 具有交換律與<strong>結合律</strong>的是<strong>卷積</strong>，不是相關。這正是實務上偏好卷積的原因。<br>
+  D 正確：脈衝 ∗ 核 = 核本身（相關則會得到<strong>鏡像</strong>的核）。</div>
+</div>
+
+<div class="mq q" data-ans="1,2">
+  <div class="qt">A-7. 一張 200×200 的影像與 7×7 的核做運算，下列正確的有？</div>
+  <div class="opt">valid 模式輸出為 200×200</div>
+  <div class="opt">valid 模式輸出為 194×194</div>
+  <div class="opt">若結果寫在視窗中心，上下左右各有 3 格無法計算</div>
+  <div class="opt">full 模式輸出為 205×205</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>正確：B、C</strong><br>
+  valid = N − K + 1 = 200 − 7 + 1 = <strong>194</strong>（A 錯，那是 same）。<br>
+  無效邊界寬度 = ⌊7/2⌋ = <strong>3</strong>，C 正確。<br>
+  full = N + K − 1 = 200 + 7 − 1 = <strong>206</strong>，所以 D 錯。</div>
+</div>
+
+<div class="mq q" data-ans="0,2,3">
+  <div class="qt">A-8. 關於濾波器，正確的有？</div>
+  <div class="opt">平滑用的核，係數總和應為 1，否則影像亮度會改變</div>
+  <div class="opt">中位數濾波是線性運算，可以寫成卷積</div>
+  <div class="opt">中位數濾波對椒鹽雜訊的效果優於平均濾波</div>
+  <div class="opt">重複施加 box filter，效果會逐漸接近高斯模糊</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>正確：A、C、D</strong><br>
+  B 錯 —— 中位數要<strong>排序</strong>再取中間值，無法表示為加權總和，是<strong>非線性</strong>運算。<br>
+  C 正確：椒鹽是極端值，排序後被排到兩端而忽略；平均則會被拖歪。</div>
+</div>
+
+<div class="mq q" data-ans="0,1,3">
+  <div class="qt">A-9. 關於邊緣偵測，正確的有？</div>
+  <div class="opt">梯度方向與邊緣方向互相垂直</div>
+  <div class="opt">Sobel 與 Prewitt 的核係數總和皆為 0</div>
+  <div class="opt">Laplacian 運算子可同時提供邊緣強度與邊緣方向</div>
+  <div class="opt">微分會放大雜訊，因此通常先做高斯平滑</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>正確：A、B、D</strong><br>
+  C 錯 —— Laplacian 是<strong>各向同性</strong>（isotropic）的二階運算子，只給強度，<strong>不提供方向</strong>。
+  要方向必須用一階的 Sobel／Prewitt 算 θ = tan⁻¹(Gy/Gx)。</div>
+</div>
+
+<div class="mq q" data-ans="1,2">
+  <div class="qt">A-10. 關於形態學運算，正確的有？</div>
+  <div class="opt">Opening 是先膨脹再侵蝕</div>
+  <div class="opt">Closing 可用於填補物體內部的小洞</div>
+  <div class="opt">形態學梯度 = 膨脹結果 − 侵蝕結果</div>
+  <div class="opt">用 3×3 全 1 的 SE 侵蝕一個孤立的單像素，該點會被保留</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>正確：B、C</strong><br>
+  A 錯 —— <strong>Opening = 先侵蝕再膨脹</strong>（Closing 才是先膨脹）。<br>
+  D 錯 —— 侵蝕要求 3×3 內<strong>全部</strong>為前景，孤立點周圍都是背景 → <strong>會消失</strong>。</div>
+</div>
+
+<div class="score" id="score"></div>
+
+<h2>Part B · 計算題（每題 10 分，須寫出過程）</h2>
+
+<div class="box">
+  <span class="t">📝 作答提示</span>
+  Part B <strong>有部分分</strong>。就算最後算錯或算不完，<strong>把公式和步驟寫出來就能拿分</strong>。
+  先自己在紙上做完，再展開看參考解答。
+</div>
+
+<div class="card">
+<h3 style="margin-top:0">B-1. 直方圖均衡化</h3>
+<p>一張 4×4、灰階範圍 0~7（L = 8）的影像如下，請完成直方圖均衡化，寫出對應表與結果影像。</p>
+<div class="mat" style="grid-template-columns:repeat(4,1fr)">
+  <span>2</span><span>3</span><span>3</span><span>2</span>
+  <span>4</span><span>2</span><span>4</span><span>3</span>
+  <span>3</span><span>5</span><span>5</span><span>4</span>
+  <span>2</span><span>3</span><span>4</span><span>4</span>
+</div>
+
+<details>
+<summary>參考解答</summary>
+<p><strong>Step 1　N = 16，L = 8，係數 (L−1)/N = 7/16 = 0.4375</strong></p>
+<p><strong>Step 2　統計直方圖</strong>（數一數）：<br>
+灰階 2：4 個　灰階 3：5 個　灰階 4：5 個　灰階 5：2 個　其餘為 0<br>
+檢查：4 + 5 + 5 + 2 = 16 = N ✓</p>
+
+<p><strong>Step 3　累積直方圖與對應表</strong></p>
+<div class="tw"><table>
+<tr><th>r</th><th>h(r)</th><th>cdf(r)</th><th>0.4375 × cdf</th><th>s = round</th></tr>
+<tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+<tr><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+<tr><td>2</td><td>4</td><td>4</td><td>1.75</td><td><strong>2</strong></td></tr>
+<tr><td>3</td><td>5</td><td>9</td><td>3.94</td><td><strong>4</strong></td></tr>
+<tr><td>4</td><td>5</td><td>14</td><td>6.125</td><td><strong>6</strong></td></tr>
+<tr><td>5</td><td>2</td><td>16</td><td>7.00</td><td><strong>7</strong></td></tr>
+<tr><td>6</td><td>0</td><td>16</td><td>7.00</td><td>7</td></tr>
+<tr><td>7</td><td>0</td><td>16</td><td>7.00</td><td>7</td></tr>
+</table></div>
+<p>檢查：cdf 最後 = 16 = N ✓；最大灰階對應到 7 = L−1 ✓</p>
+
+<p><strong>Step 4　查表換值</strong>（2→2、3→4、4→6、5→7）</p>
+<div class="mat" style="grid-template-columns:repeat(4,1fr)">
+  <span class="hl">2</span><span class="hl">4</span><span class="hl">4</span><span class="hl">2</span>
+  <span class="hl">6</span><span class="hl">2</span><span class="hl">6</span><span class="hl">4</span>
+  <span class="hl">4</span><span class="hl">7</span><span class="hl">7</span><span class="hl">6</span>
+  <span class="hl">2</span><span class="hl">4</span><span class="hl">6</span><span class="hl">6</span>
+</div>
+<p><strong>說明（可加分）</strong>：原本只用到 2~5（4 級），處理後拉開到 2~7，<strong>對比增強</strong>；
+但灰階之間出現空隙（3、5 沒有被用到），所以直方圖<strong>不是完全平坦</strong>。</p>
+</details>
+</div>
+
+<div class="card">
+<h3 style="margin-top:0">B-2. 一維卷積與相關</h3>
+<p>已知訊號 f = [1, 2, 3, 4] 與核 w = [1, 0, −1]。<br>
+(a) 求 <strong>full 相關</strong>；(b) 求 <strong>full 卷積</strong>；(c) 說明兩者結果的關係。</p>
+
+<details>
+<summary>參考解答</summary>
+<p><strong>(a) 相關（核不翻轉，用 [1, 0, −1]）</strong><br>
+兩邊各補 K−1 = 2 個 0：f' = [0, 0, 1, 2, 3, 4, 0, 0]<br>
+輸出長度 = 8 − 3 + 1 = 6</p>
+<ul style="font-size:15px">
+<li>位置 0：(1)(0)+(0)(0)+(−1)(1) = <strong>−1</strong></li>
+<li>位置 1：(1)(0)+(0)(1)+(−1)(2) = <strong>−2</strong></li>
+<li>位置 2：(1)(1)+(0)(2)+(−1)(3) = <strong>−2</strong></li>
+<li>位置 3：(1)(2)+(0)(3)+(−1)(4) = <strong>−2</strong></li>
+<li>位置 4：(1)(3)+(0)(4)+(−1)(0) = <strong>3</strong></li>
+<li>位置 5：(1)(4)+(0)(0)+(−1)(0) = <strong>4</strong></li>
+</ul>
+<p>相關結果 = <strong>[−1, −2, −2, −2, 3, 4]</strong></p>
+
+<p><strong>(b) 卷積（核先翻轉成 [−1, 0, 1]）</strong></p>
+<ul style="font-size:15px">
+<li>位置 0：(−1)(0)+(0)(0)+(1)(1) = <strong>1</strong></li>
+<li>位置 1：(−1)(0)+(0)(1)+(1)(2) = <strong>2</strong></li>
+<li>位置 2：(−1)(1)+(0)(2)+(1)(3) = <strong>2</strong></li>
+<li>位置 3：(−1)(2)+(0)(3)+(1)(4) = <strong>2</strong></li>
+<li>位置 4：(−1)(3)+(0)(4)+(1)(0) = <strong>−3</strong></li>
+<li>位置 5：(−1)(4)+(0)(0)+(1)(0) = <strong>−4</strong></li>
+</ul>
+<p>卷積結果 = <strong>[1, 2, 2, 2, −3, −4]</strong></p>
+
+<p><strong>(c) 關係</strong>：因為核 [1,0,−1] 是<strong>反對稱</strong>的（翻轉後正好變號），
+所以卷積結果 = 相關結果 <strong>× (−1)</strong>。<br>
+若核是對稱的（例如 [1,2,1]），兩者會<strong>完全相同</strong>。</p>
+</details>
+</div>
+
+<div class="card">
+<h3 style="margin-top:0">B-3. Sobel 梯度</h3>
+<p>下列 3×3 影像區域，求中心像素的 <strong>G<sub>x</sub>、G<sub>y</sub>、梯度大小與方向</strong>，並說明該處邊緣的走向。</p>
+<div class="mat" style="grid-template-columns:repeat(3,1fr)">
+  <span>20</span><span>20</span><span>20</span>
+  <span>20</span><span>20</span><span>20</span>
+  <span>80</span><span>80</span><span>80</span>
+</div>
+
+<details>
+<summary>參考解答</summary>
+<p><strong>Sobel 核</strong><br>
+G<sub>x</sub> = [[−1,0,1],[−2,0,2],[−1,0,1]]　　G<sub>y</sub> = [[−1,−2,−1],[0,0,0],[1,2,1]]</p>
+
+<p><strong>算 G<sub>x</sub></strong>（左右相減）：<br>
+列1：(−1)(20) + (0)(20) + (1)(20) = 0<br>
+列2：(−2)(20) + (0)(20) + (2)(20) = 0<br>
+列3：(−1)(80) + (0)(80) + (1)(80) = 0<br>
+<strong>G<sub>x</sub> = 0</strong>（因為每一列左右都一樣，沒有水平變化）</p>
+
+<p><strong>算 G<sub>y</sub></strong>（上下相減）：<br>
+上排：(−1)(20) + (−2)(20) + (−1)(20) = −80<br>
+中排：0<br>
+下排：(1)(80) + (2)(80) + (1)(80) = 320<br>
+<strong>G<sub>y</sub> = −80 + 0 + 320 = 240</strong></p>
+
+<p><strong>梯度大小</strong> = √(0² + 240²) = <strong>240</strong><br>
+<strong>梯度方向</strong> θ = tan⁻¹(240 / 0) = <strong>90°</strong>（指向 y 方向，即垂直方向）</p>
+
+<p><strong>邊緣走向</strong>：梯度指向垂直（90°），而<strong>邊緣垂直於梯度</strong>，
+所以這裡是一條<strong>水平</strong>的邊緣 —— 和影像上半部暗（20）、下半部亮（80）的情況吻合。✓</p>
+</details>
+</div>
+
+<div class="card">
+<h3 style="margin-top:0">B-4. 形態學運算</h3>
+<p>下列二值影像（1 = 前景），SE 為 3×3 全 1、原點在中心，邊界外視為 0。<br>
+求 (a) 侵蝕、(b) 膨脹、(c) Opening 的結果，並說明 Opening 的作用。</p>
+<div class="mat" style="grid-template-columns:repeat(6,1fr)">
+  <span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span>
+  <span>0</span><span>1</span><span>1</span><span>1</span><span>0</span><span>0</span>
+  <span>0</span><span>1</span><span>1</span><span>1</span><span>0</span><span>0</span>
+  <span>0</span><span>1</span><span>1</span><span>1</span><span>0</span><span>0</span>
+  <span>0</span><span>0</span><span>0</span><span>0</span><span>1</span><span>0</span>
+  <span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span>
+</div>
+
+<details>
+<summary>參考解答</summary>
+<p><strong>(a) 侵蝕</strong>：只有「3×3 鄰域<strong>全部</strong>為 1」的位置才留下。<br>
+只有 (2,2) 這一格（3×3 方塊的正中心）符合；
+右下角 (4,4) 的孤立點周圍都是 0 → 消失。</p>
+<div class="mat" style="grid-template-columns:repeat(6,1fr)">
+  <span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span>
+  <span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span>
+  <span>0</span><span>0</span><span class="hl">1</span><span>0</span><span>0</span><span>0</span>
+  <span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span>
+  <span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span>
+  <span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span>
+</div>
+
+<p><strong>(b) 膨脹</strong>：3×3 鄰域內<strong>只要有一個</strong> 1，中心就變 1。<br>
+方塊往外長一圈；孤立點長成 3×3。</p>
+<div class="mat" style="grid-template-columns:repeat(6,1fr)">
+  <span class="hl">1</span><span class="hl">1</span><span class="hl">1</span><span class="hl">1</span><span>0</span><span>0</span>
+  <span class="hl">1</span><span class="hl">1</span><span class="hl">1</span><span class="hl">1</span><span>0</span><span>0</span>
+  <span class="hl">1</span><span class="hl">1</span><span class="hl">1</span><span class="hl">1</span><span class="hl">1</span><span class="hl">1</span>
+  <span class="hl">1</span><span class="hl">1</span><span class="hl">1</span><span class="hl">1</span><span class="hl">1</span><span class="hl">1</span>
+  <span class="hl">1</span><span class="hl">1</span><span class="hl">1</span><span class="hl">1</span><span class="hl">1</span><span class="hl">1</span>
+  <span>0</span><span>0</span><span>0</span><span>0</span><span class="hl">1</span><span class="hl">1</span>
+</div>
+
+<p><strong>(c) Opening = 先侵蝕再膨脹</strong>：把 (a) 的結果（只剩一格）再膨脹 3×3，
+得到原來的 3×3 方塊，而孤立點<strong>不會回來</strong>。</p>
+<div class="mat" style="grid-template-columns:repeat(6,1fr)">
+  <span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span>
+  <span>0</span><span class="hl">1</span><span class="hl">1</span><span class="hl">1</span><span>0</span><span>0</span>
+  <span>0</span><span class="hl">1</span><span class="hl">1</span><span class="hl">1</span><span>0</span><span>0</span>
+  <span>0</span><span class="hl">1</span><span class="hl">1</span><span class="hl">1</span><span>0</span><span>0</span>
+  <span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span>
+  <span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span>
+</div>
+
+<p><strong>作用說明</strong>：Opening <strong>去除了比 SE 小的雜點</strong>（右下角孤立點），
+同時<strong>保留了大物體的原本大小與形狀</strong>（3×3 方塊完好無損）。
+這就是為什麼 Opening 常用來去除前景中的小雜訊。</p>
+</details>
+</div>
+
+<div class="box ok">
+  <span class="t">✅ 做完之後</span>
+  錯的題目回去看對應章節，不要只記答案 —— Part A 是全對才給分，
+  只有真的理解每個選項為什麼對／錯，考試才拿得到分。
+</div>
+
+<div class="pager">
+  <a href="cheatsheet.html">← 考前速記</a>
+  <a href="index.html">回首頁 →</a>
+</div>
+
+<p class="foot">CISC3011 期中溫習站 · 模擬測驗<br>
+題目為依課程範圍自行命題的練習題，非真實考題。</p>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

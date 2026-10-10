@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>考前速記 — CISC3011 溫習站</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="topbar"><div class="topbar-in">
+  <a class="brand" href="index.html">CISC3011 溫習站<small>數位影像處理 · 期中考 Ch1–6</small></a>
+  <nav class="navlinks">
+    <a href="index.html">首頁</a>
+    <a href="ch1.html">1 基礎</a><a href="ch2.html">2 點運算</a><a href="ch3.html">3 直方圖</a>
+    <a href="ch4.html">4 濾波</a><a href="ch5.html">5 邊緣</a><a href="ch6.html">6 形態學</a>
+    <a class="on" href="cheatsheet.html">速記</a><a href="quiz.html">測驗</a>
+  </nav>
+</div></div>
+
+<div class="wrap">
+
+<h1>考前速記</h1>
+<p class="sub">進考場前 30 分鐘看這一頁就好 · 可直接列印（Ctrl/Cmd + P）</p>
+
+<div class="box warn">
+  <span class="t">📋 考試格式與作答策略</span>
+  <strong>90 分鐘、100 分、閉卷</strong>，有 A4 草稿紙（草稿紙要一起釘上交）。
+  <ul style="margin:8px 0 0">
+    <li><strong>Part A 多選題（每題 5 分）</strong>：<u>可能不只一個正確答案，必須全部選對才給分，答錯沒有部分分</u>。<br>
+        → 逐個選項判斷「這句話單獨看對不對」，不要只找「最好的那個」。</li>
+    <li><strong>Part B 計算／論述（每題 10 分）</strong>：<u>必須寫出推導過程</u>，有部分分。<br>
+        → <strong>就算算不完，也一定要寫出公式和步驟</strong>，寫了就有機會拿分。</li>
+    <li>時間分配建議：Part A 約 40 分鐘、Part B 約 45 分鐘、留 5 分鐘檢查。</li>
+    <li>題目不清楚時「寫下你的假設」再作答（考卷明文允許，不會回答提問）。</li>
+  </ul>
+</div>
+
+<h2>一、必背公式總表</h2>
+
+<div class="tw"><table>
+<tr><th>主題</th><th>公式</th><th>備註</th></tr>
+<tr><td>灰階級數</td><td>L = 2<sup>b</sup></td><td>8-bit → 256 級（0~255）</td></tr>
+<tr><td>影像大小</td><td>H × W × b × 通道 ÷ 8 byte</td><td>8-bit 灰階：1 像素 = 1 byte</td></tr>
+<tr><td>反相</td><td>s = (L−1) − r = 255 − r</td><td></td></tr>
+<tr><td>線性</td><td>s = a·r + b</td><td>a 管對比、b 管亮度</td></tr>
+<tr><td><strong>Gamma</strong></td><td>s = c · r<sup>γ</sup></td><td><strong>γ&lt;1 變亮、γ&gt;1 變暗</strong>；先正規化到 0~1</td></tr>
+<tr><td>多張平均降噪</td><td>雜訊 → 1/√N</td><td>不是 1/N</td></tr>
+<tr><td><strong>Alpha 混合</strong></td><td>I = α·F + (1−α)·B</td><td>α=1 全前景、α=0 全背景</td></tr>
+<tr><td>對比拉伸</td><td>s = (r−r<sub>min</sub>)/(r<sub>max</sub>−r<sub>min</sub>) × (L−1)</td><td>線性</td></tr>
+<tr><td><strong>直方圖均衡化</strong></td><td>s = round( (L−1)/N × cdf(r) )</td><td>非線性；最大值必為 L−1</td></tr>
+<tr><td>相關</td><td>g(x) = Σ w(s)·f(x+s)</td><td>核<strong>不</strong>翻轉</td></tr>
+<tr><td><strong>卷積</strong></td><td>g(x) = Σ w(s)·f(x−s)</td><td>核<strong>要</strong>翻轉 180°</td></tr>
+<tr><td>輸出尺寸</td><td>full = N+K−1；same = N；valid = N−K+1</td><td>無效邊界寬 ⌊K/2⌋</td></tr>
+<tr><td>可分離複雜度</td><td>O(K²) → O(2K)</td><td>高斯、box 可分離</td></tr>
+<tr><td><strong>銳化</strong></td><td>結果 = 原圖 + k ×(原圖 − 模糊)</td><td>k&gt;1 叫 highboost</td></tr>
+<tr><td><strong>梯度</strong></td><td>|∇f| = √(G<sub>x</sub>²+G<sub>y</sub>²)，θ = tan⁻¹(G<sub>y</sub>/G<sub>x</sub>)</td><td><strong>梯度 ⊥ 邊緣</strong></td></tr>
+<tr><td>微分定理</td><td>d/dx(G∗f) = (d/dx G)∗f</td><td>省一次運算</td></tr>
+<tr><td><strong>內／外邊界</strong></td><td>內 = A − erode(A)；外 = dilate(A) − A</td><td></td></tr>
+<tr><td><strong>形態學梯度</strong></td><td>dilate(A) − erode(A)</td><td>= 內 ∪ 外</td></tr>
+</table></div>
+
+<h2>二、必背核（Kernel）</h2>
+
+<div class="matrow">
+  <div><div class="cap">Box 3×3（×1/9）</div>
+  <div class="mat" style="grid-template-columns:repeat(3,1fr)">
+    <span>1</span><span>1</span><span>1</span><span>1</span><span>1</span><span>1</span><span>1</span><span>1</span><span>1</span></div></div>
+  <div><div class="cap">Gaussian 3×3（×1/16）</div>
+  <div class="mat" style="grid-template-columns:repeat(3,1fr)">
+    <span>1</span><span>2</span><span>1</span><span>2</span><span>4</span><span>2</span><span>1</span><span>2</span><span>1</span></div></div>
+</div>
+
+<div class="matrow">
+  <div><div class="cap">Sobel G<sub>x</sub></div>
+  <div class="mat" style="grid-template-columns:repeat(3,1fr)">
+    <span>−1</span><span>0</span><span>1</span><span>−2</span><span>0</span><span>2</span><span>−1</span><span>0</span><span>1</span></div></div>
+  <div><div class="cap">Sobel G<sub>y</sub></div>
+  <div class="mat" style="grid-template-columns:repeat(3,1fr)">
+    <span>−1</span><span>−2</span><span>−1</span><span>0</span><span>0</span><span>0</span><span>1</span><span>2</span><span>1</span></div></div>
+</div>
+
+<div class="matrow">
+  <div><div class="cap">Prewitt G<sub>x</sub></div>
+  <div class="mat" style="grid-template-columns:repeat(3,1fr)">
+    <span>−1</span><span>0</span><span>1</span><span>−1</span><span>0</span><span>1</span><span>−1</span><span>0</span><span>1</span></div></div>
+  <div><div class="cap">Laplacian（4-鄰域）</div>
+  <div class="mat" style="grid-template-columns:repeat(3,1fr)">
+    <span>0</span><span>1</span><span>0</span><span>1</span><span>−4</span><span>1</span><span>0</span><span>1</span><span>0</span></div></div>
+</div>
+
+<div class="box ok">
+  <span class="t">✅ 一眼認出核的種類</span>
+  係數和 = <strong>1</strong> → 平滑（box、高斯）<br>
+  係數和 = <strong>0</strong> → 微分／邊緣（Sobel、Prewitt、Laplacian）<br>
+  中間<strong>大負數</strong>、周圍正 → Laplacian<br>
+  中間一排是 <strong>2</strong> → Sobel（不是 Prewitt）
+</div>
+
+<h2>三、容易混淆的對照</h2>
+
+<div class="tw"><table>
+<tr><th>A</th><th>B</th><th>差在哪</th></tr>
+<tr><td>取樣 Sampling</td><td>量化 Quantization</td><td>切<strong>空間</strong> vs 切<strong>亮度</strong>；馬賽克 vs 偽輪廓</td></tr>
+<tr><td>點運算</td><td>鄰域運算（濾波）</td><td>看不看<strong>鄰居</strong></td></tr>
+<tr><td>相關</td><td>卷積</td><td>核<strong>不翻</strong> vs <strong>翻 180°</strong>；對稱核兩者相同</td></tr>
+<tr><td>對比拉伸</td><td>直方圖均衡化</td><td><strong>線性</strong>拉寬 vs <strong>非線性</strong>依 cdf 重分配</td></tr>
+<tr><td>平均濾波</td><td>中位數濾波</td><td><strong>線性</strong>、怕極端值 vs <strong>非線性</strong>、抗椒鹽</td></tr>
+<tr><td>一階（Sobel）</td><td>二階（Laplacian）</td><td>找<strong>峰值</strong>、有方向 vs 找<strong>零交越</strong>、無方向</td></tr>
+<tr><td>Opening</td><td>Closing</td><td><strong>侵蝕→膨脹</strong>去白點 vs <strong>膨脹→侵蝕</strong>補黑洞</td></tr>
+<tr><td>侵蝕</td><td>膨脹</td><td><strong>全中</strong>才留（變瘦） vs <strong>有中</strong>就留（變胖）</td></tr>
+</table></div>
+
+<h2>四、Canny 四步驟</h2>
+<div class="card">
+<strong>1. 高斯平滑</strong> → <strong>2. 算梯度大小與方向</strong> → <strong>3. 非極大值抑制（讓邊變細）</strong> → <strong>4. 雙閾值 + 連通分析（防斷線）</strong>
+<p style="margin-bottom:0;font-size:14px;color:var(--muted)">口訣：去雜訊 → 找邊 → 瘦身 → 補線。<br>
+三目標：good detection、good localization、minimal response（NMS 負責最後這個）。</p>
+</div>
+
+<h2>五、直方圖均衡化標準答題格式</h2>
+<div class="card">
+<p style="margin-top:0">Part B 如果考這題，照這個順序寫，每步都有分：</p>
+<ol>
+<li>寫出 <strong>N</strong>（總像素）與 <strong>L</strong>（灰階級數）</li>
+<li>列表算 <strong>h(r)</strong>：每個灰階幾個像素</li>
+<li>列表算 <strong>cdf(r)</strong>：累加（檢查最後 = N）</li>
+<li>套公式 <strong>s = round((L−1)/N × cdf(r))</strong>，寫出每一級的對應值</li>
+<li>把原圖每個像素<strong>查表換成新值</strong>，畫出新影像</li>
+<li>（加分）說明：對比增強、最大值變 L−1、直方圖不會完全平坦</li>
+</ol>
+</div>
+
+<h2>六、最後叮嚀：五個最常見失分</h2>
+<div class="box bad">
+<ol style="margin-bottom:0">
+  <li><strong>卷積忘記翻轉核</strong>（那是相關）</li>
+  <li><strong>平滑核忘記除以總和</strong>（亮度爆掉）</li>
+  <li><strong>Gamma 記反</strong>（γ&lt;1 是變<strong>亮</strong>）</li>
+  <li><strong>均衡化忘記乘 (L−1)</strong> 或乘成 L</li>
+  <li><strong>Open / Close 順序顛倒</strong>（Open 先侵蝕）</li>
+</ol>
+</div>
+
+<div class="box ok">
+  <span class="t">✅ 進考場前最後確認</span>
+  <strong>記得簽 Pledge（誠信聲明）—— 沒簽名直接 0 分。</strong>
+</div>
+
+<div class="pager">
+  <a href="ch6.html">← 第 6 章</a>
+  <a href="quiz.html">去做模擬測驗 →</a>
+</div>
+
+<p class="foot">CISC3011 期中溫習站 · 速記頁</p>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

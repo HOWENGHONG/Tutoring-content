@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ch3 直方圖 — CISC3011 溫習站</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="topbar"><div class="topbar-in">
+  <a class="brand" href="index.html">CISC3011 溫習站<small>數位影像處理 · 期中考 Ch1–6</small></a>
+  <nav class="navlinks">
+    <a href="index.html">首頁</a>
+    <a href="ch1.html">1 基礎</a><a href="ch2.html">2 點運算</a><a class="on" href="ch3.html">3 直方圖</a>
+    <a href="ch4.html">4 濾波</a><a href="ch5.html">5 邊緣</a><a href="ch6.html">6 形態學</a>
+    <a href="cheatsheet.html">速記</a><a href="quiz.html">測驗</a>
+  </nav>
+</div></div>
+
+<div class="wrap">
+
+<h1>第 3 章 · 直方圖</h1>
+<p class="sub">用統計圖看懂一張照片，並自動增強對比</p>
+
+<div class="box">
+  <span class="t">📌 一句話說完</span>
+  <strong>直方圖就是「每一種亮度各有幾個像素」的長條圖</strong>；
+  把它攤平就能自動增強對比，這叫<strong>直方圖均衡化</strong>。
+</div>
+
+<div class="box bad">
+  <span class="t">🔥 這章最可能出 Part B 計算題</span>
+  直方圖均衡化的手算是本科最經典的考題。下面的四步驟和例題請務必練到閉著眼睛也會。
+</div>
+
+<div class="toc"><strong>本章內容</strong>
+<ol>
+  <li><a href="#a">直方圖是什麼</a></li>
+  <li><a href="#b">看直方圖診斷照片</a></li>
+  <li><a href="#c">對比拉伸</a></li>
+  <li><a href="#d">直方圖均衡化四步驟（必考）</a></li>
+  <li><a href="#e">完整手算例題</a></li>
+  <li><a href="#f">考點整理</a></li>
+</ol></div>
+
+<h2 id="a">1. 直方圖是什麼</h2>
+
+<p>把整張圖的像素倒出來，按亮度分類數一數：</p>
+
+<div class="f">
+  h(i) = 灰階值等於 i 的像素個數
+  <span class="why">i = 0, 1, 2, …, L−1（8-bit 的話是 0~255，共 256 個格子）</span>
+</div>
+
+<p>程式就是這樣寫（作業 hw3 考過）：</p>
+<pre><code>hist = [0] * 256                  # 256 個計數器
+for i in range(H):
+    for j in range(W):
+        hist[ img[i][j] ] += 1    # 用亮度當索引，那格 +1</code></pre>
+
+<div class="box ok">
+  <span class="t">✅ 三個重要性質</span>
+  <ol style="margin-bottom:0">
+    <li>所有長條加起來 = <strong>總像素數 N</strong></li>
+    <li>直方圖<strong>丟失了位置資訊</strong> — 把圖打亂重排，直方圖完全一樣。所以不同的圖可能有相同直方圖。</li>
+    <li>正規化直方圖 p(i) = h(i)/N，可看成「隨便抓一個像素，亮度是 i 的機率」</li>
+  </ol>
+</div>
+
+<h3>累積直方圖（CDF）</h3>
+<div class="f">
+  cdf(i) = h(0) + h(1) + … + h(i)
+  <span class="why">意思是：亮度「小於等於 i」的像素總共有幾個</span>
+</div>
+<p>性質：<strong>一路遞增不會下降</strong>，而且<strong>最後一格 cdf(L−1) 一定等於 N</strong>。這是檢查算對沒的好方法。</p>
+
+<h2 id="b">2. 看直方圖診斷照片</h2>
+
+<div class="tw"><table>
+<tr><th>直方圖長相</th><th>照片的問題</th></tr>
+<tr><td>全部擠在<strong>左邊</strong></td><td>曝光不足（太暗）</td></tr>
+<tr><td>全部擠在<strong>右邊</strong></td><td>曝光過度（太亮）</td></tr>
+<tr><td>擠在<strong>中間窄窄一條</strong></td><td>對比太低（灰濛濛、霧感）</td></tr>
+<tr><td>分散在整個範圍</td><td>曝光與對比良好 ✅</td></tr>
+<tr><td>左端或右端出現<strong>一根超高的柱子</strong></td><td>有像素被削掉（clipping）：暗部死黑或亮部過曝，細節救不回來</td></tr>
+<tr><td>像<strong>梳子</strong>一樣一根一根有空隙</td><td>影像被處理過（例如做過對比拉伸或均衡化），或是壓縮造成的</td></tr>
+</table></div>
+
+<div class="box">
+  <span class="t">💡 為什麼均衡化後會出現「梳子狀」空隙</span>
+  因為灰階是<strong>整數</strong>。均衡化會把多個原始灰階<strong>合併</strong>到同一個新值，
+  也會讓某些新值<strong>沒有任何像素對應</strong>（空隙）。<br>
+  <strong>所以均衡化後的直方圖不會真的變成平的！</strong>這是極常考的觀念題。
+</div>
+
+<h2 id="c">3. 對比拉伸（Auto-contrast）</h2>
+
+<p>最簡單的增強：把目前用到的範圍 [r<sub>min</sub>, r<sub>max</sub>] 線性拉開到滿格 [0, L−1]。</p>
+
+<div class="f">
+  s = (r − r<sub>min</sub>) / (r<sub>max</sub> − r<sub>min</sub>) × (L − 1)
+</div>
+
+<p><strong>和均衡化的差別</strong>：</p>
+<ul>
+  <li><strong>對比拉伸</strong>是<strong>線性</strong>的，只是把範圍拉寬，直方圖形狀不變（只是變胖）。</li>
+  <li><strong>均衡化</strong>是<strong>非線性</strong>的，會根據像素多寡重新分配：像素多的地方拉開、像素少的地方壓縮。</li>
+</ul>
+
+<h2 id="d">4. 直方圖均衡化四步驟</h2>
+
+<div class="box warn">
+  <span class="t">⭐ 把這四步背起來，Part B 照著寫就有分</span>
+  <ol style="margin-bottom:0">
+    <li><strong>算直方圖</strong> h(i)：每個亮度有幾個像素</li>
+    <li><strong>算累積直方圖</strong> cdf(i)：一路加上去</li>
+    <li><strong>算對應表</strong>：s = round( (L−1)/N × cdf(r) )</li>
+    <li><strong>查表換值</strong>：把每個像素的舊值換成對應的新值</li>
+  </ol>
+</div>
+
+<div class="f">
+  s = round( (L−1) / N × cdf(r) )
+  <span class="why">L = 灰階級數（8-bit 時 256）、N = 總像素數、cdf(r) = 累積到 r 的像素數</span>
+</div>
+
+<h3>這條公式在幹嘛？（理解了就不會記錯）</h3>
+<ul>
+  <li><code>cdf(r) / N</code> → 算出「亮度 ≤ r 的像素佔全圖幾成」，範圍 <strong>0 到 1</strong>。</li>
+  <li>再乘 <code>(L−1)</code> → 把這個 0~1 的比例<strong>攤開到完整的 0~255 範圍</strong>。</li>
+  <li><code>round</code> → 灰階必須是整數。</li>
+</ul>
+
+<div class="box bad">
+  <span class="t">⚠️ 三個最常見的錯</span>
+  <ol style="margin-bottom:0">
+    <li><strong>忘記乘 (L−1)</strong> → 結果全部擠在 0~1，整張圖變全黑</li>
+    <li><strong>乘成 L（256）而不是 L−1（255）</strong> → 最大值變 256，超出範圍</li>
+    <li><strong>忘記 round</strong> → 得到小數，不是合法的灰階值</li>
+  </ol>
+</div>
+
+<div class="box ok">
+  <span class="t">✅ 驗算技巧（考試時自我檢查）</span>
+  最大的那個灰階，其 cdf 一定 = N，所以 s = round((L−1)/N × N) = <strong>L−1</strong>。<br>
+  <strong>也就是說：均衡化後的最大值必定是 255（或 L−1）。算出來不是的話就是算錯了。</strong>
+</div>
+
+<h2 id="e">5. 完整手算例題</h2>
+
+<div id="heDemo"></div>
+
+<h3>再練一題（考試常見尺寸）</h3>
+<details>
+  <summary>例題：一張 5×5 的影像，L = 8，直方圖如下，求均衡化對應表</summary>
+  <p>N = 25，L − 1 = 7，所以係數 = 7/25 = 0.28</p>
+  <div class="tw"><table>
+  <tr><th>r</th><th>h(r)</th><th>cdf(r)</th><th>0.28 × cdf</th><th>s = round</th></tr>
+  <tr><td>0</td><td>2</td><td>2</td><td>0.56</td><td><strong>1</strong></td></tr>
+  <tr><td>1</td><td>4</td><td>6</td><td>1.68</td><td><strong>2</strong></td></tr>
+  <tr><td>2</td><td>7</td><td>13</td><td>3.64</td><td><strong>4</strong></td></tr>
+  <tr><td>3</td><td>6</td><td>19</td><td>5.32</td><td><strong>5</strong></td></tr>
+  <tr><td>4</td><td>3</td><td>22</td><td>6.16</td><td><strong>6</strong></td></tr>
+  <tr><td>5</td><td>2</td><td>24</td><td>6.72</td><td><strong>7</strong></td></tr>
+  <tr><td>6</td><td>1</td><td>25</td><td>7.00</td><td><strong>7</strong></td></tr>
+  <tr><td>7</td><td>0</td><td>25</td><td>7.00</td><td><strong>7</strong></td></tr>
+  </table></div>
+  <p><strong>檢查：</strong>cdf 最後 = 25 = N ✓，最大值對應到 7 = L−1 ✓</p>
+  <p><strong>注意這裡發生的事</strong>：原本的 5、6、7 三個灰階<strong>全部被合併成 7</strong>。
+  這就是為什麼均衡化後直方圖會有空隙、而且<strong>不可逆</strong>（資訊損失了）。</p>
+</details>
+
+<h3>均衡化之後會怎樣？</h3>
+<ul>
+  <li>像素多的灰階區間 → 被<strong>拉開</strong>（對比變強，細節看得到）</li>
+  <li>像素少的灰階區間 → 被<strong>壓縮</strong>甚至合併</li>
+  <li>整體對比增強，<strong>標準差變大</strong></li>
+  <li>直方圖變得比較「分散」但<strong>不是完全平坦</strong></li>
+  <li>可能放大雜訊（原本看不見的雜訊被拉開後變明顯）</li>
+</ul>
+
+<h2 id="e2">6. 補充：兩個延伸概念</h2>
+
+<div class="tw"><table>
+<tr><th>方法</th><th>做法</th><th>優缺點</th></tr>
+<tr><td><strong>Adaptive HE</strong><br>（局部均衡化）</td>
+    <td>不對整張圖做，而是取一個小視窗，對視窗內做均衡化，把結果給中心像素，逐點滑過整張圖。</td>
+    <td>✅ 局部細節更好<br>❌ 計算量大、會放大雜訊</td></tr>
+<tr><td><strong>Histogram Matching</strong><br>（直方圖匹配／規定化）</td>
+    <td>不是攤平，而是讓 A 圖的直方圖「長得像」B 圖的直方圖。</td>
+    <td>可做風格／色調轉移。彩色圖對 R、G、B <strong>各通道獨立</strong>處理。</td></tr>
+</table></div>
+
+<h2 id="f">7. 考點整理</h2>
+
+<div class="box ok">
+  <span class="t">✅ 本章一定要會</span>
+  <ol style="margin-bottom:0">
+    <li>直方圖定義；<strong>丟失位置資訊</strong>（不同圖可有相同直方圖）</li>
+    <li>cdf 遞增、最後 = N</li>
+    <li><strong>均衡化四步驟 + 公式 s = round((L−1)/N × cdf(r))</strong></li>
+    <li>均衡化後<strong>最大值必為 L−1</strong>；直方圖<strong>不會完全平坦</strong>（離散造成空隙）</li>
+    <li>均衡化<strong>不可逆</strong>（灰階被合併）</li>
+    <li>對比拉伸是線性、均衡化是非線性</li>
+  </ol>
+</div>
+
+<h3>小測驗</h3>
+<div class="q" data-ans="2">
+  <div class="qt">Q1. 關於直方圖均衡化後的結果，何者正確？</div>
+  <div class="opt">直方圖會變成完全平坦的水平線</div>
+  <div class="opt">影像的對比一定會下降</div>
+  <div class="opt">最大灰階值會被對應到 L−1</div>
+  <div class="opt">處理後可以完全還原回原圖</div>
+  <div class="exp">最大灰階的 cdf = N，所以 s = round((L−1)/N × N) = <strong>L−1</strong>，正確。<br>
+  直方圖<strong>不會</strong>完全平坦（灰階是離散的）；對比是<strong>增強</strong>；因為灰階會被合併所以<strong>不可逆</strong>。</div>
+</div>
+
+<div class="q" data-ans="1">
+  <div class="qt">Q2. 某 4×4 影像（N=16, L=8）中，灰階 3 的累積個數 cdf(3) = 8，則灰階 3 會被對應到？</div>
+  <div class="opt">3</div>
+  <div class="opt">4</div>
+  <div class="opt">5</div>
+  <div class="opt">8</div>
+  <div class="exp">s = round( (8−1)/16 × 8 ) = round( 7/16 × 8 ) = round(3.5) = <strong>4</strong>。<br>
+  （Python 的 round(3.5) 會給 4；考試寫 4 即可。）</div>
+</div>
+
+<div class="q" data-ans="3">
+  <div class="qt">Q3. 兩張完全不同的照片，有沒有可能擁有一模一樣的直方圖？</div>
+  <div class="opt">不可能，直方圖是唯一的</div>
+  <div class="opt">只有兩張圖完全相同時才可能</div>
+  <div class="opt">只有灰階圖才可能</div>
+  <div class="opt">有可能，因為直方圖不記錄像素的位置</div>
+  <div class="exp">直方圖只統計「有幾個」，<strong>完全不管在哪裡</strong>。把一張圖的像素隨意打亂重排，直方圖一模一樣，但畫面完全不同。</div>
+</div>
+
+<div class="q" data-ans="0">
+  <div class="qt">Q4. 一張照片的直方圖全部擠在最左邊一小段，代表？</div>
+  <div class="opt">照片太暗且對比低</div>
+  <div class="opt">照片太亮且對比低</div>
+  <div class="opt">照片對比很好</div>
+  <div class="opt">照片有雜訊</div>
+  <div class="exp">靠左 = 值小 = <strong>暗</strong>；擠成一小段 = 用到的灰階範圍很窄 = <strong>對比低</strong>。這正是直方圖均衡化最能發揮的情況。</div>
+</div>
+<div class="score" id="score"></div>
+
+<div class="pager">
+  <a href="ch2.html">← 第 2 章</a>
+  <a href="ch4.html">第 4 章：濾波器 →</a>
+</div>
+
+<p class="foot">CISC3011 期中溫習站 · Ch3</p>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

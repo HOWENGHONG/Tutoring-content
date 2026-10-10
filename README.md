@@ -18,6 +18,7 @@
   - [化學（結構與鍵合）](#-化學結構與鍵合)
   - [英文（中一）](#-英文中一)
   - [CISC3012 人工智能（AI）](#cisc3012-人工智能ai)
+  - [CISC3011 數位影像處理（DIP）](#️-cisc3011-數位影像處理dip)
 - [如何使用](#如何使用)
 - [教學建議](#教學建議)
 - [貢獻與回饋](#貢獻與回饋)
@@ -106,6 +107,26 @@
 | `CISC3012 AI mid考試速記.html` | 期中考試速記 | [🔗 預覽](https://howenghong.github.io/Tutoring-content/CISC3012%20AI%20mid%E8%80%83%E8%A9%A6%E9%80%9F%E8%A8%98.html) |
 
 > **📝 使用建議**：建議先閱讀「期中溫習筆記」，再用「考試速記」快速複習，最後以兩份 Mock Test 進行自測。
+
+---
+
+### 🖼️ CISC3011 數位影像處理（DIP）
+
+**期中考溫習網站**（範圍 Lecture 1–6），多頁式網站，從零基礎講起，含手算例題與互動示範。
+
+| 頁面 | 說明 | 預覽連結 |
+|------|------|----------|
+| 首頁 | 考試格式、六章地圖、檢查清單 | [🔗 預覽](https://howenghong.github.io/Tutoring-content/cisc3011/) |
+| Ch1 | 數位影像基礎（取樣、量化、容量計算） | [🔗 預覽](https://howenghong.github.io/Tutoring-content/cisc3011/ch1.html) |
+| Ch2 | 點運算與影像合成（Gamma、Alpha 混合） | [🔗 預覽](https://howenghong.github.io/Tutoring-content/cisc3011/ch2.html) |
+| Ch3 | 直方圖（均衡化手算，含互動計算器） | [🔗 預覽](https://howenghong.github.io/Tutoring-content/cisc3011/ch3.html) |
+| Ch4 | 濾波器（相關 vs 卷積，含互動示範） | [🔗 預覽](https://howenghong.github.io/Tutoring-content/cisc3011/ch4.html) |
+| Ch5 | 邊緣偵測（Sobel、Laplacian、Canny） | [🔗 預覽](https://howenghong.github.io/Tutoring-content/cisc3011/ch5.html) |
+| Ch6 | 形態學處理（含可點擊的侵蝕／膨脹格子） | [🔗 預覽](https://howenghong.github.io/Tutoring-content/cisc3011/ch6.html) |
+| 考前速記 | 一頁式公式總表，可直接列印 | [🔗 預覽](https://howenghong.github.io/Tutoring-content/cisc3011/cheatsheet.html) |
+| 模擬測驗 | Part A 多選（全對才給分）+ Part B 計算題 | [🔗 預覽](https://howenghong.github.io/Tutoring-content/cisc3011/quiz.html) |
+
+> **📝 使用建議**：時間有限的話，先看「考前速記」掌握全貌 → 再把 Ch3、Ch4、Ch6 的手算例題做熟 → 最後用「模擬測驗」找漏洞。
 
 ---
 

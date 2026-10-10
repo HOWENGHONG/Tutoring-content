@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ch1 數位影像基礎 — CISC3011 溫習站</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="topbar"><div class="topbar-in">
+  <a class="brand" href="index.html">CISC3011 溫習站<small>數位影像處理 · 期中考 Ch1–6</small></a>
+  <nav class="navlinks">
+    <a href="index.html">首頁</a>
+    <a class="on" href="ch1.html">1 基礎</a><a href="ch2.html">2 點運算</a><a href="ch3.html">3 直方圖</a>
+    <a href="ch4.html">4 濾波</a><a href="ch5.html">5 邊緣</a><a href="ch6.html">6 形態學</a>
+    <a href="cheatsheet.html">速記</a><a href="quiz.html">測驗</a>
+  </nav>
+</div></div>
+
+<div class="wrap">
+
+<h1>第 1 章 · 數位影像基礎</h1>
+<p class="sub">影像在電腦裡到底長什麼樣子</p>
+
+<div class="box">
+  <span class="t">📌 一句話說完</span>
+  <strong>一張數位影像就是一個裝滿數字的表格</strong>，每個數字代表那一點有多亮。
+</div>
+
+<div class="toc"><strong>本章內容</strong>
+<ol>
+  <li><a href="#a">影像 = 數字矩陣</a></li>
+  <li><a href="#b">取樣與量化（必考）</a></li>
+  <li><a href="#c">容量計算（必考）</a></li>
+  <li><a href="#d">人眼的特性</a></li>
+  <li><a href="#e">考點整理</a></li>
+</ol></div>
+
+<h2 id="a">1. 影像 = 數字矩陣</h2>
+
+<p>先丟掉「照片」這個印象。對電腦來說，一張灰階照片就是一個表格，每格放一個數字：</p>
+
+<div class="matrow">
+  <div><div class="cap">影像的一小塊</div>
+  <div class="mat" style="grid-template-columns:repeat(4,1fr)">
+    <span>12</span><span>15</span><span>90</span><span>200</span>
+    <span>14</span><span>18</span><span>95</span><span>210</span>
+    <span>16</span><span>20</span><span>99</span><span>215</span>
+    <span>18</span><span>22</span><span>101</span><span>220</span>
+  </div></div>
+</div>
+
+<ul>
+  <li>每一格叫做一個 <strong>像素（pixel）</strong>，是 picture element 的縮寫。</li>
+  <li>數字叫做<strong>強度（intensity）</strong>或灰階值。<strong>0 = 全黑，255 = 全白</strong>，中間是灰色。</li>
+  <li>寫成數學就是一個函數 <code>f(x, y)</code>：給我座標，我告訴你那點多亮。</li>
+</ul>
+
+<div class="box ok">
+  <span class="t">✅ 灰階圖 vs 彩色圖</span>
+  <strong>灰階圖</strong>的形狀是 <code>(高, 寬)</code>，例如 (355, 355)。<br>
+  <strong>彩色圖</strong>的形狀是 <code>(高, 寬, 3)</code>，多出來的 3 是 <strong>R、G、B</strong> 三個顏色通道，等於三張灰階圖疊在一起。<br>
+  所以彩色圖的數字量是灰階圖的 <strong>3 倍</strong>。
+</div>
+
+<p>這就是為什麼作業裡 <code>img.shape</code> 印出 <code>(355, 355, 3)</code>，而 <code>img.size</code>（總共幾個數字）是 355 × 355 × 3 = 378,075。</p>
+
+<h2 id="b">2. 取樣與量化</h2>
+
+<p>真實世界的光是<strong>連續</strong>的，電腦只能存<strong>離散</strong>的數字。要把連續變離散，需要兩個動作，<strong>這兩個最愛考，一定要分清楚</strong>：</p>
+
+<svg viewBox="0 0 700 220" role="img" aria-label="取樣與量化示意圖">
+  <text x="10" y="20" font-size="15" font-weight="bold" fill="currentColor">取樣 Sampling：切成幾格（管「位置」）</text>
+  <rect x="10" y="30" width="200" height="80" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  <line x1="60" y1="30" x2="60" y2="110" stroke="currentColor" stroke-width=".5"/>
+  <line x1="110" y1="30" x2="110" y2="110" stroke="currentColor" stroke-width=".5"/>
+  <line x1="160" y1="30" x2="160" y2="110" stroke="currentColor" stroke-width=".5"/>
+  <line x1="10" y1="70" x2="210" y2="70" stroke="currentColor" stroke-width=".5"/>
+  <text x="10" y="128" font-size="13" fill="currentColor">格子多 → 解析度高 → 清楚</text>
+  <text x="250" y="20" font-size="15" font-weight="bold" fill="currentColor">量化 Quantization：分幾級亮度（管「數值」）</text>
+  <rect x="250" y="30" width="40" height="80" fill="currentColor" opacity="1"/>
+  <rect x="295" y="30" width="40" height="80" fill="currentColor" opacity=".7"/>
+  <rect x="340" y="30" width="40" height="80" fill="currentColor" opacity=".45"/>
+  <rect x="385" y="30" width="40" height="80" fill="currentColor" opacity=".25"/>
+  <rect x="430" y="30" width="40" height="80" fill="currentColor" opacity=".1"/>
+  <text x="250" y="128" font-size="13" fill="currentColor">級數多 → 明暗過渡平滑</text>
+  <text x="10" y="165" font-size="14" fill="currentColor">取樣不足 → 畫面變成一格一格的「馬賽克」</text>
+  <text x="10" y="190" font-size="14" fill="currentColor">量化不足 → 本來平滑的漸層出現一圈圈分界：偽輪廓（false contour）</text>
+</svg>
+
+<div class="tw"><table>
+<tr><th></th><th>取樣 Sampling</th><th>量化 Quantization</th></tr>
+<tr><td>在切什麼</td><td>切<strong>空間</strong>（切成幾個像素）</td><td>切<strong>亮度</strong>（分成幾級）</td></tr>
+<tr><td>決定了</td><td>空間解析度（幾乘幾）</td><td>灰階級數（幾 bit）</td></tr>
+<tr><td>不夠會怎樣</td><td>馬賽克、鋸齒、細節消失</td><td>偽輪廓：漸層變成一塊一塊</td></tr>
+</table></div>
+
+<div class="box warn">
+  <span class="t">⚠️ 超高頻考點</span>
+  考試很愛給你兩張壞掉的圖，問你是<strong>取樣不足</strong>還是<strong>量化不足</strong>。<br>
+  口訣：<strong>格子變大 = 取樣問題；顏色變階梯 = 量化問題。</strong>
+</div>
+
+<h2 id="c">3. 容量計算</h2>
+
+<p>這是最好拿分的計算題，公式只有兩條。</p>
+
+<div class="f">
+  L = 2<sup>b</sup>
+  <span class="why">b = 幾個 bit，L = 總共有幾級灰階</span>
+</div>
+
+<p>8-bit 影像：L = 2<sup>8</sup> = <strong>256</strong> 級，也就是 <strong>0 到 255</strong>（注意是 0 到 255，不是 1 到 256）。</p>
+
+<div class="f">
+  總 bit 數 = 高 × 寬 × b × 通道數
+  <span class="why">除以 8 就是 byte，再除以 1024 是 KB</span>
+</div>
+
+<details>
+  <summary>例題 1：一張 512×512 的 8-bit 灰階圖要多少 KB？</summary>
+  <p>bit 數 = 512 × 512 × 8 = 2,097,152 bit<br>
+  byte 數 = 2,097,152 ÷ 8 = 262,144 byte<br>
+  KB = 262,144 ÷ 1024 = <strong>256 KB</strong></p>
+  <p style="color:var(--muted);font-size:14px">小技巧：8-bit 時「幾個像素就是幾個 byte」，512×512 = 262,144 byte，直接除 1024 就好。</p>
+</details>
+
+<details>
+  <summary>例題 2：同樣 512×512，但換成 RGB 彩色，又是多少？</summary>
+  <p>彩色有 3 個通道，所以 × 3：<br>
+  262,144 × 3 = 786,432 byte = <strong>768 KB</strong>（剛好是灰階的 3 倍）</p>
+</details>
+
+<details>
+  <summary>例題 3：如果要 1024 級灰階，每個像素要幾 bit？</summary>
+  <p>要解 2<sup>b</sup> = 1024。因為 2<sup>10</sup> = 1024，所以 <strong>b = 10 bit</strong>。</p>
+  <p style="color:var(--muted);font-size:14px">背熟：2<sup>1</sup>=2、2<sup>2</sup>=4、2<sup>3</sup>=8、2<sup>4</sup>=16、2<sup>5</sup>=32、2<sup>6</sup>=64、2<sup>7</sup>=128、2<sup>8</sup>=256、2<sup>10</sup>=1024</p>
+</details>
+
+<h2 id="d">4. 人眼的特性</h2>
+
+<p>這部分是概念題，不會算，但會考名詞。</p>
+
+<div class="tw"><table>
+<tr><th>名詞</th><th>白話意思</th></tr>
+<tr><td><strong>Brightness adaptation</strong><br>亮度適應</td>
+    <td>人眼不是同時能看所有亮度，而是會「調整基準」。從戲院走到大太陽下會暫時看不見，就是在重新適應。</td></tr>
+<tr><td><strong>Weber's law</strong><br>韋伯定律</td>
+    <td>我們察覺亮度變化的能力，取決於<strong>比例</strong>而不是絕對差。<br>在很暗的地方加 10 格亮度很明顯；在很亮的地方加 10 格幾乎看不出來。</td></tr>
+<tr><td><strong>Mach band effect</strong><br>馬赫帶效應</td>
+    <td>兩塊不同灰色相接時，交界處看起來會比實際更亮／更暗。<strong>這是錯覺，數值上根本沒有這條邊。</strong>說明人眼會自己強化邊緣。</td></tr>
+<tr><td><strong>Simultaneous contrast</strong><br>同時對比</td>
+    <td>同樣一塊灰，放在黑背景上看起來比較亮，放在白背景上看起來比較暗。</td></tr>
+</table></div>
+
+<div class="box">
+  <span class="t">💡 為什麼要學這個</span>
+  因為 Weber's law 解釋了<strong>為什麼要用 Gamma 校正</strong>（第 2 章），
+  也解釋了<strong>為什麼 8-bit（256 級）就夠用</strong>——再細人眼也看不出來。
+</div>
+
+<h2 id="e">5. 考點整理</h2>
+
+<div class="box ok">
+  <span class="t">✅ 本章一定要會</span>
+  <ol style="margin-bottom:0">
+    <li>影像 = 矩陣；灰階 (H,W)、彩色 (H,W,3)；0=黑、255=白</li>
+    <li><strong>取樣</strong>管空間、<strong>量化</strong>管亮度 — 以及各自不足的畫面症狀</li>
+    <li>L = 2<sup>b</sup>；容量 = H×W×b×通道 ÷ 8 byte</li>
+    <li>Mach band＝人眼錯覺會強化邊緣；Weber＝看比例不看絕對差</li>
+  </ol>
+</div>
+
+<h3>小測驗</h3>
+<div class="q" data-ans="1">
+  <div class="qt">Q1. 一張圖放大後看到一格一格的方塊，這是什麼不足？</div>
+  <div class="opt">量化不足</div>
+  <div class="opt">取樣不足</div>
+  <div class="opt">bit 數不足</div>
+  <div class="opt">對比不足</div>
+  <div class="exp">方塊 = 像素太少 = <strong>取樣（sampling）不足</strong>，也就是空間解析度不夠。量化不足的症狀是漸層出現一圈圈的偽輪廓。</div>
+</div>
+
+<div class="q" data-ans="2">
+  <div class="qt">Q2. 一張 256×256 的 8-bit 灰階影像，未壓縮要多少 byte？</div>
+  <div class="opt">8,192</div>
+  <div class="opt">32,768</div>
+  <div class="opt">65,536</div>
+  <div class="opt">196,608</div>
+  <div class="exp">8-bit = 1 byte/像素，所以 256 × 256 × 1 = <strong>65,536 byte</strong>（64 KB）。
+  196,608 是彩色（×3）的答案。</div>
+</div>
+
+<div class="q" data-ans="0">
+  <div class="qt">Q3. 關於 Mach band effect，下列何者正確？</div>
+  <div class="opt">是人眼的錯覺，實際像素值沒有那條亮／暗帶</div>
+  <div class="opt">是感光元件的雜訊造成的</div>
+  <div class="opt">是因為量化級數不足造成的</div>
+  <div class="opt">只會出現在彩色影像</div>
+  <div class="exp">Mach band 是<strong>視覺系統</strong>在邊界自行強化對比的結果，量測像素值會發現那條帶根本不存在。</div>
+</div>
+<div class="score" id="score"></div>
+
+<div class="pager">
+  <a href="index.html">← 回首頁</a>
+  <a href="ch2.html">第 2 章：點運算 →</a>
+</div>
+
+<p class="foot">CISC3011 期中溫習站 · Ch1</p>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

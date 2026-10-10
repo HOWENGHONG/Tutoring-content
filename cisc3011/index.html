@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CISC3011 數位影像處理 — 期中溫習站</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="topbar"><div class="topbar-in">
+  <a class="brand" href="index.html">CISC3011 溫習站<small>數位影像處理 · 期中考 Ch1–6</small></a>
+  <nav class="navlinks">
+    <a class="on" href="index.html">首頁</a>
+    <a href="ch1.html">1 基礎</a><a href="ch2.html">2 點運算</a><a href="ch3.html">3 直方圖</a>
+    <a href="ch4.html">4 濾波</a><a href="ch5.html">5 邊緣</a><a href="ch6.html">6 形態學</a>
+    <a href="cheatsheet.html">速記</a><a href="quiz.html">測驗</a>
+  </nav>
+</div></div>
+
+<div class="wrap">
+
+<h1>數位影像處理 · 期中考溫習站</h1>
+<p class="sub">CISC3011 · 範圍：Lecture 1–6 · 寫給「完全零基礎」的你</p>
+
+<div class="box warn">
+  <span class="t">⏰ 考試資訊</span>
+  <strong>2026 年 10 月 13 日（星期二）· 90 分鐘 · 100 分 · 閉卷</strong>，範圍是<strong>前 6 講</strong>。
+  <span id="cd"></span><br>
+  期中＋期末共佔 28%（各 14%），作業佔 72%。
+</div>
+
+<div class="box bad">
+  <span class="t">📋 考卷格式（看懂這段再開始讀）</span>
+  <div class="tw"><table style="margin:6px 0">
+  <tr><th>部分</th><th>題型</th><th>配分</th><th>計分規則</th></tr>
+  <tr><td><strong>Part A</strong></td><td>多選題（A-1 ~ A-10）</td><td>每題 5 分</td>
+      <td><strong>可能不只一個答案，必須全部選對才給分，沒有部分分</strong></td></tr>
+  <tr><td><strong>Part B</strong></td><td>計算／論述（B-1 ~ B-4）</td><td>每題 10 分</td>
+      <td><strong>必須寫出推導與過程</strong>，寫得清楚才有部分分</td></tr>
+  </table></div>
+  這兩條規則直接決定你該怎麼準備：
+  <ul style="margin-bottom:0">
+    <li>Part A 不能靠「猜最像的那個」 → 每個觀念都要<strong>精確</strong>，知道為什麼對也要知道為什麼錯。</li>
+    <li>Part B 有部分分 → <strong>算不出來也要把公式和步驟寫上去</strong>，絕對不要空白。</li>
+    <li>會發 A4 草稿紙給你演算，<strong>草稿紙要和考卷一起釘上交</strong>。</li>
+    <li>⚠️ 考卷上的 <strong>Pledge（誠信聲明）沒簽名 = 0 分</strong>，進場第一件事就是簽名。</li>
+  </ul>
+</div>
+
+<h2>這個網站怎麼用</h2>
+<p>我假設你<strong>什麼都還不懂</strong>。每一章都是這樣排的：</p>
+<ol>
+  <li><strong>一句話說完</strong> — 先知道這章在幹嘛</li>
+  <li><strong>白話解釋</strong> — 用生活例子，不用數學嚇你</li>
+  <li><strong>公式卡</strong> — 要背的就這幾條，我會說每個符號是什麼</li>
+  <li><strong>手算例題</strong> — <span class="tag hot">考試最愛考</span>一步一步算給你看</li>
+  <li><strong>陷阱與考點</strong> — 最多人錯的地方</li>
+</ol>
+
+<div class="box">
+  <span class="t">💡 只剩幾天的話，這樣讀</span>
+  先看<a href="cheatsheet.html">考前速記</a>掌握全貌 → 再把 <strong>Ch3、Ch4、Ch6</strong> 的手算例題做熟（最可能出計算題）
+  → 最後做<a href="quiz.html">自我測驗</a>找出漏洞。
+</div>
+
+<h2>六章地圖</h2>
+<p>這六章其實是一條線：<strong>影像是什麼 → 一個像素一個像素改 → 看統計圖來改 → 看鄰居一起改 → 找邊緣 → 改形狀</strong>。</p>
+
+<div class="grid">
+  <a class="chcard" href="ch1.html"><div class="n">CHAPTER 1</div><div class="ti">數位影像基礎</div>
+    <div class="d">影像在電腦裡就是一堆數字。取樣、量化、解析度、8-bit 是什麼意思。</div></a>
+  <a class="chcard" href="ch2.html"><div class="n">CHAPTER 2</div><div class="ti">點運算與影像合成</div>
+    <div class="d">一次只看一個像素：變亮、反相、二值化、Gamma、以及 Alpha 混合。</div></a>
+  <a class="chcard" href="ch3.html"><div class="n">CHAPTER 3</div><div class="ti">直方圖</div>
+    <div class="d">統計每個亮度有幾個像素，然後用它自動增強對比：直方圖均衡化。</div></a>
+  <a class="chcard" href="ch4.html"><div class="n">CHAPTER 4</div><div class="ti">濾波器</div>
+    <div class="d">開始看「鄰居」：相關 vs 卷積、模糊、去雜訊、銳化。本科最核心。</div></a>
+  <a class="chcard" href="ch5.html"><div class="n">CHAPTER 5</div><div class="ti">邊緣偵測</div>
+    <div class="d">用微分找出輪廓：Sobel、Laplacian、Canny 四步驟。</div></a>
+  <a class="chcard" href="ch6.html"><div class="n">CHAPTER 6</div><div class="ti">形態學處理</div>
+    <div class="d">針對黑白圖改形狀：膨脹、侵蝕、Opening、Closing、邊界抽取。</div></a>
+</div>
+
+<h2>考前最後檢查清單</h2>
+<p>每一項你都能「不看筆記講出來」才算過關。點一下可以打勾（會記在這台裝置上）。</p>
+
+<div class="card">
+  <label class="chk"><input type="checkbox" data-k="c1"><span>我能說出<strong>取樣</strong>和<strong>量化</strong>的差別，以及各自不足會造成什麼畫面問題</span></label>
+  <label class="chk"><input type="checkbox" data-k="c2"><span>我會算一張 <code>H×W</code>、<code>b</code> bit 影像佔多少空間，以及有幾級灰階</span></label>
+  <label class="chk"><input type="checkbox" data-k="c3"><span>我知道 <strong>γ&lt;1 變亮、γ&gt;1 變暗</strong>，而且知道為什麼</span></label>
+  <label class="chk"><input type="checkbox" data-k="c4"><span>我能默寫 <strong>Alpha 混合</strong>公式並解釋 α=0 和 α=1 分別是什麼</span></label>
+  <label class="chk"><input type="checkbox" data-k="c5"><span>我能<strong>手算直方圖均衡化</strong>（直方圖 → 累積 → 對應表 → 新圖）</span></label>
+  <label class="chk"><input type="checkbox" data-k="c6"><span>我知道<strong>相關和卷積差在哪</strong>（核要不要翻轉），並能手算 1D 例子</span></label>
+  <label class="chk"><input type="checkbox" data-k="c7"><span>我知道濾波器<strong>為什麼要正規化</strong>（係數和＝1）</span></label>
+  <label class="chk"><input type="checkbox" data-k="c8"><span>我知道<strong>中位數濾波</strong>為何最適合去椒鹽雜訊，而平均濾波不行</span></label>
+  <label class="chk"><input type="checkbox" data-k="c9"><span>我能默寫 <strong>Sobel</strong> 的兩個核，並算出梯度大小與方向</span></label>
+  <label class="chk"><input type="checkbox" data-k="c10"><span>我能按順序說出 <strong>Canny 四步驟</strong>，並解釋雙閾值在幹嘛</span></label>
+  <label class="chk"><input type="checkbox" data-k="c11"><span>我能手算<strong>侵蝕與膨脹</strong>，並說出 Opening / Closing 各自的用途</span></label>
+  <label class="chk"><input type="checkbox" data-k="c12"><span>我能寫出<strong>形態學梯度</strong>＝膨脹 − 侵蝕，以及內／外邊界的公式</span></label>
+</div>
+
+<h2>最常被扣分的五個地方</h2>
+<div class="box bad">
+  <span class="t">⚠️ 這五個每年都有人錯</span>
+  <ol style="margin-bottom:0">
+    <li><strong>卷積忘記翻轉核</strong> — 那是相關，不是卷積。</li>
+    <li><strong>濾波器忘了除以總和</strong> — 整張圖會爆亮或變暗。</li>
+    <li><strong>Gamma 記反</strong> — 記住：γ&lt;1 → 變<strong>亮</strong>。</li>
+    <li><strong>均衡化忘了乘 (L−1)</strong> — 只除以 N 的話值永遠落在 0~1。</li>
+    <li><strong>Opening / Closing 順序搞反</strong> — Open＝先<strong>侵蝕</strong>；Close＝先<strong>膨脹</strong>。</li>
+  </ol>
+</div>
+
+<div class="pager">
+  <span></span>
+  <a href="ch1.html">第 1 章：數位影像基礎 →</a>
+</div>
+
+<p class="foot">依據 CISC3011（2026-1）Lecture 1–6 講義整理 · 僅供個人溫習參考<br>
+如與老師上課內容有出入，以老師的講義為準。</p>
+</div>
+
+<script>
+(function(){
+  var exam = new Date(2026,9,13,9,0,0); // 2026-10-13
+  var now = new Date();
+  var d = Math.ceil((exam - now)/86400000);
+  var el = document.getElementById('cd');
+  if(!el) return;
+  if(d > 1) el.innerHTML = ' 距離考試還有 <strong>' + d + ' 天</strong>。';
+  else if(d === 1) el.innerHTML = ' <strong>就是明天了</strong>，今天看速記頁就好。';
+  else if(d === 0) el.innerHTML = ' <strong>就是今天，加油！</strong>';
+})();
+</script>
+<script src="app.js"></script>
+</body>
+</html>

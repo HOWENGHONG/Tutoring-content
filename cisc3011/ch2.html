@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ch2 點運算與影像合成 — CISC3011 溫習站</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="topbar"><div class="topbar-in">
+  <a class="brand" href="index.html">CISC3011 溫習站<small>數位影像處理 · 期中考 Ch1–6</small></a>
+  <nav class="navlinks">
+    <a href="index.html">首頁</a>
+    <a href="ch1.html">1 基礎</a><a class="on" href="ch2.html">2 點運算</a><a href="ch3.html">3 直方圖</a>
+    <a href="ch4.html">4 濾波</a><a href="ch5.html">5 邊緣</a><a href="ch6.html">6 形態學</a>
+    <a href="cheatsheet.html">速記</a><a href="quiz.html">測驗</a>
+  </nav>
+</div></div>
+
+<div class="wrap">
+
+<h1>第 2 章 · 點運算與影像合成</h1>
+<p class="sub">一次只處理一個像素</p>
+
+<div class="box">
+  <span class="t">📌 一句話說完</span>
+  <strong>點運算 = 新的像素值只跟「同一個位置」的舊像素值有關，完全不看旁邊的鄰居。</strong>
+</div>
+
+<div class="toc"><strong>本章內容</strong>
+<ol>
+  <li><a href="#a">什麼是點運算</a></li>
+  <li><a href="#b">五種基本點運算</a></li>
+  <li><a href="#c">Gamma 冪次轉換（必考）</a></li>
+  <li><a href="#d">影像相加相減</a></li>
+  <li><a href="#e">Alpha 混合（必考）</a></li>
+  <li><a href="#f">考點整理</a></li>
+</ol></div>
+
+<h2 id="a">1. 什麼是點運算</h2>
+
+<div class="f">
+  s = T(r)
+  <span class="why">r = 原本的像素值，s = 新的像素值，T = 轉換函數</span>
+</div>
+
+<p>關鍵在於：算 <code>s</code> 的時候<strong>只用到同一位置的 r</strong>。所以你可以寫成一個簡單的雙重迴圈：</p>
+
+<pre><code>for i in range(H):
+    for j in range(W):
+        out[i][j] = T(img[i][j])   # 只看 img[i][j]，不看鄰居</code></pre>
+
+<div class="box ok">
+  <span class="t">✅ 怎麼分辨是不是點運算</span>
+  問自己一句：<strong>「算這一格的新值，需要偷看旁邊的格子嗎？」</strong><br>
+  不用 → 點運算（第 2、3 章）。需要 → 鄰域運算／濾波（第 4、5、6 章）。<br>
+  <span style="font-size:14px;color:var(--muted)">所以模糊、銳化、邊緣偵測<strong>都不是</strong>點運算，因為要看鄰居。</span>
+</div>
+
+<p>另外還分兩種：</p>
+<ul>
+  <li><strong>Homogeneous（齊次）</strong>：所有像素用同一條規則。例如整張圖都 +50。</li>
+  <li><strong>Non-homogeneous（非齊次）</strong>：規則跟位置有關。例如照片四角壓暗（vignette）。</li>
+</ul>
+
+<h2 id="b">2. 五種基本點運算</h2>
+
+<h3>① 加亮 / 對比（線性）</h3>
+<div class="f">
+  s = a · r + b
+  <span class="why">b 管亮度（整體平移）、a 管對比（拉開或壓縮）</span>
+</div>
+<p>a &gt; 1 對比變強，a &lt; 1 對比變弱；b &gt; 0 變亮，b &lt; 0 變暗。</p>
+
+<h3>② 箝位 Clamping</h3>
+<p>算完可能跑出 0~255 之外，必須夾回來，否則會<strong>溢位</strong>變成亂碼。</p>
+<div class="f">
+  s = min(255, max(0, s))
+</div>
+<div class="box bad">
+  <span class="t">⚠️ 程式陷阱（作業也考過）</span>
+  <code>uint8</code> 型別最大只到 255。如果 <code>200 + 100</code> 不先轉成浮點數，結果不是 300 也不是 255，
+  而是會「繞回去」變成 <strong>44</strong>（300 − 256）。所以運算前要先轉 float，最後再 clip 回 0~255。
+</div>
+
+<h3>③ 反相 Negative</h3>
+<div class="f">
+  s = (L − 1) − r ＝ 255 − r
+  <span class="why">L = 灰階級數，8-bit 時 L−1 = 255</span>
+</div>
+<p>最亮變最暗、最暗變最亮，就像底片。醫學影像（X 光）常用，因為人眼對暗背景上的亮細節比較敏感。</p>
+
+<h3>④ 二值化 Thresholding</h3>
+<div class="f">
+  s = 1（若 r &gt; T）；s = 0（若 r ≤ T）
+</div>
+<p>把灰階圖變成只有黑白兩色。<strong>這是第 6 章形態學的前置步驟</strong>——形態學只處理二值圖。</p>
+
+<h3>⑤ 對數轉換 Log</h3>
+<div class="f">
+  s = c · log(1 + r)
+  <span class="why">壓縮動態範圍：暗部被拉開、亮部被壓扁</span>
+</div>
+
+<h2 id="c">3. Gamma 冪次轉換</h2>
+
+<div class="f">
+  s = c · r<sup>γ</sup>
+  <span class="why">γ（gamma）決定變亮還是變暗</span>
+</div>
+
+<div class="box warn">
+  <span class="t">⚠️ 最容易記反的地方，務必弄懂</span>
+  <strong>γ &lt; 1 → 變亮</strong>　　<strong>γ &gt; 1 → 變暗</strong>　　γ = 1 → 不變
+</div>
+
+<p><strong>為什麼？</strong>先把像素正規化到 0~1 之間（除以 255），然後想一個具體數字，例如 r = 0.25：</p>
+
+<div class="tw"><table>
+<tr><th>γ</th><th>算式</th><th>結果</th><th>比原本 0.25…</th></tr>
+<tr><td>0.5</td><td>0.25<sup>0.5</sup> = √0.25</td><td><strong>0.50</strong></td><td>變大 → <strong>變亮</strong> ☀️</td></tr>
+<tr><td>1.0</td><td>0.25<sup>1</sup></td><td>0.25</td><td>不變</td></tr>
+<tr><td>2.0</td><td>0.25<sup>2</sup></td><td><strong>0.0625</strong></td><td>變小 → <strong>變暗</strong> 🌙</td></tr>
+</table></div>
+
+<p><strong>記憶法</strong>：0 到 1 之間的小數，<strong>次方越大結果越小</strong>（0.5 的平方是 0.25，變小了）。所以 γ 大 = 變暗。</p>
+
+<svg viewBox="0 0 320 250" role="img" aria-label="Gamma 曲線">
+  <line x1="40" y1="210" x2="290" y2="210" stroke="currentColor" stroke-width="1.5"/>
+  <line x1="40" y1="210" x2="40" y2="20" stroke="currentColor" stroke-width="1.5"/>
+  <text x="150" y="235" font-size="13" fill="currentColor">輸入 r</text>
+  <text x="2" y="115" font-size="13" fill="currentColor">輸出 s</text>
+  <text x="33" y="225" font-size="11" fill="currentColor">0</text>
+  <text x="283" y="225" font-size="11" fill="currentColor">1</text>
+  <text x="28" y="25" font-size="11" fill="currentColor">1</text>
+  <path d="M40,210 L290,20" stroke="currentColor" stroke-width="1" stroke-dasharray="4 3" opacity=".5"/>
+  <path d="M40,210 Q90,70 290,20" stroke="#b4530a" stroke-width="2.5" fill="none"/>
+  <path d="M40,210 Q240,195 290,20" stroke="#2f6f4e" stroke-width="2.5" fill="none"/>
+  <text x="95" y="70" font-size="12" fill="#b4530a" font-weight="bold">γ&lt;1 變亮</text>
+  <text x="150" y="195" font-size="12" fill="#2f6f4e" font-weight="bold">γ&gt;1 變暗</text>
+  <text x="215" y="95" font-size="11" fill="currentColor" opacity=".6">γ=1</text>
+</svg>
+
+<div class="box">
+  <span class="t">💡 為什麼現實中需要 Gamma 校正</span>
+  螢幕的輸出亮度和輸入電壓不是線性關係（大約是 2.2 次方），而且人眼對暗部變化比較敏感（Weber's law）。
+  所以拍攝時先做 γ ≈ 1/2.2 的預校正，顯示時螢幕再做 γ ≈ 2.2，兩者抵銷後看起來才正常。
+</div>
+
+<details>
+  <summary>例題：r = 100（8-bit），c = 1，γ = 2，求 s</summary>
+  <p><strong>正確做法（先正規化）：</strong><br>
+  r' = 100 / 255 = 0.392<br>
+  s' = 0.392<sup>2</sup> = 0.1537<br>
+  s = 0.1537 × 255 ≈ <strong>39</strong></p>
+  <div class="box bad" style="margin:10px 0 0">
+    <strong>錯誤做法</strong>：直接算 100² = 10000 → 遠遠超過 255，整張圖會爆掉。<br>
+    <strong>所以冪次轉換一定要先把值縮到 0~1 再做次方，最後再乘回 255。</strong>（作業 hw2 考過這個坑）
+  </div>
+</details>
+
+<h2 id="d">4. 影像相加相減</h2>
+
+<div class="tw"><table>
+<tr><th>運算</th><th>公式</th><th>用途</th></tr>
+<tr><td><strong>平均多張</strong></td><td>s = (I₁+I₂+…+I<sub>N</sub>) / N</td>
+    <td><strong>降雜訊</strong>。雜訊是隨機的會互相抵銷，訊號固定會留下。<br>
+    平均 N 張後，雜訊標準差變成原本的 <strong>1/√N</strong>。（平均 4 張 → 雜訊減半）</td></tr>
+<tr><td><strong>相減</strong></td><td>s = I₁ − I₂</td>
+    <td><strong>找差異</strong>：監視器背景相減抓移動物體、工業檢測找瑕疵、醫學血管攝影。</td></tr>
+<tr><td><strong>絕對差</strong></td><td>s = |I₁ − I₂|</td>
+    <td>同上，但不管誰大誰小都看得到差異（負數不會被截掉）。</td></tr>
+</table></div>
+
+<h2 id="e">5. Alpha 混合（影像合成）</h2>
+
+<p>要把兩張圖疊在一起，直接貼上去（copy-paste）會留下一條很硬的長方形接縫。解法是加一個<strong>透明度通道 α</strong>。</p>
+
+<div class="f">
+  I = α · F + (1 − α) · B
+  <span class="why">F = 前景(foreground)、B = 背景(background)、α ∈ [0, 1]</span>
+</div>
+
+<div class="tw"><table>
+<tr><th>α 的值</th><th>看到什麼</th></tr>
+<tr><td>α = 1</td><td>100% 前景（完全不透明）</td></tr>
+<tr><td>α = 0</td><td>100% 背景（前景完全透明）</td></tr>
+<tr><td>0 &lt; α &lt; 1</td><td>按比例混合（半透明）← <strong>柔和過渡就是靠這個</strong></td></tr>
+</table></div>
+
+<div class="box ok">
+  <span class="t">✅ 為什麼公式要用 (1 − α)</span>
+  因為兩個權重加起來必須 <strong>= 1</strong>，這樣亮度才不會變。
+  如果寫成 α·F + α·B，當 α=1 時結果會是兩張圖相加，亮度爆掉。
+</div>
+
+<h3>Feathering（羽化）</h3>
+<p>關鍵不是 α 的值，而是<strong>讓 α 從 1 平滑地降到 0</strong>（通常把二值遮罩用高斯模糊一下）。
+過渡帶的寬度叫 <strong>window size</strong>：</p>
+<ul>
+  <li><strong>太窄</strong> → 還是看得到接縫（seam）</li>
+  <li><strong>太寬</strong> → 兩張圖重疊處出現「鬼影」（ghosting），人物會半透明</li>
+  <li><strong>最佳</strong> ≈ 最大明顯特徵的尺寸</li>
+</ul>
+
+<div class="box">
+  <span class="t">💡 進階：Pyramid Blending</span>
+  更好的做法是把影像拆成不同頻率層（Laplacian pyramid），<strong>每一層用不同寬度的過渡帶</strong>：
+  粗糙的低頻用寬過渡、細節的高頻用窄過渡，就能同時避免接縫和鬼影。
+  <span style="font-size:14px;color:var(--muted)">（概念題，知道「不同頻率用不同過渡寬度」就夠。）</span>
+</div>
+
+<details>
+  <summary>例題：F = 200、B = 80、α = 0.25，求混合結果</summary>
+  <p>I = 0.25 × 200 + (1 − 0.25) × 80<br>
+     = 50 + 0.75 × 80<br>
+     = 50 + 60 = <strong>110</strong></p>
+  <p style="font-size:14px;color:var(--muted)">檢查合理性：α 只有 0.25，所以結果應該比較靠近背景 80，而 110 確實比較靠近 80（而不是 200）。✓</p>
+</details>
+
+<div class="box warn">
+  <span class="t">⚠️ 程式陷阱（hw2 考過）</span>
+  彩色圖是 <code>(H, W, 3)</code>，但遮罩 α 只有 <code>(H, W)</code>，形狀對不上不能直接相乘。
+  要用 <code>alpha[:, :, np.newaxis]</code> 補一個維度變成 <code>(H, W, 1)</code>，
+  numpy 的 broadcasting 才會自動套用到 R、G、B 三個通道。
+</div>
+
+<h2 id="f">6. 考點整理</h2>
+
+<div class="box ok">
+  <span class="t">✅ 本章一定要會</span>
+  <ol style="margin-bottom:0">
+    <li>點運算定義：<strong>只看同位置像素</strong>（會拿來跟濾波對比考）</li>
+    <li>反相 s = 255 − r；二值化；線性 s = ar + b</li>
+    <li><strong>γ &lt; 1 變亮、γ &gt; 1 變暗</strong>，且計算前要先正規化到 0~1</li>
+    <li>平均 N 張 → 雜訊降為 <strong>1/√N</strong></li>
+    <li><strong>I = αF + (1−α)B</strong>，兩權重和必為 1</li>
+    <li>過渡太窄→接縫；太寬→鬼影</li>
+  </ol>
+</div>
+
+<h3>小測驗</h3>
+<div class="q" data-ans="2">
+  <div class="qt">Q1. 下列哪一個<strong>不是</strong>點運算？</div>
+  <div class="opt">影像反相 s = 255 − r</div>
+  <div class="opt">Gamma 轉換 s = c·r^γ</div>
+  <div class="opt">3×3 平均模糊</div>
+  <div class="opt">二值化</div>
+  <div class="exp">3×3 平均模糊需要看<strong>周圍 8 個鄰居</strong>才能算出中心的新值，屬於鄰域運算（濾波），不是點運算。其他三個都只用到同一位置的像素值。</div>
+</div>
+
+<div class="q" data-ans="0">
+  <div class="qt">Q2. 一張照片太暗，要用冪次轉換把它變亮，γ 應該選？</div>
+  <div class="opt">γ = 0.4</div>
+  <div class="opt">γ = 1.0</div>
+  <div class="opt">γ = 1.8</div>
+  <div class="opt">γ = 2.5</div>
+  <div class="exp"><strong>γ &lt; 1 會變亮</strong>，所以選 0.4。驗算：0.25<sup>0.4</sup> ≈ 0.57 &gt; 0.25，確實變亮了。</div>
+</div>
+
+<div class="q" data-ans="3">
+  <div class="qt">Q3. 前景 F=150、背景 B=50、α=0.8，混合後的值是？</div>
+  <div class="opt">100</div>
+  <div class="opt">110</div>
+  <div class="opt">120</div>
+  <div class="opt">130</div>
+  <div class="exp">0.8 × 150 + 0.2 × 50 = 120 + 10 = <strong>130</strong>。α 很大（0.8）所以結果靠近前景 150，合理。</div>
+</div>
+
+<div class="q" data-ans="1">
+  <div class="qt">Q4. 平均 9 張含雜訊的照片，雜訊大約降到原本的幾分之一？</div>
+  <div class="opt">1/9</div>
+  <div class="opt">1/3</div>
+  <div class="opt">1/81</div>
+  <div class="opt">不會改變</div>
+  <div class="exp">是 <strong>1/√N</strong> 不是 1/N。√9 = 3，所以降到 <strong>1/3</strong>。</div>
+</div>
+<div class="score" id="score"></div>
+
+<div class="pager">
+  <a href="ch1.html">← 第 1 章</a>
+  <a href="ch3.html">第 3 章：直方圖 →</a>
+</div>
+
+<p class="foot">CISC3011 期中溫習站 · Ch2</p>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

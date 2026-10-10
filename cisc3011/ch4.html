@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ch4 濾波器 — CISC3011 溫習站</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="topbar"><div class="topbar-in">
+  <a class="brand" href="index.html">CISC3011 溫習站<small>數位影像處理 · 期中考 Ch1–6</small></a>
+  <nav class="navlinks">
+    <a href="index.html">首頁</a>
+    <a href="ch1.html">1 基礎</a><a href="ch2.html">2 點運算</a><a href="ch3.html">3 直方圖</a>
+    <a class="on" href="ch4.html">4 濾波</a><a href="ch5.html">5 邊緣</a><a href="ch6.html">6 形態學</a>
+    <a href="cheatsheet.html">速記</a><a href="quiz.html">測驗</a>
+  </nav>
+</div></div>
+
+<div class="wrap">
+
+<h1>第 4 章 · 濾波器</h1>
+<p class="sub">開始看「鄰居」—— 本科最核心的一章</p>
+
+<div class="box">
+  <span class="t">📌 一句話說完</span>
+  <strong>拿一個小方格（核／kernel）在影像上滑動，每個位置做一次加權平均，得到新的一張圖。</strong>
+</div>
+
+<div class="box bad">
+  <span class="t">🔥 這章幾乎一定出計算題</span>
+  手算 1D 卷積、2D 卷積、中位數濾波、輸出尺寸 —— 全都是常見題型。
+</div>
+
+<div class="toc"><strong>本章內容</strong>
+<ol>
+  <li><a href="#a">相關 vs 卷積（必考）</a></li>
+  <li><a href="#b">手算 1D 例題</a></li>
+  <li><a href="#c">常見的核</a></li>
+  <li><a href="#d">邊界處理與輸出尺寸</a></li>
+  <li><a href="#e">可分離性</a></li>
+  <li><a href="#f">非線性濾波：中位數</a></li>
+  <li><a href="#g">銳化：Unsharp Masking</a></li>
+  <li><a href="#h">考點整理</a></li>
+</ol></div>
+
+<h2 id="a">1. 相關 vs 卷積</h2>
+
+<p>兩者的動作幾乎一樣：<strong>把核蓋在影像上 → 對應位置相乘 → 全部加起來 → 寫到中心位置</strong>。
+唯一的差別是：</p>
+
+<div class="box warn">
+  <span class="t">⭐ 唯一差別</span>
+  <strong>相關（Correlation）：核<u>直接用</u></strong><br>
+  <strong>卷積（Convolution）：核要<u>先翻轉 180°</u>再用</strong><br>
+  <span style="font-size:14px">（1D 是左右顛倒；2D 是上下 + 左右都翻，等於旋轉 180 度）</span>
+</div>
+
+<div class="f">
+  相關：g(x) = Σ<sub>s</sub> w(s) · f(x <strong>+</strong> s)<br>
+  卷積：g(x) = Σ<sub>s</sub> w(s) · f(x <strong>−</strong> s)
+  <span class="why">只差一個正負號，而那個負號的效果就是「翻轉」</span>
+</div>
+
+<div class="box ok">
+  <span class="t">✅ 怎麼看出有沒有差</span>
+  如果核<strong>本身就是左右對稱</strong>（例如 box filter 全是 1/9、高斯核），
+  翻轉前後長得一樣 → <strong>相關和卷積結果相同</strong>。<br>
+  只有<strong>不對稱</strong>的核（例如 Sobel、[1,2,3,4,5]）兩者才會不同。
+</div>
+
+<div id="convDemo"></div>
+
+<h3>為什麼要用卷積而不是相關？</h3>
+<p>因為卷積有很好的數學性質（相關沒有）：</p>
+<div class="tw"><table>
+<tr><th>性質</th><th>意思</th></tr>
+<tr><td>交換律 f*g = g*f</td><td>誰當影像誰當核都一樣</td></tr>
+<tr><td>結合律 (f*g)*h = f*(g*h)</td><td><strong>可以先把兩個核合成一個</strong>再做一次，比較快</td></tr>
+<tr><td>分配律 f*(g+h) = f*g + f*h</td><td>可拆開</td></tr>
+<tr><td>平移不變 shift-invariant</td><td>圖平移，結果也跟著平移（不會變形）</td></tr>
+</table></div>
+
+<h2 id="b">2. 手算 1D 例題</h2>
+
+<details open>
+  <summary>例題：f = [0,0,0,1,0,0,0,0]，w = [1,2,3,4,5]，求 full 相關與 full 卷積</summary>
+
+  <p><strong>Step 1：補零（padding）</strong><br>
+  要算 full，兩邊各補 <code>len(w) − 1 = 4</code> 個 0：</p>
+  <p><code>f' = [0,0,0,0, 0,0,0,1,0,0,0,0, 0,0,0,0]</code>（長度 8 + 4 + 4 = 16）</p>
+
+  <p><strong>Step 2：相關（核不翻轉）</strong><br>
+  輸出長度 = 16 − 5 + 1 = 12。因為訊號只有第 7 格（0-based）是 1，其他都 0，
+  所以每個位置的結果就是「核裡對到那個 1 的那一格的值」：</p>
+  <div class="mat" style="grid-template-columns:repeat(12,1fr)">
+    <span>0</span><span>0</span><span>0</span><span class="hl">5</span><span class="hl">4</span><span class="hl">3</span>
+    <span class="hl">2</span><span class="hl">1</span><span>0</span><span>0</span><span>0</span><span>0</span>
+  </div>
+  <p>⚠️ 注意出來的是 <strong>5,4,3,2,1</strong>（<strong>倒過來的</strong>核）。</p>
+
+  <p><strong>Step 3：卷積（核先翻轉成 [5,4,3,2,1]）</strong></p>
+  <div class="mat" style="grid-template-columns:repeat(12,1fr)">
+    <span>0</span><span>0</span><span>0</span><span class="hl">1</span><span class="hl">2</span><span class="hl">3</span>
+    <span class="hl">4</span><span class="hl">5</span><span>0</span><span>0</span><span>0</span><span>0</span>
+  </div>
+  <p>✅ 出來的是 <strong>1,2,3,4,5</strong>（<strong>原樣</strong>的核）。</p>
+
+  <div class="box ok" style="margin-top:14px">
+    <span class="t">✅ 超重要結論（一定會考）</span>
+    <strong>用一個脈衝（只有一個 1 的訊號）去卷積，會原原本本印出那個核。</strong><br>
+    這就是「脈衝響應」的意思 —— 卷積保留原樣，相關會印出鏡像。
+  </div>
+
+  <p><strong>Step 4：裁成 same（和原訊號一樣長）</strong><br>
+  從 full 的兩端各裁掉 <code>a = len(w)//2 = 2</code> 格：</p>
+  <p>相關 same = [0,5,4,3,2,1,0,0]　　卷積 same = [0,1,2,3,4,5,0,0]（長度都是 8 ✓）</p>
+</details>
+
+<h2 id="c">3. 常見的核</h2>
+
+<h3>Box filter（均值濾波）</h3>
+<div class="matrow">
+  <div class="mat" style="grid-template-columns:repeat(3,1fr)">
+    <span>1</span><span>1</span><span>1</span><span>1</span><span>1</span><span>1</span><span>1</span><span>1</span><span>1</span>
+  </div>
+  <div class="op">×</div><div style="font-size:19px">1/9</div>
+</div>
+
+<div class="box bad">
+  <span class="t">⚠️ 為什麼一定要除以 9（正規化）</span>
+  因為係數總和必須 <strong>= 1</strong>，這樣平均之後亮度才不變。<br>
+  如果忘記除，每個像素都會變成周圍 9 格的<strong>總和</strong>，整張圖會亮 9 倍直接爆白。<br>
+  <strong>通則：平滑用的核，係數和必為 1。</strong>
+</div>
+
+<h3>Gaussian（高斯）濾波</h3>
+<div class="matrow">
+  <div class="mat" style="grid-template-columns:repeat(3,1fr)">
+    <span>1</span><span>2</span><span>1</span><span>2</span><span>4</span><span>2</span><span>1</span><span>2</span><span>1</span>
+  </div>
+  <div class="op">×</div><div style="font-size:19px">1/16</div>
+</div>
+<p>中間權重最大、越遠越小。和 box filter 相比：</p>
+<ul>
+  <li>Box：所有鄰居一視同仁 → 模糊得比較「生硬」，會產生方形的痕跡</li>
+  <li>Gaussian：近的鄰居影響大 → 模糊得<strong>比較自然</strong>，是標準做法</li>
+  <li>σ（sigma）越大 → 越模糊（而且核要開得越大才裝得下）</li>
+</ul>
+
+<div class="box">
+  <span class="t">💡 重複做 box filter 會怎樣？</span>
+  <strong>會越來越接近高斯模糊</strong>（中央極限定理）。作業 hw4 要你做 5 次 3×3 box，就是在示範這件事。
+  另外，兩次高斯卷積（σ₁、σ₂）等於做一次 σ = √(σ₁² + σ₂²) 的高斯。
+</div>
+
+<h3>Impulse（脈衝／不變）</h3>
+<div class="matrow">
+  <div class="mat" style="grid-template-columns:repeat(3,1fr)">
+    <span>0</span><span>0</span><span>0</span><span>0</span><span class="hl">1</span><span>0</span><span>0</span><span>0</span><span>0</span>
+  </div>
+  <div style="font-size:15px">→ 影像完全不變</div>
+</div>
+<p>如果那個 1 不在中間，而在別的位置 → <strong>影像會平移</strong>（這就是第 6 章開頭的平移核，hw6 考過）。</p>
+
+<h2 id="d">4. 邊界處理與輸出尺寸</h2>
+
+<p>核滑到邊緣時會有一部分「伸出圖外」，必須決定怎麼辦：</p>
+
+<div class="tw"><table>
+<tr><th>做法</th><th>說明</th></tr>
+<tr><td><strong>Zero padding</strong>（補零）</td><td>外面當作黑色。最簡單，但邊緣會<strong>變暗</strong>。</td></tr>
+<tr><td><strong>Replicate</strong>（複製邊緣）</td><td>把最外圈的值往外延伸。常用、效果自然。</td></tr>
+<tr><td><strong>Reflect</strong>（鏡射）</td><td>像照鏡子一樣翻出去。效果通常最好。</td></tr>
+<tr><td><strong>Wrap</strong>（環繞）</td><td>右邊接左邊（當成週期性）。</td></tr>
+<tr><td><strong>Crop / valid</strong>（不處理）</td><td>邊界直接不算，輸出變小。</td></tr>
+</table></div>
+
+<h3>輸出尺寸（計算題常考）</h3>
+<div class="f">
+  full：N + K − 1　　same：N　　valid：N − K + 1
+  <span class="why">N = 輸入長度，K = 核長度</span>
+</div>
+
+<div class="box ok">
+  <span class="t">✅ 2D 的無效邊界有多寬</span>
+  用 K×K 的核、結果寫在中心時，<strong>上下左右各有 ⌊K/2⌋ 格算不到</strong>。<br>
+  3×3 → 各 1 格；5×5 → 各 2 格；7×7 → 各 3 格。<br>
+  所以 355×355 的圖用 3×3 做 valid，有效區域是 <strong>353×353</strong>。
+</div>
+
+<h2 id="e">5. 可分離性（Separability）</h2>
+
+<p>有些 2D 核可以拆成「一個直的 1D 核」× 「一個橫的 1D 核」，例如高斯和 box：</p>
+
+<div class="f">
+  2D 高斯 = 1D 高斯(橫) ∗ 1D 高斯(直)
+</div>
+
+<p><strong>好處是快很多：</strong></p>
+<div class="tw"><table>
+<tr><th></th><th>直接做 2D</th><th>拆成兩次 1D</th></tr>
+<tr><td>每個像素要乘幾次</td><td>K × K = K²</td><td>K + K = 2K</td></tr>
+<tr><td>K = 11 時</td><td>121 次</td><td><strong>22 次</strong>（快 5.5 倍）</td></tr>
+<tr><td>複雜度</td><td>O(K²)</td><td><strong>O(K)</strong></td></tr>
+</table></div>
+
+<h2 id="f">6. 非線性濾波：中位數</h2>
+
+<p>前面都是<strong>線性</strong>濾波（加權總和）。但有一種雜訊線性濾波處理不好：</p>
+
+<div class="box warn">
+  <span class="t">⭐ 椒鹽雜訊（Salt &amp; Pepper）</span>
+  畫面上隨機出現的<strong>純黑點（0，胡椒）和純白點（255，鹽）</strong>。<br>
+  <strong>平均濾波為什麼不行？</strong>因為 0 和 255 是極端值，平均時會把周圍一起<strong>拖歪</strong>，
+  結果是雜訊沒消失、只是變成一團糊掉的灰影。
+</div>
+
+<h3>中位數濾波 Median Filter</h3>
+<p>做法：取視窗內所有值 → <strong>排序</strong> → 取<strong>正中間</strong>那個 → 寫到中心。</p>
+
+<details open>
+  <summary>手算例題：3×3 視窗如下，求中位數</summary>
+  <div class="matrow">
+    <div class="mat" style="grid-template-columns:repeat(3,1fr)">
+      <span>12</span><span>15</span><span>255</span>
+      <span>14</span><span class="hl">13</span><span>16</span>
+      <span>0</span><span>17</span><span>14</span>
+    </div>
+  </div>
+  <p><strong>Step 1 排序</strong>：0, 12, 13, 14, 14, <strong>15</strong>, 16, 17, 255<br>
+  <strong>Step 2</strong>：9 個數，中間是第 5 個（index = 9//2 = 4，從 0 算起）→ <strong>15</strong></p>
+  <p>對照一下平均：(12+15+255+14+13+16+0+17+14)/9 = 356/9 ≈ <strong>39.6</strong></p>
+  <div class="box ok" style="margin-top:10px">
+    中位數給出 <strong>15</strong>，和周圍鄰居（12~17）非常合理。<br>
+    平均給出 <strong>39.6</strong>，被那個 255 嚴重拉高了。<br>
+    <strong>這就是中位數濾波贏在哪裡：排序後極端值被排到兩端，自然被忽略。</strong>
+  </div>
+</details>
+
+<div class="tw"><table>
+<tr><th>濾波器</th><th>做什麼</th><th>最適合</th></tr>
+<tr><td><strong>Median</strong> 中位數</td><td>取中間值</td><td><strong>椒鹽雜訊</strong>（兩種都去）</td></tr>
+<tr><td><strong>Max</strong> 最大值</td><td>取最大</td><td>去掉<strong>胡椒</strong>（黑點），但會放大鹽</td></tr>
+<tr><td><strong>Min</strong> 最小值</td><td>取最小</td><td>去掉<strong>鹽</strong>（白點），但會放大胡椒</td></tr>
+<tr><td><strong>Mean</strong> 平均</td><td>加權平均</td><td>高斯雜訊（不適合椒鹽）</td></tr>
+</table></div>
+
+<div class="box">
+  <span class="t">💡 中位數是非線性的</span>
+  median(A + B) ≠ median(A) + median(B)，所以它<strong>不能</strong>寫成卷積，也沒有卷積那些性質。
+  考試可能問「下列哪個不是線性濾波」→ 答案就是中位數／最大／最小。
+</div>
+
+<h2 id="g">7. 銳化：Unsharp Masking</h2>
+
+<p>銳化的邏輯很妙：<strong>先把圖弄模糊，然後看「模糊掉了什麼」，再把那些東西加回去。</strong></p>
+
+<div class="f">
+  Step 1　mask = 原圖 − 模糊圖<br>
+  Step 2　結果 = 原圖 + k × mask
+  <span class="why">mask 就是被模糊抹掉的細節（邊緣、紋理）；k 是強度</span>
+</div>
+
+<ul>
+  <li><strong>k 越大 → 越銳利</strong></li>
+  <li>k 太大會出現<strong>光暈（halo）</strong>：邊緣兩側出現過亮和過暗的滾邊</li>
+  <li>k = 1 叫 unsharp masking；<strong>k &gt; 1 叫 highboost filtering</strong></li>
+</ul>
+
+<details>
+  <summary>例題：某像素原值 150，模糊後 120，k = 2，求銳化後的值</summary>
+  <p>mask = 150 − 120 = 30<br>
+  結果 = 150 + 2 × 30 = <strong>210</strong></p>
+  <p style="font-size:14px;color:var(--muted)">這個點本來就比周圍亮（所以模糊後變暗了），銳化讓它<strong>更亮</strong>，對比被強化。
+  如果算出來超過 255 要 clip 回 255。</p>
+</details>
+
+<h2 id="h">8. 考點整理</h2>
+
+<div class="box ok">
+  <span class="t">✅ 本章一定要會</span>
+  <ol style="margin-bottom:0">
+    <li><strong>卷積要翻轉核，相關不用</strong>；對稱核兩者相同</li>
+    <li>脈衝 ∗ 核 = 原樣的核（相關則得到鏡像）</li>
+    <li>平滑核<strong>係數和 = 1</strong>，否則亮度改變</li>
+    <li>輸出尺寸：full = N+K−1、same = N、valid = N−K+1；無效邊界寬 ⌊K/2⌋</li>
+    <li>可分離：O(K²) → O(2K)</li>
+    <li><strong>椒鹽雜訊用中位數</strong>；中位數是非線性</li>
+    <li>銳化 = 原圖 + k × (原圖 − 模糊)</li>
+    <li>重複 box ≈ 高斯</li>
+  </ol>
+</div>
+
+<h3>小測驗</h3>
+<div class="q" data-ans="1">
+  <div class="qt">Q1. 用核 w = [1,2,3] 對脈衝訊號做<strong>卷積</strong>，結果中會出現？</div>
+  <div class="opt">3, 2, 1</div>
+  <div class="opt">1, 2, 3</div>
+  <div class="opt">2, 4, 6</div>
+  <div class="opt">1, 1, 1</div>
+  <div class="exp">卷積會先把核翻轉成 [3,2,1]，再和脈衝做相關，結果<strong>印出原樣的核 1,2,3</strong>。
+  如果是做相關（不翻轉），才會得到鏡像的 3,2,1。</div>
+</div>
+
+<div class="q" data-ans="2">
+  <div class="qt">Q2. 一張 100×100 的影像用 5×5 的核做卷積，valid 模式下輸出尺寸是？</div>
+  <div class="opt">100×100</div>
+  <div class="opt">104×104</div>
+  <div class="opt">96×96</div>
+  <div class="opt">95×95</div>
+  <div class="exp">valid = N − K + 1 = 100 − 5 + 1 = <strong>96</strong>，所以是 96×96。<br>
+  （full 會是 104×104，same 是 100×100。）</div>
+</div>
+
+<div class="q" data-ans="3">
+  <div class="qt">Q3. 要去除椒鹽雜訊，最適合用？</div>
+  <div class="opt">3×3 box filter</div>
+  <div class="opt">高斯濾波</div>
+  <div class="opt">Unsharp masking</div>
+  <div class="opt">3×3 中位數濾波</div>
+  <div class="exp">椒鹽雜訊是<strong>極端值</strong>，平均類（box、高斯）會被極端值拖歪，只是把黑白點糊開。
+  中位數排序後極端值自動被排到兩端而忽略，所以最有效。</div>
+</div>
+
+<div class="q" data-ans="0">
+  <div class="qt">Q4. 3×3 的核 [[1,1,1],[1,1,1],[1,1,1]]（<strong>沒有</strong>除以 9）直接拿去濾波，結果會？</div>
+  <div class="opt">整張圖亮度大約變成 9 倍，大面積過曝變白</div>
+  <div class="opt">影像變暗</div>
+  <div class="opt">影像不變</div>
+  <div class="opt">只有邊緣被強化</div>
+  <div class="exp">沒有正規化，每個像素變成周圍 9 格的<strong>總和</strong>而不是平均，所以亮度約 ×9，
+  超過 255 的部分被截斷成白色。<strong>平滑核的係數和必須為 1。</strong></div>
+</div>
+
+<div class="q" data-ans="1">
+  <div class="qt">Q5. 下列哪一個<strong>不是</strong>線性運算？</div>
+  <div class="opt">高斯模糊</div>
+  <div class="opt">中位數濾波</div>
+  <div class="opt">Box filter</div>
+  <div class="opt">Sobel 邊緣偵測</div>
+  <div class="exp">中位數需要<strong>排序</strong>再挑中間值，無法表示成加權總和，所以是<strong>非線性</strong>。
+  其他三個都是卷積（加權總和），屬於線性。</div>
+</div>
+<div class="score" id="score"></div>
+
+<div class="pager">
+  <a href="ch3.html">← 第 3 章</a>
+  <a href="ch5.html">第 5 章：邊緣偵測 →</a>
+</div>
+
+<p class="foot">CISC3011 期中溫習站 · Ch4</p>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

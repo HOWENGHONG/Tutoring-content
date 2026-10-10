@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ch5 邊緣偵測 — CISC3011 溫習站</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="topbar"><div class="topbar-in">
+  <a class="brand" href="index.html">CISC3011 溫習站<small>數位影像處理 · 期中考 Ch1–6</small></a>
+  <nav class="navlinks">
+    <a href="index.html">首頁</a>
+    <a href="ch1.html">1 基礎</a><a href="ch2.html">2 點運算</a><a href="ch3.html">3 直方圖</a>
+    <a href="ch4.html">4 濾波</a><a class="on" href="ch5.html">5 邊緣</a><a href="ch6.html">6 形態學</a>
+    <a href="cheatsheet.html">速記</a><a href="quiz.html">測驗</a>
+  </nav>
+</div></div>
+
+<div class="wrap">
+
+<h1>第 5 章 · 邊緣偵測</h1>
+<p class="sub">用「微分」找出輪廓</p>
+
+<div class="box">
+  <span class="t">📌 一句話說完</span>
+  <strong>邊緣 = 亮度變化很劇烈的地方。找變化劇烈 = 找「斜率大」= 微分。</strong>
+</div>
+
+<div class="toc"><strong>本章內容</strong>
+<ol>
+  <li><a href="#a">什麼是邊緣</a></li>
+  <li><a href="#b">一階微分與梯度（必考）</a></li>
+  <li><a href="#c">Sobel 與 Prewitt（要背）</a></li>
+  <li><a href="#d">雜訊問題：先平滑</a></li>
+  <li><a href="#e">二階微分：Laplacian</a></li>
+  <li><a href="#f">Canny 四步驟（必考）</a></li>
+  <li><a href="#g">考點整理</a></li>
+</ol></div>
+
+<h2 id="a">1. 什麼是邊緣</h2>
+
+<p>邊緣就是影像中<strong>亮度突然改變</strong>的位置。造成邊緣的四種原因（考過名詞題）：</p>
+<ul>
+  <li><strong>深度不連續</strong>（depth discontinuity）— 物體擋住後面的東西</li>
+  <li><strong>表面法線不連續</strong>（surface normal）— 物體的轉角、摺痕</li>
+  <li><strong>表面顏色不連續</strong>（surface color）— 貼紙、花紋</li>
+  <li><strong>光照不連續</strong>（illumination）— 影子邊界</li>
+</ul>
+
+<h3>邊緣的三種型態</h3>
+<svg viewBox="0 0 640 140" role="img" aria-label="邊緣類型">
+  <text x="10" y="18" font-size="13" font-weight="bold" fill="currentColor">Step（階梯）</text>
+  <path d="M15,100 L75,100 L75,40 L135,40" stroke="currentColor" stroke-width="2.5" fill="none"/>
+  <text x="225" y="18" font-size="13" font-weight="bold" fill="currentColor">Ramp（斜坡）</text>
+  <path d="M225,100 L265,100 L315,40 L350,40" stroke="currentColor" stroke-width="2.5" fill="none"/>
+  <text x="450" y="18" font-size="13" font-weight="bold" fill="currentColor">Roof（屋脊／線）</text>
+  <path d="M450,100 L500,45 L550,100 L600,100" stroke="currentColor" stroke-width="2.5" fill="none"/>
+  <text x="15" y="130" font-size="12" fill="currentColor">理想邊緣</text>
+  <text x="225" y="130" font-size="12" fill="currentColor">真實照片多半是這種（有模糊過渡）</text>
+  <text x="450" y="130" font-size="12" fill="currentColor">細線條</text>
+</svg>
+
+<h2 id="b">2. 一階微分與梯度</h2>
+
+<p>連續函數的微分是斜率。影像是離散的，所以用<strong>相鄰像素相減</strong>來近似：</p>
+
+<div class="f">
+  中央差分：f′(x) ≈ [ f(x+1) − f(x−1) ] / 2
+  <span class="why">寫成核就是 ½ × [−1, 0, 1]</span>
+</div>
+
+<p>影像是二維的，所以要分別對 x 和 y 微分，合起來叫<strong>梯度（gradient）</strong>：</p>
+
+<div class="f">
+  ∇f = ( ∂f/∂x , ∂f/∂y ) = ( G<sub>x</sub> , G<sub>y</sub> )
+</div>
+
+<div class="f">
+  大小 |∇f| = √( G<sub>x</sub>² + G<sub>y</sub>² )　　方向 θ = tan<sup>−1</sup>( G<sub>y</sub> / G<sub>x</sub> )
+  <span class="why">大小 = 邊緣有多強；方向 = 亮度變化最快的方向</span>
+</div>
+
+<div class="box warn">
+  <span class="t">⭐ 極常考的觀念</span>
+  <strong>梯度方向 ⊥（垂直於）邊緣方向。</strong><br>
+  想像一條<strong>垂直</strong>的邊界線：你要感受亮度變化，必須<strong>左右</strong>走（水平方向），
+  所以梯度指向水平，而邊緣本身是垂直的 —— 兩者差 90°。
+</div>
+
+<div class="box">
+  <span class="t">💡 簡化算法</span>
+  有時為了省計算，會用 <strong>|G<sub>x</sub>| + |G<sub>y</sub>|</strong> 近似平方根（絕對值相加）。
+  考試若沒特別說，用標準的平方根公式。
+</div>
+
+<h2 id="c">3. Sobel 與 Prewitt</h2>
+
+<div class="box bad">
+  <span class="t">🔥 這兩組核要背起來</span>
+</div>
+
+<h3>Sobel（最常用）</h3>
+<div class="matrow">
+  <div><div class="cap">G<sub>x</sub>（偵測垂直邊緣）</div>
+  <div class="mat" style="grid-template-columns:repeat(3,1fr)">
+    <span>−1</span><span>0</span><span>1</span>
+    <span>−2</span><span>0</span><span>2</span>
+    <span>−1</span><span>0</span><span>1</span>
+  </div></div>
+  <div><div class="cap">G<sub>y</sub>（偵測水平邊緣）</div>
+  <div class="mat" style="grid-template-columns:repeat(3,1fr)">
+    <span>−1</span><span>−2</span><span>−1</span>
+    <span>0</span><span>0</span><span>0</span>
+    <span>1</span><span>2</span><span>1</span>
+  </div></div>
+</div>
+
+<h3>Prewitt</h3>
+<div class="matrow">
+  <div><div class="cap">G<sub>x</sub></div>
+  <div class="mat" style="grid-template-columns:repeat(3,1fr)">
+    <span>−1</span><span>0</span><span>1</span>
+    <span>−1</span><span>0</span><span>1</span>
+    <span>−1</span><span>0</span><span>1</span>
+  </div></div>
+  <div><div class="cap">G<sub>y</sub></div>
+  <div class="mat" style="grid-template-columns:repeat(3,1fr)">
+    <span>−1</span><span>−1</span><span>−1</span>
+    <span>0</span><span>0</span><span>0</span>
+    <span>1</span><span>1</span><span>1</span>
+  </div></div>
+</div>
+
+<div class="box ok">
+  <span class="t">✅ 兩者的差別與記法</span>
+  <strong>Sobel 中間那排是 2</strong>（給中心列／行更大權重，等於順便做了一點平滑），所以<strong>比較抗雜訊</strong>。<br>
+  Prewitt 全部都是 1。<br>
+  <strong>記法</strong>：G<sub>x</sub> 是「左負右正」（左右相減 → 抓左右的變化 → 找<strong>垂直</strong>線）；
+  G<sub>y</sub> 是「上負下正」（上下相減 → 找<strong>水平</strong>線）。<br>
+  <span style="font-size:14px">兩個核的係數總和都是 <strong>0</strong> —— 這是微分類核的共同特徵（平坦區域輸出 0）。</span>
+</div>
+
+<details open>
+  <summary>手算例題：求下列 3×3 區域中心的 Sobel 梯度大小與方向</summary>
+  <div class="matrow">
+    <div class="mat" style="grid-template-columns:repeat(3,1fr)">
+      <span>10</span><span>10</span><span>50</span>
+      <span>10</span><span class="hl">10</span><span>50</span>
+      <span>10</span><span>10</span><span>50</span>
+    </div>
+    <div style="font-size:14px">（左邊暗、右邊亮 → 有一條垂直邊緣）</div>
+  </div>
+
+  <p><strong>算 G<sub>x</sub></strong>（對應位置相乘後加總）：<br>
+  = (−1)(10) + (0)(10) + (1)(50)<br>
+  &nbsp;&nbsp;+ (−2)(10) + (0)(10) + (2)(50)<br>
+  &nbsp;&nbsp;+ (−1)(10) + (0)(10) + (1)(50)<br>
+  = (−10 + 50) + (−20 + 100) + (−10 + 50)<br>
+  = 40 + 80 + 40 = <strong>160</strong></p>
+
+  <p><strong>算 G<sub>y</sub></strong>：<br>
+  = (−1)(10) + (−2)(10) + (−1)(50)<br>
+  &nbsp;&nbsp;+ 0 + 0 + 0<br>
+  &nbsp;&nbsp;+ (1)(10) + (2)(10) + (1)(50)<br>
+  = (−10 −20 −50) + (10 + 20 + 50) = −80 + 80 = <strong>0</strong></p>
+
+  <p><strong>大小</strong> = √(160² + 0²) = <strong>160</strong><br>
+  <strong>方向</strong> θ = tan<sup>−1</sup>(0 / 160) = <strong>0°</strong>（指向 x 正方向，也就是水平向右）</p>
+
+  <div class="box ok" style="margin-top:10px">
+    <strong>解讀</strong>：梯度指向水平（0°），而邊緣是<strong>垂直</strong>的 —— 再次驗證「梯度 ⊥ 邊緣」。<br>
+    G<sub>y</sub> = 0 是因為上下方向完全沒有亮度變化。
+  </div>
+</details>
+
+<h2 id="d">4. 雜訊問題：先平滑</h2>
+
+<div class="box bad">
+  <span class="t">⚠️ 微分會放大雜訊</span>
+  雜訊的特徵就是「鄰居之間差很多」，而微分正是在算差 —— 所以<strong>雜訊會被嚴重放大</strong>，
+  直接微分可能整張圖都是假邊緣。
+</div>
+
+<p><strong>解法：先用高斯平滑，再微分。</strong></p>
+
+<div class="f">
+  d/dx ( G ∗ f ) = ( d/dx G ) ∗ f
+  <span class="why">微分定理（Derivative Theorem）</span>
+</div>
+
+<div class="box ok">
+  <span class="t">✅ 這條公式的好處</span>
+  本來要做兩次運算（先平滑、再微分），現在可以<strong>先把高斯核微分好</strong>，
+  得到一個「高斯的導數核」，<strong>只對影像做一次卷積</strong>就好 → 省一半時間。<br>
+  這用到的是卷積的<strong>結合律</strong>。
+</div>
+
+<p>σ 的取捨（常考的 trade-off）：</p>
+<ul>
+  <li><strong>σ 大</strong>（平滑多）→ 雜訊少、但邊緣位置變模糊不準（<strong>定位差</strong>），細節消失</li>
+  <li><strong>σ 小</strong>（平滑少）→ 定位準、細節多、但<strong>雜訊多</strong>，假邊緣多</li>
+</ul>
+
+<h2 id="e">5. 二階微分：Laplacian</h2>
+
+<p>一階微分在邊緣處出現<strong>峰值</strong>；二階微分則在邊緣處<strong>穿越零點</strong>（zero-crossing）。</p>
+
+<svg viewBox="0 0 620 200" role="img" aria-label="一階與二階導數">
+  <text x="10" y="16" font-size="12" font-weight="bold" fill="currentColor">原訊號（階梯邊緣）</text>
+  <path d="M15,55 L80,55 L110,20 L185,20" stroke="currentColor" stroke-width="2" fill="none"/>
+  <text x="215" y="16" font-size="12" font-weight="bold" fill="currentColor">一階導數：出現峰值</text>
+  <line x1="220" y1="55" x2="390" y2="55" stroke="currentColor" stroke-width=".7" opacity=".4"/>
+  <path d="M220,55 L285,55 L300,18 L315,55 L390,55" stroke="#b4530a" stroke-width="2" fill="none"/>
+  <text x="290" y="14" font-size="11" fill="#b4530a">峰值←邊緣在這</text>
+  <text x="420" y="16" font-size="12" font-weight="bold" fill="currentColor">二階導數：穿越 0</text>
+  <line x1="425" y1="110" x2="600" y2="110" stroke="currentColor" stroke-width=".7" opacity=".4"/>
+  <path d="M425,110 L490,110 L497,70 L505,150 L512,110 L600,110" stroke="#2f6f4e" stroke-width="2" fill="none"/>
+  <text x="470" y="175" font-size="11" fill="#2f6f4e">零交越點 ← 邊緣在這</text>
+  <circle cx="505" cy="110" r="3.5" fill="#2f6f4e"/>
+</svg>
+
+<h3>Laplacian 核</h3>
+<div class="matrow">
+  <div><div class="cap">4-鄰域版</div>
+  <div class="mat" style="grid-template-columns:repeat(3,1fr)">
+    <span>0</span><span>1</span><span>0</span>
+    <span>1</span><span class="hl">−4</span><span>1</span>
+    <span>0</span><span>1</span><span>0</span>
+  </div></div>
+  <div><div class="cap">8-鄰域版</div>
+  <div class="mat" style="grid-template-columns:repeat(3,1fr)">
+    <span>1</span><span>1</span><span>1</span>
+    <span>1</span><span class="hl">−8</span><span>1</span>
+    <span>1</span><span>1</span><span>1</span>
+  </div></div>
+</div>
+
+<div class="box ok">
+  <span class="t">✅ 辨認 Laplacian 核的方法</span>
+  <strong>中間一個大負數，周圍都是正數，而且全部加起來 = 0。</strong><br>
+  （0+1+0+1−4+1+0+1+0 = 0 ✓）<br>
+  它是<strong>各向同性</strong>（isotropic）的 —— 不管邊緣朝哪個方向都一樣敏感，
+  <strong>所以它只給邊緣強度，不給方向</strong>（這點和 Sobel 不同，常考）。
+</div>
+
+<h3>LoG（Laplacian of Gaussian）</h3>
+<p>Laplacian 是二階微分，對雜訊<strong>更</strong>敏感。所以一樣先平滑：先高斯模糊再做 Laplacian，
+合起來叫 <strong>LoG</strong>，形狀像倒過來的墨西哥帽（Mexican hat）。
+實務上常用兩個不同 σ 的高斯相減來近似，叫 <strong>DoG</strong>（Difference of Gaussians）。</p>
+
+<h2 id="f">6. Canny 四步驟</h2>
+
+<div class="box bad">
+  <span class="t">🔥 幾乎必考：順序不能錯</span>
+</div>
+
+<div class="card">
+<ol>
+  <li><strong>高斯平滑（Smoothing）</strong><br>
+      先用高斯濾波去雜訊，避免雜訊被微分放大。</li>
+  <li><strong>算梯度大小與方向（Gradient）</strong><br>
+      通常用 Sobel 算出 G<sub>x</sub>、G<sub>y</sub>，再求 |∇f| 和 θ。</li>
+  <li><strong>非極大值抑制（Non-Maximum Suppression, NMS）</strong><br>
+      此時的邊緣很<strong>粗</strong>。沿著<strong>梯度方向</strong>比較：如果這點不是局部最大值就歸零。<br>
+      <strong>目的：把邊緣變細，變成一個像素寬。</strong></li>
+  <li><strong>雙閾值 + 連通性分析（Hysteresis）</strong><br>
+      設高閾值 H 和低閾值 L：<br>
+      • &gt; H → <strong>強邊緣</strong>，直接保留<br>
+      • &lt; L → 丟掉<br>
+      • 介於中間 → <strong>弱邊緣</strong>，只有在「與某個強邊緣相連」時才保留<br>
+      <strong>目的：避免一條邊緣忽斷忽續（streaking）。</strong></li>
+</ol>
+</div>
+
+<div class="box ok">
+  <span class="t">✅ 記憶口訣</span>
+  <strong>平滑 → 求梯度 → 變細 → 雙閾值接起來</strong><br>
+  （去雜訊 → 找邊 → 瘦身 → 補線）
+</div>
+
+<h3>Canny 的三個設計目標</h3>
+<ul>
+  <li><strong>Good detection</strong> — 真的邊要找到，不要被雜訊騙</li>
+  <li><strong>Good localization</strong> — 找到的位置要準，貼近真實邊緣</li>
+  <li><strong>Minimal response</strong> — 一條邊只回應一次（這就是 NMS 在做的事）</li>
+</ul>
+<p>前兩個互相衝突：平滑越多 detection 越好，但 localization 越差 —— 這個 trade-off 常考。</p>
+
+<h2 id="g">7. 考點整理</h2>
+
+<div class="box ok">
+  <span class="t">✅ 本章一定要會</span>
+  <ol style="margin-bottom:0">
+    <li>邊緣四種成因；step / ramp / roof</li>
+    <li><strong>|∇f| = √(Gx²+Gy²)，θ = tan⁻¹(Gy/Gx)</strong>；<strong>梯度 ⊥ 邊緣</strong></li>
+    <li><strong>Sobel 與 Prewitt 的核</strong>（Sobel 中間是 2，較抗雜訊）；係數和 = 0</li>
+    <li>微分放大雜訊 → 先高斯平滑；微分定理可省一次運算</li>
+    <li>σ 大：抗雜訊但定位差；σ 小：定位準但雜訊多</li>
+    <li>Laplacian：二階、找<strong>零交越</strong>、中間負周圍正、<strong>無方向資訊</strong>；LoG / DoG</li>
+    <li><strong>Canny 四步驟</strong>；NMS 讓邊變細；雙閾值防斷線</li>
+  </ol>
+</div>
+
+<h3>小測驗</h3>
+<div class="q" data-ans="1">
+  <div class="qt">Q1. 影像中有一條水平的邊緣，則該處的梯度方向大約是？</div>
+  <div class="opt">水平方向（0°）</div>
+  <div class="opt">垂直方向（90°）</div>
+  <div class="opt">45°</div>
+  <div class="opt">無法判斷</div>
+  <div class="exp"><strong>梯度永遠垂直於邊緣</strong>。邊緣是水平的，所以梯度指向<strong>垂直</strong>方向（上下），即 90°。
+  直觀想：水平邊界上下才有亮度差，左右走沒變化。</div>
+</div>
+
+<div class="q" data-ans="2">
+  <div class="qt">Q2. Canny 邊緣偵測中，「非極大值抑制」的主要目的是？</div>
+  <div class="opt">去除雜訊</div>
+  <div class="opt">計算梯度方向</div>
+  <div class="opt">把粗邊緣變細成單像素寬</div>
+  <div class="opt">把斷掉的邊緣連起來</div>
+  <div class="exp">NMS 沿梯度方向比較，只留下局部最大值，所以<strong>邊緣變細</strong>（對應「一條邊只回應一次」）。<br>
+  去雜訊是第 1 步高斯；連接斷線是第 4 步雙閾值。</div>
+</div>
+
+<div class="q" data-ans="0">
+  <div class="qt">Q3. 下列哪個核是 Laplacian？</div>
+  <div class="opt">[[0,1,0],[1,−4,1],[0,1,0]]</div>
+  <div class="opt">[[−1,0,1],[−2,0,2],[−1,0,1]]</div>
+  <div class="opt">[[1,1,1],[1,1,1],[1,1,1]]/9</div>
+  <div class="opt">[[1,2,1],[2,4,2],[1,2,1]]/16</div>
+  <div class="exp">Laplacian 的特徵是<strong>中間大負數、周圍正數、總和為 0</strong>。<br>
+  第二個是 Sobel Gx；第三個是 box filter；第四個是高斯。</div>
+</div>
+
+<div class="q" data-ans="3">
+  <div class="qt">Q4. 某點 Gx = 3、Gy = 4，則梯度大小為？</div>
+  <div class="opt">3</div>
+  <div class="opt">4</div>
+  <div class="opt">7</div>
+  <div class="opt">5</div>
+  <div class="exp">√(3² + 4²) = √(9+16) = √25 = <strong>5</strong>。（經典的 3-4-5 直角三角形）<br>
+  選 7 的是誤用了 |Gx|+|Gy| 的近似公式。</div>
+</div>
+
+<div class="q" data-ans="1">
+  <div class="qt">Q5. 增大高斯平滑的 σ，會有什麼結果？</div>
+  <div class="opt">雜訊變多，但邊緣定位更準</div>
+  <div class="opt">雜訊變少，但邊緣定位變差</div>
+  <div class="opt">雜訊和定位都變好</div>
+  <div class="opt">完全沒有影響</div>
+  <div class="exp">σ 越大平滑越強 → <strong>雜訊減少</strong>（detection 變好），
+  但邊緣被抹糊、位置偏移 → <strong>localization 變差</strong>。這就是 Canny 提到的取捨。</div>
+</div>
+<div class="score" id="score"></div>
+
+<div class="pager">
+  <a href="ch4.html">← 第 4 章</a>
+  <a href="ch6.html">第 6 章：形態學 →</a>
+</div>
+
+<p class="foot">CISC3011 期中溫習站 · Ch5</p>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ch6 形態學處理 — CISC3011 溫習站</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="topbar"><div class="topbar-in">
+  <a class="brand" href="index.html">CISC3011 溫習站<small>數位影像處理 · 期中考 Ch1–6</small></a>
+  <nav class="navlinks">
+    <a href="index.html">首頁</a>
+    <a href="ch1.html">1 基礎</a><a href="ch2.html">2 點運算</a><a href="ch3.html">3 直方圖</a>
+    <a href="ch4.html">4 濾波</a><a href="ch5.html">5 邊緣</a><a class="on" href="ch6.html">6 形態學</a>
+    <a href="cheatsheet.html">速記</a><a href="quiz.html">測驗</a>
+  </nav>
+</div></div>
+
+<div class="wrap">
+
+<h1>第 6 章 · 形態學處理</h1>
+<p class="sub">針對黑白二值影像「改形狀」</p>
+
+<div class="box">
+  <span class="t">📌 一句話說完</span>
+  <strong>拿一個小形狀（結構元 SE）去滑過黑白圖：要求「全部都中」就是侵蝕（變瘦），只要「有一個中」就是膨脹（變胖）。</strong>
+</div>
+
+<div class="toc"><strong>本章內容</strong>
+<ol>
+  <li><a href="#a">二值影像與結構元</a></li>
+  <li><a href="#b">平移核</a></li>
+  <li><a href="#c">侵蝕與膨脹（必考）</a></li>
+  <li><a href="#d">手算例題</a></li>
+  <li><a href="#e">Opening 與 Closing（必考）</a></li>
+  <li><a href="#f">邊界抽取</a></li>
+  <li><a href="#g">字元偵測：相關還是卷積</a></li>
+  <li><a href="#h">考點整理</a></li>
+</ol></div>
+
+<h2 id="a">1. 二值影像與結構元</h2>
+
+<p>形態學只處理<strong>二值影像</strong>（只有 0 和 1，或黑與白）。灰階圖要先<strong>二值化</strong>（第 2 章）才能用。</p>
+<ul>
+  <li><strong>1（前景 foreground）</strong>：我們關心的物體，通常畫成白色</li>
+  <li><strong>0（背景 background）</strong>：其他地方</li>
+</ul>
+
+<p><strong>結構元（Structuring Element, SE）</strong>就是一個小形狀，外加一個<strong>原點</strong>（通常在正中心）。常見的有：</p>
+
+<div class="matrow">
+  <div><div class="cap">3×3 方形</div>
+  <div class="mat" style="grid-template-columns:repeat(3,1fr)">
+    <span>1</span><span>1</span><span>1</span><span>1</span><span class="hl">1</span><span>1</span><span>1</span><span>1</span><span>1</span>
+  </div></div>
+  <div><div class="cap">十字形</div>
+  <div class="mat" style="grid-template-columns:repeat(3,1fr)">
+    <span>0</span><span>1</span><span>0</span><span>1</span><span class="hl">1</span><span>1</span><span>0</span><span>1</span><span>0</span>
+  </div></div>
+  <div><div class="cap">X 形</div>
+  <div class="mat" style="grid-template-columns:repeat(3,1fr)">
+    <span>1</span><span>0</span><span>1</span><span>0</span><span class="hl">1</span><span>0</span><span>1</span><span>0</span><span>1</span>
+  </div></div>
+</div>
+<p style="font-size:14px;color:var(--muted)">橘色格子是原點。SE 的形狀會決定結果 —— 不同 SE 得到的侵蝕／膨脹結果不同。</p>
+
+<h2 id="b">2. 平移核</h2>
+
+<p>先熱身一個簡單的：用卷積把影像<strong>平移</strong>。（hw6 第一題）</p>
+
+<div class="box">
+  <span class="t">💡 原理</span>
+  用一個只有單一個 1 的核去卷積，影像會往那個 1 的<strong>偏移方向</strong>移動。
+  <strong>但要記得卷積會先翻轉核</strong>，所以方向和直覺相反。
+</div>
+
+<div class="matrow">
+  <div><div class="cap">1 在右下 → 影像往右下移</div>
+  <div class="mat" style="grid-template-columns:repeat(3,1fr)">
+    <span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span class="hl">1</span>
+  </div></div>
+  <div><div class="cap">1 在中左 → 影像往左移</div>
+  <div class="mat" style="grid-template-columns:repeat(3,1fr)">
+    <span>0</span><span>0</span><span>0</span><span class="hl">1</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span>
+  </div></div>
+</div>
+
+<h2 id="c">3. 侵蝕與膨脹</h2>
+
+<div class="box warn">
+  <span class="t">⭐ 核心定義（背這兩句就好）</span>
+  <strong>侵蝕 Erosion（⊖）：SE 蓋下去，<u>全部</u>的 1 都對到前景 → 中心才是 1</strong>（AND）<br>
+  <strong>膨脹 Dilation（⊕）：SE 蓋下去，<u>只要有一個</u> 1 對到前景 → 中心就是 1</strong>（OR）
+</div>
+
+<div class="tw"><table>
+<tr><th></th><th>侵蝕 Erosion</th><th>膨脹 Dilation</th></tr>
+<tr><td>邏輯</td><td>全部命中（AND / all）</td><td>任一命中（OR / any）</td></tr>
+<tr><td>形狀</td><td><strong>變瘦、縮小</strong></td><td><strong>變胖、擴大</strong></td></tr>
+<tr><td>小白點（雜訊）</td><td>消失 ✅</td><td>變更大 ❌</td></tr>
+<tr><td>小黑洞</td><td>變更大</td><td>被填平 ✅</td></tr>
+<tr><td>相連的物體</td><td>可能被<strong>分開</strong></td><td>可能被<strong>連起來</strong></td></tr>
+<tr><td>用途</td><td>去小雜點、分離黏住的物體、找特定形狀</td><td>補洞、連接斷裂、加粗</td></tr>
+</table></div>
+
+<div class="box ok">
+  <span class="t">✅ 記憶法</span>
+  <strong>侵蝕</strong>像海浪侵蝕沙灘 → 東西<strong>變少變小</strong>。<br>
+  <strong>膨脹</strong>像麵團發酵 → 東西<strong>變多變大</strong>。<br>
+  條件也好記：變小的那個條件比較<strong>嚴格</strong>（要全中）；變大的那個條件比較<strong>寬鬆</strong>（中一個就好）。
+</div>
+
+<h2 id="d">4. 手算例題</h2>
+
+<details open>
+  <summary>例題：用 3×3 全 1 的 SE，對下圖做侵蝕與膨脹</summary>
+  <p>下面 7×7 的圖，黑色格子是前景（1）：</p>
+  <div class="matrow">
+    <div><div class="cap">原圖</div>
+    <div class="mat" style="grid-template-columns:repeat(7,1fr)">
+      <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+      <span></span><span class="on"></span><span class="on"></span><span class="on"></span><span></span><span></span><span></span>
+      <span></span><span class="on"></span><span class="on"></span><span class="on"></span><span></span><span></span><span></span>
+      <span></span><span class="on"></span><span class="on"></span><span class="on"></span><span></span><span class="on"></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+    </div></div>
+  </div>
+
+  <p><strong>侵蝕</strong>：只有「3×3 範圍內全部都是前景」的中心才留下來。<br>
+  那個 3×3 方塊的<strong>正中心</strong>（第 2 列第 2 行）符合；<br>
+  右邊那個孤立點完全不符合（周圍都是背景）→ <strong>消失</strong>。</p>
+  <div class="matrow">
+    <div><div class="cap">侵蝕結果（只剩 1 格）</div>
+    <div class="mat" style="grid-template-columns:repeat(7,1fr)">
+      <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span class="on"></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+    </div></div>
+  </div>
+
+  <p><strong>膨脹</strong>：只要 3×3 範圍內<strong>碰到任何一個</strong>前景，中心就變前景。
+  所以方塊往外長一圈，孤立點變成 3×3 的小方塊。</p>
+  <div class="matrow">
+    <div><div class="cap">膨脹結果</div>
+    <div class="mat" style="grid-template-columns:repeat(7,1fr)">
+      <span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span></span><span></span>
+      <span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span>
+      <span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span>
+      <span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span>
+      <span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span>
+      <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+    </div></div>
+  </div>
+  <p style="font-size:14px;color:var(--muted)">（邊界以外當作背景 0 處理）</p>
+</details>
+
+<div id="morphDemo"></div>
+
+<h2 id="e">5. Opening 與 Closing</h2>
+
+<div class="box warn">
+  <span class="t">⭐ 順序絕對不能記反</span>
+  <strong>Opening（開運算）＝ 先<u>侵蝕</u>，再膨脹</strong><br>
+  <strong>Closing（閉運算）＝ 先<u>膨脹</u>，再侵蝕</strong>
+</div>
+
+<div class="box ok">
+  <span class="t">✅ 怎麼記不會混</span>
+  看名字就知道效果：<br>
+  <strong>Open（打開）</strong> → 把黏在一起的東西<strong>分開</strong>、把小突起<strong>拿掉</strong>（開 = 斷開）<br>
+  <strong>Close（關閉）</strong> → 把洞和縫隙<strong>關起來</strong>、把斷掉的接上（閉 = 封起來）<br>
+  再配合「第一個動作決定主要效果」：Open 先侵蝕（主要在<strong>去掉</strong>東西）、Close 先膨脹（主要在<strong>補上</strong>東西）。
+</div>
+
+<div class="tw"><table>
+<tr><th></th><th>Opening = 侵蝕 → 膨脹</th><th>Closing = 膨脹 → 侵蝕</th></tr>
+<tr><td>主要效果</td><td>去掉<strong>小的前景雜點</strong>、磨平突起、斷開細連接</td><td>填補<strong>小洞</strong>、接合裂縫、平滑凹陷</td></tr>
+<tr><td>對大物體</td><td>大致保持原本大小（侵蝕縮小後又膨脹回來）</td><td>大致保持原本大小</td></tr>
+<tr><td>面積變化</td><td>≤ 原本（只會變少）</td><td>≥ 原本（只會變多）</td></tr>
+<tr><td>去哪種雜訊</td><td>白點（鹽）</td><td>黑洞（胡椒）</td></tr>
+</table></div>
+
+<div class="box">
+  <span class="t">💡 兩個進階性質（概念題可能考）</span>
+  <strong>冪等性（idempotent）</strong>：做第二次不會再改變。open(open(A)) = open(A)。<br>
+  <strong>包含關係</strong>：opening(A) ⊆ A ⊆ closing(A)。
+</div>
+
+<h2 id="f">6. 邊界抽取</h2>
+
+<p>用侵蝕／膨脹和原圖相減，就能抽出輪廓。三條公式：</p>
+
+<div class="f">
+  內邊界 = A − erode(A)<br>
+  外邊界 = dilate(A) − A<br>
+  形態學梯度 = dilate(A) − erode(A)
+</div>
+
+<div class="tw"><table>
+<tr><th>種類</th><th>位置</th><th>直覺</th></tr>
+<tr><td><strong>內邊界</strong></td><td>落在物體<strong>裡面</strong>最外圈</td><td>被侵蝕「啃掉」的那一圈就是內輪廓</td></tr>
+<tr><td><strong>外邊界</strong></td><td>落在物體<strong>外面</strong>貼著的一圈</td><td>膨脹「長出來」的那一圈就是外輪廓</td></tr>
+<tr><td><strong>形態學梯度</strong></td><td>橫跨內外，<strong>比較粗</strong></td><td>= 內邊界 ∪ 外邊界</td></tr>
+</table></div>
+
+<div class="box ok">
+  <span class="t">✅ 用集合運算寫</span>
+  「A − B」在二值影像中就是 <code>A AND (NOT B)</code>。<br>
+  內邊界 = <code>A AND NOT erode(A)</code>；外邊界 = <code>dilate(A) AND NOT A</code>。（hw6 寫過）
+</div>
+
+<h2 id="g">7. 字元偵測：要相關還是卷積？</h2>
+
+<p>這是 hw6 的重點，也很可能考觀念。流程是：</p>
+<ol>
+  <li><strong>用要找的字元當 SE 去侵蝕整篇文章</strong> → 只有「完全放得下這個字元」的位置會留下一個點，
+      等於<strong>找到了所有出現位置</strong>。</li>
+  <li><strong>再用同一個字元去膨脹</strong> → 把字元「蓋回」每個偵測到的位置，做出標示圖。</li>
+</ol>
+
+<div class="box warn">
+  <span class="t">⭐ 關鍵結論</span>
+  <strong>侵蝕（找位置）：用相關，SE 不翻轉。</strong>（要找的是這個字，不是它的鏡像）<br>
+  <strong>膨脹（蓋回去）：要翻轉 SE（即卷積）</strong>，印出來的才是<strong>原樣</strong>的字元。
+  如果不翻轉，蓋回去的會是<strong>左右顛倒</strong>的鏡像字。
+</div>
+
+<p style="font-size:14px;color:var(--muted)">原因：膨脹的定義內含一次反射，卷積的翻轉剛好把它抵銷掉，所以最後印出來是原樣。
+（這和第 4 章「脈衝 ∗ 核 = 原樣的核」是同一個道理。）</p>
+
+<h2 id="h">8. 考點整理</h2>
+
+<div class="box ok">
+  <span class="t">✅ 本章一定要會</span>
+  <ol style="margin-bottom:0">
+    <li>形態學只用在<strong>二值圖</strong>；SE 形狀會影響結果</li>
+    <li><strong>侵蝕＝全中才留（變瘦）；膨脹＝有中就留（變胖）</strong></li>
+    <li><strong>Opening = 侵蝕→膨脹</strong>（去小白點）；<strong>Closing = 膨脹→侵蝕</strong>（補小洞）</li>
+    <li>opening(A) ⊆ A ⊆ closing(A)；兩者都具冪等性</li>
+    <li>內邊界 = A − erode；外邊界 = dilate − A；梯度 = dilate − erode</li>
+    <li>字元偵測：侵蝕找位置（相關）、膨脹蓋回（要翻轉）</li>
+  </ol>
+</div>
+
+<h3>小測驗</h3>
+<div class="q" data-ans="1">
+  <div class="qt">Q1. 一張二值圖上有許多孤立的白色小雜點，要去掉它們又盡量保持大物體的形狀，應該用？</div>
+  <div class="opt">Closing</div>
+  <div class="opt">Opening</div>
+  <div class="opt">只做膨脹</div>
+  <div class="opt">形態學梯度</div>
+  <div class="exp"><strong>Opening（先侵蝕再膨脹）</strong>：侵蝕先把小白點消滅，接著膨脹讓大物體恢復原本大小。<br>
+  只做侵蝕的話大物體會一直變小；Closing 是用來補洞的。</div>
+</div>
+
+<div class="q" data-ans="0">
+  <div class="qt">Q2. Closing 運算的正確順序是？</div>
+  <div class="opt">先膨脹，再侵蝕</div>
+  <div class="opt">先侵蝕，再膨脹</div>
+  <div class="opt">連做兩次膨脹</div>
+  <div class="opt">連做兩次侵蝕</div>
+  <div class="exp">Clos<strong>ing</strong>＝<strong>膨脹 → 侵蝕</strong>。先膨脹把洞和縫填起來，再侵蝕把尺寸還原。
+  記法：「關起來」要先長大去把洞蓋住。</div>
+</div>
+
+<div class="q" data-ans="2">
+  <div class="qt">Q3. 形態學梯度的定義是？</div>
+  <div class="opt">A − erode(A)</div>
+  <div class="opt">dilate(A) − A</div>
+  <div class="opt">dilate(A) − erode(A)</div>
+  <div class="opt">A − dilate(A)</div>
+  <div class="exp">形態學梯度 = <strong>膨脹 − 侵蝕</strong>，等於內邊界和外邊界聯集，所以輪廓比較粗。<br>
+  選項 A 是內邊界，選項 B 是外邊界。</div>
+</div>
+
+<div class="q" data-ans="3">
+  <div class="qt">Q4. 用 3×3 全 1 的 SE 對「一個孤立的單一前景像素」做侵蝕，結果是？</div>
+  <div class="opt">還是那一個點</div>
+  <div class="opt">變成 3×3 的方塊</div>
+  <div class="opt">變成十字形</div>
+  <div class="opt">完全消失（全部變成 0）</div>
+  <div class="exp">侵蝕要求 3×3 範圍內<strong>全部 9 格都是前景</strong>。孤立點的周圍都是背景，條件不成立，所以<strong>消失</strong>。
+  這正是 Opening 能去雜點的原理。（變成 3×3 方塊的是膨脹。）</div>
+</div>
+<div class="score" id="score"></div>
+
+<div class="pager">
+  <a href="ch5.html">← 第 5 章</a>
+  <a href="cheatsheet.html">考前速記 →</a>
+</div>
+
+<p class="foot">CISC3011 期中溫習站 · Ch6</p>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
