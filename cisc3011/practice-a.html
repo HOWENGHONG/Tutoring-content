@@ -1,0 +1,1258 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Part A 題庫 — CISC3011 溫習站</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="topbar"><div class="topbar-in">
+  <a class="brand" href="index.html">CISC3011 溫習站<small>數位影像處理 · 期中考 Ch1–6</small></a>
+  <nav class="navlinks">
+    <a href="index.html">首頁</a>
+    <a href="ch1.html">1 基礎</a><a href="ch2.html">2 點運算</a><a href="ch3.html">3 直方圖</a>
+    <a href="ch4.html">4 濾波</a><a href="ch5.html">5 邊緣</a><a href="ch6.html">6 形態學</a>
+    <a href="cheatsheet.html">速記</a><a href="quiz.html">測驗</a>
+    <a class="on" href="practice-a.html">A題庫</a><a href="practice-b.html">B題庫</a>
+  </nav>
+</div></div>
+
+<div class="wrap">
+
+<h1>Part A 全面題庫 · 86 題</h1>
+<p class="sub">多選題 · 全對才給分 · 每題逐一解釋四個選項 · 涵蓋六章所有考點</p>
+
+<div class="box bad">
+  <span class="t">⚠️ Part A 的致命規則</span>
+  <strong>可能不只一個正確答案，必須全部選對才得分，答錯沒有部分分。</strong><br>
+  只要<strong>多選一個錯的、或漏選一個對的</strong>，整題 5 分就沒了。
+  所以練習的重點不是「找出最好的答案」，而是<strong>把每個選項當成獨立的是非題</strong>。
+</div>
+
+<div class="box ok">
+  <span class="t">✅ Part A 四步作答法</span>
+  <ol style="margin-bottom:0">
+    <li><strong>遮住選項先想答案</strong> —— 看完題幹先自己回憶觀念，避免被選項帶著走。</li>
+    <li><strong>逐一判斷</strong> —— 在每個選項旁標 ○ 或 ✗，不要互相比較「哪個比較好」。</li>
+    <li><strong>找關鍵字陷阱</strong>（見下表）。</li>
+    <li><strong>複查漏選</strong> —— 漏選和選錯一樣是 0 分。</li>
+  </ol>
+</div>
+
+<h2>最常見的五種陷阱</h2>
+<div class="tw"><table>
+<tr><th>陷阱類型</th><th>關鍵字</th><th>例子</th></tr>
+<tr><td><strong>絕對化字眼</strong></td><td>一定、完全、永遠、不可能、唯一</td>
+    <td>「均衡化後直方圖<strong>完全</strong>平坦」→ ✗</td></tr>
+<tr><td><strong>差一數字</strong></td><td>L 與 L−1、0~255 與 1~256、1/N 與 1/√N</td>
+    <td>「8-bit 範圍 1~256」→ ✗（0~255）</td></tr>
+<tr><td><strong>順序顛倒</strong></td><td>先…再…</td>
+    <td>「Opening 先膨脹再侵蝕」→ ✗</td></tr>
+<tr><td><strong>張冠李戴</strong></td><td>把 A 的性質說成 B 的</td>
+    <td>「取樣決定灰階級數」→ ✗（那是量化）</td></tr>
+<tr><td><strong>方向相反</strong></td><td>變亮/變暗、變大/變小、平行/垂直</td>
+    <td>「γ &gt; 1 變亮」→ ✗（變暗）</td></tr>
+</table></div>
+
+<div class="box warn">
+  <span class="t">⚠️ 不要用「數答案個數」當策略</span>
+  本題庫的正確答案個數是<strong>刻意打散</strong>的：有 2 題只有一個答案、30 題兩個、52 題三個、2 題四個全對。<br>
+  真實考卷的分布無從得知，所以<strong>絕對不要想「大概要選三個吧」</strong> ——
+  一題一題照選項判斷，該選幾個就選幾個。
+</div>
+
+<div class="toc"><strong>快速跳章</strong>
+<ol>
+  <li><a href="#c1">第 1 章 · 數位影像基礎（14 題）</a></li>
+  <li><a href="#c2">第 2 章 · 點運算與影像合成（14 題）</a></li>
+  <li><a href="#c3">第 3 章 · 直方圖（14 題）</a></li>
+  <li><a href="#c4">第 4 章 · 濾波器（16 題）</a></li>
+  <li><a href="#c5">第 5 章 · 邊緣偵測（14 題）</a></li>
+  <li><a href="#c6">第 6 章 · 形態學處理（14 題）</a></li>
+</ol></div>
+
+<!-- ======================================================= CH1 -->
+<h2 id="c1">第 1 章 · 數位影像基礎</h2>
+
+<div class="mq q" data-ans="0,2">
+  <div class="qt">A-1. 關於數位影像的表示，正確的有？</div>
+  <div class="opt">A. 灰階影像可表示為二維函數 f(x, y)</div>
+  <div class="opt">B. 8-bit 灰階影像的像素值範圍是 1 ~ 256</div>
+  <div class="opt">C. RGB 彩色影像通常以 (高, 寬, 3) 的三維陣列表示</div>
+  <div class="opt">D. 像素值 0 代表白色</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、C</strong><br>
+  A ✓ 給座標回傳亮度。<br>
+  B ✗ 是 <strong>0 ~ 255</strong>（共 256 級）。<br>
+  C ✓ 最後的 3 是 R、G、B。<br>
+  D ✗ <strong>0 是黑、255 是白</strong>。</div>
+</div>
+
+<div class="mq q" data-ans="0,1">
+  <div class="qt">A-2. 關於取樣與量化，正確的有？</div>
+  <div class="opt">A. 取樣決定影像的空間解析度</div>
+  <div class="opt">B. 量化決定灰階級數</div>
+  <div class="opt">C. 量化不足會使物體邊緣出現鋸齒狀（jagged edges）</div>
+  <div class="opt">D. 取樣不足造成的馬賽克，可藉由增加 bit 數改善</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、B</strong><br>
+  A ✓ 取樣 = 切空間。B ✓ 量化 = 切亮度。<br>
+  C ✗ 鋸齒是<strong>取樣</strong>不足的症狀；量化不足的症狀是<strong>偽輪廓</strong>（漸層變階梯）。
+  兩者別搞混。<br>
+  D ✗ 馬賽克是<strong>取樣</strong>問題，要增加像素數，加 bit 數沒用。</div>
+</div>
+
+<div class="mq q" data-ans="0,1,2">
+  <div class="qt">A-3. 一張 1024×1024、12-bit 的灰階影像（未壓縮），正確的有？</div>
+  <div class="opt">A. 共有 4096 級灰階</div>
+  <div class="opt">B. 需要約 1.5 MB 儲存空間</div>
+  <div class="opt">C. 若改成 8-bit，需要約 1 MB</div>
+  <div class="opt">D. 像素值範圍是 0 ~ 4096</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、B、C</strong><br>
+  A ✓ 2¹² = 4096。<br>
+  B ✓ 1024×1024×12 ÷ 8 = 1,572,864 byte = 1.5 MB。<br>
+  C ✓ 8-bit 時 1 像素 = 1 byte = 1 MB。<br>
+  D ✗ 是 <strong>0 ~ 4095</strong>。</div>
+</div>
+
+<div class="mq q" data-ans="0,1,3">
+  <div class="qt">A-4. 關於人類視覺特性，正確的有？</div>
+  <div class="opt">A. Mach band 是視覺錯覺，實際像素值並沒有那條亮／暗帶</div>
+  <div class="opt">B. Weber's law 指出辨識亮度變化的能力取決於相對比例而非絕對差</div>
+  <div class="opt">C. 人眼可同時分辨所有亮度範圍，不需要適應過程</div>
+  <div class="opt">D. 同一塊灰色放在黑背景上看起來比放在白背景上亮</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、B、D</strong><br>
+  A ✓ 視覺系統自行強化邊緣。<br>
+  B ✓ 暗部加一點很明顯、亮部加同樣多看不出來。<br>
+  C ✗ 需要 <strong>brightness adaptation</strong>（亮度適應）。<br>
+  D ✓ 同時對比（simultaneous contrast）。</div>
+</div>
+
+<div class="mq q" data-ans="0,1,2,3">
+  <div class="qt">A-5. 關於彩色影像的處理，正確的有？</div>
+  <div class="opt">A. 同尺寸下，RGB 影像的資料量是灰階影像的 3 倍</div>
+  <div class="opt">B. 可以把 R、G、B 各自視為一張灰階影像分別處理</div>
+  <div class="opt">C. 課堂作法中，彩色影像的直方圖均衡化是對三個通道獨立進行</div>
+  <div class="opt">D. 一張 (480, 640, 3) 的彩色影像，其 size（元素總數）為 921,600</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、B、C、D（四個全對）</strong><br>
+  A ✓ 多兩個通道。B ✓ hw3 就是這樣做。C ✓ 各通道獨立。<br>
+  D ✓ 480 × 640 × 3 = 921,600。<br>
+  <strong>注意：確實存在「四個選項全對」的題目</strong> ——
+  不要因為「不可能全對吧」就心虛改答案。</div>
+</div>
+
+<div class="mq q" data-ans="0,2">
+  <div class="qt">A-6. 關於數位影像處理（DIP）與相關領域，正確的有？</div>
+  <div class="opt">A. DIP 的典型輸入是影像、輸出也是影像</div>
+  <div class="opt">B. 電腦圖學（Computer Graphics）的輸入是影像、輸出是模型</div>
+  <div class="opt">C. 電腦視覺（Computer Vision）著重從影像中取得理解或描述</div>
+  <div class="opt">D. 影像壓縮不屬於數位影像處理的範疇</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、C</strong><br>
+  A ✓ 去雜訊、增強、銳化等都是影像進、影像出。<br>
+  B ✗ 反了 —— 圖學是<strong>由模型／描述產生影像</strong>。<br>
+  C ✓ 影像進、<strong>理解</strong>出（如辨識、偵測）。<br>
+  D ✗ 影像壓縮是 DIP 的重要主題之一。</div>
+</div>
+
+<div class="mq q" data-ans="0,1,3">
+  <div class="qt">A-7. 關於電磁波譜與成像，正確的有？</div>
+  <div class="opt">A. 可見光只佔電磁波譜中很窄的一段</div>
+  <div class="opt">B. X 光的波長比可見光短</div>
+  <div class="opt">C. 紅外線的波長比紫外線短</div>
+  <div class="opt">D. 影像可以由可見光以外的波段取得（如 X 光、紅外線）</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、B、D</strong><br>
+  A ✓ 約 400~700 nm，只是極小一段。<br>
+  B ✓ 波長順序（短→長）：γ 射線 → X 光 → 紫外 → <strong>可見光</strong> → 紅外 → 微波 → 無線電。<br>
+  C ✗ 反了，<strong>紅外線波長比紫外線長</strong>。<br>
+  D ✓ 醫學 X 光、紅外熱像都是影像。</div>
+</div>
+
+<div class="mq q" data-ans="0">
+  <div class="qt">A-8. 關於影像擷取與感測，正確的有？</div>
+  <div class="opt">A. 成像的能量多半來自光源照射物體後的反射光</div>
+  <div class="opt">B. 感測器輸出的電訊號本身就是數位影像，不需要額外的轉換步驟</div>
+  <div class="opt">C. 薄透鏡成像滿足 1/f = u + v 的關係</div>
+  <div class="opt">D. 數位化只需要取樣，不需要量化</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A（只有一個正確）</strong><br>
+  A ✓ 也可能是透射（如 X 光）。<br>
+  B ✗ 感測器輸出的是<strong>類比</strong>電訊號，必須再經 A/D 轉換（取樣＋量化）才是數位影像。<br>
+  C ✗ 公式寫錯了，正確是 <strong>1/f = 1/u + 1/v</strong>（注意是倒數相加）。<br>
+  D ✗ <strong>兩者都要</strong>：取樣處理空間、量化處理數值。<br>
+  <strong>注意：也有「只有一個正確」的題目</strong>，不要硬湊數量。</div>
+</div>
+
+<div class="mq q" data-ans="1,3">
+  <div class="qt">A-9. 一張影像若把空間解析度降低一半（長寬各減半），正確的有？</div>
+  <div class="opt">A. 資料量變為原本的 1/2</div>
+  <div class="opt">B. 資料量變為原本的 1/4</div>
+  <div class="opt">C. 灰階級數也會跟著減半</div>
+  <div class="opt">D. 影像細節會流失，可能出現鋸齒或馬賽克</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：B、D</strong><br>
+  A ✗ 長寬<strong>各</strong>減半 → 像素數變 1/2 × 1/2 = <strong>1/4</strong>。<br>
+  B ✓ 同上。<br>
+  C ✗ 灰階級數由<strong>量化位元數</strong>決定，與空間解析度無關。<br>
+  D ✓ 取樣不足的典型症狀。</div>
+</div>
+
+<div class="mq q" data-ans="0,1">
+  <div class="qt">A-10. 一張影像若把量化位元數由 8-bit 降為 2-bit，正確的有？</div>
+  <div class="opt">A. 灰階級數由 256 降為 4</div>
+  <div class="opt">B. 平滑的漸層區域會出現明顯的階梯狀分界</div>
+  <div class="opt">C. 影像的長寬尺寸會變小</div>
+  <div class="opt">D. 這屬於取樣不足的問題</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、B</strong><br>
+  A ✓ 2² = 4 級。<br>
+  B ✓ 這就是<strong>偽輪廓（false contour）</strong>。<br>
+  C ✗ 量化不影響<strong>尺寸</strong>，只影響每個像素能表示幾種亮度。<br>
+  D ✗ 這是<strong>量化</strong>不足。</div>
+</div>
+
+<div class="mq q" data-ans="0,2">
+  <div class="qt">A-11. 關於影像檔案格式，正確的有？</div>
+  <div class="opt">A. JPEG 屬於有損壓縮</div>
+  <div class="opt">B. PNG 屬於有損壓縮</div>
+  <div class="opt">C. 有損壓縮可能在影像中留下人工痕跡（artifacts），並反映在直方圖上</div>
+  <div class="opt">D. 壓縮後的檔案大小一定等於 H × W × b ÷ 8</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、C</strong><br>
+  A ✓ JPEG 用量化捨棄高頻資訊。<br>
+  B ✗ PNG 是<strong>無損</strong>。<br>
+  C ✓ 例如區塊效應，直方圖可能出現異常峰或空隙。<br>
+  D ✗ 那是<strong>未壓縮</strong>的大小；壓縮後通常小得多。</div>
+</div>
+
+<div class="mq q" data-ans="0,1">
+  <div class="qt">A-12. 關於「解析度要多少才夠」，正確的有？</div>
+  <div class="opt">A. 需要多少解析度取決於影像的用途與觀看距離</div>
+  <div class="opt">B. 在細節豐富的區域，解析度不足會比在平坦區域更明顯</div>
+  <div class="opt">C. 8-bit 對所有專業領域都綽綽有餘，醫學影像也不需要更高的位元深度</div>
+  <div class="opt">D. 解析度越高一定越好，沒有任何代價</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、B</strong><br>
+  A ✓ 看圖目的不同，需求不同。<br>
+  B ✓ 平坦區降解析度不易察覺。<br>
+  C ✗ 8-bit 對一般自然影像夠用，但<strong>醫學影像（CT、MRI）常用 12~16 bit</strong>，以保留更細的灰階層次。「所有」「都」是絕對化陷阱。<br>
+  D ✗ 代價是<strong>儲存空間與計算時間</strong>大幅增加。</div>
+</div>
+
+<div class="mq q" data-ans="0,1,2">
+  <div class="qt">A-13. 關於感測器的飽和（saturation）與雜訊，正確的有？</div>
+  <div class="opt">A. 進光量過多超出感測上限時會飽和，該區域細節無法還原</div>
+  <div class="opt">B. 飽和會在直方圖最右端造成堆積</div>
+  <div class="opt">C. 光線不足時，雜訊相對訊號的比例會提高</div>
+  <div class="opt">D. 飽和與雜訊都可以用直方圖均衡化完全修復</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、B、C</strong><br>
+  A ✓ 過曝資訊永久遺失。<br>
+  B ✓ 全部被夾在最大值。<br>
+  C ✓ 低光時 SNR 下降。<br>
+  D ✗ 均衡化只是<strong>重新分配既有的值</strong>，<strong>無法把已經遺失的細節變回來</strong>，
+  反而可能讓雜訊更明顯。</div>
+</div>
+
+<div class="mq q" data-ans="0,1,3">
+  <div class="qt">A-14. 下列哪些屬於數位影像處理常見的應用／處理階段？</div>
+  <div class="opt">A. 影像去雜訊與影像增強</div>
+  <div class="opt">B. 影像分割與形態學處理</div>
+  <div class="opt">C. 以物理引擎模擬剛體碰撞</div>
+  <div class="opt">D. 影像壓縮與影像復原（restoration）</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、B、D</strong><br>
+  A、B、D ✓ 都是 DIP 的標準階段。<br>
+  C ✗ 那是<strong>物理模擬／電腦圖學</strong>的範疇，不是影像處理。</div>
+</div>
+
+<!-- ======================================================= CH2 -->
+<h2 id="c2">第 2 章 · 點運算與影像合成</h2>
+
+<div class="mq q" data-ans="0,1">
+  <div class="qt">A-15. 關於點運算（point operation），正確的有？</div>
+  <div class="opt">A. 輸出像素值只取決於同一位置的輸入像素值</div>
+  <div class="opt">B. 反相、二值化、Gamma 轉換都屬於點運算</div>
+  <div class="opt">C. 3×3 中位數濾波屬於點運算</div>
+  <div class="opt">D. 點運算會改變影像的空間解析度</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、B</strong><br>
+  A ✓ 定義。B ✓ 三者都只用同位置的值。<br>
+  C ✗ 要讀鄰域。D ✗ 只改亮度，尺寸不變。</div>
+</div>
+
+<div class="mq q" data-ans="0,2">
+  <div class="qt">A-16. 關於齊次（homogeneous）與非齊次點運算，正確的有？</div>
+  <div class="opt">A. 齊次點運算對所有像素套用相同的轉換函數</div>
+  <div class="opt">B. 非齊次點運算的輸出會取決於鄰居的值</div>
+  <div class="opt">C. 四角壓暗（vignette）屬於非齊次點運算</div>
+  <div class="opt">D. 非齊次點運算就是濾波</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、C</strong><br>
+  A ✓ 例如整張 +50。<br>
+  B ✗ 非齊次是指轉換函數<strong>隨位置不同</strong>，但仍<strong>只看自己那一點</strong>的值，不看鄰居。<br>
+  C ✓ 轉換強度依座標而變。<br>
+  D ✗ 濾波的定義是<strong>看鄰域</strong>，兩者不同。</div>
+</div>
+
+<div class="mq q" data-ans="0,1,3">
+  <div class="qt">A-17. 關於影像反相 s = 255 − r，正確的有？</div>
+  <div class="opt">A. 最亮的像素會變成最暗</div>
+  <div class="opt">B. 直方圖會左右鏡像翻轉</div>
+  <div class="opt">C. 這個操作不可逆</div>
+  <div class="opt">D. r = 0 會變成 255</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、B、D</strong><br>
+  A ✓ B ✓ 線性反轉使直方圖整個翻過來。<br>
+  C ✗ <strong>可逆</strong>：再做一次就還原。真正不可逆的是均衡化。<br>
+  D ✓</div>
+</div>
+
+<div class="mq q" data-ans="0,1,2">
+  <div class="qt">A-18. 關於冪次轉換 s = c · r<sup>γ</sup>，正確的有？</div>
+  <div class="opt">A. γ &lt; 1 時影像變亮</div>
+  <div class="opt">B. γ &gt; 1 時影像變暗</div>
+  <div class="opt">C. 對 8-bit 影像應先正規化到 0~1 再取次方</div>
+  <div class="opt">D. γ = 1 時影像會變成全黑</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、B、C</strong><br>
+  A、B ✓ 0~1 的小數次方越大值越小。<br>
+  C ✓ 否則溢位。<br>
+  D ✗ γ=1 是恆等轉換，影像不變。</div>
+</div>
+
+<div class="mq q" data-ans="0,1">
+  <div class="qt">A-19. 關於 Gamma 校正的實務意義，正確的有？</div>
+  <div class="opt">A. 顯示器的輸出亮度與輸入訊號並非線性關係</div>
+  <div class="opt">B. 人眼對暗部的變化比亮部敏感，因此用非線性編碼較有效率</div>
+  <div class="opt">C. 拍攝端與顯示端都套用 γ ≈ 2.2，兩者即可互相抵銷</div>
+  <div class="opt">D. Gamma 校正屬於鄰域運算</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、B</strong><br>
+  A ✓ 約 2.2 次方關係。<br>
+  B ✓ Weber's law。<br>
+  C ✗ 兩端都用 2.2 會<strong>疊加</strong>成 2.2 × 2.2 ≈ 4.8，影像會更暗。正確是拍攝端用 <strong>1/2.2</strong>、顯示端用 2.2，相乘才等於 1。<br>
+  D ✗ 是<strong>點運算</strong>。</div>
+</div>
+
+<div class="mq q" data-ans="0,1,3">
+  <div class="qt">A-20. 關於對數轉換 s = c · log(1 + r)，正確的有？</div>
+  <div class="opt">A. 會把暗部的細節拉開</div>
+  <div class="opt">B. 會把亮部壓縮</div>
+  <div class="opt">C. 會讓整體影像變暗</div>
+  <div class="opt">D. 常用於壓縮動態範圍很大的影像</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、B、D</strong><br>
+  A、B ✓ log 曲線在小輸入時斜率大、大輸入時斜率小。<br>
+  C ✗ 整體是<strong>變亮</strong>（暗部被大幅提升）。<br>
+  D ✓ 例如傅立葉頻譜的顯示。</div>
+</div>
+
+<div class="mq q" data-ans="0,2">
+  <div class="qt">A-21. 關於二值化（thresholding）與強度窗化（intensity windowing），正確的有？</div>
+  <div class="opt">A. 二值化把影像變成只有兩種值，是形態學處理的前置步驟</div>
+  <div class="opt">B. 二值化的閾值固定為 128，不需依影像調整</div>
+  <div class="opt">C. 強度窗化是把某個區間 [a, b] 拉伸到完整範圍，區間外的值被截斷</div>
+  <div class="opt">D. 二值化後仍保留原本的灰階層次</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、C</strong><br>
+  A ✓ 第 6 章只處理二值圖。<br>
+  B ✗ 閾值應<strong>依影像而定</strong>（例如看直方圖雙峰之間的谷底，或用 Otsu 自動求取）；固定 128 對偏亮或偏暗的影像會完全失效。<br>
+  C ✓ 醫學影像常用（例如只看某個 HU 範圍）。<br>
+  D ✗ 二值化後<strong>只剩兩種值</strong>，層次全部消失。</div>
+</div>
+
+<div class="mq q" data-ans="0,1,2">
+  <div class="qt">A-22. 關於多張影像平均，正確的有？</div>
+  <div class="opt">A. 可降低隨機雜訊，雜訊標準差約降為 1/√N</div>
+  <div class="opt">B. 平均 16 張，雜訊約降為原本的 1/4</div>
+  <div class="opt">C. 前提是多張影像必須對齊（內容相同、雜訊獨立）</div>
+  <div class="opt">D. 平均 N 張會使訊號本身也衰減為 1/N</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、B、C</strong><br>
+  A ✓ 注意是 1/√N。B ✓ √16 = 4。<br>
+  C ✓ 若物體移動了，平均只會產生殘影。<br>
+  D ✗ 訊號固定，平均後不變。</div>
+</div>
+
+<div class="mq q" data-ans="0,1">
+  <div class="qt">A-23. 關於影像相減的應用，正確的有？</div>
+  <div class="opt">A. 可用於監視畫面的背景相減，找出移動物體</div>
+  <div class="opt">B. 可用於工業檢測，比對標準件找出瑕疵</div>
+  <div class="opt">C. 取絕對差 |I₁ − I₂| 之後，仍可分辨出是變亮還是變暗</div>
+  <div class="opt">D. 相減結果一定落在 0~255，不需要處理範圍問題</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、B</strong><br>
+  A、B ✓ 經典應用。<br>
+  C ✗ 取絕對值之後<strong>正負資訊就消失了</strong>，只知道「有差異」，無法分辨變亮或變暗（但好處是不會漏看）。<br>
+  D ✗ 相減可能得到 <strong>−255 ~ 255</strong>，必須取絕對值或平移／箝位。</div>
+</div>
+
+<div class="mq q" data-ans="0,2,3">
+  <div class="qt">A-24. 關於 Alpha 混合 I = αF + (1−α)B，正確的有？</div>
+  <div class="opt">A. α = 1 時結果完全是前景 F</div>
+  <div class="opt">B. α = 0 時結果完全是前景 F</div>
+  <div class="opt">C. 兩個權重相加為 1，可確保亮度不會爆掉</div>
+  <div class="opt">D. 0 &lt; α &lt; 1 表示半透明，是柔和過渡的來源</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、C、D</strong><br>
+  A ✓ 代入 α=1 得 F。<br>
+  B ✗ α=0 得 <strong>B（背景）</strong>。<br>
+  C ✓ 凸組合。<br>
+  D ✓ 羽化就是讓 α 平滑變化。</div>
+</div>
+
+<div class="mq q" data-ans="0,1,3">
+  <div class="qt">A-25. 關於影像合成的過渡帶（window size），正確的有？</div>
+  <div class="opt">A. 過渡帶太窄會看到明顯接縫（seam）</div>
+  <div class="opt">B. 過渡帶太寬會出現鬼影（ghosting）</div>
+  <div class="opt">C. 過渡帶的理想寬度與影像的頻率內容無關</div>
+  <div class="opt">D. Pyramid blending 對不同頻率層使用不同寬度的過渡帶</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、B、D</strong><br>
+  A ✓ 亮度不連續。B ✓ 大範圍半透明疊加。<br>
+  C ✗ 關係很大，經驗法則取<strong>最大明顯特徵的尺寸</strong>。<br>
+  D ✓ 低頻寬過渡、高頻窄過渡。</div>
+</div>
+
+<div class="mq q" data-ans="0">
+  <div class="qt">A-26. 關於用二值遮罩直接貼上（naive copy-paste）的問題，正確的有？</div>
+  <div class="opt">A. 邊界會出現生硬的接縫</div>
+  <div class="opt">B. 只要遮罩邊緣畫得夠精細，就能正確表現薄紗、煙霧等半透明物體</div>
+  <div class="opt">C. 二值遮罩能正確處理陰影這種「部分覆蓋」的情況</div>
+  <div class="opt">D. 只要遮罩畫得夠精準，就能完全解決上述所有問題</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A（只有一個正確）</strong><br>
+  A ✓ 二值遮罩在邊界造成亮度不連續。<br>
+  B ✗ 半透明需要<strong>部分覆蓋</strong>，二值遮罩只有 0 或 1 兩種狀態，再精細也做不到。<br>
+  C ✗ 同理，陰影是部分遮蔽，二值遮罩無法表現。<br>
+  D ✗ 關鍵不在遮罩畫得準不準，而在於必須引入 0~1 連續的 <strong>alpha 通道</strong>。</div>
+</div>
+
+<div class="mq q" data-ans="0,1,2">
+  <div class="qt">A-27. 關於 8-bit（uint8）運算的溢位問題，正確的有？</div>
+  <div class="opt">A. uint8 下計算 200 + 100，結果會變成 44</div>
+  <div class="opt">B. 先轉成浮點數再運算可以避免此問題</div>
+  <div class="opt">C. 運算後用 clip 把值夾回 0~255 是正確做法</div>
+  <div class="opt">D. uint8 可表示的範圍是 −128 ~ 127</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、B、C</strong><br>
+  A ✓ 300 − 256 = 44（繞回）。<br>
+  B、C ✓ 標準流程：float → 運算 → clip → uint8。<br>
+  D ✗ 那是 <strong>int8</strong>；uint8 是 0 ~ 255。</div>
+</div>
+
+<div class="mq q" data-ans="1,2">
+  <div class="qt">A-28. 關於「不要混合，用剪的」（don't blend, cut）這類合成方法，正確的有？</div>
+  <div class="opt">A. 它的做法是把過渡帶開得非常寬</div>
+  <div class="opt">B. 它改為尋找一條「差異最小」的接縫路徑來裁切</div>
+  <div class="opt">C. 沿著兩張影像最相似的地方裁切，可讓接縫不易被察覺</div>
+  <div class="opt">D. 這種方法一定優於 alpha blending，已完全取代之</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：B、C</strong><br>
+  A ✗ 剛好相反，它<strong>不靠過渡帶</strong>。<br>
+  B ✓ 用最短路徑／最小誤差邊界（如 Dijkstra）找裁切線。<br>
+  C ✓ 在兩圖本來就像的地方接合，看不出來。<br>
+  D ✗ 各有適用情境，<strong>沒有一種方法在所有情況都最好</strong>（絕對化陷阱）。</div>
+</div>
+
+<!-- ======================================================= CH3 -->
+<h2 id="c3">第 3 章 · 直方圖</h2>
+
+<div class="mq q" data-ans="0,1,3">
+  <div class="qt">A-29. 關於直方圖的性質，正確的有？</div>
+  <div class="opt">A. 所有長條的總和等於總像素數 N</div>
+  <div class="opt">B. 直方圖不包含像素的位置資訊</div>
+  <div class="opt">C. 由直方圖可以唯一還原出原始影像</div>
+  <div class="opt">D. 正規化直方圖 p(i) = h(i)/N 可視為機率分布</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、B、D</strong><br>
+  A ✓ B ✓ 只統計數量不管位置。<br>
+  C ✗ 打亂像素後直方圖不變，故<strong>無法還原</strong>。<br>
+  D ✓ 總和為 1。</div>
+</div>
+
+<div class="mq q" data-ans="0,1,3">
+  <div class="qt">A-30. 關於累積直方圖 cdf，正確的有？</div>
+  <div class="opt">A. cdf 是單調不遞減的</div>
+  <div class="opt">B. cdf(L−1) 必定等於總像素數 N</div>
+  <div class="opt">C. 若某灰階的像素數為 0，cdf 在該處會下降</div>
+  <div class="opt">D. cdf(i) 表示亮度小於等於 i 的像素總數</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、B、D</strong><br>
+  A ✓ 只會持平或上升。B ✓ 很好的驗算點。<br>
+  C ✗ 加 0 只會<strong>持平</strong>，永不下降。<br>
+  D ✓ 累積的定義。</div>
+</div>
+
+<div class="mq q" data-ans="0,1,3">
+  <div class="qt">A-31. 關於直方圖均衡化的公式，正確的有？</div>
+  <div class="opt">A. s = round( (L−1)/N × cdf(r) )</div>
+  <div class="opt">B. 若忘記乘 (L−1)，結果會落在 0~1 之間，影像近乎全黑</div>
+  <div class="opt">C. 公式中應該乘 L 而不是 L−1</div>
+  <div class="opt">D. 原影像中最大的灰階，處理後必定對應到 L−1</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、B、D</strong><br>
+  A ✓ B ✓ cdf/N 只到 1。<br>
+  C ✗ 必須是 <strong>L−1</strong>，乘 L 會算出 256 超出範圍。<br>
+  D ✓ 最大灰階 cdf = N → s = L−1。</div>
+</div>
+
+<div class="mq q" data-ans="1,2,3">
+  <div class="qt">A-32. 關於直方圖均衡化的結果，正確的有？</div>
+  <div class="opt">A. 處理後的直方圖會變成完全平坦的水平線</div>
+  <div class="opt">B. 處理後的直方圖通常呈現有空隙的「梳子狀」</div>
+  <div class="opt">C. 此操作不可逆</div>
+  <div class="opt">D. 對比通常增強，像素值的標準差變大</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：B、C、D</strong><br>
+  A ✗ 經典陷阱：灰階離散，<strong>不可能完全平坦</strong>。<br>
+  B ✓ 合併與空缺造成。C ✓ 灰階被合併。D ✓ 擁擠區間被拉開。</div>
+</div>
+
+<div class="mq q" data-ans="0,1,2">
+  <div class="qt">A-33. 比較「對比拉伸」與「直方圖均衡化」，正確的有？</div>
+  <div class="opt">A. 對比拉伸是線性映射</div>
+  <div class="opt">B. 均衡化依據 cdf 做非線性重分配</div>
+  <div class="opt">C. 對比拉伸不會把不同灰階合併，均衡化則可能合併</div>
+  <div class="opt">D. 均衡化需要先指定 r<sub>min</sub> 與 r<sub>max</sub></div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、B、C</strong><br>
+  A ✓ 直線映射。B ✓ 依像素多寡重分配。C ✓ 這也是均衡化不可逆的原因。<br>
+  D ✗ 需要 r<sub>min</sub>/r<sub>max</sub> 的是<strong>對比拉伸</strong>；均衡化全自動。</div>
+</div>
+
+<div class="mq q" data-ans="0,2">
+  <div class="qt">A-34. 關於自動對比調整（auto-contrast）的實務問題，正確的有？</div>
+  <div class="opt">A. 若影像中有極少數極亮或極暗的離群像素，會使拉伸效果變差</div>
+  <div class="opt">B. 改良方式是先做高斯模糊，把離群像素抹掉後再拉伸</div>
+  <div class="opt">C. 拉伸過度可能造成亮部「燒掉」（burn out）而失去細節</div>
+  <div class="opt">D. 自動對比調整一定比直方圖均衡化效果好</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、C</strong><br>
+  A ✓ 一顆亮點就會把 r<sub>max</sub> 拉到 255，使拉伸幾乎無效。<br>
+  B ✗ 模糊會破壞整張影像的細節。正確作法是<strong>忽略最亮／最暗的某個百分比</strong>（例如前後各 1%）再決定 r<sub>min</sub>、r<sub>max</sub>。<br>
+  C ✓ 被夾到端點的像素細節遺失。<br>
+  D ✗ 絕對化陷阱，兩者各有適用場合。</div>
+</div>
+
+<div class="mq q" data-ans="0,1,2">
+  <div class="qt">A-35. 關於局部（adaptive）均衡化，正確的有？</div>
+  <div class="opt">A. 做法是對每個像素，用其鄰域視窗內的分布做均衡化</div>
+  <div class="opt">B. 計算量比全域均衡化大很多</div>
+  <div class="opt">C. 容易放大平坦區域中的雜訊</div>
+  <div class="opt">D. 視窗取得越大，局部細節的增強效果越強</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、B、C</strong><br>
+  A ✓ B ✓ 每個像素都要重算一次。C ✓ 微小雜訊被硬拉開。<br>
+  D ✗ 相反：視窗<strong>越大越接近全域</strong>均衡化，局部效果<strong>越弱</strong>。</div>
+</div>
+
+<div class="mq q" data-ans="0,1">
+  <div class="qt">A-36. 關於直方圖匹配（histogram matching / specification），正確的有？</div>
+  <div class="opt">A. 目標是讓影像的直方圖接近某個指定的參考分布</div>
+  <div class="opt">B. 可用於色調或風格轉移</div>
+  <div class="opt">C. 彩色影像必須先轉成灰階，才能進行直方圖匹配</div>
+  <div class="opt">D. 直方圖均衡化與直方圖匹配是完全無關的兩種方法</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、B</strong><br>
+  A ✓ B ✓<br>
+  C ✗ 不需要轉灰階，<strong>可對 R、G、B 各通道獨立匹配</strong>（只要來源與參考的通道數相同）。<br>
+  D ✗ 均衡化可視為<strong>匹配到「均勻分布」的特例</strong>，兩者都以 cdf 為核心工具。</div>
+</div>
+
+<div class="mq q" data-ans="0,1,2">
+  <div class="qt">A-37. 由直方圖診斷影像，正確的有？</div>
+  <div class="opt">A. 分布集中在右側 → 曝光過度</div>
+  <div class="opt">B. 集中在中間一段窄範圍 → 對比偏低</div>
+  <div class="opt">C. 最左或最右端出現一根特別高的柱 → 可能發生削波，細節已遺失</div>
+  <div class="opt">D. 出現梳子狀空隙，通常表示影像未經任何後製處理</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、B、C</strong><br>
+  A ✓ 值大 = 亮。B ✓ 範圍窄。C ✓ 超出範圍被夾在端點。<br>
+  D ✗ 相反，梳子狀正是<strong>被處理過</strong>的痕跡。</div>
+</div>
+
+<div class="mq q" data-ans="0,2">
+  <div class="qt">A-38. 關於直方圖的分組（binning），正確的有？</div>
+  <div class="opt">A. 當灰階級數很多時，可把多個相鄰灰階合併成一個 bin 以利觀察</div>
+  <div class="opt">B. 分 bin 之後資訊量不會有任何損失</div>
+  <div class="opt">C. 若把 256 級分成 32 個 bin，每個 bin 涵蓋 8 個灰階</div>
+  <div class="opt">D. bin 數越多，直方圖一定越容易解讀</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、C</strong><br>
+  A ✓ 例如 16-bit 影像直接畫 65536 根長條難以觀察。<br>
+  B ✗ 合併後<strong>無法區分</strong>同一 bin 內的不同灰階，有損失。<br>
+  C ✓ 256 ÷ 32 = 8。<br>
+  D ✗ bin 太多會過於雜亂（也可能每根都很矮），<strong>不一定</strong>好讀。</div>
+</div>
+
+<div class="mq q" data-ans="0,1,3">
+  <div class="qt">A-39. 關於對比與動態範圍，正確的有？</div>
+  <div class="opt">A. 影像的動態範圍指最亮與最暗之間的跨度</div>
+  <div class="opt">B. 對比低的影像，其直方圖佔據的灰階範圍較窄</div>
+  <div class="opt">C. 提高對比一定會增加影像的資訊量</div>
+  <div class="opt">D. HDR 技術可透過合成多張不同曝光的影像來擴大可記錄的動態範圍</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、B、D</strong><br>
+  A ✓ B ✓<br>
+  C ✗ 提高對比只是<strong>重新分配</strong>既有資訊，甚至可能因箝位而<strong>損失</strong>資訊。<br>
+  D ✓ 不同曝光各自記錄不同亮度段，再合成。</div>
+</div>
+
+<div class="mq q" data-ans="0,1">
+  <div class="qt">A-40. 某影像經直方圖均衡化後，下列推論正確的有？</div>
+  <div class="opt">A. 新影像中必定存在值為 L−1 的像素</div>
+  <div class="opt">B. 新影像的灰階個數不會超過原影像的灰階個數</div>
+  <div class="opt">C. 新影像的灰階個數一定等於 L</div>
+  <div class="opt">D. 新影像的平均亮度一定等於 (L−1)/2</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、B</strong><br>
+  A ✓ 最大灰階的 cdf = N，必對應到 L−1。<br>
+  B ✓ 均衡化是<strong>多對一</strong>的映射，只會合併不會新增灰階種類。<br>
+  C ✗ 因為會合併，實際用到的灰階數通常<strong>少於</strong> L。<br>
+  D ✗ 理想連續情況下平均會趨近中間值，但<strong>離散影像不保證</strong>，是絕對化陷阱。</div>
+</div>
+
+<div class="mq q" data-ans="0,1,2">
+  <div class="qt">A-41. 關於均衡化的適用情境，正確的有？</div>
+  <div class="opt">A. 對低對比、灰階集中的影像效果最明顯</div>
+  <div class="opt">B. 可用於醫學影像以凸顯被低對比掩蓋的細節</div>
+  <div class="opt">C. 對本來對比就很好的影像，效果有限甚至可能變差</div>
+  <div class="opt">D. 對任何影像都能無副作用地提升品質</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、B、C</strong><br>
+  A ✓ B ✓ 講義明確提到的應用。<br>
+  C ✓ 可能造成過度增強、顏色不自然。<br>
+  D ✗ 絕對化陷阱；副作用包括<strong>放大雜訊</strong>與<strong>灰階合併</strong>。</div>
+</div>
+
+<div class="mq q" data-ans="1,3">
+  <div class="qt">A-42. 一張 4×4 影像（N = 16, L = 8），某灰階 r 的 cdf(r) = 12，則？</div>
+  <div class="opt">A. s = round(8/16 × 12) = 6</div>
+  <div class="opt">B. s = round(7/16 × 12) = 5</div>
+  <div class="opt">C. 此灰階必定是影像中最大的灰階</div>
+  <div class="opt">D. 若 cdf(r) = 16，則 s = 7</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：B、D</strong><br>
+  A ✗ 係數要用 <strong>(L−1)/N = 7/16</strong>，不是 8/16。<br>
+  B ✓ 7/16 × 12 = 5.25 → round = <strong>5</strong>。<br>
+  C ✗ cdf = 12 &lt; 16 = N，表示<strong>後面還有更大的灰階</strong>。<br>
+  D ✓ 7/16 × 16 = 7，正是最大灰階對應到 L−1 的情形。</div>
+</div>
+
+<!-- ======================================================= CH4 -->
+<h2 id="c4">第 4 章 · 濾波器</h2>
+
+<div class="mq q" data-ans="0,1,2">
+  <div class="qt">A-43. 關於相關與卷積，正確的有？</div>
+  <div class="opt">A. 卷積需要先把核旋轉 180°</div>
+  <div class="opt">B. 若核本身對稱，相關與卷積的結果相同</div>
+  <div class="opt">C. 卷積滿足交換律與結合律</div>
+  <div class="opt">D. 相關也滿足結合律，因此可先合併多個核</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、B、C</strong><br>
+  A ✓ 唯一的差別。B ✓ 翻轉後長得一樣。C ✓ 實務偏好卷積的原因。<br>
+  D ✗ <strong>相關不滿足</strong>交換律與結合律。</div>
+</div>
+
+<div class="mq q" data-ans="0,1,2">
+  <div class="qt">A-44. 關於脈衝（impulse / Dirac）與核的關係，正確的有？</div>
+  <div class="opt">A. 脈衝與核做卷積，會得到原樣的核</div>
+  <div class="opt">B. 脈衝與核做相關，會得到左右顛倒的核</div>
+  <div class="opt">C. 中心為 1、其餘為 0 的 3×3 核，不會改變影像</div>
+  <div class="opt">D. 把那個 1 移到角落，影像會被旋轉</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、B、C</strong><br>
+  A ✓ 稱為「脈衝響應」。B ✓ 不翻轉就得鏡像。C ✓ 恆等核。<br>
+  D ✗ 是<strong>平移</strong>（hw6 第一題）。</div>
+</div>
+
+<div class="mq q" data-ans="0,1">
+  <div class="qt">A-45. 關於濾波器係數的正規化，正確的有？</div>
+  <div class="opt">A. 平滑用的核，係數總和應為 1</div>
+  <div class="opt">B. 微分類的核（Sobel、Laplacian）係數總和為 0</div>
+  <div class="opt">C. 3×3 box filter 若忘記除以 9，影像會明顯變暗</div>
+  <div class="opt">D. 高斯核的係數總和也應該是 0</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、B</strong><br>
+  A ✓ B ✓ 所以平坦區回應 0。<br>
+  C ✗ 方向相反 —— 變成<strong>總和</strong>而非平均，亮度約變 <strong>9 倍</strong>，大面積過曝變白。<br>
+  D ✗ 高斯是<strong>平滑</strong>核，總和為 <strong>1</strong>。</div>
+</div>
+
+<div class="mq q" data-ans="0,1,2">
+  <div class="qt">A-46. 一張 100×100 的影像與 7×7 的核運算，正確的有？</div>
+  <div class="opt">A. full 模式輸出為 106×106</div>
+  <div class="opt">B. same 模式輸出為 100×100</div>
+  <div class="opt">C. valid 模式輸出為 94×94</div>
+  <div class="opt">D. 結果置於視窗中心時，上下左右各有 7 格無法計算</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、B、C</strong><br>
+  A ✓ 100+7−1。B ✓ C ✓ 100−7+1。<br>
+  D ✗ 無效邊界寬 <strong>⌊7/2⌋ = 3</strong> 格。</div>
+</div>
+
+<div class="mq q" data-ans="0,1,2">
+  <div class="qt">A-47. 關於邊界處理，正確的有？</div>
+  <div class="opt">A. zero padding 會使影像邊緣偏暗</div>
+  <div class="opt">B. replicate 是把最外圈的像素值往外延伸</div>
+  <div class="opt">C. reflect 是以鏡射方式向外延伸</div>
+  <div class="opt">D. valid 模式的輸出會比輸入大</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、B、C</strong><br>
+  A ✓ 外面補 0（黑）把邊緣拉暗。B、C ✓ 效果較自然的做法。<br>
+  D ✗ valid 的輸出一定<strong>比較小</strong>。</div>
+</div>
+
+<div class="mq q" data-ans="0,1,2">
+  <div class="qt">A-48. 關於可分離（separable）濾波器，正確的有？</div>
+  <div class="opt">A. 2D 高斯可分解為一個水平 1D 高斯與一個垂直 1D 高斯</div>
+  <div class="opt">B. 可分離使每像素的乘法次數由 O(K²) 降為 O(K)</div>
+  <div class="opt">C. K = 11 時，乘法次數由 121 次降為 22 次</div>
+  <div class="opt">D. 中位數濾波同樣可以用可分離方式加速</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、B、C</strong><br>
+  A ✓ B ✓ K² → 2K。C ✓ 121 → 22。<br>
+  D ✗ 中位數是<strong>非線性</strong>，先排序列再排序行 ≠ 整體中位數。</div>
+</div>
+
+<div class="mq q" data-ans="0,1,2">
+  <div class="qt">A-49. 關於非線性濾波，正確的有？</div>
+  <div class="opt">A. 中位數濾波是非線性運算，不能寫成卷積</div>
+  <div class="opt">B. 中位數濾波對椒鹽雜訊特別有效</div>
+  <div class="opt">C. max 濾波可去除胡椒（黑點），但會放大鹽（白點）</div>
+  <div class="opt">D. min 濾波可去除胡椒（黑點）</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、B、C</strong><br>
+  A ✓ 需要排序。B ✓ 極端值被排到兩端。C ✓<br>
+  D ✗ min 取最小值，去掉的是<strong>鹽（白點）</strong>。</div>
+</div>
+
+<div class="mq q" data-ans="0,1">
+  <div class="qt">A-50. 關於雜訊的種類與對策，正確的有？</div>
+  <div class="opt">A. 高斯雜訊是加在每個像素上的隨機擾動，適合用平均／高斯濾波抑制</div>
+  <div class="opt">B. 椒鹽雜訊屬於脈衝雜訊，只影響部分像素但幅度極大</div>
+  <div class="opt">C. 對椒鹽雜訊使用 3×3 平均濾波，可以把雜訊完全去除</div>
+  <div class="opt">D. 中位數濾波對所有種類的雜訊都是最佳選擇</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、B</strong><br>
+  A ✓ 高斯雜訊零均值，平均可抵銷。<br>
+  B ✓ 值直接變成 0 或 255。<br>
+  C ✗ 平均濾波<strong>無法去除</strong>椒鹽雜訊，只是把極端值「抹開」去污染鄰居，結果是一團糊掉的灰影。要用<strong>中位數</strong>。<br>
+  D ✗ 絕對化陷阱：對<strong>高斯雜訊</strong>，平均／高斯濾波通常表現更好，
+  且中位數會破壞細緻紋理。</div>
+</div>
+
+<div class="mq q" data-ans="0,1,2">
+  <div class="qt">A-51. 關於影像銳化，正確的有？</div>
+  <div class="opt">A. unsharp mask = 原圖 − 模糊圖</div>
+  <div class="opt">B. 銳化結果 = 原圖 + k × mask</div>
+  <div class="opt">C. k 越大越銳利，但容易產生光暈（halo）</div>
+  <div class="opt">D. k &gt; 1 的情形稱為 unsharp masking</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、B、C</strong><br>
+  A ✓ 被模糊抹掉的細節。B ✓ C ✓ 邊緣出現滾邊。<br>
+  D ✗ 名稱相反：k = 1 是 unsharp masking，<strong>k &gt; 1 叫 highboost filtering</strong>。</div>
+</div>
+
+<div class="mq q" data-ans="0,1,3">
+  <div class="qt">A-52. 關於重複濾波與卷積性質，正確的有？</div>
+  <div class="opt">A. 重複施加 box filter，結果逐漸接近高斯模糊</div>
+  <div class="opt">B. 連續兩次高斯模糊（σ₁、σ₂）等效於一次 σ = √(σ₁² + σ₂²) 的高斯</div>
+  <div class="opt">C. 重複模糊多次後，可以再用銳化完整還原原圖</div>
+  <div class="opt">D. 由卷積的結合律，多個核可先合併成一個再套用</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、B、D</strong><br>
+  A ✓ 中央極限定理（hw4 做 5 次就是在示範）。<br>
+  B ✓ 例如 σ₁=3、σ₂=4 等效 σ=5。<br>
+  C ✗ 模糊<strong>遺失高頻資訊</strong>，無法完整還原。<br>
+  D ✓ (f∗g)∗h = f∗(g∗h)。</div>
+</div>
+
+<div class="mq q" data-ans="0,1,2">
+  <div class="qt">A-53. 關於線性濾波器的定義與性質，正確的有？</div>
+  <div class="opt">A. 線性濾波滿足疊加性：對 (f₁ + f₂) 濾波等於分別濾波後相加</div>
+  <div class="opt">B. 線性濾波滿足齊次性：對 a·f 濾波等於濾波結果乘以 a</div>
+  <div class="opt">C. 卷積是平移不變（shift-invariant）的</div>
+  <div class="opt">D. max 濾波是線性濾波</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、B、C</strong><br>
+  A、B ✓ 線性的兩個條件。<br>
+  C ✓ 影像平移，輸出也跟著平移。<br>
+  D ✗ max（以及 min、median）都是<strong>非線性</strong>。</div>
+</div>
+
+<div class="mq q" data-ans="0,1,3">
+  <div class="qt">A-54. 關於 box filter 與高斯濾波的比較，正確的有？</div>
+  <div class="opt">A. box filter 對鄰域內所有像素一視同仁</div>
+  <div class="opt">B. 高斯濾波給予越靠近中心的像素越高的權重</div>
+  <div class="opt">C. box filter 的模糊效果比高斯自然，是實務首選</div>
+  <div class="opt">D. 兩者都是平滑（低通）濾波器</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、B、D</strong><br>
+  A ✓ 權重全部相同。B ✓ 依高斯函數遞減。<br>
+  C ✗ 相反：box 容易產生<strong>方塊狀痕跡</strong>，<strong>高斯比較自然</strong>且是實務標準。<br>
+  D ✓ 都會抑制高頻。</div>
+</div>
+
+<div class="mq q" data-ans="0,2">
+  <div class="qt">A-55. 關於高斯濾波中的 σ（標準差），正確的有？</div>
+  <div class="opt">A. σ 越大，模糊程度越強</div>
+  <div class="opt">B. σ 越大時，核的尺寸可以取得越小，以節省計算</div>
+  <div class="opt">C. σ 決定了權重隨距離衰減的快慢</div>
+  <div class="opt">D. 核尺寸固定時，σ 無論取多大效果都相同</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、C</strong><br>
+  A ✓ C ✓<br>
+  B ✗ 方向相反：σ 越大，權重分布越寬，<strong>核也必須開得越大</strong>（經驗上邊長約取 6σ），否則會把重要的權重截斷。<br>
+  D ✗ σ 直接改變權重分布；σ 很大時核內權重趨近均勻，接近 box filter。</div>
+</div>
+
+<div class="mq q" data-ans="0,2">
+  <div class="qt">A-56. 關於點運算與鄰域運算（濾波）的比較，正確的有？</div>
+  <div class="opt">A. 模糊、銳化、邊緣偵測都無法用點運算達成</div>
+  <div class="opt">B. 調整亮度與對比必須使用鄰域運算</div>
+  <div class="opt">C. 鄰域運算的輸出取決於一個區域內的多個像素</div>
+  <div class="opt">D. 點運算可以改變影像中物體的形狀</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、C</strong><br>
+  A ✓ 這些都需要<strong>空間資訊</strong>（鄰居），點運算做不到。<br>
+  B ✗ 亮度與對比調整正是典型的<strong>點</strong>運算。<br>
+  C ✓ 定義。<br>
+  D ✗ 點運算只改<strong>亮度值</strong>，不會移動或改變形狀。</div>
+</div>
+
+<div class="mq q" data-ans="0,1,2">
+  <div class="qt">A-57. 關於加權中位數（weighted median）濾波，正確的有？</div>
+  <div class="opt">A. 可以對不同位置的鄰居給予不同的重要性</div>
+  <div class="opt">B. 實作上常用「重複該值若干次後再排序取中位數」來體現權重</div>
+  <div class="opt">C. 它仍然屬於非線性濾波</div>
+  <div class="opt">D. 加上權重之後，它就變成線性濾波了</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、B、C</strong><br>
+  A ✓ 例如中心權重較高。B ✓ 標準實作技巧。C ✓ 核心仍是<strong>排序取中間</strong>。<br>
+  D ✗ 加權不改變它<strong>非線性</strong>的本質。</div>
+</div>
+
+<div class="mq q" data-ans="1,2">
+  <div class="qt">A-58. 用 3×3 box filter 處理下列鄰域，中心輸出值為何？相關敘述正確的有？<br>
+  <span style="font-size:14px;color:var(--muted)">鄰域各值：10, 20, 30 / 40, 50, 60 / 70, 80, 90</span></div>
+  <div class="opt">A. 輸出為 450</div>
+  <div class="opt">B. 輸出為 50</div>
+  <div class="opt">C. 輸出剛好等於中心原值，因為此鄰域是線性漸變</div>
+  <div class="opt">D. 輸出為 90</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：B、C</strong><br>
+  總和 = 10+20+…+90 = 450，平均 = 450 / 9 = <strong>50</strong>。<br>
+  A ✗ 450 是<strong>沒有除以 9</strong> 的錯誤答案（忘記正規化）。<br>
+  B ✓ C ✓ 因為數值線性遞增且對稱分布，平均正好等於中心值 50。<br>
+  D ✗ 90 是鄰域最大值，不是平均。</div>
+</div>
+
+<!-- ======================================================= CH5 -->
+<h2 id="c5">第 5 章 · 邊緣偵測</h2>
+
+<div class="mq q" data-ans="0,1,2">
+  <div class="qt">A-59. 關於邊緣的成因，下列哪些可能在影像中形成邊緣？</div>
+  <div class="opt">A. 深度不連續（物體遮擋）</div>
+  <div class="opt">B. 表面法線不連續（物體的轉角、摺痕）</div>
+  <div class="opt">C. 光照不連續（影子的邊界）</div>
+  <div class="opt">D. 影像的儲存格式由 PNG 改為 JPEG</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、B、C</strong><br>
+  A、B、C ✓ 連同<strong>表面顏色不連續</strong>，是講義列出的四大成因。<br>
+  D ✗ 更換檔案格式不會<strong>產生</strong>場景中的邊緣（雖然有損壓縮可能帶來區塊假影，
+  但那是壓縮假影，不是邊緣的成因）。</div>
+</div>
+
+<div class="mq q" data-ans="0,1,2">
+  <div class="qt">A-60. 關於邊緣的型態，正確的有？</div>
+  <div class="opt">A. Step edge 是亮度瞬間跳變的理想邊緣</div>
+  <div class="opt">B. Ramp edge 有一段漸變過渡，較接近真實照片中的邊緣</div>
+  <div class="opt">C. Roof edge 對應細線狀的結構</div>
+  <div class="opt">D. 真實影像中的邊緣多半是完美的 step edge</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、B、C</strong><br>
+  A ✓ B ✓ 因為鏡頭失焦、取樣與雜訊，真實邊緣都有過渡帶。<br>
+  C ✓ 先升後降。<br>
+  D ✗ 真實邊緣多為 <strong>ramp</strong>，完美 step 只是理想模型。</div>
+</div>
+
+<div class="mq q" data-ans="0,1,3">
+  <div class="qt">A-61. 關於影像梯度，正確的有？</div>
+  <div class="opt">A. 梯度大小 |∇f| = √(G<sub>x</sub>² + G<sub>y</sub>²)</div>
+  <div class="opt">B. 梯度方向 θ = tan⁻¹(G<sub>y</sub> / G<sub>x</sub>)</div>
+  <div class="opt">C. 梯度方向與邊緣方向平行</div>
+  <div class="opt">D. 一條水平邊緣，其梯度指向垂直方向</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、B、D</strong><br>
+  A、B ✓ 標準公式。<br>
+  C ✗ 是<strong>垂直</strong> —— 本章最常考的觀念。<br>
+  D ✓ 水平邊界只有上下有變化。</div>
+</div>
+
+<div class="mq q" data-ans="0,2">
+  <div class="qt">A-62. 關於離散微分的近似，正確的有？</div>
+  <div class="opt">A. 中央差分可寫成 [f(x+1) − f(x−1)] / 2</div>
+  <div class="opt">B. 中央差分對應的核是 ½ × [1, 0, 1]</div>
+  <div class="opt">C. 微分運算可以用卷積來實現</div>
+  <div class="opt">D. 離散影像無法進行微分，只能用積分近似</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、C</strong><br>
+  A ✓ 用相鄰像素相減近似斜率。<br>
+  B ✗ 核應為 ½ × <strong>[−1, 0, 1]</strong>（注意要有<strong>負號</strong>，是相減不是相加）。若寫成 [1, 0, 1] 就變成平滑而不是微分了。<br>
+  C ✓ 所以 Sobel、Laplacian 都是卷積核。<br>
+  D ✗ 可用<strong>有限差分（finite difference）</strong>來近似微分。</div>
+</div>
+
+<div class="mq q" data-ans="0,1,2">
+  <div class="qt">A-63. 關於 Sobel 與 Prewitt 運算子，正確的有？</div>
+  <div class="opt">A. Sobel 的中心列／行權重為 2，等於順便做了平滑，較抗雜訊</div>
+  <div class="opt">B. 兩者的核係數總和皆為 0</div>
+  <div class="opt">C. G<sub>x</sub> 主要用於偵測垂直方向的邊緣</div>
+  <div class="opt">D. Prewitt 比 Sobel 更能抵抗雜訊</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、B、C</strong><br>
+  A ✓ 兩者主要差別。B ✓ 平坦區回應 0。C ✓ 左負右正抓左右差異。<br>
+  D ✗ 相反，<strong>Sobel 較抗雜訊</strong>。</div>
+</div>
+
+<div class="mq q" data-ans="0,1">
+  <div class="qt">A-64. 某像素的 G<sub>x</sub> = 3、G<sub>y</sub> = 4，正確的有？</div>
+  <div class="opt">A. 梯度大小為 5</div>
+  <div class="opt">B. 梯度方向約為 53.1°</div>
+  <div class="opt">C. 梯度大小為 7</div>
+  <div class="opt">D. 該點位於完全平坦的區域</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、B</strong><br>
+  A ✓ √(9+16) = 5。B ✓ tan⁻¹(4/3) ≈ 53.13°。<br>
+  C ✗ 7 是 |G<sub>x</sub>|+|G<sub>y</sub>| 的<strong>近似</strong>，題目未指定時應用標準公式。<br>
+  D ✗ 平坦區梯度應為 0。</div>
+</div>
+
+<div class="mq q" data-ans="0,1,2">
+  <div class="qt">A-65. 關於雜訊與平滑，正確的有？</div>
+  <div class="opt">A. 微分運算會放大雜訊</div>
+  <div class="opt">B. 因此通常先做高斯平滑再求導數</div>
+  <div class="opt">C. 由微分定理，可先對高斯核微分，再與影像做一次卷積即可</div>
+  <div class="opt">D. σ 取得越大，邊緣定位越精準</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、B、C</strong><br>
+  A ✓ 雜訊就是鄰居差異大。B ✓ C ✓ d/dx(G∗f) = (d/dx G)∗f，省一次運算。<br>
+  D ✗ 相反：σ 大則<strong>抗雜訊好但定位差</strong>，這是經典 trade-off。</div>
+</div>
+
+<div class="mq q" data-ans="0,1,3">
+  <div class="qt">A-66. 關於 Laplacian 運算子，正確的有？</div>
+  <div class="opt">A. 它是二階微分運算子</div>
+  <div class="opt">B. 邊緣位置對應於其輸出的零交越（zero-crossing）</div>
+  <div class="opt">C. 它可以同時提供邊緣的強度與方向</div>
+  <div class="opt">D. 其核的中心為負值、周圍為正值，總和為 0</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、B、D</strong><br>
+  A ✓ B ✓ 一階找峰值、二階找零交越。<br>
+  C ✗ Laplacian 是<strong>各向同性</strong>的，<strong>不提供方向</strong>。<br>
+  D ✓ 例如 [[0,1,0],[1,−4,1],[0,1,0]]。</div>
+</div>
+
+<div class="mq q" data-ans="0,1,2">
+  <div class="qt">A-67. 關於 LoG 與 DoG，正確的有？</div>
+  <div class="opt">A. LoG 是先用高斯平滑、再做 Laplacian</div>
+  <div class="opt">B. LoG 的形狀常被稱為「墨西哥帽」</div>
+  <div class="opt">C. DoG（兩個不同 σ 的高斯相減）可用來近似 LoG</div>
+  <div class="opt">D. 使用 LoG 的目的是讓 Laplacian 對雜訊更敏感</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、B、C</strong><br>
+  A ✓ B ✓ 中間凹、周圍凸起的形狀。C ✓ 計算上更省。<br>
+  D ✗ 目的剛好相反 —— 是要<strong>降低</strong>對雜訊的敏感度。</div>
+</div>
+
+<div class="mq q" data-ans="0,1,2">
+  <div class="qt">A-68. 關於 Canny 邊緣偵測，正確的有？</div>
+  <div class="opt">A. 第一步是高斯平滑</div>
+  <div class="opt">B. 非極大值抑制（NMS）可把邊緣細化為單像素寬</div>
+  <div class="opt">C. 雙閾值中，介於 L 與 H 的弱邊緣只有在與強邊緣相連時才保留</div>
+  <div class="opt">D. NMS 的目的是把斷裂的邊緣連接起來</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、B、C</strong><br>
+  A ✓ B ✓ 對應「一條邊只回應一次」。C ✓ hysteresis 的精神。<br>
+  D ✗ 連接斷裂邊緣是<strong>第 4 步</strong>做的，不是 NMS。</div>
+</div>
+
+<div class="mq q" data-ans="0,1,2,3">
+  <div class="qt">A-69. 關於 Canny 的三個設計目標，正確的有？</div>
+  <div class="opt">A. Good detection：對真實邊緣有回應，不被雜訊誤導</div>
+  <div class="opt">B. Good localization：偵測到的位置要接近真實邊緣位置</div>
+  <div class="opt">C. Minimal response：一條邊緣只產生一個回應</div>
+  <div class="opt">D. Detection 與 localization 之間存在取捨，無法同時達到最佳</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、B、C、D（四個全對）</strong><br>
+  A、B、C ✓ 三大準則，其中 C 由 NMS 負責。<br>
+  D ✓ 平滑越多 → 抗雜訊（detection）越好，但邊緣被抹糊 → 定位（localization）越差。<br>
+  <strong>這題四個全對。</strong></div>
+</div>
+
+<div class="mq q" data-ans="0,2">
+  <div class="qt">A-70. 關於雙閾值（hysteresis）的設定，正確的有？</div>
+  <div class="opt">A. 大於高閾值 H 的點直接判定為強邊緣</div>
+  <div class="opt">B. 小於低閾值 L 的點會被當成弱邊緣保留</div>
+  <div class="opt">C. 使用雙閾值的目的是避免邊緣斷斷續續（streaking）</div>
+  <div class="opt">D. 只要使用單一閾值，就不會有邊緣斷裂的問題</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、C</strong><br>
+  A ✓<br>
+  B ✗ 小於 L 的點直接<strong>捨棄</strong>，不是保留。弱邊緣是介於 L 與 H 之間的點。<br>
+  C ✓<br>
+  D ✗ 相反 —— 單一閾值正是造成斷裂的原因，所以才需要雙閾值。</div>
+</div>
+
+<div class="mq q" data-ans="0,1,2">
+  <div class="qt">A-71. 關於多尺度（multi-scale）邊緣，正確的有？</div>
+  <div class="opt">A. 在較細的尺度（小 σ）可偵測到更多細節邊緣</div>
+  <div class="opt">B. 在較粗的尺度（大 σ）只會保留較顯著的大結構邊緣</div>
+  <div class="opt">C. 調整閾值也會改變最終保留的邊緣數量</div>
+  <div class="opt">D. 存在一個對所有影像都最佳的固定 σ 與閾值</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、B、C</strong><br>
+  A、B ✓ 這就是「邊緣有尺度性」的意思。<br>
+  C ✓ 高閾值留下少而強的邊。<br>
+  D ✗ 絕對化陷阱，參數需<strong>依影像與目的調整</strong>。</div>
+</div>
+
+<div class="mq q" data-ans="0,1,2">
+  <div class="qt">A-72. 關於其他邊緣運算子，正確的有？</div>
+  <div class="opt">A. Roberts 運算子使用 2×2 的核</div>
+  <div class="opt">B. Compass（羅盤）運算子使用多個方向的核，取其中最大的回應</div>
+  <div class="opt">C. 對 Sobel 的結果取閾值，可得到二值的邊緣圖</div>
+  <div class="opt">D. 所有邊緣運算子得到的結果都完全相同</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、B、C</strong><br>
+  A ✓ 最小的微分核，對雜訊較敏感。<br>
+  B ✓ 例如 8 個方向，哪個方向回應最大就代表邊緣方向。<br>
+  C ✓ 講義中 Sobel 結果取 64 / 96 等閾值的例子。<br>
+  D ✗ 不同運算子的核不同，<strong>抗雜訊能力與定位精度都不同</strong>。</div>
+</div>
+
+<!-- ======================================================= CH6 -->
+<h2 id="c6">第 6 章 · 形態學處理</h2>
+
+<div class="mq q" data-ans="0,1,3">
+  <div class="qt">A-73. 關於形態學運算的前提，正確的有？</div>
+  <div class="opt">A. 本章討論的運算作用於二值影像</div>
+  <div class="opt">B. 結構元（SE）的形狀會影響運算結果</div>
+  <div class="opt">C. 結構元必須是正方形</div>
+  <div class="opt">D. 灰階影像需先二值化才能套用這些運算</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、B、D</strong><br>
+  A ✓ B ✓ 方形、十字、X 形結果都不同。<br>
+  C ✗ 可以是任意形狀（hw6 用 15×13 的字元當 SE）。<br>
+  D ✓ 第 2 章的二值化是前置步驟。</div>
+</div>
+
+<div class="mq q" data-ans="0,2">
+  <div class="qt">A-74. 關於結構元的原點，正確的有？</div>
+  <div class="opt">A. 原點決定運算結果要寫回輸出影像的哪個位置</div>
+  <div class="opt">B. 原點必須設在結構元中值為 1 的位置上</div>
+  <div class="opt">C. 若把原點設在非中心位置，結果會產生位移</div>
+  <div class="opt">D. 原點的位置不影響任何結果</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、C</strong><br>
+  A ✓<br>
+  B ✗ 原點<strong>慣例上</strong>設在中心，但<strong>不是必須</strong> —— 它可以落在值為 0 的位置，甚至在結構元之外。<br>
+  C ✓ 這正是用單點核做<strong>平移</strong>的原理。<br>
+  D ✗ 影響很大，會造成整體位移。</div>
+</div>
+
+<div class="mq q" data-ans="0,1,2">
+  <div class="qt">A-75. 關於侵蝕與膨脹，正確的有？</div>
+  <div class="opt">A. 侵蝕要求 SE 覆蓋的所有位置都是前景，中心才保留</div>
+  <div class="opt">B. 膨脹只要 SE 覆蓋範圍內有任一前景，中心就變前景</div>
+  <div class="opt">C. 侵蝕可用來分離黏在一起的物體</div>
+  <div class="opt">D. 膨脹會讓物體內部的小洞變得更大</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、B、C</strong><br>
+  A ✓ AND（全中）。B ✓ OR（有中就算）。C ✓ 細的連接處先斷開。<br>
+  D ✗ 相反：膨脹<strong>填平</strong>小洞；讓洞變大的是侵蝕。</div>
+</div>
+
+<div class="mq q" data-ans="0,1,2">
+  <div class="qt">A-76. 用 3×3 全 1 的 SE 處理一個孤立的單一前景像素，正確的有？</div>
+  <div class="opt">A. 侵蝕後該點會消失</div>
+  <div class="opt">B. 膨脹後會變成 3×3 的方塊</div>
+  <div class="opt">C. Opening 後該點會消失</div>
+  <div class="opt">D. Closing 後該點會消失</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、B、C</strong><br>
+  A ✓ 周圍都是背景，不滿足「全中」。<br>
+  B ✓ 向外長一圈。<br>
+  C ✓ Opening = 侵蝕→膨脹，侵蝕時已消失，膨脹救不回來。<br>
+  D ✗ Closing = 膨脹→侵蝕：先變 3×3，再侵蝕回原本的<strong>單點</strong>，
+  所以<strong>該點仍然存在</strong>。</div>
+</div>
+
+<div class="mq q" data-ans="0,1,2">
+  <div class="qt">A-77. 關於 Opening 與 Closing，正確的有？</div>
+  <div class="opt">A. Opening = 先侵蝕再膨脹</div>
+  <div class="opt">B. Closing = 先膨脹再侵蝕</div>
+  <div class="opt">C. Opening 可去除比結構元小的前景雜點</div>
+  <div class="opt">D. Closing 後的前景面積會小於等於原圖</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、B、C</strong><br>
+  A、B ✓ 順序不能反。C ✓<br>
+  D ✗ 相反：<strong>closing(A) ⊇ A</strong>，面積<strong>大於等於</strong>原圖。
+  面積變小的是 Opening。</div>
+</div>
+
+<div class="mq q" data-ans="0,1,2">
+  <div class="qt">A-78. 關於 Opening／Closing 的性質，正確的有？</div>
+  <div class="opt">A. opening(A) ⊆ A</div>
+  <div class="opt">B. A ⊆ closing(A)</div>
+  <div class="opt">C. 兩者都具有冪等性：做第二次不會再改變結果</div>
+  <div class="opt">D. 連續做 Opening 三次，物體會持續縮小</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、B、C</strong><br>
+  A、B ✓ opening ⊆ 原圖 ⊆ closing。C ✓ open(open(A)) = open(A)。<br>
+  D ✗ 因為<strong>冪等性</strong>，第二次之後就不再改變。
+  會持續縮小的是連續做<strong>侵蝕</strong>。</div>
+</div>
+
+<div class="mq q" data-ans="0,1">
+  <div class="qt">A-79. 關於 Opening 與 Closing 的雜訊濾除用途，正確的有？</div>
+  <div class="opt">A. Opening 適合去除背景中的小白點</div>
+  <div class="opt">B. Closing 適合填補前景物體中的小黑洞</div>
+  <div class="opt">C. 先 Opening 再 Closing 與先 Closing 再 Opening，結果一定相同</div>
+  <div class="opt">D. Opening 與 Closing 的效果完全相同，可互相取代</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、B</strong><br>
+  A ✓ B ✓ 兩者分工明確。<br>
+  C ✗ 兩種順序的<strong>結果通常不同</strong>（形態學運算不可交換）。雖然「先 Opening 再 Closing」確實是常見的去雜訊組合，但不能說兩種順序等價。<br>
+  D ✗ 兩者是<strong>對偶但不同</strong>的運算，絕不能互換。</div>
+</div>
+
+<div class="mq q" data-ans="0,1,2">
+  <div class="qt">A-80. 關於形態學邊界抽取，正確的有？</div>
+  <div class="opt">A. 內邊界 = A − erode(A)</div>
+  <div class="opt">B. 外邊界 = dilate(A) − A</div>
+  <div class="opt">C. 形態學梯度 = dilate(A) − erode(A)</div>
+  <div class="opt">D. 形態學梯度得到的輪廓比內邊界更細</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、B、C</strong><br>
+  A ✓ 位於物體<strong>內部</strong>。B ✓ 位於物體<strong>外部</strong>。C ✓ 等於內 ∪ 外。<br>
+  D ✗ 同時包含內外兩圈，所以<strong>更粗</strong>。</div>
+</div>
+
+<div class="mq q" data-ans="0,1,2">
+  <div class="qt">A-81. 關於膨脹與侵蝕的代數性質，正確的有？</div>
+  <div class="opt">A. 膨脹滿足交換律：A ⊕ B = B ⊕ A</div>
+  <div class="opt">B. 膨脹滿足結合律：(A ⊕ B) ⊕ C = A ⊕ (B ⊕ C)</div>
+  <div class="opt">C. 用 3×3 方形 SE 連續膨脹兩次，效果等同用一個 5×5 方形 SE 膨脹一次</div>
+  <div class="opt">D. 侵蝕也滿足交換律：A ⊖ B = B ⊖ A</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、B、C</strong><br>
+  A、B ✓ 膨脹具有這兩個性質。<br>
+  C ✓ 這是結合律的實際應用：<strong>可用小核重複達成大核效果</strong>，節省計算。<br>
+  D ✗ <strong>侵蝕不滿足交換律</strong>（影像與結構元的角色不對等）。</div>
+</div>
+
+<div class="mq q" data-ans="0,2">
+  <div class="qt">A-82. 關於侵蝕與膨脹的對偶性（duality），正確的有？</div>
+  <div class="opt">A. 對前景做侵蝕，相當於對背景做膨脹後再取補集</div>
+  <div class="opt">B. 對偶性表示侵蝕與膨脹的結果完全相同</div>
+  <div class="opt">C. 因為有對偶性，實作上只需寫一種運算就能推得另一種</div>
+  <div class="opt">D. 對偶性只在結構元為單一像素時成立</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、C</strong><br>
+  A ✓ 形式為 (A ⊖ B)<sup>c</sup> = A<sup>c</sup> ⊕ B̂（B̂ 為反射後的 SE）。<br>
+  B ✗ 兩者結果<strong>相反</strong>（一個變瘦一個變胖），不是相同。<br>
+  C ✓ 這是對偶性的實用價值。<br>
+  D ✗ 對一般結構元都成立。</div>
+</div>
+
+<div class="mq q" data-ans="0,2">
+  <div class="qt">A-83. 關於形態學的實際應用，正確的有？</div>
+  <div class="opt">A. 可用侵蝕把黏在一起的物體（如硬幣）分開後再計數</div>
+  <div class="opt">B. 可直接用在灰階影像上，不必先二值化</div>
+  <div class="opt">C. 可用 Opening／Closing 清理二值化後殘留的雜點</div>
+  <div class="opt">D. 形態學運算可直接套用在彩色相片上做去雜訊</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、C</strong><br>
+  A ✓ 講義中的 blob separation / counting coins 例子。<br>
+  B ✗ 本章的運算定義在<strong>二值</strong>影像上，灰階必須先二值化。（雖然存在灰階形態學，但那不是本章範圍。）<br>
+  C ✓ 非常常見的後處理。<br>
+  D ✗ 本章方法針對<strong>二值</strong>影像，彩色相片必須先轉灰階並二值化。</div>
+</div>
+
+<div class="mq q" data-ans="0,1,2">
+  <div class="qt">A-84. 用形態學做字元偵測（hw6），正確的有？</div>
+  <div class="opt">A. 以目標字元當結構元去侵蝕文章，可找出該字元出現的位置</div>
+  <div class="opt">B. 偵測（侵蝕）階段應使用相關，即結構元不翻轉</div>
+  <div class="opt">C. 把字元蓋回去時若不翻轉結構元，會得到左右顛倒的鏡像字</div>
+  <div class="opt">D. 侵蝕之後，每個命中位置仍會保留完整的字元形狀</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、B、C</strong><br>
+  A ✓ 只有「完全放得下」的位置會留下。<br>
+  B ✓ 要找這個字而非鏡像。<br>
+  C ✓ 膨脹定義內含一次反射，需用翻轉（卷積）抵銷。<br>
+  D ✗ 侵蝕後每處只剩<strong>很小一塊（通常一個點）</strong>，才需要膨脹蓋回去做視覺化。</div>
+</div>
+
+<div class="mq q" data-ans="0,1,2">
+  <div class="qt">A-85. 關於用卷積核做平移（hw6 第一題），正確的有？</div>
+  <div class="opt">A. 只含單一個 1、其餘為 0 的核，可使影像平移</div>
+  <div class="opt">B. 因為卷積會先翻轉核，實際位移方向與 1 在核中的位置相反直覺</div>
+  <div class="opt">C. 1 位於 3×3 核的正中央時，影像不會移動</div>
+  <div class="opt">D. 這種平移會改變影像的尺寸</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、B、C</strong><br>
+  A ✓ B ✓ 這正是 hw6 容易算錯的地方 —— 務必記得翻轉。<br>
+  C ✓ 恆等核。<br>
+  D ✗ 用 'same' 模式時<strong>尺寸不變</strong>，只是內容平移（邊緣會補 0）。</div>
+</div>
+
+<div class="mq q" data-ans="0,1,2">
+  <div class="qt">A-86. 關於平移不變性（shift invariance），正確的有？</div>
+  <div class="opt">A. 卷積運算具有平移不變性</div>
+  <div class="opt">B. 平移不變表示：輸入平移後，輸出也會以相同量平移</div>
+  <div class="opt">C. 形態學的侵蝕與膨脹同樣具有平移不變性</div>
+  <div class="opt">D. 平移不變表示輸入平移後輸出完全不變</div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：A、B、C</strong><br>
+  A ✓ 同一個核套用在每個位置。<br>
+  B ✓ 嚴格來說這稱為 shift-<strong>equivariance</strong>（等變），是本課所指的意思。<br>
+  C ✓ 形態學運算也在每個位置套用相同的 SE。<br>
+  D ✗ 輸出<strong>會跟著平移</strong>，而不是不變。</div>
+</div>
+
+<div class="score" id="score"></div>
+
+<hr>
+
+<div class="box ok">
+  <span class="t">✅ 檢討方式（這步比做題更重要）</span>
+  <ol style="margin-bottom:0">
+    <li>把<strong>答錯的題目</strong>記下來，但不要只記答案。</li>
+    <li>問自己：我是<strong>漏選</strong>還是<strong>多選</strong>？
+        漏選 = 有個正確觀念不熟；多選 = 被某個陷阱騙了。</li>
+    <li>回去看該章節，特別注意「陷阱」方框。</li>
+    <li>隔天重做一次，目標是<strong>每個選項都能說出為什麼對／錯</strong>。</li>
+  </ol>
+</div>
+
+<div class="pager">
+  <a href="quiz.html">← 10 題快速模擬</a>
+  <a href="practice-b.html">Part B 題庫 →</a>
+</div>
+
+<p class="foot">CISC3011 期中溫習站 · Part A 全面題庫<br>
+題目為依課程範圍自行命題的練習題，非真實考題。</p>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
