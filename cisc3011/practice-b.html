@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Part B 題庫 — CISC3011 溫習站</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="topbar"><div class="topbar-in">
+  <a class="brand" href="index.html">CISC3011 溫習站<small>數位影像處理 · 期中考 Ch1–6</small></a>
+  <nav class="navlinks">
+    <a href="index.html">首頁</a>
+    <a href="ch1.html">1 基礎</a><a href="ch2.html">2 點運算</a><a href="ch3.html">3 直方圖</a>
+    <a href="ch4.html">4 濾波</a><a href="ch5.html">5 邊緣</a><a href="ch6.html">6 形態學</a>
+    <a href="cheatsheet.html">速記</a><a href="quiz.html">測驗</a><a class="on" href="practice-b.html">B題庫</a>
+  </nav>
+</div></div>
+
+<div class="wrap">
+
+<h1>Part B 題庫 · 12 題</h1>
+<p class="sub">每題 10 分的計算／論述題 · 全部附逐步解答</p>
+
+<div class="box warn">
+  <span class="t">⚠️ 先自己做，再看解答</span>
+  Part B <strong>有部分分</strong>，所以重點不是「答案對不對」，而是<strong>你能不能把過程寫出來</strong>。
+  請拿一張紙，每題先自己算完再展開解答對照。<br>
+  <strong>所有解答的數字我都用程式驗算過</strong>，可以放心對答案。
+</div>
+
+<div class="box ok">
+  <span class="t">✅ 拿部分分的答題模板</span>
+  不管哪一題，照這個順序寫就能拿到過程分：
+  <ol style="margin-bottom:0">
+    <li><strong>寫下已知</strong>（L、N、核、公式）</li>
+    <li><strong>寫出要用的公式</strong>（即使還沒代數字）</li>
+    <li><strong>代入數字、列出計算過程</strong>（不要只寫答案）</li>
+    <li><strong>寫出結論並檢查合理性</strong>（例如「最大值應為 L−1 ✓」）</li>
+  </ol>
+</div>
+
+<div class="toc"><strong>題目一覽</strong>
+<ol>
+  <li><a href="#b1">直方圖均衡化（5×5）</a>　<span class="tag hot">最常考</span></li>
+  <li><a href="#b2">一維相關與卷積</a>　<span class="tag hot">最常考</span></li>
+  <li><a href="#b3">二維卷積：平滑與銳化</a></li>
+  <li><a href="#b4">中位數 vs 平均濾波</a></li>
+  <li><a href="#b5">Unsharp Masking / Highboost</a></li>
+  <li><a href="#b6">Sobel 梯度與邊緣方向</a>　<span class="tag hot">最常考</span></li>
+  <li><a href="#b7">Laplacian 與零交越</a></li>
+  <li><a href="#b8">形態學：侵蝕／膨脹／開閉運算</a>　<span class="tag hot">最常考</span></li>
+  <li><a href="#b9">Gamma 轉換</a></li>
+  <li><a href="#b10">Alpha 混合與羽化</a></li>
+  <li><a href="#b11">取樣、量化與容量</a></li>
+  <li><a href="#b12">Canny：NMS 與雙閾值</a></li>
+</ol></div>
+
+<!-- ============================================ B1 -->
+<h2 id="b1">B-1　直方圖均衡化（10 分）</h2>
+<div class="card">
+<p style="margin-top:0">下圖為一張 5×5 的灰階影像，灰階範圍 0~7（L = 8）。</p>
+<div class="mat" style="grid-template-columns:repeat(5,1fr)">
+  <span>3</span><span>3</span><span>4</span><span>4</span><span>5</span>
+  <span>2</span><span>3</span><span>4</span><span>5</span><span>5</span>
+  <span>2</span><span>2</span><span>3</span><span>4</span><span>6</span>
+  <span>1</span><span>2</span><span>3</span><span>4</span><span>6</span>
+  <span>1</span><span>2</span><span>3</span><span>3</span><span>7</span>
+</div>
+<p>(a) 求直方圖 h(r) 與累積直方圖 cdf(r)。(b) 求均衡化對應表。(c) 寫出輸出影像。(d) 說明對比的變化。</p>
+</div>
+
+<details>
+<summary>完整解答</summary>
+<p><strong>(a)　N = 25，L = 8</strong></p>
+<div class="tw"><table>
+<tr><th>r</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th></tr>
+<tr><td><strong>h(r)</strong></td><td>0</td><td>2</td><td>5</td><td>7</td><td>5</td><td>3</td><td>2</td><td>1</td></tr>
+<tr><td><strong>cdf(r)</strong></td><td>0</td><td>2</td><td>7</td><td>14</td><td>19</td><td>22</td><td>24</td><td>25</td></tr>
+</table></div>
+<p>檢查：h 總和 = 2+5+7+5+3+2+1 = 25 = N ✓；cdf 最後一項 = 25 = N ✓</p>
+
+<p><strong>(b)　s = round( (L−1)/N × cdf(r) ) = round( 7/25 × cdf(r) ) = round( 0.28 × cdf(r) )</strong></p>
+<div class="tw"><table>
+<tr><th>r</th><th>cdf(r)</th><th>0.28 × cdf</th><th>s</th></tr>
+<tr><td>0</td><td>0</td><td>0.00</td><td><strong>0</strong></td></tr>
+<tr><td>1</td><td>2</td><td>0.56</td><td><strong>1</strong></td></tr>
+<tr><td>2</td><td>7</td><td>1.96</td><td><strong>2</strong></td></tr>
+<tr><td>3</td><td>14</td><td>3.92</td><td><strong>4</strong></td></tr>
+<tr><td>4</td><td>19</td><td>5.32</td><td><strong>5</strong></td></tr>
+<tr><td>5</td><td>22</td><td>6.16</td><td><strong>6</strong></td></tr>
+<tr><td>6</td><td>24</td><td>6.72</td><td><strong>7</strong></td></tr>
+<tr><td>7</td><td>25</td><td>7.00</td><td><strong>7</strong></td></tr>
+</table></div>
+<p>檢查：最大灰階對應到 7 = L−1 ✓</p>
+
+<p><strong>(c)　查表換值（1→1, 2→2, 3→4, 4→5, 5→6, 6→7, 7→7）</strong></p>
+<div class="mat" style="grid-template-columns:repeat(5,1fr)">
+  <span class="hl">4</span><span class="hl">4</span><span class="hl">5</span><span class="hl">5</span><span class="hl">6</span>
+  <span class="hl">2</span><span class="hl">4</span><span class="hl">5</span><span class="hl">6</span><span class="hl">6</span>
+  <span class="hl">2</span><span class="hl">2</span><span class="hl">4</span><span class="hl">5</span><span class="hl">7</span>
+  <span class="hl">1</span><span class="hl">2</span><span class="hl">4</span><span class="hl">5</span><span class="hl">7</span>
+  <span class="hl">1</span><span class="hl">2</span><span class="hl">4</span><span class="hl">4</span><span class="hl">7</span>
+</div>
+
+<p><strong>(d)　對比變化</strong></p>
+<ul>
+<li>原影像用到的灰階是 1~7，但集中在 2~4；處理後分布拉開到 1~7，<strong>對比增強</strong>
+（標準差由 1.53 提高到 1.80）。</li>
+<li>灰階 6 和 7 都被對應到 7，<strong>發生合併 → 不可逆</strong>。</li>
+<li>新影像中沒有灰階 0 和 3，<strong>直方圖出現空隙，不是完全平坦的</strong>。</li>
+</ul>
+</details>
+
+<!-- ============================================ B2 -->
+<h2 id="b2">B-2　一維相關與卷積（10 分）</h2>
+<div class="card">
+<p style="margin-top:0">已知訊號 <strong>f = [2, 1, 3, 0, 4]</strong>、核 <strong>w = [1, −2, 3]</strong>。</p>
+<p>(a) 求 full 卷積（寫出每一步）。(b) 求 same 與 valid 的結果與長度。(c) 求 full 相關，並說明與卷積的差異。</p>
+</div>
+
+<details>
+<summary>完整解答</summary>
+<p><strong>(a)　full 卷積</strong></p>
+<p>Step 1　核翻轉：w<sub>flip</sub> = <strong>[3, −2, 1]</strong><br>
+Step 2　兩邊各補 K−1 = 2 個 0：f′ = [0, 0, <strong>2, 1, 3, 0, 4</strong>, 0, 0]<br>
+Step 3　滑動相乘求和（輸出長度 = 5 + 3 − 1 = 7）：</p>
+<div class="tw"><table>
+<tr><th>位置</th><th>視窗</th><th>計算</th><th>結果</th></tr>
+<tr><td>0</td><td>[0,0,2]</td><td>3(0) + (−2)(0) + 1(2)</td><td><strong>2</strong></td></tr>
+<tr><td>1</td><td>[0,2,1]</td><td>3(0) + (−2)(2) + 1(1)</td><td><strong>−3</strong></td></tr>
+<tr><td>2</td><td>[2,1,3]</td><td>3(2) + (−2)(1) + 1(3)</td><td><strong>7</strong></td></tr>
+<tr><td>3</td><td>[1,3,0]</td><td>3(1) + (−2)(3) + 1(0)</td><td><strong>−3</strong></td></tr>
+<tr><td>4</td><td>[3,0,4]</td><td>3(3) + (−2)(0) + 1(4)</td><td><strong>13</strong></td></tr>
+<tr><td>5</td><td>[0,4,0]</td><td>3(0) + (−2)(4) + 1(0)</td><td><strong>−8</strong></td></tr>
+<tr><td>6</td><td>[4,0,0]</td><td>3(4) + (−2)(0) + 1(0)</td><td><strong>12</strong></td></tr>
+</table></div>
+<p><strong>full 卷積 = [2, −3, 7, −3, 13, −8, 12]</strong>（長度 7）</p>
+
+<p><strong>(b)</strong>　從 full 兩端各裁掉 ⌊K/2⌋ = 1 格：<br>
+<strong>same = [−3, 7, −3, 13, −8]</strong>（長度 5，與 f 相同）<br>
+再往內裁，只保留完全重疊的部分：<strong>valid = [7, −3, 13]</strong>（長度 5 − 3 + 1 = 3）</p>
+
+<p><strong>(c)　full 相關</strong>（核<strong>不</strong>翻轉，直接用 [1, −2, 3]）：<br>
+<strong>= [6, −1, 9, −5, 15, −8, 4]</strong></p>
+<p><strong>差異說明</strong>：兩者唯一差別是核有沒有翻轉 180°。
+因為 w = [1, −2, 3] <strong>不對稱</strong>，所以兩個結果不同；
+若核是對稱的（例如 [1, 2, 1]），相關與卷積會完全相同。</p>
+</details>
+
+<!-- ============================================ B3 -->
+<h2 id="b3">B-3　二維卷積：平滑與銳化（10 分）</h2>
+<div class="card">
+<p style="margin-top:0">5×5 影像 A（座標從 0 起算）：</p>
+<div class="mat" style="grid-template-columns:repeat(5,1fr)">
+  <span>10</span><span>10</span><span>10</span><span>10</span><span>10</span>
+  <span>10</span><span>20</span><span>30</span><span>20</span><span>10</span>
+  <span>10</span><span>30</span><span>90</span><span>30</span><span>10</span>
+  <span>10</span><span>20</span><span>30</span><span>20</span><span>10</span>
+  <span>10</span><span>10</span><span>10</span><span>10</span><span>10</span>
+</div>
+<p>(a) 用 3×3 box filter 求輸出在 (2,2) 與 (1,1) 的值。<br>
+(b) 用銳化核 <code>[[0,−1,0],[−1,5,−1],[0,−1,0]]</code> 求 (2,2) 的值，並說明要注意什麼。<br>
+(c) valid 模式的輸出尺寸是多少？</p>
+</div>
+
+<details>
+<summary>完整解答</summary>
+<p><strong>(a)　Box filter：係數全為 1/9</strong></p>
+<p>位置 (2,2) 的 3×3 鄰域是 A[1:4, 1:4]：</p>
+<div class="mat" style="grid-template-columns:repeat(3,1fr)">
+  <span>20</span><span>30</span><span>20</span>
+  <span>30</span><span class="hl">90</span><span>30</span>
+  <span>20</span><span>30</span><span>20</span>
+</div>
+<p>總和 = 20+30+20+30+90+30+20+30+20 = <strong>290</strong><br>
+輸出 = 290 / 9 = <strong>32.22</strong></p>
+
+<p>位置 (1,1) 的鄰域是 A[0:3, 0:3]：10+10+10+10+20+30+10+30+90 = 220<br>
+輸出 = 220 / 9 = <strong>24.44</strong></p>
+<p style="color:var(--muted);font-size:14px">注意中心值從 90 降到 32.22 —— 這就是平滑把亮點「抹平」的效果。</p>
+
+<p><strong>(b)　銳化核</strong>（係數和 = 5 − 4 = 1，所以整體亮度不變）</p>
+<p>輸出 = 5(90) − 30 − 30 − 30 − 30 = 450 − 120 = <strong>330</strong></p>
+<div class="box bad" style="margin:10px 0">
+<strong>要注意的是：330 超過 255</strong>，必須做 <strong>clipping（箝位）</strong>夾回 255，
+否則用 uint8 儲存會溢位繞回變成 74（330 − 256）。<br>
+這也說明銳化容易在強邊緣產生<strong>過曝的光暈（halo）</strong>。
+</div>
+
+<p><strong>(c)</strong>　valid 尺寸 = (N − K + 1) × (N − K + 1) = (5 − 3 + 1)² = <strong>3 × 3</strong></p>
+</details>
+
+<!-- ============================================ B4 -->
+<h2 id="b4">B-4　中位數 vs 平均濾波（10 分）</h2>
+<div class="card">
+<p style="margin-top:0">(a) 下列 3×3 視窗，分別求<strong>中位數</strong>與<strong>平均值</strong>，並說明哪個較合理。</p>
+<div class="mat" style="grid-template-columns:repeat(3,1fr)">
+  <span>12</span><span>10</span><span>255</span>
+  <span>11</span><span class="hl">13</span><span>14</span>
+  <span>0</span><span>12</span><span>11</span>
+</div>
+<p>(b) 下列 5×5 影像含椒鹽雜訊，求 3×3 中位數濾波在有效區域（中間 3×3）的結果。</p>
+<div class="mat" style="grid-template-columns:repeat(5,1fr)">
+  <span>5</span><span>5</span><span>5</span><span>5</span><span>5</span>
+  <span>5</span><span>5</span><span>255</span><span>5</span><span>5</span>
+  <span>5</span><span>0</span><span>5</span><span>5</span><span>5</span>
+  <span>5</span><span>5</span><span>5</span><span>255</span><span>5</span>
+  <span>5</span><span>5</span><span>5</span><span>5</span><span>5</span>
+</div>
+</div>
+
+<details>
+<summary>完整解答</summary>
+<p><strong>(a)</strong></p>
+<p>排序 9 個值：0, 10, 11, 11, 12, <strong>12</strong>, 13, 14, 255<br>
+中位數 = 第 5 個（index = 9//2 = 4，從 0 起算）= <strong>12</strong></p>
+<p>平均 = (12+10+255+11+13+14+0+12+11) / 9 = 338 / 9 = <strong>37.56</strong></p>
+<div class="box ok" style="margin:10px 0">
+<strong>中位數（12）比較合理。</strong>除了 255 和 0 這兩個雜訊，其餘像素都在 10~14 之間，
+中位數落在這個範圍內；平均值卻被 255 拉高到 37.56，<strong>明顯偏離真實亮度</strong>。<br>
+原因：排序後極端值被排到兩端，取中間值自然就忽略了它們。
+</div>
+
+<p><strong>(b)</strong>　每個位置取 3×3 共 9 個值排序取中間。以中心 (2,2) 為例：<br>
+鄰域為 {5,255,5, 0,5,5, 5,5,255} → 排序 0,5,5,5,<strong>5</strong>,5,5,255,255 → 中位數 = 5</p>
+<p>其餘位置同理，9 個 5 中混入 1~2 個極端值，中位數永遠是 5。結果：</p>
+<div class="mat" style="grid-template-columns:repeat(3,1fr)">
+  <span class="hl">5</span><span class="hl">5</span><span class="hl">5</span>
+  <span class="hl">5</span><span class="hl">5</span><span class="hl">5</span>
+  <span class="hl">5</span><span class="hl">5</span><span class="hl">5</span>
+</div>
+<p><strong>椒鹽雜訊被完全清除。</strong></p>
+<p style="color:var(--muted);font-size:14px">對照：若改用 3×3 平均濾波，同樣位置會得到
+32.2、60.0、4.4 等等 —— 雜訊沒被去掉，只是被「抹開」污染了周圍的乾淨像素。</p>
+</details>
+
+<!-- ============================================ B5 -->
+<h2 id="b5">B-5　Unsharp Masking / Highboost（10 分）</h2>
+<div class="card">
+<p style="margin-top:0">某一列 4 個像素，原始值與高斯模糊後的值如下：</p>
+<div class="tw"><table>
+<tr><th>位置</th><th>P1</th><th>P2</th><th>P3</th><th>P4</th></tr>
+<tr><td>原圖 f</td><td>100</td><td>150</td><td>200</td><td>60</td></tr>
+<tr><td>模糊 f̄</td><td>120</td><td>130</td><td>170</td><td>80</td></tr>
+</table></div>
+<p>(a) 求 unsharp mask。(b) 求 k = 1 與 k = 3 的銳化結果（注意範圍）。(c) 說明 k 太大的後果。</p>
+</div>
+
+<details>
+<summary>完整解答</summary>
+<p><strong>(a)　mask = 原圖 − 模糊</strong></p>
+<div class="tw"><table>
+<tr><th></th><th>P1</th><th>P2</th><th>P3</th><th>P4</th></tr>
+<tr><td>mask</td><td>100−120 = <strong>−20</strong></td><td>150−130 = <strong>+20</strong></td><td>200−170 = <strong>+30</strong></td><td>60−80 = <strong>−20</strong></td></tr>
+</table></div>
+<p>mask 為正 → 該點本來就比周圍亮；為負 → 本來就比周圍暗。</p>
+
+<p><strong>(b)　結果 = f + k × mask</strong></p>
+<div class="tw"><table>
+<tr><th>k</th><th>P1</th><th>P2</th><th>P3</th><th>P4</th></tr>
+<tr><td>k = 1</td><td>100−20 = 80</td><td>150+20 = 170</td><td>200+30 = 230</td><td>60−20 = 40</td></tr>
+<tr><td>k = 3</td><td>100−60 = 40</td><td>150+60 = 210</td><td>200+90 = <strong>290 → 箝位 255</strong></td><td>60−60 = <strong>0</strong></td></tr>
+</table></div>
+<p>k = 3 時 P3 算出 290 超過上限，必須 clip 成 <strong>255</strong>；P4 剛好落在 0。</p>
+
+<p><strong>(c)　k 太大的後果</strong></p>
+<ul>
+<li>亮的更亮、暗的更暗 → 邊緣兩側出現<strong>過曝的白邊與死黑的黑邊，即光暈（halo / overshoot）</strong>。</li>
+<li>超出 0~255 的值被箝位 → <strong>細節被削平、資訊永久損失</strong>（P3 和 P4 就是例子）。</li>
+<li>雜訊也屬於高頻，會被一起放大。</li>
+</ul>
+<p style="color:var(--muted);font-size:14px">補充：k = 1 稱為 unsharp masking，k &gt; 1 稱為 highboost filtering。</p>
+</details>
+
+<!-- ============================================ B6 -->
+<h2 id="b6">B-6　Sobel 梯度與邊緣方向（10 分）</h2>
+<div class="card">
+<p style="margin-top:0">5×5 影像（左半暗、右半亮）：</p>
+<div class="mat" style="grid-template-columns:repeat(5,1fr)">
+  <span>10</span><span>10</span><span>10</span><span>60</span><span>60</span>
+  <span>10</span><span>10</span><span>10</span><span>60</span><span>60</span>
+  <span>10</span><span>10</span><span>10</span><span>60</span><span>60</span>
+  <span>10</span><span>10</span><span>10</span><span>60</span><span>60</span>
+  <span>10</span><span>10</span><span>10</span><span>60</span><span>60</span>
+</div>
+<p>(a) 求位置 (2,2) 的 G<sub>x</sub>、G<sub>y</sub>、梯度大小與方向。(b) 判斷邊緣走向。
+(c) 位置 (2,3) 也算一次，並說明觀察到的現象與 Canny 的哪個步驟有關。</p>
+</div>
+
+<details>
+<summary>完整解答</summary>
+<p><strong>Sobel 遮罩</strong>（以相關方式套用，不翻轉）<br>
+G<sub>x</sub> = [[−1,0,1],[−2,0,2],[−1,0,1]]　　G<sub>y</sub> = [[−1,−2,−1],[0,0,0],[1,2,1]]</p>
+
+<p><strong>(a)　位置 (2,2)，鄰域為：</strong></p>
+<div class="mat" style="grid-template-columns:repeat(3,1fr)">
+  <span>10</span><span>10</span><span>60</span>
+  <span>10</span><span class="hl">10</span><span>60</span>
+  <span>10</span><span>10</span><span>60</span>
+</div>
+<p><strong>G<sub>x</sub></strong> = [(−1)(10) + 0 + (1)(60)] + [(−2)(10) + 0 + (2)(60)] + [(−1)(10) + 0 + (1)(60)]<br>
+= (−10+60) + (−20+120) + (−10+60) = 50 + 100 + 50 = <strong>200</strong></p>
+<p><strong>G<sub>y</sub></strong> = [(−1)(10) + (−2)(10) + (−1)(60)] + 0 + [(1)(10) + (2)(10) + (1)(60)]<br>
+= (−10−20−60) + (10+20+60) = −90 + 90 = <strong>0</strong></p>
+<p><strong>梯度大小</strong> |∇f| = √(200² + 0²) = <strong>200</strong><br>
+<strong>梯度方向</strong> θ = tan⁻¹(0 / 200) = <strong>0°</strong>（指向水平、往右）</p>
+
+<p><strong>(b)　邊緣走向</strong><br>
+梯度方向是 0°（水平），而<strong>邊緣永遠垂直於梯度</strong>，
+所以這裡的邊緣是一條<strong>垂直線</strong>。<br>
+這與影像相符：左邊三行是 10、右邊兩行是 60，分界線確實是垂直的。✓</p>
+
+<p><strong>(c)　位置 (2,3)</strong>，鄰域為 [[10,60,60],[10,60,60],[10,60,60]]：<br>
+G<sub>x</sub> = (−10+60) + (−20+120) + (−10+60) = <strong>200</strong>，G<sub>y</sub> = <strong>0</strong>，|∇f| = <strong>200</strong></p>
+<div class="box ok" style="margin:10px 0">
+<strong>觀察到的現象</strong>：第 2 行和第 3 行<strong>都</strong>有很強的回應（都是 200），
+也就是說一條邊緣產生了<strong>兩個像素寬</strong>的反應 —— 邊緣變「粗」了。<br>
+<strong>對應的 Canny 步驟：非極大值抑制（Non-Maximum Suppression, NMS）。</strong>
+NMS 沿著梯度方向比較，只保留局部最大值，把邊緣細化成單像素寬，
+這正是 Canny 三大目標中「minimal response（一條邊只回應一次）」的來源。
+</div>
+</details>
+
+<!-- ============================================ B7 -->
+<h2 id="b7">B-7　Laplacian 與零交越（10 分）</h2>
+<div class="card">
+<p style="margin-top:0">(a) 一維訊號 f = [10, 10, 10, 10, 50, 50, 50, 50]，用一維 Laplacian 核 [1, −2, 1] 計算
+（只需計算邊界以內的位置），並指出邊緣位置。</p>
+<p>(b) 用 4-鄰域 Laplacian <code>[[0,1,0],[1,−4,1],[0,1,0]]</code> 計算下列兩個 3×3 區域中心的回應，並解釋結果。</p>
+<div class="matrow">
+  <div><div class="cap">孤立亮點</div>
+  <div class="mat" style="grid-template-columns:repeat(3,1fr)">
+    <span>10</span><span>10</span><span>10</span><span>10</span><span class="hl">50</span><span>10</span><span>10</span><span>10</span><span>10</span>
+  </div></div>
+  <div><div class="cap">平坦區域</div>
+  <div class="mat" style="grid-template-columns:repeat(3,1fr)">
+    <span>30</span><span>30</span><span>30</span><span>30</span><span class="hl">30</span><span>30</span><span>30</span><span>30</span><span>30</span>
+  </div></div>
+</div>
+</div>
+
+<details>
+<summary>完整解答</summary>
+<p><strong>(a)</strong>　每個位置計算 f(i−1) − 2f(i) + f(i+1)：</p>
+<div class="tw"><table>
+<tr><th>i</th><th>計算</th><th>結果</th></tr>
+<tr><td>1</td><td>10 − 2(10) + 10</td><td>0</td></tr>
+<tr><td>2</td><td>10 − 2(10) + 10</td><td>0</td></tr>
+<tr><td>3</td><td>10 − 2(10) + 50</td><td><strong>+40</strong></td></tr>
+<tr><td>4</td><td>10 − 2(50) + 50</td><td><strong>−40</strong></td></tr>
+<tr><td>5</td><td>50 − 2(50) + 50</td><td>0</td></tr>
+<tr><td>6</td><td>50 − 2(50) + 50</td><td>0</td></tr>
+</table></div>
+<p><strong>邊緣位置</strong>：結果在 i = 3（+40）與 i = 4（−40）之間<strong>由正轉負</strong>，
+發生<strong>零交越（zero-crossing）</strong>，所以邊緣就位在 i = 3 與 4 之間 ——
+與原訊號由 10 跳到 50 的位置吻合 ✓</p>
+<div class="box" style="margin:10px 0">
+<strong>重點對比</strong>：一階導數在邊緣處出現<strong>峰值</strong>，
+二階導數（Laplacian）在邊緣處<strong>穿越零點</strong>。所以用 Laplacian 找邊緣是找「零交越」，不是找最大值。
+</div>
+
+<p><strong>(b)　孤立亮點</strong>：回應 = (10 + 10 + 10 + 10) − 4(50) = 40 − 200 = <strong>−160</strong><br>
+<strong>平坦區域</strong>：回應 = (30 + 30 + 30 + 30) − 4(30) = 120 − 120 = <strong>0</strong></p>
+<p><strong>解釋</strong>：</p>
+<ul>
+<li>平坦區域回應為 0，因為 Laplacian 核的<strong>係數總和為 0</strong>，常數區域必定被抵銷。</li>
+<li>孤立亮點產生<strong>很大的絕對值回應（−160）</strong>，代表 Laplacian 對<strong>孤立點與雜訊極度敏感</strong>
+（二階導數比一階更敏感）。</li>
+<li>這就是為什麼實務上要先做高斯平滑，合起來稱為 <strong>LoG（Laplacian of Gaussian）</strong>。</li>
+</ul>
+</details>
+
+<!-- ============================================ B8 -->
+<h2 id="b8">B-8　形態學運算（10 分）</h2>
+<div class="card">
+<p style="margin-top:0">以下 8×8 二值影像 A（1 = 前景），結構元 B 為 3×3 全 1、原點在中心。
+<strong>影像外視為 0。</strong></p>
+<div class="mat" style="grid-template-columns:repeat(8,1fr)">
+  <span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span>
+  <span>0</span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span>0</span><span>0</span><span>0</span>
+  <span>0</span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span>0</span><span>0</span><span>0</span>
+  <span>0</span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span>0</span><span>0</span><span>0</span>
+  <span>0</span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span>0</span><span>0</span><span>0</span>
+  <span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span>
+  <span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span class="on"></span><span>0</span>
+  <span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span><span>0</span>
+</div>
+<p style="font-size:14px;color:var(--muted)">（黑格 = 前景 1：一個 4×4 方塊，加上右下角一個孤立雜點）</p>
+<p>(a) 求侵蝕 A⊖B 與膨脹 A⊕B。(b) 求 Opening 與 Closing，並說明各自的作用。
+(c) 寫出內邊界、外邊界與形態學梯度的公式與關係。</p>
+</div>
+
+<details>
+<summary>完整解答</summary>
+<p><strong>(a)(i) 侵蝕</strong>：只有「3×3 鄰域<strong>全部</strong>為 1」的位置才保留。<br>
+4×4 方塊中，只有中間 2×2 的四個點符合；孤立雜點周圍都是 0 → 消失。</p>
+<div class="mat" style="grid-template-columns:repeat(8,1fr)">
+  <span>·</span><span>·</span><span>·</span><span>·</span><span>·</span><span>·</span><span>·</span><span>·</span>
+  <span>·</span><span>·</span><span>·</span><span>·</span><span>·</span><span>·</span><span>·</span><span>·</span>
+  <span>·</span><span>·</span><span class="on"></span><span class="on"></span><span>·</span><span>·</span><span>·</span><span>·</span>
+  <span>·</span><span>·</span><span class="on"></span><span class="on"></span><span>·</span><span>·</span><span>·</span><span>·</span>
+  <span>·</span><span>·</span><span>·</span><span>·</span><span>·</span><span>·</span><span>·</span><span>·</span>
+  <span>·</span><span>·</span><span>·</span><span>·</span><span>·</span><span>·</span><span>·</span><span>·</span>
+  <span>·</span><span>·</span><span>·</span><span>·</span><span>·</span><span>·</span><span>·</span><span>·</span>
+  <span>·</span><span>·</span><span>·</span><span>·</span><span>·</span><span>·</span><span>·</span><span>·</span>
+</div>
+<p>面積：17 → <strong>4</strong></p>
+
+<p><strong>(a)(ii) 膨脹</strong>：鄰域內<strong>只要有一個</strong> 1 就變 1。方塊往外長一圈、雜點變成 3×3。</p>
+<div class="mat" style="grid-template-columns:repeat(8,1fr)">
+  <span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span>·</span><span>·</span>
+  <span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span>·</span><span>·</span>
+  <span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span>·</span><span>·</span>
+  <span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span>·</span><span>·</span>
+  <span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span>·</span><span>·</span>
+  <span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span>
+  <span>·</span><span>·</span><span>·</span><span>·</span><span>·</span><span class="on"></span><span class="on"></span><span class="on"></span>
+  <span>·</span><span>·</span><span>·</span><span>·</span><span>·</span><span class="on"></span><span class="on"></span><span class="on"></span>
+</div>
+<p>面積：17 → <strong>44</strong></p>
+
+<p><strong>(b)(i) Opening = 侵蝕 → 膨脹</strong>：把 (a)(i) 的 2×2 再膨脹，
+<strong>完整還原成原本的 4×4 方塊</strong>，但<strong>孤立雜點不會回來</strong>。</p>
+<div class="mat" style="grid-template-columns:repeat(8,1fr)">
+  <span>·</span><span>·</span><span>·</span><span>·</span><span>·</span><span>·</span><span>·</span><span>·</span>
+  <span>·</span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span>·</span><span>·</span><span>·</span>
+  <span>·</span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span>·</span><span>·</span><span>·</span>
+  <span>·</span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span>·</span><span>·</span><span>·</span>
+  <span>·</span><span class="on"></span><span class="on"></span><span class="on"></span><span class="on"></span><span>·</span><span>·</span><span>·</span>
+  <span>·</span><span>·</span><span>·</span><span>·</span><span>·</span><span>·</span><span>·</span><span>·</span>
+  <span>·</span><span>·</span><span>·</span><span>·</span><span>·</span><span>·</span><span>·</span><span>·</span>
+  <span>·</span><span>·</span><span>·</span><span>·</span><span>·</span><span>·</span><span>·</span><span>·</span>
+</div>
+<p>面積 = <strong>16</strong>（＝原本 17 減掉那一個雜點）<br>
+<strong>作用：去除比結構元小的前景雜點，同時保持大物體的大小與形狀。</strong></p>
+
+<p><strong>(b)(ii) Closing = 膨脹 → 侵蝕</strong>：這張圖沒有洞也沒有缺口，
+所以結果<strong>與原圖完全相同</strong>（面積 17，雜點仍在）。</p>
+<div class="box ok" style="margin:10px 0">
+<strong>補充對照（很好的加分說明）</strong>：若把方塊中間挖掉一個像素變成一個洞，
+Closing 會<strong>把洞補起來</strong>，還原成完整的 4×4 方塊；
+而此時若改做 Opening，整個方塊反而會<strong>完全消失</strong>——
+因為每個 3×3 視窗都會碰到那個洞，侵蝕後一個點都不剩。<br>
+這說明：<strong>Opening 去白點、Closing 補黑洞，兩者不可互換。</strong>
+</div>
+
+<p><strong>(c)　邊界公式</strong></p>
+<div class="f">
+內邊界 = A − erode(A)　　外邊界 = dilate(A) − A　　形態學梯度 = dilate(A) − erode(A)
+</div>
+<p>以本題為例：內邊界 = <strong>13</strong> 個像素、外邊界 = <strong>27</strong> 個像素、
+梯度 = <strong>40</strong> 個像素。</p>
+<p><strong>關係</strong>：13 + 27 = 40，亦即<strong>形態學梯度 = 內邊界 ∪ 外邊界</strong>
+（兩者不重疊，一個在物體內、一個在物體外），所以梯度得到的輪廓最粗。</p>
+</details>
+
+<!-- ============================================ B9 -->
+<h2 id="b9">B-9　Gamma 轉換（10 分）</h2>
+<div class="card">
+<p style="margin-top:0">8-bit 影像（L = 256），取 c = 1。</p>
+<p>(a) 對 r = 50、100、200，分別求 γ = 0.5 與 γ = 2.0 的輸出值。<br>
+(b) 說明兩種 γ 分別讓影像變亮還是變暗，並解釋原因。<br>
+(c) 若直接把 r = 100 代入 r<sup>2</sup> 而不做正規化，會發生什麼問題？</p>
+</div>
+
+<details>
+<summary>完整解答</summary>
+<p><strong>(a)　正確步驟：先正規化 → 取次方 → 乘回 255</strong></p>
+<div class="f">s = 255 × ( r / 255 )<sup>γ</sup></div>
+<div class="tw"><table>
+<tr><th>r</th><th>r/255</th><th>γ = 0.5 → s</th><th>γ = 2.0 → s</th></tr>
+<tr><td>50</td><td>0.196</td><td>0.196<sup>0.5</sup> = 0.443 → <strong>113</strong></td><td>0.196² = 0.038 → <strong>10</strong></td></tr>
+<tr><td>100</td><td>0.392</td><td>0.392<sup>0.5</sup> = 0.626 → <strong>160</strong></td><td>0.392² = 0.154 → <strong>39</strong></td></tr>
+<tr><td>200</td><td>0.784</td><td>0.784<sup>0.5</sup> = 0.886 → <strong>226</strong></td><td>0.784² = 0.615 → <strong>157</strong></td></tr>
+</table></div>
+
+<p><strong>(b)</strong>　<strong>γ = 0.5 → 變亮</strong>（50→113、100→160、200→226，全部變大）<br>
+<strong>γ = 2.0 → 變暗</strong>（50→10、100→39、200→157，全部變小）</p>
+<p><strong>原因</strong>：正規化後的值落在 0~1 之間。對 0~1 的小數而言，
+<strong>次方越大結果越小</strong>（例如 0.5² = 0.25 變小了），
+<strong>次方小於 1 則結果變大</strong>（例如 √0.25 = 0.5 變大了）。
+所以 γ &lt; 1 變亮、γ &gt; 1 變暗。</p>
+<p style="font-size:14px;color:var(--muted)">另外觀察：暗部（r=50）變化幅度比亮部（r=200）大得多，
+這正好符合人眼對暗部較敏感的特性（Weber's law），也是 Gamma 校正的用意。</p>
+
+<p><strong>(c)</strong>　100² = <strong>10,000</strong>，遠遠超過 8-bit 的上限 255。</p>
+<ul>
+<li>若有做箝位 → 幾乎所有像素都被夾成 255，整張圖變<strong>全白</strong>，細節全失。</li>
+<li>若沒做箝位、又用 uint8 儲存 → 會<strong>溢位繞回</strong>（10000 mod 256 = 16），
+得到完全錯誤且混亂的影像。</li>
+</ul>
+<p><strong>結論：冪次轉換前一定要先正規化到 0~1。</strong></p>
+</details>
+
+<!-- ============================================ B10 -->
+<h2 id="b10">B-10　Alpha 混合與羽化（10 分）</h2>
+<div class="card">
+<p style="margin-top:0">前景 F = 240、背景 B = 40。</p>
+<p>(a) 寫出 alpha 混合公式，並求 α = 0、0.25、0.5、0.75、1 時的結果。<br>
+(b) 解釋為什麼公式用 (1 − α) 而不是其他權重。<br>
+(c) 說明過渡帶（window size）太窄與太寬各會有什麼問題。</p>
+</div>
+
+<details>
+<summary>完整解答</summary>
+<p><strong>(a)</strong></p>
+<div class="f">I = α · F + (1 − α) · B</div>
+<div class="tw"><table>
+<tr><th>α</th><th>計算</th><th>I</th></tr>
+<tr><td>0</td><td>0(240) + 1(40)</td><td><strong>40</strong>（完全是背景）</td></tr>
+<tr><td>0.25</td><td>0.25(240) + 0.75(40) = 60 + 30</td><td><strong>90</strong></td></tr>
+<tr><td>0.5</td><td>0.5(240) + 0.5(40) = 120 + 20</td><td><strong>140</strong></td></tr>
+<tr><td>0.75</td><td>0.75(240) + 0.25(40) = 180 + 10</td><td><strong>190</strong></td></tr>
+<tr><td>1</td><td>1(240) + 0(40)</td><td><strong>240</strong>（完全是前景）</td></tr>
+</table></div>
+<p>可以看到 α 從 0 到 1，結果從背景值平滑過渡到前景值。</p>
+
+<p><strong>(b)</strong>　因為兩個權重<strong>加起來必須等於 1</strong>（α + (1−α) = 1），這樣才能保證：</p>
+<ul>
+<li>結果一定落在 F 與 B 之間，<strong>不會超出合法範圍</strong>；</li>
+<li>當兩張圖亮度相同時（F = B），混合後亮度<strong>維持不變</strong>。</li>
+</ul>
+<p>若寫成 α·F + α·B，當 α = 1 時會變成 F + B = 280 → 溢位爆掉。</p>
+
+<p><strong>(c)</strong></p>
+<div class="tw"><table>
+<tr><th>過渡帶</th><th>問題</th><th>原因</th></tr>
+<tr><td><strong>太窄</strong></td><td>看得到明顯<strong>接縫（seam）</strong></td><td>α 從 1 瞬間掉到 0，亮度不連續</td></tr>
+<tr><td><strong>太寬</strong></td><td>出現<strong>鬼影（ghosting）</strong>，物體看起來半透明</td><td>兩張圖在大範圍內同時以中間比例疊加</td></tr>
+</table></div>
+<p><strong>經驗法則</strong>：過渡帶寬度約取<strong>最大明顯特徵的尺寸</strong>。<br>
+更好的做法是 <strong>Pyramid blending</strong>：把影像拆成不同頻率層，
+低頻用寬過渡、高頻用窄過渡，就能同時避免接縫與鬼影。</p>
+</details>
+
+<!-- ============================================ B11 -->
+<h2 id="b11">B-11　取樣、量化與容量（10 分）</h2>
+<div class="card">
+<p style="margin-top:0">(a) 一張 512×512 的 8-bit 灰階影像，未壓縮需要多少 byte？多少 KB？<br>
+(b) 同尺寸的 RGB 彩色影像呢？<br>
+(c) 一張 1024×768 的 10-bit 灰階影像需要多少 KB？共有幾級灰階？<br>
+(d) 說明取樣不足與量化不足分別造成什麼視覺問題。</p>
+</div>
+
+<details>
+<summary>完整解答</summary>
+<p><strong>(a)</strong>　總 bit = 512 × 512 × 8 = 2,097,152 bit<br>
+byte = 2,097,152 ÷ 8 = <strong>262,144 byte</strong><br>
+KB = 262,144 ÷ 1024 = <strong>256 KB</strong></p>
+<p style="font-size:14px;color:var(--muted)">小技巧：8-bit 時 1 像素 = 1 byte，所以直接 512×512 = 262,144 byte。</p>
+
+<p><strong>(b)</strong>　RGB 有 3 個通道：262,144 × 3 = <strong>786,432 byte = 768 KB</strong>（正好 3 倍）</p>
+
+<p><strong>(c)</strong>　總 bit = 1024 × 768 × 10 = 7,864,320 bit<br>
+byte = 7,864,320 ÷ 8 = 983,040 byte<br>
+KB = 983,040 ÷ 1024 = <strong>960 KB</strong><br>
+灰階級數 L = 2<sup>10</sup> = <strong>1024 級</strong>（範圍 0 ~ 1023）</p>
+
+<p><strong>(d)</strong></p>
+<div class="tw"><table>
+<tr><th></th><th>切什麼</th><th>不足時的視覺問題</th></tr>
+<tr><td><strong>取樣 Sampling</strong></td><td>切空間（像素數量）</td>
+    <td>畫面出現<strong>馬賽克方塊</strong>、鋸齒邊緣、細節消失</td></tr>
+<tr><td><strong>量化 Quantization</strong></td><td>切亮度（灰階級數）</td>
+    <td>平滑漸層變成一圈圈階梯，稱為<strong>偽輪廓（false contour）</strong></td></tr>
+</table></div>
+</details>
+
+<!-- ============================================ B12 -->
+<h2 id="b12">B-12　Canny：NMS 與雙閾值（10 分）</h2>
+<div class="card">
+<p style="margin-top:0">某影像經 Sobel 後得到梯度大小如下，且<strong>所有點的梯度方向皆為水平（0°）</strong>：</p>
+<div class="mat" style="grid-template-columns:repeat(5,1fr)">
+  <span>0</span><span>0</span><span>0</span><span>0</span><span>0</span>
+  <span>0</span><span>20</span><span>40</span><span>25</span><span>0</span>
+  <span>0</span><span>30</span><span>80</span><span>35</span><span>0</span>
+  <span>0</span><span>25</span><span>50</span><span>30</span><span>0</span>
+  <span>0</span><span>0</span><span>0</span><span>0</span><span>0</span>
+</div>
+<p>(a) 依序列出 Canny 的四個步驟。(b) 對中間 3×3 區域做非極大值抑制。
+(c) 取 H = 60、L = 30 做雙閾值，分類強／弱邊緣並說明最終保留哪些。</p>
+</div>
+
+<details>
+<summary>完整解答</summary>
+<p><strong>(a)　Canny 四步驟</strong></p>
+<ol>
+<li><strong>高斯平滑</strong> —— 先去雜訊，避免微分放大雜訊</li>
+<li><strong>計算梯度大小與方向</strong> —— 通常用 Sobel 求 G<sub>x</sub>、G<sub>y</sub></li>
+<li><strong>非極大值抑制（NMS）</strong> —— 沿梯度方向比較，邊緣細化成單像素寬</li>
+<li><strong>雙閾值 + 連通性分析（Hysteresis）</strong> —— 連接邊緣、去除假邊緣</li>
+</ol>
+
+<p><strong>(b)　NMS</strong>：梯度方向是水平，所以每個點和<strong>左右</strong>兩個鄰居比較，
+只有「大於等於左右兩者」才保留，否則歸零。</p>
+<div class="tw"><table>
+<tr><th>位置</th><th>左 / 中 / 右</th><th>判斷</th><th>結果</th></tr>
+<tr><td>(1,1)</td><td>0 / 20 / 40</td><td>20 &lt; 40，不是最大</td><td>0</td></tr>
+<tr><td>(1,2)</td><td>20 / 40 / 25</td><td>40 最大 ✓</td><td><strong>40</strong></td></tr>
+<tr><td>(1,3)</td><td>40 / 25 / 0</td><td>25 &lt; 40，不是最大</td><td>0</td></tr>
+<tr><td>(2,1)</td><td>0 / 30 / 80</td><td>30 &lt; 80</td><td>0</td></tr>
+<tr><td>(2,2)</td><td>30 / 80 / 35</td><td>80 最大 ✓</td><td><strong>80</strong></td></tr>
+<tr><td>(2,3)</td><td>80 / 35 / 0</td><td>35 &lt; 80</td><td>0</td></tr>
+<tr><td>(3,1)</td><td>0 / 25 / 50</td><td>25 &lt; 50</td><td>0</td></tr>
+<tr><td>(3,2)</td><td>25 / 50 / 30</td><td>50 最大 ✓</td><td><strong>50</strong></td></tr>
+<tr><td>(3,3)</td><td>50 / 30 / 0</td><td>30 &lt; 50</td><td>0</td></tr>
+</table></div>
+<p>NMS 後只剩中間一行：</p>
+<div class="mat" style="grid-template-columns:repeat(5,1fr)">
+  <span>0</span><span>0</span><span>0</span><span>0</span><span>0</span>
+  <span>0</span><span>0</span><span class="hl">40</span><span>0</span><span>0</span>
+  <span>0</span><span>0</span><span class="hl">80</span><span>0</span><span>0</span>
+  <span>0</span><span>0</span><span class="hl">50</span><span>0</span><span>0</span>
+  <span>0</span><span>0</span><span>0</span><span>0</span><span>0</span>
+</div>
+<p>原本兩三個像素寬的回應，被<strong>細化成一個像素寬</strong> ✓</p>
+
+<p><strong>(c)　雙閾值（H = 60、L = 30）</strong></p>
+<ul>
+<li>(2,2) = 80 &gt; 60 → <strong>強邊緣</strong>，直接保留</li>
+<li>(1,2) = 40，介於 30 與 60 → <strong>弱邊緣</strong></li>
+<li>(3,2) = 50，介於 30 與 60 → <strong>弱邊緣</strong></li>
+</ul>
+<p><strong>連通性分析</strong>：兩個弱邊緣 (1,2) 與 (3,2) 都<strong>直接與強邊緣 (2,2) 相鄰（上下相連）</strong>，
+因此都<strong>被保留</strong>，最終形成一條連續的垂直邊緣線。</p>
+<p><strong>為什麼要用雙閾值？</strong>如果只用單一閾值：取 60 會讓 40 和 50 被刪掉，
+邊緣<strong>斷斷續續（streaking）</strong>；取 30 則會讓雜訊也被當成邊緣。
+雙閾值讓「夠強的核心」把「與它相連的較弱部分」一起帶進來，兼顧完整性與抗雜訊。</p>
+</details>
+
+<hr>
+
+<div class="box ok">
+  <span class="t">✅ 都做完了？</span>
+  回頭檢查：哪幾題你<strong>連公式都想不起來</strong>？那幾章要再看一次。<br>
+  只要公式寫得出來、過程列得出來，Part B 就算最後數字算錯，也能拿到大部分的分數。
+</div>
+
+<div class="pager">
+  <a href="quiz.html">← Part A 模擬測驗</a>
+  <a href="cheatsheet.html">考前速記 →</a>
+</div>
+
+<p class="foot">CISC3011 期中溫習站 · Part B 題庫<br>
+題目為依課程範圍自行命題的練習題，非真實考題；所有解答數值均經程式驗算。</p>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

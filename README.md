@@ -125,6 +125,7 @@
 | Ch6 | 形態學處理（含可點擊的侵蝕／膨脹格子） | [🔗 預覽](https://howenghong.github.io/Tutoring-content/cisc3011/ch6.html) |
 | 考前速記 | 一頁式公式總表，可直接列印 | [🔗 預覽](https://howenghong.github.io/Tutoring-content/cisc3011/cheatsheet.html) |
 | 模擬測驗 | Part A 多選（全對才給分）+ Part B 計算題 | [🔗 預覽](https://howenghong.github.io/Tutoring-content/cisc3011/quiz.html) |
+| Part B 題庫 | 12 題計算／論述題，全附逐步解答（數值經程式驗算） | [🔗 預覽](https://howenghong.github.io/Tutoring-content/cisc3011/practice-b.html) |
 
 > **📝 使用建議**：時間有限的話，先看「考前速記」掌握全貌 → 再把 Ch3、Ch4、Ch6 的手算例題做熟 → 最後用「模擬測驗」找漏洞。
 
