@@ -1,5 +1,28 @@
 /* CISC3011 溫習站 — 共用互動 */
 
+/* ---- 0. 中英顯示切換（模擬英文考卷） ---- */
+(function () {
+  var bar = document.getElementById('langbar');
+  if (!bar) return;
+  var KEY = 'cisc3011:enonly';
+  var btnBoth = bar.querySelector('[data-lang="both"]');
+  var btnEn = bar.querySelector('[data-lang="en"]');
+
+  function apply(enOnly) {
+    document.body.classList.toggle('en-only', enOnly);
+    if (btnBoth) btnBoth.classList.toggle('on', !enOnly);
+    if (btnEn) btnEn.classList.toggle('on', enOnly);
+    try { localStorage.setItem(KEY, enOnly ? '1' : '0'); } catch (e) {}
+  }
+
+  var saved = '0';
+  try { saved = localStorage.getItem(KEY) || '0'; } catch (e) {}
+  apply(saved === '1');
+
+  if (btnBoth) btnBoth.addEventListener('click', function () { apply(false); });
+  if (btnEn) btnEn.addEventListener('click', function () { apply(true); });
+})();
+
 /* ---- 1. 進度勾選（存在瀏覽器本機） ---- */
 (function () {
   var boxes = document.querySelectorAll('.chk input[type=checkbox][data-k]');

@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>英中術語對照 — CISC3011 溫習站</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="topbar"><div class="topbar-in">
+  <a class="brand" href="index.html">CISC3011 溫習站<small>數位影像處理 · 期中考 Ch1–6</small></a>
+  <nav class="navlinks">
+    <a href="index.html">首頁</a>
+    <a href="ch1.html">1 基礎</a><a href="ch2.html">2 點運算</a><a href="ch3.html">3 直方圖</a>
+    <a href="ch4.html">4 濾波</a><a href="ch5.html">5 邊緣</a><a href="ch6.html">6 形態學</a>
+    <a href="cheatsheet.html">速記</a><a class="on" href="glossary.html">英中對照</a>
+    <a href="quiz.html">測驗</a><a href="practice-a.html">A題庫</a><a href="practice-b.html">B題庫</a>
+  </nav>
+</div></div>
+
+<div class="wrap">
+
+<h1>英中術語對照 · Glossary</h1>
+<p class="sub">考卷是英文的 —— 這頁讓你看到英文就知道在問什麼</p>
+
+<div class="box bad">
+  <span class="t">⚠️ 為什麼這頁很重要</span>
+  你的觀念可能都懂，但考卷上寫的是 <em>non-maximum suppression</em>、<em>structuring element</em>、
+  <em>zero-crossing</em>。<strong>看不懂題目，會的也拿不到分。</strong><br>
+  考前把<strong>紅色標記的高頻詞</strong>掃過一遍，確保看到英文能立刻反應。
+</div>
+
+<div class="toc"><strong>目錄</strong>
+<ol>
+  <li><a href="#verbs">考卷指令動詞（最先看這個）</a></li>
+  <li><a href="#stems">常見英文題幹句型</a></li>
+  <li><a href="#t1">Ch1 影像基礎術語</a></li>
+  <li><a href="#t2">Ch2 點運算術語</a></li>
+  <li><a href="#t3">Ch3 直方圖術語</a></li>
+  <li><a href="#t4">Ch4 濾波術語</a></li>
+  <li><a href="#t5">Ch5 邊緣術語</a></li>
+  <li><a href="#t6">Ch6 形態學術語</a></li>
+  <li><a href="#partb">Part B 英文答題範本</a></li>
+</ol></div>
+
+<!-- =============================================== -->
+<h2 id="verbs">1. 考卷指令動詞</h2>
+<p>看到這些字，就知道該寫多少、寫什麼。<strong>答錯方向比算錯更慘。</strong></p>
+
+<div class="tw"><table>
+<tr><th>English</th><th>中文</th><th>該怎麼答</th></tr>
+<tr><td><strong>Compute / Calculate</strong></td><td>計算</td><td>要<strong>算出數字</strong>，並寫出過程</td></tr>
+<tr><td><strong>Derive</strong></td><td>推導</td><td>要從公式<strong>一步步推</strong>，不能直接寫答案</td></tr>
+<tr><td><strong>State</strong></td><td>陳述、寫出</td><td>直接寫出結論即可，<strong>不必推導</strong></td></tr>
+<tr><td><strong>Explain / Justify</strong></td><td>解釋、說明理由</td><td>必須寫<strong>為什麼</strong>，只寫結論會扣分</td></tr>
+<tr><td><strong>Show that…</strong></td><td>證明…</td><td>要導到題目給的那個結果</td></tr>
+<tr><td><strong>Sketch / Draw</strong></td><td>畫出</td><td>要畫圖（座標軸、標示要寫清楚）</td></tr>
+<tr><td><strong>Compare / Contrast</strong></td><td>比較</td><td>要講<strong>兩者的差異</strong>，不是各自描述</td></tr>
+<tr><td><strong>Briefly</strong></td><td>簡短地</td><td>一兩句即可，不要寫長篇</td></tr>
+<tr><td><strong>With reference to…</strong></td><td>根據／參照…</td><td>答案必須<strong>引用題目給的那張圖或數據</strong></td></tr>
+<tr><td><strong>Give an example</strong></td><td>舉例</td><td>一定要舉<strong>具體</strong>例子</td></tr>
+<tr><td><strong>Determine</strong></td><td>求出、判定</td><td>算出或判斷出明確答案</td></tr>
+<tr><td><strong>Indicate</strong></td><td>指出、標示</td><td>圈選或標明位置</td></tr>
+</table></div>
+
+<!-- =============================================== -->
+<h2 id="stems">2. 常見英文題幹句型</h2>
+
+<div class="box">
+  <span class="t">💡 Part A 多選題的標準問法</span>
+  <ul style="margin-bottom:0">
+    <li><em><strong>Which of the following statements is/are correct?</strong></em><br>
+        下列敘述何者<strong>正確</strong>？（注意 <em>is/are</em> 暗示可能多個）</li>
+    <li><em><strong>Which of the following is/are TRUE about …?</strong></em><br>
+        關於…下列何者為<strong>真</strong>？</li>
+    <li><em><strong>Select all that apply.</strong></em><br>
+        <strong>選出所有符合的</strong>（明確告訴你是複選）</li>
+    <li><em><strong>Which of the following is NOT …?</strong></em><br>
+        下列何者<strong>不是</strong>…？⚠️ <strong>看到 NOT 要特別小心，答案是反過來的</strong></li>
+    <li><em><strong>…EXCEPT</strong></em><br>
+        「除了…之外」—— 同樣是反向題</li>
+  </ul>
+</div>
+
+<div class="box warn">
+  <span class="t">⚠️ 英文卷最容易害人的兩個字</span>
+  <strong>NOT</strong> 和 <strong>EXCEPT</strong> —— 通常會用大寫或粗體標出來。
+  考試時看到立刻<strong>在題目上畫圈</strong>，提醒自己答案要反過來選。
+</div>
+
+<div class="tw"><table>
+<tr><th>English 片語</th><th>中文</th></tr>
+<tr><td>consider the following image / kernel</td><td>考慮下列影像／核</td></tr>
+<tr><td>assume zero padding outside the image</td><td>假設影像外補零</td></tr>
+<tr><td>the origin of the structuring element is at its centre</td><td>結構元的原點位於中心</td></tr>
+<tr><td>ignore boundary effects / boundary pixels</td><td>忽略邊界效應／邊界像素</td></tr>
+<tr><td>round to the nearest integer</td><td>四捨五入到最接近的整數</td></tr>
+<tr><td>express your answer in terms of L and N</td><td>用 L 與 N 表示你的答案</td></tr>
+<tr><td>show all your working</td><td>寫出所有計算過程</td></tr>
+<tr><td>state any assumptions you make</td><td>寫出你所做的任何假設</td></tr>
+<tr><td>the resulting image / output image</td><td>結果影像／輸出影像</td></tr>
+<tr><td>apply the mask / filter to the image</td><td>把遮罩／濾波器套用到影像上</td></tr>
+</table></div>
+
+<!-- =============================================== -->
+<h2 id="t1">3. Ch1 影像基礎 · Digital Image Fundamentals</h2>
+<div class="tw"><table>
+<tr><th>English</th><th>中文</th><th>一句話重點</th></tr>
+<tr><td class="tag hot">sampling</td><td>取樣</td><td>切<strong>空間</strong>，決定解析度</td></tr>
+<tr><td class="tag hot">quantization</td><td>量化</td><td>切<strong>亮度</strong>，決定灰階級數</td></tr>
+<tr><td>spatial resolution</td><td>空間解析度</td><td>幾乘幾像素</td></tr>
+<tr><td>intensity / gray level resolution</td><td>強度／灰階解析度</td><td>幾個 bit</td></tr>
+<tr><td>pixel (picture element)</td><td>像素</td><td>影像的最小單位</td></tr>
+<tr><td>intensity / gray level</td><td>強度／灰階值</td><td>0 = black、255 = white</td></tr>
+<tr><td class="tag hot">false contour</td><td>偽輪廓</td><td><strong>量化</strong>不足的症狀</td></tr>
+<tr><td>aliasing / jagged edges</td><td>鋸齒</td><td><strong>取樣</strong>不足的症狀</td></tr>
+<tr><td>bit depth</td><td>位元深度</td><td>L = 2<sup>b</sup></td></tr>
+<tr><td>dynamic range</td><td>動態範圍</td><td>最亮與最暗的跨度</td></tr>
+<tr><td>saturation</td><td>飽和（過曝）</td><td>超出上限，細節遺失</td></tr>
+<tr><td>Mach band effect</td><td>馬赫帶效應</td><td>視覺<strong>錯覺</strong>，強化邊緣</td></tr>
+<tr><td>Weber's law</td><td>韋伯定律</td><td>看<strong>比例</strong>不看絕對差</td></tr>
+<tr><td>brightness adaptation</td><td>亮度適應</td><td>人眼調整基準</td></tr>
+<tr><td>simultaneous contrast</td><td>同時對比</td><td>背景影響感知亮度</td></tr>
+<tr><td>electromagnetic spectrum</td><td>電磁波譜</td><td>可見光 400~700 nm</td></tr>
+<tr><td>lossy / lossless compression</td><td>有損／無損壓縮</td><td>JPEG 有損、PNG 無損</td></tr>
+<tr><td>channel</td><td>通道</td><td>RGB = 3 channels</td></tr>
+</table></div>
+
+<!-- =============================================== -->
+<h2 id="t2">4. Ch2 點運算 · Point Operations</h2>
+<div class="tw"><table>
+<tr><th>English</th><th>中文</th><th>一句話重點</th></tr>
+<tr><td class="tag hot">point operation</td><td>點運算</td><td><strong>只看同一位置</strong>的像素</td></tr>
+<tr><td>neighbourhood operation</td><td>鄰域運算</td><td>要看鄰居（＝濾波）</td></tr>
+<tr><td>homogeneous / non-homogeneous</td><td>齊次／非齊次</td><td>轉換是否隨位置改變</td></tr>
+<tr><td>transformation function T(r)</td><td>轉換函數</td><td>s = T(r)</td></tr>
+<tr><td class="tag hot">clamping / clipping</td><td>箝位</td><td>夾回 0~255</td></tr>
+<tr><td>overflow / wrap around</td><td>溢位／繞回</td><td>uint8：300 → 44</td></tr>
+<tr><td class="tag hot">image negative / inversion</td><td>反相</td><td>s = 255 − r</td></tr>
+<tr><td class="tag hot">thresholding</td><td>二值化</td><td>變成只有 0 和 1</td></tr>
+<tr><td>binary image</td><td>二值影像</td><td>形態學的前提</td></tr>
+<tr><td class="tag hot">power-law / gamma transformation</td><td>冪次／伽瑪轉換</td><td>γ&lt;1 變亮、γ&gt;1 變暗</td></tr>
+<tr><td>gamma correction</td><td>伽瑪校正</td><td>螢幕非線性的補償</td></tr>
+<tr><td>log transformation</td><td>對數轉換</td><td>壓縮動態範圍</td></tr>
+<tr><td>contrast stretching</td><td>對比拉伸</td><td>線性拉開範圍</td></tr>
+<tr><td>intensity windowing</td><td>強度窗化</td><td>只看某個區間</td></tr>
+<tr><td>image averaging</td><td>影像平均</td><td>降噪，雜訊 → 1/√N</td></tr>
+<tr><td>image subtraction</td><td>影像相減</td><td>找差異／瑕疵</td></tr>
+<tr><td class="tag hot">alpha blending</td><td>Alpha 混合</td><td>I = αF + (1−α)B</td></tr>
+<tr><td>foreground / background</td><td>前景／背景</td><td>F / B</td></tr>
+<tr><td>compositing</td><td>合成</td><td>把多張圖疊在一起</td></tr>
+<tr><td>feathering</td><td>羽化</td><td>讓 α 平滑過渡</td></tr>
+<tr><td>seam</td><td>接縫</td><td>過渡帶<strong>太窄</strong>的後果</td></tr>
+<tr><td>ghosting</td><td>鬼影</td><td>過渡帶<strong>太寬</strong>的後果</td></tr>
+<tr><td>opacity / transparency</td><td>不透明度／透明度</td><td>α = 1 不透明</td></tr>
+</table></div>
+
+<!-- =============================================== -->
+<h2 id="t3">5. Ch3 直方圖 · Histograms</h2>
+<div class="tw"><table>
+<tr><th>English</th><th>中文</th><th>一句話重點</th></tr>
+<tr><td class="tag hot">histogram</td><td>直方圖</td><td>每個灰階有幾個像素</td></tr>
+<tr><td class="tag hot">cumulative histogram / CDF</td><td>累積直方圖</td><td>遞增，最後 = N</td></tr>
+<tr><td>normalized histogram</td><td>正規化直方圖</td><td>p(i) = h(i)/N</td></tr>
+<tr><td>probability distribution</td><td>機率分布</td><td>總和為 1</td></tr>
+<tr><td class="tag hot">histogram equalization</td><td>直方圖均衡化</td><td>s = round((L−1)/N × cdf)</td></tr>
+<tr><td>histogram matching / specification</td><td>直方圖匹配／規定化</td><td>匹配到指定分布</td></tr>
+<tr><td>adaptive histogram equalization</td><td>局部／自適應均衡化</td><td>用視窗逐點做</td></tr>
+<tr><td>bin / binning</td><td>分組</td><td>合併相鄰灰階</td></tr>
+<tr><td>mapping / transformation table</td><td>對應表</td><td>舊灰階 → 新灰階</td></tr>
+<tr><td>monotonically increasing</td><td>單調遞增</td><td>cdf 的性質</td></tr>
+<tr><td>under-exposed / over-exposed</td><td>曝光不足／過度</td><td>直方圖偏左／偏右</td></tr>
+<tr><td>low contrast</td><td>低對比</td><td>直方圖集中在窄範圍</td></tr>
+<tr><td>clipping (in histogram)</td><td>削波</td><td>端點出現高柱</td></tr>
+<tr><td>irreversible</td><td>不可逆</td><td>均衡化會合併灰階</td></tr>
+<tr><td>uniform distribution</td><td>均勻分布</td><td>均衡化的理想目標</td></tr>
+</table></div>
+
+<!-- =============================================== -->
+<h2 id="t4">6. Ch4 濾波 · Filtering</h2>
+<div class="tw"><table>
+<tr><th>English</th><th>中文</th><th>一句話重點</th></tr>
+<tr><td class="tag hot">correlation</td><td>相關</td><td>核<strong>不</strong>翻轉</td></tr>
+<tr><td class="tag hot">convolution</td><td>卷積</td><td>核<strong>要</strong>翻轉 180°</td></tr>
+<tr><td class="tag hot">flip / rotate by 180°</td><td>翻轉</td><td>卷積的關鍵動作</td></tr>
+<tr><td>kernel / mask / filter</td><td>核／遮罩／濾波器</td><td>三個字常常互用</td></tr>
+<tr><td>sliding window</td><td>滑動視窗</td><td>核蓋住的那一塊</td></tr>
+<tr><td>inner product / dot product</td><td>內積</td><td>對應相乘再相加</td></tr>
+<tr><td class="tag hot">normalize the filter</td><td>正規化濾波器</td><td>係數和 = 1</td></tr>
+<tr><td>impulse / Dirac function</td><td>脈衝函數</td><td>卷積後印出原樣的核</td></tr>
+<tr><td>impulse response</td><td>脈衝響應</td><td>同上</td></tr>
+<tr><td class="tag hot">box filter / mean filter / averaging</td><td>均值濾波</td><td>全部 1/9</td></tr>
+<tr><td class="tag hot">Gaussian filter</td><td>高斯濾波</td><td>中心權重最大</td></tr>
+<tr><td>standard deviation σ (sigma)</td><td>標準差</td><td>σ 大 = 更模糊</td></tr>
+<tr><td>smoothing / blurring / low-pass</td><td>平滑／模糊／低通</td><td>抑制高頻</td></tr>
+<tr><td class="tag hot">padding (zero / replicate / reflect)</td><td>補邊</td><td>邊界處理方式</td></tr>
+<tr><td class="tag hot">full / same / valid</td><td>三種輸出模式</td><td>N+K−1 / N / N−K+1</td></tr>
+<tr><td>separable filter</td><td>可分離濾波器</td><td>O(K²) → O(2K)</td></tr>
+<tr><td>linear / non-linear filter</td><td>線性／非線性濾波</td><td>中位數是非線性</td></tr>
+<tr><td class="tag hot">median filter</td><td>中位數濾波</td><td>排序取中間</td></tr>
+<tr><td>max / min filter</td><td>最大／最小值濾波</td><td>去胡椒／去鹽</td></tr>
+<tr><td class="tag hot">salt-and-pepper / impulse noise</td><td>椒鹽雜訊</td><td>用<strong>中位數</strong>去除</td></tr>
+<tr><td>Gaussian noise</td><td>高斯雜訊</td><td>用平均／高斯去除</td></tr>
+<tr><td class="tag hot">unsharp masking</td><td>反遮罩銳化</td><td>原圖 − 模糊圖</td></tr>
+<tr><td class="tag hot">highboost filtering</td><td>高增幅濾波</td><td>k &gt; 1 的銳化</td></tr>
+<tr><td>halo / overshoot</td><td>光暈</td><td>銳化過度的後果</td></tr>
+<tr><td>sharpening / high-pass</td><td>銳化／高通</td><td>強化高頻</td></tr>
+<tr><td>shift-invariant</td><td>平移不變</td><td>卷積的性質</td></tr>
+<tr><td>commutative / associative / distributive</td><td>交換／結合／分配律</td><td>卷積三大性質</td></tr>
+</table></div>
+
+<!-- =============================================== -->
+<h2 id="t5">7. Ch5 邊緣 · Edge Detection</h2>
+<div class="tw"><table>
+<tr><th>English</th><th>中文</th><th>一句話重點</th></tr>
+<tr><td class="tag hot">edge</td><td>邊緣</td><td>亮度劇烈變化處</td></tr>
+<tr><td>discontinuity</td><td>不連續</td><td>邊緣的成因</td></tr>
+<tr><td>depth / surface normal discontinuity</td><td>深度／表面法線不連續</td><td>邊緣四大成因之二</td></tr>
+<tr><td>step / ramp / roof edge</td><td>階梯／斜坡／屋脊邊緣</td><td>三種邊緣型態</td></tr>
+<tr><td class="tag hot">gradient</td><td>梯度</td><td>∇f = (G<sub>x</sub>, G<sub>y</sub>)</td></tr>
+<tr><td class="tag hot">gradient magnitude</td><td>梯度大小</td><td>√(G<sub>x</sub>²+G<sub>y</sub>²)</td></tr>
+<tr><td class="tag hot">gradient direction / orientation</td><td>梯度方向</td><td>tan⁻¹(G<sub>y</sub>/G<sub>x</sub>)</td></tr>
+<tr><td class="tag hot">perpendicular / orthogonal to the edge</td><td>垂直於邊緣</td><td><strong>梯度 ⊥ 邊緣</strong></td></tr>
+<tr><td>partial derivative</td><td>偏導數</td><td>∂f/∂x</td></tr>
+<tr><td>finite difference</td><td>有限差分</td><td>用相減近似微分</td></tr>
+<tr><td>central difference</td><td>中央差分</td><td>½[−1, 0, 1]</td></tr>
+<tr><td>first-order / second-order derivative</td><td>一階／二階導數</td><td>峰值／零交越</td></tr>
+<tr><td class="tag hot">Sobel operator</td><td>Sobel 運算子</td><td>中間權重 2，較抗雜訊</td></tr>
+<tr><td>Prewitt operator</td><td>Prewitt 運算子</td><td>全部權重 1</td></tr>
+<tr><td>Roberts operator</td><td>Roberts 運算子</td><td>2×2 核</td></tr>
+<tr><td>compass operator</td><td>羅盤運算子</td><td>多方向取最大回應</td></tr>
+<tr><td class="tag hot">Laplacian</td><td>拉普拉斯運算子</td><td>二階，無方向資訊</td></tr>
+<tr><td class="tag hot">zero-crossing</td><td>零交越</td><td>二階導數找邊緣的方式</td></tr>
+<tr><td>isotropic</td><td>各向同性</td><td>對所有方向一樣敏感</td></tr>
+<tr><td>Laplacian of Gaussian (LoG)</td><td>高斯拉普拉斯</td><td>先平滑再二階微分</td></tr>
+<tr><td>Difference of Gaussians (DoG)</td><td>高斯差</td><td>近似 LoG</td></tr>
+<tr><td>Mexican hat</td><td>墨西哥帽</td><td>LoG 的形狀</td></tr>
+<tr><td class="tag hot">Canny edge detector</td><td>Canny 邊緣偵測</td><td>四步驟</td></tr>
+<tr><td class="tag hot">non-maximum suppression (NMS)</td><td>非極大值抑制</td><td>把邊緣<strong>細化</strong></td></tr>
+<tr><td class="tag hot">hysteresis thresholding</td><td>遲滯雙閾值</td><td>強／弱邊緣 + 連通</td></tr>
+<tr><td>strong / weak edge</td><td>強／弱邊緣</td><td>&gt;H / 介於 L 與 H</td></tr>
+<tr><td>connectivity analysis</td><td>連通性分析</td><td>弱邊緣要連到強邊緣</td></tr>
+<tr><td>streaking</td><td>斷續</td><td>單一閾值的後果</td></tr>
+<tr><td>localization</td><td>定位（準確度）</td><td>σ 大則變差</td></tr>
+<tr><td>trade-off</td><td>取捨</td><td>detection vs localization</td></tr>
+<tr><td>thin the edges</td><td>細化邊緣</td><td>NMS 的作用</td></tr>
+</table></div>
+
+<!-- =============================================== -->
+<h2 id="t6">8. Ch6 形態學 · Morphological Processing</h2>
+<div class="tw"><table>
+<tr><th>English</th><th>中文</th><th>一句話重點</th></tr>
+<tr><td class="tag hot">morphological processing</td><td>形態學處理</td><td>改變<strong>形狀</strong></td></tr>
+<tr><td class="tag hot">structuring element (SE)</td><td>結構元</td><td>小形狀 + 原點</td></tr>
+<tr><td>origin of the SE</td><td>結構元的原點</td><td>通常在中心</td></tr>
+<tr><td class="tag hot">erosion (⊖)</td><td>侵蝕</td><td><strong>全中</strong>才留，變瘦</td></tr>
+<tr><td class="tag hot">dilation (⊕)</td><td>膨脹</td><td><strong>有中</strong>就留，變胖</td></tr>
+<tr><td class="tag hot">opening</td><td>開運算</td><td>侵蝕 → 膨脹，去白點</td></tr>
+<tr><td class="tag hot">closing</td><td>閉運算</td><td>膨脹 → 侵蝕，補黑洞</td></tr>
+<tr><td>shrink / grow</td><td>縮小／長大</td><td>侵蝕／膨脹的效果</td></tr>
+<tr><td>idempotent</td><td>冪等</td><td>做第二次沒變化</td></tr>
+<tr><td>duality</td><td>對偶性</td><td>侵蝕 ↔ 膨脹（取補集）</td></tr>
+<tr><td>complement</td><td>補集</td><td>前景背景互換</td></tr>
+<tr><td>reflection</td><td>反射</td><td>SE 翻轉</td></tr>
+<tr><td>translation / shift</td><td>平移</td><td>單點核可做平移</td></tr>
+<tr><td class="tag hot">internal boundary</td><td>內邊界</td><td>A − erode(A)</td></tr>
+<tr><td class="tag hot">external boundary</td><td>外邊界</td><td>dilate(A) − A</td></tr>
+<tr><td class="tag hot">morphological gradient</td><td>形態學梯度</td><td>dilate − erode</td></tr>
+<tr><td>boundary extraction</td><td>邊界抽取</td><td>抽出輪廓</td></tr>
+<tr><td>noise removal / filtering</td><td>去雜訊</td><td>Opening / Closing</td></tr>
+<tr><td>blob separation</td><td>物體分離</td><td>用侵蝕斷開</td></tr>
+<tr><td>hole filling</td><td>填洞</td><td>Closing</td></tr>
+<tr><td>foreground pixel</td><td>前景像素</td><td>值為 1</td></tr>
+<tr><td>fits / hits</td><td>完全容納／碰到</td><td>侵蝕用 fit、膨脹用 hit</td></tr>
+</table></div>
+
+<!-- =============================================== -->
+<h2 id="partb">9. Part B 英文答題範本</h2>
+
+<div class="box ok">
+  <span class="t">✅ 直接照抄這些句型，閱卷老師一看就懂</span>
+  Part B 有部分分，用英文寫出<strong>步驟標示</strong>最容易拿分。
+  就算英文不好，<strong>公式 + 數字 + 這些短句</strong>就足夠了。
+</div>
+
+<h3>通用步驟句型</h3>
+<div class="tw"><table>
+<tr><th>English</th><th>中文</th></tr>
+<tr><td><strong>Step 1: Compute the histogram h(r).</strong></td><td>步驟 1：計算直方圖</td></tr>
+<tr><td><strong>Step 2: Compute the cumulative histogram cdf(r).</strong></td><td>步驟 2：計算累積直方圖</td></tr>
+<tr><td><strong>Given:</strong> N = 25, L = 8</td><td>已知：…</td></tr>
+<tr><td><strong>Using the formula:</strong> s = round((L−1)/N × cdf(r))</td><td>使用公式：…</td></tr>
+<tr><td><strong>Substituting:</strong> s = round(7/25 × 14) = 4</td><td>代入得：…</td></tr>
+<tr><td><strong>Therefore,</strong> the output image is …</td><td>因此，輸出影像為…</td></tr>
+<tr><td><strong>Check:</strong> cdf(L−1) = N = 25 ✓</td><td>驗算：…</td></tr>
+<tr><td><strong>Hence</strong> the maximum gray level maps to L−1 = 7.</td><td>因此最大灰階對應到…</td></tr>
+<tr><td><strong>Note that</strong> values exceeding 255 must be clipped.</td><td>注意超過 255 的值必須箝位</td></tr>
+<tr><td><strong>Assumption:</strong> zero padding is used at the boundary.</td><td>假設：邊界補零</td></tr>
+</table></div>
+
+<h3>各題型的英文結論句（背起來直接寫）</h3>
+<div class="tw"><table>
+<tr><th>題型</th><th>英文結論句</th></tr>
+<tr><td>均衡化</td><td><em>The contrast is enhanced because the concentrated gray levels are spread over a wider range. The histogram is not perfectly flat because gray levels are discrete and some levels are merged.</em></td></tr>
+<tr><td>卷積 vs 相關</td><td><em>Convolution requires flipping the kernel by 180°, while correlation does not. Since the kernel here is not symmetric, the two results differ.</em></td></tr>
+<tr><td>中位數濾波</td><td><em>The median is more robust because extreme values (0 and 255) are moved to the ends after sorting and therefore do not affect the middle value.</em></td></tr>
+<tr><td>銳化</td><td><em>A larger k produces stronger sharpening but may cause halo artifacts, and values outside [0, 255] must be clipped.</em></td></tr>
+<tr><td>Sobel</td><td><em>Since the gradient is horizontal (θ = 0°) and the edge is perpendicular to the gradient, the edge is vertical.</em></td></tr>
+<tr><td>Laplacian</td><td><em>The edge is located at the zero-crossing, where the response changes from positive to negative.</em></td></tr>
+<tr><td>Canny</td><td><em>Non-maximum suppression thins the edge to one pixel wide; hysteresis keeps weak edges only if they are connected to a strong edge, which prevents streaking.</em></td></tr>
+<tr><td>形態學</td><td><em>Opening removes small foreground noise while preserving the size and shape of larger objects. Closing fills small holes and gaps.</em></td></tr>
+<tr><td>邊界抽取</td><td><em>The morphological gradient is the union of the internal and external boundaries, so it is thicker than either one alone.</em></td></tr>
+</table></div>
+
+<div class="box warn">
+  <span class="t">⚠️ 寫英文答案的三個原則</span>
+  <ol style="margin-bottom:0">
+    <li><strong>公式和數字比句子重要</strong> —— 英文寫不好沒關係，但算式一定要清楚。</li>
+    <li><strong>用 Step 1 / Step 2 標號</strong> —— 閱卷者容易找到你的得分點。</li>
+    <li><strong>寫不出完整句子就寫關鍵詞</strong> —— 例如 "contrast ↑, histogram not flat (discrete levels merged)"
+        也比留白好。</li>
+  </ol>
+</div>
+
+<div class="pager">
+  <a href="cheatsheet.html">← 考前速記</a>
+  <a href="practice-a.html">Part A 題庫 →</a>
+</div>
+
+<p class="foot">CISC3011 期中溫習站 · 英中術語對照</p>
+</div>
+<script src="app.js"></script>
+</body>
+</html>

@@ -14,15 +14,30 @@
     <a href="index.html">首頁</a>
     <a href="ch1.html">1 基礎</a><a href="ch2.html">2 點運算</a><a href="ch3.html">3 直方圖</a>
     <a href="ch4.html">4 濾波</a><a href="ch5.html">5 邊緣</a><a href="ch6.html">6 形態學</a>
-    <a href="cheatsheet.html">速記</a><a href="quiz.html">測驗</a>
+    <a href="cheatsheet.html">速記</a><a href="glossary.html">英中對照</a><a href="quiz.html">測驗</a>
     <a class="on" href="practice-a.html">A題庫</a><a href="practice-b.html">B題庫</a>
   </nav>
 </div></div>
 
 <div class="wrap">
 
-<h1>Part A 全面題庫 · 86 題</h1>
+<h1>Part A 全面題庫 · 86 題（中英對照）</h1>
 <p class="sub">多選題 · 全對才給分 · 每題逐一解釋四個選項 · 涵蓋六章所有考點</p>
+
+<div class="langbar" id="langbar">
+  <strong>顯示：</strong>
+  <button data-lang="both" class="on">英 + 中</button>
+  <button data-lang="en">只看英文（模擬考卷）</button>
+  <span style="color:var(--muted)">題目與選項以英文為主、中文在下方對照</span>
+</div>
+
+<div class="box ok">
+  <span class="t">✅ 怎麼用這個雙語模式</span>
+  <strong>第一輪</strong>：用「英 + 中」做，遇到看不懂的英文就對照中文，順便記術語。<br>
+  <strong>第二輪</strong>：切到「<strong>只看英文</strong>」再做一次 —— 這就是明天考卷的樣子。
+  如果只看英文也能答對，你就真的準備好了。<br>
+  <span style="font-size:14px;color:var(--muted)">（切換會記在這台裝置上，重新整理也不會跑掉。）</span>
+</div>
 
 <div class="box bad">
   <span class="t">⚠️ Part A 的致命規則</span>
@@ -77,11 +92,11 @@
 <h2 id="c1">第 1 章 · 數位影像基礎</h2>
 
 <div class="mq q" data-ans="0,2">
-  <div class="qt">A-1. 關於數位影像的表示，正確的有？</div>
-  <div class="opt">A. 灰階影像可表示為二維函數 f(x, y)</div>
-  <div class="opt">B. 8-bit 灰階影像的像素值範圍是 1 ~ 256</div>
-  <div class="opt">C. RGB 彩色影像通常以 (高, 寬, 3) 的三維陣列表示</div>
-  <div class="opt">D. 像素值 0 代表白色</div>
+  <div class="qt"><span class="en">A-1. Which of the following statements about digital image representation are correct?</span><span class="zh">關於數位影像的表示，正確的有？</span></div>
+  <div class="opt"><span class="en">A. A grayscale image can be represented as a 2-D function f(x, y).</span><span class="zh">灰階影像可表示為二維函數 f(x, y)</span></div>
+  <div class="opt"><span class="en">B. The pixel values of an 8-bit grayscale image range from 1 to 256.</span><span class="zh">8-bit 灰階影像的像素值範圍是 1 ~ 256</span></div>
+  <div class="opt"><span class="en">C. An RGB colour image is usually stored as a 3-D array of shape (height, width, 3).</span><span class="zh">RGB 彩色影像通常以 (高, 寬, 3) 的三維陣列表示</span></div>
+  <div class="opt"><span class="en">D. A pixel value of 0 represents white.</span><span class="zh">像素值 0 代表白色</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、C</strong><br>
   A ✓ 給座標回傳亮度。<br>
@@ -91,11 +106,11 @@
 </div>
 
 <div class="mq q" data-ans="0,1">
-  <div class="qt">A-2. 關於取樣與量化，正確的有？</div>
-  <div class="opt">A. 取樣決定影像的空間解析度</div>
-  <div class="opt">B. 量化決定灰階級數</div>
-  <div class="opt">C. 量化不足會使物體邊緣出現鋸齒狀（jagged edges）</div>
-  <div class="opt">D. 取樣不足造成的馬賽克，可藉由增加 bit 數改善</div>
+  <div class="qt"><span class="en">A-2. Which of the following statements about sampling and quantization are correct?</span><span class="zh">關於取樣與量化，正確的有？</span></div>
+  <div class="opt"><span class="en">A. Sampling determines the spatial resolution of an image.</span><span class="zh">取樣決定影像的空間解析度</span></div>
+  <div class="opt"><span class="en">B. Quantization determines the number of gray levels.</span><span class="zh">量化決定灰階級數</span></div>
+  <div class="opt"><span class="en">C. Insufficient quantization produces jagged edges on objects.</span><span class="zh">量化不足會使物體邊緣出現鋸齒狀（jagged edges）</span></div>
+  <div class="opt"><span class="en">D. The blockiness caused by insufficient sampling can be fixed by increasing the bit depth.</span><span class="zh">取樣不足造成的馬賽克，可藉由增加 bit 數改善</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、B</strong><br>
   A ✓ 取樣 = 切空間。B ✓ 量化 = 切亮度。<br>
@@ -105,11 +120,11 @@
 </div>
 
 <div class="mq q" data-ans="0,1,2">
-  <div class="qt">A-3. 一張 1024×1024、12-bit 的灰階影像（未壓縮），正確的有？</div>
-  <div class="opt">A. 共有 4096 級灰階</div>
-  <div class="opt">B. 需要約 1.5 MB 儲存空間</div>
-  <div class="opt">C. 若改成 8-bit，需要約 1 MB</div>
-  <div class="opt">D. 像素值範圍是 0 ~ 4096</div>
+  <div class="qt"><span class="en">A-3. For an uncompressed 1024 x 1024, 12-bit grayscale image, which statements are correct?</span><span class="zh">一張 1024×1024、12-bit 的灰階影像（未壓縮），正確的有？</span></div>
+  <div class="opt"><span class="en">A. It has 4096 gray levels.</span><span class="zh">共有 4096 級灰階</span></div>
+  <div class="opt"><span class="en">B. It requires about 1.5 MB of storage.</span><span class="zh">需要約 1.5 MB 儲存空間</span></div>
+  <div class="opt"><span class="en">C. If stored as 8-bit instead, it requires about 1 MB.</span><span class="zh">若改成 8-bit，需要約 1 MB</span></div>
+  <div class="opt"><span class="en">D. Its pixel values range from 0 to 4096.</span><span class="zh">像素值範圍是 0 ~ 4096</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、B、C</strong><br>
   A ✓ 2¹² = 4096。<br>
@@ -119,11 +134,11 @@
 </div>
 
 <div class="mq q" data-ans="0,1,3">
-  <div class="qt">A-4. 關於人類視覺特性，正確的有？</div>
-  <div class="opt">A. Mach band 是視覺錯覺，實際像素值並沒有那條亮／暗帶</div>
-  <div class="opt">B. Weber's law 指出辨識亮度變化的能力取決於相對比例而非絕對差</div>
-  <div class="opt">C. 人眼可同時分辨所有亮度範圍，不需要適應過程</div>
-  <div class="opt">D. 同一塊灰色放在黑背景上看起來比放在白背景上亮</div>
+  <div class="qt"><span class="en">A-4. Which of the following statements about human visual perception are correct?</span><span class="zh">關於人類視覺特性，正確的有？</span></div>
+  <div class="opt"><span class="en">A. The Mach band effect is an optical illusion; the bright/dark band does not exist in the actual pixel values.</span><span class="zh">Mach band 是視覺錯覺，實際像素值並沒有那條亮／暗帶</span></div>
+  <div class="opt"><span class="en">B. Weber's law states that the ability to detect an intensity change depends on the relative ratio rather than the absolute difference.</span><span class="zh">Weber's law 指出辨識亮度變化的能力取決於相對比例而非絕對差</span></div>
+  <div class="opt"><span class="en">C. The human eye can distinguish the entire range of brightness simultaneously, with no adaptation needed.</span><span class="zh">人眼可同時分辨所有亮度範圍，不需要適應過程</span></div>
+  <div class="opt"><span class="en">D. The same gray patch appears brighter on a black background than on a white background.</span><span class="zh">同一塊灰色放在黑背景上看起來比放在白背景上亮</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、B、D</strong><br>
   A ✓ 視覺系統自行強化邊緣。<br>
@@ -133,11 +148,11 @@
 </div>
 
 <div class="mq q" data-ans="0,1,2,3">
-  <div class="qt">A-5. 關於彩色影像的處理，正確的有？</div>
-  <div class="opt">A. 同尺寸下，RGB 影像的資料量是灰階影像的 3 倍</div>
-  <div class="opt">B. 可以把 R、G、B 各自視為一張灰階影像分別處理</div>
-  <div class="opt">C. 課堂作法中，彩色影像的直方圖均衡化是對三個通道獨立進行</div>
-  <div class="opt">D. 一張 (480, 640, 3) 的彩色影像，其 size（元素總數）為 921,600</div>
+  <div class="qt"><span class="en">A-5. Which of the following statements about colour image processing are correct?</span><span class="zh">關於彩色影像的處理，正確的有？</span></div>
+  <div class="opt"><span class="en">A. For the same dimensions, an RGB image contains three times as much data as a grayscale image.</span><span class="zh">同尺寸下，RGB 影像的資料量是灰階影像的 3 倍</span></div>
+  <div class="opt"><span class="en">B. Each of the R, G and B channels can be treated as a separate grayscale image.</span><span class="zh">可以把 R、G、B 各自視為一張灰階影像分別處理</span></div>
+  <div class="opt"><span class="en">C. In this course, histogram equalization of a colour image is performed independently on each channel.</span><span class="zh">課堂作法中，彩色影像的直方圖均衡化是對三個通道獨立進行</span></div>
+  <div class="opt"><span class="en">D. A colour image of shape (480, 640, 3) has a size (total number of elements) of 921,600.</span><span class="zh">一張 (480, 640, 3) 的彩色影像，其 size（元素總數）為 921,600</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、B、C、D（四個全對）</strong><br>
   A ✓ 多兩個通道。B ✓ hw3 就是這樣做。C ✓ 各通道獨立。<br>
@@ -147,11 +162,11 @@
 </div>
 
 <div class="mq q" data-ans="0,2">
-  <div class="qt">A-6. 關於數位影像處理（DIP）與相關領域，正確的有？</div>
-  <div class="opt">A. DIP 的典型輸入是影像、輸出也是影像</div>
-  <div class="opt">B. 電腦圖學（Computer Graphics）的輸入是影像、輸出是模型</div>
-  <div class="opt">C. 電腦視覺（Computer Vision）著重從影像中取得理解或描述</div>
-  <div class="opt">D. 影像壓縮不屬於數位影像處理的範疇</div>
+  <div class="qt"><span class="en">A-6. Which of the following statements about digital image processing (DIP) and related fields are correct?</span><span class="zh">關於數位影像處理（DIP）與相關領域，正確的有？</span></div>
+  <div class="opt"><span class="en">A. The typical input of DIP is an image and the output is also an image.</span><span class="zh">DIP 的典型輸入是影像、輸出也是影像</span></div>
+  <div class="opt"><span class="en">B. In computer graphics, the input is an image and the output is a model.</span><span class="zh">電腦圖學（Computer Graphics）的輸入是影像、輸出是模型</span></div>
+  <div class="opt"><span class="en">C. Computer vision focuses on obtaining understanding or a description from an image.</span><span class="zh">電腦視覺（Computer Vision）著重從影像中取得理解或描述</span></div>
+  <div class="opt"><span class="en">D. Image compression does not belong to digital image processing.</span><span class="zh">影像壓縮不屬於數位影像處理的範疇</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、C</strong><br>
   A ✓ 去雜訊、增強、銳化等都是影像進、影像出。<br>
@@ -161,11 +176,11 @@
 </div>
 
 <div class="mq q" data-ans="0,1,3">
-  <div class="qt">A-7. 關於電磁波譜與成像，正確的有？</div>
-  <div class="opt">A. 可見光只佔電磁波譜中很窄的一段</div>
-  <div class="opt">B. X 光的波長比可見光短</div>
-  <div class="opt">C. 紅外線的波長比紫外線短</div>
-  <div class="opt">D. 影像可以由可見光以外的波段取得（如 X 光、紅外線）</div>
+  <div class="qt"><span class="en">A-7. Which of the following statements about the electromagnetic spectrum and imaging are correct?</span><span class="zh">關於電磁波譜與成像，正確的有？</span></div>
+  <div class="opt"><span class="en">A. Visible light occupies only a very narrow band of the electromagnetic spectrum.</span><span class="zh">可見光只佔電磁波譜中很窄的一段</span></div>
+  <div class="opt"><span class="en">B. The wavelength of X-rays is shorter than that of visible light.</span><span class="zh">X 光的波長比可見光短</span></div>
+  <div class="opt"><span class="en">C. The wavelength of infrared is shorter than that of ultraviolet.</span><span class="zh">紅外線的波長比紫外線短</span></div>
+  <div class="opt"><span class="en">D. Images can be acquired using bands outside visible light, such as X-ray and infrared.</span><span class="zh">影像可以由可見光以外的波段取得（如 X 光、紅外線）</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、B、D</strong><br>
   A ✓ 約 400~700 nm，只是極小一段。<br>
@@ -175,11 +190,11 @@
 </div>
 
 <div class="mq q" data-ans="0">
-  <div class="qt">A-8. 關於影像擷取與感測，正確的有？</div>
-  <div class="opt">A. 成像的能量多半來自光源照射物體後的反射光</div>
-  <div class="opt">B. 感測器輸出的電訊號本身就是數位影像，不需要額外的轉換步驟</div>
-  <div class="opt">C. 薄透鏡成像滿足 1/f = u + v 的關係</div>
-  <div class="opt">D. 數位化只需要取樣，不需要量化</div>
+  <div class="qt"><span class="en">A-8. Which of the following statements about image acquisition and sensing are correct?</span><span class="zh">關於影像擷取與感測，正確的有？</span></div>
+  <div class="opt"><span class="en">A. The energy used for imaging usually comes from light reflected by the object.</span><span class="zh">成像的能量多半來自光源照射物體後的反射光</span></div>
+  <div class="opt"><span class="en">B. The electrical signal produced by the sensor is already a digital image and needs no further conversion.</span><span class="zh">感測器輸出的電訊號本身就是數位影像，不需要額外的轉換步驟</span></div>
+  <div class="opt"><span class="en">C. Thin lens imaging satisfies the relation 1/f = u + v.</span><span class="zh">薄透鏡成像滿足 1/f = u + v 的關係</span></div>
+  <div class="opt"><span class="en">D. Digitization requires only sampling, not quantization.</span><span class="zh">數位化只需要取樣，不需要量化</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A（只有一個正確）</strong><br>
   A ✓ 也可能是透射（如 X 光）。<br>
@@ -190,11 +205,11 @@
 </div>
 
 <div class="mq q" data-ans="1,3">
-  <div class="qt">A-9. 一張影像若把空間解析度降低一半（長寬各減半），正確的有？</div>
-  <div class="opt">A. 資料量變為原本的 1/2</div>
-  <div class="opt">B. 資料量變為原本的 1/4</div>
-  <div class="opt">C. 灰階級數也會跟著減半</div>
-  <div class="opt">D. 影像細節會流失，可能出現鋸齒或馬賽克</div>
+  <div class="qt"><span class="en">A-9. If the spatial resolution of an image is halved in both width and height, which statements are correct?</span><span class="zh">一張影像若把空間解析度降低一半（長寬各減半），正確的有？</span></div>
+  <div class="opt"><span class="en">A. The amount of data becomes 1/2 of the original.</span><span class="zh">資料量變為原本的 1/2</span></div>
+  <div class="opt"><span class="en">B. The amount of data becomes 1/4 of the original.</span><span class="zh">資料量變為原本的 1/4</span></div>
+  <div class="opt"><span class="en">C. The number of gray levels is also halved.</span><span class="zh">灰階級數也會跟著減半</span></div>
+  <div class="opt"><span class="en">D. Image detail is lost and blockiness or jagged edges may appear.</span><span class="zh">影像細節會流失，可能出現鋸齒或馬賽克</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：B、D</strong><br>
   A ✗ 長寬<strong>各</strong>減半 → 像素數變 1/2 × 1/2 = <strong>1/4</strong>。<br>
@@ -204,11 +219,11 @@
 </div>
 
 <div class="mq q" data-ans="0,1">
-  <div class="qt">A-10. 一張影像若把量化位元數由 8-bit 降為 2-bit，正確的有？</div>
-  <div class="opt">A. 灰階級數由 256 降為 4</div>
-  <div class="opt">B. 平滑的漸層區域會出現明顯的階梯狀分界</div>
-  <div class="opt">C. 影像的長寬尺寸會變小</div>
-  <div class="opt">D. 這屬於取樣不足的問題</div>
+  <div class="qt"><span class="en">A-10. If the quantization of an image is reduced from 8-bit to 2-bit, which statements are correct?</span><span class="zh">一張影像若把量化位元數由 8-bit 降為 2-bit，正確的有？</span></div>
+  <div class="opt"><span class="en">A. The number of gray levels drops from 256 to 4.</span><span class="zh">灰階級數由 256 降為 4</span></div>
+  <div class="opt"><span class="en">B. Smooth gradient regions will show obvious step-like boundaries.</span><span class="zh">平滑的漸層區域會出現明顯的階梯狀分界</span></div>
+  <div class="opt"><span class="en">C. The width and height of the image become smaller.</span><span class="zh">影像的長寬尺寸會變小</span></div>
+  <div class="opt"><span class="en">D. This is a problem of insufficient sampling.</span><span class="zh">這屬於取樣不足的問題</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、B</strong><br>
   A ✓ 2² = 4 級。<br>
@@ -218,11 +233,11 @@
 </div>
 
 <div class="mq q" data-ans="0,2">
-  <div class="qt">A-11. 關於影像檔案格式，正確的有？</div>
-  <div class="opt">A. JPEG 屬於有損壓縮</div>
-  <div class="opt">B. PNG 屬於有損壓縮</div>
-  <div class="opt">C. 有損壓縮可能在影像中留下人工痕跡（artifacts），並反映在直方圖上</div>
-  <div class="opt">D. 壓縮後的檔案大小一定等於 H × W × b ÷ 8</div>
+  <div class="qt"><span class="en">A-11. Which of the following statements about image file formats are correct?</span><span class="zh">關於影像檔案格式，正確的有？</span></div>
+  <div class="opt"><span class="en">A. JPEG is a lossy compression format.</span><span class="zh">JPEG 屬於有損壓縮</span></div>
+  <div class="opt"><span class="en">B. PNG is a lossy compression format.</span><span class="zh">PNG 屬於有損壓縮</span></div>
+  <div class="opt"><span class="en">C. Lossy compression may leave artifacts in the image, which can be reflected in the histogram.</span><span class="zh">有損壓縮可能在影像中留下人工痕跡（artifacts），並反映在直方圖上</span></div>
+  <div class="opt"><span class="en">D. The compressed file size must equal H x W x b / 8.</span><span class="zh">壓縮後的檔案大小一定等於 H × W × b ÷ 8</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、C</strong><br>
   A ✓ JPEG 用量化捨棄高頻資訊。<br>
@@ -232,11 +247,11 @@
 </div>
 
 <div class="mq q" data-ans="0,1">
-  <div class="qt">A-12. 關於「解析度要多少才夠」，正確的有？</div>
-  <div class="opt">A. 需要多少解析度取決於影像的用途與觀看距離</div>
-  <div class="opt">B. 在細節豐富的區域，解析度不足會比在平坦區域更明顯</div>
-  <div class="opt">C. 8-bit 對所有專業領域都綽綽有餘，醫學影像也不需要更高的位元深度</div>
-  <div class="opt">D. 解析度越高一定越好，沒有任何代價</div>
+  <div class="qt"><span class="en">A-12. Regarding 'how much resolution is enough', which statements are correct?</span><span class="zh">關於「解析度要多少才夠」，正確的有？</span></div>
+  <div class="opt"><span class="en">A. The required resolution depends on the purpose of the image and the viewing distance.</span><span class="zh">需要多少解析度取決於影像的用途與觀看距離</span></div>
+  <div class="opt"><span class="en">B. Insufficient resolution is more noticeable in regions with fine detail than in flat regions.</span><span class="zh">在細節豐富的區域，解析度不足會比在平坦區域更明顯</span></div>
+  <div class="opt"><span class="en">C. 8-bit is more than enough for every professional field; even medical imaging needs no higher bit depth.</span><span class="zh">8-bit 對所有專業領域都綽綽有餘，醫學影像也不需要更高的位元深度</span></div>
+  <div class="opt"><span class="en">D. Higher resolution is always better, with no cost at all.</span><span class="zh">解析度越高一定越好，沒有任何代價</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、B</strong><br>
   A ✓ 看圖目的不同，需求不同。<br>
@@ -246,11 +261,11 @@
 </div>
 
 <div class="mq q" data-ans="0,1,2">
-  <div class="qt">A-13. 關於感測器的飽和（saturation）與雜訊，正確的有？</div>
-  <div class="opt">A. 進光量過多超出感測上限時會飽和，該區域細節無法還原</div>
-  <div class="opt">B. 飽和會在直方圖最右端造成堆積</div>
-  <div class="opt">C. 光線不足時，雜訊相對訊號的比例會提高</div>
-  <div class="opt">D. 飽和與雜訊都可以用直方圖均衡化完全修復</div>
+  <div class="qt"><span class="en">A-13. Which of the following statements about sensor saturation and noise are correct?</span><span class="zh">關於感測器的飽和（saturation）與雜訊，正確的有？</span></div>
+  <div class="opt"><span class="en">A. When the incoming light exceeds the sensing limit, saturation occurs and detail in that region cannot be recovered.</span><span class="zh">進光量過多超出感測上限時會飽和，該區域細節無法還原</span></div>
+  <div class="opt"><span class="en">B. Saturation only occurs in dark regions of an image.</span><span class="zh">飽和會在直方圖最右端造成堆積</span></div>
+  <div class="opt"><span class="en">C. Under low light, the ratio of noise to signal increases.</span><span class="zh">光線不足時，雜訊相對訊號的比例會提高</span></div>
+  <div class="opt"><span class="en">D. Both saturation and noise can be completely repaired by histogram equalization.</span><span class="zh">飽和與雜訊都可以用直方圖均衡化完全修復</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、B、C</strong><br>
   A ✓ 過曝資訊永久遺失。<br>
@@ -261,11 +276,11 @@
 </div>
 
 <div class="mq q" data-ans="0,1,3">
-  <div class="qt">A-14. 下列哪些屬於數位影像處理常見的應用／處理階段？</div>
-  <div class="opt">A. 影像去雜訊與影像增強</div>
-  <div class="opt">B. 影像分割與形態學處理</div>
-  <div class="opt">C. 以物理引擎模擬剛體碰撞</div>
-  <div class="opt">D. 影像壓縮與影像復原（restoration）</div>
+  <div class="qt"><span class="en">A-14. Which of the following belong to the common applications or stages of digital image processing?</span><span class="zh">下列哪些屬於數位影像處理常見的應用／處理階段？</span></div>
+  <div class="opt"><span class="en">A. Image denoising and image enhancement.</span><span class="zh">影像去雜訊與影像增強</span></div>
+  <div class="opt"><span class="en">B. Image segmentation and morphological processing.</span><span class="zh">影像分割與形態學處理</span></div>
+  <div class="opt"><span class="en">C. Simulating rigid-body collisions with a physics engine.</span><span class="zh">以物理引擎模擬剛體碰撞</span></div>
+  <div class="opt"><span class="en">D. Image compression and image restoration.</span><span class="zh">影像壓縮與影像復原（restoration）</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、B、D</strong><br>
   A、B、D ✓ 都是 DIP 的標準階段。<br>
@@ -276,11 +291,11 @@
 <h2 id="c2">第 2 章 · 點運算與影像合成</h2>
 
 <div class="mq q" data-ans="0,1">
-  <div class="qt">A-15. 關於點運算（point operation），正確的有？</div>
-  <div class="opt">A. 輸出像素值只取決於同一位置的輸入像素值</div>
-  <div class="opt">B. 反相、二值化、Gamma 轉換都屬於點運算</div>
-  <div class="opt">C. 3×3 中位數濾波屬於點運算</div>
-  <div class="opt">D. 點運算會改變影像的空間解析度</div>
+  <div class="qt"><span class="en">A-15. Which of the following statements about point operations are correct?</span><span class="zh">關於點運算（point operation），正確的有？</span></div>
+  <div class="opt"><span class="en">A. The output pixel value depends only on the input pixel value at the same location.</span><span class="zh">輸出像素值只取決於同一位置的輸入像素值</span></div>
+  <div class="opt"><span class="en">B. Image negative, thresholding and gamma transformation are all point operations.</span><span class="zh">反相、二值化、Gamma 轉換都屬於點運算</span></div>
+  <div class="opt"><span class="en">C. A 3x3 median filter is a point operation.</span><span class="zh">3×3 中位數濾波屬於點運算</span></div>
+  <div class="opt"><span class="en">D. A point operation changes the spatial resolution of the image.</span><span class="zh">點運算會改變影像的空間解析度</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、B</strong><br>
   A ✓ 定義。B ✓ 三者都只用同位置的值。<br>
@@ -288,11 +303,11 @@
 </div>
 
 <div class="mq q" data-ans="0,2">
-  <div class="qt">A-16. 關於齊次（homogeneous）與非齊次點運算，正確的有？</div>
-  <div class="opt">A. 齊次點運算對所有像素套用相同的轉換函數</div>
-  <div class="opt">B. 非齊次點運算的輸出會取決於鄰居的值</div>
-  <div class="opt">C. 四角壓暗（vignette）屬於非齊次點運算</div>
-  <div class="opt">D. 非齊次點運算就是濾波</div>
+  <div class="qt"><span class="en">A-16. Which of the following statements about homogeneous and non-homogeneous point operations are correct?</span><span class="zh">關於齊次（homogeneous）與非齊次點運算，正確的有？</span></div>
+  <div class="opt"><span class="en">A. A homogeneous point operation applies the same transformation function to every pixel.</span><span class="zh">齊次點運算對所有像素套用相同的轉換函數</span></div>
+  <div class="opt"><span class="en">B. The output of a non-homogeneous point operation depends on the values of neighbouring pixels.</span><span class="zh">非齊次點運算的輸出會取決於鄰居的值</span></div>
+  <div class="opt"><span class="en">C. Darkening the four corners (vignetting) is a non-homogeneous point operation.</span><span class="zh">四角壓暗（vignette）屬於非齊次點運算</span></div>
+  <div class="opt"><span class="en">D. A non-homogeneous point operation is the same thing as filtering.</span><span class="zh">非齊次點運算就是濾波</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、C</strong><br>
   A ✓ 例如整張 +50。<br>
@@ -302,11 +317,11 @@
 </div>
 
 <div class="mq q" data-ans="0,1,3">
-  <div class="qt">A-17. 關於影像反相 s = 255 − r，正確的有？</div>
-  <div class="opt">A. 最亮的像素會變成最暗</div>
-  <div class="opt">B. 直方圖會左右鏡像翻轉</div>
-  <div class="opt">C. 這個操作不可逆</div>
-  <div class="opt">D. r = 0 會變成 255</div>
+  <div class="qt"><span class="en">A-17. Which of the following statements about image negative s = 255 - r are correct?</span><span class="zh">關於影像反相 s = 255 − r，正確的有？</span></div>
+  <div class="opt"><span class="en">A. The brightest pixels become the darkest.</span><span class="zh">最亮的像素會變成最暗</span></div>
+  <div class="opt"><span class="en">B. The histogram is mirrored left to right.</span><span class="zh">直方圖會左右鏡像翻轉</span></div>
+  <div class="opt"><span class="en">C. This operation is irreversible.</span><span class="zh">這個操作不可逆</span></div>
+  <div class="opt"><span class="en">D. A pixel with r = 0 becomes 255.</span><span class="zh">r = 0 會變成 255</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、B、D</strong><br>
   A ✓ B ✓ 線性反轉使直方圖整個翻過來。<br>
@@ -315,11 +330,11 @@
 </div>
 
 <div class="mq q" data-ans="0,1,2">
-  <div class="qt">A-18. 關於冪次轉換 s = c · r<sup>γ</sup>，正確的有？</div>
-  <div class="opt">A. γ &lt; 1 時影像變亮</div>
-  <div class="opt">B. γ &gt; 1 時影像變暗</div>
-  <div class="opt">C. 對 8-bit 影像應先正規化到 0~1 再取次方</div>
-  <div class="opt">D. γ = 1 時影像會變成全黑</div>
+  <div class="qt"><span class="en">A-18. Which of the following statements about the power-law transformation s = c * r^gamma are correct?</span><span class="zh">關於冪次轉換 s = c · r<sup>γ</sup>，正確的有？</span></div>
+  <div class="opt"><span class="en">A. When gamma &lt; 1 the image becomes brighter.</span><span class="zh">γ &lt; 1 時影像變亮</span></div>
+  <div class="opt"><span class="en">B. When gamma &gt; 1 the image becomes darker.</span><span class="zh">γ &gt; 1 時影像變暗</span></div>
+  <div class="opt"><span class="en">C. For an 8-bit image, the values should be normalized to 0~1 before raising to the power.</span><span class="zh">對 8-bit 影像應先正規化到 0~1 再取次方</span></div>
+  <div class="opt"><span class="en">D. When gamma = 1 the image becomes completely black.</span><span class="zh">γ = 1 時影像會變成全黑</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、B、C</strong><br>
   A、B ✓ 0~1 的小數次方越大值越小。<br>
@@ -328,11 +343,11 @@
 </div>
 
 <div class="mq q" data-ans="0,1">
-  <div class="qt">A-19. 關於 Gamma 校正的實務意義，正確的有？</div>
-  <div class="opt">A. 顯示器的輸出亮度與輸入訊號並非線性關係</div>
-  <div class="opt">B. 人眼對暗部的變化比亮部敏感，因此用非線性編碼較有效率</div>
-  <div class="opt">C. 拍攝端與顯示端都套用 γ ≈ 2.2，兩者即可互相抵銷</div>
-  <div class="opt">D. Gamma 校正屬於鄰域運算</div>
+  <div class="qt"><span class="en">A-19. Which of the following statements about the practical purpose of gamma correction are correct?</span><span class="zh">關於 Gamma 校正的實務意義，正確的有？</span></div>
+  <div class="opt"><span class="en">A. The output luminance of a display is not linearly related to the input signal.</span><span class="zh">顯示器的輸出亮度與輸入訊號並非線性關係</span></div>
+  <div class="opt"><span class="en">B. The human eye is more sensitive to changes in dark regions, so non-linear encoding is more efficient.</span><span class="zh">人眼對暗部的變化比亮部敏感，因此用非線性編碼較有效率</span></div>
+  <div class="opt"><span class="en">C. Applying gamma = 2.2 at both the capture side and the display side makes the two cancel out.</span><span class="zh">拍攝端與顯示端都套用 γ ≈ 2.2，兩者即可互相抵銷</span></div>
+  <div class="opt"><span class="en">D. Gamma correction is a neighbourhood operation.</span><span class="zh">Gamma 校正屬於鄰域運算</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、B</strong><br>
   A ✓ 約 2.2 次方關係。<br>
@@ -342,11 +357,11 @@
 </div>
 
 <div class="mq q" data-ans="0,1,3">
-  <div class="qt">A-20. 關於對數轉換 s = c · log(1 + r)，正確的有？</div>
-  <div class="opt">A. 會把暗部的細節拉開</div>
-  <div class="opt">B. 會把亮部壓縮</div>
-  <div class="opt">C. 會讓整體影像變暗</div>
-  <div class="opt">D. 常用於壓縮動態範圍很大的影像</div>
+  <div class="qt"><span class="en">A-20. Which of the following statements about the log transformation s = c * log(1 + r) are correct?</span><span class="zh">關於對數轉換 s = c · log(1 + r)，正確的有？</span></div>
+  <div class="opt"><span class="en">A. It expands the detail in dark regions.</span><span class="zh">會把暗部的細節拉開</span></div>
+  <div class="opt"><span class="en">B. It compresses the bright regions.</span><span class="zh">會把亮部壓縮</span></div>
+  <div class="opt"><span class="en">C. It makes the overall image darker.</span><span class="zh">會讓整體影像變暗</span></div>
+  <div class="opt"><span class="en">D. It is often used to compress a large dynamic range.</span><span class="zh">常用於壓縮動態範圍很大的影像</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、B、D</strong><br>
   A、B ✓ log 曲線在小輸入時斜率大、大輸入時斜率小。<br>
@@ -355,11 +370,11 @@
 </div>
 
 <div class="mq q" data-ans="0,2">
-  <div class="qt">A-21. 關於二值化（thresholding）與強度窗化（intensity windowing），正確的有？</div>
-  <div class="opt">A. 二值化把影像變成只有兩種值，是形態學處理的前置步驟</div>
-  <div class="opt">B. 二值化的閾值固定為 128，不需依影像調整</div>
-  <div class="opt">C. 強度窗化是把某個區間 [a, b] 拉伸到完整範圍，區間外的值被截斷</div>
-  <div class="opt">D. 二值化後仍保留原本的灰階層次</div>
+  <div class="qt"><span class="en">A-21. Which of the following statements about thresholding and intensity windowing are correct?</span><span class="zh">關於二值化（thresholding）與強度窗化（intensity windowing），正確的有？</span></div>
+  <div class="opt"><span class="en">A. Thresholding converts an image to only two values and is a prerequisite for morphological processing.</span><span class="zh">二值化把影像變成只有兩種值，是形態學處理的前置步驟</span></div>
+  <div class="opt"><span class="en">B. The threshold is fixed at 128 and does not need to be adjusted for different images.</span><span class="zh">二值化的閾值固定為 128，不需依影像調整</span></div>
+  <div class="opt"><span class="en">C. Intensity windowing stretches an interval [a, b] to the full range and clips values outside it.</span><span class="zh">強度窗化是把某個區間 [a, b] 拉伸到完整範圍，區間外的值被截斷</span></div>
+  <div class="opt"><span class="en">D. After thresholding, the original gray level gradations are preserved.</span><span class="zh">二值化後仍保留原本的灰階層次</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、C</strong><br>
   A ✓ 第 6 章只處理二值圖。<br>
@@ -369,11 +384,11 @@
 </div>
 
 <div class="mq q" data-ans="0,1,2">
-  <div class="qt">A-22. 關於多張影像平均，正確的有？</div>
-  <div class="opt">A. 可降低隨機雜訊，雜訊標準差約降為 1/√N</div>
-  <div class="opt">B. 平均 16 張，雜訊約降為原本的 1/4</div>
-  <div class="opt">C. 前提是多張影像必須對齊（內容相同、雜訊獨立）</div>
-  <div class="opt">D. 平均 N 張會使訊號本身也衰減為 1/N</div>
+  <div class="qt"><span class="en">A-22. Which of the following statements about averaging multiple images are correct?</span><span class="zh">關於多張影像平均，正確的有？</span></div>
+  <div class="opt"><span class="en">A. It reduces random noise; the noise standard deviation drops to about 1/sqrt(N).</span><span class="zh">可降低隨機雜訊，雜訊標準差約降為 1/√N</span></div>
+  <div class="opt"><span class="en">B. Averaging 16 images reduces the noise to about 1/4.</span><span class="zh">平均 16 張，雜訊約降為原本的 1/4</span></div>
+  <div class="opt"><span class="en">C. It requires the images to be aligned (same content, independent noise).</span><span class="zh">前提是多張影像必須對齊（內容相同、雜訊獨立）</span></div>
+  <div class="opt"><span class="en">D. Averaging N images also attenuates the signal itself to 1/N.</span><span class="zh">平均 N 張會使訊號本身也衰減為 1/N</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、B、C</strong><br>
   A ✓ 注意是 1/√N。B ✓ √16 = 4。<br>
@@ -382,11 +397,11 @@
 </div>
 
 <div class="mq q" data-ans="0,1">
-  <div class="qt">A-23. 關於影像相減的應用，正確的有？</div>
-  <div class="opt">A. 可用於監視畫面的背景相減，找出移動物體</div>
-  <div class="opt">B. 可用於工業檢測，比對標準件找出瑕疵</div>
-  <div class="opt">C. 取絕對差 |I₁ − I₂| 之後，仍可分辨出是變亮還是變暗</div>
-  <div class="opt">D. 相減結果一定落在 0~255，不需要處理範圍問題</div>
+  <div class="qt"><span class="en">A-23. Which of the following statements about applications of image subtraction are correct?</span><span class="zh">關於影像相減的應用，正確的有？</span></div>
+  <div class="opt"><span class="en">A. It can be used for background subtraction in surveillance to find moving objects.</span><span class="zh">可用於監視畫面的背景相減，找出移動物體</span></div>
+  <div class="opt"><span class="en">B. It can be used in industrial inspection to find defects by comparing against a reference.</span><span class="zh">可用於工業檢測，比對標準件找出瑕疵</span></div>
+  <div class="opt"><span class="en">C. After taking the absolute difference |I1 - I2|, one can still tell whether the region became brighter or darker.</span><span class="zh">取絕對差 |I₁ − I₂| 之後，仍可分辨出是變亮還是變暗</span></div>
+  <div class="opt"><span class="en">D. The result of subtraction always lies in 0~255, so the range needs no handling.</span><span class="zh">相減結果一定落在 0~255，不需要處理範圍問題</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、B</strong><br>
   A、B ✓ 經典應用。<br>
@@ -395,11 +410,11 @@
 </div>
 
 <div class="mq q" data-ans="0,2,3">
-  <div class="qt">A-24. 關於 Alpha 混合 I = αF + (1−α)B，正確的有？</div>
-  <div class="opt">A. α = 1 時結果完全是前景 F</div>
-  <div class="opt">B. α = 0 時結果完全是前景 F</div>
-  <div class="opt">C. 兩個權重相加為 1，可確保亮度不會爆掉</div>
-  <div class="opt">D. 0 &lt; α &lt; 1 表示半透明，是柔和過渡的來源</div>
+  <div class="qt"><span class="en">A-24. Which of the following statements about alpha blending I = aF + (1-a)B are correct?</span><span class="zh">關於 Alpha 混合 I = αF + (1−α)B，正確的有？</span></div>
+  <div class="opt"><span class="en">A. When a = 1 the result is entirely the foreground F.</span><span class="zh">α = 1 時結果完全是前景 F</span></div>
+  <div class="opt"><span class="en">B. When a = 0 the result is entirely the foreground F.</span><span class="zh">α = 0 時結果完全是前景 F</span></div>
+  <div class="opt"><span class="en">C. The two weights sum to 1, which ensures the brightness does not blow up.</span><span class="zh">兩個權重相加為 1，可確保亮度不會爆掉</span></div>
+  <div class="opt"><span class="en">D. 0 &lt; a &lt; 1 means semi-transparent, and is the source of the smooth transition.</span><span class="zh">0 &lt; α &lt; 1 表示半透明，是柔和過渡的來源</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、C、D</strong><br>
   A ✓ 代入 α=1 得 F。<br>
@@ -409,11 +424,11 @@
 </div>
 
 <div class="mq q" data-ans="0,1,3">
-  <div class="qt">A-25. 關於影像合成的過渡帶（window size），正確的有？</div>
-  <div class="opt">A. 過渡帶太窄會看到明顯接縫（seam）</div>
-  <div class="opt">B. 過渡帶太寬會出現鬼影（ghosting）</div>
-  <div class="opt">C. 過渡帶的理想寬度與影像的頻率內容無關</div>
-  <div class="opt">D. Pyramid blending 對不同頻率層使用不同寬度的過渡帶</div>
+  <div class="qt"><span class="en">A-25. Which of the following statements about the transition band (window size) in image compositing are correct?</span><span class="zh">關於影像合成的過渡帶（window size），正確的有？</span></div>
+  <div class="opt"><span class="en">A. Too narrow a transition band leaves a visible seam.</span><span class="zh">過渡帶太窄會看到明顯接縫（seam）</span></div>
+  <div class="opt"><span class="en">B. Too wide a transition band causes ghosting.</span><span class="zh">過渡帶太寬會出現鬼影（ghosting）</span></div>
+  <div class="opt"><span class="en">C. The ideal width of the transition band is unrelated to the frequency content of the image.</span><span class="zh">過渡帶的理想寬度與影像的頻率內容無關</span></div>
+  <div class="opt"><span class="en">D. Pyramid blending uses transition bands of different widths for different frequency bands.</span><span class="zh">Pyramid blending 對不同頻率層使用不同寬度的過渡帶</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、B、D</strong><br>
   A ✓ 亮度不連續。B ✓ 大範圍半透明疊加。<br>
@@ -422,11 +437,11 @@
 </div>
 
 <div class="mq q" data-ans="0">
-  <div class="qt">A-26. 關於用二值遮罩直接貼上（naive copy-paste）的問題，正確的有？</div>
-  <div class="opt">A. 邊界會出現生硬的接縫</div>
-  <div class="opt">B. 只要遮罩邊緣畫得夠精細，就能正確表現薄紗、煙霧等半透明物體</div>
-  <div class="opt">C. 二值遮罩能正確處理陰影這種「部分覆蓋」的情況</div>
-  <div class="opt">D. 只要遮罩畫得夠精準，就能完全解決上述所有問題</div>
+  <div class="qt"><span class="en">A-26. Which of the following statements about naive copy-paste using a binary mask are correct?</span><span class="zh">關於用二值遮罩直接貼上（naive copy-paste）的問題，正確的有？</span></div>
+  <div class="opt"><span class="en">A. A hard seam appears at the boundary.</span><span class="zh">邊界會出現生硬的接縫</span></div>
+  <div class="opt"><span class="en">B. As long as the mask edge is drawn finely enough, semi-transparent objects such as gauze or smoke can be represented correctly.</span><span class="zh">只要遮罩邊緣畫得夠精細，就能正確表現薄紗、煙霧等半透明物體</span></div>
+  <div class="opt"><span class="en">C. A binary mask can correctly handle partial coverage such as shadows.</span><span class="zh">二值遮罩能正確處理陰影這種「部分覆蓋」的情況</span></div>
+  <div class="opt"><span class="en">D. All the above problems can be completely solved simply by drawing the mask accurately.</span><span class="zh">只要遮罩畫得夠精準，就能完全解決上述所有問題</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A（只有一個正確）</strong><br>
   A ✓ 二值遮罩在邊界造成亮度不連續。<br>
@@ -436,11 +451,11 @@
 </div>
 
 <div class="mq q" data-ans="0,1,2">
-  <div class="qt">A-27. 關於 8-bit（uint8）運算的溢位問題，正確的有？</div>
-  <div class="opt">A. uint8 下計算 200 + 100，結果會變成 44</div>
-  <div class="opt">B. 先轉成浮點數再運算可以避免此問題</div>
-  <div class="opt">C. 運算後用 clip 把值夾回 0~255 是正確做法</div>
-  <div class="opt">D. uint8 可表示的範圍是 −128 ~ 127</div>
+  <div class="qt"><span class="en">A-27. Which of the following statements about overflow in 8-bit (uint8) arithmetic are correct?</span><span class="zh">關於 8-bit（uint8）運算的溢位問題，正確的有？</span></div>
+  <div class="opt"><span class="en">A. Computing 200 + 100 in uint8 gives 44.</span><span class="zh">uint8 下計算 200 + 100，結果會變成 44</span></div>
+  <div class="opt"><span class="en">B. Converting to floating point before the computation avoids this problem.</span><span class="zh">先轉成浮點數再運算可以避免此問題</span></div>
+  <div class="opt"><span class="en">C. Clipping the result back to 0~255 after the computation is the correct approach.</span><span class="zh">運算後用 clip 把值夾回 0~255 是正確做法</span></div>
+  <div class="opt"><span class="en">D. The range representable by uint8 is -128 to 127.</span><span class="zh">uint8 可表示的範圍是 −128 ~ 127</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、B、C</strong><br>
   A ✓ 300 − 256 = 44（繞回）。<br>
@@ -449,11 +464,11 @@
 </div>
 
 <div class="mq q" data-ans="1,2">
-  <div class="qt">A-28. 關於「不要混合，用剪的」（don't blend, cut）這類合成方法，正確的有？</div>
-  <div class="opt">A. 它的做法是把過渡帶開得非常寬</div>
-  <div class="opt">B. 它改為尋找一條「差異最小」的接縫路徑來裁切</div>
-  <div class="opt">C. 沿著兩張影像最相似的地方裁切，可讓接縫不易被察覺</div>
-  <div class="opt">D. 這種方法一定優於 alpha blending，已完全取代之</div>
+  <div class="qt"><span class="en">A-28. Which of the following statements about 'don't blend, cut' compositing methods are correct?</span><span class="zh">關於「不要混合，用剪的」（don't blend, cut）這類合成方法，正確的有？</span></div>
+  <div class="opt"><span class="en">A. The method works by making the transition band extremely wide.</span><span class="zh">它的做法是把過渡帶開得非常寬</span></div>
+  <div class="opt"><span class="en">B. It instead searches for a cutting path along which the difference is minimal.</span><span class="zh">它改為尋找一條「差異最小」的接縫路徑來裁切</span></div>
+  <div class="opt"><span class="en">C. Cutting where the two images are most similar makes the seam hard to notice.</span><span class="zh">沿著兩張影像最相似的地方裁切，可讓接縫不易被察覺</span></div>
+  <div class="opt"><span class="en">D. This method is always better than alpha blending and has completely replaced it.</span><span class="zh">這種方法一定優於 alpha blending，已完全取代之</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：B、C</strong><br>
   A ✗ 剛好相反，它<strong>不靠過渡帶</strong>。<br>
@@ -466,11 +481,11 @@
 <h2 id="c3">第 3 章 · 直方圖</h2>
 
 <div class="mq q" data-ans="0,1,3">
-  <div class="qt">A-29. 關於直方圖的性質，正確的有？</div>
-  <div class="opt">A. 所有長條的總和等於總像素數 N</div>
-  <div class="opt">B. 直方圖不包含像素的位置資訊</div>
-  <div class="opt">C. 由直方圖可以唯一還原出原始影像</div>
-  <div class="opt">D. 正規化直方圖 p(i) = h(i)/N 可視為機率分布</div>
+  <div class="qt"><span class="en">A-29. Which of the following statements about properties of the histogram are correct?</span><span class="zh">關於直方圖的性質，正確的有？</span></div>
+  <div class="opt"><span class="en">A. The sum of all bins equals the total number of pixels N.</span><span class="zh">所有長條的總和等於總像素數 N</span></div>
+  <div class="opt"><span class="en">B. The histogram contains no information about pixel locations.</span><span class="zh">直方圖不包含像素的位置資訊</span></div>
+  <div class="opt"><span class="en">C. The original image can be uniquely reconstructed from its histogram.</span><span class="zh">由直方圖可以唯一還原出原始影像</span></div>
+  <div class="opt"><span class="en">D. The normalized histogram p(i) = h(i)/N can be regarded as a probability distribution.</span><span class="zh">正規化直方圖 p(i) = h(i)/N 可視為機率分布</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、B、D</strong><br>
   A ✓ B ✓ 只統計數量不管位置。<br>
@@ -479,11 +494,11 @@
 </div>
 
 <div class="mq q" data-ans="0,1,3">
-  <div class="qt">A-30. 關於累積直方圖 cdf，正確的有？</div>
-  <div class="opt">A. cdf 是單調不遞減的</div>
-  <div class="opt">B. cdf(L−1) 必定等於總像素數 N</div>
-  <div class="opt">C. 若某灰階的像素數為 0，cdf 在該處會下降</div>
-  <div class="opt">D. cdf(i) 表示亮度小於等於 i 的像素總數</div>
+  <div class="qt"><span class="en">A-30. Which of the following statements about the cumulative histogram (cdf) are correct?</span><span class="zh">關於累積直方圖 cdf，正確的有？</span></div>
+  <div class="opt"><span class="en">A. The cdf is monotonically non-decreasing.</span><span class="zh">cdf 是單調不遞減的</span></div>
+  <div class="opt"><span class="en">B. cdf(L-1) must equal the total number of pixels N.</span><span class="zh">cdf(L−1) 必定等於總像素數 N</span></div>
+  <div class="opt"><span class="en">C. If a gray level has zero pixels, the cdf decreases at that point.</span><span class="zh">若某灰階的像素數為 0，cdf 在該處會下降</span></div>
+  <div class="opt"><span class="en">D. cdf(i) is the total number of pixels with intensity less than or equal to i.</span><span class="zh">cdf(i) 表示亮度小於等於 i 的像素總數</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、B、D</strong><br>
   A ✓ 只會持平或上升。B ✓ 很好的驗算點。<br>
@@ -492,11 +507,11 @@
 </div>
 
 <div class="mq q" data-ans="0,1,3">
-  <div class="qt">A-31. 關於直方圖均衡化的公式，正確的有？</div>
-  <div class="opt">A. s = round( (L−1)/N × cdf(r) )</div>
-  <div class="opt">B. 若忘記乘 (L−1)，結果會落在 0~1 之間，影像近乎全黑</div>
-  <div class="opt">C. 公式中應該乘 L 而不是 L−1</div>
-  <div class="opt">D. 原影像中最大的灰階，處理後必定對應到 L−1</div>
+  <div class="qt"><span class="en">A-31. Which of the following statements about the histogram equalization formula are correct?</span><span class="zh">關於直方圖均衡化的公式，正確的有？</span></div>
+  <div class="opt"><span class="en">A. s = round( (L-1)/N x cdf(r) ).</span><span class="zh">s = round( (L−1)/N × cdf(r) )</span></div>
+  <div class="opt"><span class="en">B. Forgetting to multiply by (L-1) leaves the result between 0 and 1, making the image nearly black.</span><span class="zh">若忘記乘 (L−1)，結果會落在 0~1 之間，影像近乎全黑</span></div>
+  <div class="opt"><span class="en">C. The formula should multiply by L rather than L-1.</span><span class="zh">公式中應該乘 L 而不是 L−1</span></div>
+  <div class="opt"><span class="en">D. The largest gray level in the original image must be mapped to L-1.</span><span class="zh">原影像中最大的灰階，處理後必定對應到 L−1</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、B、D</strong><br>
   A ✓ B ✓ cdf/N 只到 1。<br>
@@ -505,11 +520,11 @@
 </div>
 
 <div class="mq q" data-ans="1,2,3">
-  <div class="qt">A-32. 關於直方圖均衡化的結果，正確的有？</div>
-  <div class="opt">A. 處理後的直方圖會變成完全平坦的水平線</div>
-  <div class="opt">B. 處理後的直方圖通常呈現有空隙的「梳子狀」</div>
-  <div class="opt">C. 此操作不可逆</div>
-  <div class="opt">D. 對比通常增強，像素值的標準差變大</div>
+  <div class="qt"><span class="en">A-32. Which of the following statements about the result of histogram equalization are correct?</span><span class="zh">關於直方圖均衡化的結果，正確的有？</span></div>
+  <div class="opt"><span class="en">A. The resulting histogram becomes a perfectly flat horizontal line.</span><span class="zh">處理後的直方圖會變成完全平坦的水平線</span></div>
+  <div class="opt"><span class="en">B. The resulting histogram usually looks comb-like with gaps.</span><span class="zh">處理後的直方圖通常呈現有空隙的「梳子狀」</span></div>
+  <div class="opt"><span class="en">C. The operation is irreversible.</span><span class="zh">此操作不可逆</span></div>
+  <div class="opt"><span class="en">D. Contrast is usually enhanced and the standard deviation of pixel values increases.</span><span class="zh">對比通常增強，像素值的標準差變大</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：B、C、D</strong><br>
   A ✗ 經典陷阱：灰階離散，<strong>不可能完全平坦</strong>。<br>
@@ -517,11 +532,11 @@
 </div>
 
 <div class="mq q" data-ans="0,1,2">
-  <div class="qt">A-33. 比較「對比拉伸」與「直方圖均衡化」，正確的有？</div>
-  <div class="opt">A. 對比拉伸是線性映射</div>
-  <div class="opt">B. 均衡化依據 cdf 做非線性重分配</div>
-  <div class="opt">C. 對比拉伸不會把不同灰階合併，均衡化則可能合併</div>
-  <div class="opt">D. 均衡化需要先指定 r<sub>min</sub> 與 r<sub>max</sub></div>
+  <div class="qt"><span class="en">A-33. Comparing contrast stretching with histogram equalization, which statements are correct?</span><span class="zh">比較「對比拉伸」與「直方圖均衡化」，正確的有？</span></div>
+  <div class="opt"><span class="en">A. Contrast stretching is a linear mapping.</span><span class="zh">對比拉伸是線性映射</span></div>
+  <div class="opt"><span class="en">B. Equalization performs a non-linear redistribution based on the cdf.</span><span class="zh">均衡化依據 cdf 做非線性重分配</span></div>
+  <div class="opt"><span class="en">C. Contrast stretching does not merge different gray levels, whereas equalization may merge them.</span><span class="zh">對比拉伸不會把不同灰階合併，均衡化則可能合併</span></div>
+  <div class="opt"><span class="en">D. Equalization requires r_min and r_max to be specified first.</span><span class="zh">均衡化需要先指定 r<sub>min</sub> 與 r<sub>max</sub></span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、B、C</strong><br>
   A ✓ 直線映射。B ✓ 依像素多寡重分配。C ✓ 這也是均衡化不可逆的原因。<br>
@@ -529,11 +544,11 @@
 </div>
 
 <div class="mq q" data-ans="0,2">
-  <div class="qt">A-34. 關於自動對比調整（auto-contrast）的實務問題，正確的有？</div>
-  <div class="opt">A. 若影像中有極少數極亮或極暗的離群像素，會使拉伸效果變差</div>
-  <div class="opt">B. 改良方式是先做高斯模糊，把離群像素抹掉後再拉伸</div>
-  <div class="opt">C. 拉伸過度可能造成亮部「燒掉」（burn out）而失去細節</div>
-  <div class="opt">D. 自動對比調整一定比直方圖均衡化效果好</div>
+  <div class="qt"><span class="en">A-34. Which of the following statements about practical issues of auto-contrast adjustment are correct?</span><span class="zh">關於自動對比調整（auto-contrast）的實務問題，正確的有？</span></div>
+  <div class="opt"><span class="en">A. A few extremely bright or dark outlier pixels will degrade the stretching result.</span><span class="zh">若影像中有極少數極亮或極暗的離群像素，會使拉伸效果變差</span></div>
+  <div class="opt"><span class="en">B. The standard remedy is to apply Gaussian blur first to remove the outliers, then stretch.</span><span class="zh">改良方式是先做高斯模糊，把離群像素抹掉後再拉伸</span></div>
+  <div class="opt"><span class="en">C. Over-stretching may burn out highlights and lose detail.</span><span class="zh">拉伸過度可能造成亮部「燒掉」（burn out）而失去細節</span></div>
+  <div class="opt"><span class="en">D. Auto-contrast adjustment always performs better than histogram equalization.</span><span class="zh">自動對比調整一定比直方圖均衡化效果好</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、C</strong><br>
   A ✓ 一顆亮點就會把 r<sub>max</sub> 拉到 255，使拉伸幾乎無效。<br>
@@ -543,11 +558,11 @@
 </div>
 
 <div class="mq q" data-ans="0,1,2">
-  <div class="qt">A-35. 關於局部（adaptive）均衡化，正確的有？</div>
-  <div class="opt">A. 做法是對每個像素，用其鄰域視窗內的分布做均衡化</div>
-  <div class="opt">B. 計算量比全域均衡化大很多</div>
-  <div class="opt">C. 容易放大平坦區域中的雜訊</div>
-  <div class="opt">D. 視窗取得越大，局部細節的增強效果越強</div>
+  <div class="qt"><span class="en">A-35. Which of the following statements about adaptive histogram equalization are correct?</span><span class="zh">關於局部（adaptive）均衡化，正確的有？</span></div>
+  <div class="opt"><span class="en">A. It equalizes each pixel using the distribution within its local neighbourhood window.</span><span class="zh">做法是對每個像素，用其鄰域視窗內的分布做均衡化</span></div>
+  <div class="opt"><span class="en">B. It is much more computationally expensive than global equalization.</span><span class="zh">計算量比全域均衡化大很多</span></div>
+  <div class="opt"><span class="en">C. It tends to amplify noise in flat regions.</span><span class="zh">容易放大平坦區域中的雜訊</span></div>
+  <div class="opt"><span class="en">D. The larger the window, the stronger the local detail enhancement.</span><span class="zh">視窗取得越大，局部細節的增強效果越強</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、B、C</strong><br>
   A ✓ B ✓ 每個像素都要重算一次。C ✓ 微小雜訊被硬拉開。<br>
@@ -555,11 +570,11 @@
 </div>
 
 <div class="mq q" data-ans="0,1">
-  <div class="qt">A-36. 關於直方圖匹配（histogram matching / specification），正確的有？</div>
-  <div class="opt">A. 目標是讓影像的直方圖接近某個指定的參考分布</div>
-  <div class="opt">B. 可用於色調或風格轉移</div>
-  <div class="opt">C. 彩色影像必須先轉成灰階，才能進行直方圖匹配</div>
-  <div class="opt">D. 直方圖均衡化與直方圖匹配是完全無關的兩種方法</div>
+  <div class="qt"><span class="en">A-36. Which of the following statements about histogram matching (specification) are correct?</span><span class="zh">關於直方圖匹配（histogram matching / specification），正確的有？</span></div>
+  <div class="opt"><span class="en">A. The goal is to make the histogram of an image approach a specified reference distribution.</span><span class="zh">目標是讓影像的直方圖接近某個指定的參考分布</span></div>
+  <div class="opt"><span class="en">B. It can be used for tone or style transfer.</span><span class="zh">可用於色調或風格轉移</span></div>
+  <div class="opt"><span class="en">C. A colour image must first be converted to grayscale before histogram matching can be applied.</span><span class="zh">彩色影像必須先轉成灰階，才能進行直方圖匹配</span></div>
+  <div class="opt"><span class="en">D. Histogram equalization and histogram matching are two completely unrelated methods.</span><span class="zh">直方圖均衡化與直方圖匹配是完全無關的兩種方法</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、B</strong><br>
   A ✓ B ✓<br>
@@ -568,11 +583,11 @@
 </div>
 
 <div class="mq q" data-ans="0,1,2">
-  <div class="qt">A-37. 由直方圖診斷影像，正確的有？</div>
-  <div class="opt">A. 分布集中在右側 → 曝光過度</div>
-  <div class="opt">B. 集中在中間一段窄範圍 → 對比偏低</div>
-  <div class="opt">C. 最左或最右端出現一根特別高的柱 → 可能發生削波，細節已遺失</div>
-  <div class="opt">D. 出現梳子狀空隙，通常表示影像未經任何後製處理</div>
+  <div class="qt"><span class="en">A-37. Diagnosing an image from its histogram, which statements are correct?</span><span class="zh">由直方圖診斷影像，正確的有？</span></div>
+  <div class="opt"><span class="en">A. The distribution concentrated on the right indicates over-exposure.</span><span class="zh">分布集中在右側 → 曝光過度</span></div>
+  <div class="opt"><span class="en">B. Concentrated in a narrow band in the middle indicates low contrast.</span><span class="zh">集中在中間一段窄範圍 → 對比偏低</span></div>
+  <div class="opt"><span class="en">C. A particularly tall bar at the extreme left or right suggests clipping, where detail has been lost.</span><span class="zh">最左或最右端出現一根特別高的柱 → 可能發生削波，細節已遺失</span></div>
+  <div class="opt"><span class="en">D. Comb-like gaps usually indicate that the image has not been post-processed.</span><span class="zh">出現梳子狀空隙，通常表示影像未經任何後製處理</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、B、C</strong><br>
   A ✓ 值大 = 亮。B ✓ 範圍窄。C ✓ 超出範圍被夾在端點。<br>
@@ -580,11 +595,11 @@
 </div>
 
 <div class="mq q" data-ans="0,2">
-  <div class="qt">A-38. 關於直方圖的分組（binning），正確的有？</div>
-  <div class="opt">A. 當灰階級數很多時，可把多個相鄰灰階合併成一個 bin 以利觀察</div>
-  <div class="opt">B. 分 bin 之後資訊量不會有任何損失</div>
-  <div class="opt">C. 若把 256 級分成 32 個 bin，每個 bin 涵蓋 8 個灰階</div>
-  <div class="opt">D. bin 數越多，直方圖一定越容易解讀</div>
+  <div class="qt"><span class="en">A-38. Which of the following statements about histogram binning are correct?</span><span class="zh">關於直方圖的分組（binning），正確的有？</span></div>
+  <div class="opt"><span class="en">A. When there are many gray levels, adjacent levels can be merged into one bin for easier viewing.</span><span class="zh">當灰階級數很多時，可把多個相鄰灰階合併成一個 bin 以利觀察</span></div>
+  <div class="opt"><span class="en">B. Binning causes no loss of information.</span><span class="zh">分 bin 之後資訊量不會有任何損失</span></div>
+  <div class="opt"><span class="en">C. Dividing 256 levels into 32 bins means each bin covers 8 gray levels.</span><span class="zh">若把 256 級分成 32 個 bin，每個 bin 涵蓋 8 個灰階</span></div>
+  <div class="opt"><span class="en">D. The more bins, the easier the histogram is to interpret.</span><span class="zh">bin 數越多，直方圖一定越容易解讀</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、C</strong><br>
   A ✓ 例如 16-bit 影像直接畫 65536 根長條難以觀察。<br>
@@ -594,11 +609,11 @@
 </div>
 
 <div class="mq q" data-ans="0,1,3">
-  <div class="qt">A-39. 關於對比與動態範圍，正確的有？</div>
-  <div class="opt">A. 影像的動態範圍指最亮與最暗之間的跨度</div>
-  <div class="opt">B. 對比低的影像，其直方圖佔據的灰階範圍較窄</div>
-  <div class="opt">C. 提高對比一定會增加影像的資訊量</div>
-  <div class="opt">D. HDR 技術可透過合成多張不同曝光的影像來擴大可記錄的動態範圍</div>
+  <div class="qt"><span class="en">A-39. Which of the following statements about contrast and dynamic range are correct?</span><span class="zh">關於對比與動態範圍，正確的有？</span></div>
+  <div class="opt"><span class="en">A. The dynamic range of an image refers to the span between its brightest and darkest values.</span><span class="zh">影像的動態範圍指最亮與最暗之間的跨度</span></div>
+  <div class="opt"><span class="en">B. A low-contrast image occupies a narrow range of gray levels in its histogram.</span><span class="zh">對比低的影像，其直方圖佔據的灰階範圍較窄</span></div>
+  <div class="opt"><span class="en">C. Increasing contrast always increases the amount of information in the image.</span><span class="zh">提高對比一定會增加影像的資訊量</span></div>
+  <div class="opt"><span class="en">D. HDR techniques can extend the recordable dynamic range by combining multiple exposures.</span><span class="zh">HDR 技術可透過合成多張不同曝光的影像來擴大可記錄的動態範圍</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、B、D</strong><br>
   A ✓ B ✓<br>
@@ -607,11 +622,11 @@
 </div>
 
 <div class="mq q" data-ans="0,1">
-  <div class="qt">A-40. 某影像經直方圖均衡化後，下列推論正確的有？</div>
-  <div class="opt">A. 新影像中必定存在值為 L−1 的像素</div>
-  <div class="opt">B. 新影像的灰階個數不會超過原影像的灰階個數</div>
-  <div class="opt">C. 新影像的灰階個數一定等於 L</div>
-  <div class="opt">D. 新影像的平均亮度一定等於 (L−1)/2</div>
+  <div class="qt"><span class="en">A-40. After an image has been histogram-equalized, which of the following inferences are correct?</span><span class="zh">某影像經直方圖均衡化後，下列推論正確的有？</span></div>
+  <div class="opt"><span class="en">A. There must exist pixels with the value L-1 in the new image.</span><span class="zh">新影像中必定存在值為 L−1 的像素</span></div>
+  <div class="opt"><span class="en">B. The number of distinct gray levels in the new image cannot exceed that of the original.</span><span class="zh">新影像的灰階個數不會超過原影像的灰階個數</span></div>
+  <div class="opt"><span class="en">C. The number of distinct gray levels in the new image must equal L.</span><span class="zh">新影像的灰階個數一定等於 L</span></div>
+  <div class="opt"><span class="en">D. The mean brightness of the new image must equal (L-1)/2.</span><span class="zh">新影像的平均亮度一定等於 (L−1)/2</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、B</strong><br>
   A ✓ 最大灰階的 cdf = N，必對應到 L−1。<br>
@@ -621,11 +636,11 @@
 </div>
 
 <div class="mq q" data-ans="0,1,2">
-  <div class="qt">A-41. 關於均衡化的適用情境，正確的有？</div>
-  <div class="opt">A. 對低對比、灰階集中的影像效果最明顯</div>
-  <div class="opt">B. 可用於醫學影像以凸顯被低對比掩蓋的細節</div>
-  <div class="opt">C. 對本來對比就很好的影像，效果有限甚至可能變差</div>
-  <div class="opt">D. 對任何影像都能無副作用地提升品質</div>
+  <div class="qt"><span class="en">A-41. Which of the following statements about when to use histogram equalization are correct?</span><span class="zh">關於均衡化的適用情境，正確的有？</span></div>
+  <div class="opt"><span class="en">A. It is most effective on low-contrast images whose gray levels are concentrated.</span><span class="zh">對低對比、灰階集中的影像效果最明顯</span></div>
+  <div class="opt"><span class="en">B. It can be used in medical imaging to reveal detail hidden by low contrast.</span><span class="zh">可用於醫學影像以凸顯被低對比掩蓋的細節</span></div>
+  <div class="opt"><span class="en">C. For an image that already has good contrast, the benefit is limited and the result may even be worse.</span><span class="zh">對本來對比就很好的影像，效果有限甚至可能變差</span></div>
+  <div class="opt"><span class="en">D. It improves the quality of any image with no side effects.</span><span class="zh">對任何影像都能無副作用地提升品質</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、B、C</strong><br>
   A ✓ B ✓ 講義明確提到的應用。<br>
@@ -634,11 +649,11 @@
 </div>
 
 <div class="mq q" data-ans="1,3">
-  <div class="qt">A-42. 一張 4×4 影像（N = 16, L = 8），某灰階 r 的 cdf(r) = 12，則？</div>
-  <div class="opt">A. s = round(8/16 × 12) = 6</div>
-  <div class="opt">B. s = round(7/16 × 12) = 5</div>
-  <div class="opt">C. 此灰階必定是影像中最大的灰階</div>
-  <div class="opt">D. 若 cdf(r) = 16，則 s = 7</div>
+  <div class="qt"><span class="en">A-42. For a 4x4 image (N = 16, L = 8), a gray level r has cdf(r) = 12. Which statements are correct?</span><span class="zh">一張 4×4 影像（N = 16, L = 8），某灰階 r 的 cdf(r) = 12，則？</span></div>
+  <div class="opt"><span class="en">A. s = round(8/16 x 12) = 6.</span><span class="zh">s = round(8/16 × 12) = 6</span></div>
+  <div class="opt"><span class="en">B. s = round(7/16 x 12) = 5.</span><span class="zh">s = round(7/16 × 12) = 5</span></div>
+  <div class="opt"><span class="en">C. This gray level must be the largest gray level in the image.</span><span class="zh">此灰階必定是影像中最大的灰階</span></div>
+  <div class="opt"><span class="en">D. If cdf(r) = 16, then s = 7.</span><span class="zh">若 cdf(r) = 16，則 s = 7</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：B、D</strong><br>
   A ✗ 係數要用 <strong>(L−1)/N = 7/16</strong>，不是 8/16。<br>
@@ -651,11 +666,11 @@
 <h2 id="c4">第 4 章 · 濾波器</h2>
 
 <div class="mq q" data-ans="0,1,2">
-  <div class="qt">A-43. 關於相關與卷積，正確的有？</div>
-  <div class="opt">A. 卷積需要先把核旋轉 180°</div>
-  <div class="opt">B. 若核本身對稱，相關與卷積的結果相同</div>
-  <div class="opt">C. 卷積滿足交換律與結合律</div>
-  <div class="opt">D. 相關也滿足結合律，因此可先合併多個核</div>
+  <div class="qt"><span class="en">A-43. Which of the following statements about correlation and convolution are correct?</span><span class="zh">關於相關與卷積，正確的有？</span></div>
+  <div class="opt"><span class="en">A. Convolution requires rotating the kernel by 180 degrees first.</span><span class="zh">卷積需要先把核旋轉 180°</span></div>
+  <div class="opt"><span class="en">B. If the kernel itself is symmetric, correlation and convolution give the same result.</span><span class="zh">若核本身對稱，相關與卷積的結果相同</span></div>
+  <div class="opt"><span class="en">C. Convolution satisfies both the commutative and the associative law.</span><span class="zh">卷積滿足交換律與結合律</span></div>
+  <div class="opt"><span class="en">D. Correlation also satisfies the associative law, so several kernels may be combined first.</span><span class="zh">相關也滿足結合律，因此可先合併多個核</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、B、C</strong><br>
   A ✓ 唯一的差別。B ✓ 翻轉後長得一樣。C ✓ 實務偏好卷積的原因。<br>
@@ -663,11 +678,11 @@
 </div>
 
 <div class="mq q" data-ans="0,1,2">
-  <div class="qt">A-44. 關於脈衝（impulse / Dirac）與核的關係，正確的有？</div>
-  <div class="opt">A. 脈衝與核做卷積，會得到原樣的核</div>
-  <div class="opt">B. 脈衝與核做相關，會得到左右顛倒的核</div>
-  <div class="opt">C. 中心為 1、其餘為 0 的 3×3 核，不會改變影像</div>
-  <div class="opt">D. 把那個 1 移到角落，影像會被旋轉</div>
+  <div class="qt"><span class="en">A-44. Which of the following statements about the impulse (Dirac) function and kernels are correct?</span><span class="zh">關於脈衝（impulse / Dirac）與核的關係，正確的有？</span></div>
+  <div class="opt"><span class="en">A. Convolving an impulse with a kernel reproduces the kernel as it is.</span><span class="zh">脈衝與核做卷積，會得到原樣的核</span></div>
+  <div class="opt"><span class="en">B. Correlating an impulse with a kernel gives the left-right reversed kernel.</span><span class="zh">脈衝與核做相關，會得到左右顛倒的核</span></div>
+  <div class="opt"><span class="en">C. A 3x3 kernel with 1 at the centre and 0 elsewhere leaves the image unchanged.</span><span class="zh">中心為 1、其餘為 0 的 3×3 核，不會改變影像</span></div>
+  <div class="opt"><span class="en">D. Moving that 1 to a corner rotates the image.</span><span class="zh">把那個 1 移到角落，影像會被旋轉</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、B、C</strong><br>
   A ✓ 稱為「脈衝響應」。B ✓ 不翻轉就得鏡像。C ✓ 恆等核。<br>
@@ -675,11 +690,11 @@
 </div>
 
 <div class="mq q" data-ans="0,1">
-  <div class="qt">A-45. 關於濾波器係數的正規化，正確的有？</div>
-  <div class="opt">A. 平滑用的核，係數總和應為 1</div>
-  <div class="opt">B. 微分類的核（Sobel、Laplacian）係數總和為 0</div>
-  <div class="opt">C. 3×3 box filter 若忘記除以 9，影像會明顯變暗</div>
-  <div class="opt">D. 高斯核的係數總和也應該是 0</div>
+  <div class="qt"><span class="en">A-45. Which of the following statements about normalizing filter coefficients are correct?</span><span class="zh">關於濾波器係數的正規化，正確的有？</span></div>
+  <div class="opt"><span class="en">A. For a smoothing kernel, the coefficients should sum to 1.</span><span class="zh">平滑用的核，係數總和應為 1</span></div>
+  <div class="opt"><span class="en">B. For derivative kernels (Sobel, Laplacian), the coefficients sum to 0.</span><span class="zh">微分類的核（Sobel、Laplacian）係數總和為 0</span></div>
+  <div class="opt"><span class="en">C. If a 3x3 box filter is not divided by 9, the image becomes noticeably darker.</span><span class="zh">3×3 box filter 若忘記除以 9，影像會明顯變暗</span></div>
+  <div class="opt"><span class="en">D. The coefficients of a Gaussian kernel should also sum to 0.</span><span class="zh">高斯核的係數總和也應該是 0</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、B</strong><br>
   A ✓ B ✓ 所以平坦區回應 0。<br>
@@ -688,11 +703,11 @@
 </div>
 
 <div class="mq q" data-ans="0,1,2">
-  <div class="qt">A-46. 一張 100×100 的影像與 7×7 的核運算，正確的有？</div>
-  <div class="opt">A. full 模式輸出為 106×106</div>
-  <div class="opt">B. same 模式輸出為 100×100</div>
-  <div class="opt">C. valid 模式輸出為 94×94</div>
-  <div class="opt">D. 結果置於視窗中心時，上下左右各有 7 格無法計算</div>
+  <div class="qt"><span class="en">A-46. A 100x100 image is processed with a 7x7 kernel. Which statements are correct?</span><span class="zh">一張 100×100 的影像與 7×7 的核運算，正確的有？</span></div>
+  <div class="opt"><span class="en">A. The 'full' output is 106x106.</span><span class="zh">full 模式輸出為 106×106</span></div>
+  <div class="opt"><span class="en">B. The 'same' output is 100x100.</span><span class="zh">same 模式輸出為 100×100</span></div>
+  <div class="opt"><span class="en">C. The 'valid' output is 94x94.</span><span class="zh">valid 模式輸出為 94×94</span></div>
+  <div class="opt"><span class="en">D. If the result is placed at the window centre, 7 rows/columns on each side cannot be computed.</span><span class="zh">結果置於視窗中心時，上下左右各有 7 格無法計算</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、B、C</strong><br>
   A ✓ 100+7−1。B ✓ C ✓ 100−7+1。<br>
@@ -700,11 +715,11 @@
 </div>
 
 <div class="mq q" data-ans="0,1,2">
-  <div class="qt">A-47. 關於邊界處理，正確的有？</div>
-  <div class="opt">A. zero padding 會使影像邊緣偏暗</div>
-  <div class="opt">B. replicate 是把最外圈的像素值往外延伸</div>
-  <div class="opt">C. reflect 是以鏡射方式向外延伸</div>
-  <div class="opt">D. valid 模式的輸出會比輸入大</div>
+  <div class="qt"><span class="en">A-47. Which of the following statements about boundary handling are correct?</span><span class="zh">關於邊界處理，正確的有？</span></div>
+  <div class="opt"><span class="en">A. Zero padding tends to darken the borders of the image.</span><span class="zh">zero padding 會使影像邊緣偏暗</span></div>
+  <div class="opt"><span class="en">B. Replicate extends the outermost pixel values outwards.</span><span class="zh">replicate 是把最外圈的像素值往外延伸</span></div>
+  <div class="opt"><span class="en">C. Reflect extends the image outwards in a mirrored manner.</span><span class="zh">reflect 是以鏡射方式向外延伸</span></div>
+  <div class="opt"><span class="en">D. The 'valid' mode produces an output larger than the input.</span><span class="zh">valid 模式的輸出會比輸入大</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、B、C</strong><br>
   A ✓ 外面補 0（黑）把邊緣拉暗。B、C ✓ 效果較自然的做法。<br>
@@ -712,11 +727,11 @@
 </div>
 
 <div class="mq q" data-ans="0,1,2">
-  <div class="qt">A-48. 關於可分離（separable）濾波器，正確的有？</div>
-  <div class="opt">A. 2D 高斯可分解為一個水平 1D 高斯與一個垂直 1D 高斯</div>
-  <div class="opt">B. 可分離使每像素的乘法次數由 O(K²) 降為 O(K)</div>
-  <div class="opt">C. K = 11 時，乘法次數由 121 次降為 22 次</div>
-  <div class="opt">D. 中位數濾波同樣可以用可分離方式加速</div>
+  <div class="qt"><span class="en">A-48. Which of the following statements about separable filters are correct?</span><span class="zh">關於可分離（separable）濾波器，正確的有？</span></div>
+  <div class="opt"><span class="en">A. A 2-D Gaussian can be decomposed into a horizontal 1-D Gaussian and a vertical 1-D Gaussian.</span><span class="zh">2D 高斯可分解為一個水平 1D 高斯與一個垂直 1D 高斯</span></div>
+  <div class="opt"><span class="en">B. Separability reduces the multiplications per pixel from O(K^2) to O(K).</span><span class="zh">可分離使每像素的乘法次數由 O(K²) 降為 O(K)</span></div>
+  <div class="opt"><span class="en">C. For K = 11, the number of multiplications drops from 121 to 22.</span><span class="zh">K = 11 時，乘法次數由 121 次降為 22 次</span></div>
+  <div class="opt"><span class="en">D. A median filter can be accelerated in the same separable way.</span><span class="zh">中位數濾波同樣可以用可分離方式加速</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、B、C</strong><br>
   A ✓ B ✓ K² → 2K。C ✓ 121 → 22。<br>
@@ -724,11 +739,11 @@
 </div>
 
 <div class="mq q" data-ans="0,1,2">
-  <div class="qt">A-49. 關於非線性濾波，正確的有？</div>
-  <div class="opt">A. 中位數濾波是非線性運算，不能寫成卷積</div>
-  <div class="opt">B. 中位數濾波對椒鹽雜訊特別有效</div>
-  <div class="opt">C. max 濾波可去除胡椒（黑點），但會放大鹽（白點）</div>
-  <div class="opt">D. min 濾波可去除胡椒（黑點）</div>
+  <div class="qt"><span class="en">A-49. Which of the following statements about non-linear filtering are correct?</span><span class="zh">關於非線性濾波，正確的有？</span></div>
+  <div class="opt"><span class="en">A. The median filter is a non-linear operation and cannot be written as a convolution.</span><span class="zh">中位數濾波是非線性運算，不能寫成卷積</span></div>
+  <div class="opt"><span class="en">B. The median filter is particularly effective against salt-and-pepper noise.</span><span class="zh">中位數濾波對椒鹽雜訊特別有效</span></div>
+  <div class="opt"><span class="en">C. A max filter removes pepper (black dots) but enlarges salt (white dots).</span><span class="zh">max 濾波可去除胡椒（黑點），但會放大鹽（白點）</span></div>
+  <div class="opt"><span class="en">D. A min filter removes pepper (black dots).</span><span class="zh">min 濾波可去除胡椒（黑點）</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、B、C</strong><br>
   A ✓ 需要排序。B ✓ 極端值被排到兩端。C ✓<br>
@@ -736,11 +751,11 @@
 </div>
 
 <div class="mq q" data-ans="0,1">
-  <div class="qt">A-50. 關於雜訊的種類與對策，正確的有？</div>
-  <div class="opt">A. 高斯雜訊是加在每個像素上的隨機擾動，適合用平均／高斯濾波抑制</div>
-  <div class="opt">B. 椒鹽雜訊屬於脈衝雜訊，只影響部分像素但幅度極大</div>
-  <div class="opt">C. 對椒鹽雜訊使用 3×3 平均濾波，可以把雜訊完全去除</div>
-  <div class="opt">D. 中位數濾波對所有種類的雜訊都是最佳選擇</div>
+  <div class="qt"><span class="en">A-50. Which of the following statements about types of noise and their remedies are correct?</span><span class="zh">關於雜訊的種類與對策，正確的有？</span></div>
+  <div class="opt"><span class="en">A. Gaussian noise is a random perturbation added to every pixel and is well suppressed by mean or Gaussian filtering.</span><span class="zh">高斯雜訊是加在每個像素上的隨機擾動，適合用平均／高斯濾波抑制</span></div>
+  <div class="opt"><span class="en">B. Salt-and-pepper noise is impulse noise: it affects only some pixels but with extreme magnitude.</span><span class="zh">椒鹽雜訊屬於脈衝雜訊，只影響部分像素但幅度極大</span></div>
+  <div class="opt"><span class="en">C. Applying a 3x3 mean filter to salt-and-pepper noise removes the noise completely.</span><span class="zh">對椒鹽雜訊使用 3×3 平均濾波，可以把雜訊完全去除</span></div>
+  <div class="opt"><span class="en">D. The median filter is the best choice for every kind of noise.</span><span class="zh">中位數濾波對所有種類的雜訊都是最佳選擇</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、B</strong><br>
   A ✓ 高斯雜訊零均值，平均可抵銷。<br>
@@ -751,11 +766,11 @@
 </div>
 
 <div class="mq q" data-ans="0,1,2">
-  <div class="qt">A-51. 關於影像銳化，正確的有？</div>
-  <div class="opt">A. unsharp mask = 原圖 − 模糊圖</div>
-  <div class="opt">B. 銳化結果 = 原圖 + k × mask</div>
-  <div class="opt">C. k 越大越銳利，但容易產生光暈（halo）</div>
-  <div class="opt">D. k &gt; 1 的情形稱為 unsharp masking</div>
+  <div class="qt"><span class="en">A-51. Which of the following statements about image sharpening are correct?</span><span class="zh">關於影像銳化，正確的有？</span></div>
+  <div class="opt"><span class="en">A. unsharp mask = original image - blurred image.</span><span class="zh">unsharp mask = 原圖 − 模糊圖</span></div>
+  <div class="opt"><span class="en">B. The sharpened result = original image + k x mask.</span><span class="zh">銳化結果 = 原圖 + k × mask</span></div>
+  <div class="opt"><span class="en">C. A larger k gives stronger sharpening but tends to produce halo artifacts.</span><span class="zh">k 越大越銳利，但容易產生光暈（halo）</span></div>
+  <div class="opt"><span class="en">D. The case k &gt; 1 is called unsharp masking.</span><span class="zh">k &gt; 1 的情形稱為 unsharp masking</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、B、C</strong><br>
   A ✓ 被模糊抹掉的細節。B ✓ C ✓ 邊緣出現滾邊。<br>
@@ -763,11 +778,11 @@
 </div>
 
 <div class="mq q" data-ans="0,1,3">
-  <div class="qt">A-52. 關於重複濾波與卷積性質，正確的有？</div>
-  <div class="opt">A. 重複施加 box filter，結果逐漸接近高斯模糊</div>
-  <div class="opt">B. 連續兩次高斯模糊（σ₁、σ₂）等效於一次 σ = √(σ₁² + σ₂²) 的高斯</div>
-  <div class="opt">C. 重複模糊多次後，可以再用銳化完整還原原圖</div>
-  <div class="opt">D. 由卷積的結合律，多個核可先合併成一個再套用</div>
+  <div class="qt"><span class="en">A-52. Which of the following statements about repeated filtering and convolution properties are correct?</span><span class="zh">關於重複濾波與卷積性質，正確的有？</span></div>
+  <div class="opt"><span class="en">A. Repeatedly applying a box filter gradually approaches Gaussian blurring.</span><span class="zh">重複施加 box filter，結果逐漸接近高斯模糊</span></div>
+  <div class="opt"><span class="en">B. Two successive Gaussian blurs (sigma1, sigma2) are equivalent to one Gaussian with sigma = sqrt(sigma1^2 + sigma2^2).</span><span class="zh">連續兩次高斯模糊（σ₁、σ₂）等效於一次 σ = √(σ₁² + σ₂²) 的高斯</span></div>
+  <div class="opt"><span class="en">C. After blurring several times, sharpening can completely restore the original image.</span><span class="zh">重複模糊多次後，可以再用銳化完整還原原圖</span></div>
+  <div class="opt"><span class="en">D. By the associative law of convolution, several kernels may be combined into one before being applied.</span><span class="zh">由卷積的結合律，多個核可先合併成一個再套用</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、B、D</strong><br>
   A ✓ 中央極限定理（hw4 做 5 次就是在示範）。<br>
@@ -777,11 +792,11 @@
 </div>
 
 <div class="mq q" data-ans="0,1,2">
-  <div class="qt">A-53. 關於線性濾波器的定義與性質，正確的有？</div>
-  <div class="opt">A. 線性濾波滿足疊加性：對 (f₁ + f₂) 濾波等於分別濾波後相加</div>
-  <div class="opt">B. 線性濾波滿足齊次性：對 a·f 濾波等於濾波結果乘以 a</div>
-  <div class="opt">C. 卷積是平移不變（shift-invariant）的</div>
-  <div class="opt">D. max 濾波是線性濾波</div>
+  <div class="qt"><span class="en">A-53. Which of the following statements about the definition and properties of linear filters are correct?</span><span class="zh">關於線性濾波器的定義與性質，正確的有？</span></div>
+  <div class="opt"><span class="en">A. Linear filtering satisfies additivity: filtering (f1 + f2) equals the sum of the individually filtered results.</span><span class="zh">線性濾波滿足疊加性：對 (f₁ + f₂) 濾波等於分別濾波後相加</span></div>
+  <div class="opt"><span class="en">B. Linear filtering satisfies homogeneity: filtering a*f equals a times the filtered result.</span><span class="zh">線性濾波滿足齊次性：對 a·f 濾波等於濾波結果乘以 a</span></div>
+  <div class="opt"><span class="en">C. Convolution is shift-invariant.</span><span class="zh">卷積是平移不變（shift-invariant）的</span></div>
+  <div class="opt"><span class="en">D. A max filter is a linear filter.</span><span class="zh">max 濾波是線性濾波</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、B、C</strong><br>
   A、B ✓ 線性的兩個條件。<br>
@@ -790,11 +805,11 @@
 </div>
 
 <div class="mq q" data-ans="0,1,3">
-  <div class="qt">A-54. 關於 box filter 與高斯濾波的比較，正確的有？</div>
-  <div class="opt">A. box filter 對鄰域內所有像素一視同仁</div>
-  <div class="opt">B. 高斯濾波給予越靠近中心的像素越高的權重</div>
-  <div class="opt">C. box filter 的模糊效果比高斯自然，是實務首選</div>
-  <div class="opt">D. 兩者都是平滑（低通）濾波器</div>
+  <div class="qt"><span class="en">A-54. Comparing the box filter with Gaussian filtering, which statements are correct?</span><span class="zh">關於 box filter 與高斯濾波的比較，正確的有？</span></div>
+  <div class="opt"><span class="en">A. A box filter treats all pixels in the neighbourhood equally.</span><span class="zh">box filter 對鄰域內所有像素一視同仁</span></div>
+  <div class="opt"><span class="en">B. Gaussian filtering gives larger weights to pixels closer to the centre.</span><span class="zh">高斯濾波給予越靠近中心的像素越高的權重</span></div>
+  <div class="opt"><span class="en">C. The blur produced by a box filter looks more natural than Gaussian and is preferred in practice.</span><span class="zh">box filter 的模糊效果比高斯自然，是實務首選</span></div>
+  <div class="opt"><span class="en">D. Both are smoothing (low-pass) filters.</span><span class="zh">兩者都是平滑（低通）濾波器</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、B、D</strong><br>
   A ✓ 權重全部相同。B ✓ 依高斯函數遞減。<br>
@@ -803,11 +818,11 @@
 </div>
 
 <div class="mq q" data-ans="0,2">
-  <div class="qt">A-55. 關於高斯濾波中的 σ（標準差），正確的有？</div>
-  <div class="opt">A. σ 越大，模糊程度越強</div>
-  <div class="opt">B. σ 越大時，核的尺寸可以取得越小，以節省計算</div>
-  <div class="opt">C. σ 決定了權重隨距離衰減的快慢</div>
-  <div class="opt">D. 核尺寸固定時，σ 無論取多大效果都相同</div>
+  <div class="qt"><span class="en">A-55. Which of the following statements about sigma in Gaussian filtering are correct?</span><span class="zh">關於高斯濾波中的 σ（標準差），正確的有？</span></div>
+  <div class="opt"><span class="en">A. The larger the sigma, the stronger the blurring.</span><span class="zh">σ 越大，模糊程度越強</span></div>
+  <div class="opt"><span class="en">B. The larger the sigma, the smaller the kernel size can be, which saves computation.</span><span class="zh">σ 越大時，核的尺寸可以取得越小，以節省計算</span></div>
+  <div class="opt"><span class="en">C. Sigma determines how quickly the weights decay with distance.</span><span class="zh">σ 決定了權重隨距離衰減的快慢</span></div>
+  <div class="opt"><span class="en">D. For a fixed kernel size, the result is the same no matter how large sigma is.</span><span class="zh">核尺寸固定時，σ 無論取多大效果都相同</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、C</strong><br>
   A ✓ C ✓<br>
@@ -816,11 +831,11 @@
 </div>
 
 <div class="mq q" data-ans="0,2">
-  <div class="qt">A-56. 關於點運算與鄰域運算（濾波）的比較，正確的有？</div>
-  <div class="opt">A. 模糊、銳化、邊緣偵測都無法用點運算達成</div>
-  <div class="opt">B. 調整亮度與對比必須使用鄰域運算</div>
-  <div class="opt">C. 鄰域運算的輸出取決於一個區域內的多個像素</div>
-  <div class="opt">D. 點運算可以改變影像中物體的形狀</div>
+  <div class="qt"><span class="en">A-56. Comparing point operations with neighbourhood operations (filtering), which statements are correct?</span><span class="zh">關於點運算與鄰域運算（濾波）的比較，正確的有？</span></div>
+  <div class="opt"><span class="en">A. Blurring, sharpening and edge detection cannot be achieved by point operations.</span><span class="zh">模糊、銳化、邊緣偵測都無法用點運算達成</span></div>
+  <div class="opt"><span class="en">B. Adjusting brightness and contrast must be done with neighbourhood operations.</span><span class="zh">調整亮度與對比必須使用鄰域運算</span></div>
+  <div class="opt"><span class="en">C. The output of a neighbourhood operation depends on several pixels within a region.</span><span class="zh">鄰域運算的輸出取決於一個區域內的多個像素</span></div>
+  <div class="opt"><span class="en">D. A point operation can change the shape of objects in the image.</span><span class="zh">點運算可以改變影像中物體的形狀</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、C</strong><br>
   A ✓ 這些都需要<strong>空間資訊</strong>（鄰居），點運算做不到。<br>
@@ -830,11 +845,11 @@
 </div>
 
 <div class="mq q" data-ans="0,1,2">
-  <div class="qt">A-57. 關於加權中位數（weighted median）濾波，正確的有？</div>
-  <div class="opt">A. 可以對不同位置的鄰居給予不同的重要性</div>
-  <div class="opt">B. 實作上常用「重複該值若干次後再排序取中位數」來體現權重</div>
-  <div class="opt">C. 它仍然屬於非線性濾波</div>
-  <div class="opt">D. 加上權重之後，它就變成線性濾波了</div>
+  <div class="qt"><span class="en">A-57. Which of the following statements about the weighted median filter are correct?</span><span class="zh">關於加權中位數（weighted median）濾波，正確的有？</span></div>
+  <div class="opt"><span class="en">A. It allows different neighbours to be given different importance.</span><span class="zh">可以對不同位置的鄰居給予不同的重要性</span></div>
+  <div class="opt"><span class="en">B. It is commonly implemented by repeating a value several times before sorting and taking the median.</span><span class="zh">實作上常用「重複該值若干次後再排序取中位數」來體現權重</span></div>
+  <div class="opt"><span class="en">C. It is still a non-linear filter.</span><span class="zh">它仍然屬於非線性濾波</span></div>
+  <div class="opt"><span class="en">D. Once weights are added, it becomes a linear filter.</span><span class="zh">加上權重之後，它就變成線性濾波了</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、B、C</strong><br>
   A ✓ 例如中心權重較高。B ✓ 標準實作技巧。C ✓ 核心仍是<strong>排序取中間</strong>。<br>
@@ -842,12 +857,12 @@
 </div>
 
 <div class="mq q" data-ans="1,2">
-  <div class="qt">A-58. 用 3×3 box filter 處理下列鄰域，中心輸出值為何？相關敘述正確的有？<br>
-  <span style="font-size:14px;color:var(--muted)">鄰域各值：10, 20, 30 / 40, 50, 60 / 70, 80, 90</span></div>
-  <div class="opt">A. 輸出為 450</div>
-  <div class="opt">B. 輸出為 50</div>
-  <div class="opt">C. 輸出剛好等於中心原值，因為此鄰域是線性漸變</div>
-  <div class="opt">D. 輸出為 90</div>
+  <div class="qt"><span class="en">A-58. A 3x3 box filter is applied to the neighbourhood 10, 20, 30 / 40, 50, 60 / 70, 80, 90. Which statements are correct?</span><span class="zh">用 3×3 box filter 處理下列鄰域，中心輸出值為何？相關敘述正確的有？<br>
+  <span style="font-size:14px;color:var(--muted)">鄰域各值：10, 20, 30 / 40, 50, 60 / 70, 80, 90</span></span></div>
+  <div class="opt"><span class="en">A. The output is 450.</span><span class="zh">輸出為 450</span></div>
+  <div class="opt"><span class="en">B. The output is 50.</span><span class="zh">輸出為 50</span></div>
+  <div class="opt"><span class="en">C. The output happens to equal the original centre value because this neighbourhood varies linearly.</span><span class="zh">輸出剛好等於中心原值，因為此鄰域是線性漸變</span></div>
+  <div class="opt"><span class="en">D. The output is 90.</span><span class="zh">輸出為 90</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：B、C</strong><br>
   總和 = 10+20+…+90 = 450，平均 = 450 / 9 = <strong>50</strong>。<br>
@@ -860,11 +875,11 @@
 <h2 id="c5">第 5 章 · 邊緣偵測</h2>
 
 <div class="mq q" data-ans="0,1,2">
-  <div class="qt">A-59. 關於邊緣的成因，下列哪些可能在影像中形成邊緣？</div>
-  <div class="opt">A. 深度不連續（物體遮擋）</div>
-  <div class="opt">B. 表面法線不連續（物體的轉角、摺痕）</div>
-  <div class="opt">C. 光照不連續（影子的邊界）</div>
-  <div class="opt">D. 影像的儲存格式由 PNG 改為 JPEG</div>
+  <div class="qt"><span class="en">A-59. Which of the following can create an edge in an image?</span><span class="zh">關於邊緣的成因，下列哪些可能在影像中形成邊緣？</span></div>
+  <div class="opt"><span class="en">A. Depth discontinuity (one object occluding another).</span><span class="zh">深度不連續（物體遮擋）</span></div>
+  <div class="opt"><span class="en">B. Surface normal discontinuity (a corner or crease of an object).</span><span class="zh">表面法線不連續（物體的轉角、摺痕）</span></div>
+  <div class="opt"><span class="en">C. Illumination discontinuity (the boundary of a shadow).</span><span class="zh">光照不連續（影子的邊界）</span></div>
+  <div class="opt"><span class="en">D. Changing the storage format of the image from PNG to JPEG.</span><span class="zh">影像的儲存格式由 PNG 改為 JPEG</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、B、C</strong><br>
   A、B、C ✓ 連同<strong>表面顏色不連續</strong>，是講義列出的四大成因。<br>
@@ -873,11 +888,11 @@
 </div>
 
 <div class="mq q" data-ans="0,1,2">
-  <div class="qt">A-60. 關於邊緣的型態，正確的有？</div>
-  <div class="opt">A. Step edge 是亮度瞬間跳變的理想邊緣</div>
-  <div class="opt">B. Ramp edge 有一段漸變過渡，較接近真實照片中的邊緣</div>
-  <div class="opt">C. Roof edge 對應細線狀的結構</div>
-  <div class="opt">D. 真實影像中的邊緣多半是完美的 step edge</div>
+  <div class="qt"><span class="en">A-60. Which of the following statements about types of edges are correct?</span><span class="zh">關於邊緣的型態，正確的有？</span></div>
+  <div class="opt"><span class="en">A. A step edge is an ideal edge where the intensity jumps instantaneously.</span><span class="zh">Step edge 是亮度瞬間跳變的理想邊緣</span></div>
+  <div class="opt"><span class="en">B. A ramp edge has a gradual transition and is closer to edges in real photographs.</span><span class="zh">Ramp edge 有一段漸變過渡，較接近真實照片中的邊緣</span></div>
+  <div class="opt"><span class="en">C. A roof edge corresponds to a thin line structure.</span><span class="zh">Roof edge 對應細線狀的結構</span></div>
+  <div class="opt"><span class="en">D. Edges in real images are mostly perfect step edges.</span><span class="zh">真實影像中的邊緣多半是完美的 step edge</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、B、C</strong><br>
   A ✓ B ✓ 因為鏡頭失焦、取樣與雜訊，真實邊緣都有過渡帶。<br>
@@ -886,11 +901,11 @@
 </div>
 
 <div class="mq q" data-ans="0,1,3">
-  <div class="qt">A-61. 關於影像梯度，正確的有？</div>
-  <div class="opt">A. 梯度大小 |∇f| = √(G<sub>x</sub>² + G<sub>y</sub>²)</div>
-  <div class="opt">B. 梯度方向 θ = tan⁻¹(G<sub>y</sub> / G<sub>x</sub>)</div>
-  <div class="opt">C. 梯度方向與邊緣方向平行</div>
-  <div class="opt">D. 一條水平邊緣，其梯度指向垂直方向</div>
+  <div class="qt"><span class="en">A-61. Which of the following statements about the image gradient are correct?</span><span class="zh">關於影像梯度，正確的有？</span></div>
+  <div class="opt"><span class="en">A. The gradient magnitude is sqrt(Gx^2 + Gy^2).</span><span class="zh">梯度大小 |∇f| = √(G<sub>x</sub>² + G<sub>y</sub>²)</span></div>
+  <div class="opt"><span class="en">B. The gradient direction is theta = arctan(Gy / Gx).</span><span class="zh">梯度方向 θ = tan⁻¹(G<sub>y</sub> / G<sub>x</sub>)</span></div>
+  <div class="opt"><span class="en">C. The gradient direction is parallel to the edge direction.</span><span class="zh">梯度方向與邊緣方向平行</span></div>
+  <div class="opt"><span class="en">D. For a horizontal edge, the gradient points in the vertical direction.</span><span class="zh">一條水平邊緣，其梯度指向垂直方向</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、B、D</strong><br>
   A、B ✓ 標準公式。<br>
@@ -899,11 +914,11 @@
 </div>
 
 <div class="mq q" data-ans="0,2">
-  <div class="qt">A-62. 關於離散微分的近似，正確的有？</div>
-  <div class="opt">A. 中央差分可寫成 [f(x+1) − f(x−1)] / 2</div>
-  <div class="opt">B. 中央差分對應的核是 ½ × [1, 0, 1]</div>
-  <div class="opt">C. 微分運算可以用卷積來實現</div>
-  <div class="opt">D. 離散影像無法進行微分，只能用積分近似</div>
+  <div class="qt"><span class="en">A-62. Which of the following statements about discrete approximation of derivatives are correct?</span><span class="zh">關於離散微分的近似，正確的有？</span></div>
+  <div class="opt"><span class="en">A. The central difference can be written as [f(x+1) - f(x-1)] / 2.</span><span class="zh">中央差分可寫成 [f(x+1) − f(x−1)] / 2</span></div>
+  <div class="opt"><span class="en">B. The kernel corresponding to the central difference is 1/2 x [1, 0, 1].</span><span class="zh">中央差分對應的核是 ½ × [1, 0, 1]</span></div>
+  <div class="opt"><span class="en">C. Differentiation can be implemented by convolution.</span><span class="zh">微分運算可以用卷積來實現</span></div>
+  <div class="opt"><span class="en">D. A discrete image cannot be differentiated; only integration can approximate it.</span><span class="zh">離散影像無法進行微分，只能用積分近似</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、C</strong><br>
   A ✓ 用相鄰像素相減近似斜率。<br>
@@ -913,11 +928,11 @@
 </div>
 
 <div class="mq q" data-ans="0,1,2">
-  <div class="qt">A-63. 關於 Sobel 與 Prewitt 運算子，正確的有？</div>
-  <div class="opt">A. Sobel 的中心列／行權重為 2，等於順便做了平滑，較抗雜訊</div>
-  <div class="opt">B. 兩者的核係數總和皆為 0</div>
-  <div class="opt">C. G<sub>x</sub> 主要用於偵測垂直方向的邊緣</div>
-  <div class="opt">D. Prewitt 比 Sobel 更能抵抗雜訊</div>
+  <div class="qt"><span class="en">A-63. Which of the following statements about the Sobel and Prewitt operators are correct?</span><span class="zh">關於 Sobel 與 Prewitt 運算子，正確的有？</span></div>
+  <div class="opt"><span class="en">A. The centre row/column of Sobel has weight 2, which performs some smoothing and makes it more noise-resistant.</span><span class="zh">Sobel 的中心列／行權重為 2，等於順便做了平滑，較抗雜訊</span></div>
+  <div class="opt"><span class="en">B. The coefficients of both kernels sum to 0.</span><span class="zh">兩者的核係數總和皆為 0</span></div>
+  <div class="opt"><span class="en">C. Gx is mainly used to detect vertical edges.</span><span class="zh">G<sub>x</sub> 主要用於偵測垂直方向的邊緣</span></div>
+  <div class="opt"><span class="en">D. Prewitt resists noise better than Sobel.</span><span class="zh">Prewitt 比 Sobel 更能抵抗雜訊</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、B、C</strong><br>
   A ✓ 兩者主要差別。B ✓ 平坦區回應 0。C ✓ 左負右正抓左右差異。<br>
@@ -925,11 +940,11 @@
 </div>
 
 <div class="mq q" data-ans="0,1">
-  <div class="qt">A-64. 某像素的 G<sub>x</sub> = 3、G<sub>y</sub> = 4，正確的有？</div>
-  <div class="opt">A. 梯度大小為 5</div>
-  <div class="opt">B. 梯度方向約為 53.1°</div>
-  <div class="opt">C. 梯度大小為 7</div>
-  <div class="opt">D. 該點位於完全平坦的區域</div>
+  <div class="qt"><span class="en">A-64. A pixel has Gx = 3 and Gy = 4. Which statements are correct?</span><span class="zh">某像素的 G<sub>x</sub> = 3、G<sub>y</sub> = 4，正確的有？</span></div>
+  <div class="opt"><span class="en">A. The gradient magnitude is 5.</span><span class="zh">梯度大小為 5</span></div>
+  <div class="opt"><span class="en">B. The gradient direction is about 53.1 degrees.</span><span class="zh">梯度方向約為 53.1°</span></div>
+  <div class="opt"><span class="en">C. The gradient magnitude is 7.</span><span class="zh">梯度大小為 7</span></div>
+  <div class="opt"><span class="en">D. The pixel lies in a completely flat region.</span><span class="zh">該點位於完全平坦的區域</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、B</strong><br>
   A ✓ √(9+16) = 5。B ✓ tan⁻¹(4/3) ≈ 53.13°。<br>
@@ -938,11 +953,11 @@
 </div>
 
 <div class="mq q" data-ans="0,1,2">
-  <div class="qt">A-65. 關於雜訊與平滑，正確的有？</div>
-  <div class="opt">A. 微分運算會放大雜訊</div>
-  <div class="opt">B. 因此通常先做高斯平滑再求導數</div>
-  <div class="opt">C. 由微分定理，可先對高斯核微分，再與影像做一次卷積即可</div>
-  <div class="opt">D. σ 取得越大，邊緣定位越精準</div>
+  <div class="qt"><span class="en">A-65. Which of the following statements about noise and smoothing are correct?</span><span class="zh">關於雜訊與平滑，正確的有？</span></div>
+  <div class="opt"><span class="en">A. Differentiation amplifies noise.</span><span class="zh">微分運算會放大雜訊</span></div>
+  <div class="opt"><span class="en">B. Therefore Gaussian smoothing is usually applied before taking derivatives.</span><span class="zh">因此通常先做高斯平滑再求導數</span></div>
+  <div class="opt"><span class="en">C. By the derivative theorem, one may differentiate the Gaussian kernel first and then convolve with the image only once.</span><span class="zh">由微分定理，可先對高斯核微分，再與影像做一次卷積即可</span></div>
+  <div class="opt"><span class="en">D. The larger the sigma, the more accurate the edge localization.</span><span class="zh">σ 取得越大，邊緣定位越精準</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、B、C</strong><br>
   A ✓ 雜訊就是鄰居差異大。B ✓ C ✓ d/dx(G∗f) = (d/dx G)∗f，省一次運算。<br>
@@ -950,11 +965,11 @@
 </div>
 
 <div class="mq q" data-ans="0,1,3">
-  <div class="qt">A-66. 關於 Laplacian 運算子，正確的有？</div>
-  <div class="opt">A. 它是二階微分運算子</div>
-  <div class="opt">B. 邊緣位置對應於其輸出的零交越（zero-crossing）</div>
-  <div class="opt">C. 它可以同時提供邊緣的強度與方向</div>
-  <div class="opt">D. 其核的中心為負值、周圍為正值，總和為 0</div>
+  <div class="qt"><span class="en">A-66. Which of the following statements about the Laplacian operator are correct?</span><span class="zh">關於 Laplacian 運算子，正確的有？</span></div>
+  <div class="opt"><span class="en">A. It is a second-order derivative operator.</span><span class="zh">它是二階微分運算子</span></div>
+  <div class="opt"><span class="en">B. Edge locations correspond to zero-crossings of its output.</span><span class="zh">邊緣位置對應於其輸出的零交越（zero-crossing）</span></div>
+  <div class="opt"><span class="en">C. It provides both the strength and the direction of an edge.</span><span class="zh">它可以同時提供邊緣的強度與方向</span></div>
+  <div class="opt"><span class="en">D. Its kernel has a negative centre and positive surroundings, summing to 0.</span><span class="zh">其核的中心為負值、周圍為正值，總和為 0</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、B、D</strong><br>
   A ✓ B ✓ 一階找峰值、二階找零交越。<br>
@@ -963,11 +978,11 @@
 </div>
 
 <div class="mq q" data-ans="0,1,2">
-  <div class="qt">A-67. 關於 LoG 與 DoG，正確的有？</div>
-  <div class="opt">A. LoG 是先用高斯平滑、再做 Laplacian</div>
-  <div class="opt">B. LoG 的形狀常被稱為「墨西哥帽」</div>
-  <div class="opt">C. DoG（兩個不同 σ 的高斯相減）可用來近似 LoG</div>
-  <div class="opt">D. 使用 LoG 的目的是讓 Laplacian 對雜訊更敏感</div>
+  <div class="qt"><span class="en">A-67. Which of the following statements about LoG and DoG are correct?</span><span class="zh">關於 LoG 與 DoG，正確的有？</span></div>
+  <div class="opt"><span class="en">A. LoG applies Gaussian smoothing first and then the Laplacian.</span><span class="zh">LoG 是先用高斯平滑、再做 Laplacian</span></div>
+  <div class="opt"><span class="en">B. The shape of LoG is often called a Mexican hat.</span><span class="zh">LoG 的形狀常被稱為「墨西哥帽」</span></div>
+  <div class="opt"><span class="en">C. DoG (the difference of two Gaussians with different sigma) can approximate LoG.</span><span class="zh">DoG（兩個不同 σ 的高斯相減）可用來近似 LoG</span></div>
+  <div class="opt"><span class="en">D. The purpose of using LoG is to make the Laplacian more sensitive to noise.</span><span class="zh">使用 LoG 的目的是讓 Laplacian 對雜訊更敏感</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、B、C</strong><br>
   A ✓ B ✓ 中間凹、周圍凸起的形狀。C ✓ 計算上更省。<br>
@@ -975,11 +990,11 @@
 </div>
 
 <div class="mq q" data-ans="0,1,2">
-  <div class="qt">A-68. 關於 Canny 邊緣偵測，正確的有？</div>
-  <div class="opt">A. 第一步是高斯平滑</div>
-  <div class="opt">B. 非極大值抑制（NMS）可把邊緣細化為單像素寬</div>
-  <div class="opt">C. 雙閾值中，介於 L 與 H 的弱邊緣只有在與強邊緣相連時才保留</div>
-  <div class="opt">D. NMS 的目的是把斷裂的邊緣連接起來</div>
+  <div class="qt"><span class="en">A-68. Which of the following statements about the Canny edge detector are correct?</span><span class="zh">關於 Canny 邊緣偵測，正確的有？</span></div>
+  <div class="opt"><span class="en">A. The first step is Gaussian smoothing.</span><span class="zh">第一步是高斯平滑</span></div>
+  <div class="opt"><span class="en">B. Non-maximum suppression (NMS) thins the edges to one pixel wide.</span><span class="zh">非極大值抑制（NMS）可把邊緣細化為單像素寬</span></div>
+  <div class="opt"><span class="en">C. In hysteresis thresholding, a weak edge between L and H is kept only if it is connected to a strong edge.</span><span class="zh">雙閾值中，介於 L 與 H 的弱邊緣只有在與強邊緣相連時才保留</span></div>
+  <div class="opt"><span class="en">D. The purpose of NMS is to connect broken edges.</span><span class="zh">NMS 的目的是把斷裂的邊緣連接起來</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、B、C</strong><br>
   A ✓ B ✓ 對應「一條邊只回應一次」。C ✓ hysteresis 的精神。<br>
@@ -987,11 +1002,11 @@
 </div>
 
 <div class="mq q" data-ans="0,1,2,3">
-  <div class="qt">A-69. 關於 Canny 的三個設計目標，正確的有？</div>
-  <div class="opt">A. Good detection：對真實邊緣有回應，不被雜訊誤導</div>
-  <div class="opt">B. Good localization：偵測到的位置要接近真實邊緣位置</div>
-  <div class="opt">C. Minimal response：一條邊緣只產生一個回應</div>
-  <div class="opt">D. Detection 與 localization 之間存在取捨，無法同時達到最佳</div>
+  <div class="qt"><span class="en">A-69. Which of the following statements about the three design goals of Canny are correct?</span><span class="zh">關於 Canny 的三個設計目標，正確的有？</span></div>
+  <div class="opt"><span class="en">A. Good detection: respond to true edges and not be misled by noise.</span><span class="zh">Good detection：對真實邊緣有回應，不被雜訊誤導</span></div>
+  <div class="opt"><span class="en">B. Good localization: the detected position should be close to the true edge position.</span><span class="zh">Good localization：偵測到的位置要接近真實邊緣位置</span></div>
+  <div class="opt"><span class="en">C. Minimal response: one edge should produce only one response.</span><span class="zh">Minimal response：一條邊緣只產生一個回應</span></div>
+  <div class="opt"><span class="en">D. Detection and localization involve a trade-off and cannot both be optimal.</span><span class="zh">Detection 與 localization 之間存在取捨，無法同時達到最佳</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、B、C、D（四個全對）</strong><br>
   A、B、C ✓ 三大準則，其中 C 由 NMS 負責。<br>
@@ -1000,11 +1015,11 @@
 </div>
 
 <div class="mq q" data-ans="0,2">
-  <div class="qt">A-70. 關於雙閾值（hysteresis）的設定，正確的有？</div>
-  <div class="opt">A. 大於高閾值 H 的點直接判定為強邊緣</div>
-  <div class="opt">B. 小於低閾值 L 的點會被當成弱邊緣保留</div>
-  <div class="opt">C. 使用雙閾值的目的是避免邊緣斷斷續續（streaking）</div>
-  <div class="opt">D. 只要使用單一閾值，就不會有邊緣斷裂的問題</div>
+  <div class="qt"><span class="en">A-70. Which of the following statements about hysteresis (double) thresholding are correct?</span><span class="zh">關於雙閾值（hysteresis）的設定，正確的有？</span></div>
+  <div class="opt"><span class="en">A. Points above the high threshold H are immediately classified as strong edges.</span><span class="zh">大於高閾值 H 的點直接判定為強邊緣</span></div>
+  <div class="opt"><span class="en">B. Points below the low threshold L are kept as weak edges.</span><span class="zh">小於低閾值 L 的點會被當成弱邊緣保留</span></div>
+  <div class="opt"><span class="en">C. The purpose of double thresholding is to avoid streaking (broken edges).</span><span class="zh">使用雙閾值的目的是避免邊緣斷斷續續（streaking）</span></div>
+  <div class="opt"><span class="en">D. Using a single threshold would avoid the problem of broken edges entirely.</span><span class="zh">只要使用單一閾值，就不會有邊緣斷裂的問題</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、C</strong><br>
   A ✓<br>
@@ -1014,11 +1029,11 @@
 </div>
 
 <div class="mq q" data-ans="0,1,2">
-  <div class="qt">A-71. 關於多尺度（multi-scale）邊緣，正確的有？</div>
-  <div class="opt">A. 在較細的尺度（小 σ）可偵測到更多細節邊緣</div>
-  <div class="opt">B. 在較粗的尺度（大 σ）只會保留較顯著的大結構邊緣</div>
-  <div class="opt">C. 調整閾值也會改變最終保留的邊緣數量</div>
-  <div class="opt">D. 存在一個對所有影像都最佳的固定 σ 與閾值</div>
+  <div class="qt"><span class="en">A-71. Which of the following statements about multi-scale edges are correct?</span><span class="zh">關於多尺度（multi-scale）邊緣，正確的有？</span></div>
+  <div class="opt"><span class="en">A. At a fine scale (small sigma), more detailed edges can be detected.</span><span class="zh">在較細的尺度（小 σ）可偵測到更多細節邊緣</span></div>
+  <div class="opt"><span class="en">B. At a coarse scale (large sigma), only the more significant large structures remain.</span><span class="zh">在較粗的尺度（大 σ）只會保留較顯著的大結構邊緣</span></div>
+  <div class="opt"><span class="en">C. Changing the threshold also changes how many edges are finally kept.</span><span class="zh">調整閾值也會改變最終保留的邊緣數量</span></div>
+  <div class="opt"><span class="en">D. There exists one fixed sigma and threshold that is optimal for all images.</span><span class="zh">存在一個對所有影像都最佳的固定 σ 與閾值</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、B、C</strong><br>
   A、B ✓ 這就是「邊緣有尺度性」的意思。<br>
@@ -1027,11 +1042,11 @@
 </div>
 
 <div class="mq q" data-ans="0,1,2">
-  <div class="qt">A-72. 關於其他邊緣運算子，正確的有？</div>
-  <div class="opt">A. Roberts 運算子使用 2×2 的核</div>
-  <div class="opt">B. Compass（羅盤）運算子使用多個方向的核，取其中最大的回應</div>
-  <div class="opt">C. 對 Sobel 的結果取閾值，可得到二值的邊緣圖</div>
-  <div class="opt">D. 所有邊緣運算子得到的結果都完全相同</div>
+  <div class="qt"><span class="en">A-72. Which of the following statements about other edge operators are correct?</span><span class="zh">關於其他邊緣運算子，正確的有？</span></div>
+  <div class="opt"><span class="en">A. The Roberts operator uses 2x2 kernels.</span><span class="zh">Roberts 運算子使用 2×2 的核</span></div>
+  <div class="opt"><span class="en">B. Compass operators use kernels in several orientations and take the largest response.</span><span class="zh">Compass（羅盤）運算子使用多個方向的核，取其中最大的回應</span></div>
+  <div class="opt"><span class="en">C. Thresholding the Sobel result produces a binary edge map.</span><span class="zh">對 Sobel 的結果取閾值，可得到二值的邊緣圖</span></div>
+  <div class="opt"><span class="en">D. All edge operators give exactly the same result.</span><span class="zh">所有邊緣運算子得到的結果都完全相同</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、B、C</strong><br>
   A ✓ 最小的微分核，對雜訊較敏感。<br>
@@ -1044,11 +1059,11 @@
 <h2 id="c6">第 6 章 · 形態學處理</h2>
 
 <div class="mq q" data-ans="0,1,3">
-  <div class="qt">A-73. 關於形態學運算的前提，正確的有？</div>
-  <div class="opt">A. 本章討論的運算作用於二值影像</div>
-  <div class="opt">B. 結構元（SE）的形狀會影響運算結果</div>
-  <div class="opt">C. 結構元必須是正方形</div>
-  <div class="opt">D. 灰階影像需先二值化才能套用這些運算</div>
+  <div class="qt"><span class="en">A-73. Which of the following statements about the prerequisites of morphological operations are correct?</span><span class="zh">關於形態學運算的前提，正確的有？</span></div>
+  <div class="opt"><span class="en">A. The operations discussed in this chapter act on binary images.</span><span class="zh">本章討論的運算作用於二值影像</span></div>
+  <div class="opt"><span class="en">B. The shape of the structuring element (SE) affects the result.</span><span class="zh">結構元（SE）的形狀會影響運算結果</span></div>
+  <div class="opt"><span class="en">C. The structuring element must be square.</span><span class="zh">結構元必須是正方形</span></div>
+  <div class="opt"><span class="en">D. A grayscale image must be thresholded before these operations can be applied.</span><span class="zh">灰階影像需先二值化才能套用這些運算</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、B、D</strong><br>
   A ✓ B ✓ 方形、十字、X 形結果都不同。<br>
@@ -1057,11 +1072,11 @@
 </div>
 
 <div class="mq q" data-ans="0,2">
-  <div class="qt">A-74. 關於結構元的原點，正確的有？</div>
-  <div class="opt">A. 原點決定運算結果要寫回輸出影像的哪個位置</div>
-  <div class="opt">B. 原點必須設在結構元中值為 1 的位置上</div>
-  <div class="opt">C. 若把原點設在非中心位置，結果會產生位移</div>
-  <div class="opt">D. 原點的位置不影響任何結果</div>
+  <div class="qt"><span class="en">A-74. Which of the following statements about the origin of the structuring element are correct?</span><span class="zh">關於結構元的原點，正確的有？</span></div>
+  <div class="opt"><span class="en">A. The origin determines where in the output image the result is written.</span><span class="zh">原點決定運算結果要寫回輸出影像的哪個位置</span></div>
+  <div class="opt"><span class="en">B. The origin must be placed at a position whose value in the structuring element is 1.</span><span class="zh">原點必須設在結構元中值為 1 的位置上</span></div>
+  <div class="opt"><span class="en">C. If the origin is placed off-centre, the result is shifted.</span><span class="zh">若把原點設在非中心位置，結果會產生位移</span></div>
+  <div class="opt"><span class="en">D. The position of the origin does not affect the result at all.</span><span class="zh">原點的位置不影響任何結果</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、C</strong><br>
   A ✓<br>
@@ -1071,11 +1086,11 @@
 </div>
 
 <div class="mq q" data-ans="0,1,2">
-  <div class="qt">A-75. 關於侵蝕與膨脹，正確的有？</div>
-  <div class="opt">A. 侵蝕要求 SE 覆蓋的所有位置都是前景，中心才保留</div>
-  <div class="opt">B. 膨脹只要 SE 覆蓋範圍內有任一前景，中心就變前景</div>
-  <div class="opt">C. 侵蝕可用來分離黏在一起的物體</div>
-  <div class="opt">D. 膨脹會讓物體內部的小洞變得更大</div>
+  <div class="qt"><span class="en">A-75. Which of the following statements about erosion and dilation are correct?</span><span class="zh">關於侵蝕與膨脹，正確的有？</span></div>
+  <div class="opt"><span class="en">A. Erosion keeps the centre only if every position covered by the SE is foreground.</span><span class="zh">侵蝕要求 SE 覆蓋的所有位置都是前景，中心才保留</span></div>
+  <div class="opt"><span class="en">B. Dilation sets the centre to foreground if any position covered by the SE is foreground.</span><span class="zh">膨脹只要 SE 覆蓋範圍內有任一前景，中心就變前景</span></div>
+  <div class="opt"><span class="en">C. Erosion can be used to separate objects that are touching.</span><span class="zh">侵蝕可用來分離黏在一起的物體</span></div>
+  <div class="opt"><span class="en">D. Dilation makes small holes inside an object larger.</span><span class="zh">膨脹會讓物體內部的小洞變得更大</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、B、C</strong><br>
   A ✓ AND（全中）。B ✓ OR（有中就算）。C ✓ 細的連接處先斷開。<br>
@@ -1083,11 +1098,11 @@
 </div>
 
 <div class="mq q" data-ans="0,1,2">
-  <div class="qt">A-76. 用 3×3 全 1 的 SE 處理一個孤立的單一前景像素，正確的有？</div>
-  <div class="opt">A. 侵蝕後該點會消失</div>
-  <div class="opt">B. 膨脹後會變成 3×3 的方塊</div>
-  <div class="opt">C. Opening 後該點會消失</div>
-  <div class="opt">D. Closing 後該點會消失</div>
+  <div class="qt"><span class="en">A-76. A single isolated foreground pixel is processed with a 3x3 all-ones SE. Which statements are correct?</span><span class="zh">用 3×3 全 1 的 SE 處理一個孤立的單一前景像素，正確的有？</span></div>
+  <div class="opt"><span class="en">A. After erosion the pixel disappears.</span><span class="zh">侵蝕後該點會消失</span></div>
+  <div class="opt"><span class="en">B. After dilation it becomes a 3x3 block.</span><span class="zh">膨脹後會變成 3×3 的方塊</span></div>
+  <div class="opt"><span class="en">C. After opening the pixel disappears.</span><span class="zh">Opening 後該點會消失</span></div>
+  <div class="opt"><span class="en">D. After closing the pixel disappears.</span><span class="zh">Closing 後該點會消失</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、B、C</strong><br>
   A ✓ 周圍都是背景，不滿足「全中」。<br>
@@ -1098,11 +1113,11 @@
 </div>
 
 <div class="mq q" data-ans="0,1,2">
-  <div class="qt">A-77. 關於 Opening 與 Closing，正確的有？</div>
-  <div class="opt">A. Opening = 先侵蝕再膨脹</div>
-  <div class="opt">B. Closing = 先膨脹再侵蝕</div>
-  <div class="opt">C. Opening 可去除比結構元小的前景雜點</div>
-  <div class="opt">D. Closing 後的前景面積會小於等於原圖</div>
+  <div class="qt"><span class="en">A-77. Which of the following statements about opening and closing are correct?</span><span class="zh">關於 Opening 與 Closing，正確的有？</span></div>
+  <div class="opt"><span class="en">A. Opening = erosion followed by dilation.</span><span class="zh">Opening = 先侵蝕再膨脹</span></div>
+  <div class="opt"><span class="en">B. Closing = dilation followed by erosion.</span><span class="zh">Closing = 先膨脹再侵蝕</span></div>
+  <div class="opt"><span class="en">C. Opening removes foreground specks smaller than the structuring element.</span><span class="zh">Opening 可去除比結構元小的前景雜點</span></div>
+  <div class="opt"><span class="en">D. After closing, the foreground area is less than or equal to that of the original.</span><span class="zh">Closing 後的前景面積會小於等於原圖</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、B、C</strong><br>
   A、B ✓ 順序不能反。C ✓<br>
@@ -1111,11 +1126,11 @@
 </div>
 
 <div class="mq q" data-ans="0,1,2">
-  <div class="qt">A-78. 關於 Opening／Closing 的性質，正確的有？</div>
-  <div class="opt">A. opening(A) ⊆ A</div>
-  <div class="opt">B. A ⊆ closing(A)</div>
-  <div class="opt">C. 兩者都具有冪等性：做第二次不會再改變結果</div>
-  <div class="opt">D. 連續做 Opening 三次，物體會持續縮小</div>
+  <div class="qt"><span class="en">A-78. Which of the following statements about properties of opening and closing are correct?</span><span class="zh">關於 Opening／Closing 的性質，正確的有？</span></div>
+  <div class="opt"><span class="en">A. opening(A) is a subset of A.</span><span class="zh">opening(A) ⊆ A</span></div>
+  <div class="opt"><span class="en">B. A is a subset of closing(A).</span><span class="zh">A ⊆ closing(A)</span></div>
+  <div class="opt"><span class="en">C. Both are idempotent: applying them a second time changes nothing.</span><span class="zh">兩者都具有冪等性：做第二次不會再改變結果</span></div>
+  <div class="opt"><span class="en">D. Applying opening three times in a row keeps shrinking the object.</span><span class="zh">連續做 Opening 三次，物體會持續縮小</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、B、C</strong><br>
   A、B ✓ opening ⊆ 原圖 ⊆ closing。C ✓ open(open(A)) = open(A)。<br>
@@ -1124,11 +1139,11 @@
 </div>
 
 <div class="mq q" data-ans="0,1">
-  <div class="qt">A-79. 關於 Opening 與 Closing 的雜訊濾除用途，正確的有？</div>
-  <div class="opt">A. Opening 適合去除背景中的小白點</div>
-  <div class="opt">B. Closing 適合填補前景物體中的小黑洞</div>
-  <div class="opt">C. 先 Opening 再 Closing 與先 Closing 再 Opening，結果一定相同</div>
-  <div class="opt">D. Opening 與 Closing 的效果完全相同，可互相取代</div>
+  <div class="qt"><span class="en">A-79. Which of the following statements about using opening/closing for noise removal are correct?</span><span class="zh">關於 Opening 與 Closing 的雜訊濾除用途，正確的有？</span></div>
+  <div class="opt"><span class="en">A. Opening is suitable for removing small white specks in the background.</span><span class="zh">Opening 適合去除背景中的小白點</span></div>
+  <div class="opt"><span class="en">B. Closing is suitable for filling small black holes inside foreground objects.</span><span class="zh">Closing 適合填補前景物體中的小黑洞</span></div>
+  <div class="opt"><span class="en">C. Opening followed by closing gives exactly the same result as closing followed by opening.</span><span class="zh">先 Opening 再 Closing 與先 Closing 再 Opening，結果一定相同</span></div>
+  <div class="opt"><span class="en">D. Opening and closing have identical effects and can replace each other.</span><span class="zh">Opening 與 Closing 的效果完全相同，可互相取代</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、B</strong><br>
   A ✓ B ✓ 兩者分工明確。<br>
@@ -1137,11 +1152,11 @@
 </div>
 
 <div class="mq q" data-ans="0,1,2">
-  <div class="qt">A-80. 關於形態學邊界抽取，正確的有？</div>
-  <div class="opt">A. 內邊界 = A − erode(A)</div>
-  <div class="opt">B. 外邊界 = dilate(A) − A</div>
-  <div class="opt">C. 形態學梯度 = dilate(A) − erode(A)</div>
-  <div class="opt">D. 形態學梯度得到的輪廓比內邊界更細</div>
+  <div class="qt"><span class="en">A-80. Which of the following statements about morphological boundary extraction are correct?</span><span class="zh">關於形態學邊界抽取，正確的有？</span></div>
+  <div class="opt"><span class="en">A. internal boundary = A - erode(A).</span><span class="zh">內邊界 = A − erode(A)</span></div>
+  <div class="opt"><span class="en">B. external boundary = dilate(A) - A.</span><span class="zh">外邊界 = dilate(A) − A</span></div>
+  <div class="opt"><span class="en">C. morphological gradient = dilate(A) - erode(A).</span><span class="zh">形態學梯度 = dilate(A) − erode(A)</span></div>
+  <div class="opt"><span class="en">D. The morphological gradient gives a thinner contour than the internal boundary.</span><span class="zh">形態學梯度得到的輪廓比內邊界更細</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、B、C</strong><br>
   A ✓ 位於物體<strong>內部</strong>。B ✓ 位於物體<strong>外部</strong>。C ✓ 等於內 ∪ 外。<br>
@@ -1149,11 +1164,11 @@
 </div>
 
 <div class="mq q" data-ans="0,1,2">
-  <div class="qt">A-81. 關於膨脹與侵蝕的代數性質，正確的有？</div>
-  <div class="opt">A. 膨脹滿足交換律：A ⊕ B = B ⊕ A</div>
-  <div class="opt">B. 膨脹滿足結合律：(A ⊕ B) ⊕ C = A ⊕ (B ⊕ C)</div>
-  <div class="opt">C. 用 3×3 方形 SE 連續膨脹兩次，效果等同用一個 5×5 方形 SE 膨脹一次</div>
-  <div class="opt">D. 侵蝕也滿足交換律：A ⊖ B = B ⊖ A</div>
+  <div class="qt"><span class="en">A-81. Which of the following statements about the algebraic properties of dilation and erosion are correct?</span><span class="zh">關於膨脹與侵蝕的代數性質，正確的有？</span></div>
+  <div class="opt"><span class="en">A. Dilation is commutative: A (+) B = B (+) A.</span><span class="zh">膨脹滿足交換律：A ⊕ B = B ⊕ A</span></div>
+  <div class="opt"><span class="en">B. Dilation is associative: (A (+) B) (+) C = A (+) (B (+) C).</span><span class="zh">膨脹滿足結合律：(A ⊕ B) ⊕ C = A ⊕ (B ⊕ C)</span></div>
+  <div class="opt"><span class="en">C. Dilating twice with a 3x3 square SE is equivalent to dilating once with a 5x5 square SE.</span><span class="zh">用 3×3 方形 SE 連續膨脹兩次，效果等同用一個 5×5 方形 SE 膨脹一次</span></div>
+  <div class="opt"><span class="en">D. Erosion is also commutative: A (-) B = B (-) A.</span><span class="zh">侵蝕也滿足交換律：A ⊖ B = B ⊖ A</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、B、C</strong><br>
   A、B ✓ 膨脹具有這兩個性質。<br>
@@ -1162,11 +1177,11 @@
 </div>
 
 <div class="mq q" data-ans="0,2">
-  <div class="qt">A-82. 關於侵蝕與膨脹的對偶性（duality），正確的有？</div>
-  <div class="opt">A. 對前景做侵蝕，相當於對背景做膨脹後再取補集</div>
-  <div class="opt">B. 對偶性表示侵蝕與膨脹的結果完全相同</div>
-  <div class="opt">C. 因為有對偶性，實作上只需寫一種運算就能推得另一種</div>
-  <div class="opt">D. 對偶性只在結構元為單一像素時成立</div>
+  <div class="qt"><span class="en">A-82. Which of the following statements about the duality of erosion and dilation are correct?</span><span class="zh">關於侵蝕與膨脹的對偶性（duality），正確的有？</span></div>
+  <div class="opt"><span class="en">A. Eroding the foreground is equivalent to dilating the background and then taking the complement.</span><span class="zh">對前景做侵蝕，相當於對背景做膨脹後再取補集</span></div>
+  <div class="opt"><span class="en">B. Duality means erosion and dilation produce identical results.</span><span class="zh">對偶性表示侵蝕與膨脹的結果完全相同</span></div>
+  <div class="opt"><span class="en">C. Because of duality, one only needs to implement one of the two operations.</span><span class="zh">因為有對偶性，實作上只需寫一種運算就能推得另一種</span></div>
+  <div class="opt"><span class="en">D. Duality holds only when the structuring element is a single pixel.</span><span class="zh">對偶性只在結構元為單一像素時成立</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、C</strong><br>
   A ✓ 形式為 (A ⊖ B)<sup>c</sup> = A<sup>c</sup> ⊕ B̂（B̂ 為反射後的 SE）。<br>
@@ -1176,11 +1191,11 @@
 </div>
 
 <div class="mq q" data-ans="0,2">
-  <div class="qt">A-83. 關於形態學的實際應用，正確的有？</div>
-  <div class="opt">A. 可用侵蝕把黏在一起的物體（如硬幣）分開後再計數</div>
-  <div class="opt">B. 可直接用在灰階影像上，不必先二值化</div>
-  <div class="opt">C. 可用 Opening／Closing 清理二值化後殘留的雜點</div>
-  <div class="opt">D. 形態學運算可直接套用在彩色相片上做去雜訊</div>
+  <div class="qt"><span class="en">A-83. Which of the following statements about practical applications of morphology are correct?</span><span class="zh">關於形態學的實際應用，正確的有？</span></div>
+  <div class="opt"><span class="en">A. Erosion can separate touching objects (such as coins) before counting them.</span><span class="zh">可用侵蝕把黏在一起的物體（如硬幣）分開後再計數</span></div>
+  <div class="opt"><span class="en">B. It can be applied directly to grayscale images without thresholding first.</span><span class="zh">可直接用在灰階影像上，不必先二值化</span></div>
+  <div class="opt"><span class="en">C. Opening/closing can clean up specks left after thresholding.</span><span class="zh">可用 Opening／Closing 清理二值化後殘留的雜點</span></div>
+  <div class="opt"><span class="en">D. Morphological operations can be applied directly to colour photographs for denoising.</span><span class="zh">形態學運算可直接套用在彩色相片上做去雜訊</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、C</strong><br>
   A ✓ 講義中的 blob separation / counting coins 例子。<br>
@@ -1190,11 +1205,11 @@
 </div>
 
 <div class="mq q" data-ans="0,1,2">
-  <div class="qt">A-84. 用形態學做字元偵測（hw6），正確的有？</div>
-  <div class="opt">A. 以目標字元當結構元去侵蝕文章，可找出該字元出現的位置</div>
-  <div class="opt">B. 偵測（侵蝕）階段應使用相關，即結構元不翻轉</div>
-  <div class="opt">C. 把字元蓋回去時若不翻轉結構元，會得到左右顛倒的鏡像字</div>
-  <div class="opt">D. 侵蝕之後，每個命中位置仍會保留完整的字元形狀</div>
+  <div class="qt"><span class="en">A-84. Which of the following statements about character detection using morphology (hw6) are correct?</span><span class="zh">用形態學做字元偵測（hw6），正確的有？</span></div>
+  <div class="opt"><span class="en">A. Eroding the article with the target character as the SE locates where that character occurs.</span><span class="zh">以目標字元當結構元去侵蝕文章，可找出該字元出現的位置</span></div>
+  <div class="opt"><span class="en">B. The detection (erosion) stage should use correlation, i.e. the SE is not flipped.</span><span class="zh">偵測（侵蝕）階段應使用相關，即結構元不翻轉</span></div>
+  <div class="opt"><span class="en">C. When stamping the character back, not flipping the SE produces a mirrored character.</span><span class="zh">把字元蓋回去時若不翻轉結構元，會得到左右顛倒的鏡像字</span></div>
+  <div class="opt"><span class="en">D. After erosion, each detected location still retains the complete shape of the character.</span><span class="zh">侵蝕之後，每個命中位置仍會保留完整的字元形狀</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、B、C</strong><br>
   A ✓ 只有「完全放得下」的位置會留下。<br>
@@ -1204,11 +1219,11 @@
 </div>
 
 <div class="mq q" data-ans="0,1,2">
-  <div class="qt">A-85. 關於用卷積核做平移（hw6 第一題），正確的有？</div>
-  <div class="opt">A. 只含單一個 1、其餘為 0 的核，可使影像平移</div>
-  <div class="opt">B. 因為卷積會先翻轉核，實際位移方向與 1 在核中的位置相反直覺</div>
-  <div class="opt">C. 1 位於 3×3 核的正中央時，影像不會移動</div>
-  <div class="opt">D. 這種平移會改變影像的尺寸</div>
+  <div class="qt"><span class="en">A-85. Which of the following statements about using a convolution kernel to translate an image (hw6 Q1) are correct?</span><span class="zh">關於用卷積核做平移（hw6 第一題），正確的有？</span></div>
+  <div class="opt"><span class="en">A. A kernel containing a single 1 and zeros elsewhere can shift the image.</span><span class="zh">只含單一個 1、其餘為 0 的核，可使影像平移</span></div>
+  <div class="opt"><span class="en">B. Because convolution flips the kernel first, the actual shift direction is opposite to intuition.</span><span class="zh">因為卷積會先翻轉核，實際位移方向與 1 在核中的位置相反直覺</span></div>
+  <div class="opt"><span class="en">C. When the 1 is at the centre of a 3x3 kernel, the image does not move.</span><span class="zh">1 位於 3×3 核的正中央時，影像不會移動</span></div>
+  <div class="opt"><span class="en">D. This kind of translation changes the size of the image.</span><span class="zh">這種平移會改變影像的尺寸</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、B、C</strong><br>
   A ✓ B ✓ 這正是 hw6 容易算錯的地方 —— 務必記得翻轉。<br>
@@ -1217,11 +1232,11 @@
 </div>
 
 <div class="mq q" data-ans="0,1,2">
-  <div class="qt">A-86. 關於平移不變性（shift invariance），正確的有？</div>
-  <div class="opt">A. 卷積運算具有平移不變性</div>
-  <div class="opt">B. 平移不變表示：輸入平移後，輸出也會以相同量平移</div>
-  <div class="opt">C. 形態學的侵蝕與膨脹同樣具有平移不變性</div>
-  <div class="opt">D. 平移不變表示輸入平移後輸出完全不變</div>
+  <div class="qt"><span class="en">A-86. Which of the following statements about shift invariance are correct?</span><span class="zh">關於平移不變性（shift invariance），正確的有？</span></div>
+  <div class="opt"><span class="en">A. Convolution has the shift-invariance property.</span><span class="zh">卷積運算具有平移不變性</span></div>
+  <div class="opt"><span class="en">B. Shift invariance means that when the input is shifted, the output is shifted by the same amount.</span><span class="zh">平移不變表示：輸入平移後，輸出也會以相同量平移</span></div>
+  <div class="opt"><span class="en">C. Morphological erosion and dilation also have this property.</span><span class="zh">形態學的侵蝕與膨脹同樣具有平移不變性</span></div>
+  <div class="opt"><span class="en">D. Shift invariance means the output does not change at all when the input is shifted.</span><span class="zh">平移不變表示輸入平移後輸出完全不變</span></div>
   <button class="btn mcheck">對答案</button>
   <div class="exp"><strong>答案：A、B、C</strong><br>
   A ✓ 同一個核套用在每個位置。<br>
