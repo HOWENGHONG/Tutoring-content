@@ -14,14 +14,14 @@
     <a href="index.html">首頁</a>
     <a href="ch1.html">1 基礎</a><a href="ch2.html">2 點運算</a><a href="ch3.html">3 直方圖</a>
     <a href="ch4.html">4 濾波</a><a href="ch5.html">5 邊緣</a><a href="ch6.html">6 形態學</a>
-    <a href="cheatsheet.html">速記</a><a href="glossary.html">英中對照</a><a href="quiz.html">測驗</a>
+    <a href="cheatsheet.html">速記</a><a href="glossary.html">英中對照</a><a href="pastpaper.html">Past Paper</a><a href="quiz.html">測驗</a>
     <a class="on" href="practice-a.html">A題庫</a><a href="practice-b.html">B題庫</a>
   </nav>
 </div></div>
 
 <div class="wrap">
 
-<h1>Part A 全面題庫 · 86 題（中英對照）</h1>
+<h1>Part A 全面題庫 · 90 題（中英對照）</h1>
 <p class="sub">多選題 · 全對才給分 · 每題逐一解釋四個選項 · 涵蓋六章所有考點</p>
 
 <div class="langbar" id="langbar">
@@ -86,6 +86,7 @@
   <li><a href="#c4">第 4 章 · 濾波器（16 題）</a></li>
   <li><a href="#c5">第 5 章 · 邊緣偵測（14 題）</a></li>
   <li><a href="#c6">第 6 章 · 形態學處理（14 題）</a></li>
+  <li><a href="#c7">🔥 依 past paper 補充（4 題）</a></li>
 </ol></div>
 
 <!-- ======================================================= CH1 -->
@@ -261,7 +262,7 @@
 </div>
 
 <div class="mq q" data-ans="0,1,2">
-  <div class="qt"><span class="en">A-13. Which of the following statements about sensor saturation and noise are correct?</span><span class="zh">關於感測器的飽和（saturation）與雜訊，正確的有？</span></div>
+  <div class="qt"><span class="tag" style="float:right;margin-left:8px">★★</span><span class="en">A-13. Which of the following statements about sensor saturation and noise are correct?</span><span class="zh">關於感測器的飽和（saturation）與雜訊，正確的有？</span></div>
   <div class="opt"><span class="en">A. When the incoming light exceeds the sensing limit, saturation occurs and detail in that region cannot be recovered.</span><span class="zh">進光量過多超出感測上限時會飽和，該區域細節無法還原</span></div>
   <div class="opt"><span class="en">B. Saturation only occurs in dark regions of an image.</span><span class="zh">飽和會在直方圖最右端造成堆積</span></div>
   <div class="opt"><span class="en">C. Under low light, the ratio of noise to signal increases.</span><span class="zh">光線不足時，雜訊相對訊號的比例會提高</span></div>
@@ -481,7 +482,7 @@
 <h2 id="c3">第 3 章 · 直方圖</h2>
 
 <div class="mq q" data-ans="0,1,3">
-  <div class="qt"><span class="en">A-29. Which of the following statements about properties of the histogram are correct?</span><span class="zh">關於直方圖的性質，正確的有？</span></div>
+  <div class="qt"><span class="tag hot" style="float:right;margin-left:8px">★★★ 必做</span><span class="en">A-29. Which of the following statements about properties of the histogram are correct?</span><span class="zh">關於直方圖的性質，正確的有？</span></div>
   <div class="opt"><span class="en">A. The sum of all bins equals the total number of pixels N.</span><span class="zh">所有長條的總和等於總像素數 N</span></div>
   <div class="opt"><span class="en">B. The histogram contains no information about pixel locations.</span><span class="zh">直方圖不包含像素的位置資訊</span></div>
   <div class="opt"><span class="en">C. The original image can be uniquely reconstructed from its histogram.</span><span class="zh">由直方圖可以唯一還原出原始影像</span></div>
@@ -494,7 +495,7 @@
 </div>
 
 <div class="mq q" data-ans="0,1,3">
-  <div class="qt"><span class="en">A-30. Which of the following statements about the cumulative histogram (cdf) are correct?</span><span class="zh">關於累積直方圖 cdf，正確的有？</span></div>
+  <div class="qt"><span class="tag hot" style="float:right;margin-left:8px">★★★ 必做</span><span class="en">A-30. Which of the following statements about the cumulative histogram (cdf) are correct?</span><span class="zh">關於累積直方圖 cdf，正確的有？</span></div>
   <div class="opt"><span class="en">A. The cdf is monotonically non-decreasing.</span><span class="zh">cdf 是單調不遞減的</span></div>
   <div class="opt"><span class="en">B. cdf(L-1) must equal the total number of pixels N.</span><span class="zh">cdf(L−1) 必定等於總像素數 N</span></div>
   <div class="opt"><span class="en">C. If a gray level has zero pixels, the cdf decreases at that point.</span><span class="zh">若某灰階的像素數為 0，cdf 在該處會下降</span></div>
@@ -507,7 +508,7 @@
 </div>
 
 <div class="mq q" data-ans="0,1,3">
-  <div class="qt"><span class="en">A-31. Which of the following statements about the histogram equalization formula are correct?</span><span class="zh">關於直方圖均衡化的公式，正確的有？</span></div>
+  <div class="qt"><span class="tag hot" style="float:right;margin-left:8px">★★★ 必做</span><span class="en">A-31. Which of the following statements about the histogram equalization formula are correct?</span><span class="zh">關於直方圖均衡化的公式，正確的有？</span></div>
   <div class="opt"><span class="en">A. s = round( (L-1)/N x cdf(r) ).</span><span class="zh">s = round( (L−1)/N × cdf(r) )</span></div>
   <div class="opt"><span class="en">B. Forgetting to multiply by (L-1) leaves the result between 0 and 1, making the image nearly black.</span><span class="zh">若忘記乘 (L−1)，結果會落在 0~1 之間，影像近乎全黑</span></div>
   <div class="opt"><span class="en">C. The formula should multiply by L rather than L-1.</span><span class="zh">公式中應該乘 L 而不是 L−1</span></div>
@@ -520,7 +521,7 @@
 </div>
 
 <div class="mq q" data-ans="1,2,3">
-  <div class="qt"><span class="en">A-32. Which of the following statements about the result of histogram equalization are correct?</span><span class="zh">關於直方圖均衡化的結果，正確的有？</span></div>
+  <div class="qt"><span class="tag" style="float:right;margin-left:8px">★★</span><span class="en">A-32. Which of the following statements about the result of histogram equalization are correct?</span><span class="zh">關於直方圖均衡化的結果，正確的有？</span></div>
   <div class="opt"><span class="en">A. The resulting histogram becomes a perfectly flat horizontal line.</span><span class="zh">處理後的直方圖會變成完全平坦的水平線</span></div>
   <div class="opt"><span class="en">B. The resulting histogram usually looks comb-like with gaps.</span><span class="zh">處理後的直方圖通常呈現有空隙的「梳子狀」</span></div>
   <div class="opt"><span class="en">C. The operation is irreversible.</span><span class="zh">此操作不可逆</span></div>
@@ -532,7 +533,7 @@
 </div>
 
 <div class="mq q" data-ans="0,1,2">
-  <div class="qt"><span class="en">A-33. Comparing contrast stretching with histogram equalization, which statements are correct?</span><span class="zh">比較「對比拉伸」與「直方圖均衡化」，正確的有？</span></div>
+  <div class="qt"><span class="tag" style="float:right;margin-left:8px">★★</span><span class="en">A-33. Comparing contrast stretching with histogram equalization, which statements are correct?</span><span class="zh">比較「對比拉伸」與「直方圖均衡化」，正確的有？</span></div>
   <div class="opt"><span class="en">A. Contrast stretching is a linear mapping.</span><span class="zh">對比拉伸是線性映射</span></div>
   <div class="opt"><span class="en">B. Equalization performs a non-linear redistribution based on the cdf.</span><span class="zh">均衡化依據 cdf 做非線性重分配</span></div>
   <div class="opt"><span class="en">C. Contrast stretching does not merge different gray levels, whereas equalization may merge them.</span><span class="zh">對比拉伸不會把不同灰階合併，均衡化則可能合併</span></div>
@@ -622,7 +623,7 @@
 </div>
 
 <div class="mq q" data-ans="0,1">
-  <div class="qt"><span class="en">A-40. After an image has been histogram-equalized, which of the following inferences are correct?</span><span class="zh">某影像經直方圖均衡化後，下列推論正確的有？</span></div>
+  <div class="qt"><span class="tag" style="float:right;margin-left:8px">★★</span><span class="en">A-40. After an image has been histogram-equalized, which of the following inferences are correct?</span><span class="zh">某影像經直方圖均衡化後，下列推論正確的有？</span></div>
   <div class="opt"><span class="en">A. There must exist pixels with the value L-1 in the new image.</span><span class="zh">新影像中必定存在值為 L−1 的像素</span></div>
   <div class="opt"><span class="en">B. The number of distinct gray levels in the new image cannot exceed that of the original.</span><span class="zh">新影像的灰階個數不會超過原影像的灰階個數</span></div>
   <div class="opt"><span class="en">C. The number of distinct gray levels in the new image must equal L.</span><span class="zh">新影像的灰階個數一定等於 L</span></div>
@@ -649,7 +650,7 @@
 </div>
 
 <div class="mq q" data-ans="1,3">
-  <div class="qt"><span class="en">A-42. For a 4x4 image (N = 16, L = 8), a gray level r has cdf(r) = 12. Which statements are correct?</span><span class="zh">一張 4×4 影像（N = 16, L = 8），某灰階 r 的 cdf(r) = 12，則？</span></div>
+  <div class="qt"><span class="tag hot" style="float:right;margin-left:8px">★★★ 必做</span><span class="en">A-42. For a 4x4 image (N = 16, L = 8), a gray level r has cdf(r) = 12. Which statements are correct?</span><span class="zh">一張 4×4 影像（N = 16, L = 8），某灰階 r 的 cdf(r) = 12，則？</span></div>
   <div class="opt"><span class="en">A. s = round(8/16 x 12) = 6.</span><span class="zh">s = round(8/16 × 12) = 6</span></div>
   <div class="opt"><span class="en">B. s = round(7/16 x 12) = 5.</span><span class="zh">s = round(7/16 × 12) = 5</span></div>
   <div class="opt"><span class="en">C. This gray level must be the largest gray level in the image.</span><span class="zh">此灰階必定是影像中最大的灰階</span></div>
@@ -666,7 +667,7 @@
 <h2 id="c4">第 4 章 · 濾波器</h2>
 
 <div class="mq q" data-ans="0,1,2">
-  <div class="qt"><span class="en">A-43. Which of the following statements about correlation and convolution are correct?</span><span class="zh">關於相關與卷積，正確的有？</span></div>
+  <div class="qt"><span class="tag hot" style="float:right;margin-left:8px">★★★ 必做</span><span class="en">A-43. Which of the following statements about correlation and convolution are correct?</span><span class="zh">關於相關與卷積，正確的有？</span></div>
   <div class="opt"><span class="en">A. Convolution requires rotating the kernel by 180 degrees first.</span><span class="zh">卷積需要先把核旋轉 180°</span></div>
   <div class="opt"><span class="en">B. If the kernel itself is symmetric, correlation and convolution give the same result.</span><span class="zh">若核本身對稱，相關與卷積的結果相同</span></div>
   <div class="opt"><span class="en">C. Convolution satisfies both the commutative and the associative law.</span><span class="zh">卷積滿足交換律與結合律</span></div>
@@ -678,7 +679,7 @@
 </div>
 
 <div class="mq q" data-ans="0,1,2">
-  <div class="qt"><span class="en">A-44. Which of the following statements about the impulse (Dirac) function and kernels are correct?</span><span class="zh">關於脈衝（impulse / Dirac）與核的關係，正確的有？</span></div>
+  <div class="qt"><span class="tag hot" style="float:right;margin-left:8px">★★★ 必做</span><span class="en">A-44. Which of the following statements about the impulse (Dirac) function and kernels are correct?</span><span class="zh">關於脈衝（impulse / Dirac）與核的關係，正確的有？</span></div>
   <div class="opt"><span class="en">A. Convolving an impulse with a kernel reproduces the kernel as it is.</span><span class="zh">脈衝與核做卷積，會得到原樣的核</span></div>
   <div class="opt"><span class="en">B. Correlating an impulse with a kernel gives the left-right reversed kernel.</span><span class="zh">脈衝與核做相關，會得到左右顛倒的核</span></div>
   <div class="opt"><span class="en">C. A 3x3 kernel with 1 at the centre and 0 elsewhere leaves the image unchanged.</span><span class="zh">中心為 1、其餘為 0 的 3×3 核，不會改變影像</span></div>
@@ -690,7 +691,7 @@
 </div>
 
 <div class="mq q" data-ans="0,1">
-  <div class="qt"><span class="en">A-45. Which of the following statements about normalizing filter coefficients are correct?</span><span class="zh">關於濾波器係數的正規化，正確的有？</span></div>
+  <div class="qt"><span class="tag" style="float:right;margin-left:8px">★★</span><span class="en">A-45. Which of the following statements about normalizing filter coefficients are correct?</span><span class="zh">關於濾波器係數的正規化，正確的有？</span></div>
   <div class="opt"><span class="en">A. For a smoothing kernel, the coefficients should sum to 1.</span><span class="zh">平滑用的核，係數總和應為 1</span></div>
   <div class="opt"><span class="en">B. For derivative kernels (Sobel, Laplacian), the coefficients sum to 0.</span><span class="zh">微分類的核（Sobel、Laplacian）係數總和為 0</span></div>
   <div class="opt"><span class="en">C. If a 3x3 box filter is not divided by 9, the image becomes noticeably darker.</span><span class="zh">3×3 box filter 若忘記除以 9，影像會明顯變暗</span></div>
@@ -703,7 +704,7 @@
 </div>
 
 <div class="mq q" data-ans="0,1,2">
-  <div class="qt"><span class="en">A-46. A 100x100 image is processed with a 7x7 kernel. Which statements are correct?</span><span class="zh">一張 100×100 的影像與 7×7 的核運算，正確的有？</span></div>
+  <div class="qt"><span class="tag" style="float:right;margin-left:8px">★★</span><span class="en">A-46. A 100x100 image is processed with a 7x7 kernel. Which statements are correct?</span><span class="zh">一張 100×100 的影像與 7×7 的核運算，正確的有？</span></div>
   <div class="opt"><span class="en">A. The 'full' output is 106x106.</span><span class="zh">full 模式輸出為 106×106</span></div>
   <div class="opt"><span class="en">B. The 'same' output is 100x100.</span><span class="zh">same 模式輸出為 100×100</span></div>
   <div class="opt"><span class="en">C. The 'valid' output is 94x94.</span><span class="zh">valid 模式輸出為 94×94</span></div>
@@ -727,7 +728,7 @@
 </div>
 
 <div class="mq q" data-ans="0,1,2">
-  <div class="qt"><span class="en">A-48. Which of the following statements about separable filters are correct?</span><span class="zh">關於可分離（separable）濾波器，正確的有？</span></div>
+  <div class="qt"><span class="tag hot" style="float:right;margin-left:8px">★★★ 必做</span><span class="en">A-48. Which of the following statements about separable filters are correct?</span><span class="zh">關於可分離（separable）濾波器，正確的有？</span></div>
   <div class="opt"><span class="en">A. A 2-D Gaussian can be decomposed into a horizontal 1-D Gaussian and a vertical 1-D Gaussian.</span><span class="zh">2D 高斯可分解為一個水平 1D 高斯與一個垂直 1D 高斯</span></div>
   <div class="opt"><span class="en">B. Separability reduces the multiplications per pixel from O(K^2) to O(K).</span><span class="zh">可分離使每像素的乘法次數由 O(K²) 降為 O(K)</span></div>
   <div class="opt"><span class="en">C. For K = 11, the number of multiplications drops from 121 to 22.</span><span class="zh">K = 11 時，乘法次數由 121 次降為 22 次</span></div>
@@ -739,7 +740,7 @@
 </div>
 
 <div class="mq q" data-ans="0,1,2">
-  <div class="qt"><span class="en">A-49. Which of the following statements about non-linear filtering are correct?</span><span class="zh">關於非線性濾波，正確的有？</span></div>
+  <div class="qt"><span class="tag" style="float:right;margin-left:8px">★★</span><span class="en">A-49. Which of the following statements about non-linear filtering are correct?</span><span class="zh">關於非線性濾波，正確的有？</span></div>
   <div class="opt"><span class="en">A. The median filter is a non-linear operation and cannot be written as a convolution.</span><span class="zh">中位數濾波是非線性運算，不能寫成卷積</span></div>
   <div class="opt"><span class="en">B. The median filter is particularly effective against salt-and-pepper noise.</span><span class="zh">中位數濾波對椒鹽雜訊特別有效</span></div>
   <div class="opt"><span class="en">C. A max filter removes pepper (black dots) but enlarges salt (white dots).</span><span class="zh">max 濾波可去除胡椒（黑點），但會放大鹽（白點）</span></div>
@@ -751,7 +752,7 @@
 </div>
 
 <div class="mq q" data-ans="0,1">
-  <div class="qt"><span class="en">A-50. Which of the following statements about types of noise and their remedies are correct?</span><span class="zh">關於雜訊的種類與對策，正確的有？</span></div>
+  <div class="qt"><span class="tag" style="float:right;margin-left:8px">★★</span><span class="en">A-50. Which of the following statements about types of noise and their remedies are correct?</span><span class="zh">關於雜訊的種類與對策，正確的有？</span></div>
   <div class="opt"><span class="en">A. Gaussian noise is a random perturbation added to every pixel and is well suppressed by mean or Gaussian filtering.</span><span class="zh">高斯雜訊是加在每個像素上的隨機擾動，適合用平均／高斯濾波抑制</span></div>
   <div class="opt"><span class="en">B. Salt-and-pepper noise is impulse noise: it affects only some pixels but with extreme magnitude.</span><span class="zh">椒鹽雜訊屬於脈衝雜訊，只影響部分像素但幅度極大</span></div>
   <div class="opt"><span class="en">C. Applying a 3x3 mean filter to salt-and-pepper noise removes the noise completely.</span><span class="zh">對椒鹽雜訊使用 3×3 平均濾波，可以把雜訊完全去除</span></div>
@@ -778,7 +779,7 @@
 </div>
 
 <div class="mq q" data-ans="0,1,3">
-  <div class="qt"><span class="en">A-52. Which of the following statements about repeated filtering and convolution properties are correct?</span><span class="zh">關於重複濾波與卷積性質，正確的有？</span></div>
+  <div class="qt"><span class="tag" style="float:right;margin-left:8px">★★</span><span class="en">A-52. Which of the following statements about repeated filtering and convolution properties are correct?</span><span class="zh">關於重複濾波與卷積性質，正確的有？</span></div>
   <div class="opt"><span class="en">A. Repeatedly applying a box filter gradually approaches Gaussian blurring.</span><span class="zh">重複施加 box filter，結果逐漸接近高斯模糊</span></div>
   <div class="opt"><span class="en">B. Two successive Gaussian blurs (sigma1, sigma2) are equivalent to one Gaussian with sigma = sqrt(sigma1^2 + sigma2^2).</span><span class="zh">連續兩次高斯模糊（σ₁、σ₂）等效於一次 σ = √(σ₁² + σ₂²) 的高斯</span></div>
   <div class="opt"><span class="en">C. After blurring several times, sharpening can completely restore the original image.</span><span class="zh">重複模糊多次後，可以再用銳化完整還原原圖</span></div>
@@ -845,7 +846,7 @@
 </div>
 
 <div class="mq q" data-ans="0,1,2">
-  <div class="qt"><span class="en">A-57. Which of the following statements about the weighted median filter are correct?</span><span class="zh">關於加權中位數（weighted median）濾波，正確的有？</span></div>
+  <div class="qt"><span class="tag" style="float:right;margin-left:8px">★★</span><span class="en">A-57. Which of the following statements about the weighted median filter are correct?</span><span class="zh">關於加權中位數（weighted median）濾波，正確的有？</span></div>
   <div class="opt"><span class="en">A. It allows different neighbours to be given different importance.</span><span class="zh">可以對不同位置的鄰居給予不同的重要性</span></div>
   <div class="opt"><span class="en">B. It is commonly implemented by repeating a value several times before sorting and taking the median.</span><span class="zh">實作上常用「重複該值若干次後再排序取中位數」來體現權重</span></div>
   <div class="opt"><span class="en">C. It is still a non-linear filter.</span><span class="zh">它仍然屬於非線性濾波</span></div>
@@ -857,7 +858,7 @@
 </div>
 
 <div class="mq q" data-ans="1,2">
-  <div class="qt"><span class="en">A-58. A 3x3 box filter is applied to the neighbourhood 10, 20, 30 / 40, 50, 60 / 70, 80, 90. Which statements are correct?</span><span class="zh">用 3×3 box filter 處理下列鄰域，中心輸出值為何？相關敘述正確的有？<br>
+  <div class="qt"><span class="tag" style="float:right;margin-left:8px">★★</span><span class="en">A-58. A 3x3 box filter is applied to the neighbourhood 10, 20, 30 / 40, 50, 60 / 70, 80, 90. Which statements are correct?</span><span class="zh">用 3×3 box filter 處理下列鄰域，中心輸出值為何？相關敘述正確的有？<br>
   <span style="font-size:14px;color:var(--muted)">鄰域各值：10, 20, 30 / 40, 50, 60 / 70, 80, 90</span></span></div>
   <div class="opt"><span class="en">A. The output is 450.</span><span class="zh">輸出為 450</span></div>
   <div class="opt"><span class="en">B. The output is 50.</span><span class="zh">輸出為 50</span></div>
@@ -990,7 +991,7 @@
 </div>
 
 <div class="mq q" data-ans="0,1,2">
-  <div class="qt"><span class="en">A-68. Which of the following statements about the Canny edge detector are correct?</span><span class="zh">關於 Canny 邊緣偵測，正確的有？</span></div>
+  <div class="qt"><span class="tag hot" style="float:right;margin-left:8px">★★★ 必做</span><span class="en">A-68. Which of the following statements about the Canny edge detector are correct?</span><span class="zh">關於 Canny 邊緣偵測，正確的有？</span></div>
   <div class="opt"><span class="en">A. The first step is Gaussian smoothing.</span><span class="zh">第一步是高斯平滑</span></div>
   <div class="opt"><span class="en">B. Non-maximum suppression (NMS) thins the edges to one pixel wide.</span><span class="zh">非極大值抑制（NMS）可把邊緣細化為單像素寬</span></div>
   <div class="opt"><span class="en">C. In hysteresis thresholding, a weak edge between L and H is kept only if it is connected to a strong edge.</span><span class="zh">雙閾值中，介於 L 與 H 的弱邊緣只有在與強邊緣相連時才保留</span></div>
@@ -1015,7 +1016,7 @@
 </div>
 
 <div class="mq q" data-ans="0,2">
-  <div class="qt"><span class="en">A-70. Which of the following statements about hysteresis (double) thresholding are correct?</span><span class="zh">關於雙閾值（hysteresis）的設定，正確的有？</span></div>
+  <div class="qt"><span class="tag hot" style="float:right;margin-left:8px">★★★ 必做</span><span class="en">A-70. Which of the following statements about hysteresis (double) thresholding are correct?</span><span class="zh">關於雙閾值（hysteresis）的設定，正確的有？</span></div>
   <div class="opt"><span class="en">A. Points above the high threshold H are immediately classified as strong edges.</span><span class="zh">大於高閾值 H 的點直接判定為強邊緣</span></div>
   <div class="opt"><span class="en">B. Points below the low threshold L are kept as weak edges.</span><span class="zh">小於低閾值 L 的點會被當成弱邊緣保留</span></div>
   <div class="opt"><span class="en">C. The purpose of double thresholding is to avoid streaking (broken edges).</span><span class="zh">使用雙閾值的目的是避免邊緣斷斷續續（streaking）</span></div>
@@ -1086,7 +1087,7 @@
 </div>
 
 <div class="mq q" data-ans="0,1,2">
-  <div class="qt"><span class="en">A-75. Which of the following statements about erosion and dilation are correct?</span><span class="zh">關於侵蝕與膨脹，正確的有？</span></div>
+  <div class="qt"><span class="tag" style="float:right;margin-left:8px">★★</span><span class="en">A-75. Which of the following statements about erosion and dilation are correct?</span><span class="zh">關於侵蝕與膨脹，正確的有？</span></div>
   <div class="opt"><span class="en">A. Erosion keeps the centre only if every position covered by the SE is foreground.</span><span class="zh">侵蝕要求 SE 覆蓋的所有位置都是前景，中心才保留</span></div>
   <div class="opt"><span class="en">B. Dilation sets the centre to foreground if any position covered by the SE is foreground.</span><span class="zh">膨脹只要 SE 覆蓋範圍內有任一前景，中心就變前景</span></div>
   <div class="opt"><span class="en">C. Erosion can be used to separate objects that are touching.</span><span class="zh">侵蝕可用來分離黏在一起的物體</span></div>
@@ -1098,7 +1099,7 @@
 </div>
 
 <div class="mq q" data-ans="0,1,2">
-  <div class="qt"><span class="en">A-76. A single isolated foreground pixel is processed with a 3x3 all-ones SE. Which statements are correct?</span><span class="zh">用 3×3 全 1 的 SE 處理一個孤立的單一前景像素，正確的有？</span></div>
+  <div class="qt"><span class="tag" style="float:right;margin-left:8px">★★</span><span class="en">A-76. A single isolated foreground pixel is processed with a 3x3 all-ones SE. Which statements are correct?</span><span class="zh">用 3×3 全 1 的 SE 處理一個孤立的單一前景像素，正確的有？</span></div>
   <div class="opt"><span class="en">A. After erosion the pixel disappears.</span><span class="zh">侵蝕後該點會消失</span></div>
   <div class="opt"><span class="en">B. After dilation it becomes a 3x3 block.</span><span class="zh">膨脹後會變成 3×3 的方塊</span></div>
   <div class="opt"><span class="en">C. After opening the pixel disappears.</span><span class="zh">Opening 後該點會消失</span></div>
@@ -1113,7 +1114,7 @@
 </div>
 
 <div class="mq q" data-ans="0,1,2">
-  <div class="qt"><span class="en">A-77. Which of the following statements about opening and closing are correct?</span><span class="zh">關於 Opening 與 Closing，正確的有？</span></div>
+  <div class="qt"><span class="tag hot" style="float:right;margin-left:8px">★★★ 必做</span><span class="en">A-77. Which of the following statements about opening and closing are correct?</span><span class="zh">關於 Opening 與 Closing，正確的有？</span></div>
   <div class="opt"><span class="en">A. Opening = erosion followed by dilation.</span><span class="zh">Opening = 先侵蝕再膨脹</span></div>
   <div class="opt"><span class="en">B. Closing = dilation followed by erosion.</span><span class="zh">Closing = 先膨脹再侵蝕</span></div>
   <div class="opt"><span class="en">C. Opening removes foreground specks smaller than the structuring element.</span><span class="zh">Opening 可去除比結構元小的前景雜點</span></div>
@@ -1139,7 +1140,7 @@
 </div>
 
 <div class="mq q" data-ans="0,1">
-  <div class="qt"><span class="en">A-79. Which of the following statements about using opening/closing for noise removal are correct?</span><span class="zh">關於 Opening 與 Closing 的雜訊濾除用途，正確的有？</span></div>
+  <div class="qt"><span class="tag" style="float:right;margin-left:8px">★★</span><span class="en">A-79. Which of the following statements about using opening/closing for noise removal are correct?</span><span class="zh">關於 Opening 與 Closing 的雜訊濾除用途，正確的有？</span></div>
   <div class="opt"><span class="en">A. Opening is suitable for removing small white specks in the background.</span><span class="zh">Opening 適合去除背景中的小白點</span></div>
   <div class="opt"><span class="en">B. Closing is suitable for filling small black holes inside foreground objects.</span><span class="zh">Closing 適合填補前景物體中的小黑洞</span></div>
   <div class="opt"><span class="en">C. Opening followed by closing gives exactly the same result as closing followed by opening.</span><span class="zh">先 Opening 再 Closing 與先 Closing 再 Opening，結果一定相同</span></div>
@@ -1152,7 +1153,7 @@
 </div>
 
 <div class="mq q" data-ans="0,1,2">
-  <div class="qt"><span class="en">A-80. Which of the following statements about morphological boundary extraction are correct?</span><span class="zh">關於形態學邊界抽取，正確的有？</span></div>
+  <div class="qt"><span class="tag" style="float:right;margin-left:8px">★★</span><span class="en">A-80. Which of the following statements about morphological boundary extraction are correct?</span><span class="zh">關於形態學邊界抽取，正確的有？</span></div>
   <div class="opt"><span class="en">A. internal boundary = A - erode(A).</span><span class="zh">內邊界 = A − erode(A)</span></div>
   <div class="opt"><span class="en">B. external boundary = dilate(A) - A.</span><span class="zh">外邊界 = dilate(A) − A</span></div>
   <div class="opt"><span class="en">C. morphological gradient = dilate(A) - erode(A).</span><span class="zh">形態學梯度 = dilate(A) − erode(A)</span></div>
@@ -1164,7 +1165,7 @@
 </div>
 
 <div class="mq q" data-ans="0,1,2">
-  <div class="qt"><span class="en">A-81. Which of the following statements about the algebraic properties of dilation and erosion are correct?</span><span class="zh">關於膨脹與侵蝕的代數性質，正確的有？</span></div>
+  <div class="qt"><span class="tag" style="float:right;margin-left:8px">★★</span><span class="en">A-81. Which of the following statements about the algebraic properties of dilation and erosion are correct?</span><span class="zh">關於膨脹與侵蝕的代數性質，正確的有？</span></div>
   <div class="opt"><span class="en">A. Dilation is commutative: A (+) B = B (+) A.</span><span class="zh">膨脹滿足交換律：A ⊕ B = B ⊕ A</span></div>
   <div class="opt"><span class="en">B. Dilation is associative: (A (+) B) (+) C = A (+) (B (+) C).</span><span class="zh">膨脹滿足結合律：(A ⊕ B) ⊕ C = A ⊕ (B ⊕ C)</span></div>
   <div class="opt"><span class="en">C. Dilating twice with a 3x3 square SE is equivalent to dilating once with a 5x5 square SE.</span><span class="zh">用 3×3 方形 SE 連續膨脹兩次，效果等同用一個 5×5 方形 SE 膨脹一次</span></div>
@@ -1243,6 +1244,71 @@
   B ✓ 嚴格來說這稱為 shift-<strong>equivariance</strong>（等變），是本課所指的意思。<br>
   C ✓ 形態學運算也在每個位置套用相同的 SE。<br>
   D ✗ 輸出<strong>會跟著平移</strong>，而不是不變。</div>
+</div>
+
+
+<h2 id="c7">🔥 依 past paper 補充（最高命中率）</h2>
+<div class="box bad">
+  <span class="t">⚠️ 這四題是 past paper 考過、但原本題庫沒有的題型</span>
+  past paper 的 A-5 ~ A-7 連續三題都在問<strong>卷積的乘法次數</strong>，
+  是整份考卷佔比最高的單一主題。<strong>這四題務必做到秒答。</strong>
+</div>
+
+<div class="mq q" data-ans="2">
+  <div class="qt"><span class="tag hot" style="float:right;margin-left:8px">★★★ 必做</span><span class="en">A-87. An image of size m x n is filtered with a k x k filter (k odd, origin at the centre, output same size). How many multiplications are performed?</span><span class="zh">一張 m × n 的影像用 k × k 的濾波器做濾波（k 為奇數、原點在中心、輸出同尺寸），總共要做幾次乘法？</span></div>
+  <div class="opt"><span class="en">A. m x n</span><span class="zh">m × n</span></div>
+  <div class="opt"><span class="en">B. m x n x k</span><span class="zh">m × n × k</span></div>
+  <div class="opt"><span class="en">C. m x n x k^2</span><span class="zh">m × n × k²</span></div>
+  <div class="opt"><span class="en">D. m x n x k/2</span><span class="zh">m × n × k/2</span></div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：C</strong><br>
+  想法：<strong>每個輸出像素要做幾次乘法 × 總共幾個輸出像素</strong>。<br>
+  k×k 的核蓋下去有 k² 個係數，每個都要乘一次 → 每像素 <strong>k²</strong> 次。<br>
+  輸出有 m×n 個像素 → 總共 <strong>m × n × k²</strong>。<br>
+  A ✗ 那是只乘一次（等於沒做濾波）。B ✗ 那是 k×1 的一維核。D ✗ 沒有這種形式。</div>
+</div>
+
+<div class="mq q" data-ans="1">
+  <div class="qt"><span class="tag hot" style="float:right;margin-left:8px">★★★ 必做</span><span class="en">A-88. For the same image, if the filter size is changed to k x 1, how many multiplications are performed?</span><span class="zh">同一張影像，若濾波器改成 k × 1，總共要做幾次乘法？</span></div>
+  <div class="opt"><span class="en">A. m x n</span><span class="zh">m × n</span></div>
+  <div class="opt"><span class="en">B. m x n x k</span><span class="zh">m × n × k</span></div>
+  <div class="opt"><span class="en">C. m x n x k^2</span><span class="zh">m × n × k²</span></div>
+  <div class="opt"><span class="en">D. m x n x k/2</span><span class="zh">m × n × k/2</span></div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：B</strong><br>
+  k×1 的核只有 <strong>k</strong> 個係數 → 每個輸出像素 k 次乘法 → 總共 <strong>m × n × k</strong>。<br>
+  <strong>記法：核裡有幾個數字，每個像素就乘幾次。</strong></div>
+</div>
+
+<div class="mq q" data-ans="1">
+  <div class="qt"><span class="tag hot" style="float:right;margin-left:8px">★★★ 必做</span><span class="en">A-89. Suppose a k x k filter can be constructed by convolving a k x 1 filter with a 1 x k filter. If we convolve the image with the k x 1 filter and then with the 1 x k filter, what is the total number of multiplications?</span><span class="zh">假設一個 k × k 的濾波器可以由 k × 1 與 1 × k 兩個濾波器卷積而成。若先用 k × 1 再用 1 × k 對影像做卷積，總乘法次數是多少？</span></div>
+  <div class="opt"><span class="en">A. 2 x m x n</span><span class="zh">2 × m × n</span></div>
+  <div class="opt"><span class="en">B. 2 x m x n x k</span><span class="zh">2 × m × n × k</span></div>
+  <div class="opt"><span class="en">C. m^2 x n^2 x k^2</span><span class="zh">m² × n² × k²</span></div>
+  <div class="opt"><span class="en">D. m x n x k^2</span><span class="zh">m × n × k²</span></div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：B</strong><br>
+  做<strong>兩趟</strong>：第一趟用 k×1 → m·n·k 次；第二趟用 1×k → 又 m·n·k 次。<br>
+  合計 = <strong>2 × m × n × k</strong>。<br>
+  <strong>這就是「可分離」省時間的來源</strong>：<br>
+  直接做 k×k 要 m·n·k²，拆開只要 2·m·n·k，
+  加速倍數 = k² / 2k = <strong>k/2</strong>（k = 11 時快約 5.5 倍）。</div>
+</div>
+
+<div class="mq q" data-ans="2">
+  <div class="qt"><span class="tag hot" style="float:right;margin-left:8px">★★★ 必做</span><span class="en">A-90. Separating a filter into two 1-D filters is possible because convolution is:</span><span class="zh">之所以能把一個濾波器拆成兩個一維濾波器來做，是因為卷積具有：</span></div>
+  <div class="opt"><span class="en">A. Additive</span><span class="zh">加法性</span></div>
+  <div class="opt"><span class="en">B. Commutative</span><span class="zh">交換律</span></div>
+  <div class="opt"><span class="en">C. Associative</span><span class="zh">結合律</span></div>
+  <div class="opt"><span class="en">D. Distributive</span><span class="zh">分配律</span></div>
+  <button class="btn mcheck">對答案</button>
+  <div class="exp"><strong>答案：C（結合律 Associative）</strong><br>
+  可分離的數學式是：<br>
+  <code>A ∗ (K_col ∗ K_row) = (A ∗ K_col) ∗ K_row</code><br>
+  「把括號移位置、先算哪一組都一樣」正是<strong>結合律</strong>的定義。<br>
+  B ✗ 交換律是 f∗g = g∗f（誰當核都一樣）。<br>
+  D ✗ 分配律是 f∗(g+h) = f∗g + f∗h（對加法可拆）。<br>
+  <strong>past paper A-8 就是考這題。</strong></div>
 </div>
 
 <div class="score" id="score"></div>

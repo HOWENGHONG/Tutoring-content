@@ -14,13 +14,13 @@
     <a href="index.html">首頁</a>
     <a href="ch1.html">1 基礎</a><a href="ch2.html">2 點運算</a><a href="ch3.html">3 直方圖</a>
     <a href="ch4.html">4 濾波</a><a href="ch5.html">5 邊緣</a><a href="ch6.html">6 形態學</a>
-    <a href="cheatsheet.html">速記</a><a href="glossary.html">英中對照</a><a href="quiz.html">測驗</a><a href="practice-a.html">A題庫</a><a class="on" href="practice-b.html">B題庫</a>
+    <a href="cheatsheet.html">速記</a><a href="glossary.html">英中對照</a><a href="pastpaper.html">Past Paper</a><a href="quiz.html">測驗</a><a href="practice-a.html">A題庫</a><a class="on" href="practice-b.html">B題庫</a>
   </nav>
 </div></div>
 
 <div class="wrap">
 
-<h1>Part B 題庫 · 12 題</h1>
+<h1>Part B 題庫 · 13 題</h1>
 <p class="sub">每題 10 分的計算／論述題 · 全部附逐步解答</p>
 
 <div class="box warn">
@@ -55,10 +55,11 @@
   <li><a href="#b10">Alpha 混合與羽化</a></li>
   <li><a href="#b11">取樣、量化與容量</a></li>
   <li><a href="#b12">Canny：NMS 與雙閾值</a></li>
+  <li><a href="#b13">加權中位數濾波</a>　<span class="tag hot">past paper 考過</span></li>
 </ol></div>
 
 <!-- ============================================ B1 -->
-<h2 id="b1">B-1　直方圖均衡化（10 分）</h2>
+<h2 id="b1"><span class="tag hot" style="float:right;font-size:12px">★★★ past paper A-4 考過</span>B-1　直方圖均衡化（10 分）</h2>
 <div class="box" style="border-left-color:#2f6f4e;background:var(--ok-soft);margin-top:10px"><span class="t" style="color:var(--ok)">🇬🇧 English version</span><div class="enq">The image below is a 5x5 grayscale image with gray levels in the range 0~7 (L = 8).<br>(a) Compute the histogram h(r) and the cumulative histogram cdf(r).<br>(b) Derive the equalization mapping table.<br>(c) Write down the output image.<br>(d) Explain how the contrast changes. <em>Show all your working.</em></div></div>
 <div class="card">
 <p style="margin-top:0">下圖為一張 5×5 的灰階影像，灰階範圍 0~7（L = 8）。</p>
@@ -115,7 +116,7 @@
 </details>
 
 <!-- ============================================ B2 -->
-<h2 id="b2">B-2　一維相關與卷積（10 分）</h2>
+<h2 id="b2"><span class="tag hot" style="float:right;font-size:12px">★★★ past paper B-4 考過</span>B-2　一維相關與卷積（10 分）</h2>
 <div class="box" style="border-left-color:#2f6f4e;background:var(--ok-soft);margin-top:10px"><span class="t" style="color:var(--ok)">🇬🇧 English version</span><div class="enq">Given the signal <strong>f = [2, 1, 3, 0, 4]</strong> and the kernel <strong>w = [1, -2, 3]</strong>:<br>(a) Compute the full convolution, showing every step.<br>(b) State the 'same' and 'valid' results and their lengths.<br>(c) Compute the full correlation and explain how it differs from the convolution.</div></div>
 <div class="card">
 <p style="margin-top:0">已知訊號 <strong>f = [2, 1, 3, 0, 4]</strong>、核 <strong>w = [1, −2, 3]</strong>。</p>
@@ -152,7 +153,7 @@ Step 3　滑動相乘求和（輸出長度 = 5 + 3 − 1 = 7）：</p>
 </details>
 
 <!-- ============================================ B3 -->
-<h2 id="b3">B-3　二維卷積：平滑與銳化（10 分）</h2>
+<h2 id="b3"><span class="tag hot" style="float:right;font-size:12px">★★★ past paper B-4 考過</span>B-3　二維卷積：平滑與銳化（10 分）</h2>
 <div class="box" style="border-left-color:#2f6f4e;background:var(--ok-soft);margin-top:10px"><span class="t" style="color:var(--ok)">🇬🇧 English version</span><div class="enq">For the 5x5 image A below (coordinates start from 0):<br>(a) Using a 3x3 box filter, compute the output at (2,2) and at (1,1).<br>(b) Using the sharpening kernel [[0,-1,0],[-1,5,-1],[0,-1,0]], compute the output at (2,2) and state what must be taken care of.<br>(c) What is the output size in 'valid' mode?</div></div>
 <div class="card">
 <p style="margin-top:0">5×5 影像 A（座標從 0 起算）：</p>
@@ -196,7 +197,7 @@ Step 3　滑動相乘求和（輸出長度 = 5 + 3 − 1 = 7）：</p>
 </details>
 
 <!-- ============================================ B4 -->
-<h2 id="b4">B-4　中位數 vs 平均濾波（10 分）</h2>
+<h2 id="b4"><span class="tag" style="float:right;font-size:12px">★★ 與加權中位數同型</span>B-4　中位數 vs 平均濾波（10 分）</h2>
 <div class="box" style="border-left-color:#2f6f4e;background:var(--ok-soft);margin-top:10px"><span class="t" style="color:var(--ok)">🇬🇧 English version</span><div class="enq">(a) For the 3x3 window below, compute the <strong>median</strong> and the <strong>mean</strong>, and explain which is more reasonable.<br>(b) The 5x5 image below contains salt-and-pepper noise. Compute the result of a 3x3 median filter over the valid (inner 3x3) region.</div></div>
 <div class="card">
 <p style="margin-top:0">(a) 下列 3×3 視窗，分別求<strong>中位數</strong>與<strong>平均值</strong>，並說明哪個較合理。</p>
@@ -280,7 +281,7 @@ Step 3　滑動相乘求和（輸出長度 = 5 + 3 − 1 = 7）：</p>
 </details>
 
 <!-- ============================================ B6 -->
-<h2 id="b6">B-6　Sobel 梯度與邊緣方向（10 分）</h2>
+<h2 id="b6"><span class="tag" style="float:right;font-size:12px">★★ 可能出現</span>B-6　Sobel 梯度與邊緣方向（10 分）</h2>
 <div class="box" style="border-left-color:#2f6f4e;background:var(--ok-soft);margin-top:10px"><span class="t" style="color:var(--ok)">🇬🇧 English version</span><div class="enq">For the 5x5 image below (dark on the left, bright on the right):<br>(a) Compute Gx, Gy, the gradient magnitude and the gradient direction at position (2,2).<br>(b) Determine the orientation of the edge.<br>(c) Repeat the computation at position (2,3), state what you observe and explain which step of the Canny detector addresses it.</div></div>
 <div class="card">
 <p style="margin-top:0">5×5 影像（左半暗、右半亮）：</p>
@@ -380,7 +381,7 @@ NMS 沿著梯度方向比較，只保留局部最大值，把邊緣細化成單�
 </details>
 
 <!-- ============================================ B8 -->
-<h2 id="b8">B-8　形態學運算（10 分）</h2>
+<h2 id="b8"><span class="tag hot" style="float:right;font-size:12px">★★★ past paper B-2 考過</span>B-8　形態學運算（10 分）</h2>
 <div class="box" style="border-left-color:#2f6f4e;background:var(--ok-soft);margin-top:10px"><span class="t" style="color:var(--ok)">🇬🇧 English version</span><div class="enq">For the 8x8 binary image A below (1 = foreground), with the structuring element B being a 3x3 block of ones whose origin is at its centre. <strong>Treat pixels outside the image as 0.</strong><br>(a) Compute the erosion A (-) B and the dilation A (+) B.<br>(b) Compute the opening and the closing, and explain what each is used for.<br>(c) State the formulas for the internal boundary, the external boundary and the morphological gradient, and the relationship between them.</div></div>
 <div class="card">
 <p style="margin-top:0">以下 8×8 二值影像 A（1 = 前景），結構元 B 為 3×3 全 1、原點在中心。
@@ -580,7 +581,7 @@ KB = 983,040 ÷ 1024 = <strong>960 KB</strong><br>
 </details>
 
 <!-- ============================================ B12 -->
-<h2 id="b12">B-12　Canny：NMS 與雙閾值（10 分）</h2>
+<h2 id="b12"><span class="tag" style="float:right;font-size:12px">★★ 可能出現</span>B-12　Canny：NMS 與雙閾值（10 分）</h2>
 <div class="box" style="border-left-color:#2f6f4e;background:var(--ok-soft);margin-top:10px"><span class="t" style="color:var(--ok)">🇬🇧 English version</span><div class="enq">After applying Sobel, the gradient magnitudes are as shown below, and <strong>the gradient direction at every point is horizontal (0 degrees)</strong>.<br>(a) List the four steps of the Canny edge detector in order.<br>(b) Apply non-maximum suppression to the inner 3x3 region.<br>(c) Using H = 60 and L = 30, classify the strong and weak edges and state which pixels are finally retained.</div></div>
 <div class="card">
 <p style="margin-top:0">某影像經 Sobel 後得到梯度大小如下，且<strong>所有點的梯度方向皆為水平（0°）</strong>：</p>
@@ -640,6 +641,57 @@ KB = 983,040 ÷ 1024 = <strong>960 KB</strong><br>
 <p><strong>為什麼要用雙閾值？</strong>如果只用單一閾值：取 60 會讓 40 和 50 被刪掉，
 邊緣<strong>斷斷續續（streaking）</strong>；取 30 則會讓雜訊也被當成邊緣。
 雙閾值讓「夠強的核心」把「與它相連的較弱部分」一起帶進來，兼顧完整性與抗雜訊。</p>
+</details>
+
+
+<h2 id="b13"><span class="tag hot" style="float:right;font-size:12px">★★★ past paper B-3 考過</span>B-13　加權中位數濾波（10 分）</h2>
+<div class="box" style="border-left-color:#2f6f4e;background:var(--ok-soft)">
+<span class="t" style="color:var(--ok)">🇬🇧 English version</span>
+<div class="enq">Explain the weighted median filter. Use the pixel block and the weight matrix below
+as an example to present your explanation, and compute the output value.</div>
+</div>
+<div class="card">
+<div class="matrow">
+<div><div class="cap">像素 pixel block</div>
+<div class="mat" style="grid-template-columns:repeat(3,1fr)">
+<span>5</span><span>2</span><span>9</span><span>1</span><span class="hl">4</span><span>7</span><span>8</span><span>3</span><span>6</span>
+</div></div>
+<div><div class="cap">權重 weight matrix</div>
+<div class="mat" style="grid-template-columns:repeat(3,1fr)">
+<span>1</span><span>1</span><span>1</span><span>1</span><span class="hl">5</span><span>1</span><span>1</span><span>1</span><span>1</span>
+</div></div>
+</div>
+<p style="margin-bottom:0">求加權中位數，並說明它與一般中位數、平均值的差異。</p>
+</div>
+
+<details>
+<summary>完整解答</summary>
+<p><strong>Step 1　說明原理</strong><br>
+加權中位數 = 讓每個像素依其權重<strong>「投多張票」</strong>：把數值重複寫 w 次後排序，再取正中間。
+一般中位數是所有像素權重都為 1 的特例。</p>
+
+<p><strong>Step 2　依權重展開</strong>（中心的 4 權重是 5，所以寫 5 次）</p>
+<p>5, 2, 9, 1, <strong>4, 4, 4, 4, 4</strong>, 7, 8, 3, 6　　總權重 = 8×1 + 5 = <strong>13</strong></p>
+
+<p><strong>Step 3　排序</strong></p>
+<div class="mat" style="grid-template-columns:repeat(13,1fr)">
+<span>1</span><span>2</span><span>3</span><span>4</span><span>4</span><span>4</span>
+<span class="hl">4</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span>
+</div>
+<p>13 個數 → 中間是<strong>第 7 個</strong></p>
+<div class="f">加權中位數 = <strong>4</strong></div>
+
+<p><strong>Step 4　對照說明（拿解釋分）</strong></p>
+<div class="tw"><table>
+<tr><th></th><th>結果</th><th>說明</th></tr>
+<tr><td>加權中位數</td><td><strong>4</strong></td><td>中心像素權重 5，把結果拉向中心值 4</td></tr>
+<tr><td>一般中位數</td><td>5</td><td>9 個數排序取第 5 個</td></tr>
+<tr><td>平均值</td><td>5.00</td><td>45 / 9</td></tr>
+</table></div>
+<p><strong>結論寫法</strong>：加權中位數讓<strong>中心像素有更大的影響力</strong>，
+因此輸出更接近中心值；同時它保留了中位數<strong>抗極端值</strong>的特性 ——
+最大的 9 和最小的 1 都沒有左右結果。這使它在<strong>去除脈衝雜訊</strong>的同時，
+能比一般中位數<strong>更好地保留影像細節</strong>。</p>
 </details>
 
 <hr>
