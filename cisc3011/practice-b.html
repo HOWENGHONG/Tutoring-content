@@ -59,6 +59,7 @@
 
 <!-- ============================================ B1 -->
 <h2 id="b1">B-1　直方圖均衡化（10 分）</h2>
+<div class="box" style="border-left-color:#2f6f4e;background:var(--ok-soft);margin-top:10px"><span class="t" style="color:var(--ok)">🇬🇧 English version</span><div class="enq">The image below is a 5x5 grayscale image with gray levels in the range 0~7 (L = 8).<br>(a) Compute the histogram h(r) and the cumulative histogram cdf(r).<br>(b) Derive the equalization mapping table.<br>(c) Write down the output image.<br>(d) Explain how the contrast changes. <em>Show all your working.</em></div></div>
 <div class="card">
 <p style="margin-top:0">下圖為一張 5×5 的灰階影像，灰階範圍 0~7（L = 8）。</p>
 <div class="mat" style="grid-template-columns:repeat(5,1fr)">
@@ -115,6 +116,7 @@
 
 <!-- ============================================ B2 -->
 <h2 id="b2">B-2　一維相關與卷積（10 分）</h2>
+<div class="box" style="border-left-color:#2f6f4e;background:var(--ok-soft);margin-top:10px"><span class="t" style="color:var(--ok)">🇬🇧 English version</span><div class="enq">Given the signal <strong>f = [2, 1, 3, 0, 4]</strong> and the kernel <strong>w = [1, -2, 3]</strong>:<br>(a) Compute the full convolution, showing every step.<br>(b) State the 'same' and 'valid' results and their lengths.<br>(c) Compute the full correlation and explain how it differs from the convolution.</div></div>
 <div class="card">
 <p style="margin-top:0">已知訊號 <strong>f = [2, 1, 3, 0, 4]</strong>、核 <strong>w = [1, −2, 3]</strong>。</p>
 <p>(a) 求 full 卷積（寫出每一步）。(b) 求 same 與 valid 的結果與長度。(c) 求 full 相關，並說明與卷積的差異。</p>
@@ -151,6 +153,7 @@ Step 3　滑動相乘求和（輸出長度 = 5 + 3 − 1 = 7）：</p>
 
 <!-- ============================================ B3 -->
 <h2 id="b3">B-3　二維卷積：平滑與銳化（10 分）</h2>
+<div class="box" style="border-left-color:#2f6f4e;background:var(--ok-soft);margin-top:10px"><span class="t" style="color:var(--ok)">🇬🇧 English version</span><div class="enq">For the 5x5 image A below (coordinates start from 0):<br>(a) Using a 3x3 box filter, compute the output at (2,2) and at (1,1).<br>(b) Using the sharpening kernel [[0,-1,0],[-1,5,-1],[0,-1,0]], compute the output at (2,2) and state what must be taken care of.<br>(c) What is the output size in 'valid' mode?</div></div>
 <div class="card">
 <p style="margin-top:0">5×5 影像 A（座標從 0 起算）：</p>
 <div class="mat" style="grid-template-columns:repeat(5,1fr)">
@@ -194,6 +197,7 @@ Step 3　滑動相乘求和（輸出長度 = 5 + 3 − 1 = 7）：</p>
 
 <!-- ============================================ B4 -->
 <h2 id="b4">B-4　中位數 vs 平均濾波（10 分）</h2>
+<div class="box" style="border-left-color:#2f6f4e;background:var(--ok-soft);margin-top:10px"><span class="t" style="color:var(--ok)">🇬🇧 English version</span><div class="enq">(a) For the 3x3 window below, compute the <strong>median</strong> and the <strong>mean</strong>, and explain which is more reasonable.<br>(b) The 5x5 image below contains salt-and-pepper noise. Compute the result of a 3x3 median filter over the valid (inner 3x3) region.</div></div>
 <div class="card">
 <p style="margin-top:0">(a) 下列 3×3 視窗，分別求<strong>中位數</strong>與<strong>平均值</strong>，並說明哪個較合理。</p>
 <div class="mat" style="grid-template-columns:repeat(3,1fr)">
@@ -238,6 +242,7 @@ Step 3　滑動相乘求和（輸出長度 = 5 + 3 − 1 = 7）：</p>
 
 <!-- ============================================ B5 -->
 <h2 id="b5">B-5　Unsharp Masking / Highboost（10 分）</h2>
+<div class="box" style="border-left-color:#2f6f4e;background:var(--ok-soft);margin-top:10px"><span class="t" style="color:var(--ok)">🇬🇧 English version</span><div class="enq">A row of four pixels has the original and Gaussian-blurred values shown below.<br>(a) Compute the unsharp mask.<br>(b) Compute the sharpened result for k = 1 and k = 3 (mind the valid range).<br>(c) Explain the consequences of making k too large.</div></div>
 <div class="card">
 <p style="margin-top:0">某一列 4 個像素，原始值與高斯模糊後的值如下：</p>
 <div class="tw"><table>
@@ -276,6 +281,7 @@ Step 3　滑動相乘求和（輸出長度 = 5 + 3 − 1 = 7）：</p>
 
 <!-- ============================================ B6 -->
 <h2 id="b6">B-6　Sobel 梯度與邊緣方向（10 分）</h2>
+<div class="box" style="border-left-color:#2f6f4e;background:var(--ok-soft);margin-top:10px"><span class="t" style="color:var(--ok)">🇬🇧 English version</span><div class="enq">For the 5x5 image below (dark on the left, bright on the right):<br>(a) Compute Gx, Gy, the gradient magnitude and the gradient direction at position (2,2).<br>(b) Determine the orientation of the edge.<br>(c) Repeat the computation at position (2,3), state what you observe and explain which step of the Canny detector addresses it.</div></div>
 <div class="card">
 <p style="margin-top:0">5×5 影像（左半暗、右半亮）：</p>
 <div class="mat" style="grid-template-columns:repeat(5,1fr)">
@@ -325,6 +331,7 @@ NMS 沿著梯度方向比較，只保留局部最大值，把邊緣細化成單�
 
 <!-- ============================================ B7 -->
 <h2 id="b7">B-7　Laplacian 與零交越（10 分）</h2>
+<div class="box" style="border-left-color:#2f6f4e;background:var(--ok-soft);margin-top:10px"><span class="t" style="color:var(--ok)">🇬🇧 English version</span><div class="enq">(a) For the 1-D signal f = [10, 10, 10, 10, 50, 50, 50, 50], apply the 1-D Laplacian kernel [1, -2, 1] (compute interior positions only) and indicate the location of the edge.<br>(b) Using the 4-neighbour Laplacian [[0,1,0],[1,-4,1],[0,1,0]], compute the response at the centre of the two 3x3 regions below and explain the results.</div></div>
 <div class="card">
 <p style="margin-top:0">(a) 一維訊號 f = [10, 10, 10, 10, 50, 50, 50, 50]，用一維 Laplacian 核 [1, −2, 1] 計算
 （只需計算邊界以內的位置），並指出邊緣位置。</p>
@@ -374,6 +381,7 @@ NMS 沿著梯度方向比較，只保留局部最大值，把邊緣細化成單�
 
 <!-- ============================================ B8 -->
 <h2 id="b8">B-8　形態學運算（10 分）</h2>
+<div class="box" style="border-left-color:#2f6f4e;background:var(--ok-soft);margin-top:10px"><span class="t" style="color:var(--ok)">🇬🇧 English version</span><div class="enq">For the 8x8 binary image A below (1 = foreground), with the structuring element B being a 3x3 block of ones whose origin is at its centre. <strong>Treat pixels outside the image as 0.</strong><br>(a) Compute the erosion A (-) B and the dilation A (+) B.<br>(b) Compute the opening and the closing, and explain what each is used for.<br>(c) State the formulas for the internal boundary, the external boundary and the morphological gradient, and the relationship between them.</div></div>
 <div class="card">
 <p style="margin-top:0">以下 8×8 二值影像 A（1 = 前景），結構元 B 為 3×3 全 1、原點在中心。
 <strong>影像外視為 0。</strong></p>
@@ -458,6 +466,7 @@ Closing 會<strong>把洞補起來</strong>，還原成完整的 4×4 方塊；
 
 <!-- ============================================ B9 -->
 <h2 id="b9">B-9　Gamma 轉換（10 分）</h2>
+<div class="box" style="border-left-color:#2f6f4e;background:var(--ok-soft);margin-top:10px"><span class="t" style="color:var(--ok)">🇬🇧 English version</span><div class="enq">For an 8-bit image (L = 256) with c = 1:<br>(a) Compute the output for r = 50, 100 and 200, with gamma = 0.5 and gamma = 2.0.<br>(b) State whether each gamma brightens or darkens the image and explain why.<br>(c) What problem occurs if r = 100 is substituted directly into r^2 without normalization?</div></div>
 <div class="card">
 <p style="margin-top:0">8-bit 影像（L = 256），取 c = 1。</p>
 <p>(a) 對 r = 50、100、200，分別求 γ = 0.5 與 γ = 2.0 的輸出值。<br>
@@ -496,6 +505,7 @@ Closing 會<strong>把洞補起來</strong>，還原成完整的 4×4 方塊；
 
 <!-- ============================================ B10 -->
 <h2 id="b10">B-10　Alpha 混合與羽化（10 分）</h2>
+<div class="box" style="border-left-color:#2f6f4e;background:var(--ok-soft);margin-top:10px"><span class="t" style="color:var(--ok)">🇬🇧 English version</span><div class="enq">Given a foreground F = 240 and a background B = 40:<br>(a) State the alpha blending formula and compute the result for a = 0, 0.25, 0.5, 0.75 and 1.<br>(b) Explain why the formula uses (1 - a) rather than any other weight.<br>(c) Explain the problems caused by a transition band that is too narrow and one that is too wide.</div></div>
 <div class="card">
 <p style="margin-top:0">前景 F = 240、背景 B = 40。</p>
 <p>(a) 寫出 alpha 混合公式，並求 α = 0、0.25、0.5、0.75、1 時的結果。<br>
@@ -537,6 +547,7 @@ Closing 會<strong>把洞補起來</strong>，還原成完整的 4×4 方塊；
 
 <!-- ============================================ B11 -->
 <h2 id="b11">B-11　取樣、量化與容量（10 分）</h2>
+<div class="box" style="border-left-color:#2f6f4e;background:var(--ok-soft);margin-top:10px"><span class="t" style="color:var(--ok)">🇬🇧 English version</span><div class="enq">(a) How many bytes and how many KB does an uncompressed 512x512 8-bit grayscale image require?<br>(b) What about an RGB colour image of the same size?<br>(c) How many KB does a 1024x768 10-bit grayscale image require, and how many gray levels does it have?<br>(d) Explain the visual artifacts caused by insufficient sampling and by insufficient quantization.</div></div>
 <div class="card">
 <p style="margin-top:0">(a) 一張 512×512 的 8-bit 灰階影像，未壓縮需要多少 byte？多少 KB？<br>
 (b) 同尺寸的 RGB 彩色影像呢？<br>
@@ -570,6 +581,7 @@ KB = 983,040 ÷ 1024 = <strong>960 KB</strong><br>
 
 <!-- ============================================ B12 -->
 <h2 id="b12">B-12　Canny：NMS 與雙閾值（10 分）</h2>
+<div class="box" style="border-left-color:#2f6f4e;background:var(--ok-soft);margin-top:10px"><span class="t" style="color:var(--ok)">🇬🇧 English version</span><div class="enq">After applying Sobel, the gradient magnitudes are as shown below, and <strong>the gradient direction at every point is horizontal (0 degrees)</strong>.<br>(a) List the four steps of the Canny edge detector in order.<br>(b) Apply non-maximum suppression to the inner 3x3 region.<br>(c) Using H = 60 and L = 30, classify the strong and weak edges and state which pixels are finally retained.</div></div>
 <div class="card">
 <p style="margin-top:0">某影像經 Sobel 後得到梯度大小如下，且<strong>所有點的梯度方向皆為水平（0°）</strong>：</p>
 <div class="mat" style="grid-template-columns:repeat(5,1fr)">
