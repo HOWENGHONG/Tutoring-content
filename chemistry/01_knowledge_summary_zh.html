@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>F3 Chemistry — Knowledge Summary</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;600;700&display=swap');
+  :root {
+    --ink: #1a1a2e; --paper: #f7f6f2; --ionic: #2563eb; --ionic-light: #dbeafe;
+    --cov: #16a34a; --cov-light: #dcfce7; --met: #d97706; --met-light: #fef3c7;
+    --calc: #7c3aed; --calc-light: #ede9fe; --accent: #e11d48; --rule: #e2e0d8; --card: #fff;
+  }
+  * { box-sizing: border-box; margin:0; padding:0; }
+  body { background:var(--paper); color:var(--ink); font-family:'Inter',sans-serif; font-size:14px; line-height:1.65; }
+
+  header { background:var(--ink); color:#fff; padding:36px 40px 28px; display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:12px; }
+  .eyebrow { font-family:'Space Grotesk',sans-serif; font-size:11px; letter-spacing:.15em; text-transform:uppercase; color:#94a3b8; margin-bottom:6px; }
+  header h1 { font-family:'Space Grotesk',sans-serif; font-size:28px; font-weight:700; line-height:1.2; }
+  header h1 span { color:#f59e0b; }
+  .pills { display:flex; gap:6px; flex-wrap:wrap; }
+  .pill { font-size:11px; font-weight:600; padding:3px 10px; border-radius:999px; border:1px solid rgba(255,255,255,.2); color:#fff; }
+
+  nav { background:var(--card); border-bottom:1px solid var(--rule); padding:0 40px; display:flex; gap:0; overflow-x:auto; position:sticky; top:0; z-index:50; }
+  nav a { display:inline-block; padding:12px 18px; font-size:13px; font-weight:600; text-decoration:none; color:#64748b; border-bottom:3px solid transparent; white-space:nowrap; }
+  nav a.calc { border-color:var(--calc); color:var(--calc); }
+  nav a.ion  { border-color:var(--ionic); color:var(--ionic); }
+  nav a.cov  { border-color:var(--cov); color:var(--cov); }
+  nav a.met  { border-color:var(--met); color:var(--met); }
+
+  main { max-width:1100px; margin:0 auto; padding:40px 24px 80px; }
+  .section { margin-bottom:56px; scroll-margin-top:90px; }
+  .sec-hdr { display:flex; align-items:center; gap:14px; margin-bottom:20px; padding-bottom:10px; border-bottom:2px solid var(--rule); }
+  .badge { font-family:'Space Grotesk',sans-serif; font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; padding:4px 12px; border-radius:4px; white-space:nowrap; }
+  .b-calc { background:var(--calc-light); color:var(--calc); }
+  .b-ion  { background:var(--ionic-light); color:var(--ionic); }
+  .b-cov  { background:var(--cov-light); color:var(--cov); }
+  .b-met  { background:var(--met-light); color:var(--met); }
+  .sec-title { font-size:20px; font-weight:700; }
+
+  .cards { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:16px; margin-bottom:20px; }
+  .card { background:var(--card); border:1px solid var(--rule); border-radius:10px; padding:18px 20px; }
+  .card.i-card { border-left:4px solid var(--ionic); }
+  .card.c-card { border-left:4px solid var(--cov); }
+  .card.m-card { border-left:4px solid var(--met); }
+  .card.k-card { border-left:4px solid var(--calc); }
+  .card-title { font-weight:700; font-size:13px; margin-bottom:10px; display:flex; align-items:center; gap:8px; }
+  .card ul { padding-left:16px; }
+  .card ul li { margin-bottom:5px; font-size:13px; }
+  .sub { font-size:11px; color:#64748b; margin-top:3px; }
+
+  .warn { background:#fff7ed; border:1px solid #fed7aa; border-left:4px solid var(--accent); border-radius:8px; padding:14px 18px; margin:16px 0; font-size:13px; }
+  .warn strong { color:var(--accent); display:block; margin-bottom:4px; }
+  .warn ul { padding-left:18px; }
+  .warn ul li { margin-bottom:4px; }
+
+  .tbl-wrap { overflow-x:auto; margin:16px 0; }
+  table { width:100%; border-collapse:collapse; font-size:13px; background:var(--card); border-radius:10px; overflow:hidden; box-shadow:0 1px 3px rgba(0,0,0,.06); }
+  thead tr { background:var(--ink); color:#fff; }
+  thead th { padding:11px 14px; text-align:left; font-weight:600; font-size:12px; }
+  tbody tr:nth-child(even) { background:#f8f8f8; }
+  tbody td { padding:10px 14px; border-bottom:1px solid var(--rule); vertical-align:top; }
+  tbody tr:last-child td { border-bottom:none; }
+  .yes { color:#16a34a; font-weight:700; } .no { color:#dc2626; font-weight:700; } .maybe { color:#d97706; font-weight:700; }
+
+  .formula-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:12px; }
+  .formula-box { background:var(--card); border:1px solid var(--rule); border-radius:8px; padding:14px 16px; text-align:center; }
+  .formula-box .f { font-family:'Space Grotesk',monospace; font-size:20px; font-weight:700; color:var(--calc); margin-bottom:4px; }
+  .formula-box .fl { font-size:12px; color:#64748b; }
+
+  footer { text-align:center; padding:24px; font-size:12px; color:#94a3b8; border-top:1px solid var(--rule); }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="eyebrow">F3 Chemistry · Term 2</div>
+    <h1>Knowledge <span>Summary</span></h1>
+  </div>
+  <div class="pills">
+    <span class="pill">Ch 5–6 Calculations</span>
+    <span class="pill">Ch 7 Ionic</span>
+    <span class="pill">Ch 8 Covalent</span>
+    <span class="pill">Ch 9 Metallic</span>
+  </div>
+</header>
+
+<nav>
+  <a href="#calc" class="calc">⚗ Calculations</a>
+  <a href="#ionic" class="ion">⬡ Ionic Bonding</a>
+  <a href="#covalent" class="cov">◉ Covalent Bonding</a>
+  <a href="#metallic" class="met">◈ Metallic Bonding</a>
+</nav>
+
+<main>
+
+<!-- ── Ch 5–6 ── -->
+<section class="section" id="calc">
+  <div class="sec-hdr">
+    <span class="badge b-calc">Ch 5–6</span>
+    <h2 class="sec-title">Chemical Formulae, Equations &amp; Calculations</h2>
+  </div>
+  <div class="formula-grid" style="margin-bottom:20px;">
+    <div class="formula-box"><div class="f">n = m / M</div><div class="fl">moles = mass ÷ molar mass<br>units: mol, g, g/mol</div></div>
+    <div class="formula-box"><div class="f">n = V / 24</div><div class="fl">Gas at RTP (25°C, 1 atm)<br>Molar volume = 24 dm³/mol</div></div>
+    <div class="formula-box"><div class="f">c = n / V</div><div class="fl">concentration = moles ÷ volume<br>units: mol/dm³, dm³</div></div>
+    <div class="formula-box"><div class="f">A<sub>r</sub> / M<sub>r</sub></div><div class="fl">Relative atomic/molecular mass<br>(no units)</div></div>
+  </div>
+  <div class="cards">
+    <div class="card k-card">
+      <div class="card-title">📝 Writing Ionic Formulae</div>
+      <ul>
+        <li>Use the <strong>cross-charge method</strong>: swap charges as subscripts</li>
+        <li>e.g. Ca²⁺ + Cl⁻ → CaCl₂</li>
+        <li>e.g. Al³⁺ + O²⁻ → Al₂O₃</li>
+        <li>Always reduce to simplest ratio</li>
+        <li>Polyatomic ions need brackets: Ca(NO₃)₂</li>
+      </ul>
+    </div>
+    <div class="card k-card">
+      <div class="card-title">⚖️ Balancing Equations</div>
+      <ul>
+        <li>Write the unbalanced equation first</li>
+        <li>Balance the most complex molecule first</li>
+        <li>Balance H₂O last (if present)</li>
+        <li>Check atom counts on both sides</li>
+        <li>Add state symbols: (s) (l) (g) (aq)</li>
+      </ul>
+    </div>
+    <div class="card k-card">
+      <div class="card-title">🔢 Mole Calculation Steps</div>
+      <ul>
+        <li>Write the balanced equation</li>
+        <li>Identify the mole ratio</li>
+        <li>Calculate moles of known substance</li>
+        <li>Convert using mole ratio</li>
+        <li>Convert to required units (g / dm³)</li>
+      </ul>
+    </div>
+    <div class="card k-card">
+      <div class="card-title">🚦 Limiting Reagent</div>
+      <ul>
+        <li>Calculate moles of each reactant</li>
+        <li>Divide each by its mole ratio coefficient</li>
+        <li>The <strong>smaller</strong> value = limiting reagent</li>
+        <li>Use limiting reagent to calculate product</li>
+      </ul>
+    </div>
+  </div>
+  <div class="warn">
+    <strong>⚠ Common Mistakes</strong>
+    <ul>
+      <li>Molar volume at RTP = <strong>24 dm³/mol</strong>; at STP (0°C) = 22.4 dm³/mol</li>
+      <li>Concentration formula: volume must be in <strong>dm³</strong> (1000 cm³ = 1 dm³)</li>
+      <li>Polyatomic ions need brackets in formulas: Ca(NO₃)₂ not CaNO₃₂</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ── Ch 7 Ionic ── -->
+<section class="section" id="ionic">
+  <div class="sec-hdr">
+    <span class="badge b-ion">Ch 7</span>
+    <h2 class="sec-title">Ionic Bonding</h2>
+  </div>
+  <div class="cards">
+    <div class="card i-card">
+      <div class="card-title">⚡ How It Forms</div>
+      <ul>
+        <li><strong>Metal</strong> loses electrons → cation (+)</li>
+        <li><strong>Non-metal</strong> gains electrons → anion (−)</li>
+        <li>Electrostatic attraction between oppositely charged ions</li>
+        <li>Forms a <strong>giant ionic lattice</strong></li>
+      </ul>
+    </div>
+    <div class="card i-card">
+      <div class="card-title">🏗️ Structure</div>
+      <ul>
+        <li>Giant ionic lattice structure</li>
+        <li>Each ion surrounded by <strong>oppositely charged</strong> ions</li>
+        <li>e.g. NaCl: each Na⁺ surrounded by 6 Cl⁻ (co-ordination no. = 6)</li>
+        <li>No discrete molecules</li>
+      </ul>
+    </div>
+    <div class="card i-card">
+      <div class="card-title">🌡️ Melting Point</div>
+      <ul>
+        <li><strong>High</strong> melting and boiling points</li>
+        <li>Reason: <em>strong electrostatic attraction between oppositely charged ions</em></li>
+        <li>Requires large amounts of energy to overcome</li>
+        <li>Higher charge → stronger attraction → higher melting point</li>
+        <li class="sub">e.g. CaO (Ca²⁺/O²⁻) has higher m.p. than NaCl (Na⁺/Cl⁻)</li>
+      </ul>
+    </div>
+    <div class="card i-card">
+      <div class="card-title">💡 Electrical Conductivity</div>
+      <ul>
+        <li>Solid state: <span class="no">❌ No</span> — ions fixed, cannot move</li>
+        <li>Molten: <span class="yes">✅ Yes</span> — mobile ions</li>
+        <li>Aqueous solution: <span class="yes">✅ Yes</span> — dissociated ions</li>
+      </ul>
+    </div>
+    <div class="card i-card">
+      <div class="card-title">💧 Solubility</div>
+      <ul>
+        <li>Most ionic compounds <strong>dissolve in water</strong></li>
+        <li>Polar water molecules attract the ions</li>
+        <li>Cation → attracted to O end (δ⁻)</li>
+        <li>Anion → attracted to H end (δ⁺)</li>
+        <li>Insoluble in organic solvents (e.g. hexane)</li>
+      </ul>
+    </div>
+    <div class="card i-card">
+      <div class="card-title">💔 Brittleness</div>
+      <ul>
+        <li>Ionic crystals are <strong>brittle</strong></li>
+        <li>When force is applied, layers shift</li>
+        <li>Same-charge ions align → repel each other</li>
+        <li>Crystal <strong>cracks / shatters</strong></li>
+        <li class="sub">(Contrast with metals: layers slide without repulsion)</li>
+      </ul>
+    </div>
+  </div>
+  <div class="warn">
+    <strong>⚠ Exam Traps</strong>
+    <ul>
+      <li>Conductivity requires <strong>mobile ions</strong> — solid ionic compounds cannot conduct</li>
+      <li>High melting point → use the phrase <em>strong electrostatic attraction between oppositely charged ions</em></li>
+      <li>CaO has higher m.p. than NaCl because Ca²⁺/O²⁻ have higher charges → stronger forces</li>
+      <li>Ionic solids are brittle due to <strong>repulsion</strong>, NOT because bonds are weak</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ── Ch 8 Covalent ── -->
+<section class="section" id="covalent">
+  <div class="sec-hdr">
+    <span class="badge b-cov">Ch 8</span>
+    <h2 class="sec-title">Covalent Bonding</h2>
+  </div>
+  <p style="margin-bottom:16px;font-size:13px;color:#475569;">Covalent substances fall into two very different categories:</p>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Property</th><th>Simple Molecular</th><th>Giant Covalent</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Melting point</strong></td><td><span class="no">Low</span> — weak intermolecular forces</td><td><span class="yes">Very high</span> — many strong covalent bonds</td></tr>
+        <tr><td><strong>Electrical conductivity</strong></td><td><span class="no">Does not conduct</span> — no free charges</td><td><span class="no">Does not conduct</span> (except graphite)</td></tr>
+        <tr><td><strong>Solubility in water</strong></td><td>Most are insoluble; polar molecules may dissolve</td><td><span class="no">Insoluble</span></td></tr>
+        <tr><td><strong>Examples</strong></td><td>H₂O, CO₂, HCl, Br₂, I₂, OF₂, N₂H₄</td><td>Diamond, Graphite, SiO₂, Cubic BN</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="cards" style="margin-top:20px;">
+    <div class="card c-card">
+      <div class="card-title">💎 Diamond</div>
+      <ul>
+        <li>Each C bonded to <strong>4 other C</strong> atoms</li>
+        <li>3D tetrahedral network</li>
+        <li>Very high melting point (~3550°C)</li>
+        <li><span class="no">Does not conduct</span> — no free electrons</li>
+        <li>Hardest natural substance</li>
+        <li>Insoluble in water AND organic solvents</li>
+      </ul>
+    </div>
+    <div class="card c-card">
+      <div class="card-title">✏️ Graphite</div>
+      <ul>
+        <li>Each C bonded to <strong>3 other C</strong> atoms</li>
+        <li>Layered structure; weak forces <em>between</em> layers</li>
+        <li>High melting point</li>
+        <li><span class="yes">Conducts electricity</span> — delocalized electrons move within layers</li>
+        <li>Used as lubricant (layers can slide)</li>
+      </ul>
+    </div>
+    <div class="card c-card">
+      <div class="card-title">🔩 Cubic Boron Nitride (BN)</div>
+      <ul>
+        <li>Diamond-like structure (see Quiz Q20)</li>
+        <li>B and N atoms alternate</li>
+        <li>Extremely hard (used as abrasive)</li>
+        <li><span class="no">Does not conduct</span></li>
+        <li><strong>Not brittle</strong> — brittleness is an ionic property</li>
+      </ul>
+    </div>
+    <div class="card c-card">
+      <div class="card-title">🟣 Iodine (I₂)</div>
+      <ul>
+        <li>Simple molecular structure</li>
+        <li><strong>Solid</strong> at room temperature (but low m.p.)</li>
+        <li><span class="no">Insoluble in water</span></li>
+        <li><span class="yes">Soluble in organic solvents</span> (e.g. hexane)</li>
+        <li>Does not conduct electricity</li>
+        <li class="sub">(Quiz Q10: option D "soluble in water and organic solvents" is WRONG)</li>
+      </ul>
+    </div>
+  </div>
+  <div class="warn">
+    <strong>⚠ Most Common Errors</strong>
+    <ul>
+      <li>Simple molecular low m.p. is due to <strong>weak intermolecular forces</strong> — NOT weak covalent bonds!</li>
+      <li><strong>OF₂ is simple molecular</strong>, NOT giant covalent (Quiz Q16)</li>
+      <li>Only graphite conducts among giant covalent substances</li>
+      <li>Iodine is <strong>insoluble in water</strong> but soluble in organic solvents</li>
+      <li>Diamond is insoluble in water AND organic solvents</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ── Ch 9 Metallic ── -->
+<section class="section" id="metallic">
+  <div class="sec-hdr">
+    <span class="badge b-met">Ch 9</span>
+    <h2 class="sec-title">Metallic Bonding</h2>
+  </div>
+  <div class="cards">
+    <div class="card m-card">
+      <div class="card-title">🔬 Structure</div>
+      <ul>
+        <li>Positive metal ions arranged in a lattice</li>
+        <li>Surrounded by a <strong>sea of delocalized electrons</strong></li>
+        <li>Strong electrostatic attraction between metal ions and electron sea</li>
+        <li>Orderly lattice arrangement</li>
+      </ul>
+    </div>
+    <div class="card m-card">
+      <div class="card-title">💡 Electrical Conductivity</div>
+      <ul>
+        <li>Solid: <span class="yes">✅ Yes</span></li>
+        <li>Molten: <span class="yes">✅ Yes</span></li>
+        <li>Reason: <strong>delocalized electrons</strong> can move freely</li>
+        <li class="sub">(Key difference from ionic: metals conduct in solid state!)</li>
+      </ul>
+    </div>
+    <div class="card m-card">
+      <div class="card-title">🌡️ Melting Point</div>
+      <ul>
+        <li>Generally <strong>high</strong> — strong metallic bonds</li>
+        <li>Exception: <strong>Mercury (Hg)</strong> is liquid at room temperature</li>
+        <li>Hg is still a metal (has delocalized electrons)</li>
+        <li>Hg has weaker metallic bonds than most metals</li>
+      </ul>
+    </div>
+    <div class="card m-card">
+      <div class="card-title">🔨 Malleability</div>
+      <ul>
+        <li><strong>Malleable</strong> and <strong>ductile</strong></li>
+        <li>Layers of ions can slide over each other</li>
+        <li>Delocalized electrons redistribute to maintain bonding</li>
+        <li>Unlike ionic: sliding does NOT cause same-charge repulsion</li>
+      </ul>
+    </div>
+  </div>
+  <div class="warn">
+    <strong>⚠ Mercury (Hg) — Frequently Examined!</strong>
+    <ul>
+      <li>Mercury is the only liquid metal at room temperature and pressure</li>
+      <li>Mercury(II) ions + delocalized electrons = <strong>metallic bonding</strong> (NOT molecular)</li>
+      <li>Mercury is <strong>NOT</strong> composed of discrete molecules (Quiz Q2 option (2) is wrong)</li>
+      <li>Mercury still conducts electricity (delocalized electrons)</li>
+    </ul>
+  </div>
+  <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>Metallic vs Ionic — Comparison</th><th>Metallic</th><th>Ionic</th></tr></thead>
+      <tbody>
+        <tr><td>Conducts in solid state</td><td><span class="yes">✅ Yes</span></td><td><span class="no">❌ No</span></td></tr>
+        <tr><td>Conducts when molten</td><td><span class="yes">✅ Yes</span></td><td><span class="yes">✅ Yes</span></td></tr>
+        <tr><td>Behaviour under force</td><td>Malleable (deforms)</td><td>Brittle (cracks)</td></tr>
+        <tr><td>Solubility in water</td><td><span class="maybe">Depends on metal</span></td><td><span class="yes">Most dissolve</span></td></tr>
+        <tr><td>Mobile charge carrier</td><td>Delocalized electrons</td><td>Ions (molten / aqueous)</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+</main>
+<footer>F3 Chemistry Term 2 · Knowledge Summary · Tutoring Resource</footer>
+</body>
+</html>

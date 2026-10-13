@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Form 3 — Waves & EM Spectrum: Worked Examples</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap');
+
+  :root {
+    --bg: #f4f4f0;
+    --white: #ffffff;
+    --ink: #18181b;
+    --ink2: #3f3f46;
+    --ink3: #71717a;
+    --border: #e4e4e7;
+    --border2: #d4d4d8;
+
+    --blue: #1d4ed8;
+    --blue-light: #eff6ff;
+    --blue-mid: #bfdbfe;
+
+    --green: #15803d;
+    --green-light: #f0fdf4;
+    --green-mid: #86efac;
+
+    --amber: #b45309;
+    --amber-light: #fffbeb;
+    --amber-mid: #fcd34d;
+
+    --red: #b91c1c;
+    --red-light: #fef2f2;
+    --red-mid: #fca5a5;
+
+    --purple: #7c3aed;
+    --purple-light: #f5f3ff;
+    --purple-mid: #c4b5fd;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    padding: 20px 16px 48px;
+    max-width: 880px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: var(--ink);
+    border-radius: 16px;
+    padding: 22px 26px 18px;
+    margin-bottom: 24px;
+    color: #fff;
+  }
+  .header h1 { font-size: 19px; font-weight: 700; margin-bottom: 4px; }
+  .header p  { font-size: 12px; color: #a1a1aa; }
+  .pills { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+  .pill {
+    font-size: 11px; font-weight: 600;
+    padding: 3px 11px; border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.18);
+    color: #e4e4e7;
+  }
+  .pill.hi { background: rgba(255,255,255,0.12); color: #fff; }
+
+  /* ── CHAPTER BAND ── */
+  .ch-band {
+    border-radius: 12px;
+    padding: 14px 18px;
+    margin: 26px 0 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .ch-band-green  { background: var(--green-light);  border: 1px solid var(--green-mid); }
+  .ch-band-amber  { background: var(--amber-light);  border: 1px solid var(--amber-mid); }
+  .ch-icon { font-size: 22px; }
+  .ch-title { font-size: 15px; font-weight: 700; }
+  .ch-sub   { font-size: 12px; color: var(--ink3); margin-top: 2px; }
+  .ch-band-green .ch-title { color: var(--green); }
+  .ch-band-amber .ch-title { color: var(--amber); }
+
+  /* ── CONCEPT BOX ── */
+  .concept {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 14px;
+    overflow: hidden;
+  }
+  .concept-head {
+    padding: 10px 16px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .ch-green .concept-head { background: var(--green-light);  color: var(--green);  border-bottom: 1px solid var(--green-mid); }
+  .ch-amber .concept-head { background: var(--amber-light);  color: var(--amber);  border-bottom: 1px solid var(--amber-mid); }
+  .ch-blue  .concept-head { background: var(--blue-light);   color: var(--blue);   border-bottom: 1px solid var(--blue-mid);  }
+  .concept-body { padding: 14px 16px; }
+
+  /* ── FORMULA STRIP ── */
+  .fstrip {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 8px 0;
+  }
+  .fbox {
+    background: var(--bg);
+    border: 1px solid var(--border2);
+    border-radius: 8px;
+    padding: 8px 14px;
+    text-align: center;
+  }
+  .fbox .feq {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--ink);
+    display: block;
+  }
+  .fbox .flab {
+    font-size: 10px;
+    color: var(--ink3);
+    margin-top: 3px;
+    display: block;
+  }
+
+  /* ── WORKED EXAMPLE ── */
+  .example {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 12px;
+    overflow: hidden;
+  }
+  .example-head {
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg);
+  }
+  .ex-num {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 9px;
+    border-radius: 5px;
+    letter-spacing: .3px;
+  }
+  .ex-num-green  { background: var(--green-mid);  color: #14532d; }
+  .ex-num-amber  { background: var(--amber-mid);  color: #78350f; }
+  .ex-num-blue   { background: var(--blue-mid);   color: #1e3a8a; }
+  .ex-title { font-size: 13px; font-weight: 600; color: var(--ink2); }
+  .ex-marks { font-size: 11px; color: var(--ink3); margin-left: auto; white-space: nowrap; }
+
+  .ex-q {
+    padding: 13px 16px 6px;
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: var(--ink);
+    border-bottom: 1px solid var(--border);
+  }
+  .ex-q em { color: var(--ink3); font-style: normal; font-size: 12px; }
+
+  /* step-by-step solution */
+  .solution { padding: 12px 16px 14px; }
+  .sol-label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    color: var(--green);
+    margin-bottom: 8px;
+  }
+  .step {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 8px;
+    font-size: 13px;
+    line-height: 1.65;
+    align-items: flex-start;
+  }
+  .step-num {
+    min-width: 22px;
+    height: 22px;
+    background: var(--green-light);
+    border: 1px solid var(--green-mid);
+    border-radius: 50%;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .step-num.amber { background: var(--amber-light); border-color: var(--amber-mid); color: var(--amber); }
+  .step-body { color: var(--ink2); }
+  .step-body code {
+    font-family: 'JetBrains Mono', monospace;
+    background: var(--bg);
+    border: 1px solid var(--border2);
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-size: 12.5px;
+    color: var(--ink);
+  }
+  .step-body .ans {
+    font-weight: 700;
+    color: var(--green);
+    background: var(--green-light);
+    padding: 1px 7px;
+    border-radius: 4px;
+  }
+  .step-body .warn {
+    color: var(--amber);
+    font-weight: 600;
+  }
+
+  /* ── PRACTICE QUESTION ── */
+  .practice {
+    background: var(--blue-light);
+    border: 1px solid var(--blue-mid);
+    border-radius: 12px;
+    margin-bottom: 14px;
+    overflow: hidden;
+  }
+  .practice-head {
+    padding: 9px 16px;
+    background: var(--blue);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .practice-body { padding: 13px 16px 10px; font-size: 13.5px; line-height: 1.7; color: var(--ink); }
+  .practice-body em { color: var(--ink3); font-style: normal; font-size: 12px; }
+
+  .ws {
+    margin-top: 10px;
+    border: 1.5px dashed var(--blue-mid);
+    border-radius: 8px;
+    min-height: 60px;
+    padding: 8px 12px;
+  }
+  .ws-label { font-size: 10px; font-weight: 700; color: #93c5fd; text-transform: uppercase; letter-spacing: .4px; margin-bottom: 3px; }
+
+  /* answer toggle for practice */
+  .pans-btn {
+    margin-top: 10px;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 5px 14px;
+    border-radius: 6px;
+    border: 1px solid var(--blue-mid);
+    background: #fff;
+    color: var(--blue);
+    cursor: pointer;
+    font-family: 'Inter', Arial, sans-serif;
+    transition: all .15s;
+  }
+  .pans-btn:hover { background: var(--blue); color: #fff; }
+  .pans-box {
+    display: none;
+    margin-top: 10px;
+    padding: 11px 14px;
+    background: var(--green-light);
+    border: 1px solid var(--green-mid);
+    border-radius: 8px;
+    font-size: 13px;
+    line-height: 1.75;
+    color: #14532d;
+  }
+  .pans-box.show { display: block; }
+  .pans-box code {
+    font-family: 'JetBrains Mono', monospace;
+    background: rgba(0,0,0,0.06);
+    padding: 1px 6px; border-radius: 3px; font-size: 12px;
+  }
+
+  /* ── TABLE ── */
+  table { width: 100%; border-collapse: collapse; font-size: 13px; margin: 8px 0; }
+  th {
+    background: var(--bg); padding: 8px 11px;
+    font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .4px;
+    color: var(--ink2); border-bottom: 1.5px solid var(--border2); text-align: left;
+  }
+  td { padding: 8px 11px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+
+  /* ── KEY FACT BOX ── */
+  .keyfact {
+    border-radius: 9px;
+    padding: 11px 14px;
+    font-size: 13px;
+    line-height: 1.7;
+    margin: 8px 0;
+    border: 1px solid;
+  }
+  .keyfact-green  { background: var(--green-light);  border-color: var(--green-mid);  color: #14532d; }
+  .keyfact-amber  { background: var(--amber-light);  border-color: var(--amber-mid);  color: #78350f; }
+  .keyfact-purple { background: var(--purple-light); border-color: var(--purple-mid); color: #4c1d95; }
+  .keyfact b { font-weight: 700; }
+
+  /* ── EM SPECTRUM VISUAL ── */
+  .em-bar { margin: 10px 0 6px; }
+
+  .divider { height: 1px; background: var(--border); margin: 28px 0; }
+
+  @media print {
+    body { background: #fff; }
+    .ws { min-height: 90px; }
+    .pans-btn, .pans-box { display: none !important; }
+    .example, .practice, .concept { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <h1>Form 3 Physics — Worked Examples &amp; Practice</h1>
+  <p>Ch.10 Wave Properties &nbsp;·&nbsp; Ch.11 Electromagnetic Spectrum &nbsp;·&nbsp; Study each example, then attempt the practice question.</p>
+  <div class="pills">
+    <div class="pill hi">Ch.10 Waves</div>
+    <div class="pill hi">Ch.11 EM Spectrum</div>
+    <div class="pill">Worked examples + Practice</div>
+    <div class="pill">Answers included</div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     CHAPTER 10
+═══════════════════════════════════════ -->
+<div class="ch-band ch-band-green">
+  <div class="ch-icon">🌊</div>
+  <div>
+    <div class="ch-title">Chapter 10 — Properties of Waves</div>
+    <div class="ch-sub">Transverse &amp; longitudinal · Amplitude · Wavelength · Frequency · Period · Wave equation v = fλ</div>
+  </div>
+</div>
+
+<!-- CONCEPT: Types of waves -->
+<div class="concept ch-green">
+  <div class="concept-head">📖 Concept 1 — Types of Waves</div>
+  <div class="concept-body">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:10px">
+      <div class="keyfact keyfact-green">
+        <b>Transverse wave</b><br>
+        Particles vibrate <b>perpendicular (⊥)</b> to direction of travel.<br>
+        Has <b>crests</b> and <b>troughs</b>.<br>
+        Examples: light, water waves, all EM waves.
+      </div>
+      <div class="keyfact keyfact-amber">
+        <b>Longitudinal wave</b><br>
+        Particles vibrate <b>parallel (∥)</b> to direction of travel.<br>
+        Has <b>compressions</b> and <b>rarefactions</b>.<br>
+        Example: <b>sound</b>.
+      </div>
+    </div>
+    <!-- transverse diagram -->
+    <svg width="100%" viewBox="0 0 520 80" style="display:block;margin-bottom:10px">
+      <text font-size="11" fill="#15803d" font-weight="700" x="4" y="14">Transverse:</text>
+      <line x1="4" y1="40" x2="510" y2="40" stroke="#d1d5db" stroke-width="1" stroke-dasharray="4 3"/>
+      <path d="M60,40 Q85,15 110,40 Q135,65 160,40 Q185,15 210,40 Q235,65 260,40 Q285,15 310,40 Q335,65 360,40 Q385,15 410,40 Q435,65 460,40" fill="none" stroke="#15803d" stroke-width="2.2"/>
+      <text font-size="10" fill="#15803d" x="70" y="12">crest</text>
+      <text font-size="10" fill="#15803d" x="143" y="77">trough</text>
+      <line x1="110" y1="15" x2="310" y2="15" stroke="#15803d" stroke-width="1" stroke-dasharray="3 3"/>
+      <text font-size="10" fill="#15803d" x="208" y="12" text-anchor="middle">← wavelength λ →</text>
+      <line x1="110" y1="16" x2="110" y2="39" stroke="#1d4ed8" stroke-width="1.5"/>
+      <text font-size="10" fill="#1d4ed8" x="116" y="32">A</text>
+      <text font-size="10" fill="#888" x="490" y="43">→ wave travels this way</text>
+    </svg>
+    <!-- longitudinal diagram -->
+    <svg width="100%" viewBox="0 0 520 55">
+      <text font-size="11" fill="#b45309" font-weight="700" x="4" y="14">Longitudinal (sound):</text>
+      <!-- compressions -->
+      <rect x="60"  y="20" width="8"  height="22" rx="2" fill="#b45309" opacity=".8"/>
+      <rect x="75"  y="20" width="4"  height="22" rx="2" fill="#b45309" opacity=".4"/>
+      <rect x="95"  y="20" width="8"  height="22" rx="2" fill="#b45309" opacity=".8"/>
+      <rect x="110" y="20" width="4"  height="22" rx="2" fill="#b45309" opacity=".4"/>
+      <rect x="130" y="20" width="8"  height="22" rx="2" fill="#b45309" opacity=".8"/>
+      <rect x="145" y="20" width="4"  height="22" rx="2" fill="#b45309" opacity=".4"/>
+      <rect x="165" y="20" width="8"  height="22" rx="2" fill="#b45309" opacity=".8"/>
+      <rect x="180" y="20" width="4"  height="22" rx="2" fill="#b45309" opacity=".4"/>
+      <rect x="200" y="20" width="8"  height="22" rx="2" fill="#b45309" opacity=".8"/>
+      <rect x="215" y="20" width="4"  height="22" rx="2" fill="#b45309" opacity=".4"/>
+      <rect x="235" y="20" width="8"  height="22" rx="2" fill="#b45309" opacity=".8"/>
+      <rect x="250" y="20" width="4"  height="22" rx="2" fill="#b45309" opacity=".4"/>
+      <text font-size="10" fill="#b45309" x="68"  y="52">C</text>
+      <text font-size="10" fill="#b45309" x="82"  y="52">R</text>
+      <text font-size="10" fill="#b45309" x="98"  y="52">C</text>
+      <text font-size="10" fill="#b45309" x="113" y="52">R</text>
+      <text font-size="10" fill="#888" x="280" y="33">→ wave travels this way</text>
+      <text font-size="10" fill="#888" x="280" y="48">(C=compression, R=rarefaction)</text>
+    </svg>
+  </div>
+</div>
+
+<!-- CONCEPT: Wave anatomy -->
+<div class="concept ch-green">
+  <div class="concept-head">📐 Concept 2 — Wave Quantities &amp; Formulas</div>
+  <div class="concept-body">
+    <div style="font-size:13px;color:var(--ink2);margin-bottom:10px;line-height:1.7">
+      <b>Amplitude (A)</b>: maximum displacement from rest position → metres (m)<br>
+      <b>Wavelength (λ)</b>: distance from one crest to the next → metres (m)<br>
+      <b>Frequency (f)</b>: number of complete waves per second → Hertz (Hz)<br>
+      <b>Period (T)</b>: time for one complete wave → seconds (s)<br>
+      <b>Wave speed (v)</b>: how fast the wave moves → m/s
+    </div>
+    <div class="fstrip">
+      <div class="fbox">
+        <span class="feq">v = f × λ</span>
+        <span class="flab">wave equation</span>
+      </div>
+      <div class="fbox">
+        <span class="feq">T = 1 ÷ f</span>
+        <span class="flab">period ↔ frequency</span>
+      </div>
+      <div class="fbox">
+        <span class="feq">f = v ÷ λ</span>
+        <span class="flab">find frequency</span>
+      </div>
+      <div class="fbox">
+        <span class="feq">λ = v ÷ f</span>
+        <span class="flab">find wavelength</span>
+      </div>
+    </div>
+    <div class="keyfact keyfact-amber" style="margin-top:10px">
+      ⚠️ <b>Common mistake:</b> Amplitude ≠ crest-to-trough height. Amplitude is only <b>half</b> of that (rest position to crest).
+    </div>
+  </div>
+</div>
+
+<!-- WORKED EXAMPLE 1 -->
+<div class="example">
+  <div class="example-head">
+    <div class="ex-num ex-num-green">EXAMPLE 1</div>
+    <div class="ex-title">Finding frequency and period from wave equation</div>
+    <div class="ex-marks">Ch.10 Basics</div>
+  </div>
+  <div class="ex-q">
+    A water wave travels at <b>12 m/s</b> and has a wavelength of <b>4 m</b>.<br>
+    (a) Find the frequency.&nbsp;&nbsp;(b) Find the period.
+  </div>
+  <div class="solution">
+    <div class="sol-label">✏️ SOLUTION — Step by Step</div>
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body"><b>Write down what you know:</b><br>v = 12 m/s &nbsp;·&nbsp; λ = 4 m &nbsp;·&nbsp; f = ? &nbsp;·&nbsp; T = ?</div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body"><b>Part (a) — find frequency:</b><br>Use <code>v = f × λ</code>, rearrange to <code>f = v ÷ λ</code><br>
+      <code>f = 12 ÷ 4 =</code> <span class="ans">3 Hz</span></div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body"><b>Part (b) — find period:</b><br>
+      <code>T = 1 ÷ f = 1 ÷ 3 =</code> <span class="ans">0.33 s</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- PRACTICE 1 -->
+<div class="practice">
+  <div class="practice-head">✏️ Practice 1 — Try it yourself!</div>
+  <div class="practice-body">
+    A sound wave travels at <b>340 m/s</b> and has a wavelength of <b>0.5 m</b>.<br>
+    (a) Find the frequency of the wave. <em>(2 marks)</em><br>
+    (b) Find the period. <em>(2 marks)</em>
+    <div class="ws"><div class="ws-label">Working space</div></div>
+    <button class="pans-btn" onclick="tog(this)">▶ Show Answer</button>
+    <div class="pans-box">
+      (a) <code>f = v ÷ λ = 340 ÷ 0.5 =</code> <b>680 Hz</b><br>
+      (b) <code>T = 1 ÷ f = 1 ÷ 680 =</code> <b>0.00147 s</b> (= 1.47 × 10⁻³ s)
+    </div>
+  </div>
+</div>
+
+<!-- WORKED EXAMPLE 2 -->
+<div class="example">
+  <div class="example-head">
+    <div class="ex-num ex-num-green">EXAMPLE 2</div>
+    <div class="ex-title">Finding wavelength when medium changes</div>
+    <div class="ex-marks">Ch.10 Medium Change</div>
+  </div>
+  <div class="ex-q">
+    A sound wave in air has frequency <b>500 Hz</b> and speed <b>340 m/s</b>. The wave enters water where its speed increases to <b>1500 m/s</b>. The frequency does NOT change.<br>
+    (a) Find the wavelength in air.&nbsp;&nbsp;(b) Find the wavelength in water.
+  </div>
+  <div class="solution">
+    <div class="sol-label">✏️ SOLUTION — Step by Step</div>
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body"><b>Part (a) — wavelength in air:</b><br>
+      <code>λ = v ÷ f = 340 ÷ 500 =</code> <span class="ans">0.68 m</span></div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body"><b>Part (b) — wavelength in water:</b><br>
+      Frequency stays the same (500 Hz), but speed changes.<br>
+      <code>λ = v ÷ f = 1500 ÷ 500 =</code> <span class="ans">3 m</span></div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body"><b class="warn">Key rule to remember:</b> When a wave enters a new medium, <b>frequency stays the same</b>. Speed and wavelength change together (both increase or both decrease).</div>
+    </div>
+  </div>
+</div>
+
+<!-- PRACTICE 2 -->
+<div class="practice">
+  <div class="practice-head">✏️ Practice 2 — Try it yourself!</div>
+  <div class="practice-body">
+    A light wave in a vacuum has frequency <b>6 × 10¹⁴ Hz</b> and speed <b>3 × 10⁸ m/s</b>. It enters glass where its speed drops to <b>2 × 10⁸ m/s</b>. Frequency does NOT change.<br>
+    (a) Find the wavelength in vacuum. <em>(2 marks)</em><br>
+    (b) Find the wavelength in glass. <em>(2 marks)</em>
+    <div class="ws"><div class="ws-label">Working space</div></div>
+    <button class="pans-btn" onclick="tog(this)">▶ Show Answer</button>
+    <div class="pans-box">
+      (a) <code>λ = v ÷ f = (3×10⁸) ÷ (6×10¹⁴) =</code> <b>5 × 10⁻⁷ m</b> (= 500 nm, visible light)<br>
+      (b) <code>λ = v ÷ f = (2×10⁸) ÷ (6×10¹⁴) =</code> <b>3.33 × 10⁻⁷ m</b><br>
+      Notice: speed decreased → wavelength decreased too.
+    </div>
+  </div>
+</div>
+
+<!-- WORKED EXAMPLE 3 -->
+<div class="example">
+  <div class="example-head">
+    <div class="ex-num ex-num-green">EXAMPLE 3</div>
+    <div class="ex-title">Reading a wave diagram — find amplitude, wavelength, frequency</div>
+    <div class="ex-marks">Ch.10 Diagram</div>
+  </div>
+  <div class="ex-q">
+    The wave diagram below shows a wave. The wave speed is 6 m/s.<br>
+    Find: (a) amplitude &nbsp; (b) wavelength &nbsp; (c) frequency
+    <svg width="100%" viewBox="0 0 500 140" style="display:block;margin:10px 0">
+      <!-- axes -->
+      <line x1="30" y1="10" x2="30" y2="125" stroke="#333" stroke-width="1.5"/>
+      <line x1="30" y1="70" x2="480" y2="70" stroke="#333" stroke-width="1.5"/>
+      <!-- y labels -->
+      <text font-size="10" fill="#555" x="26" y="38" text-anchor="end">+4 m</text>
+      <text font-size="10" fill="#555" x="26" y="73" text-anchor="end">0</text>
+      <text font-size="10" fill="#555" x="26" y="108" text-anchor="end">−4 m</text>
+      <!-- x labels -->
+      <text font-size="10" fill="#555" x="30"  y="136" text-anchor="middle">0</text>
+      <text font-size="10" fill="#555" x="110" y="136" text-anchor="middle">2</text>
+      <text font-size="10" fill="#555" x="190" y="136" text-anchor="middle">4</text>
+      <text font-size="10" fill="#555" x="270" y="136" text-anchor="middle">6</text>
+      <text font-size="10" fill="#555" x="350" y="136" text-anchor="middle">8</text>
+      <text font-size="10" fill="#555" x="430" y="136" text-anchor="middle">10</text>
+      <text font-size="10" fill="#555" x="460" y="136">x (m)</text>
+      <!-- gridlines -->
+      <line x1="110" y1="12" x2="110" y2="125" stroke="#eee" stroke-width="1"/>
+      <line x1="190" y1="12" x2="190" y2="125" stroke="#eee" stroke-width="1"/>
+      <line x1="270" y1="12" x2="270" y2="125" stroke="#eee" stroke-width="1"/>
+      <line x1="350" y1="12" x2="350" y2="125" stroke="#eee" stroke-width="1"/>
+      <line x1="430" y1="12" x2="430" y2="125" stroke="#eee" stroke-width="1"/>
+      <line x1="30" y1="35" x2="478" y2="35" stroke="#eee" stroke-width="1"/>
+      <line x1="30" y1="105" x2="478" y2="105" stroke="#eee" stroke-width="1"/>
+      <!-- wave: 1 full wave = 8m → 0 to 8m, then partial -->
+      <path d="M30,70 Q70,35 110,70 Q150,105 190,70 Q230,35 270,70 Q310,105 350,70 Q390,35 430,70 Q460,92 478,80" fill="none" stroke="#15803d" stroke-width="2.5"/>
+      <!-- amplitude annotation -->
+      <line x1="110" y1="36" x2="110" y2="69" stroke="#1d4ed8" stroke-width="1.5" stroke-dasharray="4 2"/>
+      <text font-size="11" fill="#1d4ed8" x="116" y="56" font-weight="600">A = ?</text>
+      <!-- wavelength annotation -->
+      <line x1="30"  y1="20" x2="190" y2="20" stroke="#b45309" stroke-width="1.5"/>
+      <line x1="30"  y1="15" x2="30"  y2="25" stroke="#b45309" stroke-width="1.5"/>
+      <line x1="190" y1="15" x2="190" y2="25" stroke="#b45309" stroke-width="1.5"/>
+      <text font-size="11" fill="#b45309" x="110" y="17" text-anchor="middle" font-weight="600">λ = ?</text>
+    </svg>
+  </div>
+  <div class="solution">
+    <div class="sol-label">✏️ SOLUTION — Step by Step</div>
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body"><b>Part (a) — Amplitude:</b><br>
+      From rest position (0) to crest = 4 m. <span class="ans">A = 4 m</span><br>
+      <span class="warn">NOT 8 m — that would be crest to trough (= 2A)</span></div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body"><b>Part (b) — Wavelength:</b><br>
+      Crest to crest = from x = 2 m to x = 6 m... wait, let's read from start.<br>
+      The wave repeats every 4 m (crest at x=2, next crest at x=6). Actually from the graph, one full cycle takes 4 m (x=0 to x=4). <span class="ans">λ = 4 m</span></div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body"><b>Part (c) — Frequency:</b><br>
+      <code>f = v ÷ λ = 6 ÷ 4 =</code> <span class="ans">1.5 Hz</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- PRACTICE 3 -->
+<div class="practice">
+  <div class="practice-head">✏️ Practice 3 — Try it yourself!</div>
+  <div class="practice-body">
+    A wave diagram shows: amplitude = 3 m, wavelength = 5 m. The wave speed is 20 m/s.<br>
+    (a) Find the frequency. <em>(2 marks)</em><br>
+    (b) Find the period. <em>(2 marks)</em><br>
+    (c) If the amplitude doubles, what happens to the wave speed? <em>(1 mark)</em>
+    <div class="ws"><div class="ws-label">Working space</div></div>
+    <button class="pans-btn" onclick="tog(this)">▶ Show Answer</button>
+    <div class="pans-box">
+      (a) <code>f = v ÷ λ = 20 ÷ 5 =</code> <b>4 Hz</b><br>
+      (b) <code>T = 1 ÷ f = 1 ÷ 4 =</code> <b>0.25 s</b><br>
+      (c) <b>Wave speed does NOT change.</b> Speed is determined by the medium, not the amplitude. Greater amplitude only means more energy.
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     CHAPTER 11
+═══════════════════════════════════════ -->
+<div class="divider"></div>
+<div class="ch-band ch-band-amber">
+  <div class="ch-icon">📡</div>
+  <div>
+    <div class="ch-title">Chapter 11 — The Electromagnetic Spectrum</div>
+    <div class="ch-sub">All 7 types · Order by frequency · Properties · Uses · Dangers · EM wave calculations</div>
+  </div>
+</div>
+
+<!-- CONCEPT: EM Spectrum overview -->
+<div class="concept ch-amber">
+  <div class="concept-head">📖 Concept 3 — The 7 Types of EM Waves (in order)</div>
+  <div class="concept-body">
+    <!-- EM spectrum bar -->
+    <svg width="100%" viewBox="0 0 620 72" class="em-bar">
+      <defs>
+        <linearGradient id="emgrad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%"   stop-color="#1d4ed8" stop-opacity=".15"/>
+          <stop offset="100%" stop-color="#b91c1c" stop-opacity=".25"/>
+        </linearGradient>
+      </defs>
+      <rect x="0" y="18" width="620" height="30" rx="6" fill="url(#emgrad)" stroke="#e4e4e7"/>
+      <text font-size="10.5" fill="#1d4ed8" font-weight="700" x="42"  y="37" text-anchor="middle">Radio</text>
+      <text font-size="10.5" fill="#0891b2" font-weight="700" x="130" y="37" text-anchor="middle">Micro</text>
+      <text font-size="10.5" fill="#15803d" font-weight="700" x="218" y="37" text-anchor="middle">Infrared</text>
+      <text font-size="10.5" fill="#7c3aed" font-weight="700" x="310" y="37" text-anchor="middle">Visible</text>
+      <text font-size="10.5" fill="#b45309" font-weight="700" x="400" y="37" text-anchor="middle">UV</text>
+      <text font-size="10.5" fill="#dc2626" font-weight="700" x="490" y="37" text-anchor="middle">X-rays</text>
+      <text font-size="10.5" fill="#991b1b" font-weight="700" x="574" y="37" text-anchor="middle">Gamma</text>
+      <!-- dividers -->
+      <line x1="88"  y1="18" x2="88"  y2="48" stroke="#d4d4d8" stroke-width="1"/>
+      <line x1="174" y1="18" x2="174" y2="48" stroke="#d4d4d8" stroke-width="1"/>
+      <line x1="262" y1="18" x2="262" y2="48" stroke="#d4d4d8" stroke-width="1"/>
+      <line x1="354" y1="18" x2="354" y2="48" stroke="#d4d4d8" stroke-width="1"/>
+      <line x1="440" y1="18" x2="440" y2="48" stroke="#d4d4d8" stroke-width="1"/>
+      <line x1="530" y1="18" x2="530" y2="48" stroke="#d4d4d8" stroke-width="1"/>
+      <!-- arrow low→high freq -->
+      <line x1="0" y1="62" x2="618" y2="62" stroke="#71717a" stroke-width="1.2" marker-end="url(#arr_em)"/>
+      <defs><marker id="arr_em" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#71717a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+      <text font-size="10" fill="#71717a" x="2"   y="60">Low f, long λ</text>
+      <text font-size="10" fill="#71717a" x="618" y="60" text-anchor="end">High f, short λ</text>
+    </svg>
+
+    <div class="keyfact keyfact-purple" style="margin-top:6px">
+      🧠 <b>Mnemonic:</b> <b>R</b>ather <b>M</b>ighty <b>I</b>ntelligent <b>V</b>ery <b>U</b>seful <b>X</b>-tra <b>G</b>reat<br>
+      (Radio · Microwave · Infrared · Visible · UV · X-rays · Gamma)
+    </div>
+  </div>
+</div>
+
+<!-- CONCEPT: Properties all EM waves share -->
+<div class="concept ch-amber">
+  <div class="concept-head">📖 Concept 4 — Properties ALL EM Waves Share</div>
+  <div class="concept-body">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px">
+      <div class="keyfact keyfact-amber">✅ Travel at <b>3 × 10⁸ m/s</b> in vacuum (speed of light)</div>
+      <div class="keyfact keyfact-amber">✅ Are <b>transverse</b> waves</div>
+      <div class="keyfact keyfact-amber">✅ Can travel through <b>vacuum</b> (no medium needed)</div>
+      <div class="keyfact keyfact-amber">✅ Transfer <b>energy</b></div>
+      <div class="keyfact keyfact-amber">✅ Obey wave equation: <b>c = f × λ</b></div>
+    </div>
+    <div class="keyfact keyfact-amber" style="margin-top:10px">
+      ❌ <b>Sound is NOT an EM wave</b> — it is longitudinal and needs a medium to travel.
+    </div>
+  </div>
+</div>
+
+<!-- CONCEPT: Uses & Dangers table -->
+<div class="concept ch-amber">
+  <div class="concept-head">📖 Concept 5 — Uses &amp; Dangers of Each EM Wave</div>
+  <div class="concept-body">
+    <table>
+      <tr><th>Wave</th><th>Uses</th><th>Dangers</th></tr>
+      <tr>
+        <td><b style="color:#1d4ed8">Radio</b></td>
+        <td>TV / radio broadcasting, Wi-Fi</td>
+        <td>Low risk at normal intensity</td>
+      </tr>
+      <tr>
+        <td><b style="color:#0891b2">Microwave</b></td>
+        <td>Cooking food, mobile phones, satellite communication</td>
+        <td>Heats internal body tissues (if absorbed)</td>
+      </tr>
+      <tr>
+        <td><b style="color:#15803d">Infrared</b></td>
+        <td>TV remote controls, thermal imaging cameras, heat lamps</td>
+        <td>Skin burns</td>
+      </tr>
+      <tr>
+        <td><b style="color:#7c3aed">Visible light</b></td>
+        <td>Human vision, photography, fibre optics</td>
+        <td>Very intense light can damage eyes</td>
+      </tr>
+      <tr>
+        <td><b style="color:#b45309">Ultraviolet (UV)</b></td>
+        <td>Sterilisation, detecting forged banknotes, sunbeds</td>
+        <td>Skin cancer, cataracts (eye damage), sunburn</td>
+      </tr>
+      <tr>
+        <td><b style="color:#dc2626">X-rays</b></td>
+        <td>Medical imaging (bones), airport security scanners</td>
+        <td>Ionising — cell &amp; DNA damage, cancer risk. Lead aprons used.</td>
+      </tr>
+      <tr>
+        <td><b style="color:#991b1b">Gamma (γ)</b></td>
+        <td>Cancer radiotherapy, sterilising medical/food equipment</td>
+        <td>Most penetrating — ionising, DNA damage, cancer at high doses</td>
+      </tr>
+    </table>
+    <div class="keyfact keyfact-amber" style="margin-top:10px">
+      ⚠️ <b>X-rays and Gamma rays are both ionising</b> — they can knock electrons out of atoms, damaging DNA. This is why they're dangerous AND useful for killing cancer cells.
+    </div>
+  </div>
+</div>
+
+<!-- WORKED EXAMPLE 4 -->
+<div class="example">
+  <div class="example-head">
+    <div class="ex-num ex-num-amber">EXAMPLE 4</div>
+    <div class="ex-title">EM wave calculation using c = fλ</div>
+    <div class="ex-marks">Ch.11 Calculation</div>
+  </div>
+  <div class="ex-q">
+    A radio wave has frequency <b>90 MHz</b> (= 9 × 10⁷ Hz). Speed of light = 3 × 10⁸ m/s.<br>
+    (a) Calculate its wavelength.&nbsp;&nbsp;(b) Is this wavelength longer or shorter than a UV wave?
+  </div>
+  <div class="solution">
+    <div class="sol-label">✏️ SOLUTION — Step by Step</div>
+    <div class="step">
+      <div class="step-num amber">1</div>
+      <div class="step-body"><b>Write what you know:</b><br>
+      c = 3 × 10⁸ m/s &nbsp;·&nbsp; f = 9 × 10⁷ Hz &nbsp;·&nbsp; λ = ?</div>
+    </div>
+    <div class="step">
+      <div class="step-num amber">2</div>
+      <div class="step-body"><b>Part (a) — find wavelength:</b><br>
+      Use <code>c = f × λ</code>, rearrange: <code>λ = c ÷ f</code><br>
+      <code>λ = (3 × 10⁸) ÷ (9 × 10⁷) =</code> <span class="ans">3.33 m</span></div>
+    </div>
+    <div class="step">
+      <div class="step-num amber">3</div>
+      <div class="step-body"><b>Part (b) — compare to UV:</b><br>
+      Radio waves have <b>lower frequency</b> than UV → <b>longer wavelength</b>.<br>
+      3.33 m (radio) is much longer than UV (~10⁻⁷ m). <span class="ans">Radio wavelength is longer than UV.</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- PRACTICE 4 -->
+<div class="practice">
+  <div class="practice-head">✏️ Practice 4 — Try it yourself!</div>
+  <div class="practice-body">
+    A gamma ray has frequency <b>3 × 10²⁰ Hz</b>. Speed of light = 3 × 10⁸ m/s.<br>
+    (a) Calculate its wavelength. <em>(2 marks)</em><br>
+    (b) A microwave has wavelength 0.12 m. Calculate its frequency. <em>(2 marks)</em><br>
+    (c) Which has higher frequency — the gamma ray or the microwave? <em>(1 mark)</em>
+    <div class="ws"><div class="ws-label">Working space</div></div>
+    <button class="pans-btn" onclick="tog(this)">▶ Show Answer</button>
+    <div class="pans-box">
+      (a) <code>λ = c ÷ f = (3×10⁸) ÷ (3×10²⁰) =</code> <b>1 × 10⁻¹² m</b> (very short!)<br>
+      (b) <code>f = c ÷ λ = (3×10⁸) ÷ 0.12 =</code> <b>2.5 × 10⁹ Hz</b><br>
+      (c) <b>Gamma ray</b> has higher frequency (3×10²⁰ Hz >> 2.5×10⁹ Hz). Gamma is always the highest frequency EM wave.
+    </div>
+  </div>
+</div>
+
+<!-- WORKED EXAMPLE 5 -->
+<div class="example">
+  <div class="example-head">
+    <div class="ex-num ex-num-amber">EXAMPLE 5</div>
+    <div class="ex-title">Identify EM wave from use / danger — exam favourite!</div>
+    <div class="ex-marks">Ch.11 Application</div>
+  </div>
+  <div class="ex-q">
+    For each situation below, name the type of EM wave being used and explain why.<br>
+    (a) A doctor takes an image of a patient's broken bone.<br>
+    (b) A security guard checks a person's passport using a special lamp that makes hidden patterns appear.<br>
+    (c) You press a button and your TV changes channel.
+  </div>
+  <div class="solution">
+    <div class="sol-label">✏️ SOLUTION</div>
+    <div class="step">
+      <div class="step-num amber">a</div>
+      <div class="step-body"><span class="ans">X-rays</span> — X-rays penetrate soft tissue but are absorbed by dense bone, creating a shadow image on film/detector. They are ionising, so only used when medically necessary.</div>
+    </div>
+    <div class="step">
+      <div class="step-num amber">b</div>
+      <div class="step-body"><span class="ans">Ultraviolet (UV)</span> — Forged banknotes and documents use UV-reactive inks that glow under UV light. The hidden security pattern becomes visible.</div>
+    </div>
+    <div class="step">
+      <div class="step-num amber">c</div>
+      <div class="step-body"><span class="ans">Infrared</span> — TV remote controls emit infrared pulses that carry coded signals to the TV receiver.</div>
+    </div>
+  </div>
+</div>
+
+<!-- PRACTICE 5 -->
+<div class="practice">
+  <div class="practice-head">✏️ Practice 5 — Try it yourself!</div>
+  <div class="practice-body">
+    Name the EM wave and give one reason for each:<br>
+    (a) Used to cook food in an oven by making water molecules vibrate. <em>(2 marks)</em><br>
+    (b) Emitted by all warm objects; used in night-vision cameras. <em>(2 marks)</em><br>
+    (c) Used to kill cancer tumours inside the body; also used to sterilise surgical instruments. <em>(2 marks)</em><br>
+    (d) Causes sunburn and skin cancer; also used for sterilising water. <em>(2 marks)</em>
+    <div class="ws" style="min-height:80px"><div class="ws-label">Working space</div></div>
+    <button class="pans-btn" onclick="tog(this)">▶ Show Answer</button>
+    <div class="pans-box">
+      (a) <b>Microwaves</b> — they are absorbed by water molecules, causing them to vibrate and heat the food from within.<br>
+      (b) <b>Infrared</b> — all objects above absolute zero emit infrared; night-vision cameras detect this heat signature.<br>
+      (c) <b>Gamma rays</b> — highly penetrating and ionising; can reach tumours deep in the body and destroy cancer cells. Also kills bacteria on equipment.<br>
+      (d) <b>Ultraviolet (UV)</b> — UV energy damages DNA of bacteria/viruses (sterilisation). Also causes sunburn and can lead to skin cancer with prolonged exposure.
+    </div>
+  </div>
+</div>
+
+<!-- WORKED EXAMPLE 6 — COMBO -->
+<div class="example">
+  <div class="example-head">
+    <div class="ex-num ex-num-amber">EXAMPLE 6</div>
+    <div class="ex-title">Combined question — EM properties + calculation</div>
+    <div class="ex-marks">Ch.11 Extended</div>
+  </div>
+  <div class="ex-q">
+    (a) State THREE properties that all EM waves have in common.<br>
+    (b) Explain why X-rays and gamma rays are considered more dangerous than radio waves or infrared.<br>
+    (c) An X-ray has wavelength 1 × 10⁻¹⁰ m. Calculate its frequency. (c = 3 × 10⁸ m/s)
+  </div>
+  <div class="solution">
+    <div class="sol-label">✏️ SOLUTION</div>
+    <div class="step">
+      <div class="step-num amber">a</div>
+      <div class="step-body">
+        1. All travel at 3 × 10⁸ m/s in vacuum (speed of light).<br>
+        2. All are transverse waves.<br>
+        3. All can travel through vacuum without a medium.
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num amber">b</div>
+      <div class="step-body">
+        X-rays and gamma rays have very <b>high frequency</b> (and short wavelength), giving them enough energy to be <b>ionising</b> — they can knock electrons out of atoms, breaking chemical bonds and damaging DNA. This can cause <b>mutations and cancer</b>. Radio waves and infrared only cause heating effects, which are less damaging.
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num amber">c</div>
+      <div class="step-body">
+        Rearrange <code>c = f × λ</code>: <code>f = c ÷ λ = (3 × 10⁸) ÷ (1 × 10⁻¹⁰) =</code> <span class="ans">3 × 10¹⁸ Hz</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FINAL PRACTICE -->
+<div class="practice">
+  <div class="practice-head">✏️ Practice 6 — Final Challenge (Mixed Ch.10 + Ch.11)</div>
+  <div class="practice-body">
+    (a) A visible light wave has wavelength 6 × 10⁻⁷ m. Calculate its frequency. (c = 3 × 10⁸ m/s) <em>(2 marks)</em><br><br>
+    (b) List the 7 types of EM wave in order from lowest to highest frequency. <em>(3 marks)</em><br><br>
+    (c) State whether each wave below is transverse or longitudinal, and give one example:<br>
+    &nbsp;&nbsp;&nbsp;(i) Sound &nbsp;&nbsp; (ii) Light &nbsp;&nbsp; (iii) A water wave <em>(3 marks)</em><br><br>
+    (d) A microwave oven uses waves of frequency 2.45 GHz (= 2.45 × 10⁹ Hz). Calculate the wavelength. <em>(2 marks)</em>
+    <div class="ws" style="min-height:100px"><div class="ws-label">Working space</div></div>
+    <button class="pans-btn" onclick="tog(this)">▶ Show Answer</button>
+    <div class="pans-box">
+      (a) <code>f = c ÷ λ = (3×10⁸) ÷ (6×10⁻⁷) =</code> <b>5 × 10¹⁴ Hz</b><br><br>
+      (b) Radio → Microwave → Infrared → Visible light → Ultraviolet → X-rays → Gamma rays<br>
+      (Mnemonic: Rather Mighty Intelligent Very Useful X-tra Great)<br><br>
+      (c) (i) Sound → <b>Longitudinal</b> (compressions &amp; rarefactions along direction of travel)<br>
+      (ii) Light → <b>Transverse</b> (vibrations perpendicular to direction of travel)<br>
+      (iii) Water wave → <b>Transverse</b> (water surface moves up and down as wave travels sideways)<br><br>
+      (d) <code>λ = c ÷ f = (3×10⁸) ÷ (2.45×10⁹) =</code> <b>0.122 m</b> ≈ 12 cm
+    </div>
+  </div>
+</div>
+
+<script>
+function tog(btn) {
+  const box = btn.nextElementSibling;
+  const show = box.classList.toggle('show');
+  btn.textContent = show ? '▼ Hide Answer' : '▶ Show Answer';
+}
+</script>
+</body>
+</html>

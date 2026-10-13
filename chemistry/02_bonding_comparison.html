@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>F3 Chemistry — Bonding 三大對比表</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Space+Grotesk:wght@400;600;700;800&display=swap');
+
+  :root {
+    --bg: #0f172a;
+    --surface: #1e293b;
+    --surface2: #263248;
+    --border: #334155;
+    --text: #f1f5f9;
+    --muted: #94a3b8;
+    --ionic:    #60a5fa;
+    --ionic-d:  #1d4ed8;
+    --simple:   #34d399;
+    --simple-d: #065f46;
+    --giant:    #a78bfa;
+    --giant-d:  #5b21b6;
+    --metallic: #fbbf24;
+    --metallic-d: #92400e;
+    --yes: #4ade80;
+    --no:  #f87171;
+    --maybe: #fbbf24;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Noto Sans TC', sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    padding: 48px 40px 36px;
+    background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+    border-bottom: 1px solid var(--border);
+    text-align: center;
+  }
+  .eyebrow {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 11px;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  header h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 36px;
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 6px;
+  }
+  .gradient-text {
+    background: linear-gradient(90deg, var(--ionic), var(--simple), var(--giant), var(--metallic));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  header p { color: var(--muted); font-size: 14px; }
+
+  /* ── MAIN ── */
+  main { max-width: 1200px; margin: 0 auto; padding: 40px 20px 80px; }
+
+  /* ── SECTION LABEL ── */
+  .section-label {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 40px 0 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-label::after { content:''; flex:1; height:1px; background:var(--border); }
+
+  /* ── 4-COLUMN CARDS ── */
+  .four-col {
+    display: grid;
+    grid-template-columns: 180px repeat(4, 1fr);
+    gap: 0;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 32px;
+  }
+
+  .col-header {
+    padding: 20px 16px;
+    text-align: center;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 13px;
+  }
+  .col-header .ch-type { font-size: 11px; font-weight: 400; color: var(--muted); margin-top: 2px; }
+  .col-header.label-col { background: var(--surface2); font-size: 12px; color: var(--muted); display: flex; align-items: center; justify-content: center; }
+  .col-header.ionic-h   { background: #1e3a5f; color: var(--ionic); border-bottom: 3px solid var(--ionic); }
+  .col-header.simple-h  { background: #0c3528; color: var(--simple); border-bottom: 3px solid var(--simple); }
+  .col-header.giant-h   { background: #2d1b5e; color: var(--giant); border-bottom: 3px solid var(--giant); }
+  .col-header.metallic-h { background: #3d2a00; color: var(--metallic); border-bottom: 3px solid var(--metallic); }
+
+  .row {
+    display: contents;
+  }
+  .cell {
+    padding: 13px 14px;
+    border-top: 1px solid var(--border);
+    font-size: 13px;
+    vertical-align: top;
+  }
+  .cell.label-cell {
+    background: var(--surface2);
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .cell.ionic-c   { background: #0d1f35; }
+  .cell.simple-c  { background: #061b13; }
+  .cell.giant-c   { background: #160d30; }
+  .cell.metallic-c { background: #1e1400; }
+
+  .yes-tag  { color: var(--yes);   font-weight: 700; }
+  .no-tag   { color: var(--no);    font-weight: 700; }
+  .maybe-tag { color: var(--maybe); font-weight: 700; }
+  .tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 7px;
+    border-radius: 4px;
+    margin: 2px 2px 2px 0;
+  }
+  .tag-ionic    { background: rgba(96,165,250,.15); color: var(--ionic); }
+  .tag-simple   { background: rgba(52,211,153,.15); color: var(--simple); }
+  .tag-giant    { background: rgba(167,139,250,.15); color: var(--giant); }
+  .tag-metal    { background: rgba(251,191,36,.15);  color: var(--metallic); }
+
+  /* ── SUBSTANCE CARDS ── */
+  .substance-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+    margin-bottom: 32px;
+  }
+  .substance-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+  }
+  .substance-card .name {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .substance-card .type-tag {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .05em;
+    padding: 2px 8px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-bottom: 10px;
+  }
+  .substance-card ul { padding-left: 16px; }
+  .substance-card ul li { font-size: 12px; color: var(--muted); margin-bottom: 3px; }
+  .substance-card ul li strong { color: var(--text); }
+
+  /* ── DECISION TREE ── */
+  .tree-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px 32px;
+    margin-bottom: 32px;
+  }
+  .tree-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 20px;
+    color: var(--text);
+  }
+  .tree-node {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-bottom: 8px;
+    font-size: 13px;
+  }
+  .tree-node .q { color: var(--muted); font-size: 11px; font-weight: 600; letter-spacing:.05em; text-transform:uppercase; margin-bottom: 4px; }
+  .tree-node .branches { display: flex; gap: 12px; margin-top: 8px; flex-wrap:wrap; }
+  .branch {
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  .branch-yes { background: rgba(74,222,128,.1); color: var(--yes); border: 1px solid rgba(74,222,128,.3); }
+  .branch-no  { background: rgba(248,113,113,.1); color: var(--no);  border: 1px solid rgba(248,113,113,.3); }
+  .arrow { color: var(--muted); margin: 0 4px; }
+
+  /* ── MEMORY TABLE ── */
+  .mem-table {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 32px;
+  }
+  .mem-table table { width:100%; border-collapse: collapse; }
+  .mem-table thead tr { background: var(--surface2); }
+  .mem-table thead th { padding: 12px 16px; text-align:left; font-family:'Space Grotesk',sans-serif; font-size:12px; font-weight:700; letter-spacing:.05em; color: var(--muted); }
+  .mem-table tbody td { padding: 11px 16px; border-top: 1px solid var(--border); font-size:13px; vertical-align:top; }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align:center;
+    padding: 24px;
+    font-size:12px;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+  }
+
+  @media (max-width: 768px) {
+    .four-col { grid-template-columns: 1fr; overflow: visible; }
+    .col-header.label-col { display:none; }
+    .cell.label-cell { display:none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="eyebrow">F3 Chemistry · 結構與鍵合</div>
+  <h1><span class="gradient-text">Bonding 三大類型</span><br>完整對比表</h1>
+  <p>Ionic · Simple Molecular · Giant Covalent · Metallic</p>
+</header>
+
+<main>
+
+  <!-- ══ MASTER COMPARISON TABLE ══ -->
+  <div class="section-label">主要性質對比</div>
+
+  <div class="four-col">
+    <!-- HEADERS -->
+    <div class="col-header label-col">性質</div>
+    <div class="col-header ionic-h">⬡ Ionic<div class="ch-type">離子鍵</div></div>
+    <div class="col-header simple-h">◎ Simple Molecular<div class="ch-type">簡單分子共價</div></div>
+    <div class="col-header giant-h">◉ Giant Covalent<div class="ch-type">巨型共價</div></div>
+    <div class="col-header metallic-h">◈ Metallic<div class="ch-type">金屬鍵</div></div>
+
+    <!-- ROW: Particles -->
+    <div class="cell label-cell">🔵 粒子類型</div>
+    <div class="cell ionic-c">正離子 + 負離子<br><small style="color:#64748b">Cations &amp; Anions</small></div>
+    <div class="cell simple-c">獨立小分子<br><small style="color:#64748b">Discrete molecules</small></div>
+    <div class="cell giant-c">原子（網狀連接）<br><small style="color:#64748b">Atoms in 3D network</small></div>
+    <div class="cell metallic-c">正金屬離子 + 電子海<br><small style="color:#64748b">Ions + delocalized e⁻</small></div>
+
+    <!-- ROW: Bonding force -->
+    <div class="cell label-cell">🔗 結合力</div>
+    <div class="cell ionic-c">Electrostatic attraction<br>（正負離子互吸）</div>
+    <div class="cell simple-c">Intermolecular forces<br>（分子間作用力）</div>
+    <div class="cell giant-c">Covalent bonds<br>（共價鍵，非常多）</div>
+    <div class="cell metallic-c">Metallic bonds<br>（正離子與電子海）</div>
+
+    <!-- ROW: Melting point -->
+    <div class="cell label-cell">🌡️ 熔沸點</div>
+    <div class="cell ionic-c"><span class="yes-tag">高</span><br><small style="color:#64748b">strong electrostatic attraction</small></div>
+    <div class="cell simple-c"><span class="no-tag">低</span><br><small style="color:#64748b">weak intermolecular forces<br>（唔係 weak covalent bonds！）</small></div>
+    <div class="cell giant-c"><span class="yes-tag">極高</span><br><small style="color:#64748b">many strong covalent bonds<br>需大量能量打斷</small></div>
+    <div class="cell metallic-c"><span class="yes-tag">一般高</span><br><small style="color:#64748b">strong metallic bonds<br>（Hg 除外）</small></div>
+
+    <!-- ROW: Conductivity solid -->
+    <div class="cell label-cell">⚡ 導電<br>固態</div>
+    <div class="cell ionic-c"><span class="no-tag">❌ 不</span><br><small style="color:#64748b">ions 固定無法移動</small></div>
+    <div class="cell simple-c"><span class="no-tag">❌ 不</span><br><small style="color:#64748b">無 free charges</small></div>
+    <div class="cell giant-c"><span class="no-tag">❌ 不</span><br><small style="color:#64748b">（Graphite 例外：✅）</small></div>
+    <div class="cell metallic-c"><span class="yes-tag">✅ 是</span><br><small style="color:#64748b">delocalized e⁻ 自由移動</small></div>
+
+    <!-- ROW: Conductivity molten -->
+    <div class="cell label-cell">⚡ 導電<br>熔融/液態</div>
+    <div class="cell ionic-c"><span class="yes-tag">✅ 是</span><br><small style="color:#64748b">mobile ions</small></div>
+    <div class="cell simple-c"><span class="no-tag">❌ 不</span></div>
+    <div class="cell giant-c"><span class="no-tag">❌ 不</span></div>
+    <div class="cell metallic-c"><span class="yes-tag">✅ 是</span><br><small style="color:#64748b">delocalized e⁻</small></div>
+
+    <!-- ROW: Conductivity aqueous -->
+    <div class="cell label-cell">⚡ 導電<br>水溶液</div>
+    <div class="cell ionic-c"><span class="yes-tag">✅ 是</span><br><small style="color:#64748b">dissociated ions</small></div>
+    <div class="cell simple-c"><span class="maybe-tag">視乎極性</span><br><small style="color:#64748b">多數不導電</small></div>
+    <div class="cell giant-c"><span class="no-tag">❌ 不溶</span></div>
+    <div class="cell metallic-c">— （反應/不溶）</div>
+
+    <!-- ROW: Solubility -->
+    <div class="cell label-cell">💧 溶於水</div>
+    <div class="cell ionic-c"><span class="yes-tag">多數溶</span></div>
+    <div class="cell simple-c"><span class="maybe-tag">視乎極性</span><br><small style="color:#64748b">I₂ 不溶；HCl 溶</small></div>
+    <div class="cell giant-c"><span class="no-tag">不溶</span></div>
+    <div class="cell metallic-c"><span class="maybe-tag">視乎金屬</span></div>
+
+    <!-- ROW: Physical properties -->
+    <div class="cell label-cell">💪 機械性質</div>
+    <div class="cell ionic-c"><span class="no-tag">Brittle 脆</span><br><small style="color:#64748b">受力→同層同電荷相斥→碎裂</small></div>
+    <div class="cell simple-c">柔軟（固態時）<br><small style="color:#64748b">分子間力弱，易變形</small></div>
+    <div class="cell giant-c">極硬（Diamond 最硬）<br><small style="color:#64748b">非 brittle</small></div>
+    <div class="cell metallic-c"><span class="yes-tag">Malleable &amp; Ductile</span><br><small style="color:#64748b">layers 滑動，e⁻ 重新分佈</small></div>
+
+    <!-- ROW: Examples -->
+    <div class="cell label-cell">📦 例子</div>
+    <div class="cell ionic-c">
+      <span class="tag tag-ionic">NaCl</span>
+      <span class="tag tag-ionic">KCl</span>
+      <span class="tag tag-ionic">CaO</span>
+      <span class="tag tag-ionic">MgO</span>
+      <span class="tag tag-ionic">K₃N</span>
+    </div>
+    <div class="cell simple-c">
+      <span class="tag tag-simple">H₂O</span>
+      <span class="tag tag-simple">CO₂</span>
+      <span class="tag tag-simple">HCl</span>
+      <span class="tag tag-simple">Br₂</span>
+      <span class="tag tag-simple">I₂</span>
+      <span class="tag tag-simple">OF₂</span>
+      <span class="tag tag-simple">N₂H₄</span>
+    </div>
+    <div class="cell giant-c">
+      <span class="tag tag-giant">Diamond</span>
+      <span class="tag tag-giant">Graphite</span>
+      <span class="tag tag-giant">SiO₂</span>
+      <span class="tag tag-giant">Cubic BN</span>
+    </div>
+    <div class="cell metallic-c">
+      <span class="tag tag-metal">Na</span>
+      <span class="tag tag-metal">Cu</span>
+      <span class="tag tag-metal">Fe</span>
+      <span class="tag tag-metal">Hg</span>
+      <span class="tag tag-metal">Al</span>
+    </div>
+  </div>
+
+  <!-- ══ INDIVIDUAL SUBSTANCES ══ -->
+  <div class="section-label">重要物質速記</div>
+
+  <div class="substance-grid">
+    <div class="substance-card" style="border-left:3px solid var(--simple);">
+      <div class="name">I₂ (Iodine)</div>
+      <span class="type-tag" style="background:rgba(52,211,153,.15); color:var(--simple);">Simple Molecular</span>
+      <ul>
+        <li>室溫：<strong>固態</strong>（但熔點低）</li>
+        <li>導電：<strong>否</strong></li>
+        <li>溶於水：<strong>否 ❌</strong></li>
+        <li>溶於有機溶劑：<strong>是 ✅</strong></li>
+        <li>熔點低（intermolecular forces weak）</li>
+      </ul>
+    </div>
+    <div class="substance-card" style="border-left:3px solid var(--metallic);">
+      <div class="name">Hg (Mercury)</div>
+      <span class="type-tag" style="background:rgba(251,191,36,.15); color:var(--metallic);">Metallic</span>
+      <ul>
+        <li>室溫：<strong>液態</strong>（唯一液態金屬）</li>
+        <li>導電：<strong>是 ✅</strong>（delocalized e⁻）</li>
+        <li><strong>非</strong> discrete molecules</li>
+        <li>Hg(II) ions + delocalized e⁻</li>
+        <li>Metallic bonds（比一般金屬弱）</li>
+      </ul>
+    </div>
+    <div class="substance-card" style="border-left:3px solid var(--giant);">
+      <div class="name">Diamond</div>
+      <span class="type-tag" style="background:rgba(167,139,250,.15); color:var(--giant);">Giant Covalent</span>
+      <ul>
+        <li>熔點：<strong>極高</strong>（~3550°C）</li>
+        <li>導電：<strong>否 ❌</strong>（無 free e⁻）</li>
+        <li>溶於水/有機溶劑：<strong>否</strong></li>
+        <li>最硬天然物質</li>
+        <li>每個 C 與 4 個 C 鍵合</li>
+      </ul>
+    </div>
+    <div class="substance-card" style="border-left:3px solid var(--giant);">
+      <div class="name">Graphite</div>
+      <span class="type-tag" style="background:rgba(167,139,250,.15); color:var(--giant);">Giant Covalent</span>
+      <ul>
+        <li>熔點：<strong>高</strong></li>
+        <li>導電：<strong>是 ✅</strong>（delocalized e⁻ 在層內）</li>
+        <li>層狀結構（layers weak forces）</li>
+        <li>每個 C 與 3 個 C 鍵合</li>
+        <li>可做潤滑劑</li>
+      </ul>
+    </div>
+    <div class="substance-card" style="border-left:3px solid var(--giant);">
+      <div class="name">Cubic BN</div>
+      <span class="type-tag" style="background:rgba(167,139,250,.15); color:var(--giant);">Giant Covalent</span>
+      <ul>
+        <li>類 Diamond 結構</li>
+        <li>導電：<strong>否 ❌</strong></li>
+        <li>非常硬（abrasive 用途）</li>
+        <li><strong>非 brittle</strong>（brittle 是 ionic 特性）</li>
+        <li>B 與 N 交替排列</li>
+      </ul>
+    </div>
+    <div class="substance-card" style="border-left:3px solid var(--simple);">
+      <div class="name">OF₂</div>
+      <span class="type-tag" style="background:rgba(52,211,153,.15); color:var(--simple);">Simple Molecular</span>
+      <ul>
+        <li><strong>唔係</strong> Giant Covalent！</li>
+        <li>O 與 2 個 F 鍵合（角形）</li>
+        <li>低熔沸點</li>
+        <li>不導電</li>
+        <li class="sub" style="color:#f87171">常見陷阱題！</li>
+      </ul>
+    </div>
+    <div class="substance-card" style="border-left:3px solid var(--ionic);">
+      <div class="name">CaO vs NaCl</div>
+      <span class="type-tag" style="background:rgba(96,165,250,.15); color:var(--ionic);">Ionic</span>
+      <ul>
+        <li>CaO：Ca²⁺ + O²⁻（電荷 ±2）</li>
+        <li>NaCl：Na⁺ + Cl⁻（電荷 ±1）</li>
+        <li>CaO 熔點 <strong>更高</strong></li>
+        <li>原因：更高電荷 → 更強靜電吸引</li>
+      </ul>
+    </div>
+    <div class="substance-card" style="border-left:3px solid var(--ionic);">
+      <div class="name">NaCl 結構</div>
+      <span class="type-tag" style="background:rgba(96,165,250,.15); color:var(--ionic);">Ionic</span>
+      <ul>
+        <li>每個 Na⁺ 被 <strong>6 個</strong> Cl⁻ 圍繞</li>
+        <li>每個 Cl⁻ 被 <strong>6 個</strong> Na⁺ 圍繞</li>
+        <li>Co-ordination number = 6</li>
+        <li>Giant ionic lattice</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ══ DECISION FLOWCHART ══ -->
+  <div class="section-label">判斷 Bonding Type — 考試思路</div>
+
+  <div class="tree-box">
+    <div class="tree-title">📋 讀題步驟（給資料判斷 Bonding Type）</div>
+
+    <div class="tree-node">
+      <div class="q">Step 1 — 看導電性</div>
+      <div>固態導電？</div>
+      <div class="branches">
+        <span class="branch branch-yes">✅ 是 → <strong>Metallic</strong>（delocalized e⁻）</span>
+        <span class="branch branch-no">❌ 否 → 繼續 Step 2</span>
+      </div>
+    </div>
+
+    <div class="tree-node">
+      <div class="q">Step 2 — 看熔點高低</div>
+      <div>熔點很低（室溫附近）？</div>
+      <div class="branches">
+        <span class="branch branch-yes">✅ 低熔點 → <strong>Simple Molecular</strong></span>
+        <span class="branch branch-no">❌ 高熔點 → 繼續 Step 3</span>
+      </div>
+    </div>
+
+    <div class="tree-node">
+      <div class="q">Step 3 — 看熔融/水溶液導電</div>
+      <div>熔融或水溶液可以導電？</div>
+      <div class="branches">
+        <span class="branch branch-yes">✅ 可以 → <strong>Ionic</strong>（mobile ions）</span>
+        <span class="branch branch-no">❌ 唔可以 → <strong>Giant Covalent</strong></span>
+      </div>
+    </div>
+
+    <div class="tree-node">
+      <div class="q">如果 Giant Covalent — 再細分</div>
+      <div class="branches">
+        <span class="branch" style="background:rgba(167,139,250,.15);color:var(--giant);border:1px solid rgba(167,139,250,.3);">導電 → Graphite</span>
+        <span class="branch" style="background:rgba(167,139,250,.15);color:var(--giant);border:1px solid rgba(167,139,250,.3);">不導電 + 最硬 → Diamond</span>
+        <span class="branch" style="background:rgba(167,139,250,.15);color:var(--giant);border:1px solid rgba(167,139,250,.3);">不導電 + 硬 → SiO₂ / Cubic BN</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ MEMORY AIDS ══ -->
+  <div class="section-label">必背口訣 &amp; 易錯總結</div>
+
+  <div class="mem-table">
+    <table>
+      <thead>
+        <tr>
+          <th>易錯點</th>
+          <th>❌ 錯誤說法</th>
+          <th>✅ 正確說法</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Simple Molecular 低熔點原因</strong></td>
+          <td style="color:var(--no);">covalent bonds are weak</td>
+          <td style="color:var(--yes);">intermolecular forces are weak</td>
+        </tr>
+        <tr>
+          <td><strong>Ionic 高熔點原因</strong></td>
+          <td style="color:var(--no);">ionic bonds are very strong</td>
+          <td style="color:var(--yes);">strong electrostatic attraction between oppositely charged ions</td>
+        </tr>
+        <tr>
+          <td><strong>金屬導電原因</strong></td>
+          <td style="color:var(--no);">metal ions can move</td>
+          <td style="color:var(--yes);">delocalized electrons can move freely</td>
+        </tr>
+        <tr>
+          <td><strong>Ionic 固態不導電</strong></td>
+          <td style="color:var(--no);">no electrons to carry charge</td>
+          <td style="color:var(--yes);">ions are fixed and cannot move</td>
+        </tr>
+        <tr>
+          <td><strong>Ionic Brittle 原因</strong></td>
+          <td style="color:var(--no);">bonds are weak</td>
+          <td style="color:var(--yes);">layers shift → same charges align → repel → crystal breaks</td>
+        </tr>
+        <tr>
+          <td><strong>OF₂ 結構</strong></td>
+          <td style="color:var(--no);">Giant covalent structure</td>
+          <td style="color:var(--yes);">Simple molecular structure</td>
+        </tr>
+        <tr>
+          <td><strong>Mercury 結構</strong></td>
+          <td style="color:var(--no);">discrete molecules</td>
+          <td style="color:var(--yes);">Hg(II) ions + delocalized electrons (metallic bonding)</td>
+        </tr>
+        <tr>
+          <td><strong>Iodine 溶解性</strong></td>
+          <td style="color:var(--no);">soluble in water and organic solvents</td>
+          <td style="color:var(--yes);">insoluble in water; soluble in organic solvents</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</main>
+
+<footer>F3 Chemistry Term 2 · Bonding 對比表 · 補習教材</footer>
+
+</body>
+</html>

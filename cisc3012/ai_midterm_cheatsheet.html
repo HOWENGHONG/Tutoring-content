@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CISC3012 Ch1-3 考試速記</title>
+<style>
+  :root{
+    --bg:#f6f7fb;
+    --card:#ffffff;
+    --ink:#1f2430;
+    --muted:#5b6472;
+    --line:#e3e7ef;
+    --blue:#2b6cb0;
+    --blue-bg:#eaf2fb;
+    --green:#2f855a;
+    --green-bg:#e8f6ee;
+    --red:#c53030;
+    --red-bg:#fdecec;
+    --amber:#b7791f;
+    --amber-bg:#fdf5e3;
+    --purple:#6b46c1;
+    --purple-bg:#f0ebfb;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    padding:24px 16px 80px;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+    line-height:1.75;
+    font-size:16px;
+  }
+  .wrap{max-width:1000px;margin:0 auto;}
+
+  header.top{
+    background:linear-gradient(135deg,#2b6cb0,#6b46c1);
+    color:#fff;
+    border-radius:18px;
+    padding:28px 26px;
+    margin-bottom:26px;
+    box-shadow:0 8px 24px rgba(43,108,176,.25);
+  }
+  header.top h1{margin:0 0 8px;font-size:26px;letter-spacing:.5px;}
+  header.top p{margin:4px 0;opacity:.95;font-size:14.5px;}
+  .pill{
+    display:inline-block;
+    background:rgba(255,255,255,.2);
+    border:1px solid rgba(255,255,255,.35);
+    padding:2px 10px;
+    border-radius:999px;
+    font-size:12.5px;
+    margin:6px 6px 0 0;
+  }
+
+  h2.chapter{
+    font-size:22px;
+    margin:38px 0 16px;
+    padding:12px 18px;
+    border-radius:12px;
+    background:var(--blue);
+    color:#fff;
+    box-shadow:0 4px 12px rgba(43,108,176,.2);
+  }
+  h2.chapter.purple{background:var(--purple);box-shadow:0 4px 12px rgba(107,70,193,.2);}
+  h2.chapter.green{background:var(--green);box-shadow:0 4px 12px rgba(47,133,90,.2);}
+
+  .card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:18px 20px;
+    margin-bottom:16px;
+    box-shadow:0 2px 8px rgba(31,36,48,.04);
+  }
+  .card h3{
+    margin:0 0 10px;
+    font-size:17.5px;
+    color:var(--blue);
+    display:flex;
+    align-items:center;
+    gap:8px;
+  }
+  .card h3 .num{
+    background:var(--blue-bg);
+    color:var(--blue);
+    border-radius:8px;
+    padding:1px 9px;
+    font-size:14px;
+    font-weight:700;
+  }
+  .card.purple h3{color:var(--purple);}
+  .card.purple h3 .num{background:var(--purple-bg);color:var(--purple);}
+  .card.green h3{color:var(--green);}
+  .card.green h3 .num{background:var(--green-bg);color:var(--green);}
+
+  .star{
+    background:var(--amber-bg);
+    color:var(--amber);
+    font-size:12px;
+    padding:1px 8px;
+    border-radius:999px;
+    border:1px solid #f0dfb8;
+    font-weight:700;
+    white-space:nowrap;
+  }
+  .must{
+    background:var(--red-bg);
+    color:var(--red);
+    font-size:12px;
+    padding:1px 8px;
+    border-radius:999px;
+    border:1px solid #f5c6c6;
+    font-weight:700;
+    white-space:nowrap;
+  }
+
+  .en{
+    background:var(--blue-bg);
+    border-left:4px solid var(--blue);
+    padding:10px 14px;
+    border-radius:0 8px 8px 0;
+    margin:10px 0;
+    font-size:15px;
+  }
+  .en.purple{background:var(--purple-bg);border-left-color:var(--purple);}
+  .en.green{background:var(--green-bg);border-left-color:var(--green);}
+  .en b{color:inherit;}
+
+  .zh{
+    color:var(--muted);
+    font-size:14.5px;
+    margin:8px 0;
+    padding-left:2px;
+  }
+
+  ul,ol{margin:8px 0;padding-left:24px;}
+  li{margin:5px 0;}
+  li b{color:var(--ink);}
+
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin:12px 0;
+    font-size:14.5px;
+    overflow:hidden;
+    border-radius:10px;
+  }
+  th,td{
+    border:1px solid var(--line);
+    padding:9px 11px;
+    text-align:left;
+    vertical-align:top;
+  }
+  th{
+    background:#eef2f8;
+    font-weight:700;
+    color:#33405a;
+  }
+  tr:nth-child(even) td{background:#fafbfe;}
+
+  .trap{
+    background:var(--red-bg);
+    border:1px solid #f5c6c6;
+    border-radius:10px;
+    padding:12px 16px;
+    margin:12px 0;
+    font-size:14.5px;
+  }
+  .trap b{color:var(--red);}
+
+  .tip{
+    background:var(--green-bg);
+    border:1px solid #bfe3cd;
+    border-radius:10px;
+    padding:12px 16px;
+    margin:12px 0;
+    font-size:14.5px;
+  }
+  .tip b{color:var(--green);}
+
+  .answer{
+    background:#fffdf5;
+    border:1px dashed #e6c96b;
+    border-radius:10px;
+    padding:12px 16px;
+    margin:12px 0;
+    font-size:14.5px;
+    font-style:normal;
+  }
+  .answer b{color:var(--amber);}
+
+  .toc{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:16px 22px;
+    margin-bottom:22px;
+  }
+  .toc h3{margin:0 0 10px;font-size:16px;color:var(--purple);}
+  .toc a{
+    color:var(--blue);
+    text-decoration:none;
+    display:inline-block;
+    margin:3px 14px 3px 0;
+    font-size:14.5px;
+  }
+  .toc a:hover{text-decoration:underline;}
+
+  .grid2{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+  }
+  @media(max-width:720px){
+    .grid2{grid-template-columns:1fr;}
+    body{font-size:15px;}
+  }
+
+  .final{
+    background:linear-gradient(135deg,#2f855a,#2b6cb0);
+    color:#fff;
+    border-radius:16px;
+    padding:22px 24px;
+    margin-top:34px;
+  }
+  .final h2{margin:0 0 12px;font-size:20px;}
+  .final ol{padding-left:22px;}
+  .final li{margin:6px 0;}
+
+  code{
+    background:#eef2f8;
+    padding:1px 6px;
+    border-radius:5px;
+    font-size:14px;
+    font-family:"SFMono-Regular",Consolas,monospace;
+  }
+  .divider{height:1px;background:var(--line);margin:14px 0;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <h1>CISC3012 Artificial Intelligence — Ch1–3 考試速記</h1>
+  <p>只列「要背、要知、拿分」內容 · 先英文（考試用語）· 中文輔助理解</p>
+  <p>
+    <span class="pill">Ch1 What is AI</span>
+    <span class="pill">Ch2 Intelligent Agents</span>
+    <span class="pill">Ch3 Rational Agent by Searching</span>
+  </p>
+</header>
+
+<div class="toc">
+  <h3>快速跳轉</h3>
+  <a href="#ch1">Ch1 What is AI?</a>
+  <a href="#ch2">Ch2 Intelligent Agents</a>
+  <a href="#ch3">Ch3 Rational Agent by Searching</a>
+  <a href="#final">最後衝刺必背清單</a>
+  <a href="#traps">易錯陷阱</a>
+</div>
+
+<!-- ========================= CH1 ========================= -->
+<h2 class="chapter" id="ch1">Chapter 1 — What is AI?</h2>
+
+<div class="card">
+  <h3><span class="num">1</span>AI 能做什麼 <span class="star">常考</span></h3>
+  <div class="en">
+    AI has <b>no limitation in application</b>, but has a <b>limitation in capability</b> — it can only reach a certain level of human intelligence, and mainly replaces <b>labour-intensive jobs</b>. For <b>intelligence-intensive jobs</b> (e.g., system analyst), humans still outperform AI.
+  </div>
+  <div class="zh">應用範圍無限，但能力有限；主要取代勞力密集工作；智力密集工作（如系統分析師）人類仍較強。</div>
+  <div class="tip"><b>拿分關鍵字：</b>no limitation in application / limitation in capability / labour-intensive / intelligence-intensive</div>
+</div>
+
+<div class="card">
+  <h3><span class="num">2</span>AI vs Traditional Algorithm <span class="star">常考</span></h3>
+  <div class="en">
+    A traditional computer program (algorithm/logic) is <b>designed by humans</b> — if a human cannot understand or solve a problem, the algorithm cannot either.<br>
+    An AI program <b>learns / is created directly from data</b> (e.g., a decision tree or a neural network) — as long as data is available, the problem can be solved even without full human understanding.
+  </div>
+  <div class="zh">傳統演算法：人寫邏輯，人不懂就解不了。AI 程式：直接從資料學習（決策樹／神經網路），有資料就可能解決。</div>
+</div>
+
+<div class="card">
+  <h3><span class="num">3</span>Three Translators（AIGC）<span class="star">常考</span></h3>
+  <table>
+    <tr><th>工具</th><th>翻譯</th></tr>
+    <tr><td><b>Assembler</b></td><td>assembly language → machine code</td></tr>
+    <tr><td><b>Compiler</b></td><td>high-level language → machine code</td></tr>
+    <tr><td><b>AI LLM agent</b></td><td>natural language → machine code</td></tr>
+  </table>
+  <div class="en">
+    This gives rise to a new job: <b>AI prompt engineering</b>. Programming is still needed, but the focus shifts to <b>idea / creativity / properties of software development</b> rather than intensive coding.
+  </div>
+  <div class="zh">仍要學程式，但重點轉向創意與軟體開發概念，而非大量寫 code。</div>
+</div>
+
+<div class="card">
+  <h3><span class="num">4</span>Definitions of AI — 四象限 <span class="must">★★核心必背</span></h3>
+  <div class="en">
+    There is <b>no single agreed definition</b> of AI. Definitions are grouped along two axes: <b>Thought vs. Behavior</b>, and <b>Human-like vs. Rational (Ideal)</b> — giving four categories.
+  </div>
+  <table>
+    <tr><th></th><th>Human-like 像人</th><th>Rational / Ideal 理性</th></tr>
+    <tr><td><b>Thought 思考</b></td><td><b>Thinking Humanly</b></td><td><b>Thinking Rationally</b></td></tr>
+    <tr><td><b>Behavior 行為</b></td><td><b>Acting Humanly</b></td><td><b>Acting Rationally</b></td></tr>
+  </table>
+  <div class="zh">
+    Thinking Humanly＝像人思考（需心智理論，做不到）<br>
+    Acting Humanly＝像人行動（用 Turing Test 判斷）<br>
+    Thinking Rationally＝理性思考（用邏輯，難處理不確定）<br>
+    Acting Rationally＝理性行動（Rational Agent，Ch2、Ch3 主題）
+  </div>
+</div>
+
+<div class="card">
+  <h3><span class="num">5</span>Turing Test <span class="must">★★必背</span></h3>
+  <div class="en">
+    A human questioner communicates via teletype (text) with an unseen respondent; if the questioner cannot reliably tell whether the respondent is a human or a computer, the computer is considered to <b>behave intelligently</b>.
+  </div>
+  <div class="en green">
+    <b>Four cognitive tasks required:</b><br>
+    1. Natural language processing — communicating with humans<br>
+    2. Knowledge representation — storing/retrieving information effectively<br>
+    3. Automated reasoning — using existing knowledge to answer questions<br>
+    4. Machine learning — adapting to answer unseen questions
+  </div>
+  <div class="en">
+    <b>Total Turing Test</b> adds two more requirements about action:<br>
+    5. Computer vision — to perceive (see)<br>
+    6. Robotics — to act (move objects)
+  </div>
+  <div class="tip"><b>結論：</b>Building a truly "humanly" AI system requires a <b>precise theory of mind</b>, which we do not have — so it is currently impossible to build humanly AI systems.</div>
+</div>
+
+<div class="card">
+  <h3><span class="num">6</span>Rational System & Rational Agent <span class="star">常考</span></h3>
+  <div class="en">
+    A rational system does not care about the method used — only whether the <b>outcome/result is correct</b>. It usually relies on <b>mathematical and logical models</b>, which makes it more reliable than trying to imitate (sometimes irrational) human behavior.
+  </div>
+  <div class="en purple">
+    <b>Rational Agent</b> — an agent (usually a computer) that <b>perceives the environment</b> and outputs <b>correct actions</b> to achieve given goals:<br>
+    facts (percepts/inputs) → reasoning → actions (outputs)
+  </div>
+  <div class="zh">理性系統只在乎結果正確，不在乎方法像不像人。Rational Agent 是 Ch2、Ch3 主題。</div>
+</div>
+
+<div class="card">
+  <h3><span class="num">7</span>Risk of AI</h3>
+  <ul>
+    <li><b>Fake news generation</b> 假新聞生成</li>
+    <li><b>Reliability and misuse issues</b> 可靠性與濫用問題</li>
+    <li><b>Challenges to human labor</b> 對人類勞工的就業衝擊</li>
+  </ul>
+  <div class="tip"><b>必答句：</b>AI's purpose is to replace or alleviate human labor (especially labour-intensive jobs), <b>not to completely replace humans</b>.</div>
+</div>
+
+<!-- ========================= CH2 ========================= -->
+<h2 class="chapter purple" id="ch2">Chapter 2 — Intelligent Agents</h2>
+
+<div class="card purple">
+  <h3><span class="num">1</span>What is an Agent? <span class="must">★★必背</span></h3>
+  <div class="en purple">
+    An agent is <b>anything that perceives its environment through sensors (input) and acts upon that environment through actuators (output)</b>. The processing in between is realized by an <b>agent program</b> — a lookup table is infeasible because the number of possible input combinations is infinite.
+  </div>
+  <div class="zh">Agent＝sensors（輸入）＋ agent program（處理）＋ actuators（輸出）。Lookup table 不可行，因輸入組合無限。</div>
+  <div class="en">
+    <b>Vacuum-cleaner world:</b><br>
+    Percepts = which square (A or B), and whether it is Clean or Dirty<br>
+    Actions = Move Left, Move Right, Suck, Do Nothing (NoOp)
+  </div>
+</div>
+
+<div class="card purple">
+  <h3><span class="num">2</span>Rationality <span class="must">★★必背四要素</span></h3>
+  <div class="en purple">
+    Rationality is judged using a <b>performance measure</b>:<br>
+    <b>Score = P(Result)</b>, where <b>Result = action(Environment)</b>.<br>
+    The performance measure should be designed according to the application's objective.
+  </div>
+  <div class="zh">用績效指標判斷；指標要依應用目標設計。吸塵機世界只看最後地板是否乾淨，不管怎樣走。</div>
+  <div class="en green">
+    <b>Rationality depends on four factors（必背）:</b><br>
+    1. The <b>performance measure</b> that defines the criterion of success<br>
+    2. The agent's <b>prior knowledge</b> of the environment<br>
+    3. The <b>actions</b> the agent can perform<br>
+    4. The agent's <b>percept sequence</b> up to now (memory)
+  </div>
+</div>
+
+<div class="card purple">
+  <h3><span class="num">3</span>PEAS <span class="must">★★★必背＋要識舉例</span></h3>
+  <table>
+    <tr><th>字母</th><th>英文</th><th>中文</th></tr>
+    <tr><td><b>P</b></td><td>Performance measure</td><td>績效指標</td></tr>
+    <tr><td><b>E</b></td><td>Environment</td><td>環境</td></tr>
+    <tr><td><b>A</b></td><td>Actuators</td><td>執行器</td></tr>
+    <tr><td><b>S</b></td><td>Sensors</td><td>感測器</td></tr>
+  </table>
+  <div class="en green">
+    <b>Automated taxi driver example:</b><br>
+    <b>Performance:</b> safety, reaching destination, minimizing time/cost/fuel, minimizing traffic violations, maximizing comfort<br>
+    <b>Environment:</b> roads, traffic lights, other vehicles, pedestrians, customers<br>
+    <b>Actuators:</b> accelerator, steering, brake, display for customers<br>
+    <b>Sensors:</b> vehicle/road detectors, GPS, customer interaction interface
+  </div>
+</div>
+
+<div class="card purple">
+  <h3><span class="num">4</span>Properties of Environments — 六對 <span class="must">★★★超高頻</span></h3>
+  <table>
+    <tr><th>Property</th><th>Definition</th><th>Example</th></tr>
+    <tr>
+      <td><b>Fully observable</b> vs <b>Partially observable</b></td>
+      <td>Whether the agent's sensors can access the complete state of the world</td>
+      <td>A local dirt sensor only knows its own square → partially observable</td>
+    </tr>
+    <tr>
+      <td><b>Deterministic</b> vs <b>Stochastic</b></td>
+      <td>Whether the next state is completely determined by the current state + action</td>
+      <td>Taxi driving is stochastic due to unobservable/noisy factors</td>
+    </tr>
+    <tr>
+      <td><b>Episodic</b> vs <b>Sequential</b></td>
+      <td>Whether the quality of an action depends on previous/future episodes</td>
+      <td>Episodic = independent single perception-action pairs (simpler); Sequential = current action affects future decisions (e.g., chess, assembly)</td>
+    </tr>
+    <tr>
+      <td><b>Static</b> vs <b>Dynamic</b></td>
+      <td>Whether the environment changes on its own over time</td>
+      <td>Chess (with a clock) is dynamic; a puzzle left alone is static</td>
+    </tr>
+    <tr>
+      <td><b>Discrete</b> vs <b>Continuous</b></td>
+      <td>Whether there is a limited, clearly defined number of percepts/actions</td>
+      <td>Vacuum world (2 squares, dirty/clean) is discrete; real-valued sensor readings are continuous</td>
+    </tr>
+    <tr>
+      <td><b>Single agent</b> vs <b>Multiagent</b></td>
+      <td>Whether there is more than one agent in the environment</td>
+      <td>Crossword = single agent; chess = competitive multiagent; taxi avoiding collision = cooperative multiagent</td>
+    </tr>
+  </table>
+  <div class="tip"><b>背法：</b>六對性質＋每對至少一個例子，考試通常直接問「give an example」。</div>
+</div>
+
+<div class="card purple">
+  <h3><span class="num">5</span>Five Types of Agents <span class="must">★★必背</span></h3>
+
+  <div class="en purple"><b>1. Simple reflex agent</b><br>
+  Uses only condition-action ("if-then") rules. Efficient but narrow in application; only works when the environment is <b>fully observable</b>.</div>
+
+  <div class="en purple"><b>2. Model-based reflex agent</b><br>
+  For <b>partially observable</b> environments. Maintains an <b>internal state</b> based on percept history to track unobserved aspects. Requires knowledge of (a) how the world evolves independently, and (b) how the agent's own actions affect the world.</div>
+
+  <div class="en purple"><b>3. Goal-based agent</b><br>
+  Chooses actions based on the current state, current percept, and a <b>goal</b> to achieve. Less efficient than reflex agents because it must check many states and available actions. <b>This motivates search — Chapter 3.</b></div>
+
+  <div class="en purple"><b>4. Utility-based agent</b><br>
+  A goal alone only tells you <b>whether</b> it is achieved, not <b>how well</b>. <b>Utility</b> is a function mapping a state to a real number representing the degree of success. Utility helps: (a) trade off between conflicting goals, and (b) make decisions when multiple goals cannot all be achieved — choose the option with higher utility.</div>
+
+  <div class="en purple"><b>5. Learning agent</b><br>
+  After being deployed, an agent may not act perfectly. From environmental feedback, it <b>learns and adjusts</b> its decisions over time — requires <b>machine learning</b> techniques.</div>
+</div>
+
+<!-- ========================= CH3 ========================= -->
+<h2 class="chapter green" id="ch3">Chapter 3 — Rational Agent by Searching</h2>
+
+<div class="card green">
+  <h3><span class="num">1</span>Problem Formulation <span class="star">常考</span></h3>
+  <div class="en green">
+    <b>Initial state + Actions + Goal states = a Search Tree.</b><br>
+    For large problems, states are generated at <b>run-time</b> rather than listed in advance:<br>
+    <b>new state = action(old state)</b>, e.g., <code>right([1,0,0]) + [0,1,0]</code>.<br>
+    A <b>solution</b> is a sequence of actions (e.g., <code>[up, left]</code>) leading to a goal; multiple paths may reach the goal, and the agent should choose the best one.
+  </div>
+</div>
+
+<div class="card green">
+  <h3><span class="num">2</span>Suitable Environments for Search <span class="must">★★必背</span></h3>
+  <div class="en green">
+    This "plan first, then execute" approach requires the environment to be:
+  </div>
+  <table>
+    <tr><th>性質</th><th>原因</th></tr>
+    <tr><td><b>Static</b></td><td>No need to worry about changes during formulation</td></tr>
+    <tr><td><b>Fully observable</b></td><td>The agent knows its initial state</td></tr>
+    <tr><td><b>Discrete</b></td><td>A finite number of actions</td></tr>
+    <tr><td><b>Deterministic</b></td><td>The effect of every action is known and certain</td></tr>
+  </table>
+  <div class="tip"><b>一句總結：</b>只適用最簡單的環境。</div>
+</div>
+
+<div class="card green">
+  <h3><span class="num">3</span>Well-defined Problem — 四組件 <span class="must">★★★必背</span></h3>
+  <ol>
+    <li><b>Initial state</b> — where the agent starts. 起始狀態。</li>
+    <li><b>Successor function / Actions</b> — the set of all possible actions; together with the initial state, this defines the <b>state space</b> (all states reachable from the initial state).</li>
+    <li><b>Goal test</b> — applied to a state to check if it is a goal. A <b>test (not a fixed list)</b> is used because some goals are described by properties that cannot be enumerated (e.g., in chess, "checkmate the opponent's king").</li>
+    <li><b>Path cost function g</b> — assigns a numeric cost to a path, usually the <b>sum of step costs</b>.</li>
+  </ol>
+  <div class="en green">
+    <b>Solution</b> = a path from initial state to a state satisfying the goal test.<br>
+    <b>Optimal solution</b> = the solution with the <b>lowest path cost</b> among all solutions.
+  </div>
+</div>
+
+<div class="card green">
+  <h3><span class="num">4</span>Classic Examples <span class="star">要識 formulate</span></h3>
+  <table>
+    <tr><th>Problem</th><th>Initial State</th><th>Actions</th><th>Goal Test</th><th>Path Cost</th></tr>
+    <tr>
+      <td>Vacuum world</td>
+      <td>Any state</td>
+      <td>left, right, suck, noOp (4 actions)</td>
+      <td>Both squares clean</td>
+      <td>Each step = 1, noOp = 0</td>
+    </tr>
+    <tr>
+      <td>8-puzzle</td>
+      <td>Any arrangement</td>
+      <td>Blank moves up/down/left/right</td>
+      <td>Matches goal configuration</td>
+      <td>Each step = 1</td>
+    </tr>
+    <tr>
+      <td>8-queens (incremental)</td>
+      <td>Empty board (0 queens)</td>
+      <td>Add a queen to any empty square</td>
+      <td>8 queens, none attacking</td>
+      <td>0; state space ≈ 256 tera-states</td>
+    </tr>
+    <tr>
+      <td>8-queens (complete-state)</td>
+      <td>8 queens already placed, one per leftmost columns</td>
+      <td>Move an attacked queen to a safe row</td>
+      <td>8 queens, none attacking</td>
+      <td>0; state space = 71 = 5040 (much smaller)</td>
+    </tr>
+  </table>
+  <div class="tip"><b>結論必寫：</b>The way a problem is formulated makes a big difference to the size of the search space.</div>
+</div>
+
+<div class="card green">
+  <h3><span class="num">5</span>Search Tree Terminology <span class="star">常考</span></h3>
+  <ul>
+    <li><b>Expanding</b> — applying the successor function to a state, generating a new set of states (e.g., S → {A, B, C}).</li>
+    <li><b>Leaf node</b> — a state with no successors (a goal), or one not yet expanded.</li>
+    <li><b>Fringe</b> — the set of generated-but-not-yet-expanded leaf nodes.</li>
+    <li><b>Node 五要素</b> — STATE, PARENT-NODE, ACTION, PATH-COST g(n), DEPTH.</li>
+    <li><b>Queue</b> — the data structure used to organize the fringe; every search strategy uses one (they differ in ordering).</li>
+  </ul>
+</div>
+
+<div class="card green">
+  <h3><span class="num">6</span>Four Evaluation Criteria <span class="must">★★必背</span></h3>
+  <ol>
+    <li><b>Completeness</b> — Is a solution guaranteed to be found?</li>
+    <li><b>Optimality</b> — Is the found solution the best among all solutions?</li>
+    <li><b>Time complexity</b> — How long does it take to find a solution?</li>
+    <li><b>Space complexity</b> — How much memory is required?</li>
+  </ol>
+  <div class="zh">完備性、最優性、時間複雜度、空間複雜度。任何 search strategy 都用這四個評價。</div>
+</div>
+
+<div class="card green">
+  <h3><span class="num">7</span>Uninformed Search Strategies <span class="must">★★★Ch3 核心</span></h3>
+  <table>
+    <tr>
+      <th>Strategy</th><th>Expansion order</th><th>Complete?</th><th>Optimal?</th><th>Notes</th>
+    </tr>
+    <tr>
+      <td><b>Breadth-first search (BFS)</b></td>
+      <td>FIFO — expand shallowest first</td>
+      <td>Yes</td>
+      <td>Yes, if path cost is non-decreasing with depth</td>
+      <td>Downside: time/space complexity explodes if branching factor b is large</td>
+    </tr>
+    <tr>
+      <td><b>Uniform-cost search</b></td>
+      <td>Expand the node with lowest path cost g(n)</td>
+      <td>Yes</td>
+      <td>Yes — guarantees the cheapest solution</td>
+      <td>Requires non-decreasing cost; unsuitable for negative-cost actions</td>
+    </tr>
+    <tr>
+      <td><b>Depth-first search (DFS)</b></td>
+      <td>LIFO — go to deepest level first</td>
+      <td>No — path may be infinite/looping</td>
+      <td>No</td>
+      <td>Lower time/space complexity; PROLOG's backtracking search is this type</td>
+    </tr>
+    <tr>
+      <td><b>Depth-limited search (DLS)</b></td>
+      <td>DFS with a predefined max depth d</td>
+      <td>Yes (bounded tree)</td>
+      <td>No</td>
+      <td>Hard to choose a good d — too small misses solutions, too large behaves like DFS</td>
+    </tr>
+    <tr>
+      <td><b>Iterative deepening search (IDS)</b></td>
+      <td>Repeats DLS with d = 0, 1, 2, ...</td>
+      <td>Yes</td>
+      <td>Yes (if step cost = 1)</td>
+      <td>Combines DFS's space efficiency with BFS's completeness/optimality; good when search space is large and solution depth unknown</td>
+    </tr>
+    <tr>
+      <td><b>Iterative lengthening search (ILS)</b></td>
+      <td>Like IDS, but limits by path cost instead of depth</td>
+      <td>—</td>
+      <td>—</td>
+      <td>Iterative version of uniform-cost search; saves memory but costs more computation</td>
+    </tr>
+    <tr>
+      <td><b>Bidirectional search</b></td>
+      <td>Simultaneous forward (from start) and backward (from goal) search, meeting in the middle</td>
+      <td>—</td>
+      <td>—</td>
+      <td>Difficult: backward search needs actions to be reversible, and there may be many goal states</td>
+    </tr>
+  </table>
+  <div class="tip"><b>背誦口訣：</b>BFS 淺／UCS 便宜／DFS 深／DLS 限深／IDS 加深／ILS 限成本／Bidirectional 兩頭。</div>
+</div>
+
+<div class="card green">
+  <h3><span class="num">8</span>Avoiding Repeated States <span class="star">常考</span></h3>
+  <div class="en green">Repeated states can cause <b>infinite loops or inefficiency</b>. Three approaches (increasing difficulty):</div>
+  <ol>
+    <li>Don't return to the state you just came from (reject successors equal to the parent)</li>
+    <li>Don't create paths with cycles (reject successors equal to any ancestor)</li>
+    <li>Don't generate any state that has already been generated — check against <b>all expanded states</b>, not just ancestors. Uses a <b>closed list</b> (a set storing every expanded node); if the current node matches one in the closed list, discard it.</li>
+  </ol>
+</div>
+
+<div class="card green">
+  <h3><span class="num">9</span>Partial Information — 三種問題 <span class="must">★★要分辨</span></h3>
+  <table>
+    <tr><th>類型</th><th>問題</th><th>做法</th></tr>
+    <tr>
+      <td><b>Sensorless / Conformant</b></td>
+      <td>No sensors, initial state unknown</td>
+      <td>Search over a set of possible initial states, called <b>belief states</b></td>
+    </tr>
+    <tr>
+      <td><b>Contingency (nondeterministic)</b></td>
+      <td>Action effects are uncertain</td>
+      <td>Build a tree of possible outcomes; the agent must interleave "search, execute, search, execute…" rather than search once then execute</td>
+    </tr>
+    <tr>
+      <td><b>Exploration</b></td>
+      <td>Both states and action effects are unknown</td>
+      <td>The agent must experiment (with risk of damage); if it survives, it learns the environment for future use</td>
+    </tr>
+  </table>
+</div>
+
+<!-- ========================= FINAL ========================= -->
+<div class="final" id="final">
+  <h2>最後衝刺 — 必背清單</h2>
+  <ol>
+    <li><b>AI 能力：</b>no limitation in application, limitation in capability; replaces labour-intensive jobs.</li>
+    <li><b>三翻譯：</b>Assembler → machine code; Compiler → machine code; AI LLM agent → natural language to machine code.</li>
+    <li><b>AI 四象限：</b>Thinking Humanly / Thinking Rationally / Acting Humanly / Acting Rationally.</li>
+    <li><b>Turing Test 四能力：</b>NLP, Knowledge representation, Automated reasoning, Machine learning；Total 加 Computer vision + Robotics。</li>
+    <li><b>Agent 定義：</b>perceives environment through sensors, acts through actuators, processed by agent program.</li>
+    <li><b>Rationality 四要素：</b>performance measure, prior knowledge, actions, percept sequence。</li>
+    <li><b>PEAS：</b>Performance measure, Environment, Actuators, Sensors。</li>
+    <li><b>環境六對：</b>Fully/Partially observable; Deterministic/Stochastic; Episodic/Sequential; Static/Dynamic; Discrete/Continuous; Single/Multiagent。</li>
+    <li><b>五種 Agent：</b>Simple reflex / Model-based reflex / Goal-based / Utility-based / Learning。</li>
+    <li><b>Problem 四組件：</b>Initial state, Successor function/Actions, Goal test, Path cost function g。</li>
+    <li><b>Search 四評價：</b>Completeness, Optimality, Time complexity, Space complexity。</li>
+    <li><b>Search strategies：</b>BFS, Uniform-cost, DFS, DLS, IDS, ILS, Bidirectional。</li>
+    <li><b>避免重複：</b>Don't return to parent; don't create cycles; use closed list。</li>
+    <li><b>部分資訊三類：</b>Sensorless (belief states), Contingency (interleave search/execute), Exploration (experiment and learn)。</li>
+  </ol>
+</div>
+
+<!-- ========================= TRAPS ========================= -->
+<h2 class="chapter purple" id="traps">易錯陷阱 — 考前一定要分清</h2>
+
+<div class="card">
+  <h3>Ch1 陷阱</h3>
+  <div class="trap">
+    <b>Thinking Humanly vs Thinking Rationally：</b>像人思考可以包括情緒、偏見、不理性；理性思考要符合邏輯。<br><br>
+    <b>Acting Humanly vs Acting Rationally：</b>像人行動用 Turing Test；理性行動用 Rational Agent，只求結果正確。<br><br>
+    <b>Human-like vs Rational：</b>人可能不理性；理性系統可以完全不像人，但結果更好。
+  </div>
+</div>
+
+<div class="card purple">
+  <h3>Ch2 陷阱</h3>
+  <div class="trap">
+    <b>Sensors vs Actuators：</b>Sensors = 輸入；Actuators = 輸出。<br><br>
+    <b>Fully observable：</b>是看 sensors 能否看到完整狀態，不是看環境簡不簡單。<br><br>
+    <b>Static vs Dynamic：</b>有 clock 的象棋是 dynamic，因為環境會隨時間變。<br><br>
+    <b>Goal-based vs Utility-based：</b>Goal 只答「有沒有達成」；Utility 答「有多好」，可權衡衝突目標。<br><br>
+    <b>Simple reflex vs Model-based reflex：</b>Simple 只看現在 percept；Model-based 有 internal state，記得過去。
+  </div>
+</div>
+
+<div class="card green">
+  <h3>Ch3 陷阱</h3>
+  <div class="trap">
+    <b>BFS vs Uniform-cost：</b>BFS 按深度一層層；UCS 按 path cost 先走最便宜。<br><br>
+    <b>DFS vs DLS vs IDS：</b>DFS 無限深可能 loop；DLS 加深度上限 d；IDS 重複 DLS，d 一直增加。<br><br>
+    <b>Complete vs Optimal：</b>Complete = 一定找到解；Optimal = 找到最好解。<br><br>
+    <b>Goal test vs Path cost：</b>Goal test 檢查是否到達目標；Path cost 計算這條路有多貴。<br><br>
+    <b>Sensorless vs Contingency vs Exploration：</b>Sensorless 不知初始狀態；Contingency 行動效果不確定；Exploration 狀態和效果都未知。
+  </div>
+</div>
+
+<!-- ========================= TEMPLATES ========================= -->
+<h2 class="chapter">英文答題模板 — 直接背</h2>
+
+<div class="card">
+  <h3>模板 1：What is AI?</h3>
+  <div class="answer">
+    <b>There is no single agreed definition of AI.</b> AI definitions can be classified along two axes: Thought vs. Behavior, and Human-like vs. Rational. This gives four categories: Thinking Humanly, Thinking Rationally, Acting Humanly, and Acting Rationally. The standard test for Acting Humanly is the Turing Test, which requires natural language processing, knowledge representation, automated reasoning, and machine learning. The Total Turing Test adds computer vision and robotics. The representative of Acting Rationally is the Rational Agent.
+  </div>
+</div>
+
+<div class="card purple">
+  <h3>模板 2：What is an Agent?</h3>
+  <div class="answer">
+    <b>An agent is anything that perceives its environment through sensors and acts upon that environment through actuators.</b> The processing in between is realized by an agent program. Rationality is judged using a performance measure, and depends on four factors: the performance measure, the agent's prior knowledge of the environment, the actions the agent can perform, and the agent's percept sequence up to now. The task environment can be described using PEAS: Performance measure, Environment, Actuators, and Sensors.
+  </div>
+</div>
+
+<div class="card green">
+  <h3>模板 3：Explain a well-defined problem</h3>
+  <div class="answer">
+    <b>A well-defined problem has four components:</b> initial state, successor function/actions, goal test, and path cost function. The initial state is where the agent starts. The successor function defines all possible actions and, together with the initial state, defines the state space. The goal test checks whether a state is a goal. The path cost function assigns a numeric cost to a path. A solution is a path from the initial state to a state satisfying the goal test. An optimal solution is the solution with the lowest path cost.
+  </div>
+</div>
+
+<div class="card green">
+  <h3>模板 4：Compare BFS and DFS</h3>
+  <div class="answer">
+    <b>BFS uses FIFO and expands the shallowest node first.</b> It is complete and optimal if path cost is non-decreasing with depth, but its time and space complexity can explode when the branching factor is large. <b>DFS uses LIFO and goes to the deepest level first.</b> It is not complete because the path may be infinite or looping, and it is not optimal, but it uses less memory. PROLOG's backtracking search is a type of DFS.
+  </div>
+</div>
+
+<div class="card green">
+  <h3>模板 5：What environments are suitable for search?</h3>
+  <div class="answer">
+    <b>This "plan first, then execute" approach requires the environment to be static, fully observable, discrete, and deterministic.</b> Static means no need to worry about changes during formulation. Fully observable means the agent knows its initial state. Discrete means a finite number of actions. Deterministic means the effect of every action is known and certain. Therefore, it only applies to the simplest environments.
+  </div>
+</div>
+
+<div style="text-align:center;color:#5b6472;font-size:13.5px;margin-top:36px;">
+  祝考試順利 · Cover the English column and try to explain each concept out loud in English — that's the actual exam skill.
+</div>
+
+</div>
+</body>
+</html>

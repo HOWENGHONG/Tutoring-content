@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Form 3 Physics — Complete Study Pack</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:Arial,Helvetica,sans-serif;background:#f5f5f0;color:#1a1a1a;padding:16px}
+  h1{font-size:20px;font-weight:600;margin-bottom:4px}
+  .subtitle{font-size:13px;color:#666;margin-bottom:16px}
+  .tabs{display:flex;gap:4px;margin-bottom:20px;border-bottom:1.5px solid #ddd;padding-bottom:0;flex-wrap:wrap}
+  .tab{padding:9px 16px;font-size:13px;cursor:pointer;border:none;background:none;color:#666;border-bottom:2.5px solid transparent;transition:all .15s;white-space:nowrap;font-family:Arial,Helvetica,sans-serif}
+  .tab.active{color:#1a1a1a;border-bottom:2.5px solid #1a1a1a;font-weight:600}
+  .tab:hover:not(.active){color:#1a1a1a;background:#f0f0ec;border-radius:6px 6px 0 0}
+  .section{display:none}.section.active{display:block}
+  h2{font-size:16px;font-weight:600;margin:22px 0 10px;padding-bottom:4px;border-bottom:1px solid #e0e0e0}
+  h3{font-size:14px;font-weight:600;margin:14px 0 6px;color:#444}
+  .badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:4px;font-weight:600;margin-right:6px}
+  .badge-blue{background:#dbeafe;color:#1e40af}
+  .badge-green{background:#dcfce7;color:#166534}
+  .badge-amber{background:#fef3c7;color:#92400e}
+  .badge-red{background:#fee2e2;color:#991b1b}
+
+  /* Exam cards */
+  .qcard{background:#fff;border:1px solid #e0e0e0;border-radius:10px;padding:14px 16px;margin-bottom:10px}
+  .qnum{font-size:12px;font-weight:600;color:#888;margin-bottom:5px}
+  .qtext{font-size:14px;line-height:1.65;margin-bottom:10px}
+  .mcq-opt{font-size:13px;line-height:1.8;color:#333;margin-bottom:8px}
+  .ans-toggle{font-size:12px;color:#2563eb;cursor:pointer;border:1px solid #bfdbfe;background:#eff6ff;padding:4px 12px;border-radius:6px;font-family:Arial,Helvetica,sans-serif;font-weight:600}
+  .ans-toggle:hover{background:#dbeafe}
+  .ans-box{display:none;margin-top:10px;padding:10px 13px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;font-size:13px;line-height:1.7;color:#14532d}
+  .ans-box.show{display:block}
+  .sep{height:1px;background:#e5e5e5;margin:20px 0}
+
+  /* Formula cards */
+  .formula-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px;margin-bottom:16px}
+  .fcard{background:#fff;border:1px solid #e0e0e0;border-radius:10px;padding:14px 16px}
+  .ftag{font-size:10px;font-weight:700;color:#888;margin-bottom:6px;text-transform:uppercase;letter-spacing:.6px}
+  .fmain{font-size:20px;font-weight:700;margin-bottom:5px;font-family:'Courier New',Courier,monospace;color:#1a1a1a;line-height:1.4}
+  .fmean{font-size:12px;color:#555;line-height:1.55}
+  .warn-box{background:#fffbeb;border:1px solid #fcd34d;border-radius:8px;padding:12px 14px;margin-top:8px}
+  .warn-box .wtitle{font-size:12px;font-weight:700;color:#92400e;margin-bottom:6px}
+  .warn-box .wtext{font-size:12px;color:#92400e;line-height:1.7}
+
+  /* Diagram section */
+  .dia-wrap{background:#fff;border:1px solid #e0e0e0;border-radius:10px;padding:16px;margin-bottom:14px}
+  .dia-label{font-size:12px;font-weight:700;color:#555;margin-bottom:10px;text-transform:uppercase;letter-spacing:.4px}
+
+  /* Knowledge cards */
+  .kcard{background:#fff;border:1px solid #e0e0e0;border-radius:10px;padding:14px 16px;margin-bottom:10px}
+  .kcard .ktitle{font-size:14px;font-weight:700;color:#1a1a1a;margin:0 0 10px;padding-bottom:6px;border-bottom:1px solid #e0e0e0}
+  .kitem{font-size:13px;line-height:1.65;padding:5px 0;border-bottom:1px solid #f0f0f0;display:flex;gap:8px;align-items:flex-start}
+  .kitem:last-child{border-bottom:none}
+  .kitem::before{content:"★";color:#f59e0b;font-size:12px;flex-shrink:0;margin-top:2px}
+  .mem-trick{font-size:13px;padding:10px 14px;background:#fffbeb;border:1px solid #fcd34d;border-radius:8px;color:#78350f;margin:10px 0;line-height:1.6}
+
+  table{width:100%;border-collapse:collapse;font-size:13px;margin:10px 0}
+  th{background:#f5f5f0;padding:8px 10px;text-align:left;font-weight:700;border-bottom:1.5px solid #ccc;font-size:12px}
+  td{padding:7px 10px;border-bottom:1px solid #ebebeb;vertical-align:top}
+  tr:last-child td{border-bottom:none}
+
+  @media print {
+    .tabs,.tab{display:none!important}
+    .section{display:block!important}
+    .qcard,.fcard,.kcard,.dia-wrap{break-inside:avoid;page-break-inside:avoid}
+    .ans-toggle{display:none!important}
+    .ans-box{display:block!important;background:#f0fdf4!important}
+    body{background:#fff;padding:0}
+  }
+</style>
+</head>
+<body>
+
+<h1>Form 3 Physics — Complete Study Pack</h1>
+<p class="subtitle">Ch.1 Movement &amp; Position &nbsp;·&nbsp; Ch.10 Properties of Waves &nbsp;·&nbsp; Ch.11 The Electromagnetic Spectrum &nbsp;·&nbsp; Ch.12 Light Waves</p>
+
+<div class="tabs">
+  <button class="tab active" onclick="showTab('exam',this)">📝 Exam Paper + Answers</button>
+  <button class="tab" onclick="showTab('formulas',this)">📐 Formulas</button>
+  <button class="tab" onclick="showTab('diagrams',this)">📊 Diagrams</button>
+  <button class="tab" onclick="showTab('knowledge',this)">🧠 Knowledge Points</button>
+</div>
+
+<!-- ===================== EXAM PAPER ===================== -->
+<div class="section active" id="exam">
+
+<div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;flex-wrap:wrap">
+  <span style="font-size:15px;font-weight:700">Form 3 Physics — Combined Revision Test</span>
+  <span class="badge badge-blue">50 marks</span>
+  <span class="badge badge-amber">~60 min</span>
+</div>
+<p style="font-size:13px;color:#666;margin-bottom:18px">Click <strong>Show Answer</strong> after attempting each question.</p>
+
+<h2>Section A — Multiple Choice &nbsp;<span style="font-weight:400;font-size:14px;color:#888">(10 marks, 1 mark each)</span></h2>
+
+<div class="qcard">
+  <div class="qnum"><span class="badge badge-blue">Ch.1</span> Q1</div>
+  <div class="qtext">A car travels 100 m in 25 s at constant speed. What is its speed?</div>
+  <div class="mcq-opt">A. 0.25 m/s &nbsp;&nbsp;&nbsp; B. 2.5 m/s &nbsp;&nbsp;&nbsp; C. 4 m/s &nbsp;&nbsp;&nbsp; D. 25 m/s</div>
+  <button class="ans-toggle" onclick="tog(this)">▶ Show Answer</button>
+  <div class="ans-box">✅ <strong>C. 4 m/s</strong><br>Speed = distance ÷ time = 100 ÷ 25 = 4 m/s</div>
+</div>
+
+<div class="qcard">
+  <div class="qnum"><span class="badge badge-blue">Ch.1</span> Q2</div>
+  <div class="qtext">On a distance-time graph, a horizontal (flat) line means the object is:</div>
+  <div class="mcq-opt">A. Moving at constant speed &nbsp;&nbsp;&nbsp; B. Accelerating &nbsp;&nbsp;&nbsp; C. Stationary &nbsp;&nbsp;&nbsp; D. Decelerating</div>
+  <button class="ans-toggle" onclick="tog(this)">▶ Show Answer</button>
+  <div class="ans-box">✅ <strong>C. Stationary</strong><br>A flat line means no change in distance over time — the object is not moving.</div>
+</div>
+
+<div class="qcard">
+  <div class="qnum"><span class="badge badge-green">Ch.10</span> Q3</div>
+  <div class="qtext">Sound waves are an example of:</div>
+  <div class="mcq-opt">A. Transverse waves &nbsp;&nbsp;&nbsp; B. Longitudinal waves &nbsp;&nbsp;&nbsp; C. Electromagnetic waves &nbsp;&nbsp;&nbsp; D. Light waves</div>
+  <button class="ans-toggle" onclick="tog(this)">▶ Show Answer</button>
+  <div class="ans-box">✅ <strong>B. Longitudinal waves</strong><br>Sound particles vibrate parallel to the direction of wave travel, forming compressions and rarefactions.</div>
+</div>
+
+<div class="qcard">
+  <div class="qnum"><span class="badge badge-green">Ch.10</span> Q4</div>
+  <div class="qtext">A wave has frequency 50 Hz and wavelength 2 m. What is its wave speed?</div>
+  <div class="mcq-opt">A. 25 m/s &nbsp;&nbsp;&nbsp; B. 52 m/s &nbsp;&nbsp;&nbsp; C. 100 m/s &nbsp;&nbsp;&nbsp; D. 48 m/s</div>
+  <button class="ans-toggle" onclick="tog(this)">▶ Show Answer</button>
+  <div class="ans-box">✅ <strong>C. 100 m/s</strong><br>v = fλ = 50 × 2 = 100 m/s</div>
+</div>
+
+<div class="qcard">
+  <div class="qnum"><span class="badge badge-amber">Ch.11</span> Q5</div>
+  <div class="qtext">Which type of electromagnetic wave has the HIGHEST frequency?</div>
+  <div class="mcq-opt">A. Radio waves &nbsp;&nbsp;&nbsp; B. Infrared &nbsp;&nbsp;&nbsp; C. X-rays &nbsp;&nbsp;&nbsp; D. Gamma rays</div>
+  <button class="ans-toggle" onclick="tog(this)">▶ Show Answer</button>
+  <div class="ans-box">✅ <strong>D. Gamma rays</strong><br>Gamma rays have the highest frequency and shortest wavelength in the EM spectrum.</div>
+</div>
+
+<div class="qcard">
+  <div class="qnum"><span class="badge badge-amber">Ch.11</span> Q6</div>
+  <div class="qtext">All electromagnetic waves share which property?</div>
+  <div class="mcq-opt">A. They require a medium to travel &nbsp;&nbsp;&nbsp; B. They travel at 3×10⁸ m/s in vacuum &nbsp;&nbsp;&nbsp; C. They are longitudinal &nbsp;&nbsp;&nbsp; D. They carry electric charge</div>
+  <button class="ans-toggle" onclick="tog(this)">▶ Show Answer</button>
+  <div class="ans-box">✅ <strong>B. They travel at 3×10⁸ m/s in vacuum</strong><br>This is called the speed of light. All EM waves are also transverse and can travel through a vacuum.</div>
+</div>
+
+<div class="qcard">
+  <div class="qnum"><span class="badge badge-red">Ch.12</span> Q7</div>
+  <div class="qtext">A ray of light hits a mirror. The angle of incidence is 35°. What is the angle of reflection?</div>
+  <div class="mcq-opt">A. 55° &nbsp;&nbsp;&nbsp; B. 35° &nbsp;&nbsp;&nbsp; C. 70° &nbsp;&nbsp;&nbsp; D. 90°</div>
+  <button class="ans-toggle" onclick="tog(this)">▶ Show Answer</button>
+  <div class="ans-box">✅ <strong>B. 35°</strong><br>Law of reflection: angle of incidence = angle of reflection. Both are measured from the normal (not the surface).</div>
+</div>
+
+<div class="qcard">
+  <div class="qnum"><span class="badge badge-red">Ch.12</span> Q8</div>
+  <div class="qtext">Total internal reflection can only occur when light travels from:</div>
+  <div class="mcq-opt">A. Less dense to more dense medium &nbsp;&nbsp;&nbsp; B. More dense to less dense medium &nbsp;&nbsp;&nbsp; C. Air to glass &nbsp;&nbsp;&nbsp; D. Water to glass</div>
+  <button class="ans-toggle" onclick="tog(this)">▶ Show Answer</button>
+  <div class="ans-box">✅ <strong>B. More dense to less dense medium</strong><br>TIR occurs when light travels from dense → less dense (e.g. glass → air) AND the angle of incidence exceeds the critical angle.</div>
+</div>
+
+<div class="qcard">
+  <div class="qnum"><span class="badge badge-green">Ch.10</span> Q9</div>
+  <div class="qtext">A wave has period T = 0.02 s. What is its frequency?</div>
+  <div class="mcq-opt">A. 0.02 Hz &nbsp;&nbsp;&nbsp; B. 5 Hz &nbsp;&nbsp;&nbsp; C. 50 Hz &nbsp;&nbsp;&nbsp; D. 500 Hz</div>
+  <button class="ans-toggle" onclick="tog(this)">▶ Show Answer</button>
+  <div class="ans-box">✅ <strong>C. 50 Hz</strong><br>f = 1/T = 1 ÷ 0.02 = 50 Hz</div>
+</div>
+
+<div class="qcard">
+  <div class="qnum"><span class="badge badge-amber">Ch.11</span> Q10</div>
+  <div class="qtext">Which EM wave is used in TV remote controls?</div>
+  <div class="mcq-opt">A. Microwaves &nbsp;&nbsp;&nbsp; B. Ultraviolet &nbsp;&nbsp;&nbsp; C. Infrared &nbsp;&nbsp;&nbsp; D. X-rays</div>
+  <button class="ans-toggle" onclick="tog(this)">▶ Show Answer</button>
+  <div class="ans-box">✅ <strong>C. Infrared</strong><br>TV remotes emit infrared signals to communicate with the TV set.</div>
+</div>
+
+<div class="sep"></div>
+<h2>Section B — Short Structured Questions &nbsp;<span style="font-weight:400;font-size:14px;color:#888">(30 marks)</span></h2>
+
+<div class="qcard">
+  <div class="qnum"><span class="badge badge-blue">Ch.1</span> Q11 &nbsp;·&nbsp; 6 marks</div>
+  <div class="qtext">
+    A cyclist starts from rest and reaches 12 m/s in 8 seconds. She then travels at constant speed for 10 seconds, then brakes to a stop in 4 seconds.<br><br>
+    (a) Calculate her acceleration in the first 8 s. <em>(2 marks)</em><br>
+    (b) Calculate the total distance travelled. <em>(3 marks)</em><br>
+    (c) On a v-t graph, describe the shape of each stage. <em>(1 mark)</em>
+  </div>
+  <button class="ans-toggle" onclick="tog(this)">▶ Show Answer</button>
+  <div class="ans-box">
+    <strong>(a)</strong> a = (v − u) / t = (12 − 0) / 8 = <strong>1.5 m/s²</strong><br><br>
+    <strong>(b)</strong><br>
+    Stage 1 (triangle): ½ × 8 × 12 = 48 m<br>
+    Stage 2 (rectangle): 10 × 12 = 120 m<br>
+    Stage 3 (triangle): ½ × 4 × 12 = 24 m<br>
+    <strong>Total = 192 m</strong><br><br>
+    <strong>(c)</strong> Stage 1: straight line sloping UP to 12 m/s; Stage 2: horizontal line at 12 m/s; Stage 3: straight line sloping DOWN to 0.
+  </div>
+</div>
+
+<div class="qcard">
+  <div class="qnum"><span class="badge badge-green">Ch.10</span> Q12 &nbsp;·&nbsp; 6 marks</div>
+  <div class="qtext">
+    A water wave has wavelength 3 m and travels at 6 m/s.<br><br>
+    (a) Calculate the frequency of the wave. <em>(2 marks)</em><br>
+    (b) Calculate the period. <em>(2 marks)</em><br>
+    (c) State TWO differences between transverse and longitudinal waves. <em>(2 marks)</em>
+  </div>
+  <button class="ans-toggle" onclick="tog(this)">▶ Show Answer</button>
+  <div class="ans-box">
+    <strong>(a)</strong> f = v / λ = 6 / 3 = <strong>2 Hz</strong><br><br>
+    <strong>(b)</strong> T = 1 / f = 1 / 2 = <strong>0.5 s</strong><br><br>
+    <strong>(c)</strong> Any two of:<br>
+    • Transverse: vibrations are perpendicular to direction of travel. Longitudinal: vibrations are parallel.<br>
+    • Examples: transverse = light / water waves; longitudinal = sound.<br>
+    • Longitudinal waves have compressions and rarefactions; transverse have crests and troughs.
+  </div>
+</div>
+
+<div class="qcard">
+  <div class="qnum"><span class="badge badge-amber">Ch.11</span> Q13 &nbsp;·&nbsp; 6 marks</div>
+  <div class="qtext">
+    (a) List the 7 types of EM radiation in order from lowest to highest frequency. <em>(3 marks)</em><br><br>
+    (b) State ONE use and ONE danger for EACH of: ultraviolet, X-rays, gamma rays. <em>(3 marks)</em>
+  </div>
+  <button class="ans-toggle" onclick="tog(this)">▶ Show Answer</button>
+  <div class="ans-box">
+    <strong>(a)</strong> Radio → Microwave → Infrared → Visible light → Ultraviolet → X-rays → Gamma rays<br><br>
+    <strong>(b)</strong><br>
+    <strong>UV:</strong> Use = sterilisation / detecting forged banknotes; Danger = skin cancer / eye damage<br>
+    <strong>X-rays:</strong> Use = medical imaging (bones) / airport security; Danger = cell/DNA damage, cancer risk<br>
+    <strong>Gamma:</strong> Use = cancer radiotherapy / sterilising medical equipment; Danger = cell/DNA damage, cancer
+  </div>
+</div>
+
+<div class="qcard">
+  <div class="qnum"><span class="badge badge-red">Ch.12</span> Q14 &nbsp;·&nbsp; 6 marks</div>
+  <div class="qtext">
+    A ray of light travels from glass (denser) into air. The critical angle of glass is 42°.<br><br>
+    (a) Describe what happens when the angle of incidence is exactly 42°. <em>(1 mark)</em><br>
+    (b) What happens when the angle of incidence is 50°? Name this phenomenon. <em>(2 marks)</em><br>
+    (c) State ONE application of this phenomenon. <em>(1 mark)</em><br>
+    (d) State TWO conditions needed for this to occur. <em>(2 marks)</em>
+  </div>
+  <button class="ans-toggle" onclick="tog(this)">▶ Show Answer</button>
+  <div class="ans-box">
+    <strong>(a)</strong> The refracted ray travels along the boundary between the two media (angle of refraction = 90°).<br><br>
+    <strong>(b)</strong> The ray is completely reflected back into the glass — this is <strong>Total Internal Reflection (TIR)</strong>.<br><br>
+    <strong>(c)</strong> Optical fibres / endoscopes / periscopes / binoculars / diamond cutting.<br><br>
+    <strong>(d)</strong><br>
+    • Light must travel from a denser medium to a less dense medium (e.g. glass → air).<br>
+    • The angle of incidence must be greater than the critical angle.
+  </div>
+</div>
+
+<div class="qcard">
+  <div class="qnum"><span class="badge badge-blue">Ch.1</span> Q15 &nbsp;·&nbsp; 6 marks</div>
+  <div class="qtext">
+    A distance-time graph shows the following:<br>
+    • t = 0 to 5 s: object moves from 0 to 20 m<br>
+    • t = 5 s to 10 s: object stays at 20 m<br>
+    • t = 10 s to 14 s: object returns to 0 m<br><br>
+    (a) What is the speed in the first 5 s? <em>(2 marks)</em><br>
+    (b) What is happening between t = 5 s and t = 10 s? <em>(1 mark)</em><br>
+    (c) What is the speed in the final stage (t = 10 to 14 s)? <em>(2 marks)</em><br>
+    (d) What is the total distance travelled? What is the displacement? <em>(1 mark)</em>
+  </div>
+  <button class="ans-toggle" onclick="tog(this)">▶ Show Answer</button>
+  <div class="ans-box">
+    <strong>(a)</strong> Speed = distance / time = 20 / 5 = <strong>4 m/s</strong><br><br>
+    <strong>(b)</strong> The object is <strong>stationary</strong> (not moving — flat line on d-t graph).<br><br>
+    <strong>(c)</strong> Speed = 20 / 4 = <strong>5 m/s</strong><br><br>
+    <strong>(d)</strong> Total distance = 20 + 0 + 20 = <strong>40 m</strong>. Displacement = <strong>0 m</strong> (returned to starting point).
+  </div>
+</div>
+
+<div class="sep"></div>
+<h2>Section C — Graph &amp; Diagram Questions &nbsp;<span style="font-weight:400;font-size:14px;color:#888">(10 marks)</span></h2>
+
+<div class="qcard">
+  <div class="qnum"><span class="badge badge-green">Ch.10</span> Q16 &nbsp;·&nbsp; 4 marks</div>
+  <div class="qtext">
+    The diagram below shows a transverse wave. Label the following on the wave:<br>
+    (a) the amplitude &nbsp; (b) the wavelength &nbsp; (c) a crest &nbsp; (d) a trough
+    <svg width="100%" viewBox="0 0 520 130" style="display:block;margin:12px 0">
+      <defs>
+        <marker id="aw" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+          <path d="M2 1L8 5L2 9" fill="none" stroke="#555" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </marker>
+      </defs>
+      <line x1="20" y1="65" x2="500" y2="65" stroke="#ccc" stroke-width="1" stroke-dasharray="4 4"/>
+      <text font-size="11" fill="#888" x="504" y="69">rest</text>
+      <path d="M20,65 Q62,15 104,65 Q146,115 188,65 Q230,15 272,65 Q314,115 356,65 Q398,15 440,65 Q482,115 504,85" fill="none" stroke="#1e40af" stroke-width="2.5"/>
+      <text font-size="11" fill="#888" x="20" y="126">← Label: Amplitude (A), Wavelength (λ), Crest (C), Trough (T) →</text>
+    </svg>
+  </div>
+  <button class="ans-toggle" onclick="tog(this)">▶ Show Answer</button>
+  <div class="ans-box">
+    <strong>(a) Amplitude (A):</strong> Vertical distance from the rest/equilibrium line up to a crest (or down to a trough) — about half the total height of the wave.<br><br>
+    <strong>(b) Wavelength (λ):</strong> Horizontal distance from one crest to the next crest (or trough to trough) — e.g. from x≈20 to x≈220.<br><br>
+    <strong>(c) Crest (C):</strong> The highest point of the wave — e.g. at x≈104 (top peak).<br><br>
+    <strong>(d) Trough (T):</strong> The lowest point of the wave — e.g. at x≈188 (bottom dip).
+  </div>
+</div>
+
+<div class="qcard">
+  <div class="qnum"><span class="badge badge-blue">Ch.1</span> Q17 &nbsp;·&nbsp; 6 marks</div>
+  <div class="qtext">
+    A vehicle has the following motion:<br>
+    • 0–4 s: accelerates uniformly from rest to 20 m/s<br>
+    • 4–9 s: travels at constant velocity<br>
+    • 9–11 s: decelerates uniformly to rest<br><br>
+    (a) Sketch and label the velocity-time graph for this motion. <em>(2 marks)</em><br>
+    (b) Calculate the acceleration in the first stage (0–4 s). <em>(2 marks)</em><br>
+    (c) Calculate the total distance travelled using the area under the graph. <em>(2 marks)</em>
+  </div>
+  <button class="ans-toggle" onclick="tog(this)">▶ Show Answer</button>
+  <div class="ans-box">
+    <strong>(a)</strong> Graph: Line rises from (0,0) to (4,20) → horizontal line from (4,20) to (9,20) → line drops from (9,20) to (11,0).<br><br>
+    <strong>(b)</strong> a = (v − u) / t = (20 − 0) / 4 = <strong>5 m/s²</strong><br><br>
+    <strong>(c)</strong><br>
+    Stage 1 (triangle): ½ × 4 × 20 = 40 m<br>
+    Stage 2 (rectangle): 5 × 20 = 100 m<br>
+    Stage 3 (triangle): ½ × 2 × 20 = 20 m<br>
+    <strong>Total distance = 160 m</strong>
+  </div>
+</div>
+
+</div><!-- end exam -->
+
+<!-- ===================== FORMULAS ===================== -->
+<div class="section" id="formulas">
+<p style="font-size:13px;color:#666;margin-bottom:16px">All formulas students must know and apply in exams. Learn the triangle method for rearranging.</p>
+
+<h2>Ch.1 — Movement and Position</h2>
+<div class="formula-grid">
+  <div class="fcard">
+    <div class="ftag">Speed</div>
+    <div class="fmain">v = d ÷ t</div>
+    <div class="fmean"><strong>v</strong> = speed (m/s) &nbsp;·&nbsp; <strong>d</strong> = distance (m) &nbsp;·&nbsp; <strong>t</strong> = time (s)<br>Rearrange: d = v × t &nbsp;·&nbsp; t = d ÷ v</div>
+  </div>
+  <div class="fcard">
+    <div class="ftag">Acceleration</div>
+    <div class="fmain">a = (v − u) ÷ t</div>
+    <div class="fmean"><strong>a</strong> = acceleration (m/s²) &nbsp;·&nbsp; <strong>v</strong> = final velocity &nbsp;·&nbsp; <strong>u</strong> = initial velocity &nbsp;·&nbsp; <strong>t</strong> = time (s)<br>Deceleration = negative acceleration</div>
+  </div>
+  <div class="fcard">
+    <div class="ftag">Distance-Time Graph</div>
+    <div class="fmain">gradient = speed</div>
+    <div class="fmean">Steep slope = fast speed &nbsp;·&nbsp; Flat line = stationary &nbsp;·&nbsp; Curved line = changing speed (accelerating)<br>Gradient = rise ÷ run = Δd ÷ Δt</div>
+  </div>
+  <div class="fcard">
+    <div class="ftag">Velocity-Time Graph</div>
+    <div class="fmain">gradient = acceleration<br>area = distance</div>
+    <div class="fmean">Gradient (slope) = acceleration &nbsp;·&nbsp; Area under graph = total distance<br>Use triangle area (½bh) or rectangle area (l×w)</div>
+  </div>
+</div>
+
+<h2>Ch.10 — Properties of Waves</h2>
+<div class="formula-grid">
+  <div class="fcard">
+    <div class="ftag">Wave Equation</div>
+    <div class="fmain">v = f × λ</div>
+    <div class="fmean"><strong>v</strong> = wave speed (m/s) &nbsp;·&nbsp; <strong>f</strong> = frequency (Hz) &nbsp;·&nbsp; <strong>λ</strong> = wavelength (m)<br>Rearrange: f = v ÷ λ &nbsp;·&nbsp; λ = v ÷ f</div>
+  </div>
+  <div class="fcard">
+    <div class="ftag">Period and Frequency</div>
+    <div class="fmain">T = 1 ÷ f</div>
+    <div class="fmean"><strong>T</strong> = period (s) = time for ONE complete wave cycle<br><strong>f</strong> = frequency (Hz) = number of waves per second<br>Also: f = 1 ÷ T</div>
+  </div>
+</div>
+
+<h2>Ch.11 — Electromagnetic Spectrum</h2>
+<div class="formula-grid">
+  <div class="fcard">
+    <div class="ftag">Speed of Light</div>
+    <div class="fmain">c = 3 × 10⁸ m/s</div>
+    <div class="fmean">All EM waves travel at this speed in vacuum.<br>Use <strong>c</strong> instead of <strong>v</strong> when dealing with EM waves.</div>
+  </div>
+  <div class="fcard">
+    <div class="ftag">EM Wave Equation</div>
+    <div class="fmain">c = f × λ</div>
+    <div class="fmean"><strong>c</strong> = 3×10⁸ m/s &nbsp;·&nbsp; <strong>f</strong> = frequency (Hz) &nbsp;·&nbsp; <strong>λ</strong> = wavelength (m)<br>Higher frequency → shorter wavelength</div>
+  </div>
+</div>
+
+<h2>Ch.12 — Light Waves</h2>
+<div class="formula-grid">
+  <div class="fcard">
+    <div class="ftag">Law of Reflection</div>
+    <div class="fmain">i = r</div>
+    <div class="fmean">Angle of incidence = angle of reflection<br>⚠️ Both angles measured from the <strong>NORMAL</strong> (perpendicular to surface), NOT from the surface itself.</div>
+  </div>
+  <div class="fcard">
+    <div class="ftag">Snell's Law (Refraction)</div>
+    <div class="fmain">n₁ sin i = n₂ sin r</div>
+    <div class="fmean"><strong>n</strong> = refractive index &nbsp;·&nbsp; <strong>i</strong> = angle in medium 1 &nbsp;·&nbsp; <strong>r</strong> = angle in medium 2<br>Air / vacuum: n = 1.0</div>
+  </div>
+  <div class="fcard">
+    <div class="ftag">Critical Angle</div>
+    <div class="fmain">sin C = 1 ÷ n</div>
+    <div class="fmean"><strong>C</strong> = critical angle &nbsp;·&nbsp; <strong>n</strong> = refractive index of the denser medium<br>When i &gt; C → Total Internal Reflection occurs</div>
+  </div>
+</div>
+
+<div class="warn-box">
+  <div class="wtitle">⚠️ Common unit mistakes — check every answer!</div>
+  <div class="wtext">
+    • Frequency → unit is <strong>Hz</strong> (not m/s or m)<br>
+    • Wavelength → unit is <strong>m</strong> (not Hz)<br>
+    • Speed → unit is <strong>m/s</strong><br>
+    • Acceleration → unit is <strong>m/s²</strong><br>
+    • Always measure reflection/refraction angles from the <strong>NORMAL</strong>, not the mirror/surface<br>
+    • Period (T) is in <strong>seconds</strong>, not Hz
+  </div>
+</div>
+
+</div><!-- end formulas -->
+
+<!-- ===================== DIAGRAMS ===================== -->
+<div class="section" id="diagrams">
+<p style="font-size:13px;color:#666;margin-bottom:16px">Key diagrams to draw and interpret in exams. Study these until you can sketch them from memory.</p>
+
+<div class="dia-wrap">
+  <div class="dia-label">1. Distance-Time Graph — what each shape means</div>
+  <svg width="100%" viewBox="0 0 620 200">
+    <defs>
+      <marker id="ad1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+        <path d="M2 1L8 5L2 9" fill="none" stroke="#555" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </marker>
+    </defs>
+    <!-- Graph 1: Constant speed -->
+    <line x1="30" y1="25" x2="30" y2="170" stroke="#333" stroke-width="1.5" marker-end="url(#ad1)"/>
+    <line x1="30" y1="170" x2="190" y2="170" stroke="#333" stroke-width="1.5" marker-end="url(#ad1)"/>
+    <text font-size="10" fill="#666" x="26" y="22" text-anchor="end">d</text>
+    <text font-size="10" fill="#666" x="195" y="174">t</text>
+    <line x1="40" y1="160" x2="175" y2="40" stroke="#1e40af" stroke-width="2.5"/>
+    <text font-size="12" fill="#1e40af" x="108" y="196" text-anchor="middle" font-weight="600">Constant speed</text>
+    <text font-size="10" fill="#666" x="108" y="185" text-anchor="middle">(steep = faster)</text>
+
+    <!-- Graph 2: Stationary -->
+    <line x1="225" y1="25" x2="225" y2="170" stroke="#333" stroke-width="1.5" marker-end="url(#ad1)"/>
+    <line x1="225" y1="170" x2="400" y2="170" stroke="#333" stroke-width="1.5" marker-end="url(#ad1)"/>
+    <text font-size="10" fill="#666" x="221" y="22" text-anchor="end">d</text>
+    <text font-size="10" fill="#666" x="405" y="174">t</text>
+    <line x1="235" y1="90" x2="385" y2="90" stroke="#166534" stroke-width="2.5"/>
+    <text font-size="12" fill="#166534" x="310" y="196" text-anchor="middle" font-weight="600">Stationary</text>
+    <text font-size="10" fill="#666" x="310" y="185" text-anchor="middle">(flat line = not moving)</text>
+
+    <!-- Graph 3: Accelerating -->
+    <line x1="420" y1="25" x2="420" y2="170" stroke="#333" stroke-width="1.5" marker-end="url(#ad1)"/>
+    <line x1="420" y1="170" x2="605" y2="170" stroke="#333" stroke-width="1.5" marker-end="url(#ad1)"/>
+    <text font-size="10" fill="#666" x="416" y="22" text-anchor="end">d</text>
+    <text font-size="10" fill="#666" x="610" y="174">t</text>
+    <path d="M430,160 Q465,155 500,135 Q540,108 590,45" fill="none" stroke="#92400e" stroke-width="2.5"/>
+    <text font-size="12" fill="#92400e" x="515" y="196" text-anchor="middle" font-weight="600">Accelerating</text>
+    <text font-size="10" fill="#666" x="515" y="185" text-anchor="middle">(curve getting steeper)</text>
+  </svg>
+</div>
+
+<div class="dia-wrap">
+  <div class="dia-label">2. Velocity-Time Graph — shapes and how to find acceleration and distance</div>
+  <svg width="100%" viewBox="0 0 620 210">
+    <defs>
+      <marker id="av1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+        <path d="M2 1L8 5L2 9" fill="none" stroke="#555" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </marker>
+    </defs>
+    <!-- Accelerating -->
+    <line x1="30" y1="25" x2="30" y2="170" stroke="#333" stroke-width="1.5" marker-end="url(#av1)"/>
+    <line x1="30" y1="170" x2="190" y2="170" stroke="#333" stroke-width="1.5" marker-end="url(#av1)"/>
+    <text font-size="10" fill="#666" x="26" y="22" text-anchor="end">v</text>
+    <text font-size="10" fill="#666" x="195" y="174">t</text>
+    <line x1="40" y1="162" x2="175" y2="45" stroke="#1e40af" stroke-width="2.5"/>
+    <polygon points="40,45 40,162 175,162" fill="#1e40af" fill-opacity="0.08"/>
+    <text font-size="10" fill="#1e40af" x="80" y="145">area = dist.</text>
+    <text font-size="12" fill="#1e40af" x="108" y="200" text-anchor="middle" font-weight="600">Accelerating</text>
+    <text font-size="10" fill="#666" x="108" y="210" text-anchor="middle">(gradient = accel.)</text>
+
+    <!-- Constant velocity -->
+    <line x1="225" y1="25" x2="225" y2="170" stroke="#333" stroke-width="1.5" marker-end="url(#av1)"/>
+    <line x1="225" y1="170" x2="400" y2="170" stroke="#333" stroke-width="1.5" marker-end="url(#av1)"/>
+    <text font-size="10" fill="#666" x="221" y="22" text-anchor="end">v</text>
+    <text font-size="10" fill="#666" x="405" y="174">t</text>
+    <line x1="235" y1="85" x2="385" y2="85" stroke="#166534" stroke-width="2.5"/>
+    <rect x="235" y="85" width="150" height="85" fill="#166534" fill-opacity="0.08"/>
+    <text font-size="10" fill="#166534" x="310" y="135" text-anchor="middle">area = dist.</text>
+    <text font-size="12" fill="#166534" x="310" y="200" text-anchor="middle" font-weight="600">Constant velocity</text>
+    <text font-size="10" fill="#666" x="310" y="210" text-anchor="middle">(gradient = 0, flat line)</text>
+
+    <!-- Decelerating -->
+    <line x1="420" y1="25" x2="420" y2="170" stroke="#333" stroke-width="1.5" marker-end="url(#av1)"/>
+    <line x1="420" y1="170" x2="605" y2="170" stroke="#333" stroke-width="1.5" marker-end="url(#av1)"/>
+    <text font-size="10" fill="#666" x="416" y="22" text-anchor="end">v</text>
+    <text font-size="10" fill="#666" x="610" y="174">t</text>
+    <line x1="430" y1="45" x2="590" y2="162" stroke="#991b1b" stroke-width="2.5"/>
+    <polygon points="430,45 430,162 590,162" fill="#991b1b" fill-opacity="0.08"/>
+    <text font-size="10" fill="#991b1b" x="475" y="145">area = dist.</text>
+    <text font-size="12" fill="#991b1b" x="515" y="200" text-anchor="middle" font-weight="600">Decelerating</text>
+    <text font-size="10" fill="#666" x="515" y="210" text-anchor="middle">(negative gradient)</text>
+  </svg>
+</div>
+
+<div class="dia-wrap">
+  <div class="dia-label">3. Wave anatomy — amplitude, wavelength, crest and trough</div>
+  <svg width="100%" viewBox="0 0 580 155">
+    <defs>
+      <marker id="aw2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+        <path d="M2 1L8 5L2 9" fill="none" stroke="#1e40af" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </marker>
+      <marker id="ag2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+        <path d="M2 1L8 5L2 9" fill="none" stroke="#166534" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </marker>
+    </defs>
+    <line x1="18" y1="77" x2="545" y2="77" stroke="#bbb" stroke-width="1" stroke-dasharray="5 4"/>
+    <text font-size="11" fill="#888" x="550" y="81">rest</text>
+    <path d="M18,77 Q63,22 108,77 Q153,132 198,77 Q243,22 288,77 Q333,132 378,77 Q423,22 468,77 Q513,132 540,90" fill="none" stroke="#1e40af" stroke-width="2.5"/>
+    <!-- Amplitude arrow -->
+    <line x1="108" y1="24" x2="108" y2="76" stroke="#1e40af" stroke-width="1.5" marker-end="url(#aw2)" marker-start="url(#aw2)"/>
+    <text font-size="12" fill="#1e40af" x="120" y="56" font-weight="600">Amplitude (A)</text>
+    <!-- Wavelength arrow -->
+    <line x1="108" y1="16" x2="288" y2="16" stroke="#166534" stroke-width="1.5" marker-end="url(#ag2)" marker-start="url(#ag2)"/>
+    <text font-size="12" fill="#166534" x="198" y="12" text-anchor="middle" font-weight="600">Wavelength (λ)</text>
+    <!-- Labels -->
+    <circle cx="108" cy="23" r="4" fill="#991b1b"/>
+    <text font-size="12" fill="#991b1b" x="108" y="10" text-anchor="middle" font-weight="600">Crest</text>
+    <circle cx="198" cy="131" r="4" fill="#991b1b"/>
+    <text font-size="12" fill="#991b1b" x="198" y="150" text-anchor="middle" font-weight="600">Trough</text>
+  </svg>
+</div>
+
+<div class="dia-wrap">
+  <div class="dia-label">4. Law of reflection — i = r (both angles measured from the normal)</div>
+  <svg width="100%" viewBox="0 0 500 175">
+    <defs>
+      <marker id="ar1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+        <path d="M2 1L8 5L2 9" fill="none" stroke="#666" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </marker>
+    </defs>
+    <rect x="60" y="140" width="380" height="15" rx="4" fill="#ccc"/>
+    <text font-size="11" fill="#666" x="250" y="170" text-anchor="middle">Mirror surface</text>
+    <!-- Normal -->
+    <line x1="250" y1="20" x2="250" y2="140" stroke="#999" stroke-width="1" stroke-dasharray="5 4"/>
+    <text font-size="11" fill="#888" x="258" y="28">Normal</text>
+    <!-- Incident ray -->
+    <line x1="140" y1="30" x2="250" y2="140" stroke="#1e40af" stroke-width="2.5" marker-end="url(#ar1)"/>
+    <text font-size="13" fill="#1e40af" x="172" y="75" font-weight="700">i</text>
+    <text font-size="11" fill="#1e40af" x="140" y="20">Incident ray</text>
+    <!-- Reflected ray -->
+    <line x1="250" y1="140" x2="360" y2="30" stroke="#991b1b" stroke-width="2.5" marker-end="url(#ar1)"/>
+    <text font-size="13" fill="#991b1b" x="323" y="75" font-weight="700">r</text>
+    <text font-size="11" fill="#991b1b" x="300" y="20">Reflected ray</text>
+    <!-- Rule label -->
+    <text font-size="13" fill="#333" x="250" y="155" text-anchor="middle" font-weight="700">angle i = angle r</text>
+  </svg>
+</div>
+
+<div class="dia-wrap">
+  <div class="dia-label">5. Refraction — light bends towards normal when entering a denser medium</div>
+  <svg width="100%" viewBox="0 0 500 185">
+    <defs>
+      <marker id="ar2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+        <path d="M2 1L8 5L2 9" fill="none" stroke="#666" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </marker>
+    </defs>
+    <rect x="50" y="85" width="400" height="85" rx="6" fill="#dbeafe" stroke="#93c5fd" stroke-width="1"/>
+    <text font-size="11" fill="#1e40af" x="440" y="100" text-anchor="end">Glass (denser, n&gt;1)</text>
+    <text font-size="11" fill="#666" x="440" y="78" text-anchor="end">Air (n = 1)</text>
+    <!-- Normal line -->
+    <line x1="250" y1="10" x2="250" y2="180" stroke="#aaa" stroke-width="1" stroke-dasharray="5 4"/>
+    <text font-size="11" fill="#999" x="258" y="20">Normal</text>
+    <!-- Incident ray -->
+    <line x1="130" y1="10" x2="250" y2="85" stroke="#1e40af" stroke-width="2.5" marker-end="url(#ar2)"/>
+    <text font-size="12" fill="#1e40af" x="168" y="55" font-weight="700">i (large)</text>
+    <!-- Refracted ray (bends towards normal) -->
+    <line x1="250" y1="85" x2="295" y2="175" stroke="#991b1b" stroke-width="2.5" marker-end="url(#ar2)"/>
+    <text font-size="12" fill="#991b1b" x="310" y="140" font-weight="700">r (smaller)</text>
+    <text font-size="11" fill="#333" x="250" y="185" text-anchor="middle">Light bends TOWARDS the normal when entering glass</text>
+  </svg>
+</div>
+
+<div class="dia-wrap">
+  <div class="dia-label">6. Total Internal Reflection — conditions and what happens</div>
+  <svg width="100%" viewBox="0 0 520 175">
+    <defs>
+      <marker id="at1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+        <path d="M2 1L8 5L2 9" fill="none" stroke="#666" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </marker>
+    </defs>
+    <rect x="30" y="20" width="460" height="100" rx="8" fill="#dbeafe" stroke="#93c5fd" stroke-width="1"/>
+    <text font-size="11" fill="#1e40af" x="480" y="35" text-anchor="end">Glass (denser)</text>
+    <text font-size="11" fill="#666" x="480" y="145">Air (less dense)</text>
+    <!-- Boundary line -->
+    <line x1="30" y1="120" x2="490" y2="120" stroke="#93c5fd" stroke-width="1.5"/>
+    <!-- Normal at point of incidence -->
+    <line x1="260" y1="20" x2="260" y2="165" stroke="#aaa" stroke-width="1" stroke-dasharray="5 4"/>
+    <!-- Incident ray (from inside glass going up to boundary) -->
+    <line x1="130" y1="90" x2="260" y2="120" stroke="#1e40af" stroke-width="2" marker-end="url(#at1)"/>
+    <text font-size="11" fill="#1e40af" x="140" y="83">Incident ray (i &gt; C)</text>
+    <!-- Reflected ray (TIR — stays inside glass) -->
+    <line x1="260" y1="120" x2="390" y2="90" stroke="#991b1b" stroke-width="2.5" marker-end="url(#at1)"/>
+    <text font-size="11" fill="#991b1b" x="350" y="83">Reflected ray (TIR!)</text>
+    <!-- No refracted ray — show dotted "would-be" -->
+    <line x1="260" y1="120" x2="290" y2="165" stroke="#aaa" stroke-width="1" stroke-dasharray="4 4"/>
+    <text font-size="10" fill="#aaa" x="292" y="162">no refracted ray</text>
+    <!-- Labels -->
+    <text font-size="12" fill="#333" x="260" y="170" text-anchor="middle" font-weight="700">Conditions: dense→less dense AND angle &gt; critical angle</text>
+  </svg>
+</div>
+
+<div class="dia-wrap">
+  <div class="dia-label">7. Electromagnetic Spectrum — order from low to high frequency</div>
+  <svg width="100%" viewBox="0 0 620 100">
+    <defs>
+      <marker id="aem" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+        <path d="M2 1L8 5L2 9" fill="none" stroke="#555" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </marker>
+    </defs>
+    <rect x="8"   y="18" width="76" height="34" rx="6" fill="#dbeafe" stroke="#1e40af" stroke-width="1"/>
+    <text font-size="11" fill="#1e40af" x="46"  y="40" text-anchor="middle" font-weight="700">Radio</text>
+    <rect x="92"  y="18" width="76" height="34" rx="6" fill="#dcfce7" stroke="#166534" stroke-width="1"/>
+    <text font-size="11" fill="#166534" x="130" y="40" text-anchor="middle" font-weight="700">Microwave</text>
+    <rect x="176" y="18" width="76" height="34" rx="6" fill="#fef3c7" stroke="#92400e" stroke-width="1"/>
+    <text font-size="11" fill="#92400e" x="214" y="40" text-anchor="middle" font-weight="700">Infrared</text>
+    <rect x="260" y="18" width="76" height="34" rx="6" fill="#fce7f3" stroke="#9d174d" stroke-width="1"/>
+    <text font-size="11" fill="#9d174d" x="298" y="40" text-anchor="middle" font-weight="700">Visible</text>
+    <rect x="344" y="18" width="76" height="34" rx="6" fill="#ede9fe" stroke="#5b21b6" stroke-width="1"/>
+    <text font-size="11" fill="#5b21b6" x="382" y="40" text-anchor="middle" font-weight="700">UV</text>
+    <rect x="428" y="18" width="76" height="34" rx="6" fill="#fee2e2" stroke="#991b1b" stroke-width="1"/>
+    <text font-size="11" fill="#991b1b" x="466" y="40" text-anchor="middle" font-weight="700">X-rays</text>
+    <rect x="512" y="18" width="76" height="34" rx="6" fill="#ffeedd" stroke="#b45309" stroke-width="1"/>
+    <text font-size="11" fill="#b45309" x="550" y="40" text-anchor="middle" font-weight="700">Gamma</text>
+    <line x1="8" y1="75" x2="600" y2="75" stroke="#555" stroke-width="1.5" marker-end="url(#aem)"/>
+    <text font-size="11" fill="#555" x="8"   y="92">Low frequency, long λ</text>
+    <text font-size="11" fill="#555" x="610" y="92" text-anchor="end">High frequency, short λ</text>
+  </svg>
+</div>
+
+</div><!-- end diagrams -->
+
+<!-- ===================== KNOWLEDGE POINTS ===================== -->
+<div class="section" id="knowledge">
+<p style="font-size:13px;color:#666;margin-bottom:16px">★ = must memorise. These are the definitions, facts, and rules that appear most often in Form 3 exams.</p>
+
+<div class="kcard">
+  <div class="ktitle">Ch.1 — Movement and Position</div>
+  <div class="kitem">Distance is the total length of path travelled (scalar — no direction). Displacement is the straight-line distance from start to finish, with direction (vector).</div>
+  <div class="kitem">Speed = distance ÷ time. Velocity = speed with direction. They use the same formula but velocity includes a direction.</div>
+  <div class="kitem">Acceleration = change in velocity ÷ time. Unit: m/s². Deceleration is negative acceleration (slowing down).</div>
+  <div class="kitem">Distance-time graph: slope (gradient) = speed. Flat horizontal line = stationary. Upward straight line = constant speed. Steeper = faster. Curve (getting steeper) = accelerating.</div>
+  <div class="kitem">Velocity-time graph: slope (gradient) = acceleration. Flat horizontal line = constant velocity. Area under the graph = total distance travelled.</div>
+  <div class="kitem">To find area under v-t graph: use triangle formula (½ × base × height) for sloping sections, and rectangle formula (length × width) for flat sections.</div>
+</div>
+
+<div class="kcard">
+  <div class="ktitle">Ch.10 — Properties of Waves</div>
+  <div class="kitem">Transverse wave: particles vibrate PERPENDICULAR (at 90°) to the direction of wave travel. Examples: light, water waves, all EM waves.</div>
+  <div class="kitem">Longitudinal wave: particles vibrate PARALLEL to the direction of wave travel. The wave creates compressions and rarefactions. Example: sound.</div>
+  <div class="kitem">Amplitude: maximum displacement of a particle from its rest (equilibrium) position. Measured in metres. Greater amplitude = more energy carried by the wave.</div>
+  <div class="kitem">Wavelength (λ): distance between two consecutive crests, or two consecutive troughs. Measured in metres (m).</div>
+  <div class="kitem">Frequency (f): number of complete wave cycles per second. Measured in Hertz (Hz).</div>
+  <div class="kitem">Period (T): time taken for one complete wave cycle. T = 1/f. Unit: seconds (s).</div>
+  <div class="kitem">Wave equation: v = fλ. If frequency increases, wavelength decreases (speed stays the same in the same medium).</div>
+  <div class="kitem">Diffraction: waves spread out when passing through a gap or around an obstacle. Most noticeable when the gap size ≈ wavelength.</div>
+  <div class="kitem">Reflection: waves bounce off a surface. Refraction: waves change direction when they change speed (entering a different medium).</div>
+</div>
+
+<div class="mem-trick">🧠 <strong>Memory trick — Transverse vs Longitudinal:</strong> "Trans = cross" — transverse vibrations cross (go perpendicular to) the direction of travel. Longitudinal = "long" — vibrations go along the direction of travel.</div>
+
+<div class="kcard">
+  <div class="ktitle">Ch.11 — The Electromagnetic Spectrum</div>
+  <div class="kitem">Order from LOW to HIGH frequency (also SHORT to LONG wavelength if reversed): Radio → Microwave → Infrared → Visible light → Ultraviolet → X-rays → Gamma rays</div>
+  <div class="kitem">All EM waves: (1) travel at speed of light (3×10⁸ m/s) in vacuum; (2) are transverse waves; (3) can travel through vacuum; (4) transfer energy; (5) obey v = fλ.</div>
+  <div class="kitem">Radio waves: broadcasting (TV, radio, Wi-Fi). No significant danger at low intensities.</div>
+  <div class="kitem">Microwaves: cooking (microwave ovens), satellite communication, mobile phones. Danger: can heat internal body tissues.</div>
+  <div class="kitem">Infrared (IR): remote controls, thermal imaging cameras, night vision, heat lamps. Danger: skin burns.</div>
+  <div class="kitem">Visible light: human vision, photography, optical fibres. The only EM waves our eyes can detect.</div>
+  <div class="kitem">Ultraviolet (UV): sterilisation, detecting forged banknotes, sunbeds, fluorescent lights. Danger: skin cancer, cataracts (eye damage), sunburn.</div>
+  <div class="kitem">X-rays: medical imaging (bones), airport security scanners. Danger: ionising radiation — causes cell and DNA damage, increased cancer risk. Lead aprons used for protection.</div>
+  <div class="kitem">Gamma (γ) rays: cancer radiotherapy (kills tumour cells), sterilising medical/food equipment. Danger: most penetrating EM wave — ionising, causes DNA damage and cancer at high doses.</div>
+</div>
+
+<div class="mem-trick">🧠 <strong>Mnemonic for EM spectrum order (low → high frequency):</strong><br>
+<strong>R</strong>ather &nbsp;<strong>M</strong>ighty &nbsp;<strong>I</strong>ntelligent &nbsp;<strong>V</strong>ery &nbsp;<strong>U</strong>seful &nbsp;<strong>X</strong>-tra &nbsp;<strong>G</strong>reat<br>
+(Radio, Microwave, Infrared, Visible, UV, X-rays, Gamma)</div>
+
+<div class="kcard">
+  <div class="ktitle">Ch.11 — EM Spectrum: Uses and Dangers Summary Table</div>
+  <table>
+    <tr><th>Wave</th><th>Uses</th><th>Dangers</th></tr>
+    <tr><td><strong>Radio</strong></td><td>TV and radio broadcasting, Wi-Fi</td><td>Low risk at normal intensities</td></tr>
+    <tr><td><strong>Microwave</strong></td><td>Cooking, mobile phones, satellites</td><td>Internal tissue heating</td></tr>
+    <tr><td><strong>Infrared</strong></td><td>Remote controls, thermal cameras</td><td>Skin burns</td></tr>
+    <tr><td><strong>Visible</strong></td><td>Sight, cameras, optical fibres</td><td>Bright light can damage eyes</td></tr>
+    <tr><td><strong>Ultraviolet</strong></td><td>Sterilisation, banknote checking</td><td>Skin cancer, eye damage</td></tr>
+    <tr><td><strong>X-rays</strong></td><td>Medical scans, airport security</td><td>Cell/DNA damage, cancer risk</td></tr>
+    <tr><td><strong>Gamma</strong></td><td>Radiotherapy, sterilising equipment</td><td>DNA damage, cancer (ionising)</td></tr>
+  </table>
+</div>
+
+<div class="kcard">
+  <div class="ktitle">Ch.12 — Light Waves</div>
+  <div class="kitem">Law of reflection: angle of incidence (i) = angle of reflection (r). BOTH angles are always measured from the NORMAL (a line perpendicular to the surface), NOT from the surface itself.</div>
+  <div class="kitem">Refraction: light bends when it travels from one medium to another (different optical density). It bends TOWARDS the normal when entering a denser medium, and AWAY when leaving.</div>
+  <div class="kitem">Refractive index (n): measures how much a medium slows light. Air = 1.0, glass ≈ 1.5, water ≈ 1.33.</div>
+  <div class="kitem">Critical angle (C): the angle of incidence in the denser medium at which the refracted ray travels along the boundary (refraction angle = 90°). sin C = 1/n.</div>
+  <div class="kitem">Total Internal Reflection (TIR): occurs ONLY when TWO conditions are met: (1) light travels from a denser medium to a less dense medium; AND (2) the angle of incidence is GREATER than the critical angle.</div>
+  <div class="kitem">Applications of TIR: optical fibres (broadband internet, telephone), endoscopes (medical), periscopes, binoculars, diamond cuts (sparkling).</div>
+  <div class="kitem">Convex (converging) lens: bends light rays inward to a focal point. Forms real, inverted image (for objects beyond focal point). Used in: cameras, projectors, human eye, magnifying glass (virtual image when object is close).</div>
+  <div class="kitem">Concave (diverging) lens: bends light rays outward. Always forms virtual, upright, smaller image. Used in: spectacles for short-sighted people.</div>
+  <div class="kitem">Dispersion: white light splits into 7 colours (ROYGBIV) when passing through a prism, because different colours refract by slightly different amounts. Red refracts least, Violet refracts most.</div>
+  <div class="kitem">ROYGBIV order: Red · Orange · Yellow · Green · Blue · Indigo · Violet (Red at top, Violet at bottom of rainbow).</div>
+</div>
+
+<div class="mem-trick">🧠 <strong>TIR — remember the TWO conditions (exam favourite!):</strong><br>
+1. Dense → Less dense medium (e.g. glass → air, NOT air → glass)<br>
+2. Angle of incidence MUST be greater than the critical angle<br>
+If BOTH are true → TIR. If only one is true → refraction still occurs (light exits).</div>
+
+<div class="mem-trick">🧠 <strong>ROYGBIV for dispersion / rainbow colours:</strong><br>
+<strong>R</strong>ed <strong>O</strong>range <strong>Y</strong>ellow <strong>G</strong>reen <strong>B</strong>lue <strong>I</strong>ndigo <strong>V</strong>iolet<br>
+Tip: "Richard Of York Gave Battle In Vain"</div>
+
+</div><!-- end knowledge -->
+
+<script>
+function showTab(id, btn) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+function tog(btn) {
+  const box = btn.nextElementSibling;
+  const showing = box.classList.toggle('show');
+  btn.textContent = showing ? '▼ Hide Answer' : '▶ Show Answer';
+}
+</script>
+</body>
+</html>
