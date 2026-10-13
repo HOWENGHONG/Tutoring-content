@@ -40,7 +40,7 @@
 | 化學 | 中三/中四 | 中英對照 | 結構與鍵合、MCQ 練習、結構化問題 |
 | 英文 | 中一 | 英文 | 模擬試卷（共三卷，含新版） |
 | CISC3012 | 大學 | 中英對照 | AI 模擬測驗、期中溫習筆記、考試速記 |
-| CISC3028 | 大學 | 中英對照 | 創業學期中溫習筆記（Ch1–3）、Past Paper 詳解；Ch4–9/Exercises/Socrative 待補 |
+| CISC3028 | 大學 | 中英對照 | 創業學期中溫習筆記（Ch1–9）、Exercises 01–07、Socrative 01–02、Past Paper 詳解 |
 
 所有內容皆為 **單一 HTML 檔案**，無需額外依賴，開箱即用。適合學生自學、教師課堂補充，或家長輔導使用。
 
@@ -156,14 +156,16 @@
 
 ### 💼 CISC3028 創業學（Entrepreneurship）
 
-期中考範圍：**Ch1–9、Exercises 01–07、Socrative 01–04**。目前僅收到 L01–L03（Ch1–3）講義，故下列資源**暫時只覆蓋 Ch1–3**；Ch4–9、Exercises、Socrative 待補上傳相應講義/題目後再擴充。
+期中考範圍：**Ch1–9、Exercises 01–07、Socrative 01–04**。下列資源已覆蓋 **Ch1–9 全部章節**、**Exercises 01–07**、**Socrative 01–02**（根據 UM Moodle 實際講義與 Attempt Review 整理）。
 
 | 檔案 | 說明 | 預覽連結 |
 |------|------|----------|
-| `cisc3028/midterm_notes.html` | 期中溫習筆記（Ch1 創業/組織/管理、Ch2 創業準備、Ch3 商業模式生成），中英對照 | [🔗 預覽](https://howenghong.github.io/Tutoring-content/cisc3028/midterm_notes.html) |
+| `cisc3028/midterm_notes.html` | 期中溫習筆記（Ch1–Ch9 全部九章：創業/組織/管理、創業準備、商業模式生成、產生想法與機會、落實商業點子、行銷、融資、智慧財產權、成長挑戰），中英對照 | [🔗 預覽](https://howenghong.github.io/Tutoring-content/cisc3028/midterm_notes.html) |
+| `cisc3028/exercises.html` | Exercise 01–07 複習（根據 UM Moodle Attempt Review 實際題目與正解整理），中英對照 | [🔗 預覽](https://howenghong.github.io/Tutoring-content/cisc3028/exercises.html) |
+| `cisc3028/socrative.html` | Socrative 01–02 課堂即時問答複習（Entrepreneur vs Manager；Bill Gross 創業成功五大因素），中英對照 | [🔗 預覽](https://howenghong.github.io/Tutoring-content/cisc3028/socrative.html) |
 | `cisc3028/pastpaper.html` | Past Paper 逐題詳解（Part A MCQ、Part B Apple BMC 練習、Part C Essay），中英對照 | [🔗 預覽](https://howenghong.github.io/Tutoring-content/cisc3028/pastpaper.html) |
 
-> **⚠️ 待補事項**：Past Paper 中 Q9–Q18 因照片角度被裁切、選項不清楚，尚未收錄解答；Ch4–9、Exercises 01–07、Socrative 01–04 的內容尚未建立，需要上傳對應講義/題目後才會擴充，避免憑空猜測與真實授課內容不符。
+> **⚠️ 待補事項**：Past Paper 中 Q9–Q18 因照片角度被裁切、選項不清楚，且目前沒有更清晰的版本可以補上，這部分解答無法提供；Socrative 03–04 老師尚未在 Moodle 上公佈，公佈後會再補上。
 
 ---
 
@@ -218,6 +220,7 @@
 | 日期 | 更新內容 |
 |------|----------|
 | 2026 年 10 月 | 新增 CISC3028 創業學系列：期中溫習筆記（Ch1–3）、Past Paper 詳解（Part A/B/C）；更新 README 與首頁導航 |
+| 2026 年 10 月 | CISC3028 創業學系列擴充完整：期中溫習筆記補齊 Ch4–9、新增 Exercises 01–07 與 Socrative 01–02 複習頁面、修正 Past Paper Q9–18 缺失說明 |
 | 2026 年 10 月 | 重新整理倉庫：檔案按科目分類至子資料夾，檔名統一為小寫英文；移除根目錄的舊檔名（舊連結失效）；備份版移至 `chemistry/archive/`；README 補上 Past Paper 詳解與英中術語對照的連結 |
 | 2026 年 7 月 | 新增 CISC3012 AI 系列：Mock Test 1-2、期中溫習筆記、考試速記；更新 README |
 | 2026 年 7 月 | 新增中一英文新版模擬卷（Paper 1-3）；更新 README |

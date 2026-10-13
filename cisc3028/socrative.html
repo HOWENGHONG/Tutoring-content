@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CISC3028 Entrepreneurship Socrative 01-02 複習</title>
+<style>
+  :root{
+    --bg:#f4f6fb;
+    --card:#ffffff;
+    --primary:#1e3a8a;
+    --primary-light:#3b82f6;
+    --accent:#f59e0b;
+    --green:#059669;
+    --red:#dc2626;
+    --text:#1f2937;
+    --muted:#6b7280;
+    --border:#e5e7eb;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang TC","Microsoft JhengHei",sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.7;
+    padding:20px;
+  }
+  .container{max-width:1000px;margin:0 auto;}
+
+  header{
+    background:linear-gradient(135deg,#1e3a8a,#3b82f6);
+    color:#fff;
+    padding:32px 28px;
+    border-radius:16px;
+    margin-bottom:24px;
+    box-shadow:0 8px 24px rgba(30,58,138,.25);
+  }
+  header h1{font-size:1.7rem;margin-bottom:8px;}
+  header p{opacity:.9;font-size:.95rem;}
+  header .badge{
+    display:inline-block;
+    background:rgba(255,255,255,.2);
+    padding:4px 12px;
+    border-radius:20px;
+    font-size:.8rem;
+    margin-top:10px;
+  }
+
+  .notice{
+    background:#fff7ed;
+    border:1px solid #fdba74;
+    border-left:5px solid var(--accent);
+    border-radius:10px;
+    padding:16px 20px;
+    margin-bottom:24px;
+    font-size:.9rem;
+  }
+  .notice strong{color:#c2410c;}
+
+  .toc{
+    background:var(--card);
+    border-radius:12px;
+    padding:20px 24px;
+    margin-bottom:24px;
+    box-shadow:0 2px 8px rgba(0,0,0,.06);
+    border-left:4px solid var(--primary-light);
+  }
+  .toc h2{font-size:1.1rem;color:var(--primary);margin-bottom:10px;}
+  .toc ul{list-style:none;display:flex;flex-wrap:wrap;gap:8px;}
+  .toc a{
+    display:inline-block;
+    background:#eff6ff;
+    color:var(--primary);
+    text-decoration:none;
+    padding:6px 14px;
+    border-radius:8px;
+    font-size:.85rem;
+    border:1px solid #dbeafe;
+  }
+  .toc a:hover{background:var(--primary-light);color:#fff;}
+
+  .chapter{
+    background:var(--card);
+    border-radius:14px;
+    padding:26px;
+    margin-bottom:28px;
+    box-shadow:0 2px 12px rgba(0,0,0,.06);
+  }
+  .chapter > h2{
+    font-size:1.35rem;
+    color:var(--primary);
+    padding-bottom:12px;
+    border-bottom:3px solid var(--primary-light);
+    margin-bottom:20px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .chapter > h2 .num{
+    background:var(--primary);
+    color:#fff;
+    width:36px;height:36px;
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-size:1rem;
+    flex-shrink:0;
+  }
+
+  .example{
+    border:1px solid var(--border);
+    border-radius:12px;
+    margin-bottom:20px;
+    overflow:hidden;
+  }
+  .example .head{
+    background:#f8fafc;
+    padding:12px 18px;
+    font-weight:600;
+    color:var(--primary);
+    border-bottom:1px solid var(--border);
+    font-size:.98rem;
+  }
+  .example .body{padding:16px 18px;}
+
+  .q{
+    background:#fffbeb;
+    border-left:4px solid var(--accent);
+    padding:10px 14px;
+    border-radius:0 8px 8px 0;
+    margin-bottom:14px;
+    font-size:.92rem;
+  }
+  .q strong{color:#b45309;}
+
+  .answer{
+    background:#eff6ff;
+    border-left:4px solid var(--primary-light);
+    padding:10px 14px;
+    border-radius:0 8px 8px 0;
+    font-size:.9rem;
+    margin-bottom:10px;
+  }
+  .answer strong{color:var(--primary);}
+  .answer em{color:var(--primary);font-style:normal;font-weight:600;}
+
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin:12px 0;
+    font-size:.85rem;
+  }
+  th,td{
+    border:1px solid var(--border);
+    padding:8px 10px;
+    text-align:left;
+    vertical-align:top;
+  }
+  th{background:#f1f5f9;color:var(--primary);font-weight:600;}
+  tr:nth-child(even){background:#fafbfc;}
+  td.correct{color:var(--green);font-weight:600;}
+
+  .tip{
+    background:#fef2f2;
+    border:1px dashed var(--red);
+    padding:12px 16px;
+    border-radius:8px;
+    font-size:.88rem;
+    margin:14px 0;
+  }
+  .tip strong{color:var(--red);}
+
+  .zh{color:var(--muted);}
+  blockquote{
+    border-left:3px solid var(--border);
+    padding:6px 14px;
+    margin:8px 0;
+    font-size:.85rem;
+    color:var(--muted);
+    font-style:italic;
+  }
+
+  footer{
+    text-align:center;
+    color:var(--muted);
+    font-size:.8rem;
+    padding:20px;
+  }
+
+  @media(max-width:600px){
+    body{padding:10px;}
+    header{padding:22px 18px;}
+    header h1{font-size:1.3rem;}
+    .chapter{padding:18px;}
+    .toc ul{flex-direction:column;}
+    .toc a{width:100%;text-align:center;}
+    table{font-size:.78rem;}
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <h1>🎤 CISC3028 Entrepreneurship<br>Socrative 01–02 複習</h1>
+  <p>中英雙語 · 根據課堂 Socrative 投票結果整理</p>
+  <span class="badge">目前有 Socrative 01、02</span>
+</header>
+
+<div class="notice">
+  <strong>⚠️ 範圍提醒：</strong> 原本的考試範圍是 <strong>Socrative 01–04</strong>，但老師目前只在課堂上做過 01 和 02，<strong>03、04 老師尚未在 Moodle 上公佈</strong>，所以這頁暫時只整理 01、02。之後老師公佈後我會再補上。
+</div>
+
+<nav class="toc">
+  <h2>📑 快速導航</h2>
+  <ul>
+    <li><a href="#s1">Socrative 01：Entrepreneur vs Manager</a></li>
+    <li><a href="#s2">Socrative 02：Bill Gross — 創業成功的五大因素</a></li>
+    <li><a href="midterm_notes.html">📖 返回期中溫習筆記</a></li>
+  </ul>
+</nav>
+
+<!-- ============ Socrative 01 ============ -->
+<section class="chapter" id="s1">
+  <h2><span class="num">1</span>Socrative 01：Entrepreneur vs Manager（5 題）</h2>
+  <div class="example">
+    <div class="head">課堂即時問答 — 全班作答統計</div>
+    <div class="body">
+      <table>
+        <tr><th>#</th><th>Question 題目</th><th>Correct Answer 正確答案</th><th>全班答對率</th></tr>
+        <tr><td>1</td><td>How do entrepreneurs and managers differ?</td><td class="correct">Entrepreneur is about what it takes to start a business, while manager is about what it takes to grow or maintain a business 企業家是「從零開始」，經理是「維持與成長」</td><td>44/46（96%）</td></tr>
+        <tr><td>2</td><td>Jeremy Stoppelman & Russel Simmons (Yelp founders) created a new type of business — they would best be described as</td><td class="correct">Entrepreneurs 企業家</td><td>40/46（87%）</td></tr>
+        <tr><td>3</td><td>Elian, a restaurant manager who carefully scheduled staff and watched costs, is best described as a(n) ___ manager.</td><td class="correct">Efficient 有效率的</td><td>36/45（80%）</td></tr>
+        <tr><td>4</td><td>Why do all types of organizations need financial resources?</td><td class="correct">To sustain operations and achieve objectives 維持運作、達成目標</td><td>44/44（100%）</td></tr>
+        <tr><td>5</td><td>What distinguishes a mutual-benefit organization from a non-profit organization regarding financial goals?</td><td class="correct">Non-profits aim to advance a social cause, while mutual-benefit organizations primarily benefit members 非營利組織推動社會公益；互惠組織主要是服務自己的成員</td><td>43/44（98%）</td></tr>
+      </table>
+      <div class="tip"><strong>複習重點：</strong>第3題是全班答對率最低的一題（80%）——記住「efficient = 省成本、把事情做對」，和「effective = 做對的事」要分清楚，這是整份課程最容易混淆的一組名詞，Part A 幾乎必考。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Socrative 02 ============ -->
+<section class="chapter" id="s2">
+  <h2><span class="num">2</span>Socrative 02：Bill Gross — Why Companies Succeed（創業成功的五大因素）</h2>
+  <div class="example">
+    <div class="head">背景：Bill Gross 的 TED 演講「The single biggest reason why start-ups succeed」</div>
+    <div class="body">
+      <div class="answer">
+        <strong>English：</strong> Bill Gross (Idealab founder) studied his own and others' startups and identified 5 key factors in startup success: <strong>Idea（想法）, Team/Execution（團隊/執行力）, Business Model（商業模式）, Funding（資金）, Timing（時機）</strong>. His data-driven conclusion, based on comparing many startups: <em>Timing</em> was the single biggest factor correlated with success (accounting for roughly 42% of the difference between success and failure in his sample), more than team, idea, business model, or funding. <em>Funding</em> was the least correlated with success.<br><br>
+        <strong>中文：</strong>Bill Gross（Idealab 創辦人）研究了自己與其他創業公司，歸納出創業成功的五大關鍵因素：想法（Idea）、團隊/執行力（Team）、商業模式（Business Model）、資金（Funding）、時機（Timing）。他以數據分析得出的結論是：<strong>時機（Timing）</strong>是與成功最相關的單一因素（在他的樣本中，大約能解釋成功與失敗差異中的42%），比團隊、想法、商業模式、資金都更關鍵；而<strong>資金（Funding）</strong>則是與成功相關性最低的因素。
+      </div>
+    </div>
+  </div>
+
+  <div class="example">
+    <div class="head">課堂投票結果 Class Poll Results</div>
+    <div class="body">
+      <table>
+        <tr><th>#</th><th>Question 題目</th><th>Class Answer 全班多數答案</th></tr>
+        <tr><td>1</td><td>Which of the following companies were NOT mentioned in the video?</td><td class="correct">C. Amazon（21/39 選此項；影片中提到的是 Airbnb、Instagram、LinkedIn、Uber、Z.com 等，Amazon 沒有被提及）</td></tr>
+        <tr><td>2</td><td>Which of the Top 5 factors do you think is the <strong>most</strong> important?</td><td class="correct">A. Timing 時機（26/39，多數同學認為「時機」最重要）</td></tr>
+        <tr><td>4</td><td>Which of the Top 5 factors do you think is the <strong>least</strong> important?</td><td class="correct">E. Funding 資金（24/37，多數同學認為「資金」最不重要）</td></tr>
+      </table>
+      <div class="answer">
+        <strong>Q3 / Q5 是開放式申論題（Justify your answer）：</strong>以下整理幾個有代表性的同學論點，可以作為 Part C 申論題的寫作範例：
+      </div>
+      <blockquote>"Timing is the most important factor. Even with a good team, great ideas, a sound business model and sufficient funding, a startup will fail with poor timing... market timing is a time-sensitive opportunity that cannot easily be re-created." — CHOIIO LEONG</blockquote>
+      <blockquote>"Bill Gross once developed an online video platform Z.com. It had a solid idea, capable team and sufficient funding, yet failed because it launched too early... household broadband was not widespread and internet speed was too slow." — Leung Cheng Lam（舉 Bill Gross 自己失敗的案例佐證 timing 的重要性）</blockquote>
+      <blockquote>"Funding is just a starting point. Many new businesses fail without a workable business model... so funding is less important than a strong business model." — Lucas</blockquote>
+      <div class="tip"><strong>考試應用：</strong> Part C 申論題若考到「哪個創業成功因素最重要」，可以用這個「Bill Gross 五大因素」架構回答：先定義五個因素，再提出自己的立場（通常用 Timing 最容易論述，因為有 YouTube／Z.com／Airbnb 等現成例子可以舉），最後用一個例子佐證——這正好符合 Ch4（opportunity 必須 timely）和 Ch1（necessity vs opportunity entrepreneur）的概念，可以跨章節連結作答。</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  CISC3028 Entrepreneurship · Socrative 01–02 複習 · 最後更新 2026-10 · Socrative 03–04 老師尚未公佈
+</footer>
+
+</div>
+</body>
+</html>

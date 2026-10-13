@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CISC3028 Entrepreneurship Exercises 01-07 複習</title>
+<style>
+  :root{
+    --bg:#f4f6fb;
+    --card:#ffffff;
+    --primary:#1e3a8a;
+    --primary-light:#3b82f6;
+    --accent:#f59e0b;
+    --green:#059669;
+    --red:#dc2626;
+    --text:#1f2937;
+    --muted:#6b7280;
+    --border:#e5e7eb;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang TC","Microsoft JhengHei",sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.7;
+    padding:20px;
+  }
+  .container{max-width:1000px;margin:0 auto;}
+
+  header{
+    background:linear-gradient(135deg,#1e3a8a,#3b82f6);
+    color:#fff;
+    padding:32px 28px;
+    border-radius:16px;
+    margin-bottom:24px;
+    box-shadow:0 8px 24px rgba(30,58,138,.25);
+  }
+  header h1{font-size:1.7rem;margin-bottom:8px;}
+  header p{opacity:.9;font-size:.95rem;}
+  header .badge{
+    display:inline-block;
+    background:rgba(255,255,255,.2);
+    padding:4px 12px;
+    border-radius:20px;
+    font-size:.8rem;
+    margin-top:10px;
+  }
+
+  .notice{
+    background:#fff7ed;
+    border:1px solid #fdba74;
+    border-left:5px solid var(--accent);
+    border-radius:10px;
+    padding:16px 20px;
+    margin-bottom:24px;
+    font-size:.9rem;
+  }
+  .notice strong{color:#c2410c;}
+
+  .toc{
+    background:var(--card);
+    border-radius:12px;
+    padding:20px 24px;
+    margin-bottom:24px;
+    box-shadow:0 2px 8px rgba(0,0,0,.06);
+    border-left:4px solid var(--primary-light);
+  }
+  .toc h2{font-size:1.1rem;color:var(--primary);margin-bottom:10px;}
+  .toc ul{list-style:none;display:flex;flex-wrap:wrap;gap:8px;}
+  .toc a{
+    display:inline-block;
+    background:#eff6ff;
+    color:var(--primary);
+    text-decoration:none;
+    padding:6px 14px;
+    border-radius:8px;
+    font-size:.85rem;
+    transition:.2s;
+    border:1px solid #dbeafe;
+  }
+  .toc a:hover{background:var(--primary-light);color:#fff;}
+
+  .chapter{
+    background:var(--card);
+    border-radius:14px;
+    padding:26px;
+    margin-bottom:28px;
+    box-shadow:0 2px 12px rgba(0,0,0,.06);
+  }
+  .chapter > h2{
+    font-size:1.35rem;
+    color:var(--primary);
+    padding-bottom:12px;
+    border-bottom:3px solid var(--primary-light);
+    margin-bottom:20px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+  }
+  .chapter > h2 .num{
+    background:var(--primary);
+    color:#fff;
+    width:36px;height:36px;
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-size:1rem;
+    flex-shrink:0;
+  }
+  .chapter > h2 .score{
+    margin-left:auto;
+    background:#f0fdf4;
+    color:var(--green);
+    border:1px solid #bbf7d0;
+    font-size:.8rem;
+    padding:4px 10px;
+    border-radius:20px;
+  }
+
+  .example{
+    border:1px solid var(--border);
+    border-radius:12px;
+    margin-bottom:20px;
+    overflow:hidden;
+  }
+  .example .head{
+    background:#f8fafc;
+    padding:12px 18px;
+    font-weight:600;
+    color:var(--primary);
+    border-bottom:1px solid var(--border);
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:.98rem;
+  }
+  .example .head .tag{
+    background:var(--accent);
+    color:#fff;
+    font-size:.7rem;
+    padding:2px 8px;
+    border-radius:6px;
+    font-weight:500;
+  }
+  .example .head .tag.core{background:var(--red);}
+  .example .head .tag.important{background:var(--green);}
+  .example .body{padding:16px 18px;}
+
+  .q{
+    background:#fffbeb;
+    border-left:4px solid var(--accent);
+    padding:10px 14px;
+    border-radius:0 8px 8px 0;
+    margin-bottom:14px;
+    font-size:.92rem;
+  }
+  .q strong{color:#b45309;}
+
+  .answer{
+    background:#eff6ff;
+    border-left:4px solid var(--primary-light);
+    padding:10px 14px;
+    border-radius:0 8px 8px 0;
+    font-size:.9rem;
+    margin-bottom:10px;
+  }
+  .answer strong{color:var(--primary);}
+  .answer em{color:var(--primary);font-style:normal;font-weight:600;}
+
+  .wrong{
+    background:#fef2f2;
+    border-left:4px solid var(--red);
+    padding:10px 14px;
+    border-radius:0 8px 8px 0;
+    font-size:.88rem;
+    margin-bottom:10px;
+  }
+  .wrong strong{color:var(--red);}
+
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin:12px 0;
+    font-size:.85rem;
+  }
+  th,td{
+    border:1px solid var(--border);
+    padding:8px 10px;
+    text-align:left;
+    vertical-align:top;
+  }
+  th{background:#f1f5f9;color:var(--primary);font-weight:600;}
+  tr:nth-child(even){background:#fafbfc;}
+  td.correct{color:var(--green);font-weight:600;white-space:nowrap;}
+
+  .tip{
+    background:#fef2f2;
+    border:1px dashed var(--red);
+    padding:12px 16px;
+    border-radius:8px;
+    font-size:.88rem;
+    margin:14px 0;
+  }
+  .tip strong{color:var(--red);}
+
+  .zh{color:var(--muted);}
+
+  footer{
+    text-align:center;
+    color:var(--muted);
+    font-size:.8rem;
+    padding:20px;
+  }
+
+  @media(max-width:600px){
+    body{padding:10px;}
+    header{padding:22px 18px;}
+    header h1{font-size:1.3rem;}
+    .chapter{padding:18px;}
+    .toc ul{flex-direction:column;}
+    .toc a{width:100%;text-align:center;}
+    table{font-size:.78rem;}
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <h1>📝 CISC3028 Entrepreneurship<br>Exercises 01–07 複習 Exercise Review</h1>
+  <p>中英雙語 · 根據 UM Moodle「Attempt review」實際題目與正解整理</p>
+  <span class="badge">Exercise 01–07 共 7 份</span>
+</header>
+
+<div class="notice">
+  <strong>📌 說明 Note：</strong> 以下內容整理自你在 UM Moodle 上完成 Exercise 01–07 後的「Attempt review」紀錄 —— 題目與「正確答案（The correct answer is...）」均為老師系統原文，我在旁邊加上中文翻譯和重點提示，幫助你複習。有些題目你當時答錯了（標示「❌ 原答錯」），這些通常是最值得重複複習的陷阱題。
+</div>
+
+<nav class="toc">
+  <h2>📑 快速導航</h2>
+  <ul>
+    <li><a href="#ex1">Exercise 01（Ch1–Ch2）</a></li>
+    <li><a href="#ex2">Exercise 02（BMC + Ch1）</a></li>
+    <li><a href="#ex3">Exercise 03（BMC 實作）</a></li>
+    <li><a href="#ex4">Exercise 04（Ch4）</a></li>
+    <li><a href="#ex5">Exercise 05（Ch4–Ch6）</a></li>
+    <li><a href="#ex6">Exercise 06（Ch7–Ch9）</a></li>
+    <li><a href="#ex7">Exercise 07（Ch7–Ch9）</a></li>
+    <li><a href="midterm_notes.html">📖 返回期中溫習筆記</a></li>
+  </ul>
+</nav>
+
+<!-- ============ Exercise 01 ============ -->
+<section class="chapter" id="ex1">
+  <h2><span class="num">1</span>Exercise 01 <span class="score">19/20 · 95%</span></h2>
+  <div class="example">
+    <div class="head">涵蓋範圍：Ch1–Ch2 核心定義與比較</div>
+    <div class="body">
+      <table>
+        <tr><th>#</th><th>Question 題目</th><th>Correct Answer 正確答案</th></tr>
+        <tr><td>1</td><td>The defining difference between an entrepreneur and an intrapreneur is that the latter...<br><span class="zh">企業家與內部創業者的關鍵差異</span></td><td class="correct">Works within an existing organization, using its resources to exploit an opportunity 在既有組織內運用其資源來把握機會</td></tr>
+        <tr><td>2</td><td>Elian, a restaurant manager who carefully scheduled staff and watched costs, is best described as a(n) ___ manager.</td><td class="correct">Efficient 有效率的</td></tr>
+        <tr><td>3</td><td>Small companies have flourished for all the following reasons EXCEPT:</td><td class="correct">They often expand easily in mature industries（✅ 其他三項：僱用更有技能的人、反應更快、運作更有效——這些才是小公司興盛的原因；「容易在成熟產業擴張」才是例外）</td></tr>
+        <tr><td>4</td><td>The success of entrepreneurial businesses occurs partially because they are ________.</td><td class="correct">More focused than their large corporate counterparts 比大企業更專注</td></tr>
+        <tr><td>5</td><td>Which one of the following is a huge advantage for small business owners to start a business?</td><td class="correct">Desire to be one's own boss 想當自己的老闆</td></tr>
+        <tr><td>6</td><td>Entrepreneurial behavior typically requires all of the following EXCEPT:</td><td class="correct">Invention of something new（創業不等於一定要「發明新東西」，risk-taking/drive/creativity 才是必要條件）</td></tr>
+        <tr><td>7</td><td>Which of the following is NOT a factor in a small business's success?</td><td class="correct">Other people's needs and wants are not as important as the small business owner's（❌ 這句話本身是錯的／不是成功因素）</td></tr>
+        <tr><td>8</td><td>What term describes individuals/organizations that impact the success of a business?</td><td class="correct">Stakeholders 利害關係人</td></tr>
+        <tr><td>9</td><td>The entrepreneurial process is comprised of each of the following steps EXCEPT:</td><td class="correct">Inventing a new product or process（創業流程是：決定創業 → 從想法到企業 → 管理並成長企業——不包含「發明新產品」這一步）</td></tr>
+        <tr><td>10</td><td>Which of the following are important economic impacts of entrepreneurial firms? (select one or more)</td><td class="correct">Innovation + Job Creation 創新與創造就業</td></tr>
+        <tr><td>11</td><td>Which is an advantage of the sole proprietorship form of organization?</td><td class="correct">Creating one is easy and inexpensive 設立簡單、成本低</td></tr>
+        <tr><td>12</td><td>Disadvantages of a limited liability company (LLC) EXCEPT:</td><td class="correct">Limited number of shareholder members（這不是LLC的缺點——LLC其實股東數量相對彈性）</td></tr>
+        <tr><td>13</td><td>Why is the executive summary perhaps the most important section of the business plan?</td><td class="correct">If it fails to attract an investor's interest, they are unlikely to read the rest 若吸引不了投資人，後面都不會被看</td></tr>
+        <tr><td>14</td><td>Trilane Systems — Myra is sole owner/employee, responsible for all income/losses. What legal form?</td><td class="correct">Sole proprietorship 獨資企業</td></tr>
+        <tr><td>15</td><td>Which statement about double taxation is correct?</td><td class="correct">A corporation is taxed on net income, then shareholders are taxed again on dividends 公司先被課稅，股東領股息時再被課一次稅</td></tr>
+        <tr><td>16</td><td>_________ is a resource/capability that serves as a firm's competitive advantage over rivals.</td><td class="correct">Core competency 核心競爭力</td></tr>
+        <tr><td>17</td><td>What describes why a business exists and what its business model is supposed to accomplish?</td><td class="correct">The firm's mission statement 使命宣言</td></tr>
+        <tr><td>18</td><td>Compared to large corporations, entrepreneurial businesses...</td><td class="correct">Play just as important a part in our economy 在經濟中同樣重要</td></tr>
+        <tr><td>19</td><td>An effective business model addresses each of the following EXCEPT:</td><td class="correct">How a firm obtains start-up capital（這屬於財務規劃，不是商業模式要回答的核心問題）</td></tr>
+        <tr><td>20</td><td>A cost leadership strategy requires a business model focused on each of the following EXCEPT:</td><td class="correct">Differentiation（成本領導策略 = 量、效率、成本最小化；差異化屬於另一種策略）</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Exercise 02 ============ -->
+<section class="chapter" id="ex2">
+  <h2><span class="num">2</span>Exercise 02 <span class="score">23.5/25 · 94%</span></h2>
+  <div class="example">
+    <div class="head">涵蓋範圍：6 Ways of Getting into Business + Business Model Canvas（Skype 案例）+ Ch1 複習</div>
+    <div class="body">
+      <div class="answer"><strong>Q1 配對題（matching）：</strong> 六種創業方式的優缺點配對——"You don't have as much freedom as an independent owner" → <em>buying a franchise</em>（加盟）；"All profits remain within the organization" → <em>nonprofit organization</em>（非營利組織）；"The business has a reputation, but is it always a good one?" → <em>buying an existing business</em>（收購現有企業）；"Distractions from family/neighbors" → <em>home-based business</em>（在家創業）；"Lower startup costs than brick-and-mortar" → <em>online business</em>（網路創業）。</div>
+      <div class="wrong"><strong>Q2（Skype BMC 拖拉題，部分錯誤）：</strong> 題目給出 Skype 這間 VOIP 公司的九宮格，你把 "Mass customers" 和 "Personal" 放錯了格子（Customer Segments 應放 "Web Users Globally"，Customer Relationships 應放 "Mass customers"／"Personal" 視版本而定）。<strong>複習重點：</strong>Customer Segments 回答「我們為誰創造價值」，Customer Relationships 回答「每個客群期望什麼樣的關係」——兩者容易混淆，要抓住「對象」vs「互動方式」的差異。</div>
+      <table>
+        <tr><th>#</th><th>Question 題目</th><th>Correct Answer 正確答案</th></tr>
+        <tr><td>3</td><td>Which building block focuses on identifying the groups of people a business serves?</td><td class="correct">Customer Segments 客戶群</td></tr>
+        <tr><td>4</td><td>Which block defines the unique value a company offers to its customers?</td><td class="correct">Value Proposition 價值主張</td></tr>
+        <tr><td>5</td><td>Why is the value proposition important to customers?</td><td class="correct">It explains the unique benefits 說明獨特的利益</td></tr>
+        <tr><td>6</td><td>Which building block describes how a company delivers its value proposition?</td><td class="correct">Channels 通路</td></tr>
+        <tr><td>7</td><td>Key question in the Channels block?</td><td class="correct">How do we reach our customer segments? 我們如何觸及客戶群？</td></tr>
+        <tr><td>8</td><td>Key aspect of Customer Relationships?</td><td class="correct">Relationship maintenance 關係維護</td></tr>
+        <tr><td>9</td><td>Which model sells a main product at low cost and profits from related items?</td><td class="correct">Accessories 配件型</td></tr>
+        <tr><td>10</td><td>Which business model charges customers at regular intervals?</td><td class="correct">Subscription 訂閱型</td></tr>
+        <tr><td>11</td><td>Which model is best for media platforms (online newspapers/streaming)?</td><td class="correct">Subscription 訂閱型</td></tr>
+        <tr><td>12</td><td>Primary purpose of a business model?</td><td class="correct">To describe how an organization creates, delivers, and captures value 描述組織如何創造、傳遞、獲取價值</td></tr>
+        <tr><td>13</td><td>What does a business plan primarily focus on?</td><td class="correct">Presenting the company's strategy and expected financial performance 呈現策略與預期財務表現</td></tr>
+        <tr><td>14</td><td>Which situation demonstrates *efficiency*?</td><td class="correct">A department lowers energy/paper usage without reducing productivity 不犧牲生產力地降低資源消耗</td></tr>
+        <tr><td>15</td><td>Which role describes the entrepreneur as a risk bearer?</td><td class="correct">An agent who buys inputs at certain prices to sell at uncertain future prices 用確定價格買進、以不確定未來價格賣出</td></tr>
+        <tr><td>16</td><td>Which action reflects innovation in production methods?</td><td class="correct">Using a new method of production that is not yet tested 使用尚未驗證的新生產方法</td></tr>
+        <tr><td>17</td><td>Main responsibility of a manager?</td><td class="correct">Growing or maintaining a business 成長或維持企業</td></tr>
+        <tr><td>18</td><td>Small companies have flourished for all the following reasons EXCEPT: <span class="zh">（❌ 原答錯）</span></td><td class="correct">They often expand easily in mature industries</td></tr>
+        <tr><td>19</td><td>The success of entrepreneurial businesses occurs partially because they are ________.</td><td class="correct">More focused than their large corporate counterparts</td></tr>
+        <tr><td>20</td><td>Difference between large organizations and entrepreneurial businesses?</td><td class="correct">Unlike entrepreneurial businesses, large organizations will regularly ignore opportunities if they don't believe it'll generate high profits 大企業常因為覺得獲利不夠高而忽略機會</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Exercise 03 ============ -->
+<section class="chapter" id="ex3">
+  <h2><span class="num">3</span>Exercise 03 — BMC <span class="score">21/21 · 100%</span></h2>
+  <div class="example">
+    <div class="head">涵蓋範圍：Business Model Canvas 實作練習（滿分）</div>
+    <div class="body">
+      <div class="answer">
+        這份練習是兩個 BMC 拖拉實作題，滿分完成：<br><br>
+        <strong>案例一：公園檸檬水攤（Lemonade Stall）</strong><br>
+        Key Partners：Municipalities（市政府／公園管理單位）｜Key Activities：Making lemonade（製作檸檬水）｜Key Resources：Ingredients（食材）｜Value Propositions：Cold tasty natural lemonade（冰涼天然好喝的檸檬水）｜Customer Relationships：Personal（個人化互動）｜Channels：Stall sale（攤位銷售）｜Customer Segments：Park visitors（公園遊客）｜Cost Structure：Salaries and commission（薪資與佣金）｜Revenue Streams：Tips（小費）。<br><br>
+        <strong>案例二：Skype（VOIP 通訊服務）</strong><br>
+        Key Partners：Telecommunications Partners（電信合作夥伴）｜Key Activities：Software development（軟體開發）｜Key Resources：Software developers（軟體工程師）｜Value Propositions：Cheap calls to phone（便宜的電話通話）｜Customer Relationships：Mass customers（大眾客戶／Personal 視版本）｜Channels：Skype.com｜Customer Segments：Web Users Globally（全球網路使用者）｜Cost Structure：Software development expenses（軟體開發費用）｜Revenue Streams：Prepaid calls or Subscriptions（預付通話或訂閱）。
+      </div>
+      <div class="tip"><strong>考前自我練習：</strong> 蓋住答案，給自己一間熟悉的公司（例如 Netflix、Grab、蝦皮），在空白九宮格上默寫九個區塊，時間抓 5 分鐘內完成。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Exercise 04 ============ -->
+<section class="chapter" id="ex4">
+  <h2><span class="num">4</span>Exercise 04 <span class="score">19/20 · 95%</span></h2>
+  <div class="example">
+    <div class="head">涵蓋範圍：Ch4（Generating Ideas）+ Ch5（Working Your Idea）+ Ch6（Marketing）入門</div>
+    <div class="body">
+      <table>
+        <tr><th>#</th><th>Question 題目</th><th>Correct Answer 正確答案</th></tr>
+        <tr><td>1</td><td>What is an idea?</td><td class="correct">It is a thought, impression, or notion 一個念頭、印象或概念</td></tr>
+        <tr><td>2</td><td>What defines an opportunity in business?</td><td class="correct">A situation that presents possibilities for exceeding existing goals 能超越現有目標的情境</td></tr>
+        <tr><td>3</td><td>Purpose of a customer advisory board?</td><td class="correct">To regularly discuss customer needs, wants, and problems to generate new ideas 定期討論顧客需求以產生新點子</td></tr>
+        <tr><td>4</td><td>Which is discouraged during brainstorming?</td><td class="correct">Criticizing ideas 批評想法</td></tr>
+        <tr><td>5</td><td>How do focus groups contribute to idea generation?</td><td class="correct">By exploring participants' thoughts and feelings on specific issues 探索參與者對特定議題的想法與感受</td></tr>
+        <tr><td>6</td><td>The three ways to identify an opportunity include ________.</td><td class="correct">Observing trends, solving a problem, and finding gaps in the marketplace 觀察趨勢、解決問題、找出市場缺口</td></tr>
+        <tr><td>7</td><td>True statement about risk tolerance?</td><td class="correct">What constitutes a risk is determined by an entrepreneur observing his/her own tolerances 風險的認定取決於創業者自身的風險承受度</td></tr>
+        <tr><td>8</td><td>Hulu.com's opportunity was made possible by ________.</td><td class="correct">Technological advances 科技進步</td></tr>
+        <tr><td>9</td><td>Solo entrepreneur vs network entrepreneur — how do they find ideas?</td><td class="correct">Solo：on their own（靠自己）；Network：through social contacts（透過人脈）</td></tr>
+        <tr><td>10</td><td>Mark has defined industry & customers. Next step in external analysis? <span class="zh">（❌ 原答錯：選了 substitutes）</span></td><td class="correct">Mark should research the industry 應先研究產業</td></tr>
+        <tr><td>11</td><td>Key questions when studying an industry EXCEPT:</td><td class="correct">"Is the industry in the maturity stage of the industry life cycle?"（這不是「必答」的關鍵問題，其他三項才是）</td></tr>
+        <tr><td>12</td><td>What technological trend led to the rise of digital photography?</td><td class="correct">Emergence of new technologies 新科技的出現</td></tr>
+        <tr><td>13</td><td>What is a benefit of your product?</td><td class="correct">The value it provides to the customer 提供給顧客的價值</td></tr>
+        <tr><td>14</td><td>What question helps define the market need?</td><td class="correct">What problem does my product or service solve? 我的產品/服務解決什麼問題？</td></tr>
+        <tr><td>15</td><td>Major advantage of selling direct?</td><td class="correct">Being able to control the process from origin to end user instead of relying on third parties 能掌控從源頭到終端的流程，不依賴第三方</td></tr>
+        <tr><td>16</td><td>First step in marketing your business?</td><td class="correct">Creating a brand 建立品牌</td></tr>
+        <tr><td>17</td><td>Which can reinforce brand positioning?</td><td class="correct">Taglines like "Just do it" 像 "Just do it" 這樣的口號</td></tr>
+        <tr><td>18</td><td>What does a marketing strategy include?</td><td class="correct">Message, channel choice, methods and cost 訊息、通路選擇、方法與成本</td></tr>
+        <tr><td>19</td><td>Why is pricing important for a business?</td><td class="correct">It can determine the success or failure of the business 能決定企業成敗</td></tr>
+        <tr><td>20</td><td>Why is pricing an ongoing effort?</td><td class="correct">Market conditions and customer demand change over time 市場狀況與顧客需求會隨時間改變</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Exercise 05 ============ -->
+<section class="chapter" id="ex5">
+  <h2><span class="num">5</span>Exercise 05 <span class="score">20/20 · 100%</span></h2>
+  <div class="example">
+    <div class="head">涵蓋範圍：Ch4（Idea Generation）+ Ch5（Industry / Competitor Research）+ Ch6（Marketing，滿分）</div>
+    <div class="body">
+      <table>
+        <tr><th>#</th><th>Question 題目</th><th>Correct Answer 正確答案</th></tr>
+        <tr><td>1</td><td>What does invention refer to?</td><td class="correct">Creating or making up something new 創造全新事物</td></tr>
+        <tr><td>2</td><td>Key feature of a brainstorming session?</td><td class="correct">It involves a group of people focused on a specific topic 一群人針對特定主題</td></tr>
+        <tr><td>3</td><td>Why should a brainstorming session move quickly?</td><td class="correct">To maintain energy and encourage spontaneous ideas 維持能量、鼓勵即興發想</td></tr>
+        <tr><td>4</td><td>What type of resources can a reference librarian suggest?</td><td class="correct">Industry-specific magazines, trade journals, and industry reports 產業雜誌、貿易期刊、產業報告</td></tr>
+        <tr><td>5</td><td>Purpose of using focus groups in business?</td><td class="correct">To help generate new business ideas 幫助產生新點子</td></tr>
+        <tr><td>6</td><td>Daisy Rock Guitars（為女性設計的吉他）— how was the idea recognized?</td><td class="correct">Finding a gap in the marketplace 找到市場缺口</td></tr>
+        <tr><td>7</td><td>__________ is a favorable set of circumstances that creates a need for a new product/service/business.</td><td class="correct">An opportunity 機會</td></tr>
+        <tr><td>8</td><td>A common way gaps in the marketplace are recognized is ________.</td><td class="correct">When people become frustrated because they can't find a product/service they need, and realize others feel the same way 人們因找不到需要的產品而沮喪，並發現別人也有同感</td></tr>
+        <tr><td>9</td><td>Intuit sends employees to customers' facilities to probe for new ideas — what technique?</td><td class="correct">Day-in-the-life research</td></tr>
+        <tr><td>10</td><td>How a company is situated relative to competitors is called _____.</td><td class="correct">Position 定位</td></tr>
+        <tr><td>11</td><td>Video industry becoming less attractive due to movie-download tech — which competitive force?</td><td class="correct">Threat of substitutes 替代品威脅</td></tr>
+        <tr><td>12</td><td>What does a gap in the marketplace usually indicate?</td><td class="correct">A need not served by mainstream providers 主流業者未能滿足的需求</td></tr>
+        <tr><td>13</td><td>Type of trend that includes disposable income and consumer spending patterns?</td><td class="correct">Economic forces 經濟力量</td></tr>
+        <tr><td>14</td><td>Key question when researching your industry?</td><td class="correct">What is the current stage of the industry life cycle? 產業目前處於生命週期哪個階段？</td></tr>
+        <tr><td>15</td><td>Which marketing concept pertains to how a firm differentiates itself from competitors?</td><td class="correct">Establishing a unique position 建立獨特定位</td></tr>
+        <tr><td>16</td><td>Why is brand identity important?</td><td class="correct">It guides all marketing activities and builds recognition 指引所有行銷活動、建立認知</td></tr>
+        <tr><td>17</td><td>What makes a product stand out from competition?</td><td class="correct">Special benefits and unique features 特殊利益與獨特特色</td></tr>
+        <tr><td>18</td><td>Why is a business website important?</td><td class="correct">It builds credibility and helps customers find you 建立信譽、幫助顧客找到你</td></tr>
+        <tr><td>19</td><td>What is bundling in pricing strategy?</td><td class="correct">Offering lower prices when customers buy multiple products/services together 購買多項產品/服務享優惠</td></tr>
+        <tr><td>20</td><td>Which aspects need to be considered while developing a marketing plan?</td><td class="correct">All of these（確定銷售管理流程、鎖定目標顧客、辨識企業市場——全部都要考慮）</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Exercise 06 ============ -->
+<section class="chapter" id="ex6">
+  <h2><span class="num">6</span>Exercise 06 <span class="score">20/20 · 100%</span></h2>
+  <div class="example">
+    <div class="head">涵蓋範圍：Ch7（Financing）+ Ch8（Intellectual Property）+ Ch9（Growth，滿分）</div>
+    <div class="body">
+      <table>
+        <tr><th>#</th><th>Question 題目</th><th>Correct Answer 正確答案</th></tr>
+        <tr><td>1</td><td>The break-even point is defined as</td><td class="correct">The level where revenue coming into the firm is sufficient to cover expenses 收入足以涵蓋費用的水準</td></tr>
+        <tr><td>2</td><td>The evaluation of a firm starts with</td><td class="correct">The mission of the firm 企業的使命</td></tr>
+        <tr><td>3</td><td>True statement about income statements?</td><td class="correct">For an entrepreneurial firm, predicting sales is key to developing income statements 預測銷售是編製損益表的關鍵</td></tr>
+        <tr><td>4</td><td>What is benchmarking?</td><td class="correct">Comparing financial data to industry norms 將財務數據與產業標準比較</td></tr>
+        <tr><td>5</td><td>Which is NOT a fixed operating expense?</td><td class="correct">Shipping costs 運費（屬於變動成本）</td></tr>
+        <tr><td>6</td><td>What does 'Capital' refer to in the Six C's of Credit?</td><td class="correct">Personal investment in the business 業主個人投入的資金</td></tr>
+        <tr><td>7</td><td>What is crowdfunding?</td><td class="correct">Raising small amounts from many people online 向大眾小額集資</td></tr>
+        <tr><td>8</td><td>Who can apply for grants?</td><td class="correct">Nonprofit organizations 非營利組織</td></tr>
+        <tr><td>9</td><td>What is typically required for a bank loan application?</td><td class="correct">Cover letter, financial statements, tax returns, and collateral 介紹信、財務報表、稅務紀錄、抵押品</td></tr>
+        <tr><td>10</td><td>_____ is a grant conferring rights to exclude others from making/selling/using an invention.</td><td class="correct">Patent 專利</td></tr>
+        <tr><td>11</td><td>Which patent type applies to Amazon one-click or Priceline name-your-own-price?</td><td class="correct">Business method patent 商業方法專利</td></tr>
+        <tr><td>12</td><td>Is registration required for copyright protection?</td><td class="correct">No, it is automatic 不需要，自動生效</td></tr>
+        <tr><td>13</td><td>Which is NOT protected by copyright?</td><td class="correct">Discoveries 發現</td></tr>
+        <tr><td>14</td><td>Can a patent be transferred?</td><td class="correct">Yes, during its period of validity 可以，在有效期內</td></tr>
+        <tr><td>15</td><td>Why is a USB plug design not eligible for registration?</td><td class="correct">It serves only a specified function 只具備特定功能</td></tr>
+        <tr><td>16</td><td>True about trade secret protection?</td><td class="correct">It does not require formal registration 不需要正式註冊</td></tr>
+        <tr><td>17</td><td>Businesses can prepare for growth by ________.</td><td class="correct">Staying committed to a core strategy 堅守核心策略</td></tr>
+        <tr><td>18</td><td>Part of the organizational life cycle EXCEPT:</td><td class="correct">Reinvention（不是生命週期的一部分 — 生命週期是 Introduction→Early Growth→Continuous Growth→Maturity→Decline）</td></tr>
+        <tr><td>19</td><td>What is an external growth strategy?</td><td class="correct">Strategic alliances and joint ventures 策略聯盟與合資</td></tr>
+        <tr><td>20</td><td>What defines the maturity stage?</td><td class="correct">Growth stalls and focus shifts to efficiency 成長停滯、重心轉向效率</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Exercise 07 ============ -->
+<section class="chapter" id="ex7">
+  <h2><span class="num">7</span>Exercise 07 <span class="score">19/20 · 95%</span></h2>
+  <div class="example">
+    <div class="head">涵蓋範圍：Ch7（Financing）+ Ch8（IP）+ Ch9（Growth）綜合複習</div>
+    <div class="body">
+      <table>
+        <tr><th>#</th><th>Question 題目</th><th>Correct Answer 正確答案</th></tr>
+        <tr><td>1</td><td>Main disadvantage of small businesses competing with large firms?</td><td class="correct">Operating at a cost level 在成本層面處於劣勢</td></tr>
+        <tr><td>2</td><td>A cash flow statement is the exact opposite of a ________. <span class="zh">（❌ 原答錯：選了 cash plan）</span></td><td class="correct">Budget 預算</td></tr>
+        <tr><td>3</td><td>Financial planning is essential to a startup EXCEPT:</td><td class="correct">"Communicate with stakeholders about the business's <em>profits</em>"（陷阱：正確說法是 about the business's <em>finances</em>，不是 profits）</td></tr>
+        <tr><td>4</td><td>What should startup funds cover?</td><td class="correct">Initial costs and working capital for 6 to 18 months 初期成本＋6–18個月週轉金</td></tr>
+        <tr><td>5</td><td>What does a balance sheet show?</td><td class="correct">Assets, liabilities, and equity 資產、負債、權益</td></tr>
+        <tr><td>6</td><td>Which is part of the Six C's of Credit?</td><td class="correct">Character 品格／信用紀錄</td></tr>
+        <tr><td>7</td><td>What is considered 'Collateral'?</td><td class="correct">Tangible assets like property and equipment 不動產與設備等有形資產</td></tr>
+        <tr><td>8</td><td>Who are angel investors?</td><td class="correct">Individuals who invest in promising companies 投資有潛力公司的個人投資者</td></tr>
+        <tr><td>9</td><td>A VP leaves and reuses an almost-identical marketing plan at a rival firm — what is this?</td><td class="correct">Trade secret dispute 商業機密糾紛</td></tr>
+        <tr><td>10</td><td>What does copyright protect?</td><td class="correct">The form or format of a piece 作品的形式／格式</td></tr>
+        <tr><td>11</td><td>How long does copyright last for anonymous works?</td><td class="correct">50 years after publication 發表後50年</td></tr>
+        <tr><td>12</td><td>Which is considered public use information?</td><td class="correct">Political speeches 政治演說</td></tr>
+        <tr><td>13</td><td>Main difference between a trademark and an industrial design?</td><td class="correct">Trademark does not require the good itself as the protected subject 商標不需要以商品本身作為保護對象</td></tr>
+        <tr><td>14</td><td>Why is intellectual property protected by law?</td><td class="correct">To reward creators and encourage innovation 獎勵創作者、鼓勵創新</td></tr>
+        <tr><td>15</td><td>Who must obtain a license to use a patented method?</td><td class="correct">Any person or company 任何人或公司</td></tr>
+        <tr><td>16</td><td>Which strengthens trade secret protection?</td><td class="correct">Information known only on a need-to-know basis 僅限「需要知道」的人知悉</td></tr>
+        <tr><td>17</td><td>Which is NOT a sign that a business is growing too fast?</td><td class="correct">Employees are satisfied 員工滿意（這不是警訊，其他三項：生產力下降、利潤極薄、品質下滑才是警訊）</td></tr>
+        <tr><td>18</td><td>Video game manufacturer: increased production → lower avg cost per unit. Example of?</td><td class="correct">Capturing economies of scale 規模經濟</td></tr>
+        <tr><td>19</td><td>What are economies of scale?</td><td class="correct">Lower average cost per unit with increased production 產量增加、單位平均成本下降</td></tr>
+        <tr><td>20</td><td>What helps a business avoid decline?</td><td class="correct">Strong leadership and adaptability 強勢領導與適應力</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<footer>
+  CISC3028 Entrepreneurship · Exercise 01–07 複習 · 最後更新 2026-10 · 整理自 UM Moodle Attempt Review
+</footer>
+
+</div>
+</body>
+</html>
