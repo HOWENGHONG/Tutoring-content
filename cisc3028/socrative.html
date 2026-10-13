@@ -170,6 +170,33 @@
   .tip strong{color:var(--red);}
 
   .zh{color:var(--muted);}
+
+  .qa-list{display:flex;flex-direction:column;}
+  .qa-item{
+    padding-bottom:16px;
+    margin-bottom:16px;
+    border-bottom:1px dashed var(--border);
+  }
+  .qa-item:last-child{padding-bottom:0;margin-bottom:0;border-bottom:none;}
+  .qa-item .q{margin-bottom:8px;}
+  .opts{list-style:none;margin:0;padding:0;}
+  .opts li{
+    padding:7px 12px;
+    border-radius:7px;
+    margin-bottom:5px;
+    font-size:.87rem;
+    background:#f8fafc;
+    border:1px solid var(--border);
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    flex-wrap:wrap;
+  }
+  .opts li.correct{background:#f0fdf4;color:var(--green);font-weight:600;border-color:#bbf7d0;}
+  .opts li .letter{font-weight:700;margin-right:4px;}
+  .opts li .pct{color:var(--muted);font-size:.8rem;font-weight:500;white-space:nowrap;}
+  .opts li.correct .pct{color:var(--green);}
+
   blockquote{
     border-left:3px solid var(--border);
     padding:6px 14px;
@@ -225,14 +252,53 @@
   <div class="example">
     <div class="head">課堂即時問答 — 全班作答統計</div>
     <div class="body">
-      <table>
-        <tr><th>#</th><th>Question 題目</th><th>Correct Answer 正確答案</th><th>全班答對率</th></tr>
-        <tr><td>1</td><td>How do entrepreneurs and managers differ?</td><td class="correct">Entrepreneur is about what it takes to start a business, while manager is about what it takes to grow or maintain a business 企業家是「從零開始」，經理是「維持與成長」</td><td>44/46（96%）</td></tr>
-        <tr><td>2</td><td>Jeremy Stoppelman & Russel Simmons (Yelp founders) created a new type of business — they would best be described as</td><td class="correct">Entrepreneurs 企業家</td><td>40/46（87%）</td></tr>
-        <tr><td>3</td><td>Elian, a restaurant manager who carefully scheduled staff and watched costs, is best described as a(n) ___ manager.</td><td class="correct">Efficient 有效率的</td><td>36/45（80%）</td></tr>
-        <tr><td>4</td><td>Why do all types of organizations need financial resources?</td><td class="correct">To sustain operations and achieve objectives 維持運作、達成目標</td><td>44/44（100%）</td></tr>
-        <tr><td>5</td><td>What distinguishes a mutual-benefit organization from a non-profit organization regarding financial goals?</td><td class="correct">Non-profits aim to advance a social cause, while mutual-benefit organizations primarily benefit members 非營利組織推動社會公益；互惠組織主要是服務自己的成員</td><td>43/44（98%）</td></tr>
-      </table>
+      <div class="qa-list">
+        <div class="qa-item">
+          <div class="q"><strong>Q1：</strong> How do entrepreneurs and managers differ? <span class="zh">全班答對率 44/46（96%）</span></div>
+          <ul class="opts">
+            <li><span><span class="letter">a.</span> Entrepreneurs and managers are synonymous, therefore both share the same concerns.</span><span class="pct">0/46</span></li>
+            <li><span><span class="letter">b.</span> Entrepreneur is about being effective while manager is about being efficient.</span><span class="pct">2/46</span></li>
+            <li class="correct"><span><span class="letter">c.</span> ✅ Entrepreneur is about what it takes to start a business, while manager is about what it takes to grow or maintain a business. 企業家是「從零開始」，經理是「維持與成長」</span><span class="pct">44/46</span></li>
+            <li><span><span class="letter">d.</span> Manager is about what it takes to start a business, while entrepreneur is about what it takes to grow or maintain a business.</span><span class="pct">0/46</span></li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q2：</strong> Jeremy Stoppelman and Russel Simmons, founders of Yelp, created a new type of business that did not exist before. They would best be described as <span class="zh">全班答對率 40/46（87%）</span></div>
+          <ul class="opts">
+            <li><span><span class="letter">a.</span> business developers.</span><span class="pct">4/46</span></li>
+            <li><span><span class="letter">b.</span> inventors.</span><span class="pct">2/46</span></li>
+            <li class="correct"><span><span class="letter">c.</span> ✅ entrepreneurs. 企業家</span><span class="pct">40/46</span></li>
+            <li><span><span class="letter">d.</span> managers.</span><span class="pct">0/46</span></li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q3：</strong> Elian, a restaurant manager who carefully scheduled staff and watched costs, is best described as a(n) ___ manager. <span class="zh">全班答對率 36/45（80%，全班最低）</span></div>
+          <ul class="opts">
+            <li class="correct"><span><span class="letter">a.</span> ✅ efficient 有效率的</span><span class="pct">36/45</span></li>
+            <li><span><span class="letter">b.</span> ethical</span><span class="pct">1/45</span></li>
+            <li><span><span class="letter">c.</span> innovative</span><span class="pct">0/45</span></li>
+            <li><span><span class="letter">d.</span> effective</span><span class="pct">8/45</span></li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q4：</strong> Why do all types of organizations need financial resources? <span class="zh">全班答對率 44/44（100%）</span></div>
+          <ul class="opts">
+            <li class="correct"><span><span class="letter">a.</span> ✅ To sustain operations and achieve objectives 維持運作、達成目標</span><span class="pct">44/44</span></li>
+            <li><span><span class="letter">b.</span> To exclusively pay taxes</span><span class="pct">0/44</span></li>
+            <li><span><span class="letter">c.</span> To distribute among stakeholders only</span><span class="pct">0/44</span></li>
+            <li><span><span class="letter">d.</span> To avoid any operational activities</span><span class="pct">0/44</span></li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q5：</strong> What distinguishes a mutual-benefit organization from a non-profit organization regarding financial goals? <span class="zh">全班答對率 43/44（98%）</span></div>
+          <ul class="opts">
+            <li><span><span class="letter">a.</span> Non-profits distribute profits to external individuals.</span><span class="pct">0/44</span></li>
+            <li><span><span class="letter">b.</span> Non-profits aim to primarily benefit members, while mutual-benefit organizations advance a social cause.</span><span class="pct">1/44</span></li>
+            <li><span><span class="letter">c.</span> Mutual-benefit organizations do not require any funds to operate.</span><span class="pct">0/44</span></li>
+            <li class="correct"><span><span class="letter">d.</span> ✅ Non-profits aim to advance a social cause, while mutual-benefit organizations primarily benefit members. 非營利組織推動社會公益；互惠組織主要是服務自己的成員</span><span class="pct">43/44</span></li>
+          </ul>
+        </div>
+      </div>
       <div class="tip"><strong>複習重點：</strong>第3題是全班答對率最低的一題（80%）——記住「efficient = 省成本、把事情做對」，和「effective = 做對的事」要分清楚，這是整份課程最容易混淆的一組名詞，Part A 幾乎必考。</div>
     </div>
   </div>
@@ -254,12 +320,38 @@
   <div class="example">
     <div class="head">課堂投票結果 Class Poll Results</div>
     <div class="body">
-      <table>
-        <tr><th>#</th><th>Question 題目</th><th>Class Answer 全班多數答案</th></tr>
-        <tr><td>1</td><td>Which of the following companies were NOT mentioned in the video?</td><td class="correct">C. Amazon（21/39 選此項；影片中提到的是 Airbnb、Instagram、LinkedIn、Uber、Z.com 等，Amazon 沒有被提及）</td></tr>
-        <tr><td>2</td><td>Which of the Top 5 factors do you think is the <strong>most</strong> important?</td><td class="correct">A. Timing 時機（26/39，多數同學認為「時機」最重要）</td></tr>
-        <tr><td>4</td><td>Which of the Top 5 factors do you think is the <strong>least</strong> important?</td><td class="correct">E. Funding 資金（24/37，多數同學認為「資金」最不重要）</td></tr>
-      </table>
+      <div class="qa-list">
+        <div class="qa-item">
+          <div class="q"><strong>Q1：</strong> Which of the following companies were NOT mentioned in the video? <span class="zh">影片中實際提到的是 Airbnb、Instagram、LinkedIn、Uber、Z.com 等，Amazon 並未被提及</span></div>
+          <ul class="opts">
+            <li><span><span class="letter">a.</span> Airbnb</span><span class="pct">1/39</span></li>
+            <li><span><span class="letter">b.</span> Instagram</span><span class="pct">8/39</span></li>
+            <li class="correct"><span><span class="letter">c.</span> ✅ Amazon（未被提及）</span><span class="pct">21/39</span></li>
+            <li><span><span class="letter">d.</span> LinkedIn</span><span class="pct">7/39</span></li>
+            <li><span><span class="letter">e.</span> Uber</span><span class="pct">2/39</span></li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q2：</strong> Assuming the Top 5 factors in success found by Bill Gross, which one do you think is the <strong>most</strong> important? <span class="zh">這是意見題，沒有「正確答案」，以下是全班投票分布</span></div>
+          <ul class="opts">
+            <li class="correct"><span><span class="letter">a.</span> ✅ Timing 時機（全班最多人選）</span><span class="pct">26/39</span></li>
+            <li><span><span class="letter">b.</span> Team 團隊</span><span class="pct">2/39</span></li>
+            <li><span><span class="letter">c.</span> Ideas 想法</span><span class="pct">5/39</span></li>
+            <li><span><span class="letter">d.</span> Business Model 商業模式</span><span class="pct">7/39</span></li>
+            <li><span><span class="letter">e.</span> Funding 資金</span><span class="pct">0/39</span></li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q4：</strong> Assuming the Top 5 factors in success found by Bill Gross, which one do you think is the <strong>least</strong> important? <span class="zh">意見題，以下是全班投票分布</span></div>
+          <ul class="opts">
+            <li><span><span class="letter">a.</span> Timing 時機</span><span class="pct">0/37</span></li>
+            <li><span><span class="letter">b.</span> Team 團隊</span><span class="pct">3/37</span></li>
+            <li><span><span class="letter">c.</span> Ideas 想法</span><span class="pct">3/37</span></li>
+            <li><span><span class="letter">d.</span> Business Model 商業模式</span><span class="pct">7/37</span></li>
+            <li class="correct"><span><span class="letter">e.</span> ✅ Funding 資金（全班最多人選）</span><span class="pct">24/37</span></li>
+          </ul>
+        </div>
+      </div>
       <div class="answer">
         <strong>Q3 / Q5 是開放式申論題（Justify your answer）：</strong>以下整理幾個有代表性的同學論點，可以作為 Part C 申論題的寫作範例：
       </div>

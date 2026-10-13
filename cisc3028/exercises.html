@@ -177,6 +177,34 @@
   }
   .wrong strong{color:var(--red);}
 
+  .qa-list{display:flex;flex-direction:column;}
+  .qa-item{
+    padding-bottom:16px;
+    margin-bottom:16px;
+    border-bottom:1px dashed var(--border);
+  }
+  .qa-item:last-child{padding-bottom:0;margin-bottom:0;border-bottom:none;}
+  .qa-item .q{margin-bottom:8px;}
+  .qa-item .answer{margin-bottom:0;}
+  .qa-item .qnum{
+    display:inline-flex;align-items:center;justify-content:center;
+    background:var(--primary);color:#fff;
+    width:22px;height:22px;border-radius:50%;
+    font-size:.72rem;font-weight:700;margin-right:6px;flex-shrink:0;
+  }
+  .opts{list-style:none;margin:0;padding:0;}
+  .opts li{
+    padding:7px 12px;
+    border-radius:7px;
+    margin-bottom:5px;
+    font-size:.87rem;
+    background:#f8fafc;
+    border:1px solid var(--border);
+  }
+  .opts li.correct{background:#f0fdf4;color:var(--green);font-weight:600;border-color:#bbf7d0;}
+  .opts li.wrongpick{background:#fef2f2;color:var(--red);font-weight:600;border-color:#fecaca;}
+  .opts li .letter{font-weight:700;margin-right:4px;}
+
   table{
     width:100%;
     border-collapse:collapse;
@@ -256,29 +284,188 @@
   <div class="example">
     <div class="head">涵蓋範圍：Ch1–Ch2 核心定義與比較</div>
     <div class="body">
-      <table>
-        <tr><th>#</th><th>Question 題目</th><th>Correct Answer 正確答案</th></tr>
-        <tr><td>1</td><td>The defining difference between an entrepreneur and an intrapreneur is that the latter...<br><span class="zh">企業家與內部創業者的關鍵差異</span></td><td class="correct">Works within an existing organization, using its resources to exploit an opportunity 在既有組織內運用其資源來把握機會</td></tr>
-        <tr><td>2</td><td>Elian, a restaurant manager who carefully scheduled staff and watched costs, is best described as a(n) ___ manager.</td><td class="correct">Efficient 有效率的</td></tr>
-        <tr><td>3</td><td>Small companies have flourished for all the following reasons EXCEPT:</td><td class="correct">They often expand easily in mature industries（✅ 其他三項：僱用更有技能的人、反應更快、運作更有效——這些才是小公司興盛的原因；「容易在成熟產業擴張」才是例外）</td></tr>
-        <tr><td>4</td><td>The success of entrepreneurial businesses occurs partially because they are ________.</td><td class="correct">More focused than their large corporate counterparts 比大企業更專注</td></tr>
-        <tr><td>5</td><td>Which one of the following is a huge advantage for small business owners to start a business?</td><td class="correct">Desire to be one's own boss 想當自己的老闆</td></tr>
-        <tr><td>6</td><td>Entrepreneurial behavior typically requires all of the following EXCEPT:</td><td class="correct">Invention of something new（創業不等於一定要「發明新東西」，risk-taking/drive/creativity 才是必要條件）</td></tr>
-        <tr><td>7</td><td>Which of the following is NOT a factor in a small business's success?</td><td class="correct">Other people's needs and wants are not as important as the small business owner's（❌ 這句話本身是錯的／不是成功因素）</td></tr>
-        <tr><td>8</td><td>What term describes individuals/organizations that impact the success of a business?</td><td class="correct">Stakeholders 利害關係人</td></tr>
-        <tr><td>9</td><td>The entrepreneurial process is comprised of each of the following steps EXCEPT:</td><td class="correct">Inventing a new product or process（創業流程是：決定創業 → 從想法到企業 → 管理並成長企業——不包含「發明新產品」這一步）</td></tr>
-        <tr><td>10</td><td>Which of the following are important economic impacts of entrepreneurial firms? (select one or more)</td><td class="correct">Innovation + Job Creation 創新與創造就業</td></tr>
-        <tr><td>11</td><td>Which is an advantage of the sole proprietorship form of organization?</td><td class="correct">Creating one is easy and inexpensive 設立簡單、成本低</td></tr>
-        <tr><td>12</td><td>Disadvantages of a limited liability company (LLC) EXCEPT:</td><td class="correct">Limited number of shareholder members（這不是LLC的缺點——LLC其實股東數量相對彈性）</td></tr>
-        <tr><td>13</td><td>Why is the executive summary perhaps the most important section of the business plan?</td><td class="correct">If it fails to attract an investor's interest, they are unlikely to read the rest 若吸引不了投資人，後面都不會被看</td></tr>
-        <tr><td>14</td><td>Trilane Systems — Myra is sole owner/employee, responsible for all income/losses. What legal form?</td><td class="correct">Sole proprietorship 獨資企業</td></tr>
-        <tr><td>15</td><td>Which statement about double taxation is correct?</td><td class="correct">A corporation is taxed on net income, then shareholders are taxed again on dividends 公司先被課稅，股東領股息時再被課一次稅</td></tr>
-        <tr><td>16</td><td>_________ is a resource/capability that serves as a firm's competitive advantage over rivals.</td><td class="correct">Core competency 核心競爭力</td></tr>
-        <tr><td>17</td><td>What describes why a business exists and what its business model is supposed to accomplish?</td><td class="correct">The firm's mission statement 使命宣言</td></tr>
-        <tr><td>18</td><td>Compared to large corporations, entrepreneurial businesses...</td><td class="correct">Play just as important a part in our economy 在經濟中同樣重要</td></tr>
-        <tr><td>19</td><td>An effective business model addresses each of the following EXCEPT:</td><td class="correct">How a firm obtains start-up capital（這屬於財務規劃，不是商業模式要回答的核心問題）</td></tr>
-        <tr><td>20</td><td>A cost leadership strategy requires a business model focused on each of the following EXCEPT:</td><td class="correct">Differentiation（成本領導策略 = 量、效率、成本最小化；差異化屬於另一種策略）</td></tr>
-      </table>
+      <div class="qa-list">
+        <div class="qa-item">
+          <div class="q"><strong>Q1：</strong> The defining difference between an entrepreneur and an intrapreneur is that the latter <span class="zh">企業家與內部創業者的關鍵差異</span></div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> usually runs a small business.</li>
+            <li><span class="letter">b.</span> is working on multiple opportunities simultaneously.</li>
+            <li class="correct"><span class="letter">c.</span> ✅ works within an existing organization, using its resources to exploit an opportunity. 在既有組織內運用其資源把握機會</li>
+            <li><span class="letter">d.</span> is the person responsible for funding the former with a startup investment.</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q2：</strong> Elian, a restaurant manager who carefully scheduled staff and watched costs, is best described as a(n) ___ manager.</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> ethical</li>
+            <li class="correct"><span class="letter">b.</span> ✅ efficient 有效率的</li>
+            <li><span class="letter">c.</span> innovative</li>
+            <li><span class="letter">d.</span> effective</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q3：</strong> Small companies have flourished for all the following reasons EXCEPT: <span class="zh">（❌ 原答錯：選了 a）</span></div>
+          <ul class="opts">
+            <li class="wrongpick"><span class="letter">a.</span> ❌（原選）they employ more skilled people.</li>
+            <li class="correct"><span class="letter">b.</span> ✅ they often expand easily in mature industries. 容易在成熟產業擴張──其實是例外，不是興盛原因</li>
+            <li><span class="letter">c.</span> they respond more quickly.</li>
+            <li><span class="letter">d.</span> they operate more effectively.</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q4：</strong> The success of entrepreneurial businesses occurs partially because they are ________.</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> responsible to public stockholders</li>
+            <li class="correct"><span class="letter">b.</span> ✅ more focused than their large corporate counterparts 比大企業更專注</li>
+            <li><span class="letter">c.</span> invested heavily in policies and procedures</li>
+            <li><span class="letter">d.</span> characterized by corporate layers of management</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q5：</strong> Which one of the following is a huge advantage for small business owners to start a business?</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> Desire to be efficient and productive</li>
+            <li><span class="letter">b.</span> Desire to work for others</li>
+            <li class="correct"><span class="letter">c.</span> ✅ Desire to be one's own boss 想當自己的老闆</li>
+            <li><span class="letter">d.</span> Benefit the stakeholders</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q6：</strong> Entrepreneurial behavior typically requires all of the following EXCEPT:</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> willingness to take risks.</li>
+            <li><span class="letter">b.</span> drive.</li>
+            <li class="correct"><span class="letter">c.</span> ✅ invention of something new. 創業不等於一定要「發明新東西」</li>
+            <li><span class="letter">d.</span> creativity.</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q7：</strong> Which of the following is NOT a factor in a small business's success?</div>
+          <ul class="opts">
+            <li class="correct"><span class="letter">a.</span> ✅ Other people's needs and wants are not as important as the small business owner's. 這句話本身是錯的／不是成功因素</li>
+            <li><span class="letter">b.</span> Business owners have both the opportunity and the responsibility to lead.</li>
+            <li><span class="letter">c.</span> Business owners need to carefully consider the needs of stakeholders.</li>
+            <li><span class="letter">d.</span> Small business owners want and need to be independent.</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q8：</strong> What term is used to describe individuals or other organizations that impact the success of a business?</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> Owners</li>
+            <li class="correct"><span class="letter">b.</span> ✅ Stakeholders 利害關係人</li>
+            <li><span class="letter">c.</span> Corporate managers</li>
+            <li><span class="letter">d.</span> Capitalists</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q9：</strong> The entrepreneurial process is comprised of each of the following steps EXCEPT:</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> moving from an idea to an entrepreneurial firm.</li>
+            <li><span class="letter">b.</span> managing and growing the entrepreneurial firm.</li>
+            <li class="correct"><span class="letter">c.</span> ✅ inventing a new product or process. 創業流程不包含「發明新產品」這一步</li>
+            <li><span class="letter">d.</span> deciding to become an entrepreneur.</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q10：</strong> Which of the following are important economic impacts of entrepreneurial firms? <span class="zh">（複選 select one or more）</span></div>
+          <ul class="opts">
+            <li class="correct"><span class="letter">a.</span> ✅ Job Creation 創造就業</li>
+            <li><span class="letter">b.</span> Impact on Larger Firms</li>
+            <li class="correct"><span class="letter">c.</span> ✅ Innovation 創新</li>
+            <li><span class="letter">d.</span> Impact on Society</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q11：</strong> Which of the following is an advantage of the sole proprietorship form of organization?</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> The business relies on the skills and abilities of a single owner.</li>
+            <li class="correct"><span class="letter">b.</span> ✅ Creating one is easy and inexpensive. 設立簡單、成本低</li>
+            <li><span class="letter">c.</span> Liability on the owner's part is unlimited.</li>
+            <li><span class="letter">d.</span> Owners are liable only for the debts and obligations up to the amount of their investment.</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q12：</strong> The following are disadvantages of a limited liability company EXCEPT:</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> regulation and taxation can vary by state.</li>
+            <li class="correct"><span class="letter">b.</span> ✅ limited number of shareholder members. 這不是LLC的缺點</li>
+            <li><span class="letter">c.</span> tax accounting can be complicated.</li>
+            <li><span class="letter">d.</span> setting up and maintaining one is more difficult and expensive.</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q13：</strong> Why is the executive summary perhaps the most important section of the business plan?</div>
+          <ul class="opts">
+            <li class="correct"><span class="letter">a.</span> ✅ If this section fails to attract an investor's interest, they are unlikely to read the rest of the plan. 若吸引不了投資人，後面都不會被看</li>
+            <li><span class="letter">b.</span> This section provides in-depth discussion of the major trends in the industry.</li>
+            <li><span class="letter">c.</span> This section deals with the day-to-day operations of the company.</li>
+            <li><span class="letter">d.</span> This section summarizes the firm's key executives.</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q14：</strong> Trilane Systems is a small business. Its owner, Myra, is also its only employee and is responsible for all income/losses. In the context of legal forms of business, Trilane Systems is a</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> corporation.</li>
+            <li class="correct"><span class="letter">b.</span> ✅ sole proprietorship. 獨資企業</li>
+            <li><span class="letter">c.</span> general partnership.</li>
+            <li><span class="letter">d.</span> limited liability partnership.</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q15：</strong> Which of the following statements pertaining to double taxation is correct?</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> Double taxation means the sole proprietorship form of organization gets taxed by state and federal governments.</li>
+            <li class="correct"><span class="letter">b.</span> ✅ A corporation is taxed on its net income, and when distributed as dividends, shareholders are taxed again on personal income tax returns. 公司先被課稅，股東領股息時再被課一次稅</li>
+            <li><span class="letter">c.</span> Double taxation refers to the fact that each partner gets taxed in the partnership form of organization.</li>
+            <li><span class="letter">d.</span> Double taxation refers to income tax rates on certain forms being double those on other forms.</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q16：</strong> _________ is a resource or capability that serves as a firm's competitive advantage over its rivals.</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> Strategic edge</li>
+            <li><span class="letter">b.</span> Brand loyalty</li>
+            <li><span class="letter">c.</span> Differentiation</li>
+            <li class="correct"><span class="letter">d.</span> ✅ Core competency 核心競爭力</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q17：</strong> What describes why a business exists and what its business model is supposed to accomplish?</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> the corporate charter</li>
+            <li><span class="letter">b.</span> the statement of core values</li>
+            <li class="correct"><span class="letter">c.</span> ✅ the firm's mission statement 使命宣言</li>
+            <li><span class="letter">d.</span> the feasibility analysis</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q18：</strong> Compared to large corporations, entrepreneurial businesses</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> are more visible.</li>
+            <li class="correct"><span class="letter">b.</span> ✅ play just as important a part in our economy. 在經濟中同樣重要</li>
+            <li><span class="letter">c.</span> attract more attention in the media.</li>
+            <li><span class="letter">d.</span> have more resources at their disposal.</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q19：</strong> An effective business model addresses each of the following EXCEPT:</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> how a firm competes.</li>
+            <li><span class="letter">b.</span> how a firm interfaces with its customers.</li>
+            <li class="correct"><span class="letter">c.</span> ✅ how a firm obtains start-up capital. 屬於財務規劃，不是商業模式要回答的核心問題</li>
+            <li><span class="letter">d.</span> how a firm acquires and uses its resources.</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q20：</strong> A cost leadership strategy requires a business model that is focused on each of the following EXCEPT:</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> volume.</li>
+            <li><span class="letter">b.</span> efficiency.</li>
+            <li><span class="letter">c.</span> cost minimization.</li>
+            <li class="correct"><span class="letter">d.</span> ✅ differentiation. 差異化屬於另一種策略</li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -291,27 +478,170 @@
     <div class="body">
       <div class="answer"><strong>Q1 配對題（matching）：</strong> 六種創業方式的優缺點配對——"You don't have as much freedom as an independent owner" → <em>buying a franchise</em>（加盟）；"All profits remain within the organization" → <em>nonprofit organization</em>（非營利組織）；"The business has a reputation, but is it always a good one?" → <em>buying an existing business</em>（收購現有企業）；"Distractions from family/neighbors" → <em>home-based business</em>（在家創業）；"Lower startup costs than brick-and-mortar" → <em>online business</em>（網路創業）。</div>
       <div class="wrong"><strong>Q2（Skype BMC 拖拉題，部分錯誤）：</strong> 題目給出 Skype 這間 VOIP 公司的九宮格，你把 "Mass customers" 和 "Personal" 放錯了格子（Customer Segments 應放 "Web Users Globally"，Customer Relationships 應放 "Mass customers"／"Personal" 視版本而定）。<strong>複習重點：</strong>Customer Segments 回答「我們為誰創造價值」，Customer Relationships 回答「每個客群期望什麼樣的關係」——兩者容易混淆，要抓住「對象」vs「互動方式」的差異。</div>
-      <table>
-        <tr><th>#</th><th>Question 題目</th><th>Correct Answer 正確答案</th></tr>
-        <tr><td>3</td><td>Which building block focuses on identifying the groups of people a business serves?</td><td class="correct">Customer Segments 客戶群</td></tr>
-        <tr><td>4</td><td>Which block defines the unique value a company offers to its customers?</td><td class="correct">Value Proposition 價值主張</td></tr>
-        <tr><td>5</td><td>Why is the value proposition important to customers?</td><td class="correct">It explains the unique benefits 說明獨特的利益</td></tr>
-        <tr><td>6</td><td>Which building block describes how a company delivers its value proposition?</td><td class="correct">Channels 通路</td></tr>
-        <tr><td>7</td><td>Key question in the Channels block?</td><td class="correct">How do we reach our customer segments? 我們如何觸及客戶群？</td></tr>
-        <tr><td>8</td><td>Key aspect of Customer Relationships?</td><td class="correct">Relationship maintenance 關係維護</td></tr>
-        <tr><td>9</td><td>Which model sells a main product at low cost and profits from related items?</td><td class="correct">Accessories 配件型</td></tr>
-        <tr><td>10</td><td>Which business model charges customers at regular intervals?</td><td class="correct">Subscription 訂閱型</td></tr>
-        <tr><td>11</td><td>Which model is best for media platforms (online newspapers/streaming)?</td><td class="correct">Subscription 訂閱型</td></tr>
-        <tr><td>12</td><td>Primary purpose of a business model?</td><td class="correct">To describe how an organization creates, delivers, and captures value 描述組織如何創造、傳遞、獲取價值</td></tr>
-        <tr><td>13</td><td>What does a business plan primarily focus on?</td><td class="correct">Presenting the company's strategy and expected financial performance 呈現策略與預期財務表現</td></tr>
-        <tr><td>14</td><td>Which situation demonstrates *efficiency*?</td><td class="correct">A department lowers energy/paper usage without reducing productivity 不犧牲生產力地降低資源消耗</td></tr>
-        <tr><td>15</td><td>Which role describes the entrepreneur as a risk bearer?</td><td class="correct">An agent who buys inputs at certain prices to sell at uncertain future prices 用確定價格買進、以不確定未來價格賣出</td></tr>
-        <tr><td>16</td><td>Which action reflects innovation in production methods?</td><td class="correct">Using a new method of production that is not yet tested 使用尚未驗證的新生產方法</td></tr>
-        <tr><td>17</td><td>Main responsibility of a manager?</td><td class="correct">Growing or maintaining a business 成長或維持企業</td></tr>
-        <tr><td>18</td><td>Small companies have flourished for all the following reasons EXCEPT: <span class="zh">（❌ 原答錯）</span></td><td class="correct">They often expand easily in mature industries</td></tr>
-        <tr><td>19</td><td>The success of entrepreneurial businesses occurs partially because they are ________.</td><td class="correct">More focused than their large corporate counterparts</td></tr>
-        <tr><td>20</td><td>Difference between large organizations and entrepreneurial businesses?</td><td class="correct">Unlike entrepreneurial businesses, large organizations will regularly ignore opportunities if they don't believe it'll generate high profits 大企業常因為覺得獲利不夠高而忽略機會</td></tr>
-      </table>
+      <div class="qa-list">
+        <div class="qa-item">
+          <div class="q"><strong>Q3：</strong> Which building block focuses on identifying the groups of people a business serves?</div>
+          <ul class="opts">
+            <li class="correct"><span class="letter">a.</span> ✅ Customer Segments 客戶群</li>
+            <li><span class="letter">b.</span> Channels</li>
+            <li><span class="letter">c.</span> Value Proposition</li>
+            <li><span class="letter">d.</span> Customer Relationships</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q4：</strong> Which block defines the unique value a company offers to its customers?</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> Revenue Streams</li>
+            <li><span class="letter">b.</span> Customer Segments</li>
+            <li><span class="letter">c.</span> Key Activities</li>
+            <li class="correct"><span class="letter">d.</span> ✅ Value Proposition 價值主張</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q5：</strong> Why is the value proposition important to customers?</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> It defines the pricing model</li>
+            <li class="correct"><span class="letter">b.</span> ✅ It explains the unique benefits 說明獨特的利益</li>
+            <li><span class="letter">c.</span> It outlines cost structure</li>
+            <li><span class="letter">d.</span> It helps identify suppliers</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q6：</strong> Which building block describes how a company delivers its value proposition?</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> Customer Relationships</li>
+            <li class="correct"><span class="letter">b.</span> ✅ Channels 通路</li>
+            <li><span class="letter">c.</span> Key Partners</li>
+            <li><span class="letter">d.</span> Revenue Streams</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q7：</strong> What is a key question in the Channels block?</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> Who are our suppliers?</li>
+            <li><span class="letter">b.</span> What are our costs?</li>
+            <li class="correct"><span class="letter">c.</span> ✅ How do we reach our customer segments? 我們如何觸及客戶群？</li>
+            <li><span class="letter">d.</span> How do we maintain relationships?</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q8：</strong> What is a key aspect of Customer Relationships?</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> Product delivery</li>
+            <li><span class="letter">b.</span> Pricing strategy</li>
+            <li><span class="letter">c.</span> Revenue generation</li>
+            <li class="correct"><span class="letter">d.</span> ✅ Relationship maintenance 關係維護</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q9：</strong> Which model involves selling a main product at low cost and profiting from related items?</div>
+          <ul class="opts">
+            <li class="correct"><span class="letter">a.</span> ✅ Accessories 配件型</li>
+            <li><span class="letter">b.</span> Advertising</li>
+            <li><span class="letter">c.</span> Production</li>
+            <li><span class="letter">d.</span> Subscription</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q10：</strong> Which business model charges customers at regular intervals?</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> Production</li>
+            <li><span class="letter">b.</span> Advertising</li>
+            <li><span class="letter">c.</span> Commission</li>
+            <li class="correct"><span class="letter">d.</span> ✅ Subscription 訂閱型</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q11：</strong> Which model is best suited for media platforms like online newspapers or streaming services?</div>
+          <ul class="opts">
+            <li class="correct"><span class="letter">a.</span> ✅ Subscription 訂閱型</li>
+            <li><span class="letter">b.</span> Production</li>
+            <li><span class="letter">c.</span> Commission</li>
+            <li><span class="letter">d.</span> Accessories</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q12：</strong> What is the primary purpose of a business model?</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> To outline the company's marketing strategy</li>
+            <li><span class="letter">b.</span> To define the company's legal structure</li>
+            <li><span class="letter">c.</span> To present the company's financial projections</li>
+            <li class="correct"><span class="letter">d.</span> ✅ To describe how an organization creates, delivers, and captures value 描述組織如何創造、傳遞、獲取價值</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q13：</strong> What does a business plan primarily focus on?</div>
+          <ul class="opts">
+            <li class="correct"><span class="letter">a.</span> ✅ Presenting the company's strategy and expected financial performance 呈現策略與預期財務表現</li>
+            <li><span class="letter">b.</span> Explaining the supply chain process</li>
+            <li><span class="letter">c.</span> Describing the company's value proposition</li>
+            <li><span class="letter">d.</span> Defining the company's industry position</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q14：</strong> Which situation demonstrates <em>efficiency</em>?</div>
+          <ul class="opts">
+            <li class="correct"><span class="letter">a.</span> ✅ A department lowers energy and paper usage without reducing productivity 不犧牲生產力地降低資源消耗</li>
+            <li><span class="letter">b.</span> A manager makes decisions without consulting the team</li>
+            <li><span class="letter">c.</span> A project is completed late but with excellent quality</li>
+            <li><span class="letter">d.</span> A company launches a product that fails to attract customers</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q15：</strong> Which role describes the entrepreneur as a risk bearer?</div>
+          <ul class="opts">
+            <li class="correct"><span class="letter">a.</span> ✅ An agent who buys factors of production at certain prices to sell products at uncertain future prices 用確定價格買進、以不確定未來價格賣出</li>
+            <li><span class="letter">b.</span> A manager who controls budgets and schedules</li>
+            <li><span class="letter">c.</span> An investor who avoids financial risks</li>
+            <li><span class="letter">d.</span> A person who manages employee performance</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q16：</strong> Which action reflects innovation in production methods?</div>
+          <ul class="opts">
+            <li class="correct"><span class="letter">a.</span> ✅ Using a new method of production that is not yet tested 使用尚未驗證的新生產方法</li>
+            <li><span class="letter">b.</span> Outsourcing manufacturing to reduce costs</li>
+            <li><span class="letter">c.</span> Following standard operating procedures</li>
+            <li><span class="letter">d.</span> Hiring experienced technicians</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q17：</strong> What is the main responsibility of a manager?</div>
+          <ul class="opts">
+            <li class="correct"><span class="letter">a.</span> ✅ Growing or maintaining a business 成長或維持企業</li>
+            <li><span class="letter">b.</span> Creating a new product idea</li>
+            <li><span class="letter">c.</span> Securing startup funding</li>
+            <li><span class="letter">d.</span> Taking business risks</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q18：</strong> Small companies have flourished for all the following reasons EXCEPT: <span class="zh">（❌ 原答錯：選了 c）</span></div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> they operate more effectively.</li>
+            <li><span class="letter">b.</span> they respond more quickly.</li>
+            <li class="wrongpick"><span class="letter">c.</span> ❌（原選）they employ more skilled people.</li>
+            <li class="correct"><span class="letter">d.</span> ✅ they often expand easily in mature industries.</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q19：</strong> The success of entrepreneurial businesses occurs partially because they are ________.</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> characterized by corporate layers of management</li>
+            <li><span class="letter">b.</span> invested heavily in policies and procedures</li>
+            <li class="correct"><span class="letter">c.</span> ✅ more focused than their large corporate counterparts</li>
+            <li><span class="letter">d.</span> responsible to public stockholders</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q20：</strong> Which of the following is a difference between large organizations and entrepreneurial businesses?</div>
+          <ul class="opts">
+            <li class="correct"><span class="letter">a.</span> ✅ Unlike entrepreneurial businesses, large organizations will regularly ignore business opportunities if they fail to believe the results will generate high profits. 大企業常因為覺得獲利不夠高而忽略機會</li>
+            <li><span class="letter">b.</span> Unlike large organizations, entrepreneurial businesses do things more efficiently because they easily achieve economies of scale.</li>
+            <li><span class="letter">c.</span> Unlike large organizations, entrepreneurial businesses are burdened by policies, procedures and public stockholders.</li>
+            <li><span class="letter">d.</span> Unlike entrepreneurial businesses, large organizations have a better understanding of the local community.</li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -340,29 +670,188 @@
   <div class="example">
     <div class="head">涵蓋範圍：Ch4（Generating Ideas）+ Ch5（Working Your Idea）+ Ch6（Marketing）入門</div>
     <div class="body">
-      <table>
-        <tr><th>#</th><th>Question 題目</th><th>Correct Answer 正確答案</th></tr>
-        <tr><td>1</td><td>What is an idea?</td><td class="correct">It is a thought, impression, or notion 一個念頭、印象或概念</td></tr>
-        <tr><td>2</td><td>What defines an opportunity in business?</td><td class="correct">A situation that presents possibilities for exceeding existing goals 能超越現有目標的情境</td></tr>
-        <tr><td>3</td><td>Purpose of a customer advisory board?</td><td class="correct">To regularly discuss customer needs, wants, and problems to generate new ideas 定期討論顧客需求以產生新點子</td></tr>
-        <tr><td>4</td><td>Which is discouraged during brainstorming?</td><td class="correct">Criticizing ideas 批評想法</td></tr>
-        <tr><td>5</td><td>How do focus groups contribute to idea generation?</td><td class="correct">By exploring participants' thoughts and feelings on specific issues 探索參與者對特定議題的想法與感受</td></tr>
-        <tr><td>6</td><td>The three ways to identify an opportunity include ________.</td><td class="correct">Observing trends, solving a problem, and finding gaps in the marketplace 觀察趨勢、解決問題、找出市場缺口</td></tr>
-        <tr><td>7</td><td>True statement about risk tolerance?</td><td class="correct">What constitutes a risk is determined by an entrepreneur observing his/her own tolerances 風險的認定取決於創業者自身的風險承受度</td></tr>
-        <tr><td>8</td><td>Hulu.com's opportunity was made possible by ________.</td><td class="correct">Technological advances 科技進步</td></tr>
-        <tr><td>9</td><td>Solo entrepreneur vs network entrepreneur — how do they find ideas?</td><td class="correct">Solo：on their own（靠自己）；Network：through social contacts（透過人脈）</td></tr>
-        <tr><td>10</td><td>Mark has defined industry & customers. Next step in external analysis? <span class="zh">（❌ 原答錯：選了 substitutes）</span></td><td class="correct">Mark should research the industry 應先研究產業</td></tr>
-        <tr><td>11</td><td>Key questions when studying an industry EXCEPT:</td><td class="correct">"Is the industry in the maturity stage of the industry life cycle?"（這不是「必答」的關鍵問題，其他三項才是）</td></tr>
-        <tr><td>12</td><td>What technological trend led to the rise of digital photography?</td><td class="correct">Emergence of new technologies 新科技的出現</td></tr>
-        <tr><td>13</td><td>What is a benefit of your product?</td><td class="correct">The value it provides to the customer 提供給顧客的價值</td></tr>
-        <tr><td>14</td><td>What question helps define the market need?</td><td class="correct">What problem does my product or service solve? 我的產品/服務解決什麼問題？</td></tr>
-        <tr><td>15</td><td>Major advantage of selling direct?</td><td class="correct">Being able to control the process from origin to end user instead of relying on third parties 能掌控從源頭到終端的流程，不依賴第三方</td></tr>
-        <tr><td>16</td><td>First step in marketing your business?</td><td class="correct">Creating a brand 建立品牌</td></tr>
-        <tr><td>17</td><td>Which can reinforce brand positioning?</td><td class="correct">Taglines like "Just do it" 像 "Just do it" 這樣的口號</td></tr>
-        <tr><td>18</td><td>What does a marketing strategy include?</td><td class="correct">Message, channel choice, methods and cost 訊息、通路選擇、方法與成本</td></tr>
-        <tr><td>19</td><td>Why is pricing important for a business?</td><td class="correct">It can determine the success or failure of the business 能決定企業成敗</td></tr>
-        <tr><td>20</td><td>Why is pricing an ongoing effort?</td><td class="correct">Market conditions and customer demand change over time 市場狀況與顧客需求會隨時間改變</td></tr>
-      </table>
+      <div class="qa-list">
+        <div class="qa-item">
+          <div class="q"><strong>Q1：</strong> What is an idea?</div>
+          <ul class="opts">
+            <li class="correct"><span class="letter">a.</span> ✅ It is a thought, impression, or notion 一個念頭、印象或概念</li>
+            <li><span class="letter">b.</span> It is a product ready for market</li>
+            <li><span class="letter">c.</span> It is a financial strategy</li>
+            <li><span class="letter">d.</span> It is a fully developed business concept</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q2：</strong> What defines an opportunity in business?</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> A financial report</li>
+            <li><span class="letter">b.</span> A marketing campaign</li>
+            <li><span class="letter">c.</span> A random idea with no analysis</li>
+            <li class="correct"><span class="letter">d.</span> ✅ A situation that presents possibilities for exceeding existing goals 能超越現有目標的情境</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q3：</strong> What is the purpose of a customer advisory board?</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> To conduct employee training</li>
+            <li><span class="letter">b.</span> To manage company finances</li>
+            <li><span class="letter">c.</span> To evaluate competitor strategies</li>
+            <li class="correct"><span class="letter">d.</span> ✅ To regularly discuss customer needs, wants, and problems to generate new ideas 定期討論顧客需求以產生新點子</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q4：</strong> Which of the following is discouraged during brainstorming?</div>
+          <ul class="opts">
+            <li class="correct"><span class="letter">a.</span> ✅ Criticizing ideas 批評想法</li>
+            <li><span class="letter">b.</span> Rapid idea generation</li>
+            <li><span class="letter">c.</span> Suggesting unusual concepts</li>
+            <li><span class="letter">d.</span> Group participation</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q5：</strong> How do focus groups contribute to idea generation?</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> By conducting technical experiments</li>
+            <li class="correct"><span class="letter">b.</span> ✅ By exploring participants' thoughts and feelings on specific issues 探索參與者對特定議題的想法與感受</li>
+            <li><span class="letter">c.</span> By analyzing financial data</li>
+            <li><span class="letter">d.</span> By testing product durability</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q6：</strong> The three ways to identify an opportunity include ________.</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> reading books, solving a problem, and finding gaps in the marketplace</li>
+            <li class="correct"><span class="letter">b.</span> ✅ observing trends, solving a problem, and finding gaps in the marketplace 觀察趨勢、解決問題、找出市場缺口</li>
+            <li><span class="letter">c.</span> observing trends, talking to consumers, and finding gaps in the marketplace</li>
+            <li><span class="letter">d.</span> observing trends, conducting brainstorming sessions, and studying industry trade journals</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q7：</strong> In the context of risks to new businesses, identify a true statement about risk tolerance.</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> Entrepreneurs can avoid a majority of the risks by allowing competitors to invest in their new businesses.</li>
+            <li class="correct"><span class="letter">b.</span> ✅ What constitutes a risk is determined by an entrepreneur by observing his or her own tolerances. 風險的認定取決於創業者自身的風險承受度</li>
+            <li><span class="letter">c.</span> In new markets, entrepreneurs must be willing to put up with risks that outweigh their personal risk tolerance.</li>
+            <li><span class="letter">d.</span> Risks must be determined based on focus groups with other entrepreneurs in the same industry.</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q8：</strong> Hulu.com allows people to watch TV shows and movies online. Hulu.com's business opportunity was made possible by ________.</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> social forces</li>
+            <li class="correct"><span class="letter">b.</span> ✅ technological advances 科技進步</li>
+            <li><span class="letter">c.</span> economic forces</li>
+            <li><span class="letter">d.</span> legal changes</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q9：</strong> A solo entrepreneur identified his/her business idea ________. A network entrepreneur identified his/her idea ________.</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> through a business incubator program; through social contacts</li>
+            <li><span class="letter">b.</span> through the assistance of a paid consultant; through social contacts</li>
+            <li class="correct"><span class="letter">c.</span> ✅ on their own; through social contacts 靠自己；透過人脈</li>
+            <li><span class="letter">d.</span> through social contacts; on their own</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q10：</strong> Mark has defined his industry and customers. In external analysis, what's his next step? <span class="zh">（❌ 原答錯：選了 c）</span></div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> Mark should draw a set of competitive maps.</li>
+            <li><span class="letter">b.</span> Mark should develop an understanding of his competitive advantage.</li>
+            <li class="wrongpick"><span class="letter">c.</span> ❌（原選）Mark should examine and develop insights about substitutes.</li>
+            <li class="correct"><span class="letter">d.</span> ✅ Mark should research the industry. 應先研究產業</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q11：</strong> When studying an industry, the following are key questions EXCEPT:</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> Are there positions in the industry that avoid some negative attributes of the industry as a whole?</li>
+            <li class="correct"><span class="letter">b.</span> ✅ Is the industry in the maturity stage of the industry life cycle? 這不是「必答」的關鍵問題</li>
+            <li><span class="letter">c.</span> Does the industry contain markets that are ripe for innovation or underserved?</li>
+            <li><span class="letter">d.</span> Is the industry a realistic place for a new venture to enter?</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q12：</strong> What technological trend led to the rise of digital photography?</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> Increase in film production</li>
+            <li><span class="letter">b.</span> Decline in internet usage</li>
+            <li><span class="letter">c.</span> Growth in paper-based media</li>
+            <li class="correct"><span class="letter">d.</span> ✅ Emergence of new technologies 新科技的出現</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q13：</strong> What is a benefit of your product?</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> Its manufacturing cost</li>
+            <li><span class="letter">b.</span> Its color</li>
+            <li class="correct"><span class="letter">c.</span> ✅ The value it provides to the customer 提供給顧客的價值</li>
+            <li><span class="letter">d.</span> Its shelf life</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q14：</strong> What question helps define the market need?</div>
+          <ul class="opts">
+            <li class="correct"><span class="letter">a.</span> ✅ What problem does my product or service solve? 我的產品/服務解決什麼問題？</li>
+            <li><span class="letter">b.</span> How much profit will I make?</li>
+            <li><span class="letter">c.</span> Who are my competitors?</li>
+            <li><span class="letter">d.</span> What is my pricing strategy?</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q15：</strong> What is a major advantage of selling direct?</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> A firm will have less of its capital tied up in fixed assets.</li>
+            <li><span class="letter">b.</span> A firm does not need to own as much of the distribution channel.</li>
+            <li class="correct"><span class="letter">c.</span> ✅ Being able to control the process of moving products from origin to end user instead of relying on third parties. 能掌控從源頭到終端的流程，不依賴第三方</li>
+            <li><span class="letter">d.</span> It ensures a firm has the services of high quality marketing intermediaries.</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q16：</strong> What is the first step in marketing your business?</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> Setting prices</li>
+            <li class="correct"><span class="letter">b.</span> ✅ Creating a brand 建立品牌</li>
+            <li><span class="letter">c.</span> Hiring employees</li>
+            <li><span class="letter">d.</span> Designing a website</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q17：</strong> Which of the following can reinforce brand positioning?</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> Product discounts</li>
+            <li class="correct"><span class="letter">b.</span> ✅ Taglines like "Just do it" 像 "Just do it" 這樣的口號</li>
+            <li><span class="letter">c.</span> Office decor</li>
+            <li><span class="letter">d.</span> Employee uniforms</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q18：</strong> What does a marketing strategy include?</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> Employee benefits</li>
+            <li><span class="letter">b.</span> Office layout</li>
+            <li><span class="letter">c.</span> Legal contracts</li>
+            <li class="correct"><span class="letter">d.</span> ✅ Message, channel choice, methods and cost 訊息、通路選擇、方法與成本</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q19：</strong> Why is pricing important for a business?</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> It sets employee salaries</li>
+            <li><span class="letter">b.</span> It defines the company's mission</li>
+            <li class="correct"><span class="letter">c.</span> ✅ It can determine the success or failure of the business 能決定企業成敗</li>
+            <li><span class="letter">d.</span> It helps design the product</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q20：</strong> Why is pricing an ongoing effort?</div>
+          <ul class="opts">
+            <li class="correct"><span class="letter">a.</span> ✅ Market conditions and customer demand change over time 市場狀況與顧客需求會隨時間改變</li>
+            <li><span class="letter">b.</span> Competitors ignore pricing strategies</li>
+            <li><span class="letter">c.</span> Customers don't care about price</li>
+            <li><span class="letter">d.</span> Prices are set once and never changed</li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -373,29 +862,188 @@
   <div class="example">
     <div class="head">涵蓋範圍：Ch4（Idea Generation）+ Ch5（Industry / Competitor Research）+ Ch6（Marketing，滿分）</div>
     <div class="body">
-      <table>
-        <tr><th>#</th><th>Question 題目</th><th>Correct Answer 正確答案</th></tr>
-        <tr><td>1</td><td>What does invention refer to?</td><td class="correct">Creating or making up something new 創造全新事物</td></tr>
-        <tr><td>2</td><td>Key feature of a brainstorming session?</td><td class="correct">It involves a group of people focused on a specific topic 一群人針對特定主題</td></tr>
-        <tr><td>3</td><td>Why should a brainstorming session move quickly?</td><td class="correct">To maintain energy and encourage spontaneous ideas 維持能量、鼓勵即興發想</td></tr>
-        <tr><td>4</td><td>What type of resources can a reference librarian suggest?</td><td class="correct">Industry-specific magazines, trade journals, and industry reports 產業雜誌、貿易期刊、產業報告</td></tr>
-        <tr><td>5</td><td>Purpose of using focus groups in business?</td><td class="correct">To help generate new business ideas 幫助產生新點子</td></tr>
-        <tr><td>6</td><td>Daisy Rock Guitars（為女性設計的吉他）— how was the idea recognized?</td><td class="correct">Finding a gap in the marketplace 找到市場缺口</td></tr>
-        <tr><td>7</td><td>__________ is a favorable set of circumstances that creates a need for a new product/service/business.</td><td class="correct">An opportunity 機會</td></tr>
-        <tr><td>8</td><td>A common way gaps in the marketplace are recognized is ________.</td><td class="correct">When people become frustrated because they can't find a product/service they need, and realize others feel the same way 人們因找不到需要的產品而沮喪，並發現別人也有同感</td></tr>
-        <tr><td>9</td><td>Intuit sends employees to customers' facilities to probe for new ideas — what technique?</td><td class="correct">Day-in-the-life research</td></tr>
-        <tr><td>10</td><td>How a company is situated relative to competitors is called _____.</td><td class="correct">Position 定位</td></tr>
-        <tr><td>11</td><td>Video industry becoming less attractive due to movie-download tech — which competitive force?</td><td class="correct">Threat of substitutes 替代品威脅</td></tr>
-        <tr><td>12</td><td>What does a gap in the marketplace usually indicate?</td><td class="correct">A need not served by mainstream providers 主流業者未能滿足的需求</td></tr>
-        <tr><td>13</td><td>Type of trend that includes disposable income and consumer spending patterns?</td><td class="correct">Economic forces 經濟力量</td></tr>
-        <tr><td>14</td><td>Key question when researching your industry?</td><td class="correct">What is the current stage of the industry life cycle? 產業目前處於生命週期哪個階段？</td></tr>
-        <tr><td>15</td><td>Which marketing concept pertains to how a firm differentiates itself from competitors?</td><td class="correct">Establishing a unique position 建立獨特定位</td></tr>
-        <tr><td>16</td><td>Why is brand identity important?</td><td class="correct">It guides all marketing activities and builds recognition 指引所有行銷活動、建立認知</td></tr>
-        <tr><td>17</td><td>What makes a product stand out from competition?</td><td class="correct">Special benefits and unique features 特殊利益與獨特特色</td></tr>
-        <tr><td>18</td><td>Why is a business website important?</td><td class="correct">It builds credibility and helps customers find you 建立信譽、幫助顧客找到你</td></tr>
-        <tr><td>19</td><td>What is bundling in pricing strategy?</td><td class="correct">Offering lower prices when customers buy multiple products/services together 購買多項產品/服務享優惠</td></tr>
-        <tr><td>20</td><td>Which aspects need to be considered while developing a marketing plan?</td><td class="correct">All of these（確定銷售管理流程、鎖定目標顧客、辨識企業市場——全部都要考慮）</td></tr>
-      </table>
+      <div class="qa-list">
+        <div class="qa-item">
+          <div class="q"><strong>Q1：</strong> What does invention refer to?</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> Managing business operations</li>
+            <li class="correct"><span class="letter">b.</span> ✅ Creating or making up something new 創造全新事物</li>
+            <li><span class="letter">c.</span> Delivering value to customers</li>
+            <li><span class="letter">d.</span> Improving an existing product</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q2：</strong> What is a key feature of a brainstorming session?</div>
+          <ul class="opts">
+            <li class="correct"><span class="letter">a.</span> ✅ It involves a group of people focused on a specific topic 一群人針對特定主題</li>
+            <li><span class="letter">b.</span> It is used to implement decisions</li>
+            <li><span class="letter">c.</span> It is conducted individually without collaboration</li>
+            <li><span class="letter">d.</span> It focuses on financial analysis</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q3：</strong> Why should a brainstorming session move quickly?</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> To allow time for detailed analysis</li>
+            <li class="correct"><span class="letter">b.</span> ✅ To maintain energy and encourage spontaneous ideas 維持能量、鼓勵即興發想</li>
+            <li><span class="letter">c.</span> To ensure only serious ideas are considered</li>
+            <li><span class="letter">d.</span> To reduce the number of ideas</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q4：</strong> What type of resources can a reference librarian suggest?</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> Government tax forms</li>
+            <li><span class="letter">b.</span> Social media platforms</li>
+            <li><span class="letter">c.</span> Online shopping sites</li>
+            <li class="correct"><span class="letter">d.</span> ✅ Industry-specific magazines, trade journals, and industry reports 產業雜誌、貿易期刊、產業報告</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q5：</strong> What is one purpose of using focus groups in business?</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> To conduct financial audits</li>
+            <li><span class="letter">b.</span> To train employees</li>
+            <li><span class="letter">c.</span> To manage customer service</li>
+            <li class="correct"><span class="letter">d.</span> ✅ To help generate new business ideas 幫助產生新點子</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q6：</strong> Tish Cirovolo realized there were no guitars made specifically for women, so she started Daisy Rock Guitars. How was the idea recognized?</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> talking to consumers</li>
+            <li><span class="letter">b.</span> brainstorming</li>
+            <li><span class="letter">c.</span> observing trends</li>
+            <li class="correct"><span class="letter">d.</span> ✅ finding a gap in the marketplace 找到市場缺口</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q7：</strong> __________ is a favorable set of circumstances that creates a need for a new product, service, or business.</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> A trend</li>
+            <li class="correct"><span class="letter">b.</span> ✅ An opportunity 機會</li>
+            <li><span class="letter">c.</span> A niche</li>
+            <li><span class="letter">d.</span> A venture</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q8：</strong> A common way that gaps in the marketplace are recognized is ________.</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> via combined focus groups and brainstorming sessions</li>
+            <li><span class="letter">b.</span> by observing changing environmental trends</li>
+            <li><span class="letter">c.</span> by recognizing problems that need to be solved</li>
+            <li class="correct"><span class="letter">d.</span> ✅ when people become frustrated because they can't find a product/service they need and recognize others feel the same way 人們因找不到需要的產品而沮喪，並發現別人也有同感</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q9：</strong> Intuit routinely sends employees to customers' facilities to probe for new ideas. This technique is called ________.</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> focus group</li>
+            <li class="correct"><span class="letter">b.</span> ✅ day-in-the-life research</li>
+            <li><span class="letter">c.</span> customer advisory board</li>
+            <li><span class="letter">d.</span> brainstorming</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q10：</strong> How a company is situated relative to its competitors is referred to as _____.</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> competitive advantage</li>
+            <li><span class="letter">b.</span> brand leadership</li>
+            <li class="correct"><span class="letter">c.</span> ✅ position 定位</li>
+            <li><span class="letter">d.</span> market share</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q11：</strong> The video industry is becoming less attractive as movie studios perfect technology for consumers to download movies. This is an example of which competitive force?</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> threat of new entrants</li>
+            <li class="correct"><span class="letter">b.</span> ✅ threat of substitutes 替代品威脅</li>
+            <li><span class="letter">c.</span> rivalry among existing firms</li>
+            <li><span class="letter">d.</span> bargaining power of buyers</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q12：</strong> What does a gap in the marketplace usually indicate?</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> A lack of consumer interest</li>
+            <li class="correct"><span class="letter">b.</span> ✅ A need not served by mainstream providers 主流業者未能滿足的需求</li>
+            <li><span class="letter">c.</span> An oversaturated market</li>
+            <li><span class="letter">d.</span> A failed product launch</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q13：</strong> What type of trend includes disposable income and consumer spending patterns?</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> Technological advances</li>
+            <li><span class="letter">b.</span> Political action</li>
+            <li class="correct"><span class="letter">c.</span> ✅ Economic forces 經濟力量</li>
+            <li><span class="letter">d.</span> Social forces</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q14：</strong> What is a key question when researching your industry?</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> What is my competitive advantage?</li>
+            <li class="correct"><span class="letter">b.</span> ✅ What is the current stage of the industry life cycle? 產業目前處於生命週期哪個階段？</li>
+            <li><span class="letter">c.</span> What are my personal strengths?</li>
+            <li><span class="letter">d.</span> What is my pricing model?</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q15：</strong> Which marketing concept pertains primarily to how a firm differentiates itself from competitors?</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> establishing a brand</li>
+            <li><span class="letter">b.</span> segmenting the market</li>
+            <li><span class="letter">c.</span> selecting a target market</li>
+            <li class="correct"><span class="letter">d.</span> ✅ establishing a unique position 建立獨特定位</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q16：</strong> Why is brand identity important?</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> It defines your product features</li>
+            <li><span class="letter">b.</span> It sets your legal structure</li>
+            <li><span class="letter">c.</span> It determines your profit margin</li>
+            <li class="correct"><span class="letter">d.</span> ✅ It guides all marketing activities and builds recognition 指引所有行銷活動、建立認知</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q17：</strong> What makes a product stand out from competition?</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> Lower employee salaries</li>
+            <li><span class="letter">b.</span> Limited availability</li>
+            <li><span class="letter">c.</span> Generic packaging</li>
+            <li class="correct"><span class="letter">d.</span> ✅ Special benefits and unique features 特殊利益與獨特特色</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q18：</strong> Why is a business website important?</div>
+          <ul class="opts">
+            <li class="correct"><span class="letter">a.</span> ✅ It builds credibility and helps customers find you 建立信譽、幫助顧客找到你</li>
+            <li><span class="letter">b.</span> It replaces your physical store</li>
+            <li><span class="letter">c.</span> It manages employee payroll</li>
+            <li><span class="letter">d.</span> It tracks inventory</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q19：</strong> What is bundling in pricing strategy?</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> Offering free samples</li>
+            <li><span class="letter">b.</span> Charging more for premium packaging</li>
+            <li class="correct"><span class="letter">c.</span> ✅ Offering lower prices when customers buy multiple products or services 購買多項產品/服務享優惠</li>
+            <li><span class="letter">d.</span> Selling products individually</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q20：</strong> Which of the following aspects needs to be considered while developing a marketing plan?</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> Determining sales management procedures</li>
+            <li><span class="letter">b.</span> Specifying the ideal and general target customers</li>
+            <li><span class="letter">c.</span> Identifying a firm's market</li>
+            <li class="correct"><span class="letter">d.</span> ✅ All of these 全部都要考慮</li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -406,29 +1054,188 @@
   <div class="example">
     <div class="head">涵蓋範圍：Ch7（Financing）+ Ch8（Intellectual Property）+ Ch9（Growth，滿分）</div>
     <div class="body">
-      <table>
-        <tr><th>#</th><th>Question 題目</th><th>Correct Answer 正確答案</th></tr>
-        <tr><td>1</td><td>The break-even point is defined as</td><td class="correct">The level where revenue coming into the firm is sufficient to cover expenses 收入足以涵蓋費用的水準</td></tr>
-        <tr><td>2</td><td>The evaluation of a firm starts with</td><td class="correct">The mission of the firm 企業的使命</td></tr>
-        <tr><td>3</td><td>True statement about income statements?</td><td class="correct">For an entrepreneurial firm, predicting sales is key to developing income statements 預測銷售是編製損益表的關鍵</td></tr>
-        <tr><td>4</td><td>What is benchmarking?</td><td class="correct">Comparing financial data to industry norms 將財務數據與產業標準比較</td></tr>
-        <tr><td>5</td><td>Which is NOT a fixed operating expense?</td><td class="correct">Shipping costs 運費（屬於變動成本）</td></tr>
-        <tr><td>6</td><td>What does 'Capital' refer to in the Six C's of Credit?</td><td class="correct">Personal investment in the business 業主個人投入的資金</td></tr>
-        <tr><td>7</td><td>What is crowdfunding?</td><td class="correct">Raising small amounts from many people online 向大眾小額集資</td></tr>
-        <tr><td>8</td><td>Who can apply for grants?</td><td class="correct">Nonprofit organizations 非營利組織</td></tr>
-        <tr><td>9</td><td>What is typically required for a bank loan application?</td><td class="correct">Cover letter, financial statements, tax returns, and collateral 介紹信、財務報表、稅務紀錄、抵押品</td></tr>
-        <tr><td>10</td><td>_____ is a grant conferring rights to exclude others from making/selling/using an invention.</td><td class="correct">Patent 專利</td></tr>
-        <tr><td>11</td><td>Which patent type applies to Amazon one-click or Priceline name-your-own-price?</td><td class="correct">Business method patent 商業方法專利</td></tr>
-        <tr><td>12</td><td>Is registration required for copyright protection?</td><td class="correct">No, it is automatic 不需要，自動生效</td></tr>
-        <tr><td>13</td><td>Which is NOT protected by copyright?</td><td class="correct">Discoveries 發現</td></tr>
-        <tr><td>14</td><td>Can a patent be transferred?</td><td class="correct">Yes, during its period of validity 可以，在有效期內</td></tr>
-        <tr><td>15</td><td>Why is a USB plug design not eligible for registration?</td><td class="correct">It serves only a specified function 只具備特定功能</td></tr>
-        <tr><td>16</td><td>True about trade secret protection?</td><td class="correct">It does not require formal registration 不需要正式註冊</td></tr>
-        <tr><td>17</td><td>Businesses can prepare for growth by ________.</td><td class="correct">Staying committed to a core strategy 堅守核心策略</td></tr>
-        <tr><td>18</td><td>Part of the organizational life cycle EXCEPT:</td><td class="correct">Reinvention（不是生命週期的一部分 — 生命週期是 Introduction→Early Growth→Continuous Growth→Maturity→Decline）</td></tr>
-        <tr><td>19</td><td>What is an external growth strategy?</td><td class="correct">Strategic alliances and joint ventures 策略聯盟與合資</td></tr>
-        <tr><td>20</td><td>What defines the maturity stage?</td><td class="correct">Growth stalls and focus shifts to efficiency 成長停滯、重心轉向效率</td></tr>
-      </table>
+      <div class="qa-list">
+        <div class="qa-item">
+          <div class="q"><strong>Q1：</strong> The break-even point is defined as</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> the level where a firm starts to profit from the revenue it makes from its products.</li>
+            <li><span class="letter">b.</span> the time when a firm experiences steady losses during its initial stages of operation.</li>
+            <li><span class="letter">c.</span> the time when a business must liquidate its holdings and declare bankruptcy.</li>
+            <li class="correct"><span class="letter">d.</span> ✅ the level where revenue coming into the firm is sufficient to cover expenses. 收入足以涵蓋費用的水準</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q2：</strong> The evaluation of a firm starts with</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> a ratio analysis.</li>
+            <li class="correct"><span class="letter">b.</span> ✅ the mission of the firm. 企業的使命</li>
+            <li><span class="letter">c.</span> a deviation analysis.</li>
+            <li><span class="letter">d.</span> the expectations of customers.</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q3：</strong> In the context of financial tools, identify a true statement about income statements.</div>
+          <ul class="opts">
+            <li class="correct"><span class="letter">a.</span> ✅ For an entrepreneurial firm, predicting sales is key to developing income statements. 預測銷售是編製損益表的關鍵</li>
+            <li><span class="letter">b.</span> When creating income statements, entrepreneurs must be liberal when estimating demand.</li>
+            <li><span class="letter">c.</span> Income statements summarize a firm's assets and liabilities.</li>
+            <li><span class="letter">d.</span> Income statements only estimate net profit figures each financial quarter.</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q4：</strong> What is benchmarking?</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> Hiring employees</li>
+            <li><span class="letter">b.</span> Setting product prices</li>
+            <li class="correct"><span class="letter">c.</span> ✅ Comparing financial data to industry norms 將財務數據與產業標準比較</li>
+            <li><span class="letter">d.</span> Designing marketing materials</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q5：</strong> Which is NOT a fixed operating expense?</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> Advertising</li>
+            <li class="correct"><span class="letter">b.</span> ✅ Shipping costs 運費（屬於變動成本）</li>
+            <li><span class="letter">c.</span> Insurance</li>
+            <li><span class="letter">d.</span> Utilities</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q6：</strong> What does 'Capital' refer to in the Six C's of Credit?</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> Marketing budget</li>
+            <li><span class="letter">b.</span> Business revenue</li>
+            <li class="correct"><span class="letter">c.</span> ✅ Personal investment in the business 業主個人投入的資金</li>
+            <li><span class="letter">d.</span> Loan amount requested</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q7：</strong> What is crowdfunding?</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> Getting a large loan from one investor</li>
+            <li class="correct"><span class="letter">b.</span> ✅ Raising small amounts from many people online 向大眾小額集資</li>
+            <li><span class="letter">c.</span> Offering free samples</li>
+            <li><span class="letter">d.</span> Selling products at a discount</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q8：</strong> Who can apply for grants?</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> Retail businesses</li>
+            <li><span class="letter">b.</span> Sole proprietors</li>
+            <li class="correct"><span class="letter">c.</span> ✅ Nonprofit organizations 非營利組織</li>
+            <li><span class="letter">d.</span> Tech startups</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q9：</strong> What is typically required for a bank loan application?</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> Social media presence and website</li>
+            <li class="correct"><span class="letter">b.</span> ✅ Cover letter, financial statements, tax returns, and collateral 介紹信、財務報表、稅務紀錄、抵押品</li>
+            <li><span class="letter">c.</span> Product samples and customer reviews</li>
+            <li><span class="letter">d.</span> Business license and marketing plan</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q10：</strong> _____ is a grant from the federal government conferring rights to exclude others from making, selling, or using an invention for a certain term.</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> Monopoly</li>
+            <li><span class="letter">b.</span> Term limit</li>
+            <li class="correct"><span class="letter">c.</span> ✅ Patent 專利</li>
+            <li><span class="letter">d.</span> Trademark</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q11：</strong> Which type of patent applies to Amazon.com's one-click ordering or Priceline.com's "name-your-own-price" model?</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> dot-com patent</li>
+            <li><span class="letter">b.</span> design patent</li>
+            <li class="correct"><span class="letter">c.</span> ✅ business method patent 商業方法專利</li>
+            <li><span class="letter">d.</span> Trademark</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q12：</strong> Is registration required for copyright protection?</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> Only for anonymous works</li>
+            <li><span class="letter">b.</span> Only for published works</li>
+            <li class="correct"><span class="letter">c.</span> ✅ No, it is automatic 不需要，自動生效</li>
+            <li><span class="letter">d.</span> Yes, it must be registered</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q13：</strong> Which of the following is not protected by copyright?</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> Original articles</li>
+            <li class="correct"><span class="letter">b.</span> ✅ Discoveries 發現</li>
+            <li><span class="letter">c.</span> Architectural designs</li>
+            <li><span class="letter">d.</span> Photographic works</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q14：</strong> Can a patent be transferred?</div>
+          <ul class="opts">
+            <li class="correct"><span class="letter">a.</span> ✅ Yes, during its period of validity 可以，在有效期內</li>
+            <li><span class="letter">b.</span> Only with government approval</li>
+            <li><span class="letter">c.</span> Only after expiration</li>
+            <li><span class="letter">d.</span> No, it is non-transferable</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q15：</strong> Why is a USB plug design not eligible for registration?</div>
+          <ul class="opts">
+            <li class="correct"><span class="letter">a.</span> ✅ It serves only a specified function 只具備特定功能</li>
+            <li><span class="letter">b.</span> It is too simple</li>
+            <li><span class="letter">c.</span> It is not original</li>
+            <li><span class="letter">d.</span> It is already patented</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q16：</strong> Which of the following is true about trade secret protection?</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> It is the same as copyright</li>
+            <li class="correct"><span class="letter">b.</span> ✅ It does not require formal registration 不需要正式註冊</li>
+            <li><span class="letter">c.</span> It only applies to physical products</li>
+            <li><span class="letter">d.</span> It must be registered with the government</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q17：</strong> Businesses can prepare for growth by ________.</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> diversifying rapidly</li>
+            <li><span class="letter">b.</span> offering the lowest prices</li>
+            <li><span class="letter">c.</span> competing against large companies</li>
+            <li class="correct"><span class="letter">d.</span> ✅ staying committed to a core strategy 堅守核心策略</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q18：</strong> Each of the following is a part of the organizational life cycle, EXCEPT:</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> Early growth</li>
+            <li><span class="letter">b.</span> Maturity</li>
+            <li class="correct"><span class="letter">c.</span> ✅ Reinvention 不是生命週期的一部分——生命週期是 Introduction→Early Growth→Continuous Growth→Maturity→Decline</li>
+            <li><span class="letter">d.</span> Introduction</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q19：</strong> What is an external growth strategy?</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> Launching a new website</li>
+            <li class="correct"><span class="letter">b.</span> ✅ Strategic alliances and joint ventures 策略聯盟與合資</li>
+            <li><span class="letter">c.</span> Improving internal processes</li>
+            <li><span class="letter">d.</span> Hiring more staff</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q20：</strong> What defines the maturity stage?</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> Rapid expansion</li>
+            <li><span class="letter">b.</span> High employee turnover</li>
+            <li class="correct"><span class="letter">c.</span> ✅ Growth stalls and focus shifts to efficiency 成長停滯、重心轉向效率</li>
+            <li><span class="letter">d.</span> Product innovation</li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -439,29 +1246,188 @@
   <div class="example">
     <div class="head">涵蓋範圍：Ch7（Financing）+ Ch8（IP）+ Ch9（Growth）綜合複習</div>
     <div class="body">
-      <table>
-        <tr><th>#</th><th>Question 題目</th><th>Correct Answer 正確答案</th></tr>
-        <tr><td>1</td><td>Main disadvantage of small businesses competing with large firms?</td><td class="correct">Operating at a cost level 在成本層面處於劣勢</td></tr>
-        <tr><td>2</td><td>A cash flow statement is the exact opposite of a ________. <span class="zh">（❌ 原答錯：選了 cash plan）</span></td><td class="correct">Budget 預算</td></tr>
-        <tr><td>3</td><td>Financial planning is essential to a startup EXCEPT:</td><td class="correct">"Communicate with stakeholders about the business's <em>profits</em>"（陷阱：正確說法是 about the business's <em>finances</em>，不是 profits）</td></tr>
-        <tr><td>4</td><td>What should startup funds cover?</td><td class="correct">Initial costs and working capital for 6 to 18 months 初期成本＋6–18個月週轉金</td></tr>
-        <tr><td>5</td><td>What does a balance sheet show?</td><td class="correct">Assets, liabilities, and equity 資產、負債、權益</td></tr>
-        <tr><td>6</td><td>Which is part of the Six C's of Credit?</td><td class="correct">Character 品格／信用紀錄</td></tr>
-        <tr><td>7</td><td>What is considered 'Collateral'?</td><td class="correct">Tangible assets like property and equipment 不動產與設備等有形資產</td></tr>
-        <tr><td>8</td><td>Who are angel investors?</td><td class="correct">Individuals who invest in promising companies 投資有潛力公司的個人投資者</td></tr>
-        <tr><td>9</td><td>A VP leaves and reuses an almost-identical marketing plan at a rival firm — what is this?</td><td class="correct">Trade secret dispute 商業機密糾紛</td></tr>
-        <tr><td>10</td><td>What does copyright protect?</td><td class="correct">The form or format of a piece 作品的形式／格式</td></tr>
-        <tr><td>11</td><td>How long does copyright last for anonymous works?</td><td class="correct">50 years after publication 發表後50年</td></tr>
-        <tr><td>12</td><td>Which is considered public use information?</td><td class="correct">Political speeches 政治演說</td></tr>
-        <tr><td>13</td><td>Main difference between a trademark and an industrial design?</td><td class="correct">Trademark does not require the good itself as the protected subject 商標不需要以商品本身作為保護對象</td></tr>
-        <tr><td>14</td><td>Why is intellectual property protected by law?</td><td class="correct">To reward creators and encourage innovation 獎勵創作者、鼓勵創新</td></tr>
-        <tr><td>15</td><td>Who must obtain a license to use a patented method?</td><td class="correct">Any person or company 任何人或公司</td></tr>
-        <tr><td>16</td><td>Which strengthens trade secret protection?</td><td class="correct">Information known only on a need-to-know basis 僅限「需要知道」的人知悉</td></tr>
-        <tr><td>17</td><td>Which is NOT a sign that a business is growing too fast?</td><td class="correct">Employees are satisfied 員工滿意（這不是警訊，其他三項：生產力下降、利潤極薄、品質下滑才是警訊）</td></tr>
-        <tr><td>18</td><td>Video game manufacturer: increased production → lower avg cost per unit. Example of?</td><td class="correct">Capturing economies of scale 規模經濟</td></tr>
-        <tr><td>19</td><td>What are economies of scale?</td><td class="correct">Lower average cost per unit with increased production 產量增加、單位平均成本下降</td></tr>
-        <tr><td>20</td><td>What helps a business avoid decline?</td><td class="correct">Strong leadership and adaptability 強勢領導與適應力</td></tr>
-      </table>
+      <div class="qa-list">
+        <div class="qa-item">
+          <div class="q"><strong>Q1：</strong> When small businesses compete with large firms, a main disadvantage is</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> reaching break-even point quicker.</li>
+            <li class="correct"><span class="letter">b.</span> ✅ operating at a cost level. 在成本層面處於劣勢</li>
+            <li><span class="letter">c.</span> analyzing unusual or unique competitive factors.</li>
+            <li><span class="letter">d.</span> lacking flexibility.</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q2：</strong> A cash flow statement is the exact opposite of a ________. <span class="zh">（❌ 原答錯：選了 cash plan）</span></div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> float</li>
+            <li class="correct"><span class="letter">b.</span> ✅ budget 預算</li>
+            <li class="wrongpick"><span class="letter">c.</span> ❌（原選）cash plan</li>
+            <li><span class="letter">d.</span> cash flow</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q3：</strong> Financial planning is essential to a startup business because it helps in the following, EXCEPT: <span class="zh">（注意用詞陷阱：finances vs profits）</span></div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> Better understand the financial risks and rewards of entrepreneurship.</li>
+            <li><span class="letter">b.</span> Create a plan to guide future business decisions and monitor results.</li>
+            <li class="correct"><span class="letter">c.</span> ✅ Communicate with stakeholders about the business's <em>profits</em>. 正確說法是關於 <em>finances</em>（財務狀況），不是 profits（利潤）——這是常見陷阱</li>
+            <li><span class="letter">d.</span> Figure out how much money you will need to start and run your business.</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q4：</strong> What should startup funds cover?</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> Only salaries</li>
+            <li><span class="letter">b.</span> Only rent and utilities</li>
+            <li><span class="letter">c.</span> Only equipment purchases</li>
+            <li class="correct"><span class="letter">d.</span> ✅ Initial costs and working capital for 6 to 18 months 初期成本＋6–18個月週轉金</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q5：</strong> What does a balance sheet show?</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> Profit margin</li>
+            <li class="correct"><span class="letter">b.</span> ✅ Assets, liabilities, and equity 資產、負債、權益</li>
+            <li><span class="letter">c.</span> Cash flow</li>
+            <li><span class="letter">d.</span> Sales and expenses</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q6：</strong> Which of the following is part of the Six C's of Credit?</div>
+          <ul class="opts">
+            <li class="correct"><span class="letter">a.</span> ✅ Character 品格／信用紀錄</li>
+            <li><span class="letter">b.</span> Creativity</li>
+            <li><span class="letter">c.</span> Cost</li>
+            <li><span class="letter">d.</span> Coverage</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q7：</strong> What is considered 'Collateral'?</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> Business plan</li>
+            <li><span class="letter">b.</span> Employee contracts</li>
+            <li><span class="letter">c.</span> Customer list</li>
+            <li class="correct"><span class="letter">d.</span> ✅ Tangible assets like property and equipment 不動產與設備等有形資產</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q8：</strong> Who are angel investors?</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> Marketing consultants</li>
+            <li><span class="letter">b.</span> Government officials</li>
+            <li class="correct"><span class="letter">c.</span> ✅ Individuals who invest in promising companies 投資有潛力公司的個人投資者</li>
+            <li><span class="letter">d.</span> Banks offering loans</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q9：</strong> A marketing VP leaves and creates a virtually identical marketing plan at a rival firm. The old firm could argue this is a ________.</div>
+          <ul class="opts">
+            <li class="correct"><span class="letter">a.</span> ✅ trade secret dispute 商業機密糾紛</li>
+            <li><span class="letter">b.</span> patent infringement</li>
+            <li><span class="letter">c.</span> market encroachment</li>
+            <li><span class="letter">d.</span> copyright infringement</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q10：</strong> What does copyright protect?</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> The method used to create the piece</li>
+            <li><span class="letter">b.</span> The opinion expressed in the piece</li>
+            <li class="correct"><span class="letter">c.</span> ✅ The form or format of a piece 作品的形式／格式</li>
+            <li><span class="letter">d.</span> The idea behind the piece</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q11：</strong> How long does copyright last for anonymous works?</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> 50 years after creation</li>
+            <li><span class="letter">b.</span> 25 years after disclosure</li>
+            <li class="correct"><span class="letter">c.</span> ✅ 50 years after publication 發表後50年</li>
+            <li><span class="letter">d.</span> 100 years from registration</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q12：</strong> Which of the following is considered public use information?</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> Software</li>
+            <li><span class="letter">b.</span> Short stories</li>
+            <li class="correct"><span class="letter">c.</span> ✅ Political speeches 政治演說</li>
+            <li><span class="letter">d.</span> Songs</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q13：</strong> What is the main difference between a trademark and an industrial design?</div>
+          <ul class="opts">
+            <li class="correct"><span class="letter">a.</span> ✅ Trademark does not require the good itself as the protected subject 商標不需要以商品本身作為保護對象</li>
+            <li><span class="letter">b.</span> Industrial design protects the brand name</li>
+            <li><span class="letter">c.</span> Industrial design is used for marketing</li>
+            <li><span class="letter">d.</span> Trademark protects the shape of the product</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q14：</strong> Why is intellectual property protected by law?</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> To reduce competition</li>
+            <li><span class="letter">b.</span> To increase taxes</li>
+            <li><span class="letter">c.</span> To control media</li>
+            <li class="correct"><span class="letter">d.</span> ✅ To reward creators and encourage innovation 獎勵創作者、鼓勵創新</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q15：</strong> Who must obtain a license to use a patented method?</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> Only government agencies</li>
+            <li><span class="letter">b.</span> Only foreign companies</li>
+            <li class="correct"><span class="letter">c.</span> ✅ Any person or company 任何人或公司</li>
+            <li><span class="letter">d.</span> Only competitors</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q16：</strong> Which of the following strengthens trade secret protection?</div>
+          <ul class="opts">
+            <li class="correct"><span class="letter">a.</span> ✅ Information known only on a need-to-know basis 僅限「需要知道」的人知悉</li>
+            <li><span class="letter">b.</span> Information posted online</li>
+            <li><span class="letter">c.</span> Information published in journals</li>
+            <li><span class="letter">d.</span> Information shared with all employees</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q17：</strong> Which of the following is NOT a sign that a business is growing too fast?</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> productivity is falling</li>
+            <li class="correct"><span class="letter">b.</span> ✅ employees are satisfied 員工滿意——這不是警訊，其他三項才是</li>
+            <li><span class="letter">c.</span> extremely tight profit margins</li>
+            <li><span class="letter">d.</span> declining product quality</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q18：</strong> A video game manufacturer increases production, resulting in lower average costs per unit. This is an example of ________.</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> executing a scalable business model</li>
+            <li><span class="letter">b.</span> capturing economies of scope</li>
+            <li class="correct"><span class="letter">c.</span> ✅ capturing economies of scale 規模經濟</li>
+            <li><span class="letter">d.</span> benchmarking</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q19：</strong> What are economies of scale?</div>
+          <ul class="opts">
+            <li class="correct"><span class="letter">a.</span> ✅ Lower average cost per unit with increased production 產量增加、單位平均成本下降</li>
+            <li><span class="letter">b.</span> Higher cost due to increased demand</li>
+            <li><span class="letter">c.</span> Reduced efficiency with growth</li>
+            <li><span class="letter">d.</span> Increased marketing expenses</li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q20：</strong> What helps a business avoid decline?</div>
+          <ul class="opts">
+            <li><span class="letter">a.</span> Low production costs</li>
+            <li class="correct"><span class="letter">b.</span> ✅ Strong leadership and adaptability 強勢領導與適應力</li>
+            <li><span class="letter">c.</span> High sales volume</li>
+            <li><span class="letter">d.</span> Large workforce</li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 </section>

@@ -28,7 +28,10 @@
   .chapter > h2 .num{background:var(--primary);color:#fff;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;}
   .mcq{border:1px solid var(--border);border-radius:10px;margin-bottom:14px;overflow:hidden;}
   .mcq .q{background:#f8fafc;padding:10px 16px;font-weight:600;color:var(--primary);font-size:.92rem;}
-  .mcq .opts{padding:10px 16px;font-size:.88rem;color:var(--muted);}
+  .mcq .opts{list-style:none;margin:0;padding:10px 16px;}
+  .mcq .opts li{padding:7px 12px;border-radius:7px;margin-bottom:5px;font-size:.87rem;background:#fff;border:1px solid var(--border);}
+  .mcq .opts li.correct{background:#f0fdf4;color:var(--green);font-weight:600;border-color:#bbf7d0;}
+  .mcq .opts li .letter{font-weight:700;margin-right:4px;}
   .mcq .ans{background:#ecfdf5;border-top:1px solid #a7f3d0;padding:10px 16px;font-size:.88rem;}
   .mcq .ans b{color:var(--green);}
   .missing{background:#fef2f2;border:1px dashed var(--red);border-radius:10px;padding:14px 18px;margin-bottom:14px;font-size:.88rem;}
@@ -83,49 +86,89 @@
 
   <div class="mcq">
     <div class="q">1. Which situation demonstrates "efficiency"?</div>
-    <div class="opts">A. Manager decides without consulting team &nbsp; B. Product fails to attract customers &nbsp; C. Project late but excellent quality &nbsp; D. Department lowers energy/paper usage without reducing productivity</div>
+    <ul class="opts">
+      <li><span class="letter">A.</span> Manager decides without consulting team</li>
+      <li><span class="letter">B.</span> Product fails to attract customers</li>
+      <li><span class="letter">C.</span> Project late but excellent quality</li>
+      <li class="correct"><span class="letter">D.</span> ✅ Department lowers energy/paper usage without reducing productivity</li>
+    </ul>
     <div class="ans"><b>答案：D</b> — Efficiency = 用更少資源、產出不變或不降低。D 在「不犧牲產能」的前提下省資源，正是 efficient 的定義。A 和風格有關、B/C 都偏向「結果不好」，屬於 effectiveness 的問題，不是 efficiency。</div>
   </div>
 
   <div class="mcq">
     <div class="q">2. Which represents "effectiveness"?</div>
-    <div class="opts">A. Cutting staff to reduce expenses &nbsp; B. Implementing a strategy that improves customer satisfaction and results &nbsp; C. Automating without considering quality &nbsp; D. Reducing production time even if errors increase</div>
+    <ul class="opts">
+      <li><span class="letter">A.</span> Cutting staff to reduce expenses</li>
+      <li class="correct"><span class="letter">B.</span> ✅ Implementing a strategy that improves customer satisfaction and results</li>
+      <li><span class="letter">C.</span> Automating without considering quality</li>
+      <li><span class="letter">D.</span> Reducing production time even if errors increase</li>
+    </ul>
     <div class="ans"><b>答案：B</b> — Effectiveness = 做對的事、達成目標／結果。B 直接講到「改善顧客滿意度與業績結果」，符合「doing the right things」。</div>
   </div>
 
   <div class="mcq">
     <div class="q">3. Which is NOT an example of entrepreneurial innovation?</div>
-    <div class="opts">A. Opening a new market &nbsp; B. Discovering a new raw material source &nbsp; C. Creating a new form of organization &nbsp; D. Repeating existing business practices</div>
+    <ul class="opts">
+      <li><span class="letter">A.</span> Opening a new market</li>
+      <li><span class="letter">B.</span> Discovering a new raw material source</li>
+      <li><span class="letter">C.</span> Creating a new form of organization</li>
+      <li class="correct"><span class="letter">D.</span> ✅ Repeating existing business practices</li>
+    </ul>
     <div class="ans"><b>答案：D</b> — 創新的五種形式是：新產品、新生產方式、新市場、新原料來源、新組織形式。「重複既有做法」正好和創新相反。</div>
   </div>
 
   <div class="mcq">
     <div class="q">4. What is the main responsibility of a manager?</div>
-    <div class="opts">A. Creating a new product idea &nbsp; B. Securing startup funding &nbsp; C. Growing or maintaining a business &nbsp; D. Taking business risks</div>
+    <ul class="opts">
+      <li><span class="letter">A.</span> Creating a new product idea</li>
+      <li><span class="letter">B.</span> Securing startup funding</li>
+      <li class="correct"><span class="letter">C.</span> ✅ Growing or maintaining a business</li>
+      <li><span class="letter">D.</span> Taking business risks</li>
+    </ul>
     <div class="ans"><b>答案：C</b> — 課堂筆記明確區分：entrepreneur＝start a business，manager＝grow or maintain a business。</div>
   </div>
 
   <div class="mcq">
     <div class="q">5. What does a business plan primarily focus on?</div>
-    <div class="opts">A. Describing value proposition &nbsp; B. Presenting strategy and expected financial performance &nbsp; C. Defining industry position &nbsp; D. Explaining supply chain process</div>
+    <ul class="opts">
+      <li><span class="letter">A.</span> Describing value proposition</li>
+      <li class="correct"><span class="letter">B.</span> ✅ Presenting strategy and expected financial performance</li>
+      <li><span class="letter">C.</span> Defining industry position</li>
+      <li><span class="letter">D.</span> Explaining supply chain process</li>
+    </ul>
     <div class="ans"><b>答案：B</b> — Ch3 定義：business plan = a document presenting the company's strategy and expected financial performance for the years to come。</div>
   </div>
 
   <div class="mcq">
     <div class="q">6. In the commission model, how does the company earn revenue?</div>
-    <div class="opts">A. Selling own products &nbsp; B. Charging a monthly fee &nbsp; C. Acting as an intermediary and taking a cut of each sale &nbsp; D. Offering free products and selling upgrades</div>
+    <ul class="opts">
+      <li><span class="letter">A.</span> Selling own products</li>
+      <li><span class="letter">B.</span> Charging a monthly fee</li>
+      <li class="correct"><span class="letter">C.</span> ✅ Acting as an intermediary and taking a cut of each sale</li>
+      <li><span class="letter">D.</span> Offering free products and selling upgrades</li>
+    </ul>
     <div class="ans"><b>答案：C</b> — Commission/distribution model 的定義就是「中介角色，每筆交易抽成」。（D 是 freemium 模式，不是 commission）</div>
   </div>
 
   <div class="mcq">
     <div class="q">7. How is creativity best defined?</div>
-    <div class="opts">A. The process of selling products &nbsp; B. The ability to manage a team &nbsp; C. The act of analyzing market trends &nbsp; D. The act of developing new and imaginative ideas into reality</div>
+    <ul class="opts">
+      <li><span class="letter">A.</span> The process of selling products</li>
+      <li><span class="letter">B.</span> The ability to manage a team</li>
+      <li><span class="letter">C.</span> The act of analyzing market trends</li>
+      <li class="correct"><span class="letter">D.</span> ✅ The act of developing new and imaginative ideas into reality</li>
+    </ul>
     <div class="ans"><b>答案：D</b> — 創造力的標準定義：把新穎、有想像力的構想變成現實的過程。</div>
   </div>
 
   <div class="mcq">
     <div class="q">8. What does "freewheeling" mean in the context of brainstorming?</div>
-    <div class="opts">A. Encouraging wild and creative ideas without judgment &nbsp; B. Following a strict agenda &nbsp; C. Limiting ideas to proven concepts &nbsp; D. Discouraging controversial suggestions</div>
+    <ul class="opts">
+      <li class="correct"><span class="letter">A.</span> ✅ Encouraging wild and creative ideas without judgment</li>
+      <li><span class="letter">B.</span> Following a strict agenda</li>
+      <li><span class="letter">C.</span> Limiting ideas to proven concepts</li>
+      <li><span class="letter">D.</span> Discouraging controversial suggestions</li>
+    </ul>
     <div class="ans"><b>答案：A</b> — Brainstorming 的經典規則之一就是 "freewheeling"：任何天馬行空的想法都先提出來，不批判。</div>
   </div>
 
@@ -133,73 +176,133 @@
 
   <div class="mcq">
     <div class="q">19. What do cash receipts and disbursements track?</div>
-    <div class="opts">A. When payments are received and made &nbsp; B. Only sales volume &nbsp; C. Only expenses &nbsp; D. Only profits</div>
+    <ul class="opts">
+      <li class="correct"><span class="letter">A.</span> ✅ When payments are received and made</li>
+      <li><span class="letter">B.</span> Only sales volume</li>
+      <li><span class="letter">C.</span> Only expenses</li>
+      <li><span class="letter">D.</span> Only profits</li>
+    </ul>
     <div class="ans"><b>答案：A</b> — Cash receipts/disbursements 記錄的是「現金何時收到、何時付出」，不只是銷售額或利潤。</div>
   </div>
 
   <div class="mcq">
     <div class="q">20. What are liabilities?</div>
-    <div class="opts">A. Money owed to others &nbsp; B. Company profits &nbsp; C. Owner equity &nbsp; D. Inventory</div>
+    <ul class="opts">
+      <li class="correct"><span class="letter">A.</span> ✅ Money owed to others</li>
+      <li><span class="letter">B.</span> Company profits</li>
+      <li><span class="letter">C.</span> Owner equity</li>
+      <li><span class="letter">D.</span> Inventory</li>
+    </ul>
     <div class="ans"><b>答案：A</b> — Liabilities（負債）＝欠別人的錢。</div>
   </div>
 
   <div class="mcq">
     <div class="q">21. What is breakeven analysis used for?</div>
-    <div class="opts">A. To set employee wages &nbsp; B. To determine when gross margin equals fixed expenses &nbsp; C. To calculate taxes and benefits &nbsp; D. To estimate startup costs</div>
+    <ul class="opts">
+      <li><span class="letter">A.</span> To set employee wages</li>
+      <li class="correct"><span class="letter">B.</span> ✅ To determine when gross margin equals fixed expenses</li>
+      <li><span class="letter">C.</span> To calculate taxes and benefits</li>
+      <li><span class="letter">D.</span> To estimate startup costs</li>
+    </ul>
     <div class="ans"><b>答案：B</b> — Breakeven point＝毛利剛好等於固定成本的那個銷售量／金額，用來判斷何時開始獲利。</div>
   </div>
 
   <div class="mcq">
     <div class="q">22. What does "Conditions" refer to in the Six Cs of Credit?</div>
-    <div class="opts">A. Payment amount and methods &nbsp; B. Marketing channels &nbsp; C. Employee benefits &nbsp; D. Loan terms and local economic climate</div>
+    <ul class="opts">
+      <li><span class="letter">A.</span> Payment amount and methods</li>
+      <li><span class="letter">B.</span> Marketing channels</li>
+      <li><span class="letter">C.</span> Employee benefits</li>
+      <li class="correct"><span class="letter">D.</span> ✅ Loan terms and local economic climate</li>
+    </ul>
     <div class="ans"><b>答案：D</b> — Six Cs of Credit 中的 "Conditions" 指的是貸款條件與當地經濟環境，會影響還款能力的外部因素。</div>
   </div>
 
   <div class="mcq">
     <div class="q">23. Who are angel investors?</div>
-    <div class="opts">A. Individuals who invest in promising companies &nbsp; B. Banks offering loans &nbsp; C. Government officials &nbsp; D. Marketing consultants</div>
+    <ul class="opts">
+      <li class="correct"><span class="letter">A.</span> ✅ Individuals who invest in promising companies</li>
+      <li><span class="letter">B.</span> Banks offering loans</li>
+      <li><span class="letter">C.</span> Government officials</li>
+      <li><span class="letter">D.</span> Marketing consultants</li>
+    </ul>
     <div class="ans"><b>答案：A</b> — Angel investor＝用自己的錢投資有潛力新創公司的個人投資者。</div>
   </div>
 
   <div class="mcq">
     <div class="q">24. Can copyright be co-owned?</div>
-    <div class="opts">A. Yes, if created by a team &nbsp; B. No, it must belong to one person &nbsp; C. Only if registered jointly &nbsp; D. Only for published works</div>
+    <ul class="opts">
+      <li class="correct"><span class="letter">A.</span> ✅ Yes, if created by a team</li>
+      <li><span class="letter">B.</span> No, it must belong to one person</li>
+      <li><span class="letter">C.</span> Only if registered jointly</li>
+      <li><span class="letter">D.</span> Only for published works</li>
+    </ul>
     <div class="ans"><b>答案：A</b> — 團隊共同創作的作品，著作權可以共同擁有（joint authorship）。</div>
   </div>
 
   <div class="mcq">
     <div class="q">25. Which of the following is an example of a non-patentable discovery?</div>
-    <div class="opts">A. Design of a new machine &nbsp; B. Improvement of a product &nbsp; C. Discovery of a natural substance &nbsp; D. New manufacturing method</div>
+    <ul class="opts">
+      <li><span class="letter">A.</span> Design of a new machine</li>
+      <li><span class="letter">B.</span> Improvement of a product</li>
+      <li class="correct"><span class="letter">C.</span> ✅ Discovery of a natural substance</li>
+      <li><span class="letter">D.</span> New manufacturing method</li>
+    </ul>
     <div class="ans"><b>答案：C</b> — 自然存在的物質本身（非人工發明）通常不能申請專利；A、B、D 都是人為發明/改良，可申請專利。</div>
   </div>
 
   <div class="mcq">
     <div class="q">26. What increases during continuous growth?</div>
-    <div class="opts">A. Need for structure and formalization &nbsp; B. Need for downsizing &nbsp; C. Need for outsourcing and flexibility &nbsp; D. Need for cost-cutting</div>
+    <ul class="opts">
+      <li class="correct"><span class="letter">A.</span> ✅ Need for structure and formalization</li>
+      <li><span class="letter">B.</span> Need for downsizing</li>
+      <li><span class="letter">C.</span> Need for outsourcing and flexibility</li>
+      <li><span class="letter">D.</span> Need for cost-cutting</li>
+    </ul>
     <div class="ans"><b>答案：A</b> — 組織持續成長時，需要更多「結構化」與「正式化」的制度去管理複雜度。</div>
   </div>
 
   <div class="mcq">
     <div class="q">27. Which is an advantage of internal growth?</div>
-    <div class="opts">A. Rapid expansion &nbsp; B. Preserves organizational culture &nbsp; C. Access to new markets &nbsp; D. Reduced competition</div>
+    <ul class="opts">
+      <li><span class="letter">A.</span> Rapid expansion</li>
+      <li class="correct"><span class="letter">B.</span> ✅ Preserves organizational culture</li>
+      <li><span class="letter">C.</span> Access to new markets</li>
+      <li><span class="letter">D.</span> Reduced competition</li>
+    </ul>
     <div class="ans"><b>答案：B</b> — Internal growth（有機成長）速度較慢，但能保留原本的組織文化；A/C/D 比較是外部成長（併購）帶來的好處。</div>
   </div>
 
   <div class="mcq">
     <div class="q">28. Which of the following is NOT typically a trademark?</div>
-    <div class="opts">A. A company name &nbsp; B. A product slogan &nbsp; C. A logo &nbsp; D. A manufacturing process</div>
+    <ul class="opts">
+      <li><span class="letter">A.</span> A company name</li>
+      <li><span class="letter">B.</span> A product slogan</li>
+      <li><span class="letter">C.</span> A logo</li>
+      <li class="correct"><span class="letter">D.</span> ✅ A manufacturing process</li>
+    </ul>
     <div class="ans"><b>答案：D</b> — 商標保護的是「品牌識別」（名稱/標語/標誌），生產製程屬於專利或商業機密的範疇，不是商標。</div>
   </div>
 
   <div class="mcq">
     <div class="q">29. Which of the following is true about trade secrets?</div>
-    <div class="opts">A. They are protected without registration &nbsp; B. They must be patented &nbsp; C. They require trademark protection &nbsp; D. They are published for legal protection</div>
+    <ul class="opts">
+      <li class="correct"><span class="letter">A.</span> ✅ They are protected without registration</li>
+      <li><span class="letter">B.</span> They must be patented</li>
+      <li><span class="letter">C.</span> They require trademark protection</li>
+      <li><span class="letter">D.</span> They are published for legal protection</li>
+    </ul>
     <div class="ans"><b>答案：A</b> — 商業機密的保護方式就是「保密」本身，不需要向政府註冊（這點和專利／商標不同）。</div>
   </div>
 
   <div class="mcq">
     <div class="q">30. How does growth help attract and retain employees?</div>
-    <div class="opts">A. It reduces workload &nbsp; B. It eliminates training needs &nbsp; C. It creates promotional opportunities &nbsp; D. It increases job security automatically</div>
+    <ul class="opts">
+      <li><span class="letter">A.</span> It reduces workload</li>
+      <li><span class="letter">B.</span> It eliminates training needs</li>
+      <li class="correct"><span class="letter">C.</span> ✅ It creates promotional opportunities</li>
+      <li><span class="letter">D.</span> It increases job security automatically</li>
+    </ul>
     <div class="ans"><b>答案：C</b> — 公司成長代表有更多職位和晉升機會，這是吸引與留住員工的重要原因。</div>
   </div>
 </section>
