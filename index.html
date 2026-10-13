@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tutoring Content — 資源總覽</title>
+<style>
+  :root {
+    --bg: #f7f7f5; --card: #ffffff; --text: #1f2328; --muted: #6b7280;
+    --line: #e5e7eb; --accent: #2563eb;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0f1115; --card: #181b22; --text: #e6e8eb; --muted: #9aa3b2;
+      --line: #2a2f3a; --accent: #7aa7ff;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0f1115; --card: #181b22; --text: #e6e8eb; --muted: #9aa3b2;
+    --line: #2a2f3a; --accent: #7aa7ff;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 16px/1.6 system-ui, -apple-system, "Segoe UI", "Noto Sans TC", sans-serif;
+  }
+  main { max-width: 920px; margin: 0 auto; padding: 32px 16px 56px; }
+  h1 { font-size: 1.8rem; margin: 0 0 4px; }
+  .lead { color: var(--muted); margin: 0 0 28px; }
+  section {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 12px; padding: 18px 20px; margin-bottom: 16px;
+  }
+  h2 { font-size: 1.15rem; margin: 0 0 4px; }
+  .meta { color: var(--muted); font-size: .9rem; margin: 0 0 10px; }
+  ul { list-style: none; padding: 0; margin: 0; }
+  li { border-top: 1px solid var(--line); }
+  li a {
+    display: flex; justify-content: space-between; gap: 12px;
+    padding: 10px 0; color: var(--text); text-decoration: none;
+  }
+  li a:hover span:first-child { color: var(--accent); text-decoration: underline; }
+  li a span:last-child { color: var(--muted); font-size: .9rem; text-align: right; }
+  .sub { font-weight: 600; color: var(--muted); font-size: .85rem; margin: 12px 0 0; }
+  footer { color: var(--muted); font-size: .85rem; margin-top: 24px; }
+  footer a { color: var(--accent); }
+</style>
+</head>
+<body>
+<main>
+  <h1>📚 Tutoring Content</h1>
+  <p class="lead">中學與大學自學資源：數學、物理、化學、英文、CISC3012 AI、CISC3011 DIP。點選下方連結即可在瀏覽器中開啟。</p>
+
+  <section>
+    <h2>📐 數學（中三）</h2>
+    <p class="meta">模擬試卷、考前重點整理</p>
+    <ul>
+      <li><a href="math/mock_exam_v2.html"><span>完整範圍模擬卷（v2）</span><span>mock_exam_v2</span></a></li>
+      <li><a href="math/math_exam_prep.html"><span>考試前重點整理筆記</span><span>math_exam_prep</span></a></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>⚛️ 物理（中三）</h2>
+    <p class="meta">電磁波、波動、完整學習套裝</p>
+    <ul>
+      <li><a href="physics/form3_physics_study_pack.html"><span>完整學習套裝（含例題）</span><span>study_pack</span></a></li>
+      <li><a href="physics/form3_revision_targeted.html"><span>重點溫習筆記（精華版）</span><span>revision_targeted</span></a></li>
+      <li><a href="physics/form3_waves_em_examples.html"><span>波動與電磁波例題集</span><span>waves_em_examples</span></a></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>🧪 化學（結構與鍵合）</h2>
+    <p class="meta">中英對照；主要版本優先</p>
+    <ul>
+      <li><a href="chemistry/01_knowledge_summary.html"><span>考前知識摘要（英文）</span><span>01</span></a></li>
+      <li><a href="chemistry/01_knowledge_summary_zh.html"><span>考前知識摘要（中文）</span><span>01</span></a></li>
+      <li><a href="chemistry/02_bonding_comparison.html"><span>鍵合比較表</span><span>02</span></a></li>
+      <li><a href="chemistry/02_structured_questions.html"><span>結構化問題練習</span><span>02</span></a></li>
+      <li><a href="chemistry/03_mcq_exam_practice.html"><span>MCQ 模擬試卷</span><span>03</span></a></li>
+      <li><a href="chemistry/03_practice_quiz.html"><span>練習小測</span><span>03</span></a></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>🇬🇧 英文（中一）</h2>
+    <p class="meta">新版為修訂後的卷子，建議優先使用</p>
+    <p class="sub">新版 Paper</p>
+    <ul>
+      <li><a href="english/f1_english_paper_1.html"><span>卷一（新版）</span><span>Paper 1</span></a></li>
+      <li><a href="english/f1_english_paper_2.html"><span>卷二（新版）</span><span>Paper 2</span></a></li>
+      <li><a href="english/f1_english_paper_3.html"><span>卷三（新版）</span><span>Paper 3</span></a></li>
+    </ul>
+    <p class="sub">初版 Mock Paper</p>
+    <ul>
+      <li><a href="english/f1_english_mock_paper_1.html"><span>卷一（初版）</span><span>Mock 1</span></a></li>
+      <li><a href="english/f1_english_mock_paper_2.html"><span>卷二（初版）</span><span>Mock 2</span></a></li>
+      <li><a href="english/f1_english_mock_paper_3.html"><span>卷三（初版）</span><span>Mock 3</span></a></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>🤖 CISC3012 人工智能（AI）</h2>
+    <p class="meta">建議順序：期中溫習筆記 → 考試速記 → Mock Test</p>
+    <ul>
+      <li><a href="cisc3012/ai_midterm_notes.html"><span>期中溫習筆記</span><span>notes</span></a></li>
+      <li><a href="cisc3012/ai_midterm_cheatsheet.html"><span>期中考試速記</span><span>cheatsheet</span></a></li>
+      <li><a href="cisc3012/mock_test_1.html"><span>AI 模擬測驗（一）</span><span>mock 1</span></a></li>
+      <li><a href="cisc3012/mock_test_2.html"><span>AI 模擬測驗（二）</span><span>mock 2</span></a></li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>🖼️ CISC3011 數位影像處理（DIP）</h2>
+    <p class="meta">期中溫習網站，範圍 Lecture 1–6</p>
+    <ul>
+      <li><a href="cisc3011/"><span>首頁（考試格式、六章地圖）</span><span>index</span></a></li>
+      <li><a href="cisc3011/cheatsheet.html"><span>考前速記</span><span>cheatsheet</span></a></li>
+      <li><a href="cisc3011/quiz.html"><span>模擬測驗</span><span>quiz</span></a></li>
+      <li><a href="cisc3011/practice-a.html"><span>Part A 題庫（86 題）</span><span>practice-a</span></a></li>
+      <li><a href="cisc3011/practice-b.html"><span>Part B 題庫（12 題）</span><span>practice-b</span></a></li>
+      <li><a href="cisc3011/pastpaper.html"><span>Past Paper 詳解</span><span>pastpaper</span></a></li>
+      <li><a href="cisc3011/glossary.html"><span>英中術語對照</span><span>glossary</span></a></li>
+      <li><a href="cisc3011/ch1.html"><span>Ch1 數位影像基礎</span><span>ch1</span></a></li>
+      <li><a href="cisc3011/ch2.html"><span>Ch2 點運算與影像合成</span><span>ch2</span></a></li>
+      <li><a href="cisc3011/ch3.html"><span>Ch3 直方圖</span><span>ch3</span></a></li>
+      <li><a href="cisc3011/ch4.html"><span>Ch4 濾波器</span><span>ch4</span></a></li>
+      <li><a href="cisc3011/ch5.html"><span>Ch5 邊緣偵測</span><span>ch5</span></a></li>
+      <li><a href="cisc3011/ch6.html"><span>Ch6 形態學處理</span><span>ch6</span></a></li>
+    </ul>
+  </section>
+
+  <footer>
+    資源僅供教學與個人學習使用，詳見 <a href="README.md">README</a> 與 <a href="LICENSE">授權說明</a>。
+  </footer>
+</main>
+</body>
+</html>
