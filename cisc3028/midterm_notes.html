@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CISC3028 Entrepreneurship 期中溫習筆記 (Ch1-3)</title>
+<style>
+  :root{
+    --bg:#f4f6fb;
+    --card:#ffffff;
+    --primary:#1e3a8a;
+    --primary-light:#3b82f6;
+    --accent:#f59e0b;
+    --green:#059669;
+    --red:#dc2626;
+    --text:#1f2937;
+    --muted:#6b7280;
+    --border:#e5e7eb;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang TC","Microsoft JhengHei",sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.7;
+    padding:20px;
+  }
+  .container{max-width:1000px;margin:0 auto;}
+
+  header{
+    background:linear-gradient(135deg,#1e3a8a,#3b82f6);
+    color:#fff;
+    padding:32px 28px;
+    border-radius:16px;
+    margin-bottom:24px;
+    box-shadow:0 8px 24px rgba(30,58,138,.25);
+  }
+  header h1{font-size:1.7rem;margin-bottom:8px;}
+  header p{opacity:.9;font-size:.95rem;}
+  header .badge{
+    display:inline-block;
+    background:rgba(255,255,255,.2);
+    padding:4px 12px;
+    border-radius:20px;
+    font-size:.8rem;
+    margin-top:10px;
+  }
+
+  .notice{
+    background:#fff7ed;
+    border:1px solid #fdba74;
+    border-left:5px solid var(--accent);
+    border-radius:10px;
+    padding:16px 20px;
+    margin-bottom:24px;
+    font-size:.9rem;
+  }
+  .notice strong{color:#c2410c;}
+
+  .toc{
+    background:var(--card);
+    border-radius:12px;
+    padding:20px 24px;
+    margin-bottom:24px;
+    box-shadow:0 2px 8px rgba(0,0,0,.06);
+    border-left:4px solid var(--primary-light);
+  }
+  .toc h2{font-size:1.1rem;color:var(--primary);margin-bottom:10px;}
+  .toc ul{list-style:none;display:flex;flex-wrap:wrap;gap:8px;}
+  .toc a{
+    display:inline-block;
+    background:#eff6ff;
+    color:var(--primary);
+    text-decoration:none;
+    padding:6px 14px;
+    border-radius:8px;
+    font-size:.85rem;
+    transition:.2s;
+    border:1px solid #dbeafe;
+  }
+  .toc a:hover{background:var(--primary-light);color:#fff;}
+
+  .chapter{
+    background:var(--card);
+    border-radius:14px;
+    padding:26px;
+    margin-bottom:28px;
+    box-shadow:0 2px 12px rgba(0,0,0,.06);
+  }
+  .chapter > h2{
+    font-size:1.35rem;
+    color:var(--primary);
+    padding-bottom:12px;
+    border-bottom:3px solid var(--primary-light);
+    margin-bottom:20px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .chapter > h2 .num{
+    background:var(--primary);
+    color:#fff;
+    width:36px;height:36px;
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-size:1rem;
+    flex-shrink:0;
+  }
+
+  .example{
+    border:1px solid var(--border);
+    border-radius:12px;
+    margin-bottom:20px;
+    overflow:hidden;
+  }
+  .example .head{
+    background:#f8fafc;
+    padding:12px 18px;
+    font-weight:600;
+    color:var(--primary);
+    border-bottom:1px solid var(--border);
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:.98rem;
+  }
+  .example .head .tag{
+    background:var(--accent);
+    color:#fff;
+    font-size:.7rem;
+    padding:2px 8px;
+    border-radius:6px;
+    font-weight:500;
+  }
+  .example .head .tag.core{background:var(--red);}
+  .example .head .tag.important{background:var(--green);}
+  .example .body{padding:16px 18px;}
+
+  .q{
+    background:#fffbeb;
+    border-left:4px solid var(--accent);
+    padding:10px 14px;
+    border-radius:0 8px 8px 0;
+    margin-bottom:14px;
+    font-size:.92rem;
+  }
+  .q strong{color:#b45309;}
+
+  .think{
+    background:#f0fdf4;
+    border-left:4px solid var(--green);
+    padding:10px 14px;
+    border-radius:0 8px 8px 0;
+    margin-bottom:14px;
+    font-size:.9rem;
+  }
+  .think strong{color:var(--green);}
+
+  .answer{
+    background:#eff6ff;
+    border-left:4px solid var(--primary-light);
+    padding:10px 14px;
+    border-radius:0 8px 8px 0;
+    font-size:.9rem;
+    margin-bottom:10px;
+  }
+  .answer strong{color:var(--primary);}
+  .answer em{color:var(--primary);font-style:normal;font-weight:600;}
+
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin:12px 0;
+    font-size:.85rem;
+  }
+  th,td{
+    border:1px solid var(--border);
+    padding:8px 10px;
+    text-align:left;
+  }
+  th{background:#f1f5f9;color:var(--primary);font-weight:600;}
+  tr:nth-child(even){background:#fafbfc;}
+
+  .tip{
+    background:#fef2f2;
+    border:1px dashed var(--red);
+    padding:12px 16px;
+    border-radius:8px;
+    font-size:.88rem;
+    margin:14px 0;
+  }
+  .tip strong{color:var(--red);}
+
+  ul,ol{margin-left:20px;margin-bottom:10px;}
+  li{margin-bottom:4px;}
+
+  .en{color:var(--primary);font-weight:500;}
+  .zh{color:var(--muted);font-size:.88rem;}
+
+  footer{
+    text-align:center;
+    color:var(--muted);
+    font-size:.8rem;
+    padding:20px;
+  }
+
+  @media(max-width:600px){
+    body{padding:10px;}
+    header{padding:22px 18px;}
+    header h1{font-size:1.3rem;}
+    .chapter{padding:18px;}
+    .toc ul{flex-direction:column;}
+    .toc a{width:100%;text-align:center;}
+    table{font-size:.78rem;}
+  }
+  @media print{
+    body{background:#fff;padding:0;}
+    header{background:#1e3a8a !important;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+    .chapter{box-shadow:none;border:1px solid #ccc;page-break-inside:avoid;}
+    .toc{display:none;}
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <h1>💼 CISC3028 Entrepreneurship<br>期中溫習筆記 Midterm Notes (Ch1–Ch3)</h1>
+  <p>中英雙語 · 考試導向 · 定義 + 解釋 + 例子</p>
+  <span class="badge">目前覆蓋 Ch1–Ch3（共 Ch1–Ch9）</span>
+</header>
+
+<div class="notice">
+  <strong>⚠️ 範圍提醒 / Scope Notice：</strong><br>
+  期中考覆蓋 <strong>Ch1–Ch9</strong>、<strong>Exercises 01–07</strong>、<strong>Socrative 01–04</strong>。
+  目前我只收到 <strong>L01（Ch1）、L02（Ch2）、L03（Ch3）</strong> 的講義 PDF，所以這份筆記暫時只能覆蓋 Ch1–Ch3。
+  <br><br>
+  Ch4–Ch9 的講義、Exercises 01–07、Socrative 01–04 的題目／答案都還沒有提供給我 —— 我不會憑空「猜」老師的內容，以免內容和真實考試對不上，反而誤導複習。
+  <strong>請把這些檔案（PDF／截圖／講義連結）上傳給我</strong>，我會用同樣的格式繼續擴充這份筆記，覆蓋到 Ch9、Exercises 和 Socrative。
+</div>
+
+<!-- 目錄 -->
+<nav class="toc">
+  <h2>📑 快速導航 Quick Navigation</h2>
+  <ul>
+    <li><a href="#ch1">Ch1：Entrepreneurship, Organization & Management</a></li>
+    <li><a href="#ch2">Ch2：Are You Ready For It?</a></li>
+    <li><a href="#ch3">Ch3：Business Model Generation</a></li>
+    <li><a href="#tips">考試提醒 Exam Tips</a></li>
+  </ul>
+</nav>
+
+<!-- ================= Ch1 ================= -->
+<section class="chapter" id="ch1">
+  <h2><span class="num">1</span>Chapter 1：Entrepreneurship, Organization and Management</h2>
+
+  <div class="example">
+    <div class="head">1.1 <span class="tag core">核心定義</span> Entrepreneurship / Entrepreneur / Intrapreneur</div>
+    <div class="body">
+      <div class="q"><strong>Q：</strong>What is entrepreneurship, and what is the difference between an entrepreneur and an intrapreneur?</div>
+      <div class="think"><strong>解題思路／想法：</strong>先給 entrepreneurship 的兩個定義角度（設計/launch/run 新業務；承擔風險創造新事業），再用「內／外」區分 entrepreneur 和 intrapreneur：entrepreneur 自己出來創業，intrapreneur 在既有組織內部推動新機會。</div>
+      <div class="answer">
+        <strong>English：</strong> Entrepreneurship is <em>the process of designing, launching and running a new business</em>, often starting small — or more broadly, <em>taking risks to create a new enterprise</em>. An <em>entrepreneur</em> sees a new opportunity for a product/service and launches a business to pursue it (usually a small business, &lt;100 employees). An <em>intrapreneur</em> is someone <em>inside an existing organization</em> (a researcher, scientist, or manager) who sees an opportunity and mobilizes the organization's own resources to pursue it.<br><br>
+        <strong>中文：</strong>創業精神是設計、推出並經營一間新事業（通常初期是小型事業）的過程；也可以說是承擔風險去創造新事業。企業家（entrepreneur）是自己發現機會並創業的人；內部創業者（intrapreneur）則是在既有組織內部，利用組織資源去實現新機會的人（例如研究員、科學家或經理）。
+      </div>
+    </div>
+  </div>
+
+  <div class="example">
+    <div class="head">1.2 <span class="tag important">常考</span> Organization — 三種類型</div>
+    <div class="body">
+      <div class="q"><strong>Q：</strong>What are the three types of organization, classified by purpose?</div>
+      <div class="answer">
+        <strong>English：</strong> <em>For-profit</em> organizations exist to make money (business organizations). <em>Nonprofit</em> organizations offer services, such as hospitals, colleges, and social-welfare agencies. <em>Mutual-benefit</em> organizations exist to aid their own members, such as political parties, labor unions, trade associations and clubs.<br><br>
+        <strong>中文：</strong>為盈利組織（為了賺錢，即一般企業）；非營利組織（提供服務，如醫院、大學、社會福利機構）；互惠組織（為了幫助自己的成員，如政黨、工會、商業協會、俱樂部）。
+      </div>
+    </div>
+  </div>
+
+  <div class="example">
+    <div class="head">1.3 <span class="tag core">核心定義</span> Management & the Four Functions (POLC)</div>
+    <div class="body">
+      <div class="q"><strong>Q：</strong>Define management, and list its four main functions.</div>
+      <div class="answer">
+        <strong>English：</strong> Management is <em>the pursuit of organizational goals, efficiently and effectively</em>, by integrating the work of people through <em>Planning, Organizing, Leading, and Controlling</em> (POLC) the organization's resources.
+        <ul>
+          <li><strong>Planning</strong> — set goals and decide how to achieve them.</li>
+          <li><strong>Organizing</strong> — arrange tasks, people and resources to accomplish the work.</li>
+          <li><strong>Leading</strong> — motivate, direct and influence people to work toward goals.</li>
+          <li><strong>Controlling</strong> — monitor performance, compare it with goals, take corrective action.</li>
+        </ul>
+        <strong>中文：</strong>管理是透過「規劃、組織、領導、控制」（POLC）去整合人的工作，有效率（efficiently）且有效果（effectively）地追求組織目標。規劃＝訂目標、想辦法；組織＝安排任務、人員、資源；領導＝激勵、指導、影響員工；控制＝監控表現、對照目標、採取修正行動。
+      </div>
+    </div>
+  </div>
+
+  <div class="example">
+    <div class="head">1.4 <span class="tag important">常考</span> Efficient vs Effective</div>
+    <div class="body">
+      <div class="q"><strong>Q：</strong>Explain the difference between "efficient" and "effective", with an example.</div>
+      <div class="think"><strong>解題思路：</strong>記住口訣："Doing the things right"（efficient）vs "Doing the right things"（effective）。選擇題常考「自動語音選單」例子：對公司省錢是 efficient，但顧客體驗差，所以 not effective。</div>
+      <div class="answer">
+        <strong>English：</strong> <em>Efficient</em> means using resources (people, money, materials) wisely and cost-effectively — "doing the things right". <em>Effective</em> means achieving results and making the right decisions to hit organizational goals — "doing the right things". Example: an automated phone menu is efficient for the company (saves cost) but often not effective (customers prefer a live agent).<br><br>
+        <strong>中文：</strong>「有效率」(efficient) 指聰明、節省成本地運用資源——「把事情做對」；「有效果」(effective) 指做出對的決策、達成組織目標——「做對的事情」。例子：自動電話選單對公司來說有效率（省錢），但常常沒有效果（顧客比較想要真人客服）。
+      </div>
+    </div>
+  </div>
+
+  <div class="example">
+    <div class="head">1.5 <span class="tag core">核心比較</span> Entrepreneurs vs. Managers</div>
+    <div class="body">
+      <div class="q"><strong>Q：</strong>Compare entrepreneurs and managers in terms of motive, status, risk, reward and innovation.</div>
+      <table>
+        <tr><th>Point 項目</th><th>Entrepreneur 企業家</th><th>Manager 經理</th></tr>
+        <tr><td>Motive 動機</td><td>Starts a venture for personal gratification（為了自我成就創業）</td><td>Renders services in an enterprise someone else set up（替別人設立的企業服務）</td></tr>
+        <tr><td>Status 地位</td><td>Owner 擁有者</td><td>Servant/employee 受僱者</td></tr>
+        <tr><td>Risk 風險</td><td>Assumes risk and uncertainty 承擔風險</td><td>Bears no risk 不承擔風險</td></tr>
+        <tr><td>Rewards 報酬</td><td>Profit — uncertain, not fixed 利潤（不確定）</td><td>Salary — fixed, certain 薪水（固定）</td></tr>
+        <tr><td>Innovation 創新</td><td>Decides what/how to produce 決定生產什麼、怎麼生產</td><td>Executes the entrepreneur's plans 執行企業家的計畫</td></tr>
+      </table>
+      <div class="answer"><strong>一句話記憶：</strong> Being an entrepreneur is what it takes to <em>start</em> a business; being a manager is what it takes to <em>grow or maintain</em> it. 企業家「從0到1」，經理「維持和成長」。</div>
+    </div>
+  </div>
+
+  <div class="example">
+    <div class="head">1.6 <span class="tag important">常考</span> Necessity vs Opportunity Entrepreneurs; 三種 Entrepreneur 觀點</div>
+    <div class="body">
+      <div class="q"><strong>Q：</strong>Distinguish necessity entrepreneurs from opportunity entrepreneurs, and name the three classic "views" of an entrepreneur.</div>
+      <div class="answer">
+        <strong>English：</strong> <em>Necessity entrepreneurs</em> suddenly must earn a living and start a business simply to replace lost income (e.g. after losing a job). <em>Opportunity entrepreneurs</em> start their business out of a burning desire, not because they lost a job.<br>
+        Three classic views of an entrepreneur: (1) <strong>Risk bearer</strong> — buys inputs at known prices to sell output at uncertain future prices; (2) <strong>Organizer</strong> — combines land, labor and capital into a product, profit = what's left after paying rent/wages/interest; (3) <strong>Innovator</strong> — drives innovation through a new product, a new (untested) production method, a new market, a new raw-material source, or a new form of organization.<br><br>
+        <strong>中文：</strong>「必要型創業者」是因為突然失去收入來源、不得不創業謀生；「機會型創業者」則是出於強烈渴望才創業，不是因為失業。企業家的三種經典觀點：風險承擔者（低價買進、未來以不確定價格賣出）、組織者（整合土地、勞動、資本，剩下的才是自己的利潤）、創新者（透過新產品、新生產方式、新市場、新原料來源或新組織形式來驅動創新）。
+      </div>
+    </div>
+  </div>
+
+  <div class="example">
+    <div class="head">1.7 Economic Impact & Management Challenges</div>
+    <div class="body">
+      <div class="answer">
+        <strong>Economic impact：</strong> Innovation（創造新事物）is central to entrepreneurship; small firms are <em>twice as innovative per employee</em> as large firms. Job creation has shifted toward smaller entrepreneurial firms. 小公司在每位員工的創新產出上，是大公司的兩倍；近年就業機會也往小型創業公司移動。<br><br>
+        <strong>6 Management Challenges：</strong> competitive advantage（競爭優勢）, diversity（多元化）, globalization（全球化）, information technology（資訊科技）, ethical standards（道德標準）, sustainability（永續／綠色經營）— 加上自己的 happiness & life goals。
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= Ch2 ================= -->
+<section class="chapter" id="ch2">
+  <h2><span class="num">2</span>Chapter 2：Entrepreneurship — Are You Ready For It?</h2>
+
+  <div class="example">
+    <div class="head">2.1 <span class="tag important">常考</span> Myth vs Reality</div>
+    <div class="body">
+      <table>
+        <tr><th>Myth 迷思</th><th>Reality 現實</th></tr>
+        <tr><td>Won't work long hours 不用長時間工作</td><td>Entrepreneurs work <em>longer</em> hours than employees 其實工時更長</td></tr>
+        <tr><td>No competition 沒有競爭對手</td><td>There is <em>always</em> competition（形式或通路不同而已）永遠有競爭</td></tr>
+        <tr><td>Can deduct everything, no tax 可以全額扣稅、不用交稅</td><td>Can deduct expenses but <em>still pay taxes</em> 可扣除費用，但仍要繳稅</td></tr>
+        <tr><td>No boss 沒有老闆</td><td>Not one boss — but <em>many</em>：clients/customers 客戶就是老闆</td></tr>
+        <tr><td>Do whatever you want 想做什麼就做什麼</td><td>Still have boring/difficult tasks 還是有枯燥、困難的工作要做</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="example">
+    <div class="head">2.2 Startup Defined & Entrepreneurial Qualities</div>
+    <div class="body">
+      <div class="answer">
+        <strong>Startup (Wikipedia)：</strong> an entrepreneurial venture — typically newly emerged, fast-growing — that develops a viable business model around an innovative product/service/process/platform; designed to <em>develop and validate a scalable business model</em>. <strong>Kinicki &amp; Williams：</strong> a newly created company <em>designed to grow fast</em>.<br>
+        中文：新創公司（startup）是一間新成立、快速成長的企業，圍繞著創新的產品/服務/流程/平台，目標是驗證一個「可規模化」的商業模式；簡單來說就是「設計來快速成長」的新公司。<br><br>
+        <strong>Qualities（特質）：</strong> industry education/experience, strong work ethic, time management, multitasking, management skills, willing to ask for help, self-motivated, resourceful, responsible, organized, persistent, decisive, good health, supportive family. 有些是天生的，有些可以學習，有些是外部因素（例如家庭支持）。
+      </div>
+    </div>
+  </div>
+
+  <div class="example">
+    <div class="head">2.3 <span class="tag core">核心比較</span> Getting Into Business — 6 Ways</div>
+    <div class="body">
+      <div class="q"><strong>Q：</strong>List the 6 ways of getting into business, and the key advantage/disadvantage of each.</div>
+      <table>
+        <tr><th>Way 方式</th><th>Advantage 優點</th><th>Disadvantage 缺點</th></tr>
+        <tr><td>Start new 從零開始</td><td>No baggage; choose own name/location 沒有包袱、自由選擇</td><td>No customer base; higher risk 沒有顧客基礎、風險較高</td></tr>
+        <tr><td>Buy existing 收購現有企業</td><td>Established customers, proven formula 已有顧客、模式已驗證</td><td>Hidden problems; inflated assets 可能有隱藏問題</td></tr>
+        <tr><td>Franchise 加盟</td><td>Known brand, training, support 品牌、培訓、支援</td><td>Royalties, less freedom 要付權利金、自由度低</td></tr>
+        <tr><td>Home-based 在家經營</td><td>Convenient, lower cost 方便、成本低</td><td>Isolating, harder financing 較孤立、融資難</td></tr>
+        <tr><td>Nonprofit 非營利</td><td>May get grants 可能取得補助</td><td>Profits stay in org 利潤不能私有化</td></tr>
+        <tr><td>Online 網路創業</td><td>Low startup cost, global reach 成本低、觸及全球</td><td>Low conversion, more competition 轉換率低、競爭多</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="example">
+    <div class="head">2.4 <span class="tag important">常考</span> Legal Structures</div>
+    <div class="body">
+      <table>
+        <tr><th>Structure 類型</th><th>Pro 優點</th><th>Con 缺點</th></tr>
+        <tr><td>Sole Proprietorship 獨資</td><td>Taxed once; full control 課稅一次、完全掌控</td><td>Unlimited liability 無限責任</td></tr>
+        <tr><td>Partnership 合夥</td><td>No entity-level tax 不用在企業層面課稅</td><td>Partners personally liable 合夥人需個人承擔債務</td></tr>
+        <tr><td>Corporation 公司</td><td>Limited liability 有限責任</td><td>Double taxation 雙重課稅</td></tr>
+        <tr><td>LLC 有限責任公司</td><td>Liability protection, no double tax 有保障又不用雙重課稅</td><td>(視地區規範而定)</td></tr>
+      </table>
+      <div class="answer"><strong>澳門補充：</strong> sole proprietor（個人全責）vs legal person proprietor（股東共同出資）；公司類型包括 general partnership、simple limited partnership、partnership limited by shares、limited company（最常見）、one-person company、public company —— 差異主要在「股東責任範圍」。</div>
+    </div>
+  </div>
+
+  <div class="example">
+    <div class="head">2.5 Business Plan Basics</div>
+    <div class="body">
+      <div class="answer">
+        <strong>Definition：</strong> a written document describing what a new business plans to accomplish, targeting employees + investors/stakeholders.<br>
+        <strong>3 Types：</strong> Summary (10–15 pages，初期測試市場反應) / Full (25–35 pages，用於融資及營運藍圖) / Operational (40–100 pages，內部使用、給營運經理指引)。<br>
+        <strong>4 Basic Contents：</strong> Executive Summary（要最後寫，雖然排在最前面）、Section 1: The Business（含 feasibility analysis）、Section 2: Financial Forecasts、Section 3: Supporting Data。<br>
+        <strong>Mission vs Vision：</strong> Mission = 為什麼存在／想達成什麼（現在）；Vision = 想成為什麼樣子、想往哪裡去（未來）。
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= Ch3 ================= -->
+<section class="chapter" id="ch3">
+  <h2><span class="num">3</span>Chapter 3：Business Model Generation</h2>
+
+  <div class="example">
+    <div class="head">3.1 <span class="tag core">核心定義</span> Business Model vs Business Plan</div>
+    <div class="body">
+      <div class="q"><strong>Q：</strong>What is the difference between a business model and a business plan?</div>
+      <div class="answer">
+        <strong>English：</strong> A <em>business model</em> is the mechanism through which a company generates profit — it describes how an organization <em>creates, delivers and captures value</em>, and its positioning with suppliers/customers/partners. A <em>business plan</em> is a document presenting the company's strategy and expected financial performance, which <em>translates</em> the business model's positioning into concrete actions. The business model sits <em>at the center of</em> the business plan.<br><br>
+        <strong>中文：</strong>商業模式是公司「怎麼賺錢」的機制——描述組織如何創造、傳遞、獲取價值；商業計劃書則是呈現公司策略與預期財務表現的文件，把商業模式的定位轉化成具體行動。商業模式是商業計劃書的核心。
+      </div>
+    </div>
+  </div>
+
+  <div class="example">
+    <div class="head">3.2 <span class="tag important">常考</span> 6 Common Business Models</div>
+    <div class="body">
+      <table>
+        <tr><th>Model</th><th>How it works</th></tr>
+        <tr><td>Production 生產型</td><td>Sells what it produces 賣自己生產的產品/服務</td></tr>
+        <tr><td>Advertising 廣告型</td><td>Sells advertising space 賣廣告版位</td></tr>
+        <tr><td>Commission 佣金型</td><td>Intermediary, takes a cut per sale 中介，抽取每筆交易佣金</td></tr>
+        <tr><td>Subscription 訂閱型</td><td>Revenue from regular subscribers 定期訂閱費</td></tr>
+        <tr><td>Freemium 免費增值</td><td>Free version + paid version 免費版+付費進階版</td></tr>
+        <tr><td>Accessories 配件型</td><td>Core product cheap/free, profit on accessories 本體便宜/免費，靠配件賺錢</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="example">
+    <div class="head">3.3 <span class="tag core">核心重點</span> Business Model Canvas — 9 Building Blocks</div>
+    <div class="body">
+      <div class="q"><strong>Q：</strong>Name and explain the 9 building blocks of the Business Model Canvas (Osterwalder, 2015).</div>
+      <table>
+        <tr><th>Block</th><th>Key Questions</th></tr>
+        <tr><td><strong>Value Proposition</strong><br>價值主張</td><td>What value do we deliver? Which problem/need are we solving? 我們提供什麼價值？解決什麼問題？</td></tr>
+        <tr><td><strong>Customer Segments</strong><br>客戶群</td><td>For whom are we creating value? Who are our customers? 我們為誰創造價值？</td></tr>
+        <tr><td><strong>Channels</strong><br>通路</td><td>How do customers want to be reached? 顧客希望透過什麼管道被觸及？</td></tr>
+        <tr><td><strong>Customer Relationships</strong><br>顧客關係</td><td>What type of relationship does each segment expect? 每個客群期望什麼樣的關係？</td></tr>
+        <tr><td><strong>Revenue Streams</strong><br>收入來源</td><td>What are customers willing to pay for, and how? 顧客願意為什麼付費？怎麼付？</td></tr>
+        <tr><td><strong>Key Resources</strong><br>關鍵資源</td><td>What resources do our value propositions require? 價值主張需要什麼資源？</td></tr>
+        <tr><td><strong>Key Activities</strong><br>關鍵活動</td><td>What activities does our value proposition require? 需要做哪些關鍵活動？</td></tr>
+        <tr><td><strong>Key Partnerships</strong><br>關鍵合作夥伴</td><td>Who are our key partners/suppliers? 誰是我們的關鍵夥伴/供應商？</td></tr>
+        <tr><td><strong>Cost Structure</strong><br>成本結構</td><td>What are the most important/expensive costs? 最重要/最昂貴的成本是什麼？</td></tr>
+      </table>
+      <div class="tip"><strong>考試提醒：</strong> 九宮格的「位置」也可能被考（例如哪些屬於左側「效率導向」、哪些屬於右側「價值導向」），複習時建議練習畫一次空白九宮格並默寫每一格的問題。</div>
+    </div>
+  </div>
+</section>
+
+<section class="chapter" id="tips">
+  <h2><span class="num">★</span>考試提醒 Exam Tips</h2>
+  <div class="answer">
+    1. Part A（MCQ）多為定義型題目，關鍵字要背熟（efficiency vs effectiveness、entrepreneur vs manager、necessity vs opportunity 等）。<br>
+    2. Part B 常以真實公司（如 Apple）出 BMC 填空題，建議練習：給一間公司名字，30 秒內能說出它的 Value Proposition 和 Revenue Streams。<br>
+    3. Part C 為申論題，字數通常要求 ≥100 words，建議用「定義 + 為什麼相關/有挑戰 + 舉一個例子」的三段式寫法。<br>
+    4. 把 Ch1–Ch3 的所有「表格」都轉換成口訣或心智圖，比死記文字更容易在考場上回想。
+  </div>
+</section>
+
+<footer>
+  CISC3028 Entrepreneurship · Midterm Notes (Ch1–3) · 最後更新 2026-10 · 待補：Ch4–9、Exercises 01–07、Socrative 01–04
+</footer>
+
+</div>
+</body>
+</html>

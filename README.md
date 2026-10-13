@@ -1,6 +1,6 @@
 # 📚 Tutoring Content — 中學理科自學資源庫
 
-> **數學 · 物理 · 化學 · 英文 · CISC3012 AI** 自學筆記與模擬試卷  
+> **數學 · 物理 · 化學 · 英文 · CISC3012 AI · CISC3028 創業學** 自學筆記與模擬試卷  
 > 所有資源均以 **HTML 自包含檔案** 形式發佈，透過 GitHub Pages 即可在線預覽，無需安裝任何軟件。
 
 [![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Online-brightgreen)](https://howenghong.github.io/Tutoring-content/)
@@ -19,6 +19,7 @@
   - [英文（中一）](#-英文中一)
   - [CISC3012 人工智能（AI）](#cisc3012-人工智能ai)
   - [CISC3011 數位影像處理（DIP）](#️-cisc3011-數位影像處理dip)
+  - [CISC3028 創業學（Entrepreneurship）](#-cisc3028-創業學entrepreneurship)
 - [如何使用](#如何使用)
 - [教學建議](#教學建議)
 - [貢獻與回饋](#貢獻與回饋)
@@ -39,6 +40,7 @@
 | 化學 | 中三/中四 | 中英對照 | 結構與鍵合、MCQ 練習、結構化問題 |
 | 英文 | 中一 | 英文 | 模擬試卷（共三卷，含新版） |
 | CISC3012 | 大學 | 中英對照 | AI 模擬測驗、期中溫習筆記、考試速記 |
+| CISC3028 | 大學 | 中英對照 | 創業學期中溫習筆記（Ch1–3）、Past Paper 詳解；Ch4–9/Exercises/Socrative 待補 |
 
 所有內容皆為 **單一 HTML 檔案**，無需額外依賴，開箱即用。適合學生自學、教師課堂補充，或家長輔導使用。
 
@@ -55,6 +57,7 @@
 | `english/` | 英文（中一）；`f1_english_paper_*` 為新版，`f1_english_mock_paper_*` 為初版 |
 | `cisc3012/` | CISC3012 人工智能（AI） |
 | `cisc3011/` | CISC3011 數位影像處理（DIP）多頁式溫習站 |
+| `cisc3028/` | CISC3028 創業學（Entrepreneurship）期中溫習筆記與 Past Paper 詳解 |
 | `LICENSE` | 授權說明 |
 
 在線首頁：[🔗 總目錄](https://howenghong.github.io/Tutoring-content/)
@@ -151,6 +154,19 @@
 
 ---
 
+### 💼 CISC3028 創業學（Entrepreneurship）
+
+期中考範圍：**Ch1–9、Exercises 01–07、Socrative 01–04**。目前僅收到 L01–L03（Ch1–3）講義，故下列資源**暫時只覆蓋 Ch1–3**；Ch4–9、Exercises、Socrative 待補上傳相應講義/題目後再擴充。
+
+| 檔案 | 說明 | 預覽連結 |
+|------|------|----------|
+| `cisc3028/midterm_notes.html` | 期中溫習筆記（Ch1 創業/組織/管理、Ch2 創業準備、Ch3 商業模式生成），中英對照 | [🔗 預覽](https://howenghong.github.io/Tutoring-content/cisc3028/midterm_notes.html) |
+| `cisc3028/pastpaper.html` | Past Paper 逐題詳解（Part A MCQ、Part B Apple BMC 練習、Part C Essay），中英對照 | [🔗 預覽](https://howenghong.github.io/Tutoring-content/cisc3028/pastpaper.html) |
+
+> **⚠️ 待補事項**：Past Paper 中 Q9–Q18 因照片角度被裁切、選項不清楚，尚未收錄解答；Ch4–9、Exercises 01–07、Socrative 01–04 的內容尚未建立，需要上傳對應講義/題目後才會擴充，避免憑空猜測與真實授課內容不符。
+
+---
+
 ## 如何使用
 
 1. **在線預覽**：點擊上方表格中的「🔗 預覽」連結，即可在瀏覽器中直接打開對應的 HTML 頁面。
@@ -201,6 +217,7 @@
 
 | 日期 | 更新內容 |
 |------|----------|
+| 2026 年 10 月 | 新增 CISC3028 創業學系列：期中溫習筆記（Ch1–3）、Past Paper 詳解（Part A/B/C）；更新 README 與首頁導航 |
 | 2026 年 10 月 | 重新整理倉庫：檔案按科目分類至子資料夾，檔名統一為小寫英文；移除根目錄的舊檔名（舊連結失效）；備份版移至 `chemistry/archive/`；README 補上 Past Paper 詳解與英中術語對照的連結 |
 | 2026 年 7 月 | 新增 CISC3012 AI 系列：Mock Test 1-2、期中溫習筆記、考試速記；更新 README |
 | 2026 年 7 月 | 新增中一英文新版模擬卷（Paper 1-3）；更新 README |
