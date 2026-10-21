@@ -164,6 +164,8 @@
 | `cisc3028/exercises.html` | Exercise 01–07 複習（根據 UM Moodle Attempt Review 實際題目與正解整理），中英對照 | [🔗 預覽](https://howenghong.github.io/Tutoring-content/cisc3028/exercises.html) |
 | `cisc3028/socrative.html` | Socrative 01–04 課堂即時問答複習（Entrepreneur vs Manager；Bill Gross 創業成功五大因素；產業分析與定位；財務工具與籌資），中英對照 | [🔗 預覽](https://howenghong.github.io/Tutoring-content/cisc3028/socrative.html) |
 | `cisc3028/pastpaper.html` | Past Paper 逐題詳解（Part A MCQ、Part B Apple BMC 練習、Part C Essay），中英對照 | [🔗 預覽](https://howenghong.github.io/Tutoring-content/cisc3028/pastpaper.html) |
+| `cisc3028/quickreview.html` | 15 分鐘快速溫習（Ch1–9 精華、5 大陷阱、Part B／C 作答模板、10 題自測），中英對照 | [🔗 預覽](https://howenghong.github.io/Tutoring-content/cisc3028/quickreview.html) |
+| `cisc3028/mockpaper.html` | Mock Paper 模擬卷 2 套（各 20 題 MCQ + Part B BMC + Part C Essay，附中英答案解釋），仿 Past Paper 格式 | [🔗 預覽](https://howenghong.github.io/Tutoring-content/cisc3028/mockpaper.html) |
 
 > **⚠️ 待補事項**：Past Paper 中 Q9–Q18 因照片角度被裁切、選項不清楚，且目前沒有更清晰的版本可以補上，這部分解答無法提供。
 

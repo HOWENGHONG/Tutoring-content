@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CISC3028 Entrepreneurship 15 分鐘快速溫習</title>
+<style>
+  :root{
+    --bg:#f4f6fb; --card:#ffffff; --primary:#1e3a8a; --primary-light:#3b82f6;
+    --accent:#f59e0b; --green:#059669; --red:#dc2626; --text:#1f2937; --muted:#6b7280; --border:#e5e7eb;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang TC","Microsoft JhengHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.7;padding:20px;}
+  .container{max-width:1000px;margin:0 auto;}
+  header{background:linear-gradient(135deg,#1e3a8a,#3b82f6);color:#fff;padding:32px 28px;border-radius:16px;margin-bottom:24px;box-shadow:0 8px 24px rgba(30,58,138,.25);}
+  header h1{font-size:1.7rem;margin-bottom:8px;}
+  header p{opacity:.9;font-size:.95rem;}
+  header .badge{display:inline-block;background:rgba(255,255,255,.2);padding:4px 12px;border-radius:20px;font-size:.8rem;margin-top:10px;}
+  .notice{background:#fff7ed;border:1px solid #fdba74;border-left:5px solid var(--accent);border-radius:10px;padding:16px 20px;margin-bottom:24px;font-size:.9rem;}
+  .notice strong{color:#c2410c;}
+  .sidebar{position:fixed;top:0;left:0;height:100vh;width:260px;background:var(--card);border-right:1px solid var(--border);padding:72px 18px 24px;overflow-y:auto;z-index:100;transition:transform .25s ease;box-shadow:2px 0 14px rgba(0,0,0,.05);}
+  .sidebar.collapsed{transform:translateX(-100%);}
+  .sidebar h2{font-size:.95rem;color:var(--primary);margin-bottom:12px;line-height:1.4;}
+  .sidebar ul{list-style:none;display:flex;flex-direction:column;gap:3px;}
+  .sidebar a{display:block;color:var(--text);text-decoration:none;padding:8px 12px;border-radius:8px;font-size:.86rem;transition:.15s;}
+  .sidebar a:hover{background:#eff6ff;color:var(--primary);}
+  .sidebar-toggle{position:fixed;top:16px;left:16px;z-index:200;width:42px;height:42px;border-radius:10px;border:1px solid var(--border);background:var(--card);cursor:pointer;font-size:1.2rem;color:var(--primary);display:flex;align-items:center;justify-content:center;box-shadow:0 2px 10px rgba(0,0,0,.12);}
+  .page-wrap{margin-left:260px;transition:margin-left .25s ease;}
+  .page-wrap.full{margin-left:0;}
+  .chapter{background:var(--card);border-radius:14px;padding:26px;margin-bottom:28px;box-shadow:0 2px 12px rgba(0,0,0,.06);}
+  .chapter > h2{font-size:1.35rem;color:var(--primary);padding-bottom:12px;border-bottom:3px solid var(--primary-light);margin-bottom:20px;display:flex;align-items:center;gap:10px;}
+  .chapter > h2 .num{background:var(--primary);color:#fff;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;}
+  .mcq{border:1px solid var(--border);border-radius:10px;margin-bottom:14px;overflow:hidden;}
+  .mcq .q{background:#f8fafc;padding:10px 16px;font-weight:600;color:var(--primary);font-size:.92rem;}
+  .mcq .opts{list-style:none;margin:0;padding:10px 16px;}
+  .mcq .opts li{padding:7px 12px;border-radius:7px;margin-bottom:5px;font-size:.87rem;background:#fff;border:1px solid var(--border);}
+  .mcq .opts li.correct{background:#f0fdf4;color:var(--green);font-weight:600;border-color:#bbf7d0;}
+  .mcq .opts li .letter{font-weight:700;margin-right:4px;}
+  .mcq .ans{background:#ecfdf5;border-top:1px solid #a7f3d0;padding:10px 16px;font-size:.88rem;}
+  .mcq .ans b{color:var(--green);}
+  .missing{background:#fef2f2;border:1px dashed var(--red);border-radius:10px;padding:14px 18px;margin-bottom:14px;font-size:.88rem;}
+  .missing b{color:var(--red);}
+  .example{border:1px solid var(--border);border-radius:12px;margin-bottom:20px;overflow:hidden;}
+  .example .head{background:#f8fafc;padding:12px 18px;font-weight:600;color:var(--primary);border-bottom:1px solid var(--border);font-size:.98rem;}
+  .example .body{padding:16px 18px;}
+  .answer{background:#eff6ff;border-left:4px solid var(--primary-light);padding:10px 14px;border-radius:0 8px 8px 0;font-size:.9rem;margin-bottom:10px;}
+  .answer strong{color:var(--primary);}
+  .answer em{color:var(--primary);font-style:normal;font-weight:600;}
+  table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.85rem;}
+  th,td{border:1px solid var(--border);padding:8px 10px;text-align:left;}
+  th{background:#f1f5f9;color:var(--primary);font-weight:600;}
+  tr:nth-child(even){background:#fafbfc;}
+  .tip{background:#fef2f2;border:1px dashed var(--red);padding:12px 16px;border-radius:8px;font-size:.88rem;margin:14px 0;}
+  .tip strong{color:var(--red);}
+  ul,ol{margin-left:20px;margin-bottom:10px;}
+  li{margin-bottom:4px;}
+  footer{text-align:center;color:var(--muted);font-size:.8rem;padding:20px;}
+  @media(max-width:860px){.sidebar{width:82vw;max-width:300px;box-shadow:4px 0 24px rgba(0,0,0,.18);}.page-wrap{margin-left:0 !important;}}
+  @media(max-width:600px){body{padding:10px;}header{padding:22px 18px;}header h1{font-size:1.3rem;}.chapter{padding:18px;}table{font-size:.78rem;}}
+  .zh{color:var(--muted);}
+
+  .timebox{display:inline-block;background:var(--accent);color:#fff;font-size:.78rem;font-weight:700;padding:2px 12px;border-radius:14px;margin-left:auto;white-space:nowrap;}
+  .chapter > h2{flex-wrap:wrap;}
+  .kp{list-style:none;margin:0 0 10px;padding:0;}
+  .kp li{background:#f8fafc;border:1px solid var(--border);border-left:4px solid var(--primary-light);border-radius:8px;padding:8px 12px;margin-bottom:6px;font-size:.88rem;}
+  .kp li b{color:var(--primary);}
+  .kp li .zh{display:block;font-size:.84rem;}
+  .trap{background:#fef2f2;border:1px dashed var(--red);border-radius:10px;padding:10px 14px;margin-bottom:8px;font-size:.88rem;}
+  .trap b{color:var(--red);}
+  .mnemonic{background:#ecfdf5;border:1px solid #a7f3d0;border-radius:10px;padding:10px 14px;margin-bottom:8px;font-size:.88rem;}
+  .mnemonic b{color:var(--green);}
+  details.sq{border:1px solid var(--border);border-radius:10px;margin-bottom:8px;overflow:hidden;}
+  details.sq summary{cursor:pointer;padding:10px 14px;background:#f8fafc;font-size:.88rem;font-weight:600;color:var(--primary);}
+  details.sq div{padding:10px 14px;font-size:.88rem;background:#ecfdf5;}
+  .plan{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin-bottom:6px;}
+  .plan div{background:#eff6ff;border:1px solid #bfdbfe;border-radius:10px;padding:8px 12px;font-size:.84rem;}
+  .plan div b{display:block;color:var(--primary);}
+</style>
+</head>
+<body>
+<button class="sidebar-toggle" id="sidebarToggle" aria-label="切換導航 Toggle navigation">☰</button>
+<nav class="sidebar" id="sidebar">
+  <h2>📑 快速導航<br>Quick Navigation</h2>
+  <ul>
+    <li><a href="#plan">0 時間分配與考試結構</a></li>
+    <li><a href="#traps">! 5 大陷阱</a></li>
+    <li><a href="#c13">Ch1–3 重點</a></li>
+    <li><a href="#c46">Ch4–6 重點</a></li>
+    <li><a href="#c79">Ch7–9 重點</a></li>
+    <li><a href="#partb">Part B BMC 模板</a></li>
+    <li><a href="#partc">Part C Essay 模板</a></li>
+    <li><a href="#quiz">10 題自測</a></li>
+    <li><a href="mockpaper.html">🧪 Mock Paper 模擬卷</a></li>
+    <li><a href="midterm_notes.html">📖 期中溫習筆記（Ch1–9）</a></li>
+    <li><a href="exercises.html">📝 Exercises 01–07 複習</a></li>
+    <li><a href="socrative.html">🎤 Socrative 01–04 複習</a></li>
+    <li><a href="pastpaper.html">📄 Past Paper 詳解</a></li>
+  </ul>
+</nav>
+<div class="page-wrap" id="pageWrap">
+<div class="container">
+
+<header>
+  <h1>⚡ CISC3028 Entrepreneurship<br>15 分鐘快速溫習 15-Minute Crash Review</h1>
+  <p>中英雙語 · Ch1–9 精華 · 陷阱題 · Part B／C 模板 · 10 題自測</p>
+  <span class="badge">已看完 Past Paper → 現在用這頁補完其餘範圍</span>
+</header>
+
+<div class="notice">
+  <strong>⏱ 用法：</strong>照 0–15 分鐘的順序由上往下讀即可。這頁只放「最容易考、最容易錯」的內容；完整解釋請看 <a href="midterm_notes.html">期中溫習筆記</a>。
+</div>
+
+<section class="chapter" id="plan">
+  <h2><span class="num">0</span>先看考試怎麼考 + 時間分配<span class="timebox">⏱ 1 分鐘</span></h2>
+  <div class="example"><div class="body">
+    
+    <div class="plan">
+      <div><b>0–1′</b>考試結構與 5 大陷阱</div>
+      <div><b>1–4′</b>Ch1–3</div>
+      <div><b>4–7′</b>Ch4–6</div>
+      <div><b>7–10′</b>Ch7–9</div>
+      <div><b>10–12′</b>Part B：BMC 模板</div>
+      <div><b>12–13′</b>Part C：作文模板</div>
+      <div><b>13–15′</b>10 題自測</div>
+    </div>
+    <ul class="kp">
+      <li><b>Part A MCQ</b>（約 30 題）：多為「定義型」題目，關鍵字比長篇理解重要。 <span class="zh">Part A is mostly definition-based — know the keywords.</span></li>
+      <li><b>Part B</b>：給一間真實公司（Past Paper 是 Apple），填 BMC 九宮格＋講優缺點，≥120 words。</li>
+      <li><b>Part C</b>：選兩個概念討論，≥100 words，用「定義＋為何相關＋例子」三段式。</li>
+      <li><b>範圍</b>：Ch1–9、Exercises 01–07、Socrative 01–04。</li>
+    </ul>
+  </div></div>
+</section>
+
+<section class="chapter" id="traps">
+  <h2><span class="num">!</span>5 大陷阱（最常見丟分位）<span class="timebox">⏱ 1 分鐘</span></h2>
+  <div class="example"><div class="body">
+    
+    <div class="trap"><b>① Efficient vs Effective：</b>efficient＝<em>把事情做對</em>（省資源、省成本）；effective＝<em>做對的事情</em>（達成目標）。自動電話選單＝efficient 但 not effective。</div>
+    <div class="trap"><b>② Financial planning：</b>是為了跟 stakeholders 溝通 <b>finances</b>（財務狀況），<b>不是 profits</b>（利潤）。</div>
+    <div class="trap"><b>③ Breakeven point：</b>＝revenue 足以涵蓋 expenses（毛利＝固定營運費用），<b>不是「開始獲利」</b>。公式：Total operating expense ÷ Gross margin %。</div>
+    <div class="trap"><b>④ Organizational life cycle：</b>Introduction → Early Growth → Continuous Growth → Maturity → Decline，<b>沒有 Reinvention</b>。（Reinvention 只出現在「產業」生命週期。）</div>
+    <div class="trap"><b>⑤ 想法 ≠ 機會；Copyright 保護形式，不保護想法：</b>idea＝念頭；opportunity＝有利情勢（要有吸引力、時機恰當、持久）。Discoveries（發現）不可申請專利；copyright 自動生效、不需註冊。</div>
+    
+  </div></div>
+</section>
+
+<section class="chapter" id="c13">
+  <h2><span class="num">1–3</span>Ch1–Ch3：創業者、管理、商業模式<span class="timebox">⏱ 3 分鐘</span></h2>
+  <div class="example"><div class="body">
+    
+    <h3 style="font-size:.95rem;color:var(--primary);margin-bottom:6px;">Ch1 Entrepreneurship, Organization &amp; Management</h3>
+    <ul class="kp">
+      <li><b>Entrepreneur</b> 自己創業；<b>Intrapreneur</b> 在既有組織內，用組織資源把握機會。 <span class="zh">企業家＝外部創業；內部創業者＝公司裡面創業。</span></li>
+      <li><b>3 種組織：</b>For-profit 賺錢／Nonprofit 提供服務（醫院、大學）／Mutual-benefit 幫成員（工會、政黨、俱樂部）。</li>
+      <li><b>POLC：</b>Planning 規劃、Organizing 組織、Leading 領導、Controlling 控制。</li>
+      <li><b>Entrepreneur vs Manager：</b>企業家＝owner、承擔風險、利潤不確定、決定生產什麼；經理＝employee、不承擔風險、固定薪水、執行計畫。 <span class="zh">企業家「從 0 到 1」，經理「維持與成長」。</span></li>
+      <li><b>Necessity</b>（失業被迫創業）vs <b>Opportunity</b>（出於強烈渴望）。</li>
+      <li><b>企業家三觀點：</b>Risk bearer 風險承擔者／Organizer 組織者／Innovator 創新者（新產品、新生產方法、新市場、新原料來源、新組織形式）。</li>
+    </ul>
+    <h3 style="font-size:.95rem;color:var(--primary);margin:10px 0 6px;">Ch2 Are You Ready For It?</h3>
+    <ul class="kp">
+      <li><b>迷思 vs 現實：</b>創業工時更長；永遠有競爭；費用可扣除但仍要繳稅；客戶就是老闆；仍有枯燥工作。</li>
+      <li><b>6 種入行方式：</b>Start new／Buy existing／Franchise（權利金、自由度低）／Home-based／Nonprofit／Online。</li>
+      <li><b>法律形式：</b>Sole proprietorship（無限責任）／Partnership／Corporation（<b>雙重課稅</b>，有限責任）／LLC（有限責任、無雙重課稅）。</li>
+      <li><b>Business plan：</b>Summary 10–15 頁／Full 25–35 頁／Operational 40–100 頁；<b>Executive summary 最後寫</b>但最重要。Mission＝為何存在（現在）；Vision＝想成為什麼（未來）。</li>
+    </ul>
+    <h3 style="font-size:.95rem;color:var(--primary);margin:10px 0 6px;">Ch3 Business Model Generation</h3>
+    <ul class="kp">
+      <li><b>Business model</b>＝如何 <em>創造、傳遞、獲取</em> 價值；<b>Business plan</b>＝呈現策略與預期財務表現的文件。</li>
+      <li><b>6 種模式：</b>Production 賣自家產品／Advertising 賣廣告版位／Commission 中介抽成／Subscription 定期訂閱／Freemium 免費版＋付費版／Accessories 本體便宜、靠配件賺錢。</li>
+      <li><b>BMC 9 格：</b>Value Proposition、Customer Segments、Channels、Customer Relationships、Revenue Streams、Key Resources、Key Activities、Key Partnerships、Cost Structure。</li>
+    </ul>
+  </div></div>
+</section>
+
+<section class="chapter" id="c46">
+  <h2><span class="num">4–6</span>Ch4–Ch6：機會、發展點子、行銷<span class="timebox">⏱ 3 分鐘</span></h2>
+  <div class="example"><div class="body">
+    
+    <h3 style="font-size:.95rem;color:var(--primary);margin-bottom:6px;">Ch4 Ideas &amp; Opportunities</h3>
+    <ul class="kp">
+      <li><b>Idea</b> 念頭／<b>Creativity</b> 產生新穎想法的過程／<b>Invention</b> 創造全新事物／<b>Innovation</b> 做新的事創造價值／<b>Opportunity</b> 創造需求的有利情勢。</li>
+      <li><b>創意 5 步：</b>Preparation → Incubation → Insight → Evaluation → Elaboration。</li>
+      <li><b>Brainstorming 4 規則：</b>不批評、鼓勵天馬行空、重數量與速度、鼓勵接力延伸（leapfrogging）。</li>
+      <li><b>點子來源：</b>Focus group、圖書館／網路研究、Customer advisory board、Day-in-the-life（Intuit）。</li>
+      <li><b>好機會＝</b>Attractive 有吸引力＋Timely 時機＋Durable 持久＋為用戶創造價值。</li>
+      <li><b>辨識機會 3 法：</b>Observing trends（經濟／社會／科技／政治，例 Hulu＝科技進步）／Solving a problem／Finding gaps（例 Daisy Rock Guitars）。</li>
+    </ul>
+    <h3 style="font-size:.95rem;color:var(--primary);margin:10px 0 6px;">Ch5 Working Your Business Idea</h3>
+    <ul class="kp">
+      <li><b>6 步：</b>市場需求 → 個人背景 → 產業 → 目標市場 → 競爭對手 → 定價。</li>
+      <li><b>產業生命週期：</b>Rapid growth → Maturity → Slow/rapid decline → Reinvention。</li>
+      <li><b>定價是持續的努力</b>（市場與需求會變）；方式含 market price、markup on cost、<b>bundling</b>（買多項享優惠）、promotional pricing 等。</li>
+    </ul>
+    <h3 style="font-size:.95rem;color:var(--primary);margin:10px 0 6px;">Ch6 Marketing Your Business</h3>
+    <ul class="kp">
+      <li><b>Brand</b>＝企業形象；<b>行銷第一步＝建立品牌</b>。<b>Positioning</b>＝強調兩三項特質，與對手區隔（Nike "Just do it"）。</li>
+      <li><b>Feature vs Benefit：</b>特徵＝能做什麼；利益＝對顧客的意義 → 要賣「利益」。</li>
+      <li><b>Logo</b> 門面符號／<b>Slogan</b> 跟產品有關、靈活／<b>Tagline</b> 跟企業有關、持久。</li>
+      <li><b>4P：</b>Product、Price、Place、Promotion。<b>直銷優勢：</b>掌控從源頭到終端的流程。</li>
+    </ul>
+  </div></div>
+</section>
+
+<section class="chapter" id="c79">
+  <h2><span class="num">7–9</span>Ch7–Ch9：財務、知識產權、成長<span class="timebox">⏱ 3 分鐘</span></h2>
+  <div class="example"><div class="body">
+    
+    <h3 style="font-size:.95rem;color:var(--primary);margin-bottom:6px;">Ch7 Financing Your Business</h3>
+    <ul class="kp">
+      <li><b>財務計劃 5 要素：</b>Startup funds（含 6–18 個月週轉金）、Salaries &amp; wages、Fixed operating expenses、Sales forecast（含 gross margin）、Cash receipts &amp; disbursements。</li>
+      <li><b>3 份報表：</b>Income statement＝利潤／虧損；Balance sheet＝資產、負債、權益；Cash flow statement＝資金進出（與 budget 相反）。</li>
+      <li><b>Equity</b>（儲蓄、家人投資、合夥人資本、保留利潤）vs <b>Debt</b>（銀行貸款、信用卡）；Angel investor＝投資有潛力公司的個人；Crowdfunding＝向大量人募集小額資金；<b>Grants 主要給 nonprofit</b>。</li>
+      <li><b>Six C's of Credit：</b>Character、Capacity、Capital、Collateral、Conditions、Cash flow。Benchmarking＝與產業標準比較。</li>
+    </ul>
+    <h3 style="font-size:.95rem;color:var(--primary);margin:10px 0 6px;">Ch8 Intellectual Property</h3>
+    <ul class="kp">
+      <li><b>Copyright：</b>保護作品「形式」；不保護 ideas／methods／discoveries／新聞／政治演說／法律；<b>自動生效</b>；團隊作品共同擁有；一般死後 50 年，匿名作品發表後 50 年。</li>
+      <li><b>Patent：</b>發明專利 20 年／實用新型 10 年／外觀設計 25 年；有效期內可轉讓；<b>發現不可專利</b>；USB 插頭這類只具功能的設計不能登記外觀設計；business method patent＝Amazon 一鍵下單。</li>
+      <li><b>Trademark</b> 保護區別商品的標誌（含聲音、顏色）；<b>Trade secret</b> 不需註冊，靠 need-to-know 保密（副總離職複製行銷計劃＝商業機密糾紛）。</li>
+    </ul>
+    <h3 style="font-size:.95rem;color:var(--primary);margin:10px 0 6px;">Ch9 Challenges of Growth</h3>
+    <ul class="kp">
+      <li><b>準備成長：</b>理解成長本質、堅守核心策略、為成長做規劃。</li>
+      <li><b>5 階段：</b>Introduction → Early Growth（要 work <em>on</em> the business）→ Continuous Growth → Maturity（成長停滯、重心轉效率）→ Decline（取決於領導力與適應力）。</li>
+      <li><b>成長原因：</b>Economies of scale（產量↑、單位成本↓）、scope、市場領導地位、吸引留住人才（晉升機會）。</li>
+      <li><b>日常挑戰：</b>Cash flow、Price stability、Quality control、Capital constraints。</li>
+      <li><b>Internal</b>（漸進可控、保留文化；較慢）vs <b>External</b>（併購、授權、策略聯盟／合資、加盟；快但有文化衝突）。</li>
+    </ul>
+  </div></div>
+</section>
+
+<section class="chapter" id="partb">
+  <h2><span class="num">B</span>Part B：BMC 30 秒作答模板<span class="timebox">⏱ 2 分鐘</span></h2>
+  <div class="example"><div class="body">
+    
+    <div class="mnemonic"><b>步驟：</b>① 先講屬於哪種 business model（6 選 1）→ ② 九格各寫一句 → ③ 優點一句＋缺點一句（湊到 120 字）。</div>
+    <ul class="kp">
+      <li><b>Value Proposition：</b>解決什麼問題？提供什麼獨特利益？</li>
+      <li><b>Customer Segments：</b>賣給誰？ <b>Channels：</b>怎麼接觸／交付？ <b>Customer Relationships：</b>自助？客服？社群？</li>
+      <li><b>Revenue Streams：</b>誰為什麼付費、怎麼付？（硬體銷售？月費？佣金？）</li>
+      <li><b>Key Resources：</b>品牌、技術、專利、人才、通路。 <b>Key Activities：</b>研發、生產、行銷、平台維運。 <b>Key Partnerships：</b>供應商、平台、合作夥伴。 <b>Cost Structure：</b>最大宗的成本是什麼？</li>
+      <li><b>速配：</b>Apple＝Production＋Accessories＋服務訂閱；Netflix＝Subscription；Uber＝Commission；YouTube／Google＝Advertising；Spotify＝Freemium。</li>
+      <li><b>優點寫法：</b>鎖定效應／經常性收入／網絡效應／輕資產。 <b>缺點寫法：</b>依賴單一產品或供應商／成本高／法規風險／競爭激烈。</li>
+    </ul>
+    <div class="tip"><strong>練習：</strong>想想看，到 <a href="mockpaper.html#m1b">Mock 1 Part B（Netflix）</a> 和 <a href="mockpaper.html#m2b">Mock 2 Part B（Uber）</a> 對照範例答案。</div>
+    
+  </div></div>
+</section>
+
+<section class="chapter" id="partc">
+  <h2><span class="num">C</span>Part C：Essay 三段式<span class="timebox">⏱ 1 分鐘</span></h2>
+  <div class="example"><div class="body">
+    
+    <div class="mnemonic"><b>公式：</b>① <b>Define</b> 這個概念是什麼 → ② <b>Why</b> 為什麼對我更相關／更有挑戰／是新觀念 → ③ <b>Example</b> 一個具體例子。兩個概念加起來 ≥100 words。</div>
+    <ul class="kp">
+      <li><b>安全選題（定義清楚、容易舉例）：</b>Efficient vs Effective／Necessity vs Opportunity entrepreneur／Idea vs Opportunity／Feature vs Benefit／Breakeven analysis／Economies of scale。</li>
+      <li><b>句型：</b>"Before this course, I thought… I learned that… For example, …"</li>
+      <li><b>中文也行嗎？</b>建議用英文作答，並按老師要求調整語言。</li>
+    </ul>
+  </div></div>
+</section>
+
+<section class="chapter" id="quiz">
+  <h2><span class="num">✓</span>10 題自測（先想答案，再點開）<span class="timebox">⏱ 2 分鐘</span></h2>
+  <div class="example"><div class="body">
+    <details class="sq"><summary>1. Efficient 與 Effective 的分別？</summary><div>Efficient＝doing things right（省資源）；Effective＝doing the right things（達成目標）。</div></details>
+<details class="sq"><summary>2. 哪種法律形式有雙重課稅？</summary><div>Corporation：公司先被課稅，股東領股息再被課稅。</div></details>
+<details class="sq"><summary>3. BMC 哪格問「我們為誰創造價值？」</summary><div>Customer Segments（客戶群）。</div></details>
+<details class="sq"><summary>4. 創意過程五步驟？</summary><div>Preparation → Incubation → Insight → Evaluation → Elaboration。</div></details>
+<details class="sq"><summary>5. 辨識機會的三種方式？</summary><div>Observing trends、Solving a problem、Finding gaps in the marketplace。</div></details>
+<details class="sq"><summary>6. Feature 和 Benefit 的分別？</summary><div>Feature＝產品能做什麼；Benefit＝對顧客有什麼意義（要賣 benefit）。</div></details>
+<details class="sq"><summary>7. Breakeven sales 公式？</summary><div>Total operating expense ÷ Gross margin %；意義＝revenue 足以涵蓋 expenses。</div></details>
+<details class="sq"><summary>8. Equity 與 Debt 各舉兩例？</summary><div>Equity：個人儲蓄、合夥人資本、保留利潤；Debt：銀行貸款、信用卡。</div></details>
+<details class="sq"><summary>9. Copyright 要註冊嗎？保護什麼？</summary><div>不用，自動生效；保護作品的「形式」，不保護想法、方法、發現。</div></details>
+<details class="sq"><summary>10. Organizational life cycle 五階段？有 Reinvention 嗎？</summary><div>Introduction → Early Growth → Continuous Growth → Maturity → Decline；沒有 Reinvention。</div></details>
+    <div class="tip"><strong>下一步：</strong>如果還有時間，直接做 <a href="mockpaper.html">Mock Paper 1–2</a>（共 40 題），答錯的題目回到上面對應章節再看。</div>
+  </div></div>
+</section>
+
+<footer>
+  CISC3028 Entrepreneurship · 15 分鐘快速溫習 · 最後更新 2026-10
+</footer>
+
+</div>
+</div>
+<script>
+(function(){
+  var sidebar=document.getElementById('sidebar');
+  var toggle=document.getElementById('sidebarToggle');
+  var wrap=document.getElementById('pageWrap');
+  function isMobile(){return window.innerWidth<=860;}
+  function setState(hidden){
+    sidebar.classList.toggle('collapsed',hidden);
+    wrap.classList.toggle('full',hidden||isMobile());
+    try{localStorage.setItem('cisc3028_sidebar_hidden',hidden?'1':'0');}catch(e){}
+  }
+  var saved=null;
+  try{saved=localStorage.getItem('cisc3028_sidebar_hidden');}catch(e){}
+  setState(isMobile() ? (saved===null ? true : saved==='1') : saved==='1');
+  toggle.addEventListener('click',function(){
+    setState(!sidebar.classList.contains('collapsed'));
+  });
+  sidebar.addEventListener('click',function(e){
+    if(e.target.tagName==='A' && isMobile()){ setState(true); }
+  });
+  window.addEventListener('resize',function(){
+    wrap.classList.toggle('full', sidebar.classList.contains('collapsed') || isMobile());
+  });
+})();
+</script>
+</body>
+</html>

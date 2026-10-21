@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CISC3028 Entrepreneurship Mock Paper 模擬卷</title>
+<style>
+  :root{
+    --bg:#f4f6fb; --card:#ffffff; --primary:#1e3a8a; --primary-light:#3b82f6;
+    --accent:#f59e0b; --green:#059669; --red:#dc2626; --text:#1f2937; --muted:#6b7280; --border:#e5e7eb;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang TC","Microsoft JhengHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.7;padding:20px;}
+  .container{max-width:1000px;margin:0 auto;}
+  header{background:linear-gradient(135deg,#1e3a8a,#3b82f6);color:#fff;padding:32px 28px;border-radius:16px;margin-bottom:24px;box-shadow:0 8px 24px rgba(30,58,138,.25);}
+  header h1{font-size:1.7rem;margin-bottom:8px;}
+  header p{opacity:.9;font-size:.95rem;}
+  header .badge{display:inline-block;background:rgba(255,255,255,.2);padding:4px 12px;border-radius:20px;font-size:.8rem;margin-top:10px;}
+  .notice{background:#fff7ed;border:1px solid #fdba74;border-left:5px solid var(--accent);border-radius:10px;padding:16px 20px;margin-bottom:24px;font-size:.9rem;}
+  .notice strong{color:#c2410c;}
+  .sidebar{position:fixed;top:0;left:0;height:100vh;width:260px;background:var(--card);border-right:1px solid var(--border);padding:72px 18px 24px;overflow-y:auto;z-index:100;transition:transform .25s ease;box-shadow:2px 0 14px rgba(0,0,0,.05);}
+  .sidebar.collapsed{transform:translateX(-100%);}
+  .sidebar h2{font-size:.95rem;color:var(--primary);margin-bottom:12px;line-height:1.4;}
+  .sidebar ul{list-style:none;display:flex;flex-direction:column;gap:3px;}
+  .sidebar a{display:block;color:var(--text);text-decoration:none;padding:8px 12px;border-radius:8px;font-size:.86rem;transition:.15s;}
+  .sidebar a:hover{background:#eff6ff;color:var(--primary);}
+  .sidebar-toggle{position:fixed;top:16px;left:16px;z-index:200;width:42px;height:42px;border-radius:10px;border:1px solid var(--border);background:var(--card);cursor:pointer;font-size:1.2rem;color:var(--primary);display:flex;align-items:center;justify-content:center;box-shadow:0 2px 10px rgba(0,0,0,.12);}
+  .page-wrap{margin-left:260px;transition:margin-left .25s ease;}
+  .page-wrap.full{margin-left:0;}
+  .chapter{background:var(--card);border-radius:14px;padding:26px;margin-bottom:28px;box-shadow:0 2px 12px rgba(0,0,0,.06);}
+  .chapter > h2{font-size:1.35rem;color:var(--primary);padding-bottom:12px;border-bottom:3px solid var(--primary-light);margin-bottom:20px;display:flex;align-items:center;gap:10px;}
+  .chapter > h2 .num{background:var(--primary);color:#fff;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;}
+  .mcq{border:1px solid var(--border);border-radius:10px;margin-bottom:14px;overflow:hidden;}
+  .mcq .q{background:#f8fafc;padding:10px 16px;font-weight:600;color:var(--primary);font-size:.92rem;}
+  .mcq .opts{list-style:none;margin:0;padding:10px 16px;}
+  .mcq .opts li{padding:7px 12px;border-radius:7px;margin-bottom:5px;font-size:.87rem;background:#fff;border:1px solid var(--border);}
+  .mcq .opts li.correct{background:#f0fdf4;color:var(--green);font-weight:600;border-color:#bbf7d0;}
+  .mcq .opts li .letter{font-weight:700;margin-right:4px;}
+  .mcq .ans{background:#ecfdf5;border-top:1px solid #a7f3d0;padding:10px 16px;font-size:.88rem;}
+  .mcq .ans b{color:var(--green);}
+  .missing{background:#fef2f2;border:1px dashed var(--red);border-radius:10px;padding:14px 18px;margin-bottom:14px;font-size:.88rem;}
+  .missing b{color:var(--red);}
+  .example{border:1px solid var(--border);border-radius:12px;margin-bottom:20px;overflow:hidden;}
+  .example .head{background:#f8fafc;padding:12px 18px;font-weight:600;color:var(--primary);border-bottom:1px solid var(--border);font-size:.98rem;}
+  .example .body{padding:16px 18px;}
+  .answer{background:#eff6ff;border-left:4px solid var(--primary-light);padding:10px 14px;border-radius:0 8px 8px 0;font-size:.9rem;margin-bottom:10px;}
+  .answer strong{color:var(--primary);}
+  .answer em{color:var(--primary);font-style:normal;font-weight:600;}
+  table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.85rem;}
+  th,td{border:1px solid var(--border);padding:8px 10px;text-align:left;}
+  th{background:#f1f5f9;color:var(--primary);font-weight:600;}
+  tr:nth-child(even){background:#fafbfc;}
+  .tip{background:#fef2f2;border:1px dashed var(--red);padding:12px 16px;border-radius:8px;font-size:.88rem;margin:14px 0;}
+  .tip strong{color:var(--red);}
+  ul,ol{margin-left:20px;margin-bottom:10px;}
+  li{margin-bottom:4px;}
+  footer{text-align:center;color:var(--muted);font-size:.8rem;padding:20px;}
+  @media(max-width:860px){.sidebar{width:82vw;max-width:300px;box-shadow:4px 0 24px rgba(0,0,0,.18);}.page-wrap{margin-left:0 !important;}}
+  @media(max-width:600px){body{padding:10px;}header{padding:22px 18px;}header h1{font-size:1.3rem;}.chapter{padding:18px;}table{font-size:.78rem;}}
+  .zh{color:var(--muted);}
+
+  .tag{display:inline-block;background:#e0e7ff;color:var(--primary);font-size:.7rem;padding:1px 8px;border-radius:10px;margin-left:6px;font-weight:600;vertical-align:middle;}
+  details.ansbox{border-top:1px solid var(--border);}
+  details.ansbox summary{cursor:pointer;padding:9px 16px;font-size:.85rem;color:var(--primary-light);font-weight:600;list-style:none;}
+  details.ansbox summary::-webkit-details-marker{display:none;}
+  details.ansbox[open] summary{display:none;}
+  details.ansbox .ans{border-top:none;}
+  .meta{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;font-size:.84rem;}
+  .meta span{background:#eff6ff;border:1px solid #bfdbfe;color:var(--primary);padding:3px 12px;border-radius:14px;}
+  .mcq:not(.revealed) .opts li.correct{background:#fff;color:inherit;font-weight:400;border-color:var(--border);}
+  .mcq:not(.revealed) .chk{display:none;}
+  .toolbar{margin:0 0 16px;display:flex;gap:8px;flex-wrap:wrap;}
+  .toolbar button{border:1px solid var(--border);background:var(--card);color:var(--primary);padding:6px 14px;border-radius:8px;font-size:.84rem;cursor:pointer;}
+  .toolbar button:hover{background:#eff6ff;}
+</style>
+</head>
+<body>
+<button class="sidebar-toggle" id="sidebarToggle" aria-label="切換導航 Toggle navigation">☰</button>
+<nav class="sidebar" id="sidebar">
+  <h2>📑 快速導航<br>Quick Navigation</h2>
+  <ul>
+    <li><a href="#m1">Mock 1：Part A MCQ</a></li>
+    <li><a href="#m1b">Mock 1：Part B Netflix BMC</a></li>
+    <li><a href="#m1c">Mock 1：Part C Essay</a></li>
+    <li><a href="#m2">Mock 2：Part A MCQ</a></li>
+    <li><a href="#m2b">Mock 2：Part B Uber BMC</a></li>
+    <li><a href="#m2c">Mock 2：Part C Essay</a></li>
+    <li><a href="quickreview.html">⚡ 15 分鐘快速溫習</a></li>
+    <li><a href="midterm_notes.html">📖 期中溫習筆記（Ch1–9）</a></li>
+    <li><a href="exercises.html">📝 Exercises 01–07 複習</a></li>
+    <li><a href="socrative.html">🎤 Socrative 01–04 複習</a></li>
+    <li><a href="pastpaper.html">📄 Past Paper 詳解</a></li>
+  </ul>
+</nav>
+<div class="page-wrap" id="pageWrap">
+<div class="container">
+
+<header>
+  <h1>🧪 CISC3028 Entrepreneurship<br>Mock Paper 模擬卷（附中英答案解釋）</h1>
+  <p>仿 Past Paper 格式 · Part A MCQ + Part B BMC + Part C Essay · 共 2 套</p>
+  <span class="badge">最後衝刺用 · 題目依 Ch1–9 筆記原創</span>
+</header>
+
+<div class="notice">
+  <strong>📝 使用方式：</strong>每套 Part A 有 20 題，先自己作答，再按「顯示答案與解釋」核對。<strong>建議計時：</strong>Part A 15 分鐘、Part B 約 10 分鐘、Part C 約 8 分鐘。答錯的題目請回到對應章節（題目右上角有 Ch 標籤）或 <a href="quickreview.html">⚡ 15 分鐘快速溫習</a> 再看一次。<br>
+  <strong>⚠️ 說明：</strong>這些是根據你的筆記與 Past Paper 出題風格新編的模擬題，不是真實試題；答案全部對照 <a href="midterm_notes.html">期中溫習筆記</a> 的內容。
+</div>
+
+<!-- ================= Mock 1 Part A ================= -->
+<section class="chapter" id="m1">
+  <h2><span class="num">1A</span>Mock Paper 1 — Part A：Multiple Choice（20 題，每題 1 分）</h2>
+  <div class="meta"><span>⏱ 建議時間 Suggested time：15 分鐘</span><span>🎯 20 分滿分</span><span>📚 覆蓋 Ch1–9</span></div>
+  <div class="toolbar"><button type="button" data-open="m1">展開本組全部答案 Show all</button><button type="button" data-close="m1">收起 Hide all</button></div>
+  <div class="mcq">
+    <div class="q">1. An intrapreneur is best described as someone who… <span class="zh">內部創業者（intrapreneur）最準確的描述是：</span> <span class="tag">Ch1</span></div>
+    <ul class="opts">
+      <li><span class="letter">A.</span> owns and runs a small business independently <span class="zh">獨立擁有並經營一間小型企業</span></li>
+      <li><span class="letter">B.</span> invests money in other people&#x27;s startups <span class="zh">投資別人的新創公司</span></li>
+      <li class="correct"><span class="letter">C.</span> <span class="chk">✅ </span>works inside an existing organization and uses its resources to pursue a new opportunity <span class="zh">在既有組織內部，運用組織資源去把握新機會</span></li>
+      <li><span class="letter">D.</span> maintains daily operations without taking initiative <span class="zh">維持日常營運，不主動開拓</span></li>
+    </ul>
+    <details class="ansbox"><summary>顯示答案與解釋 Show answer</summary>
+    <div class="ans"><b>答案 Answer：C</b><br>An intrapreneur is an &#x27;inside&#x27; entrepreneur: they spot an opportunity and mobilize the organization&#x27;s own resources. A describes an entrepreneur, B an investor.<br><span class="zh">intrapreneur 是「內部」創業者：在組織內發現機會，並動用組織自己的資源去實現。A 是 entrepreneur 的描述，B 是投資者。</span></div>
+    </details>
+  </div>
+  <div class="mcq">
+    <div class="q">2. Which of the following is NOT one of the four functions of management (POLC)? <span class="zh">以下哪項「不是」管理四大功能（POLC）之一？</span> <span class="tag">Ch1</span></div>
+    <ul class="opts">
+      <li><span class="letter">A.</span> Planning <span class="zh">規劃</span></li>
+      <li class="correct"><span class="letter">B.</span> <span class="chk">✅ </span>Marketing <span class="zh">行銷</span></li>
+      <li><span class="letter">C.</span> Leading <span class="zh">領導</span></li>
+      <li><span class="letter">D.</span> Controlling <span class="zh">控制</span></li>
+    </ul>
+    <details class="ansbox"><summary>顯示答案與解釋 Show answer</summary>
+    <div class="ans"><b>答案 Answer：B</b><br>POLC = Planning, Organizing, Leading, Controlling. Marketing is a business activity, not a management function.<br><span class="zh">POLC＝規劃、組織、領導、控制。行銷是企業活動，不屬於管理四大功能。</span></div>
+    </details>
+  </div>
+  <div class="mcq">
+    <div class="q">3. An automated phone menu saves the company money, but most customers prefer to speak to a live agent. This is best described as… <span class="zh">自動電話選單為公司省錢，但多數顧客想找真人客服。這最能形容為：</span> <span class="tag">Ch1</span></div>
+    <ul class="opts">
+      <li><span class="letter">A.</span> both efficient and effective <span class="zh">既有效率又有效果</span></li>
+      <li><span class="letter">B.</span> neither efficient nor effective <span class="zh">既沒效率也沒效果</span></li>
+      <li><span class="letter">C.</span> effective but not efficient <span class="zh">有效果但沒效率</span></li>
+      <li class="correct"><span class="letter">D.</span> <span class="chk">✅ </span>efficient but not effective <span class="zh">有效率但沒有效果</span></li>
+    </ul>
+    <details class="ansbox"><summary>顯示答案與解釋 Show answer</summary>
+    <div class="ans"><b>答案 Answer：D</b><br>Saving cost = efficient (doing things right). Customers dislike it = not effective (not achieving the right result).<br><span class="zh">省成本＝有效率（把事情做對）；顧客不喜歡＝沒有效果（沒達到對的成果）。這是課堂上的經典例子。</span></div>
+    </details>
+  </div>
+  <div class="mcq">
+    <div class="q">4. Which view of the entrepreneur emphasizes buying inputs at known prices to sell outputs at uncertain future prices? <span class="zh">哪一種企業家觀點強調「以已知價格買入、以不確定的未來價格賣出」？</span> <span class="tag">Ch1</span></div>
+    <ul class="opts">
+      <li><span class="letter">A.</span> Innovator <span class="zh">創新者</span></li>
+      <li><span class="letter">B.</span> Organizer <span class="zh">組織者</span></li>
+      <li class="correct"><span class="letter">C.</span> <span class="chk">✅ </span>Risk bearer <span class="zh">風險承擔者</span></li>
+      <li><span class="letter">D.</span> Manager <span class="zh">經理</span></li>
+    </ul>
+    <details class="ansbox"><summary>顯示答案與解釋 Show answer</summary>
+    <div class="ans"><b>答案 Answer：C</b><br>The three classic views are risk bearer, organizer and innovator. Buying at certain prices and selling at uncertain prices = risk bearer.<br><span class="zh">三種經典觀點：風險承擔者、組織者、創新者。「確定價格買、不確定價格賣」＝風險承擔者。</span></div>
+    </details>
+  </div>
+  <div class="mcq">
+    <div class="q">5. Which of the following is TRUE about starting a business (reality, not myth)? <span class="zh">以下關於創業哪項是事實（而非迷思）？</span> <span class="tag">Ch2</span></div>
+    <ul class="opts">
+      <li><span class="letter">A.</span> Entrepreneurs usually work fewer hours than employees <span class="zh">創業者的工時通常比員工少</span></li>
+      <li class="correct"><span class="letter">B.</span> <span class="chk">✅ </span>There is always some form of competition <span class="zh">永遠都有某種形式的競爭</span></li>
+      <li><span class="letter">C.</span> All expenses can be deducted, so no tax is owed <span class="zh">所有費用都可以扣除，所以不用繳稅</span></li>
+      <li><span class="letter">D.</span> Entrepreneurs can do whatever they want <span class="zh">創業者可以想做什麼就做什麼</span></li>
+    </ul>
+    <details class="ansbox"><summary>顯示答案與解釋 Show answer</summary>
+    <div class="ans"><b>答案 Answer：B</b><br>Myth vs reality: entrepreneurs work longer hours, still pay tax, still have &#x27;bosses&#x27; (customers), and still face boring tasks. Competition always exists.<br><span class="zh">迷思 vs 現實：創業者工時更長、仍要繳稅、客戶就是老闆、仍有枯燥工作。競爭永遠存在，所以 B 正確。</span></div>
+    </details>
+  </div>
+  <div class="mcq">
+    <div class="q">6. Which legal form of business is mainly criticized for double taxation? <span class="zh">哪種法律企業形式最常被批評有「雙重課稅」？</span> <span class="tag">Ch2</span></div>
+    <ul class="opts">
+      <li><span class="letter">A.</span> Sole proprietorship <span class="zh">獨資</span></li>
+      <li><span class="letter">B.</span> Partnership <span class="zh">合夥</span></li>
+      <li><span class="letter">C.</span> Limited liability company (LLC) <span class="zh">有限責任公司（LLC）</span></li>
+      <li class="correct"><span class="letter">D.</span> <span class="chk">✅ </span>Corporation <span class="zh">公司（股份有限公司）</span></li>
+    </ul>
+    <details class="ansbox"><summary>顯示答案與解釋 Show answer</summary>
+    <div class="ans"><b>答案 Answer：D</b><br>A corporation is taxed on its income, then shareholders are taxed again on dividends. Sole proprietorship&#x27;s weakness is unlimited liability; LLC avoids double tax.<br><span class="zh">公司先被課稅，股東領股息時再被課一次稅。獨資的缺點是無限責任；LLC 則避免雙重課稅。</span></div>
+    </details>
+  </div>
+  <div class="mcq">
+    <div class="q">7. A company sells its main product very cheaply (or gives it away) and earns most of its profit from related add-on items. Which business model is this? <span class="zh">一間公司把主產品賣得很便宜（甚至免費），主要利潤來自相關的附加商品。這是哪種商業模式？</span> <span class="tag">Ch3</span></div>
+    <ul class="opts">
+      <li><span class="letter">A.</span> Commission <span class="zh">佣金型</span></li>
+      <li><span class="letter">B.</span> Subscription <span class="zh">訂閱型</span></li>
+      <li class="correct"><span class="letter">C.</span> <span class="chk">✅ </span>Accessories <span class="zh">配件型</span></li>
+      <li><span class="letter">D.</span> Advertising <span class="zh">廣告型</span></li>
+    </ul>
+    <details class="ansbox"><summary>顯示答案與解釋 Show answer</summary>
+    <div class="ans"><b>答案 Answer：C</b><br>Accessories model: the core product is cheap/free and profit comes from accessories (e.g. razor and blades).<br><span class="zh">配件型：本體便宜／免費，靠配件賺錢（例如剃刀與刀片）。</span></div>
+    </details>
+  </div>
+  <div class="mcq">
+    <div class="q">8. In the Business Model Canvas, which building block answers &#x27;For whom are we creating value?&#x27; <span class="zh">在商業模式畫布（BMC）中，哪個構成要素回答「我們為誰創造價值？」</span> <span class="tag">Ch3</span></div>
+    <ul class="opts">
+      <li><span class="letter">A.</span> Value Proposition <span class="zh">價值主張</span></li>
+      <li><span class="letter">B.</span> Channels <span class="zh">通路</span></li>
+      <li><span class="letter">C.</span> Key Partnerships <span class="zh">關鍵合作夥伴</span></li>
+      <li class="correct"><span class="letter">D.</span> <span class="chk">✅ </span>Customer Segments <span class="zh">客戶群</span></li>
+    </ul>
+    <details class="ansbox"><summary>顯示答案與解釋 Show answer</summary>
+    <div class="ans"><b>答案 Answer：D</b><br>Customer Segments = the groups of people/organizations the business serves.<br><span class="zh">客戶群（Customer Segments）＝企業服務的人群／組織。</span></div>
+    </details>
+  </div>
+  <div class="mcq">
+    <div class="q">9. Which is the correct order of the five steps of the creative process? <span class="zh">創意過程五個步驟的正確順序是？</span> <span class="tag">Ch4</span></div>
+    <ul class="opts">
+      <li class="correct"><span class="letter">A.</span> <span class="chk">✅ </span>Preparation → Incubation → Insight → Evaluation → Elaboration <span class="zh">準備 → 醞釀 → 頓悟 → 評估 → 詳述</span></li>
+      <li><span class="letter">B.</span> Preparation → Insight → Incubation → Elaboration → Evaluation <span class="zh">準備 → 頓悟 → 醞釀 → 詳述 → 評估</span></li>
+      <li><span class="letter">C.</span> Incubation → Preparation → Insight → Evaluation → Elaboration <span class="zh">醞釀 → 準備 → 頓悟 → 評估 → 詳述</span></li>
+      <li><span class="letter">D.</span> Preparation → Evaluation → Incubation → Insight → Elaboration <span class="zh">準備 → 評估 → 醞釀 → 頓悟 → 詳述</span></li>
+    </ul>
+    <details class="ansbox"><summary>顯示答案與解釋 Show answer</summary>
+    <div class="ans"><b>答案 Answer：A</b><br>Mnemonic: Preparation, Incubation, Insight, Evaluation, Elaboration (P-I-I-E-E).<br><span class="zh">口訣：準備、醞釀、頓悟、評估、詳述（Preparation→Incubation→Insight→Evaluation→Elaboration）。</span></div>
+    </details>
+  </div>
+  <div class="mcq">
+    <div class="q">10. Which is NOT a rule of brainstorming? <span class="zh">以下哪項「不是」腦力激盪的規則？</span> <span class="tag">Ch4</span></div>
+    <ul class="opts">
+      <li><span class="letter">A.</span> Leapfrogging (building on others&#x27; ideas) is encouraged <span class="zh">鼓勵在別人的想法上延伸（leapfrogging）</span></li>
+      <li><span class="letter">B.</span> Freewheeling is encouraged <span class="zh">鼓勵天馬行空</span></li>
+      <li><span class="letter">C.</span> Quantity and speed matter <span class="zh">重視數量與速度</span></li>
+      <li class="correct"><span class="letter">D.</span> <span class="chk">✅ </span>Weak ideas should be criticized and rejected immediately <span class="zh">差的想法要立刻批評、否決</span></li>
+    </ul>
+    <details class="ansbox"><summary>顯示答案與解釋 Show answer</summary>
+    <div class="ans"><b>答案 Answer：D</b><br>The first rule is NO criticism. Freewheeling, quantity/speed and leapfrogging are all encouraged.<br><span class="zh">第一條規則就是「不批評」。天馬行空、重數量與速度、接力延伸都是被鼓勵的。</span></div>
+    </details>
+  </div>
+  <div class="mcq">
+    <div class="q">11. Bill Gross&#x27;s Z.com had a good idea, a capable team and enough funding, but failed because it launched before household broadband was widespread. Which quality of a good opportunity was missing? <span class="zh">Bill Gross 的 Z.com 有好點子、好團隊、足夠資金，卻因為推出時家用寬頻尚未普及而失敗。缺少了好機會的哪項特質？</span> <span class="tag">Ch4</span></div>
+    <ul class="opts">
+      <li><span class="letter">A.</span> Attractive <span class="zh">有吸引力</span></li>
+      <li class="correct"><span class="letter">B.</span> <span class="chk">✅ </span>Timely <span class="zh">時機恰當</span></li>
+      <li><span class="letter">C.</span> Durable <span class="zh">能持久</span></li>
+      <li><span class="letter">D.</span> Value-adding <span class="zh">能創造價值</span></li>
+    </ul>
+    <details class="ansbox"><summary>顯示答案與解釋 Show answer</summary>
+    <div class="ans"><b>答案 Answer：B</b><br>A good opportunity must be timely — not too early, not too late. This is also why Bill Gross rates &#x27;Timing&#x27; as the most important success factor.<br><span class="zh">好機會要「時機恰當」——不能太早也不能太晚。這也是 Bill Gross 認為 Timing 是最重要成功因素的原因（Socrative 02）。</span></div>
+    </details>
+  </div>
+  <div class="mcq">
+    <div class="q">12. Which is NOT one of the six steps for working your business idea? <span class="zh">以下哪項「不是」發展商業想法的六個步驟之一？</span> <span class="tag">Ch5</span></div>
+    <ul class="opts">
+      <li><span class="letter">A.</span> Define the market need <span class="zh">定義市場需求</span></li>
+      <li><span class="letter">B.</span> Research your competition <span class="zh">研究競爭對手</span></li>
+      <li class="correct"><span class="letter">C.</span> <span class="chk">✅ </span>Hire your first employees <span class="zh">聘請第一批員工</span></li>
+      <li><span class="letter">D.</span> Decide your pricing strategy <span class="zh">決定定價策略</span></li>
+    </ul>
+    <details class="ansbox"><summary>顯示答案與解釋 Show answer</summary>
+    <div class="ans"><b>答案 Answer：C</b><br>Six steps: define market need, review personal background, research industry, research target markets, research competition, decide pricing. Hiring is not one of them.<br><span class="zh">六步驟：定義市場需求、檢視個人背景、研究產業、研究目標市場、研究競爭對手、決定定價策略。聘請員工不在其中。</span></div>
+    </details>
+  </div>
+  <div class="mcq">
+    <div class="q">13. Why is pricing described as an &#x27;ongoing effort&#x27;? <span class="zh">為什麼說定價是一項「持續的努力」？</span> <span class="tag">Ch5</span></div>
+    <ul class="opts">
+      <li class="correct"><span class="letter">A.</span> <span class="chk">✅ </span>Market conditions and customer demand change over time <span class="zh">市場狀況與顧客需求會隨時間改變</span></li>
+      <li><span class="letter">B.</span> Competitors set the price for you <span class="zh">競爭對手會替你訂價</span></li>
+      <li><span class="letter">C.</span> Prices must never change, to build trust <span class="zh">價格不可改變才能建立信任</span></li>
+      <li><span class="letter">D.</span> Pricing only matters at launch <span class="zh">定價只在開業時重要</span></li>
+    </ul>
+    <details class="ansbox"><summary>顯示答案與解釋 Show answer</summary>
+    <div class="ans"><b>答案 Answer：A</b><br>You set an initial price, then adjust it as the market and demand change.<br><span class="zh">先訂初始價格，再隨市場與需求變化持續調整。</span></div>
+    </details>
+  </div>
+  <div class="mcq">
+    <div class="q">14. Which of the following is a BENEFIT (not a feature) of a smartphone? <span class="zh">以下哪項是智能手機的「利益」（benefit），而不是「特徵」（feature）？</span> <span class="tag">Ch6</span></div>
+    <ul class="opts">
+      <li><span class="letter">A.</span> Stores 1,000 phone numbers <span class="zh">可儲存 1,000 個電話號碼</span></li>
+      <li><span class="letter">B.</span> Has a 6-inch screen <span class="zh">有 6 吋螢幕</span></li>
+      <li class="correct"><span class="letter">C.</span> <span class="chk">✅ </span>Gives instant access to family, friends and business contacts <span class="zh">讓你隨時聯繫家人、朋友與客戶</span></li>
+      <li><span class="letter">D.</span> Contains 8GB of memory <span class="zh">內建 8GB 記憶體</span></li>
+    </ul>
+    <details class="ansbox"><summary>顯示答案與解釋 Show answer</summary>
+    <div class="ans"><b>答案 Answer：C</b><br>A feature says what the product does; a benefit says why it matters to the customer. Effective positioning sells benefits.<br><span class="zh">特徵說明產品「能做什麼」；利益說明「對顧客有什麼意義」。有效的定位賣的是利益。</span></div>
+    </details>
+  </div>
+  <div class="mcq">
+    <div class="q">15. A ______ is about the business itself and is meant to stand the test of time, while a ______ relates to a product and is used in campaigns. <span class="zh">＿＿＿與企業本身有關、講求經得起時間考驗；＿＿＿則與產品有關、常用於廣告活動。</span> <span class="tag">Ch6</span></div>
+    <ul class="opts">
+      <li><span class="letter">A.</span> logo; slogan <span class="zh">標誌；標語</span></li>
+      <li class="correct"><span class="letter">B.</span> <span class="chk">✅ </span>tagline; slogan <span class="zh">口號（tagline）；標語（slogan）</span></li>
+      <li><span class="letter">C.</span> slogan; tagline <span class="zh">標語；口號</span></li>
+      <li><span class="letter">D.</span> brand; logo <span class="zh">品牌；標誌</span></li>
+    </ul>
+    <details class="ansbox"><summary>顯示答案與解釋 Show answer</summary>
+    <div class="ans"><b>答案 Answer：B</b><br>Tagline = about the business, long-lasting. Slogan = tied to a product/service, flexible, used in campaigns. Logo = the visual symbol.<br><span class="zh">Tagline 與企業本身有關、持久；Slogan 跟產品／服務有關、較靈活、用於廣告活動；Logo 是視覺符號。</span></div>
+    </details>
+  </div>
+  <div class="mcq">
+    <div class="q">16. Breakeven sales are calculated as: <span class="zh">損益平衡銷售額的計算方式是：</span> <span class="tag">Ch7</span></div>
+    <ul class="opts">
+      <li class="correct"><span class="letter">A.</span> <span class="chk">✅ </span>Total operating expense ÷ gross margin percent <span class="zh">總營運費用 ÷ 毛利率</span></li>
+      <li><span class="letter">B.</span> Total revenue − total expense <span class="zh">總收入 − 總費用</span></li>
+      <li><span class="letter">C.</span> Gross margin percent ÷ total operating expense <span class="zh">毛利率 ÷ 總營運費用</span></li>
+      <li><span class="letter">D.</span> Assets − liabilities <span class="zh">資產 − 負債</span></li>
+    </ul>
+    <details class="ansbox"><summary>顯示答案與解釋 Show answer</summary>
+    <div class="ans"><b>答案 Answer：A</b><br>Breakeven Sales = Total Operating Expense ÷ Gross Margin %. At this point gross margin equals fixed operating expenses. (D is owner&#x27;s equity.)<br><span class="zh">損益平衡銷售額＝總營運費用 ÷ 毛利率。此時毛利剛好等於固定營運費用。（D 是業主權益的算法。）</span></div>
+    </details>
+  </div>
+  <div class="mcq">
+    <div class="q">17. Which of the following is a form of DEBT financing? <span class="zh">以下哪項屬於「債務」融資？</span> <span class="tag">Ch7</span></div>
+    <ul class="opts">
+      <li><span class="letter">A.</span> Personal savings <span class="zh">個人儲蓄</span></li>
+      <li><span class="letter">B.</span> A partner&#x27;s capital contribution <span class="zh">合夥人投入的資本</span></li>
+      <li class="correct"><span class="letter">C.</span> <span class="chk">✅ </span>A bank loan <span class="zh">銀行貸款</span></li>
+      <li><span class="letter">D.</span> Profits retained in the business <span class="zh">保留在企業中的利潤</span></li>
+    </ul>
+    <details class="ansbox"><summary>顯示答案與解釋 Show answer</summary>
+    <div class="ans"><b>答案 Answer：C</b><br>Debt = borrowed money that must be repaid, with no ownership given up (bank loans, credit cards). The others are equity.<br><span class="zh">債務＝借來、必須償還、不涉及擁有權（銀行貸款、信用卡）。其餘三項都屬於股權（equity）。</span></div>
+    </details>
+  </div>
+  <div class="mcq">
+    <div class="q">18. Which of the following is protected by copyright? <span class="zh">以下哪項受版權（著作權）保護？</span> <span class="tag">Ch8</span></div>
+    <ul class="opts">
+      <li><span class="letter">A.</span> The idea for a novel <span class="zh">一部小說的構想</span></li>
+      <li><span class="letter">B.</span> A new operating method <span class="zh">一種新的營運方法</span></li>
+      <li class="correct"><span class="letter">C.</span> <span class="chk">✅ </span>The text of a published novel <span class="zh">已出版小說的文字內容</span></li>
+      <li><span class="letter">D.</span> A natural phenomenon discovered by a scientist <span class="zh">科學家發現的自然現象</span></li>
+    </ul>
+    <details class="ansbox"><summary>顯示答案與解釋 Show answer</summary>
+    <div class="ans"><b>答案 Answer：C</b><br>Copyright protects the form/format of a work, NOT the idea, method or discovery behind it. It arises automatically — no registration needed.<br><span class="zh">版權保護作品的「形式」，不保護背後的想法、方法或發現；且自動生效，不需註冊。</span></div>
+    </details>
+  </div>
+  <div class="mcq">
+    <div class="q">19. How long does an invention patent last? <span class="zh">發明專利的保護期限是多久？</span> <span class="tag">Ch8</span></div>
+    <ul class="opts">
+      <li><span class="letter">A.</span> 10 years from application <span class="zh">自申請日起 10 年</span></li>
+      <li class="correct"><span class="letter">B.</span> <span class="chk">✅ </span>20 years from application <span class="zh">自申請日起 20 年</span></li>
+      <li><span class="letter">C.</span> 25 years from application <span class="zh">自申請日起 25 年</span></li>
+      <li><span class="letter">D.</span> 50 years after the inventor&#x27;s death <span class="zh">發明人死後 50 年</span></li>
+    </ul>
+    <details class="ansbox"><summary>顯示答案與解釋 Show answer</summary>
+    <div class="ans"><b>答案 Answer：B</b><br>Invention patent = 20 years; utility patent = 10 years; industrial design = 25 years (all from application).<br><span class="zh">發明專利 20 年；實用新型專利 10 年；工業外觀設計 25 年（皆自申請日起計）。</span></div>
+    </details>
+  </div>
+  <div class="mcq">
+    <div class="q">20. At which stage of the organizational life cycle must the founder start working &#x27;on&#x27; the business rather than only &#x27;in&#x27; it, and begin formalizing policies and procedures? <span class="zh">在組織生命週期的哪個階段，創辦人必須開始「經營」企業（work on）而不只是「在」企業裡做事（work in），並開始制定政策與程序？</span> <span class="tag">Ch9</span></div>
+    <ul class="opts">
+      <li><span class="letter">A.</span> Introduction <span class="zh">導入期</span></li>
+      <li class="correct"><span class="letter">B.</span> <span class="chk">✅ </span>Early Growth <span class="zh">早期成長</span></li>
+      <li><span class="letter">C.</span> Maturity <span class="zh">成熟期</span></li>
+      <li><span class="letter">D.</span> Decline <span class="zh">衰退期</span></li>
+    </ul>
+    <details class="ansbox"><summary>顯示答案與解釋 Show answer</summary>
+    <div class="ans"><b>答案 Answer：B</b><br>Early Growth: sales and complexity rise, so the founder must work ON the business and formalize policies. The five stages: Introduction → Early Growth → Continuous Growth → Maturity → Decline.<br><span class="zh">早期成長期：銷售與複雜度上升，創辦人須開始「經營」企業並制定政策。五個階段：導入 → 早期成長 → 持續成長 → 成熟 → 衰退。</span></div>
+    </details>
+  </div>
+</section>
+<!-- ================= Mock 1 Part B ================= -->
+<section class="chapter" id="m1b">
+  <h2><span class="num">1B</span>Mock Paper 1 — Part B：Netflix Business Model</h2>
+  <div class="example">
+    <div class="head">題目：分析 Netflix 的商業模式，填寫 BMC 九宮格，並指出其模式的優點與缺點（至少 120 words）</div>
+    <div class="body">
+      <div class="answer">
+        <strong>1. What is Netflix's business model based on？</strong><br>Netflix's business model is based on a <em>subscription model</em>: customers pay a regular (monthly) fee for on-demand access to a large library of licensed and original content, which is delivered through its own streaming platform and personalised by data. 以「訂閱制」為核心：用戶按月付費，隨時點播大量授權與自家原創內容，並以數據做個人化推薦。
+      </div>
+      <table>
+        <tr><th>Block</th><th>範例答案 Model answer</th></tr>
+        <tr><td>Value Proposition</td><td>On-demand streaming anytime/anywhere, large library + original content, personalised recommendations, (mostly) no ads 隨時隨地點播、豐富片庫與原創內容、個人化推薦</td></tr>
+        <tr><td>Customer Segments</td><td>Mass-market households and individual viewers worldwide, across age groups and interests 全球家庭與個人觀眾（廣大大眾市場）</td></tr>
+        <tr><td>Channels</td><td>Netflix app and website, smart TVs, game consoles, mobile devices 自家 App／網站、智能電視、遊戲機、手機等裝置</td></tr>
+        <tr><td>Customer Relationships</td><td>Self-service, algorithmic personalisation, customer support, easy cancel/switch plans 自助服務、演算法個人化推薦、客服、方便更換或取消方案</td></tr>
+        <tr><td>Revenue Streams</td><td>Monthly subscription fees (tiered plans, incl. cheaper ad-supported plan) 月費訂閱（分級方案，含較便宜的廣告方案）</td></tr>
+        <tr><td>Key Resources</td><td>Content library and originals, recommendation algorithm and user data, brand, streaming technology platform 內容片庫與原創作品、推薦演算法與用戶數據、品牌、串流技術平台</td></tr>
+        <tr><td>Key Activities</td><td>Content licensing and production, platform/software development, data analytics, marketing 內容採購與製作、平台開發、數據分析、行銷</td></tr>
+        <tr><td>Key Partnerships</td><td>Studios/producers/creators, device makers, cloud and payment providers 製片公司／創作者、裝置製造商、雲端與支付服務商</td></tr>
+        <tr><td>Cost Structure</td><td>Content licensing and production (largest), technology/cloud and streaming delivery, marketing, staff 內容授權與製作（最大宗）、技術／雲端與串流傳輸、行銷、人事</td></tr>
+      </table>
+      <div class="answer">
+        <strong>3. Strength(s)：</strong> <em>Recurring subscription revenue</em> gives predictable cash flow, and <em>user data</em> lets Netflix personalise recommendations and decide which originals to make, which raises customer retention. 訂閱制帶來穩定可預測的現金流；用戶數據幫助個人化推薦與決定製作哪些原創內容，提升留存率。<br><br><strong>4. Weakness(es)：</strong> Very high <em>content costs</em> (licensing and original production), strong <em>competition</em> from other streaming services, and the risk of <em>subscriber churn</em> because customers can cancel easily. 內容成本極高（授權與原創製作）、串流對手競爭激烈，而且用戶很容易取消訂閱，流失風險高。
+      </div>
+      <div class="tip"><strong>作答提醒：</strong>先寫一句 business model 屬於哪一種（Production／Advertising／Commission／Subscription／Freemium／Accessories），再按九宮格逐格填，最後用「優點＋缺點」各一句，字數即可超過 120。</div>
+    </div>
+  </div>
+</section>
+<!-- ================= Mock 1 Part C ================= -->
+<section class="chapter" id="m1c">
+  <h2><span class="num">1C</span>Mock Paper 1 — Part C：Essay</h2>
+  <div class="example">
+    <div class="head">題目：選兩個你認為最相關、最有挑戰性、或修課前從未想過的概念，並討論（至少 100 words）</div>
+    <div class="body">
+      <div class="answer">
+        <strong>建議寫法（三段式）：</strong> ① 定義概念；② 為什麼對你「更相關／更有挑戰／是新觀念」；③ 舉一個具體例子。<br><br>
+        <strong>範例概念 1：Idea vs Opportunity</strong><br>
+        <em>English：</em> Before this course I thought a good idea was already a business opportunity. I learned that an idea is just a thought or notion, while an <em>opportunity</em> is a favorable set of circumstances that creates a need for a new product or service — it must be attractive, timely and durable. For example, Bill Gross's Z.com had a good idea, team and funding, but launched before broadband was widespread, so the timing was wrong and it failed.<br>
+        <em>中文：</em>修課前我以為好點子就等於商機。現在我明白想法只是一個念頭，而「機會」是創造新產品／服務需求的有利情勢，必須有吸引力、時機恰當且能持久。例如 Bill Gross 的 Z.com 有好點子、好團隊與資金，但推出時寬頻尚未普及，時機不對所以失敗。<br><br>
+        <strong>範例概念 2：Breakeven Analysis</strong><br>
+        <em>English：</em> Breakeven analysis was the most challenging concept because it links costs, margins and sales in one number. The breakeven point is where revenue is enough to cover expenses (gross margin equals fixed operating expenses), calculated as total operating expense ÷ gross margin percent. For a small coffee shop, calculating it shows how many cups must be sold each month before the shop stops making a loss.<br>
+        <em>中文：</em>損益平衡分析對我最有挑戰，因為它把成本、毛利與銷售連成一個數字。損益平衡點是收入剛好足以涵蓋費用的水準（毛利＝固定營運費用），公式為總營運費用 ÷ 毛利率。以一間小咖啡店為例，計算後就能知道每月要賣出多少杯咖啡才不會虧損。
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= Mock 2 Part A ================= -->
+<section class="chapter" id="m2">
+  <h2><span class="num">2A</span>Mock Paper 2 — Part A：Multiple Choice（20 題，每題 1 分）</h2>
+  <div class="meta"><span>⏱ 建議時間 Suggested time：15 分鐘</span><span>🎯 20 分滿分</span><span>📚 覆蓋 Ch1–9</span></div>
+  <div class="toolbar"><button type="button" data-open="m2">展開本組全部答案 Show all</button><button type="button" data-close="m2">收起 Hide all</button></div>
+  <div class="mcq">
+    <div class="q">1. A labor union belongs to which type of organization? <span class="zh">工會屬於哪一類組織？</span> <span class="tag">Ch1</span></div>
+    <ul class="opts">
+      <li><span class="letter">A.</span> For-profit organization <span class="zh">為盈利組織</span></li>
+      <li><span class="letter">B.</span> Nonprofit organization <span class="zh">非營利組織</span></li>
+      <li class="correct"><span class="letter">C.</span> <span class="chk">✅ </span>Mutual-benefit organization <span class="zh">互惠組織</span></li>
+      <li><span class="letter">D.</span> Franchise <span class="zh">加盟組織</span></li>
+    </ul>
+    <details class="ansbox"><summary>顯示答案與解釋 Show answer</summary>
+    <div class="ans"><b>答案 Answer：C</b><br>Mutual-benefit organizations exist to aid their own members (political parties, labor unions, trade associations, clubs).<br><span class="zh">互惠組織是為了幫助自己的成員而存在（政黨、工會、商業協會、俱樂部）。</span></div>
+    </details>
+  </div>
+  <div class="mcq">
+    <div class="q">2. Which statement correctly pairs entrepreneurs and managers? <span class="zh">以下哪項正確對比企業家與經理？</span> <span class="tag">Ch1</span></div>
+    <ul class="opts">
+      <li><span class="letter">A.</span> Entrepreneur earns a fixed salary; manager earns uncertain profit <span class="zh">企業家領固定薪水；經理賺不確定的利潤</span></li>
+      <li class="correct"><span class="letter">B.</span> <span class="chk">✅ </span>Entrepreneur bears risk and earns uncertain profit; manager bears no risk and earns a fixed salary <span class="zh">企業家承擔風險、賺不確定的利潤；經理不承擔風險、領固定薪水</span></li>
+      <li><span class="letter">C.</span> Entrepreneur is an employee; manager is the owner <span class="zh">企業家是受僱者；經理是擁有者</span></li>
+      <li><span class="letter">D.</span> Entrepreneur executes plans; manager decides what to produce <span class="zh">企業家執行計畫；經理決定生產什麼</span></li>
+    </ul>
+    <details class="ansbox"><summary>顯示答案與解釋 Show answer</summary>
+    <div class="ans"><b>答案 Answer：B</b><br>Entrepreneur: owner, bears risk, uncertain profit, decides what/how to produce. Manager: employee, no risk, fixed salary, executes plans.<br><span class="zh">企業家：擁有者、承擔風險、利潤不確定、決定生產什麼與怎麼生產。經理：受僱者、不承擔風險、固定薪水、執行計畫。</span></div>
+    </details>
+  </div>
+  <div class="mcq">
+    <div class="q">3. After losing her job, Mei opens a small shop to replace her lost income. Mei is a(n) ______ entrepreneur. <span class="zh">Mei 失業後開了一間小店來彌補失去的收入。Mei 是＿＿＿型創業者。</span> <span class="tag">Ch1</span></div>
+    <ul class="opts">
+      <li><span class="letter">A.</span> opportunity <span class="zh">機會</span></li>
+      <li class="correct"><span class="letter">B.</span> <span class="chk">✅ </span>necessity <span class="zh">必要</span></li>
+      <li><span class="letter">C.</span> intra- <span class="zh">內部</span></li>
+      <li><span class="letter">D.</span> corporate <span class="zh">企業</span></li>
+    </ul>
+    <details class="ansbox"><summary>顯示答案與解釋 Show answer</summary>
+    <div class="ans"><b>答案 Answer：B</b><br>Necessity entrepreneurs start a business because they suddenly must earn a living (e.g. after losing a job). Opportunity entrepreneurs start from a burning desire.<br><span class="zh">必要型創業者是因為突然需要謀生（例如失業）而創業；機會型創業者則出於強烈渴望。</span></div>
+    </details>
+  </div>
+  <div class="mcq">
+    <div class="q">4. Which is NOT a form of innovation in the &#x27;innovator&#x27; view of the entrepreneur? <span class="zh">在企業家的「創新者」觀點中，以下哪項「不是」創新的形式？</span> <span class="tag">Ch1</span></div>
+    <ul class="opts">
+      <li><span class="letter">A.</span> A new product <span class="zh">新產品</span></li>
+      <li><span class="letter">B.</span> A new production method <span class="zh">新生產方法</span></li>
+      <li class="correct"><span class="letter">C.</span> <span class="chk">✅ </span>Lowering employee wages <span class="zh">降低員工薪資</span></li>
+      <li><span class="letter">D.</span> A new form of organization <span class="zh">新的組織形式</span></li>
+    </ul>
+    <details class="ansbox"><summary>顯示答案與解釋 Show answer</summary>
+    <div class="ans"><b>答案 Answer：C</b><br>Innovation forms: new product, new (untested) production method, new market, new raw-material source, new form of organization.<br><span class="zh">創新的形式：新產品、新（未驗證的）生產方法、新市場、新原料來源、新組織形式。降低薪資不在其中。</span></div>
+    </details>
+  </div>
+  <div class="mcq">
+    <div class="q">5. Which is a disadvantage of buying a franchise? <span class="zh">購買加盟（franchise）的缺點是？</span> <span class="tag">Ch2</span></div>
+    <ul class="opts">
+      <li><span class="letter">A.</span> No brand recognition <span class="zh">沒有品牌知名度</span></li>
+      <li class="correct"><span class="letter">B.</span> <span class="chk">✅ </span>Royalties and less freedom <span class="zh">要付權利金、自由度較低</span></li>
+      <li><span class="letter">C.</span> No training or support <span class="zh">沒有培訓或支援</span></li>
+      <li><span class="letter">D.</span> An unproven business formula <span class="zh">商業模式未經驗證</span></li>
+    </ul>
+    <details class="ansbox"><summary>顯示答案與解釋 Show answer</summary>
+    <div class="ans"><b>答案 Answer：B</b><br>Franchise pros: known brand, training, support. Cons: royalties and less freedom.<br><span class="zh">加盟優點：品牌、培訓、支援；缺點：權利金與自由度低。</span></div>
+    </details>
+  </div>
+  <div class="mcq">
+    <div class="q">6. Which section of a business plan should be written LAST, even though it appears first? <span class="zh">商業計劃書中，哪個部分雖然排在最前面，卻應該最後才寫？</span> <span class="tag">Ch2</span></div>
+    <ul class="opts">
+      <li><span class="letter">A.</span> Financial forecasts <span class="zh">財務預測</span></li>
+      <li><span class="letter">B.</span> Supporting data <span class="zh">輔助資料</span></li>
+      <li class="correct"><span class="letter">C.</span> <span class="chk">✅ </span>Executive summary <span class="zh">執行摘要</span></li>
+      <li><span class="letter">D.</span> The business section <span class="zh">業務部分</span></li>
+    </ul>
+    <details class="ansbox"><summary>顯示答案與解釋 Show answer</summary>
+    <div class="ans"><b>答案 Answer：C</b><br>The executive summary summarizes everything, so it is written last. It is also the most important section: if it fails to interest investors, they won&#x27;t read the rest.<br><span class="zh">執行摘要要總結全部內容，所以最後才寫；它也是最重要的部分——吸引不了投資人，對方就不會讀後面。</span></div>
+    </details>
+  </div>
+  <div class="mcq">
+    <div class="q">7. A company&#x27;s vision describes… <span class="zh">公司的願景（vision）描述的是……</span> <span class="tag">Ch2</span></div>
+    <ul class="opts">
+      <li><span class="letter">A.</span> why it exists today <span class="zh">它今天為何存在</span></li>
+      <li class="correct"><span class="letter">B.</span> <span class="chk">✅ </span>what it wants to become and where it wants to go <span class="zh">它想成為什麼樣子、往哪裡去</span></li>
+      <li><span class="letter">C.</span> its current product list <span class="zh">它目前的產品清單</span></li>
+      <li><span class="letter">D.</span> its legal structure <span class="zh">它的法律結構</span></li>
+    </ul>
+    <details class="ansbox"><summary>顯示答案與解釋 Show answer</summary>
+    <div class="ans"><b>答案 Answer：B</b><br>Mission = why the firm exists / what it is meant to accomplish (now). Vision = what it wants to become (future).<br><span class="zh">使命（mission）＝為何存在、要達成什麼（現在）；願景（vision）＝想成為什麼樣子（未來）。</span></div>
+    </details>
+  </div>
+  <div class="mcq">
+    <div class="q">8. A music app offers a free basic version and charges for a premium version. This is a ______ model. <span class="zh">一個音樂 App 提供免費基本版，並對進階版收費。這是＿＿＿模式。</span> <span class="tag">Ch3</span></div>
+    <ul class="opts">
+      <li><span class="letter">A.</span> Production <span class="zh">生產型</span></li>
+      <li class="correct"><span class="letter">B.</span> <span class="chk">✅ </span>Freemium <span class="zh">免費增值型</span></li>
+      <li><span class="letter">C.</span> Commission <span class="zh">佣金型</span></li>
+      <li><span class="letter">D.</span> Accessories <span class="zh">配件型</span></li>
+    </ul>
+    <details class="ansbox"><summary>顯示答案與解釋 Show answer</summary>
+    <div class="ans"><b>答案 Answer：B</b><br>Freemium = free version + paid premium version.<br><span class="zh">免費增值＝免費版＋付費進階版。</span></div>
+    </details>
+  </div>
+  <div class="mcq">
+    <div class="q">9. Which Business Model Canvas block asks &#x27;What resources do our value propositions require?&#x27; <span class="zh">BMC 的哪個要素問「我們的價值主張需要什麼資源？」</span> <span class="tag">Ch3</span></div>
+    <ul class="opts">
+      <li><span class="letter">A.</span> Key Activities <span class="zh">關鍵活動</span></li>
+      <li><span class="letter">B.</span> Key Partnerships <span class="zh">關鍵合作夥伴</span></li>
+      <li class="correct"><span class="letter">C.</span> <span class="chk">✅ </span>Key Resources <span class="zh">關鍵資源</span></li>
+      <li><span class="letter">D.</span> Cost Structure <span class="zh">成本結構</span></li>
+    </ul>
+    <details class="ansbox"><summary>顯示答案與解釋 Show answer</summary>
+    <div class="ans"><b>答案 Answer：C</b><br>Key Resources = the assets required to deliver the value proposition. Key Activities asks what activities are required.<br><span class="zh">關鍵資源＝提供價值主張所需的資產；關鍵活動問的是需要做哪些活動。</span></div>
+    </details>
+  </div>
+  <div class="mcq">
+    <div class="q">10. Employees spend time at a customer&#x27;s workplace to observe how the product is actually used. This technique is called… <span class="zh">員工到顧客的工作場所觀察產品實際如何被使用，這種技巧稱為……</span> <span class="tag">Ch4</span></div>
+    <ul class="opts">
+      <li><span class="letter">A.</span> a focus group <span class="zh">焦點小組</span></li>
+      <li><span class="letter">B.</span> brainstorming <span class="zh">腦力激盪</span></li>
+      <li><span class="letter">C.</span> a customer advisory board <span class="zh">顧客諮詢委員會</span></li>
+      <li class="correct"><span class="letter">D.</span> <span class="chk">✅ </span>day-in-the-life research <span class="zh">顧客生活體驗研究（day-in-the-life）</span></li>
+    </ul>
+    <details class="ansbox"><summary>顯示答案與解釋 Show answer</summary>
+    <div class="ans"><b>答案 Answer：D</b><br>Intuit is the classic example of day-in-the-life research.<br><span class="zh">Intuit 是 day-in-the-life 研究的經典例子。</span></div>
+    </details>
+  </div>
+  <div class="mcq">
+    <div class="q">11. Which is NOT one of the three ways to identify an opportunity? <span class="zh">以下哪項「不是」辨識機會的三種方式之一？</span> <span class="tag">Ch4</span></div>
+    <ul class="opts">
+      <li><span class="letter">A.</span> Observing trends <span class="zh">觀察趨勢</span></li>
+      <li><span class="letter">B.</span> Solving a problem <span class="zh">解決問題</span></li>
+      <li class="correct"><span class="letter">C.</span> <span class="chk">✅ </span>Copying a competitor&#x27;s price list <span class="zh">抄襲對手的價目表</span></li>
+      <li><span class="letter">D.</span> Finding gaps in the marketplace <span class="zh">找出市場缺口</span></li>
+    </ul>
+    <details class="ansbox"><summary>顯示答案與解釋 Show answer</summary>
+    <div class="ans"><b>答案 Answer：C</b><br>The three ways: observing trends, solving a problem, finding gaps in the marketplace.<br><span class="zh">三種方式：觀察趨勢、解決問題、找出市場缺口。</span></div>
+    </details>
+  </div>
+  <div class="mcq">
+    <div class="q">12. Which stage follows Maturity in the industry life cycle? <span class="zh">在產業生命週期中，成熟期（Maturity）之後是哪個階段？</span> <span class="tag">Ch5</span></div>
+    <ul class="opts">
+      <li><span class="letter">A.</span> Rapid growth <span class="zh">快速成長</span></li>
+      <li class="correct"><span class="letter">B.</span> <span class="chk">✅ </span>Slow or rapid decline <span class="zh">緩慢或快速衰退</span></li>
+      <li><span class="letter">C.</span> Introduction <span class="zh">導入</span></li>
+      <li><span class="letter">D.</span> Early growth <span class="zh">早期成長</span></li>
+    </ul>
+    <details class="ansbox"><summary>顯示答案與解釋 Show answer</summary>
+    <div class="ans"><b>答案 Answer：B</b><br>Industry life cycle: Rapid growth → Maturity → Slow (or rapid) decline → Reinvention.<br><span class="zh">產業生命週期：快速成長 → 成熟 → 緩慢（或快速）衰退 → 重塑／再造。</span></div>
+    </details>
+  </div>
+  <div class="mcq">
+    <div class="q">13. Positioning means… <span class="zh">「定位」（positioning）指的是……</span> <span class="tag">Ch6</span></div>
+    <ul class="opts">
+      <li><span class="letter">A.</span> choosing the cheapest price <span class="zh">選擇最便宜的價格</span></li>
+      <li class="correct"><span class="letter">B.</span> <span class="chk">✅ </span>establishing a position that differentiates the firm from rivals by highlighting two or three product attributes <span class="zh">在市場中建立與對手區隔的位置，並強調產品的兩三項特質</span></li>
+      <li><span class="letter">C.</span> hiring a marketing team <span class="zh">聘請行銷團隊</span></li>
+      <li><span class="letter">D.</span> printing brochures <span class="zh">印製宣傳單</span></li>
+    </ul>
+    <details class="ansbox"><summary>顯示答案與解釋 Show answer</summary>
+    <div class="ans"><b>答案 Answer：B</b><br>Positioning differentiates the firm from rivals (e.g. Nike&#x27;s &#x27;Just do it&#x27;).<br><span class="zh">定位是讓企業與對手區隔（例如 Nike 的 &#x27;Just do it&#x27;）。</span></div>
+    </details>
+  </div>
+  <div class="mcq">
+    <div class="q">14. Which is NOT one of the 4 Ps of marketing? <span class="zh">以下哪項「不是」行銷 4P 之一？</span> <span class="tag">Ch6</span></div>
+    <ul class="opts">
+      <li><span class="letter">A.</span> Product <span class="zh">產品</span></li>
+      <li><span class="letter">B.</span> Price <span class="zh">價格</span></li>
+      <li class="correct"><span class="letter">C.</span> <span class="chk">✅ </span>Profit <span class="zh">利潤</span></li>
+      <li><span class="letter">D.</span> Place <span class="zh">通路</span></li>
+    </ul>
+    <details class="ansbox"><summary>顯示答案與解釋 Show answer</summary>
+    <div class="ans"><b>答案 Answer：C</b><br>The 4 Ps: Product, Price, Place, Promotion.<br><span class="zh">行銷 4P：Product、Price、Place、Promotion。利潤（Profit）不在其中。</span></div>
+    </details>
+  </div>
+  <div class="mcq">
+    <div class="q">15. A cash flow statement shows… <span class="zh">現金流量表顯示……</span> <span class="tag">Ch7</span></div>
+    <ul class="opts">
+      <li class="correct"><span class="letter">A.</span> <span class="chk">✅ </span>funds coming into and going out of the business <span class="zh">進出企業的資金</span></li>
+      <li><span class="letter">B.</span> assets, liabilities and equity <span class="zh">資產、負債與權益</span></li>
+      <li><span class="letter">C.</span> how much profit or loss is generated <span class="zh">產生多少利潤或虧損</span></li>
+      <li><span class="letter">D.</span> only estimated sales <span class="zh">只有預估的銷售額</span></li>
+    </ul>
+    <details class="ansbox"><summary>顯示答案與解釋 Show answer</summary>
+    <div class="ans"><b>答案 Answer：A</b><br>Cash flow statement = money in and out. Balance sheet = assets/liabilities/equity. Income statement = profit or loss.<br><span class="zh">現金流量表＝資金進出；資產負債表＝資產／負債／權益；損益表＝利潤或虧損。</span></div>
+    </details>
+  </div>
+  <div class="mcq">
+    <div class="q">16. Which is NOT one of the Six C&#x27;s of Credit? <span class="zh">以下哪項「不是」信用六 C 之一？</span> <span class="tag">Ch7</span></div>
+    <ul class="opts">
+      <li><span class="letter">A.</span> Character <span class="zh">品格</span></li>
+      <li><span class="letter">B.</span> Capacity <span class="zh">還款能力</span></li>
+      <li class="correct"><span class="letter">C.</span> <span class="chk">✅ </span>Competition <span class="zh">競爭</span></li>
+      <li><span class="letter">D.</span> Collateral <span class="zh">抵押品</span></li>
+    </ul>
+    <details class="ansbox"><summary>顯示答案與解釋 Show answer</summary>
+    <div class="ans"><b>答案 Answer：C</b><br>Six C&#x27;s: Character, Capacity, Capital, Collateral, Conditions, Cash flow.<br><span class="zh">信用六 C：Character、Capacity、Capital、Collateral、Conditions、Cash flow。</span></div>
+    </details>
+  </div>
+  <div class="mcq">
+    <div class="q">17. Which best strengthens trade secret protection? <span class="zh">以下哪項最能加強商業秘密的保護？</span> <span class="tag">Ch8</span></div>
+    <ul class="opts">
+      <li><span class="letter">A.</span> Registering it with the patent office <span class="zh">向專利局註冊</span></li>
+      <li><span class="letter">B.</span> Publishing it in an industry journal <span class="zh">刊登在行業期刊</span></li>
+      <li><span class="letter">C.</span> Sharing it with all employees <span class="zh">與所有員工分享</span></li>
+      <li class="correct"><span class="letter">D.</span> <span class="chk">✅ </span>Keeping it confidential on a need-to-know basis <span class="zh">只讓「需要知道」的人知悉</span></li>
+    </ul>
+    <details class="ansbox"><summary>顯示答案與解釋 Show answer</summary>
+    <div class="ans"><b>答案 Answer：D</b><br>Trade secrets need no registration; they are protected by keeping them confidential (need-to-know, restricted access, labeled documents).<br><span class="zh">商業秘密不需註冊，靠保密保護（need-to-know、限制存取、標示文件）。</span></div>
+    </details>
+  </div>
+  <div class="mcq">
+    <div class="q">18. A company&#x27;s name and logo, used to distinguish its goods from others&#x27;, are protected as a… <span class="zh">公司用來區別其商品的名稱與標誌，受什麼保護？</span> <span class="tag">Ch8</span></div>
+    <ul class="opts">
+      <li><span class="letter">A.</span> trade secret <span class="zh">商業機密</span></li>
+      <li><span class="letter">B.</span> utility patent <span class="zh">實用新型專利</span></li>
+      <li class="correct"><span class="letter">C.</span> <span class="chk">✅ </span>trademark <span class="zh">商標</span></li>
+      <li><span class="letter">D.</span> copyright over an idea <span class="zh">對想法的版權</span></li>
+    </ul>
+    <details class="ansbox"><summary>顯示答案與解釋 Show answer</summary>
+    <div class="ans"><b>答案 Answer：C</b><br>A trademark is a sign (words, symbols, colors, shapes, even sounds) that distinguishes one company&#x27;s goods or services from another&#x27;s.<br><span class="zh">商標是用來區別不同企業商品／服務的標誌（文字、符號、顏色、形狀甚至聲音）。</span></div>
+    </details>
+  </div>
+  <div class="mcq">
+    <div class="q">19. Which is a disadvantage of external growth such as mergers and acquisitions? <span class="zh">併購等外部成長方式的缺點是？</span> <span class="tag">Ch9</span></div>
+    <ul class="opts">
+      <li><span class="letter">A.</span> Slower growth <span class="zh">成長較慢</span></li>
+      <li class="correct"><span class="letter">B.</span> <span class="chk">✅ </span>Culture clash and operational complexity <span class="zh">文化衝突與營運複雜</span></li>
+      <li><span class="letter">C.</span> Less access to new markets <span class="zh">較難進入新市場</span></li>
+      <li><span class="letter">D.</span> No economies of scale <span class="zh">沒有規模經濟</span></li>
+    </ul>
+    <details class="ansbox"><summary>顯示答案與解釋 Show answer</summary>
+    <div class="ans"><b>答案 Answer：B</b><br>External growth gives fast access to new markets/tech/brands and scale, but risks culture clash, complexity, loss of flexibility and antitrust issues.<br><span class="zh">外部成長能快速取得新市場／技術／品牌與規模，但有文化衝突、營運複雜、失去彈性、反壟斷等風險。</span></div>
+    </details>
+  </div>
+  <div class="mcq">
+    <div class="q">20. A bakery doubles its output and the average cost per loaf falls. This is an example of… <span class="zh">一間麵包店把產量加倍，每個麵包的平均成本下降。這是……的例子。</span> <span class="tag">Ch9</span></div>
+    <ul class="opts">
+      <li><span class="letter">A.</span> economies of scope <span class="zh">範疇經濟</span></li>
+      <li><span class="letter">B.</span> benchmarking <span class="zh">標竿比較</span></li>
+      <li class="correct"><span class="letter">C.</span> <span class="chk">✅ </span>economies of scale <span class="zh">規模經濟</span></li>
+      <li><span class="letter">D.</span> market leadership <span class="zh">市場領導地位</span></li>
+    </ul>
+    <details class="ansbox"><summary>顯示答案與解釋 Show answer</summary>
+    <div class="ans"><b>答案 Answer：C</b><br>Economies of scale: increasing production lowers the average cost per unit.<br><span class="zh">規模經濟：產量增加，單位平均成本下降。</span></div>
+    </details>
+  </div>
+</section>
+<!-- ================= Mock 2 Part B ================= -->
+<section class="chapter" id="m2b">
+  <h2><span class="num">2B</span>Mock Paper 2 — Part B：Uber Business Model</h2>
+  <div class="example">
+    <div class="head">題目：分析 Uber 的商業模式，填寫 BMC 九宮格，並指出其模式的優點與缺點（至少 120 words）</div>
+    <div class="body">
+      <div class="answer">
+        <strong>1. What is Uber's business model based on？</strong><br>Uber's business model is based on a <em>commission model</em>: it is an intermediary platform that matches riders with independent drivers and takes a cut (service fee) of each ride. It owns the app and network rather than the cars. 以「佣金制」為核心：Uber 是中介平台，配對乘客與獨立司機，並從每次行程抽取佣金；它擁有的是 App 與網絡，而不是車輛。
+      </div>
+      <table>
+        <tr><th>Block</th><th>範例答案 Model answer</th></tr>
+        <tr><td>Value Proposition</td><td>Riders: convenient, fast, cashless rides with transparent price and tracking. Drivers: flexible income opportunity 乘客：方便快捷、無現金、價格透明可追蹤；司機：彈性賺錢機會</td></tr>
+        <tr><td>Customer Segments</td><td>Two-sided: riders (commuters, travelers) and drivers/delivery partners 雙邊市場：乘客（通勤、旅客）與司機／外送夥伴</td></tr>
+        <tr><td>Channels</td><td>Mobile app (main channel), website, app stores 手機 App（主要通路）、網站、應用商店</td></tr>
+        <tr><td>Customer Relationships</td><td>Self-service app, ratings and reviews, in-app support, promotions/loyalty offers 自助 App、雙向評分、App 內客服、優惠活動</td></tr>
+        <tr><td>Revenue Streams</td><td>Commission / service fee on each ride (and delivery orders), surge pricing 每次行程（與外賣訂單）抽成、尖峰加價</td></tr>
+        <tr><td>Key Resources</td><td>App and matching algorithm, driver network, brand, user and location data App 與配對演算法、司機網絡、品牌、用戶與位置數據</td></tr>
+        <tr><td>Key Activities</td><td>Platform development, matching riders and drivers, pricing, safety and trust, marketing 平台開發、配對乘客與司機、定價、安全與信任機制、行銷</td></tr>
+        <tr><td>Key Partnerships</td><td>Drivers, payment processors, map/navigation providers, insurers, local regulators 司機、支付服務商、地圖導航供應商、保險公司、地方監管機構</td></tr>
+        <tr><td>Cost Structure</td><td>Technology and operations, driver incentives, insurance, marketing, regulatory and legal costs 技術與營運、司機獎勵、保險、行銷、法規與法律成本</td></tr>
+      </table>
+      <div class="answer">
+        <strong>3. Strength(s)：</strong> The <em>asset-light platform</em> scales quickly because Uber does not own the cars, and <em>network effects</em> (more drivers attract more riders and vice versa) strengthen its position. 輕資產平台，不用擁有車輛即可快速擴張；網絡效應（司機越多吸引越多乘客，反之亦然）鞏固其地位。<br><br><strong>4. Weakness(es)：</strong> Heavy dependence on <em>independent drivers</em>, exposure to <em>regulation</em> (licensing, worker classification) and <em>price competition</em> in each city can squeeze margins. 高度依賴獨立司機；面臨牌照、勞工身分等法規風險；各城市的價格競爭會壓縮利潤。
+      </div>
+      <div class="tip"><strong>作答提醒：</strong>先寫一句 business model 屬於哪一種（Production／Advertising／Commission／Subscription／Freemium／Accessories），再按九宮格逐格填，最後用「優點＋缺點」各一句，字數即可超過 120。</div>
+    </div>
+  </div>
+</section>
+<!-- ================= Mock 2 Part C ================= -->
+<section class="chapter" id="m2c">
+  <h2><span class="num">2C</span>Mock Paper 2 — Part C：Essay</h2>
+  <div class="example">
+    <div class="head">題目：選兩個你認為最相關、最有挑戰性、或修課前從未想過的概念，並討論（至少 100 words）</div>
+    <div class="body">
+      <div class="answer">
+        <strong>建議寫法（三段式）：</strong> ① 定義概念；② 為什麼對你「更相關／更有挑戰／是新觀念」；③ 舉一個具體例子。<br><br>
+        <strong>範例概念 1：Features vs Benefits</strong><br>
+        <em>English：</em> I used to describe products by listing specifications. This course taught me that a <em>feature</em> says what a product does, while a <em>benefit</em> explains why it matters to the customer, and effective positioning sells benefits. For example, "stores 1,000 phone numbers" is a feature, but "instant access to family, friends and business contacts" is the benefit customers actually buy.<br>
+        <em>中文：</em>我以前介紹產品只會列規格。這門課讓我明白「特徵」是產品能做什麼，「利益」是對顧客有什麼意義，有效的定位賣的是利益。例如「可儲存 1,000 個電話號碼」是特徵，「隨時聯繫家人、朋友與客戶」才是顧客真正想買的利益。<br><br>
+        <strong>範例概念 2：Challenges of Growth（Cash Flow Management）</strong><br>
+        <em>English：</em> I had never thought that growing too fast can hurt a business. Growth needs more and more cash for inventory, staff and equipment, so cash flow management becomes a day-to-day challenge, together with quality control and capital constraints. For example, a restaurant that opens three new branches at once may be profitable on paper but run out of cash to pay suppliers.<br>
+        <em>中文：</em>我從沒想過成長太快也會傷害企業。成長需要越來越多現金來支付存貨、人手與設備，所以現金流管理，連同品質控制與資金限制，成為日常挑戰。例如一間餐廳同時開三間分店，帳面上可能有利潤，卻可能因現金不足而付不出供應商的貨款。
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  CISC3028 Entrepreneurship · Mock Paper 1–2 · 最後更新 2026-10
+</footer>
+
+</div>
+</div>
+<script>
+(function(){
+  var sidebar=document.getElementById('sidebar');
+  var toggle=document.getElementById('sidebarToggle');
+  var wrap=document.getElementById('pageWrap');
+  function isMobile(){return window.innerWidth<=860;}
+  function setState(hidden){
+    sidebar.classList.toggle('collapsed',hidden);
+    wrap.classList.toggle('full',hidden||isMobile());
+    try{localStorage.setItem('cisc3028_sidebar_hidden',hidden?'1':'0');}catch(e){}
+  }
+  var saved=null;
+  try{saved=localStorage.getItem('cisc3028_sidebar_hidden');}catch(e){}
+  setState(isMobile() ? (saved===null ? true : saved==='1') : saved==='1');
+  toggle.addEventListener('click',function(){
+    setState(!sidebar.classList.contains('collapsed'));
+  });
+  document.querySelectorAll('details.ansbox').forEach(function(d){d.addEventListener('toggle',function(){d.closest('.mcq').classList.toggle('revealed',d.open);});});
+  document.querySelectorAll('[data-open],[data-close]').forEach(function(b){b.addEventListener('click',function(){var open=b.hasAttribute('data-open');var id=b.getAttribute('data-open')||b.getAttribute('data-close');document.querySelectorAll('#'+id+' details.ansbox').forEach(function(d){d.open=open;});});});
+  sidebar.addEventListener('click',function(e){
+    if(e.target.tagName==='A' && isMobile()){ setState(true); }
+  });
+  window.addEventListener('resize',function(){
+    wrap.classList.toggle('full', sidebar.classList.contains('collapsed') || isMobile());
+  });
+})();
+</script>
+</body>
+</html>
