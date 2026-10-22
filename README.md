@@ -232,3 +232,11 @@
 ---
 
 **最後更新**：2026 年 10 月
+
+---
+
+## CampusLoop Demo（CISC3028 Group 01）
+
+| 檔案 | 說明 | 預覽連結 |
+|------|------|----------|
+| `campusloop/index.html` | CampusLoop（UM 校園物品租借與轉售平台）互動原型：手機畫面 + 講稿面板，兩個場景（租借計算機、畢業搬離轉售），中英切換 | [🔗 預覽](https://howenghong.github.io/Tutoring-content/campusloop/) |
