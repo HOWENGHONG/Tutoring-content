@@ -11,36 +11,32 @@
 <style>
   :root{
     --ink:#0e1b2e; --azul:#1f4e9c; --azul-deep:#163a75; --tile:#f3f6fb; --paper:#ffffff;
-    --mint:#1fa37c; --mint-soft:#e3f6ef; --tag:#ffd23f; --tag-soft:#fff6d1; --coral:#d9482b;
+    --mint:#1fa37c; --mint-soft:#e3f6ef; --tag:#ffd23f; --tag-soft:#fff6d1; --coral:#d9482b; --coral-soft:#fdeae6;
     --muted:#53647c; --line:#d6dfec;
     --display:"Bricolage Grotesque","Noto Sans TC",system-ui,sans-serif;
     --body:"Noto Sans TC",system-ui,-apple-system,"Segoe UI","PingFang TC","Microsoft JhengHei",sans-serif;
   }
   *{box-sizing:border-box;margin:0;padding:0;}
-  html{scroll-behavior:smooth;}
   body{
     font-family:var(--body);color:var(--ink);line-height:1.65;min-height:100vh;
     background-color:var(--tile);
     background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='72' height='72' viewBox='0 0 72 72'%3E%3Cg fill='none' stroke='%231f4e9c' stroke-opacity='.07' stroke-width='1.4'%3E%3Ccircle cx='36' cy='36' r='14'/%3E%3Ccircle cx='36' cy='0' r='14'/%3E%3Ccircle cx='36' cy='72' r='14'/%3E%3Ccircle cx='0' cy='36' r='14'/%3E%3Ccircle cx='72' cy='36' r='14'/%3E%3C/g%3E%3C/svg%3E");
   }
   button{font:inherit;color:inherit;cursor:pointer;border:none;background:none;}
+  input,select{font:inherit;color:inherit;}
   :focus-visible{outline:3px solid var(--tag);outline-offset:2px;box-shadow:0 0 0 5px var(--ink);}
 
-  /* ---------- top bar ---------- */
   .topbar{max-width:1180px;margin:0 auto;padding:18px 24px 0;display:flex;align-items:center;justify-content:space-between;gap:12px;}
   .brand{display:flex;align-items:center;gap:10px;font-family:var(--display);font-weight:800;font-size:1.35rem;letter-spacing:-.01em;color:var(--azul-deep);}
   .brand small{font-family:var(--body);font-weight:500;font-size:.82rem;color:var(--muted);margin-left:4px;}
-  .lang{display:flex;background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:3px;}
-  .lang{flex-shrink:0;}
+  .lang{display:flex;background:var(--paper);border:1px solid var(--line);border-radius:999px;padding:3px;flex-shrink:0;}
   .lang button{white-space:nowrap;padding:5px 14px;border-radius:999px;font-size:.84rem;font-weight:500;color:var(--muted);}
   .lang button[aria-pressed="true"]{background:var(--azul);color:#fff;}
 
-  /* ---------- layout ---------- */
   .stage{max-width:1180px;margin:0 auto;padding:22px 24px 48px;display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:40px;align-items:start;}
   .rail{display:flex;flex-direction:column;gap:18px;min-width:0;}
   .phone-col{position:sticky;top:18px;display:flex;flex-direction:column;align-items:center;gap:12px;}
 
-  /* ---------- presenter rail ---------- */
   .progress{display:flex;align-items:center;gap:16px;}
   .ring{flex-shrink:0;width:68px;height:68px;position:relative;}
   .ring svg{width:68px;height:68px;transform:rotate(-90deg);}
@@ -51,7 +47,7 @@
   .progress .meta b{display:block;font-family:var(--display);font-size:1.05rem;color:var(--ink);font-weight:800;}
 
   .scene{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:24px 26px;box-shadow:0 10px 30px rgba(22,58,117,.08);}
-  .scene h1{font-family:var(--display);font-weight:800;font-size:clamp(1.7rem,3.2vw,2.35rem);line-height:1.18;letter-spacing:-.015em;color:var(--azul-deep);margin-bottom:16px;}
+  .scene h1{font-family:var(--display);font-weight:800;font-size:clamp(1.6rem,3vw,2.2rem);line-height:1.18;letter-spacing:-.015em;color:var(--azul-deep);margin-bottom:16px;}
   .cue{padding:12px 0;border-top:1px solid var(--line);}
   .cue h2{font-size:.9rem;font-weight:700;color:var(--azul);margin-bottom:3px;}
   .cue p{font-size:1.02rem;max-width:62ch;}
@@ -63,12 +59,11 @@
   .btn.primary:hover{background:var(--azul-deep);}
   .btn.ghost{background:var(--paper);border:1px solid var(--line);color:var(--azul-deep);}
   .btn.ghost:hover{background:var(--tile);}
-  .btn[disabled]{opacity:.4;cursor:not-allowed;}
   .hint{font-size:.82rem;color:var(--muted);}
 
   .steps{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:18px 22px;}
-  .steps h3{font-size:.95rem;font-weight:700;margin-bottom:8px;color:var(--ink);}
-  .steps ol{list-style:none;position:relative;}
+  .steps h3{font-size:.95rem;font-weight:700;margin-bottom:8px;}
+  .steps ol{list-style:none;}
   .steps li{position:relative;padding-left:34px;}
   .steps li::before{content:"";position:absolute;left:10px;top:0;bottom:0;width:2px;background:var(--line);}
   .steps li:first-child::before{top:50%;}
@@ -78,100 +73,122 @@
   .steps li.done button::before{background:var(--mint);border-color:var(--mint);}
   .steps li.now button{color:var(--ink);font-weight:700;}
   .steps li.now button::before{border-color:var(--azul);background:var(--tag);}
-  .steps .grp{font-size:.78rem;font-weight:700;color:var(--azul);padding:10px 0 2px 34px;}
-  .steps li.grp-gap{margin-top:0;}
 
   /* ---------- phone ---------- */
   .phone{width:360px;max-width:100%;height:700px;background:var(--ink);border-radius:46px;padding:12px;box-shadow:0 24px 50px rgba(14,27,46,.28);position:relative;}
   .phone::before{content:"";position:absolute;top:20px;left:50%;width:84px;height:22px;margin-left:-42px;background:var(--ink);border-radius:0 0 14px 14px;z-index:5;}
   .screen{width:100%;height:100%;background:var(--paper);border-radius:36px;overflow:hidden;display:flex;flex-direction:column;position:relative;}
   .status{height:34px;padding:10px 24px 0;display:flex;justify-content:space-between;font-size:.72rem;font-weight:700;flex-shrink:0;}
-  .appbar{display:flex;align-items:center;justify-content:space-between;padding:4px 18px 10px;flex-shrink:0;}
+  .appbar{display:flex;align-items:center;justify-content:space-between;padding:4px 18px 8px;flex-shrink:0;min-height:36px;}
   .appbar .logo{display:flex;align-items:center;gap:7px;font-family:var(--display);font-weight:800;color:var(--azul-deep);font-size:1.08rem;}
-  .appbar .back{font-size:.85rem;color:var(--muted);}
-  .appbar .who{font-size:.8rem;color:var(--muted);}
-  .body{flex:1;overflow-y:auto;padding:0 18px 14px;scrollbar-width:none;}
+  .appbar .back{font-size:.88rem;color:var(--azul);font-weight:700;padding:4px 0;}
+  .appbar .who{font-size:.78rem;color:var(--muted);}
+  .appbar .title{font-weight:700;font-size:.9rem;}
+  .body{flex:1;overflow-y:auto;padding:0 18px 16px;scrollbar-width:none;}
   .body::-webkit-scrollbar{display:none;}
-  .enter{animation:slidein .22s ease-out;}
-  @keyframes slidein{from{opacity:0;transform:translateX(18px);}to{opacity:1;transform:none;}}
-  .tabbar{display:flex;justify-content:space-around;border-top:1px solid var(--line);padding:8px 0 12px;font-size:.68rem;color:var(--muted);flex-shrink:0;background:var(--paper);}
-  .tabbar span{display:flex;flex-direction:column;align-items:center;gap:1px;}
-  .tabbar .on{color:var(--azul);font-weight:700;}
-  .tabbar i{font-style:normal;font-size:1.05rem;}
+  .enter{animation:slidein .2s ease-out;}
+  @keyframes slidein{from{opacity:0;transform:translateX(16px);}to{opacity:1;transform:none;}}
+  .tabbar{display:flex;justify-content:space-around;border-top:1px solid var(--line);padding:6px 0 10px;font-size:.68rem;color:var(--muted);flex-shrink:0;background:var(--paper);}
+  .tabbar button{display:flex;flex-direction:column;align-items:center;gap:1px;padding:2px 10px;color:var(--muted);position:relative;}
+  .tabbar button.on{color:var(--azul);font-weight:700;}
+  .tabbar i{font-style:normal;font-size:1.1rem;}
+  .tabbar .dot{position:absolute;top:0;right:4px;min-width:16px;height:16px;border-radius:8px;background:var(--coral);color:#fff;font-size:.62rem;display:flex;align-items:center;justify-content:center;padding:0 4px;}
 
-  .ph-h{font-family:var(--display);font-weight:800;font-size:1.3rem;line-height:1.25;margin:4px 0 10px;color:var(--ink);}
-  .ph-sub{font-size:.82rem;color:var(--muted);margin-bottom:10px;}
-  .search{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:12px;padding:9px 12px;font-size:.86rem;color:var(--muted);background:var(--tile);margin-bottom:12px;}
-  .chips{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:14px;}
-  .chip{padding:6px 12px;border-radius:999px;border:1px solid var(--line);font-size:.8rem;background:var(--paper);}
-  .chip.go{background:var(--azul);color:#fff;border-color:var(--azul);font-weight:700;position:relative;}
-  .pulse::after{content:"";position:absolute;right:-4px;top:-4px;width:12px;height:12px;border-radius:50%;background:var(--tag);box-shadow:0 0 0 0 rgba(255,210,63,.8);animation:pulse 1.6s infinite;}
-  @keyframes pulse{70%{box-shadow:0 0 0 10px rgba(255,210,63,0);}100%{box-shadow:0 0 0 0 rgba(255,210,63,0);}}
-  .sec{font-size:.86rem;font-weight:700;margin:6px 0 8px;}
-  .card{display:flex;gap:12px;align-items:center;border:1px solid var(--line);border-radius:14px;padding:10px;margin-bottom:9px;background:var(--paper);width:100%;text-align:left;}
-  button.card{transition:border-color .15s, box-shadow .15s;}
-  button.card.go{border-color:var(--azul);box-shadow:0 0 0 2px rgba(31,78,156,.15);position:relative;}
-  .thumb{width:52px;height:52px;border-radius:12px;background:var(--tile);display:flex;align-items:center;justify-content:center;font-size:1.7rem;flex-shrink:0;}
-  .card .t{font-weight:700;font-size:.9rem;line-height:1.3;}
-  .card .s{font-size:.74rem;color:var(--muted);}
-  .card .p{margin-left:auto;text-align:right;font-size:.8rem;font-weight:700;color:var(--azul-deep);white-space:nowrap;}
-  .card .p small{display:block;font-weight:400;color:var(--muted);font-size:.7rem;}
-  .badge{display:inline-block;background:var(--mint-soft);color:#0b6b50;font-size:.68rem;font-weight:700;padding:1px 7px;border-radius:8px;margin-top:2px;}
-  .banner{background:var(--tag);border-radius:16px;padding:14px 16px;margin-bottom:14px;}
-  .banner b{display:block;font-family:var(--display);font-size:1.05rem;margin-bottom:2px;}
-  .banner p{font-size:.8rem;margin-bottom:10px;}
-  .cta{display:block;width:100%;padding:13px;border-radius:14px;background:var(--azul);color:#fff;font-weight:700;font-size:.95rem;text-align:center;margin-top:12px;transition:transform .12s;}
+  .ph-h{font-family:var(--display);font-weight:800;font-size:1.28rem;line-height:1.25;margin:2px 0 8px;}
+  .ph-sub{font-size:.8rem;color:var(--muted);margin-bottom:10px;}
+  .sec{font-size:.86rem;font-weight:700;margin:12px 0 7px;display:flex;justify-content:space-between;align-items:center;}
+  .sec a,.sec button{font-size:.78rem;font-weight:500;color:var(--azul);}
+  .search{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:12px;padding:9px 12px;font-size:.86rem;color:var(--muted);background:var(--tile);margin-bottom:10px;width:100%;text-align:left;}
+  .search input{border:none;background:none;outline:none;flex:1;min-width:0;color:var(--ink);font-size:.88rem;}
+  .search:focus-within{border-color:var(--azul);box-shadow:0 0 0 3px rgba(31,78,156,.15);}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;}
+  .chip{padding:5px 11px;border-radius:999px;border:1px solid var(--line);font-size:.78rem;background:var(--paper);}
+  .chip[aria-pressed="true"]{background:var(--azul);color:#fff;border-color:var(--azul);font-weight:700;}
+  .card{display:flex;gap:11px;align-items:center;border:1px solid var(--line);border-radius:14px;padding:9px;margin-bottom:8px;background:var(--paper);width:100%;text-align:left;}
+  button.card:hover{border-color:var(--azul);}
+  .card.off{opacity:.55;}
+  .thumb{width:50px;height:50px;border-radius:12px;background:var(--tile);display:flex;align-items:center;justify-content:center;font-size:1.65rem;flex-shrink:0;}
+  .card .t{font-weight:700;font-size:.88rem;line-height:1.3;}
+  .card .s{font-size:.72rem;color:var(--muted);}
+  .card .p{margin-left:auto;text-align:right;font-size:.78rem;font-weight:700;color:var(--azul-deep);white-space:nowrap;padding-left:4px;}
+  .card .p small{display:block;font-weight:400;color:var(--muted);font-size:.68rem;}
+  .badge{display:inline-block;background:var(--mint-soft);color:#0b6b50;font-size:.64rem;font-weight:700;padding:1px 7px;border-radius:8px;margin:2px 3px 0 0;}
+  .badge.y{background:var(--tag);color:var(--ink);}
+  .badge.g{background:var(--tile);color:var(--muted);}
+  .badge.r{background:var(--coral-soft);color:var(--coral);}
+  .banner{background:var(--tag);border-radius:16px;padding:13px 15px;margin-bottom:12px;}
+  .banner b{display:block;font-family:var(--display);font-size:1.02rem;margin-bottom:1px;}
+  .banner p{font-size:.78rem;margin-bottom:8px;}
+  .cta{display:block;width:100%;padding:12px;border-radius:14px;background:var(--azul);color:#fff;font-weight:700;font-size:.92rem;text-align:center;margin-top:12px;transition:transform .12s, opacity .15s;}
   .cta:active{transform:scale(.98);}
   .cta[disabled]{opacity:.4;cursor:not-allowed;}
   .cta.dark{background:var(--ink);}
-  .cta.small{display:inline-block;width:auto;padding:8px 16px;margin:0;font-size:.82rem;}
+  .cta.mint{background:var(--mint);}
+  .cta.line{background:var(--paper);color:var(--azul-deep);border:1px solid var(--line);}
+  .cta.small{display:inline-block;width:auto;padding:7px 14px;margin:6px 6px 0 0;font-size:.8rem;border-radius:10px;}
 
-  /* hang tag */
-  .tagcard{position:relative;background:var(--tag-soft);border:2px solid var(--ink);border-radius:16px 16px 18px 18px;padding:34px 14px 14px;margin:22px 0 14px;}
-  .tagcard .hole{position:absolute;top:14px;left:50%;width:14px;height:14px;margin-left:-7px;border-radius:50%;background:var(--paper);border:2px solid var(--ink);}
-  .tagcard .big{font-size:2.6rem;text-align:center;line-height:1.2;}
-  .tagcard h2{font-family:var(--display);font-size:1.15rem;text-align:center;margin:2px 0;}
-  .tagcard .own{text-align:center;font-size:.78rem;color:var(--muted);margin-bottom:8px;}
+  .tagcard{position:relative;background:var(--tag-soft);border:2px solid var(--ink);border-radius:16px 16px 18px 18px;padding:32px 14px 12px;margin:20px 0 12px;}
+  .tagcard .hole{position:absolute;top:13px;left:50%;width:14px;height:14px;margin-left:-7px;border-radius:50%;background:var(--paper);border:2px solid var(--ink);}
+  .tagcard .big{font-size:2.5rem;text-align:center;line-height:1.2;}
+  .tagcard h2{font-family:var(--display);font-size:1.12rem;text-align:center;margin:2px 0;}
+  .tagcard .own{text-align:center;font-size:.76rem;color:var(--muted);margin-bottom:8px;}
   .record{list-style:none;font-size:.8rem;border-top:1.5px dashed var(--ink);padding-top:8px;}
-  .record li{display:flex;gap:8px;padding:2px 0;}
+  .record li{display:flex;gap:8px;padding:1px 0;}
   .record li b{color:#0b6b50;}
   .seg{display:flex;border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:10px;}
-  .seg button{flex:1;padding:9px 0;font-size:.85rem;background:var(--paper);border-right:1px solid var(--line);}
+  .seg button{flex:1;padding:8px 0;font-size:.82rem;background:var(--paper);border-right:1px solid var(--line);}
   .seg button:last-child{border-right:none;}
   .seg button[aria-pressed="true"]{background:var(--azul);color:#fff;font-weight:700;}
-  .lines div{display:flex;justify-content:space-between;font-size:.84rem;padding:3px 0;}
-  .lines .tot{border-top:1px solid var(--line);margin-top:4px;padding-top:7px;font-weight:700;font-size:.95rem;}
-  .save{background:var(--mint-soft);color:#0b6b50;border-radius:12px;padding:9px 12px;font-size:.82rem;font-weight:700;margin-top:10px;}
-  .rule{display:flex;gap:10px;font-size:.82rem;padding:8px 0;border-bottom:1px solid var(--line);}
-  .rule i{font-style:normal;font-size:1.1rem;}
-  .chk{display:flex;gap:10px;align-items:center;width:100%;text-align:left;padding:11px 12px;border:1px solid var(--line);border-radius:12px;margin-bottom:8px;font-size:.88rem;}
+  .lines div{display:flex;justify-content:space-between;font-size:.84rem;padding:3px 0;gap:10px;}
+  .lines .tot{border-top:1px solid var(--line);margin-top:4px;padding-top:7px;font-weight:700;font-size:.94rem;}
+  .note{border-radius:12px;padding:9px 12px;font-size:.8rem;margin-top:10px;}
+  .note.good{background:var(--mint-soft);color:#0b6b50;font-weight:700;}
+  .note.warn{background:var(--coral-soft);color:var(--coral);font-weight:700;}
+  .note.info{background:var(--tile);color:var(--muted);}
+  .rule{display:flex;gap:10px;font-size:.8rem;padding:7px 0;border-bottom:1px solid var(--line);}
+  .rule i{font-style:normal;font-size:1.05rem;}
+  .chk{display:flex;gap:10px;align-items:center;width:100%;text-align:left;padding:10px 12px;border:1px solid var(--line);border-radius:12px;margin-bottom:7px;font-size:.86rem;}
   .chk .box{width:22px;height:22px;border-radius:7px;border:2px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:.8rem;color:#fff;flex-shrink:0;}
   .chk[aria-checked="true"]{border-color:var(--mint);background:var(--mint-soft);}
   .chk[aria-checked="true"] .box{background:var(--mint);border-color:var(--mint);}
-  .photo{height:92px;border:2px dashed var(--line);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:.82rem;color:var(--muted);gap:8px;margin-bottom:6px;}
-  .tl{list-style:none;margin:6px 0 10px;}
-  .tl li{position:relative;padding:0 0 12px 24px;font-size:.84rem;}
-  .tl li::before{content:"";position:absolute;left:5px;top:6px;width:10px;height:10px;border-radius:50%;background:var(--mint);}
-  .tl li::after{content:"";position:absolute;left:9px;top:16px;bottom:-2px;width:2px;background:var(--line);}
+  .chk input[type=number]{width:70px;margin-left:auto;border:1px solid var(--line);border-radius:8px;padding:3px 6px;font-size:.82rem;}
+  .photo{height:70px;border:2px dashed var(--line);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:.8rem;color:var(--muted);gap:8px;margin:2px 0 4px;width:100%;}
+  .photo.on{border-color:var(--mint);color:#0b6b50;background:var(--mint-soft);border-style:solid;}
+  .tl{list-style:none;margin:4px 0 10px;}
+  .tl li{position:relative;padding:0 0 10px 24px;font-size:.82rem;color:var(--muted);}
+  .tl li::before{content:"";position:absolute;left:4px;top:5px;width:11px;height:11px;border-radius:50%;background:var(--paper);border:2px solid var(--line);}
+  .tl li::after{content:"";position:absolute;left:9px;top:17px;bottom:-2px;width:2px;background:var(--line);}
   .tl li:last-child::after{display:none;}
-  .tl small{display:block;color:var(--muted);font-size:.74rem;}
-  .refund{background:var(--mint);color:#fff;border-radius:14px;padding:12px 14px;display:flex;justify-content:space-between;align-items:center;font-weight:700;margin-bottom:12px;}
-  .stars{display:flex;gap:4px;font-size:1.8rem;justify-content:center;margin:6px 0 8px;}
+  .tl li.done{color:var(--ink);}
+  .tl li.done::before{background:var(--mint);border-color:var(--mint);}
+  .tl li.now{color:var(--ink);font-weight:700;}
+  .tl li.now::before{background:var(--tag);border-color:var(--azul);}
+  .refund{background:var(--mint);color:#fff;border-radius:14px;padding:11px 14px;display:flex;justify-content:space-between;align-items:center;font-weight:700;margin:6px 0 10px;font-size:.9rem;}
+  .refund.part{background:var(--coral);}
+  .stars{display:flex;gap:4px;font-size:1.8rem;justify-content:center;margin:4px 0 6px;}
   .stars button{color:var(--line);line-height:1;}
   .stars button.on{color:#f5a400;}
-  .loopdone{text-align:center;font-size:.8rem;color:var(--muted);margin-top:8px;}
-  .sold{font-size:.68rem;font-weight:700;padding:2px 8px;border-radius:8px;background:var(--ink);color:#fff;margin-top:2px;display:inline-block;}
-  .sold.res{background:var(--tag);color:var(--ink);}
-  .imp{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0;}
-  .imp div{background:var(--tile);border-radius:14px;padding:12px;}
-  .imp b{display:block;font-family:var(--display);font-size:1.45rem;color:var(--azul-deep);line-height:1.1;}
-  .imp span{font-size:.74rem;color:var(--muted);}
-  .vals{display:flex;flex-direction:column;gap:7px;margin-top:6px;}
-  .vals div{border-left:4px solid var(--tag);background:var(--tile);border-radius:0 10px 10px 0;padding:7px 10px;font-size:.82rem;}
-  .vals b{display:block;}
+  .imp{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0;}
+  .imp div{background:var(--tile);border-radius:14px;padding:10px 12px;}
+  .imp b{display:block;font-family:var(--display);font-size:1.3rem;color:var(--azul-deep);line-height:1.15;}
+  .imp span{font-size:.72rem;color:var(--muted);}
+  .field{margin-bottom:10px;}
+  .field label{display:block;font-size:.78rem;font-weight:700;margin-bottom:3px;}
+  .field input,.field select{width:100%;border:1px solid var(--line);border-radius:10px;padding:9px 10px;font-size:.88rem;background:var(--paper);}
+  .field input:focus,.field select:focus{outline:none;border-color:var(--azul);box-shadow:0 0 0 3px rgba(31,78,156,.15);}
+  .menu button{display:flex;justify-content:space-between;align-items:center;width:100%;padding:12px 4px;border-bottom:1px solid var(--line);font-size:.88rem;text-align:left;}
+  .menu button span:last-child{color:var(--muted);}
+  .profile{display:flex;gap:12px;align-items:center;margin-bottom:10px;}
+  .avatar{width:54px;height:54px;border-radius:50%;background:var(--tag);display:flex;align-items:center;justify-content:center;font-size:1.6rem;}
+  .wallet{background:var(--azul);color:#fff;border-radius:16px;padding:13px 15px;display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}
+  .wallet b{font-family:var(--display);font-size:1.4rem;}
+  .wallet button{background:rgba(255,255,255,.2);color:#fff;border-radius:10px;padding:6px 12px;font-size:.78rem;font-weight:700;}
+  .empty{text-align:center;padding:26px 10px;color:var(--muted);font-size:.84rem;}
+  .empty .em{font-size:2.2rem;display:block;margin-bottom:4px;}
+  .toast{position:absolute;left:16px;right:16px;bottom:76px;background:var(--ink);color:#fff;border-radius:12px;padding:10px 14px;font-size:.82rem;z-index:20;animation:slidein .2s ease-out;box-shadow:0 8px 22px rgba(0,0,0,.25);}
+  .toast.bad{background:var(--coral);}
   .demo-note{font-size:.76rem;color:var(--muted);text-align:center;max-width:340px;}
 
-  /* ---------- responsive ---------- */
   @media(max-width:980px){
     .stage{grid-template-columns:1fr;gap:24px;}
     .phone-col{position:static;order:-1;}
@@ -184,9 +201,7 @@
     .phone{height:640px;border-radius:38px;padding:10px;}
     .screen{border-radius:30px;}
   }
-  @media(prefers-reduced-motion:reduce){
-    *{animation:none !important;transition:none !important;}
-  }
+  @media(prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important;}}
 </style>
 </head>
 <body>
@@ -212,267 +227,497 @@
 
 <script>
 (function(){
-  /* ===== 可修改的人物與數字 / Editable personas and demo numbers ===== */
-  var CONFIG = {
-    amy:   {name:'Amy',   zh:'大一新生',   en:'Year-1 student'},
-    ken:   {name:'Ken',   zh:'大四、準備搬離宿舍', en:'Year-4, moving out'},
-    owner: {name:'Jason', zh:'大三',       en:'Year 3'},
-    buyer: {name:'Lily',  zh:'新生',       en:'New student'},
-    rentPerDay: 6, deposit: 100, newPrice: 180
-  };
-  var MOVEOUT = [
-    {id:'fridge', ico:'🧊', zh:'迷你雪櫃', en:'Mini fridge', price:200, who:'Lily',  st:'sold'},
-    {id:'lamp',   ico:'💡', zh:'書桌燈',   en:'Desk lamp',   price:40,  who:'Marco', st:'sold'},
-    {id:'kettle', ico:'🫖', zh:'電熱水壺', en:'Electric kettle', price:30, who:'Yan', st:'res'},
-    {id:'cooker', ico:'🍚', zh:'小電鍋',   en:'Mini rice cooker', price:60, who:'', st:'res'},
-    {id:'boxes',  ico:'📦', zh:'收納箱',   en:'Storage boxes', price:20, who:'', st:'res'}
+  'use strict';
+  /* ===== 可修改設定 / Editable settings ===== */
+  var CFG = { amy:'Amy', ken:'Ken', lateFee:5, damage:30, startWallet:{amy:300, ken:50} };
+  var NAMES = {jason:'Jason', mei:'Mei', hao:'Hao', sara:'Sara', marco:'Marco', yan:'Yan', lily:'Lily', amy:CFG.amy, ken:CFG.ken};
+  var CATS = [
+    {k:'calc', ico:'🧮', zh:'計算機', en:'Calculators'},
+    {k:'appl', ico:'🔌', zh:'電器',   en:'Appliances'},
+    {k:'tools',ico:'🔧', zh:'工具',   en:'Tools'},
+    {k:'props',ico:'🎭', zh:'活動器材', en:'Event gear'},
+    {k:'dorm', ico:'🛏', zh:'宿舍用品', en:'Dorm'}
   ];
+  var COND = {
+    works: {zh:'功能正常', en:'Works as expected'},
+    clean: {zh:'外觀乾淨', en:'Clean'},
+    nodmg: {zh:'沒有明顯損壞', en:'No visible damage'},
+    acc:   {zh:'配件齊全', en:'Accessories included'}
+  };
+  function seedItems(){ return [
+    {id:'calc1',cat:'calc',ico:'🧮',zh:'科學計算機',en:'Scientific calculator',owner:'jason',mode:'rent',price:6, deposit:100,newPrice:180,rating:4.9,n:23},
+    {id:'calc2',cat:'calc',ico:'📈',zh:'繪圖計算機',en:'Graphing calculator',owner:'mei',mode:'rent',price:15,deposit:200,newPrice:600,rating:4.7,n:11},
+    {id:'calc3',cat:'calc',ico:'💼',zh:'財務計算機',en:'Financial calculator',owner:'hao',mode:'rent',price:8,deposit:120,newPrice:250,rating:4.8,n:9},
+    {id:'appl1',cat:'appl',ico:'🫖',zh:'電熱水壺',en:'Electric kettle',owner:'yan',mode:'sell',price:30,newPrice:90,rating:4.6,n:5},
+    {id:'appl2',cat:'appl',ico:'🌀',zh:'桌上風扇',en:'Desk fan',owner:'mei',mode:'rent',price:8,deposit:60,newPrice:120,rating:4.7,n:11},
+    {id:'appl3',cat:'appl',ico:'📽',zh:'迷你投影機',en:'Mini projector',owner:'marco',mode:'rent',price:40,deposit:300,newPrice:1500,rating:4.9,n:14},
+    {id:'tool1',cat:'tools',ico:'🧰',zh:'工具箱',en:'Toolbox',owner:'hao',mode:'rent',price:10,deposit:80,newPrice:200,rating:4.8,n:9},
+    {id:'tool2',cat:'tools',ico:'🪛',zh:'電鑽',en:'Electric drill',owner:'jason',mode:'rent',price:25,deposit:200,newPrice:500,rating:4.9,n:23},
+    {id:'prop1',cat:'props',ico:'🎭',zh:'舞台劇道具組',en:'Stage prop set',owner:'sara',mode:'rent',price:20,deposit:150,newPrice:400,rating:4.6,n:4},
+    {id:'prop2',cat:'props',ico:'🔊',zh:'藍牙喇叭',en:'Bluetooth speaker',owner:'marco',mode:'rent',price:20,deposit:150,newPrice:400,rating:4.9,n:14},
+    {id:'prop3',cat:'props',ico:'🪧',zh:'活動展板',en:'Event display board',owner:'mei',mode:'rent',price:15,deposit:100,newPrice:300,rating:4.7,n:11},
+    {id:'dorm1',cat:'dorm',ico:'💡',zh:'書桌燈',en:'Desk lamp',owner:'sara',mode:'sell',price:40,newPrice:120,rating:4.6,n:4},
+    {id:'dorm2',cat:'dorm',ico:'📦',zh:'收納箱（3 個）',en:'Storage boxes (set of 3)',owner:'yan',mode:'sell',price:20,newPrice:60,rating:4.6,n:5},
+    {id:'dorm3',cat:'dorm',ico:'🛏',zh:'床上用品組',en:'Bedding set',owner:'hao',mode:'sell',price:80,newPrice:250,rating:4.8,n:9}
+  ].map(function(i){ i.status='available'; i.cond=['works','clean','nodmg']; if(i.mode==='rent'||i.cat==='appl') i.cond.push('acc'); return i; }); }
+  function seedShelf(){ return [
+    {id:'s-fridge',ico:'🧊',zh:'迷你雪櫃',en:'Mini fridge',price:200,newPrice:900,cat:'appl'},
+    {id:'s-lamp',ico:'💡',zh:'書桌燈',en:'Desk lamp',price:40,newPrice:120,cat:'dorm'},
+    {id:'s-kettle',ico:'🫖',zh:'電熱水壺',en:'Electric kettle',price:30,newPrice:90,cat:'appl'},
+    {id:'s-cooker',ico:'🍚',zh:'小電鍋',en:'Mini rice cooker',price:60,newPrice:200,cat:'appl'},
+    {id:'s-boxes',ico:'📦',zh:'收納箱',en:'Storage boxes',price:20,newPrice:60,cat:'dorm'}
+  ]; }
 
-  var S = {step:0, lang:'zh', days:7, checks:[false,false,false,false], rating:0, sel:{fridge:true,lamp:true,kettle:true,cooker:false,boxes:false}};
-  var lastStep = -1;
-  var LAST = 9;
+  var MILES = ['browse','detail','reserve','pickup','rate','moveout','listed','sold'];
+
+  function fresh(lang){
+    return {
+      lang:lang||'zh', user:'amy', route:{n:'home'}, stack:[], toast:null,
+      items:seedItems(), orders:[], seq:1,
+      users:{amy:{wallet:CFG.startWallet.amy, shelf:[]}, ken:{wallet:CFG.startWallet.ken, shelf:seedShelf()}},
+      flags:{}, guide:null,
+      f:{q:'', cat:'all', mode:'all', moveout:false, days:3, retopt:'ontime', photo:false, checks:{}, sel:{}, price:{}, nName:'', nCat:'calc', nMode:'rent', nPrice:'', nDep:''}
+    };
+  }
+  var S = fresh('zh');
+
   function tr(zh,en){return S.lang==='zh'?zh:en;}
-  function who(k){return CONFIG[k].name;}
-  function rent(){return CONFIG.rentPerDay*S.days;}
-  function selItems(){return MOVEOUT.filter(function(m){return S.sel[m.id];});}
-  function selTotal(){return selItems().reduce(function(a,m){return a+m.price;},0);}
+  function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function mop(n){return 'MOP '+n;}
+  function nm(it){return esc(tr(it.zh,it.en));}
+  function item(id){return S.items.filter(function(i){return i.id===id;})[0];}
+  function me(){return S.users[S.user];}
+  function myName(){return NAMES[S.user];}
+  function myOrders(){return S.orders.filter(function(o){return o.buyer===S.user;});}
+  function cat(k){return CATS.filter(function(c){return c.k===k;})[0];}
+  function flag(k){ if(!S.flags[k]){ S.flags[k]=true; S.guide=null; } }
 
-  /* ===== 講稿 / Presenter script ===== */
-  function steps(){ return [
-   {g:tr('場景 A：租借','Scene A: Rent'), n:tr('Amy 需要計算機','Amy needs a calculator'),
-    h:tr('Amy 下週要期中考，只需要一部計算機','Amy has midterms next week and needs a calculator for just a few days'),
-    say:tr('「接著剛才的 Amy：她不想花 MOP '+CONFIG.newPrice+' 買一部只用一週的計算機。她打開 CampusLoop。」','"Back to Amy: she does not want to pay MOP '+CONFIG.newPrice+' for a calculator she will use for one week. She opens CampusLoop."'),
-    show:tr('停在首頁，指出搜尋與分類，點「計算機」。','Stay on the home screen, point at search and categories, then tap Calculators.')},
-   {g:'', n:tr('在校園內找到物品','Find it on campus'),
-    h:tr('搜尋結果全部來自 UM 同學','Every result comes from a UM student'),
-    say:tr('「結果都是同校同學的物品，每件都有評分和「已檢查狀態」標記，比大型二手平台更近、更可信。」','"Every listing is from a fellow UM student, with a rating and a condition-checked badge. It is closer and more trusted than general second-hand platforms."'),
-    show:tr('指出評分、價格、押金，點第一個。','Point at rating, price and deposit, then tap the first listing.')},
-   {g:'', n:tr('看物品與狀態紀錄','Item and condition record'),
-    h:tr('租之前就知道物品狀態，也知道總共要付多少','Amy sees the item condition and the full cost before renting'),
-    say:tr('「物品頁有狀態紀錄。Amy 選租 7 天，系統即時算出租金和可退還的押金，並顯示比買新的省多少。」','"The item page has a condition record. Amy picks the rental period and the app shows rent, refundable deposit, and how much she saves compared with buying new."'),
-    show:tr('切換 1／3／7 天，看金額變化，點「預約」。','Switch between 1, 3 and 7 days to show the price change, then tap Reserve.')},
-   {g:'', n:tr('押金與規則','Deposit and rules'),
-    h:tr('押金和規則先講清楚','Deposit and rules are clear before anything happens'),
-    say:tr('「押金降低雙方風險：好好歸還就全額退還；逾期或損壞，按規則和狀態紀錄處理。」','"The deposit lowers risk for both sides: return the item in good condition and it is fully refunded. Late return or damage is handled by the rules and the condition record."'),
-    show:tr('點「支付押金並預約」（demo 不會真的扣款）。','Tap Pay deposit and reserve (the demo does not charge anything).')},
-   {g:'', n:tr('面交與狀態確認','Pickup check'),
-    h:tr('面交時雙方一起確認物品狀態','Both sides confirm the condition at pickup'),
-    say:tr('「面交時 Amy 和 Jason 對照狀態紀錄逐項確認，並可拍照存證。之後有爭議，就有依據。」','"At pickup, Amy and Jason check each item against the record and can take a photo. If there is a dispute later, there is evidence."'),
-    show:tr('逐項勾選（或按「全部符合」），點「確認狀態」。','Tick each item (or tap All match), then tap Confirm condition.')},
-   {g:'', n:tr('歸還、退押金、評分','Return, refund, rating'),
-    h:tr('歸還後押金退回，雙方互相評分，物品回到流通','After return the deposit is refunded, both sides rate each other, and the item goes back into circulation'),
-    say:tr('「考試結束，Amy 歸還；狀態和紀錄相符，押金退回。評分累積成信任，下一位同學就能放心租。」','"Exams are over and Amy returns it. It matches the record, so the deposit is refunded. Ratings build trust, so the next student can rent with confidence."'),
-    show:tr('給 Jason 打星，點「完成」。','Give Jason a star rating, then tap Finish.')},
-   {g:tr('場景 B：搬離宿舍','Scene B: Move-out'), n:tr('Ken 要搬離宿舍','Ken is moving out'),
-    h:tr('另一邊：Ken 畢業，東西還能用，但沒時間處理','The other side: Ken is graduating with usable items and no time'),
-    say:tr('「Ken 要搬離宿舍，很多東西還能用，丟掉可惜，在大型二手平台逐件處理又太花時間。CampusLoop 在這時段提供搬離專區。」','"Ken is moving out. Many items still work, and throwing them away is a waste, while selling them one by one on a general platform takes too long. CampusLoop offers a move-out section for this period."'),
-    show:tr('點黃色橫幅「搬離專區」。','Tap the yellow move-out banner.')},
-   {g:'', n:tr('一次上架多件物品','List many items at once'),
-    h:tr('勾選物品、確認價格，一次放進搬離批次','Tick items, confirm prices, and add them to one move-out batch'),
-    say:tr('「Ken 勾選要出的物品，價格已有建議值。一次提交，不用逐件寫文案、逐件談。」','"Ken ticks the items he wants to pass on, and prices come with suggestions. One submission, with no need to write and negotiate item by item."'),
-    show:tr('取消或加選物品，看總額變化，點「加入搬離批次」。','Add or remove items to show the total change, then tap Add to move-out batch.')},
-   {g:'', n:tr('新生接手','New students take over'),
-    h:tr('新生與返校同學接手，物品繼續被使用','New and returning students take over, and the items keep being used'),
-    say:tr('「物品出現在給新生的專區，很快有人預約。Ken 收回一點錢，宿舍也清空了，東西沒有被丟掉。」','"The items appear in a section for new students and get reserved quickly. Ken earns some money, the room is cleared, and nothing is thrown away."'),
-    show:tr('看已售出／已預約狀態，點「看整體影響」。','Point at the sold and reserved labels, then tap See the impact.')},
-   {g:tr('總結','Wrap-up'), n:tr('價值','Value'),
-    h:tr('更便宜、更方便、更可信，物品持續流通','Cheaper, more convenient, more trusted, and items keep circulating'),
-    say:tr('「一個循環：Amy 省下買新品的錢，Ken 把用不到的東西變成收入，而且校園裡少了一堆被丟掉的東西。接下來交給下一位介紹可行性與競爭優勢。」','"One loop: Amy avoids buying new, Ken turns unused items into income, and the campus throws away less. Next, we hand over to feasibility and competitor analysis."'),
-    show:tr('停在影響頁，念三個價值，然後交棒。','Stay on the impact screen, read the three values, then hand over.')}
-  ];}
+  /* ===== 導覽 / Navigation ===== */
+  var TABS = ['home','browse','orders','me'];
+  function go(n,args,replace){
+    var cur=S.route;
+    if(TABS.indexOf(n)>-1){ S.stack=[]; }
+    else if(!replace){ S.stack.push(cur); }
+    S.route=Object.assign({n:n},args||{});
+    if(n==='browse') flag('browse');
+    if(n==='detail') flag('detail');
+    if(n==='moveout') flag('moveout');
+    render(true);
+  }
+  function back(){ S.route = S.stack.pop() || {n:'home'}; render(true); }
+  var toastTimer=null;
+  function toast(msg,bad){
+    S.toast={msg:msg,bad:!!bad};
+    var el=document.getElementById('screen');
+    var old=el.querySelector('.toast'); if(old) old.remove();
+    var t=document.createElement('div'); t.className='toast'+(bad?' bad':''); t.setAttribute('role','status'); t.textContent=msg; el.appendChild(t);
+    clearTimeout(toastTimer); toastTimer=setTimeout(function(){ if(t.parentNode) t.remove(); },2600);
+  }
 
-  /* ===== 手機畫面 / Phone screens ===== */
-  function appbar(back, right){
-    return '<div class="appbar">'+(back?'<button class="back" data-act="back">‹ '+tr('返回','Back')+'</button>':
-      '<div class="logo"><svg width="22" height="22" viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="12" fill="none" stroke="#1f4e9c" stroke-width="4" stroke-dasharray="52 24" stroke-linecap="round"/><path d="M26.5 4.5l1.2 7.2-7-1.4z" fill="#1fa37c"/><circle cx="17" cy="17" r="4" fill="#ffd23f"/></svg>CampusLoop</div>')+'<span class="who">'+(right||'')+'</span></div>';
+  /* ===== 交易邏輯 / Business logic ===== */
+  function rentFee(it){ return it.price*S.f.days; }
+  function pay(id){
+    var it=item(id), u=me();
+    var total = it.mode==='rent' ? rentFee(it)+it.deposit : it.price;
+    if(it.status!=='available'){ render(); toast(tr('這件物品已被其他人預約。','Someone else already reserved this item.'),true); return; }
+    if(u.wallet<total){ render(); toast(tr('餘額不足，請先儲值。','Not enough balance. Top up first.'),true); return; }
+    u.wallet-=total; it.status='reserved';
+    var o={id:'o'+(S.seq++), itemId:id, buyer:S.user, mode:it.mode, days:S.f.days, fee: it.mode==='rent'?rentFee(it):it.price, deposit: it.mode==='rent'?it.deposit:0, total:total, status:'reserved', checks:{}, outcome:null, refund:0, rating:0};
+    S.orders.push(o); S.f.checks={}; S.f.photo=false;
+    flag('reserve');
+    S.stack=[]; S.route={n:'order',id:o.id}; render(true);
+    toast(tr('已預約，請到面交地點確認物品。','Reserved. Meet up and check the item.'));
   }
-  function tabbar(on){
-    var t=[['🏠',tr('首頁','Home')],['🔎',tr('租／買','Rent/Buy')],['📦',tr('搬離','Move-out')],['👤',tr('我','Me')]];
-    return '<div class="tabbar">'+t.map(function(x,i){return '<span class="'+(i===on?'on':'')+'"><i>'+x[0]+'</i>'+x[1]+'</span>';}).join('')+'</div>';
+  function credit(owner,amount){ if(S.users[owner]) S.users[owner].wallet+=amount; }
+  function confirmPickup(oid){
+    var o=orderById(oid), it=item(o.itemId);
+    o.status = o.mode==='rent' ? 'active' : 'done';
+    it.status = o.mode==='rent' ? 'rented' : 'sold';
+    if(o.mode==='sell') credit(it.owner,o.fee);
+    S.f.checks={}; S.f.photo=false; flag('pickup');
+    if(it.status==='sold' && S.users[it.owner]) flag('sold');
+    render(); toast(o.mode==='rent'?tr('狀態已確認，開始使用。','Condition confirmed. Enjoy using it.'):tr('交易完成。','Purchase complete.'));
   }
-  function homeScreen(moveout){
-    var name = moveout? who('ken'):who('amy');
-    var h = appbar(false, tr('你好，','Hi, ')+name);
-    h += '<div class="body enter-body">';
-    if(moveout){
-      h += '<div class="banner"><b>'+tr('搬離專區','Move-out section')+'</b><p>'+tr('要離開宿舍？一次把用不到的物品交給新生。','Leaving your room? Pass on your unused items to new students in one go.')+'</p><button class="cta small dark pulse" data-act="next">'+tr('開始整理','Start')+'</button></div>';
-    }
-    h += '<div class="ph-h">'+tr('校園裡的好東西，借用或轉讓','Rent, buy and pass on things on campus')+'</div>';
-    h += '<div class="search">🔎 '+tr('搜尋校園物品','Search items on campus')+'</div>';
-    h += '<div class="chips">'+
-      '<button class="chip'+(moveout?'':' go pulse')+'" '+(moveout?'':'data-act="next"')+'>🧮 '+tr('計算機','Calculators')+'</button>'+
-      '<span class="chip">🔌 '+tr('電器','Appliances')+'</span><span class="chip">🔧 '+tr('工具','Tools')+'</span>'+
-      '<span class="chip">🎭 '+tr('活動道具','Event props')+'</span><span class="chip">🛏 '+tr('宿舍用品','Dorm')+'</span></div>';
-    h += '<div class="sec">'+tr('本週熱門','Popular this week')+'</div>';
-    [['🧮',tr('科學計算機','Scientific calculator'),'MOP '+CONFIG.rentPerDay+tr('/天','/day')],['🎭',tr('舞台劇道具組','Stage prop set'),'MOP 20'+tr('/天','/day')],['🫖',tr('電熱水壺','Electric kettle'),'MOP 30']].forEach(function(c){
-      h += '<div class="card"><div class="thumb">'+c[0]+'</div><div><div class="t">'+c[1]+'</div><div class="s">'+tr('同校同學','UM student')+'</div></div><div class="p">'+c[2]+'</div></div>';
+  function returnItem(oid){
+    var o=orderById(oid), it=item(o.itemId), ded=0;
+    if(S.f.retopt==='late') ded=CFG.lateFee; if(S.f.retopt==='dmg') ded=CFG.damage;
+    ded=Math.min(ded,o.deposit);
+    o.outcome=S.f.retopt; o.refund=o.deposit-ded; o.status='returned';
+    me().wallet+=o.refund; credit(it.owner,o.fee+ded);
+    it.status='available'; S.f.retopt='ontime';
+    render(); toast(tr('已歸還，押金已退回錢包。','Returned. Deposit refunded to your wallet.'));
+  }
+  function rate(oid,n){ var o=orderById(oid); o.rating=n; render(); }
+  function finishOrder(oid){ var o=orderById(oid); o.status='closed'; flag('rate'); render(); toast(tr('謝謝評分，物品已回到流通。','Thanks for rating. The item is back in circulation.')); }
+  function orderById(id){return S.orders.filter(function(o){return o.id===id;})[0];}
+  function simulateSale(id){
+    var it=item(id); if(!it||it.status!=='available'||it.mode!=='sell') return;
+    it.status='sold'; credit(it.owner,it.price);
+    if(S.users[it.owner]) flag('sold');
+    render(); toast(tr('新生已購買，收入已進入錢包（示範）。','A new student bought it. Earnings added to your wallet (demo).'));
+  }
+  function submitMoveout(){
+    var u=me(), picked=u.shelf.filter(function(s){return S.f.sel[s.id];});
+    if(!picked.length) return;
+    picked.forEach(function(s){
+      var p=+S.f.price[s.id]; if(!(p>0)) p=s.price;
+      S.items.push({id:'m-'+s.id+'-'+(S.seq++),cat:s.cat,ico:s.ico,zh:s.zh,en:s.en,owner:S.user,mode:'sell',price:p,newPrice:s.newPrice,rating:4.8,n:6,status:'available',moveout:true,cond:['works','clean','nodmg']});
     });
-    return h+'</div>'+tabbar(0);
+    u.shelf=u.shelf.filter(function(s){return !S.f.sel[s.id];});
+    var ids=S.items.filter(function(i){return i.moveout&&i.owner===S.user;}).map(function(i){return i.id;});
+    S.f.sel={}; S.f.price={}; flag('listed');
+    S.stack=[]; S.route={n:'moveoutdone'}; render(true);
+    toast(tr('已加入搬離批次，新生可以看到了。','Added to the move-out batch. New students can see them now.'));
   }
-  function resultsScreen(){
-    var h = appbar(true, tr('計算機','Calculators'));
-    h += '<div class="body"><div class="ph-h">'+tr('計算機','Calculators')+'</div><div class="ph-sub">'+tr('4 件可預約，全部來自 UM 同學','4 available, all from UM students')+'</div>';
-    var rows=[['🧮',tr('科學計算機','Scientific calculator'),who('owner')+' · '+tr('大三','Year 3'),'★ 4.9 (23)','MOP '+CONFIG.rentPerDay+tr('/天','/day'),true],
-      ['📈',tr('繪圖計算機','Graphing calculator'),'Mei · '+tr('大二','Year 2'),'★ 4.7 (11)','MOP 15'+tr('/天','/day'),false],
-      ['💼',tr('財務計算機','Financial calculator'),'Hao · '+tr('大四','Year 4'),'★ 4.8 (9)','MOP 8'+tr('/天','/day'),false],
-      ['🧮',tr('科學計算機（紅）','Scientific calculator (red)'),'Sara · '+tr('大一','Year 1'),'★ 4.6 (4)','MOP 5'+tr('/天','/day'),false]];
-    rows.forEach(function(r){
-      h += '<'+(r[5]?'button data-act="next"':'div')+' class="card'+(r[5]?' go':'')+'"><div class="thumb">'+r[0]+'</div><div><div class="t">'+r[1]+'</div><div class="s">'+r[2]+' · '+r[3]+'</div><span class="badge">'+tr('已檢查狀態','Condition checked')+'</span></div><div class="p">'+r[4]+'<small>'+tr('押金 ','Deposit ')+'MOP '+CONFIG.deposit+'</small></div></'+(r[5]?'button':'div')+'>';
+  function publish(){
+    var p=+S.f.nPrice, d=+S.f.nDep;
+    if(!S.f.nName.trim() || !(p>0) || (S.f.nMode==='rent' && !(d>=0 && S.f.nDep!==''))){ toast(tr('請填寫物品名稱、價格（租借還需押金）。','Fill in the item name and price (rentals also need a deposit).'),true); return; }
+    var c=cat(S.f.nCat);
+    S.items.push({id:'u-'+(S.seq++),cat:S.f.nCat,ico:c.ico,zh:S.f.nName.trim(),en:S.f.nName.trim(),owner:S.user,mode:S.f.nMode,price:p,deposit:S.f.nMode==='rent'?d:0,custom:true,rating:5.0,n:0,status:'available',cond:['works','clean','nodmg']});
+    S.f.nName='';S.f.nPrice='';S.f.nDep='';
+    S.stack=[]; S.route={n:'mylist'}; render(true);
+    toast(tr('已上架，其他同學可以看到。','Published. Other students can see it now.'));
+  }
+
+  /* ===== UI 片段 / UI helpers ===== */
+  function logoSvg(w){return '<svg width="'+w+'" height="'+w+'" viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="12" fill="none" stroke="#1f4e9c" stroke-width="4" stroke-dasharray="52 24" stroke-linecap="round"/><path d="M26.5 4.5l1.2 7.2-7-1.4z" fill="#1fa37c"/><circle cx="17" cy="17" r="4" fill="#ffd23f"/></svg>';}
+  function appbar(title,withBack){
+    return '<div class="appbar">'+(withBack?'<button class="back" data-act="back">‹ '+tr('返回','Back')+'</button>':'<div class="logo">'+logoSvg(22)+'CampusLoop</div>')+
+      '<span class="'+(title?'title':'who')+'">'+(title?esc(title):tr('你好，','Hi, ')+esc(myName()))+'</span></div>';
+  }
+  function tabbar(){
+    var on=S.route.n; var map={home:'home',browse:'browse',detail:'browse',checkout:'browse',orders:'orders',order:'orders',me:'me',mylist:'me',newitem:'me',moveout:'me',moveoutdone:'me'};
+    var cur=map[on]||'home', active=myOrders().filter(function(o){return o.status!=='closed';}).length;
+    var t=[['home','🏠',tr('首頁','Home')],['browse','🔎',tr('瀏覽','Browse')],['orders','🧾',tr('訂單','Orders')],['me','👤',tr('我的','Me')]];
+    return '<nav class="tabbar" aria-label="App">'+t.map(function(x){return '<button data-act="tab" data-tab="'+x[0]+'" class="'+(cur===x[0]?'on':'')+'"><i>'+x[1]+'</i>'+x[2]+(x[0]==='orders'&&active?'<span class="dot">'+active+'</span>':'')+'</button>';}).join('')+'</nav>';
+  }
+  function itemCard(it){
+    var off = it.status!=='available';
+    var price = it.mode==='rent' ? mop(it.price)+tr('/天','/day')+'<small>'+tr('押金 ','Deposit ')+mop(it.deposit)+'</small>' : mop(it.price)+'<small>'+tr('二手出售','For sale')+'</small>';
+    var st = it.status==='sold' ? '<span class="badge r">'+tr('已售出','Sold')+'</span>' : (off?'<span class="badge g">'+tr('已被預約','Reserved')+'</span>':'');
+    return '<button class="card'+(off?' off':'')+'" data-act="open" data-id="'+it.id+'"><div class="thumb">'+it.ico+'</div><div><div class="t">'+nm(it)+'</div><div class="s">'+NAMES[it.owner]+' · ★ '+it.rating.toFixed(1)+(it.n?' ('+it.n+')':'')+'</div><span class="badge">'+tr('已檢查狀態','Condition checked')+'</span>'+(it.moveout?'<span class="badge y">'+tr('搬離專區','Move-out')+'</span>':'')+st+'</div><div class="p">'+price+'</div></button>';
+  }
+  function empty(em,msg,btn){ return '<div class="empty"><span class="em">'+em+'</span>'+msg+(btn||'')+'</div>'; }
+
+  /* ===== 畫面 / Screens ===== */
+  function homeScreen(){
+    var pop=S.items.filter(function(i){return i.status==='available'&&!i.moveout;}).sort(function(a,b){return b.n-a.n;}).slice(0,4);
+    var mo=S.items.filter(function(i){return i.moveout&&i.status==='available';});
+    var h='<div class="banner"><b>'+tr('要搬離宿舍？','Moving out?')+'</b><p>'+tr('一次把用不到的物品交給新生。','Pass on your unused items to new students in one go.')+'</p><button class="cta small dark" data-act="go" data-to="moveout" style="margin:0">'+tr('搬離專區','Move-out section')+'</button></div>';
+    h+='<div class="ph-h">'+tr('校園裡的好東西，借用或轉讓','Rent, buy and pass on things on campus')+'</div>';
+    h+='<button class="search" data-act="tab" data-tab="browse">🔎 '+tr('搜尋校園物品','Search items on campus')+'</button>';
+    h+='<div class="chips">'+CATS.map(function(c){return '<button class="chip" data-act="cat" data-cat="'+c.k+'">'+c.ico+' '+tr(c.zh,c.en)+'</button>';}).join('')+'</div>';
+    h+='<div class="sec">'+tr('本週熱門','Popular this week')+'</div>'+pop.map(itemCard).join('');
+    if(mo.length){ h+='<div class="sec">'+tr('搬離專區','Move-out sale')+'<button data-act="moveoutfilter">'+tr('看全部','See all')+'</button></div>'+mo.slice(0,3).map(itemCard).join(''); }
+    return h;
+  }
+  function results(){
+    var q=S.f.q.trim().toLowerCase();
+    var list=S.items.filter(function(i){
+      if(i.status==='sold') return false;
+      if(S.f.cat!=='all' && i.cat!==S.f.cat) return false;
+      if(S.f.mode!=='all' && i.mode!==(S.f.mode==='rent'?'rent':'sell')) return false;
+      if(S.f.moveout && !i.moveout) return false;
+      if(q && (i.zh+' '+i.en).toLowerCase().indexOf(q)<0) return false;
+      return true;
     });
-    return h+'</div>'+tabbar(1);
+    var h='<div class="ph-sub">'+tr('找到 '+list.length+' 件，全部來自 UM 同學','Found '+list.length+' items, all from UM students')+'</div>';
+    if(!list.length) return h+empty('🔍',tr('找不到符合的物品。試試別的關鍵字或分類。','No items match. Try another word or category.'),'<br><button class="cta small line" data-act="clear">'+tr('清除篩選','Clear filters')+'</button>');
+    return h+list.map(itemCard).join('');
+  }
+  function browseScreen(){
+    var h='<div class="search">🔎 <input id="q" type="search" placeholder="'+tr('搜尋，例如：計算機、風扇','Search, e.g. calculator, fan')+'" value="'+esc(S.f.q)+'" aria-label="Search"></div>';
+    h+='<div class="chips"><button class="chip" data-act="cat" data-cat="all" aria-pressed="'+(S.f.cat==='all')+'">'+tr('全部','All')+'</button>'+CATS.map(function(c){return '<button class="chip" data-act="cat" data-cat="'+c.k+'" aria-pressed="'+(S.f.cat===c.k)+'">'+c.ico+' '+tr(c.zh,c.en)+'</button>';}).join('')+'</div>';
+    h+='<div class="seg">'+[['all',tr('全部','All')],['rent',tr('租借','Rent')],['buy',tr('購買二手','Buy used')]].map(function(m){return '<button data-act="mode" data-mode="'+m[0]+'" aria-pressed="'+(S.f.mode===m[0])+'">'+m[1]+'</button>';}).join('')+'</div>';
+    h+='<div class="chips"><button class="chip" data-act="moveoutfilter" aria-pressed="'+S.f.moveout+'">📦 '+tr('只看搬離專區','Move-out sale only')+'</button></div>';
+    h+='<div id="results">'+results()+'</div>';
+    return h;
   }
   function detailScreen(){
-    var r=rent(), save=CONFIG.newPrice-r;
-    var h = appbar(true, '');
-    h += '<div class="body"><div class="tagcard"><span class="hole"></span><div class="big">🧮</div><h2>'+tr('科學計算機','Scientific calculator')+'</h2><div class="own">'+who('owner')+' · '+tr('大三','Year 3')+' · ★ 4.9 (23)</div>';
-    h += '<ul class="record"><li><b>✓</b> '+tr('螢幕清晰','Screen is clear')+'</li><li><b>✓</b> '+tr('按鍵正常','All keys work')+'</li><li><b>✓</b> '+tr('已換新電池','New battery')+'</li><li><b>✓</b> '+tr('附保護殼','Cover included')+'</li></ul></div>';
-    h += '<div class="sec">'+tr('租借期','Rental period')+'</div><div class="seg">'+[1,3,7].map(function(d){return '<button data-days="'+d+'" aria-pressed="'+(S.days===d)+'">'+d+tr(' 天',' day'+(d>1?'s':''))+'</button>';}).join('')+'</div>';
-    h += '<div class="lines"><div><span>'+tr('租金','Rent')+'</span><span>MOP '+r+'</span></div><div><span>'+tr('押金（可退還）','Deposit (refundable)')+'</span><span>MOP '+CONFIG.deposit+'</span></div><div class="tot"><span>'+tr('現在付','Pay now')+'</span><span>MOP '+(r+CONFIG.deposit)+'</span></div></div>';
-    h += '<div class="save">'+tr('比買新的省 MOP ','Saves MOP ')+save+tr('（新品約 MOP '+CONFIG.newPrice+'）',' compared with buying new (about MOP '+CONFIG.newPrice+')')+'</div>';
-    h += '<button class="cta" data-act="next">'+tr('預約','Reserve')+'</button></div>';
+    var it=item(S.route.id), mine=it.owner===S.user, r=it.mode==='rent';
+    var h='<div class="tagcard"><span class="hole"></span><div class="big">'+it.ico+'</div><h2>'+nm(it)+'</h2><div class="own">'+NAMES[it.owner]+' · ★ '+it.rating.toFixed(1)+(it.n?' ('+it.n+')':'')+(it.moveout?' · '+tr('搬離專區','Move-out'):'')+'</div>';
+    h+='<ul class="record">'+it.cond.map(function(k){return '<li><b>✓</b> '+tr(COND[k].zh,COND[k].en)+'</li>';}).join('')+'</ul></div>';
+    if(r){
+      var fee=rentFee(it);
+      h+='<div class="sec">'+tr('租借期','Rental period')+'</div><div class="seg">'+[1,3,7,14].map(function(d){return '<button data-act="days" data-days="'+d+'" aria-pressed="'+(S.f.days===d)+'">'+d+tr(' 天',' d')+'</button>';}).join('')+'</div>';
+      h+='<div class="lines"><div><span>'+tr('租金','Rent')+'</span><span>'+mop(fee)+'</span></div><div><span>'+tr('押金（可退還）','Deposit (refundable)')+'</span><span>'+mop(it.deposit)+'</span></div><div class="tot"><span>'+tr('現在付','Pay now')+'</span><span>'+mop(fee+it.deposit)+'</span></div></div>';
+      if(!it.custom) h+='<div class="note good">'+tr('比買新的省 '+mop(it.newPrice-fee)+'（新品約 '+mop(it.newPrice)+'）','Saves '+mop(it.newPrice-fee)+' vs buying new (about '+mop(it.newPrice)+')')+'</div>';
+    } else {
+      h+='<div class="lines"><div class="tot"><span>'+tr('二手價','Used price')+'</span><span>'+mop(it.price)+'</span></div></div>';
+      if(!it.custom) h+='<div class="note good">'+tr('比買新的省 '+mop(it.newPrice-it.price)+'（新品約 '+mop(it.newPrice)+'）','Saves '+mop(it.newPrice-it.price)+' vs buying new (about '+mop(it.newPrice)+')')+'</div>';
+    }
+    if(mine) h+='<div class="note info">'+tr('這是你自己上架的物品。','This is your own listing.')+'</div>';
+    else if(it.status!=='available') h+='<button class="cta" disabled>'+(it.status==='sold'?tr('已售出','Sold'):tr('已被預約','Reserved'))+'</button>';
+    else h+='<button class="cta" data-act="checkout" data-id="'+it.id+'">'+(r?tr('預約租借','Reserve'):tr('購買','Buy now'))+'</button>';
     return h;
   }
-  function reserveScreen(){
-    var r=rent();
-    var h = appbar(true, '');
-    h += '<div class="body"><div class="ph-h">'+tr('確認預約','Confirm reservation')+'</div>';
-    h += '<div class="card"><div class="thumb">🧮</div><div><div class="t">'+tr('科學計算機','Scientific calculator')+'</div><div class="s">'+S.days+tr(' 天 · 向 ',' days · from ')+who('owner')+'</div></div><div class="p">MOP '+r+'</div></div>';
-    h += '<div class="sec">'+tr('押金怎麼運作','How the deposit works')+'</div>';
-    h += '<div class="rule"><i>✅</i><div>'+tr('好好歸還，押金全額退還。','Return it in good condition and the deposit is fully refunded.')+'</div></div>';
-    h += '<div class="rule"><i>⏰</i><div>'+tr('逾期歸還，按天收取小額費用。','Late returns are charged a small fee per day.')+'</div></div>';
-    h += '<div class="rule"><i>📋</i><div>'+tr('有損壞，對照狀態紀錄，從押金中扣除。','If something is damaged, the condition record decides the deduction from the deposit.')+'</div></div>';
-    h += '<div class="lines" style="margin-top:10px"><div><span>'+tr('付款方式','Payment')+'</span><span>'+tr('錢包（示範）','Wallet (demo)')+'</span></div><div class="tot"><span>'+tr('現在付','Pay now')+'</span><span>MOP '+(r+CONFIG.deposit)+'</span></div></div>';
-    h += '<button class="cta" data-act="next">'+tr('支付押金並預約','Pay deposit and reserve')+'</button></div>';
+  function checkoutScreen(){
+    var it=item(S.route.id), r=it.mode==='rent', u=me();
+    var total=r?rentFee(it)+it.deposit:it.price, ok=u.wallet>=total;
+    var h='<div class="ph-h">'+(r?tr('確認預約','Confirm reservation'):tr('確認購買','Confirm purchase'))+'</div>';
+    h+='<div class="card"><div class="thumb">'+it.ico+'</div><div><div class="t">'+nm(it)+'</div><div class="s">'+(r?S.f.days+tr(' 天 · 向 ',' days · from ')+NAMES[it.owner]:tr('向 ','From ')+NAMES[it.owner])+'</div></div><div class="p">'+mop(r?rentFee(it):it.price)+'</div></div>';
+    if(r){
+      h+='<div class="sec">'+tr('押金怎麼運作','How the deposit works')+'</div>';
+      h+='<div class="rule"><i>✅</i><div>'+tr('好好歸還，押金全額退還。','Return it in good condition and the deposit is fully refunded.')+'</div></div>';
+      h+='<div class="rule"><i>⏰</i><div>'+tr('逾期歸還，扣除 '+mop(CFG.lateFee)+'（示範費率）。','A late return costs '+mop(CFG.lateFee)+' from the deposit (demo rate).')+'</div></div>';
+      h+='<div class="rule"><i>📋</i><div>'+tr('有損壞，對照狀態紀錄，扣除 '+mop(CFG.damage)+'（示範費率）。','Damage is checked against the condition record, with '+mop(CFG.damage)+' deducted (demo rate).')+'</div></div>';
+    } else {
+      h+='<div class="note info">'+tr('面交時雙方一起確認物品狀態，確認後交易完成。','You and the seller check the item together at pickup. The purchase completes after that.')+'</div>';
+    }
+    h+='<div class="lines" style="margin-top:10px"><div><span>'+tr('錢包餘額','Wallet balance')+'</span><span>'+mop(u.wallet)+'</span></div><div class="tot"><span>'+tr('現在付','Pay now')+'</span><span>'+mop(total)+'</span></div></div>';
+    if(!ok) h+='<div class="note warn">'+tr('餘額不足，還差 '+mop(total-u.wallet)+'。','Not enough balance. You need '+mop(total-u.wallet)+' more.')+'</div><button class="cta mint" data-act="topup">'+tr('儲值 MOP 200（示範）','Top up MOP 200 (demo)')+'</button>';
+    h+='<button class="cta" data-act="pay" data-id="'+it.id+'" '+(ok?'':'disabled')+'>'+(r?tr('支付押金並預約','Pay deposit and reserve'):tr('付款','Pay'))+'</button>';
     return h;
   }
-  function pickupScreen(){
-    var items=[tr('螢幕清晰','Screen is clear'),tr('按鍵正常','All keys work'),tr('已換新電池','New battery'),tr('附保護殼','Cover included')];
-    var all=S.checks.every(Boolean);
-    var h = appbar(true, tr('已預約','Reserved'));
-    h += '<div class="body"><div class="ph-h">'+tr('面交：一起確認狀態','Pickup: check the item together')+'</div><div class="ph-sub">'+tr('與 ','With ')+who('owner')+tr(' 在校園公共地點面交',' at a public spot on campus')+'</div>';
-    items.forEach(function(t,i){
-      h += '<button class="chk" role="checkbox" aria-checked="'+S.checks[i]+'" data-chk="'+i+'"><span class="box">'+(S.checks[i]?'✓':'')+'</span>'+t+'</button>';
-    });
-    h += '<div class="photo">📷 '+tr('拍照存證（示範）','Take a condition photo (demo)')+'</div>';
-    h += '<button class="cta small dark" data-act="checkall">'+tr('全部符合','All match')+'</button>';
-    h += '<button class="cta" data-act="next" '+(all?'':'disabled')+'>'+tr('確認狀態','Confirm condition')+'</button></div>';
+  function ordersScreen(){
+    var os=myOrders().slice().reverse();
+    var h='<div class="ph-h">'+tr('我的訂單','My orders')+'</div>';
+    if(!os.length) return h+empty('🧾',tr('還沒有訂單。去瀏覽物品，預約你需要的東西。','No orders yet. Browse items and reserve what you need.'),'<br><button class="cta small" data-act="tab" data-tab="browse">'+tr('瀏覽物品','Browse items')+'</button>');
+    return h+os.map(function(o){
+      var it=item(o.itemId);
+      return '<button class="card" data-act="order" data-id="'+o.id+'"><div class="thumb">'+it.ico+'</div><div><div class="t">'+nm(it)+'</div><div class="s">'+(o.mode==='rent'?o.days+tr(' 天租借',' day rental'):tr('購買','Purchase'))+'</div>'+statusBadge(o)+'</div><div class="p">'+mop(o.total)+'</div></button>';
+    }).join('');
+  }
+  function statusBadge(o){
+    var m={reserved:[tr('待面交','Awaiting pickup'),'y'],active:[tr('使用中','In use'),''],returned:[tr('已歸還，待評分','Returned, rate it'),'y'],done:[tr('已完成，待評分','Done, rate it'),'y'],closed:[tr('已完成','Completed'),'g']}[o.status];
+    return '<span class="badge '+m[1]+'">'+m[0]+'</span>';
+  }
+  function orderScreen(){
+    var o=orderById(S.route.id), it=item(o.itemId), r=o.mode==='rent';
+    var stages = r ? ['reserved','active','returned','closed'] : ['reserved','done','closed'];
+    var labels = r ? [tr('已預約','Reserved'),tr('面交並使用','Picked up and in use'),tr('歸還與退押金','Returned and refunded'),tr('評分完成','Rated')] : [tr('已預約','Reserved'),tr('面交完成','Picked up'),tr('評分完成','Rated')];
+    var idx=stages.indexOf(o.status);
+    var h='<div class="card"><div class="thumb">'+it.ico+'</div><div><div class="t">'+nm(it)+'</div><div class="s">'+NAMES[it.owner]+' · '+(r?o.days+tr(' 天',' days'):tr('購買','Purchase'))+'</div></div><div class="p">'+mop(o.total)+'</div></div>';
+    h+='<ul class="tl">'+labels.map(function(l,i){return '<li class="'+(i<idx||o.status==='closed'?'done':(i===idx?'now':''))+'">'+l+'</li>';}).join('')+'</ul>';
+    if(o.status==='reserved'){
+      h+='<div class="sec">'+tr('面交：一起確認狀態','Pickup: check the item together')+'</div><div class="ph-sub">'+tr('與 ','With ')+NAMES[it.owner]+tr(' 在校園公共地點面交，對照狀態紀錄逐項確認。',' at a public spot on campus. Check each point against the condition record.')+'</div>';
+      var all=it.cond.every(function(k){return S.f.checks[k];});
+      h+=it.cond.map(function(k){return '<button class="chk" role="checkbox" aria-checked="'+!!S.f.checks[k]+'" data-act="tick" data-k="'+k+'"><span class="box">'+(S.f.checks[k]?'✓':'')+'</span>'+tr(COND[k].zh,COND[k].en)+'</button>';}).join('');
+      h+='<button class="photo'+(S.f.photo?' on':'')+'" data-act="photo">'+(S.f.photo?'✓ '+tr('照片已存證（示範）','Photo saved (demo)'):'📷 '+tr('拍照存證（示範）','Take a condition photo (demo)'))+'</button>';
+      h+='<button class="cta small line" data-act="tickall">'+tr('全部符合','All match')+'</button>';
+      h+='<button class="cta" data-act="pickup" data-id="'+o.id+'" '+(all?'':'disabled')+'>'+tr('確認狀態','Confirm condition')+'</button>';
+    } else if(o.status==='active'){
+      h+='<div class="note info">'+tr('使用中。實際使用期結束後，到這裡歸還。','In use. Come back here to return it when you are done.')+'</div>';
+      h+='<div class="sec">'+tr('示範：歸還情況','Demo: how did the return go?')+'</div>';
+      h+=[['ontime',tr('準時歸還，狀態相符','On time, matches the record'),''],['late',tr('逾期 1 天','1 day late'),'−'+mop(Math.min(CFG.lateFee,o.deposit))],['dmg',tr('有損壞','Damaged'),'−'+mop(Math.min(CFG.damage,o.deposit))]].map(function(x){
+        return '<button class="chk" role="radio" aria-checked="'+(S.f.retopt===x[0])+'" data-act="retopt" data-o="'+x[0]+'"><span class="box">'+(S.f.retopt===x[0]?'●':'')+'</span>'+x[1]+'<span style="margin-left:auto;color:var(--coral);font-weight:700">'+x[2]+'</span></button>';}).join('');
+      h+='<button class="cta" data-act="return" data-id="'+o.id+'">'+tr('歸還物品','Return item')+'</button>';
+    } else if(o.status==='returned' || o.status==='done'){
+      if(r){ h+='<div class="refund'+(o.refund<o.deposit?' part':'')+'"><span>'+tr('押金已退還','Deposit refunded')+'</span><span>'+mop(o.refund)+'</span></div>'; if(o.refund<o.deposit) h+='<div class="note warn">'+tr('已按規則扣除 '+mop(o.deposit-o.refund)+'。','Deducted '+mop(o.deposit-o.refund)+' under the rules.')+'</div>'; }
+      h+='<div class="sec">'+tr('給 '+NAMES[it.owner]+' 評分','Rate '+NAMES[it.owner])+'</div><div class="stars" role="radiogroup" aria-label="Rating">';
+      for(var i=1;i<=5;i++) h+='<button class="'+(i<=o.rating?'on':'')+'" data-act="star" data-id="'+o.id+'" data-n="'+i+'" role="radio" aria-checked="'+(i===o.rating)+'" aria-label="'+i+'">★</button>';
+      h+='</div><button class="cta" data-act="finish" data-id="'+o.id+'" '+(o.rating?'':'disabled')+'>'+tr('完成','Finish')+'</button>';
+    } else {
+      h+='<div class="note good">'+tr('完成！物品已回到流通，下一位同學可以預約。','Done! The item is back in circulation for the next student.')+'</div>';
+      if(r) h+='<div class="lines" style="margin-top:8px"><div><span>'+tr('租金','Rent')+'</span><span>'+mop(o.fee)+'</span></div><div><span>'+tr('押金退回','Deposit returned')+'</span><span>'+mop(o.refund)+'</span></div></div>';
+      h+='<button class="cta" data-act="tab" data-tab="browse">'+tr('繼續瀏覽','Keep browsing')+'</button>';
+    }
     return h;
   }
-  function returnScreen(){
-    var h = appbar(true, tr('已完成使用','Finished using'));
-    h += '<div class="body"><div class="ph-h">'+tr('歸還並完成','Return and finish')+'</div>';
-    h += '<ul class="tl"><li>'+tr('面交','Picked up')+'<small>'+tr('與狀態紀錄相符','Matched the record')+'</small></li><li>'+tr('使用 ','Used for ')+S.days+tr(' 天',' days')+'<small>'+tr('考試期間','During exam week')+'</small></li><li>'+tr('歸還','Returned')+'<small>'+tr('對照紀錄：沒有損壞','Checked against record: no damage')+'</small></li></ul>';
-    h += '<div class="refund"><span>'+tr('押金已退還','Deposit refunded')+'</span><span>MOP '+CONFIG.deposit+'</span></div>';
-    h += '<div class="sec">'+tr('給 '+who('owner')+' 評分','Rate '+who('owner'))+'</div><div class="stars" role="radiogroup" aria-label="Rating">';
-    for(var i=1;i<=5;i++){ h += '<button class="'+(i<=S.rating?'on':'')+'" data-star="'+i+'" role="radio" aria-checked="'+(i===S.rating)+'" aria-label="'+i+'">★</button>'; }
-    h += '</div><div class="loopdone">'+(S.rating? tr('謝謝！這件物品已回到流通，下一位同學可以預約。','Thanks! The item is back in circulation for the next student.') : tr('先選星數，才能完成','Pick a star rating to finish'))+'</div>';
-    h += '<button class="cta" data-act="next" '+(S.rating?'':'disabled')+'>'+tr('完成','Finish')+'</button></div>';
+  function meScreen(){
+    var u=me(), other=S.user==='amy'?'ken':'amy';
+    var mine=S.items.filter(function(i){return i.owner===S.user;});
+    var saved=0; myOrders().forEach(function(o){var it=item(o.itemId); if(o.status!=='reserved' && it.newPrice) saved+= it.newPrice-o.fee;});
+    var h='<div class="profile"><div class="avatar">'+(S.user==='amy'?'🧑‍🎓':'🎓')+'</div><div><div class="t" style="font-weight:700">'+esc(myName())+'</div><div class="s" style="font-size:.76rem;color:var(--muted)">'+(S.user==='amy'?tr('大一新生','Year-1 student'):tr('大四，準備搬離宿舍','Year-4, moving out'))+'</div></div></div>';
+    h+='<div class="wallet"><div><div style="font-size:.74rem;opacity:.85">'+tr('錢包餘額（示範）','Wallet (demo)')+'</div><b>'+mop(u.wallet)+'</b></div><button data-act="topup">'+tr('儲值 +200','Top up +200')+'</button></div>';
+    h+='<div class="imp"><div><b>'+myOrders().length+'</b><span>'+tr('我的訂單','My orders')+'</span></div><div><b>'+mine.length+'</b><span>'+tr('我上架的物品','Items I listed')+'</span></div><div><b>'+mop(Math.max(0,saved))+'</b><span>'+tr('比買新的省下','Saved vs buying new')+'</span></div><div><b>'+u.shelf.length+'</b><span>'+tr('架上待處理物品','Items on my shelf')+'</span></div></div>';
+    h+='<div class="menu"><button data-act="go" data-to="mylist"><span>📋 '+tr('我的上架','My listings')+'</span><span>›</span></button><button data-act="go" data-to="newitem"><span>➕ '+tr('上架一件物品','List an item')+'</span><span>›</span></button><button data-act="go" data-to="moveout"><span>📦 '+tr('搬離批次','Move-out batch')+'</span><span>›</span></button><button data-act="switch"><span>🔁 '+tr('切換成 '+NAMES[other]+'（示範帳號）','Switch to '+NAMES[other]+' (demo account)')+'</span><span>›</span></button><button data-act="reset"><span>♻️ '+tr('重設 demo','Reset demo')+'</span><span>›</span></button></div>';
     return h;
   }
-  function myItemsScreen(){
-    var h = appbar(true, tr('搬離專區','Move-out'));
-    h += '<div class="body"><div class="ph-h">'+tr('搬離批次','Move-out batch')+'</div><div class="ph-sub">'+tr('勾選要轉讓的物品，價格為建議值。','Tick the items to pass on. Prices are suggestions.')+'</div>';
-    MOVEOUT.forEach(function(m){
-      h += '<button class="chk" role="checkbox" aria-checked="'+!!S.sel[m.id]+'" data-sel="'+m.id+'"><span class="box">'+(S.sel[m.id]?'✓':'')+'</span><span style="font-size:1.3rem">'+m.ico+'</span><span>'+tr(m.zh,m.en)+'</span><span style="margin-left:auto;font-weight:700">MOP '+m.price+'</span></button>';
-    });
-    h += '<div class="lines"><div class="tot"><span>'+selItems().length+tr(' 件物品',' items')+'</span><span>'+tr('預計 MOP ','About MOP ')+selTotal()+'</span></div></div>';
-    h += '<button class="cta" data-act="next" '+(selItems().length?'':'disabled')+'>'+tr('加入搬離批次','Add to move-out batch')+'</button></div>';
+  function mylistScreen(){
+    var mine=S.items.filter(function(i){return i.owner===S.user;});
+    var h='<div class="ph-h">'+tr('我的上架','My listings')+'</div>';
+    if(!mine.length) return h+empty('📋',tr('你還沒有上架物品。','You have not listed anything yet.'),'<br><button class="cta small" data-act="go" data-to="newitem">'+tr('上架一件物品','List an item')+'</button> <button class="cta small line" data-act="go" data-to="moveout">'+tr('搬離批次','Move-out batch')+'</button>');
+    return h+mine.map(function(it){
+      var st={available:[tr('上架中','Live'),''],reserved:[tr('已被預約','Reserved'),'y'],rented:[tr('租出中','Rented out'),'y'],sold:[tr('已售出','Sold'),'g']}[it.status];
+      return '<div class="card"><div class="thumb">'+it.ico+'</div><div><div class="t">'+nm(it)+'</div><div class="s">'+(it.mode==='rent'?mop(it.price)+tr('/天 · 押金 ','/day · deposit ')+mop(it.deposit):mop(it.price)+tr(' 出售',' sale'))+'</div><span class="badge '+st[1]+'">'+st[0]+'</span>'+(it.moveout?'<span class="badge y">'+tr('搬離專區','Move-out')+'</span>':'')+
+        (it.status==='available'&&it.mode==='sell'?'<br><button class="cta small line" data-act="sim" data-id="'+it.id+'">'+tr('示範：新生購買','Demo: a new student buys')+'</button>':'')+'</div></div>';
+    }).join('');
+  }
+  function newitemScreen(){
+    var f=S.f, rent=f.nMode==='rent';
+    var h='<div class="ph-h">'+tr('上架一件物品','List an item')+'</div>';
+    h+='<div class="field"><label for="nName">'+tr('物品名稱','Item name')+'</label><input id="nName" data-bind="nName" value="'+esc(f.nName)+'" placeholder="'+tr('例如：計算機','e.g. Calculator')+'"></div>';
+    h+='<div class="field"><label for="nCat">'+tr('分類','Category')+'</label><select id="nCat" data-bind="nCat">'+CATS.map(function(c){return '<option value="'+c.k+'"'+(f.nCat===c.k?' selected':'')+'>'+c.ico+' '+tr(c.zh,c.en)+'</option>';}).join('')+'</select></div>';
+    h+='<div class="seg"><button data-act="nmode" data-m="rent" aria-pressed="'+rent+'">'+tr('出租','Rent out')+'</button><button data-act="nmode" data-m="sell" aria-pressed="'+!rent+'">'+tr('出售','Sell')+'</button></div>';
+    h+='<div class="field"><label for="nPrice">'+(rent?tr('每天租金（MOP）','Rent per day (MOP)'):tr('售價（MOP）','Price (MOP)'))+'</label><input id="nPrice" data-bind="nPrice" inputmode="numeric" type="number" min="1" value="'+esc(f.nPrice)+'"></div>';
+    if(rent) h+='<div class="field"><label for="nDep">'+tr('押金（MOP，可退還）','Deposit (MOP, refundable)')+'</label><input id="nDep" data-bind="nDep" inputmode="numeric" type="number" min="0" value="'+esc(f.nDep)+'"></div>';
+    h+='<div class="note info">'+tr('上架時會建立狀態紀錄：功能正常、外觀乾淨、沒有明顯損壞。','A condition record is created at listing: works as expected, clean, no visible damage.')+'</div>';
+    h+='<button class="cta" data-act="publish">'+tr('上架','Publish listing')+'</button>';
     return h;
   }
-  function soldScreen(){
-    var h = appbar(true, tr('新生專區','New students'));
-    h += '<div class="body"><div class="ph-h">'+tr('搬離專區：新生接手','Move-out section: new students take over')+'</div><div class="ph-sub">'+tr('來自 ','Listed by ')+who('ken')+tr(' 的物品',' ')+'</div>';
-    selItems().forEach(function(m,i){
-      var sold = i<2;
-      h += '<div class="card"><div class="thumb">'+m.ico+'</div><div><div class="t">'+tr(m.zh,m.en)+'</div><div class="s">'+(sold? (m.who||'New student')+tr(' 已購買',' bought it') : tr('已被預約','Reserved'))+'</div><span class="sold'+(sold?'':' res')+'">'+(sold?tr('已售出','Sold'):tr('已預約','Reserved'))+'</span></div><div class="p">MOP '+m.price+'</div></div>';
-    });
-    h += '<div class="save">'+tr('宿舍清空了，'+selItems().length+' 件物品沒有被丟掉。','Room cleared, and '+selItems().length+' items were not thrown away.')+'</div>';
-    h += '<button class="cta" data-act="next">'+tr('看整體影響','See the impact')+'</button></div>';
+  function moveoutScreen(){
+    var u=me(), other=S.user==='amy'?'ken':'amy';
+    var h='<div class="ph-h">'+tr('搬離批次','Move-out batch')+'</div>';
+    if(!u.shelf.length){
+      return h+empty('📦',tr(S.user==='amy'?'你的架上沒有待處理物品。搬離專區的示範帳號是 '+NAMES.ken+'。':'架上物品已全部處理。','Nothing left on your shelf.'+(S.user==='amy'?' The move-out demo account is '+NAMES.ken+'.':'')),
+        (S.user==='amy'?'<br><button class="cta small" data-act="switch">'+tr('切換成 '+NAMES.ken,'Switch to '+NAMES.ken)+'</button>':'<br><button class="cta small" data-act="go" data-to="moveoutdone">'+tr('看新生專區','See new-student view')+'</button>'));
+    }
+    h+='<div class="ph-sub">'+tr('勾選要轉讓的物品，價格是建議值，可以自己改。','Tick the items to pass on. Prices are suggestions you can edit.')+'</div>';
+    h+=u.shelf.map(function(s){
+      var on=!!S.f.sel[s.id], p=S.f.price[s.id]!==undefined?S.f.price[s.id]:s.price;
+      return '<div class="chk" role="checkbox" tabindex="0" aria-checked="'+on+'" data-act="shelf" data-id="'+s.id+'"><span class="box">'+(on?'✓':'')+'</span><span style="font-size:1.3rem">'+s.ico+'</span><span>'+esc(tr(s.zh,s.en))+'</span><input type="number" min="1" data-price="'+s.id+'" value="'+p+'" aria-label="MOP"></div>';
+    }).join('');
+    h+='<div class="lines"><div class="tot"><span id="selN"></span><span id="selT"></span></div></div>';
+    h+='<button class="cta" id="moBtn" data-act="submitmo">'+tr('加入搬離批次','Add to move-out batch')+'</button>';
     return h;
   }
-  function impactScreen(){
-    var save = CONFIG.newPrice-rent();
-    var n = selItems().length;
-    var h = appbar(true, tr('影響','Impact'));
-    h += '<div class="body"><div class="ph-h">'+tr('一個循環，三方受益','One loop, three winners')+'</div>';
-    h += '<div class="imp"><div><b>MOP '+save+'</b><span>'+who('amy')+tr(' 比買新的省下',' saved vs buying new')+'</span></div><div><b>MOP '+selTotal()+'</b><span>'+who('ken')+tr(' 轉讓所得',' earned by passing on')+'</span></div><div><b>'+(n+1)+'</b><span>'+tr('件物品繼續被使用','items kept in use')+'</span></div><div><b>0</b><span>'+tr('件被丟掉','items thrown away')+'</span></div></div>';
-    h += '<div class="vals"><div><b>'+tr('更便宜','Lower cost')+'</b>'+tr('短期使用只付租金，不必買新。','Pay only for the days you need, not a new item.')+'</div><div><b>'+tr('更方便','Local convenience')+'</b>'+tr('同校面交，不用寄送與長途檢查。','Hand over on campus, with no shipping or long trips.')+'</div><div><b>'+tr('更可信','Community trust')+'</b>'+tr('押金、評分、狀態紀錄降低風險。','Deposits, ratings and condition records reduce risk.')+'</div></div>';
-    h += '<button class="cta dark" data-act="restart">'+tr('重新開始 demo','Restart demo')+'</button></div>';
+  function moveoutTotals(){
+    var u=me(), n=0, t=0;
+    u.shelf.forEach(function(s){ if(S.f.sel[s.id]){ n++; var p=S.f.price[s.id]!==undefined?+S.f.price[s.id]:s.price; t+= (p>0?p:0); } });
+    var a=document.getElementById('selN'), b=document.getElementById('selT'), c=document.getElementById('moBtn');
+    if(a) a.textContent=n+tr(' 件物品',' items'); if(b) b.textContent=tr('預計 ','About ')+mop(t); if(c) c.disabled=!n;
+  }
+  function moveoutdoneScreen(){
+    var mo=S.items.filter(function(i){return i.moveout;});
+    var mine=mo.filter(function(i){return i.owner===S.user;});
+    var earned=mine.filter(function(i){return i.status==='sold';}).reduce(function(a,i){return a+i.price;},0);
+    var h='<div class="ph-h">'+tr('搬離專區：新生接手','Move-out section: new students take over')+'</div>';
+    if(!mo.length) return h+empty('📦',tr('還沒有搬離物品。','No move-out items yet.'),'<br><button class="cta small" data-act="go" data-to="moveout">'+tr('搬離批次','Move-out batch')+'</button>');
+    h+='<div class="ph-sub">'+tr('這是新生看到的畫面。','This is what new students see.')+'</div>'+mo.map(function(it){return itemCard(it)+(it.owner===S.user&&it.status==='available'?'<button class="cta small line" style="margin:-2px 0 8px" data-act="sim" data-id="'+it.id+'">'+tr('示範：新生購買 '+esc(it.zh),'Demo: a new student buys it')+'</button>':'');}).join('');
+    var left=mine.filter(function(i){return i.status==='available';});
+    h+='<div class="imp"><div><b>'+mop(earned)+'</b><span>'+tr('已售出所得','Earned so far')+'</span></div><div><b>'+mine.filter(function(i){return i.status==='sold';}).length+'/'+mine.length+'</b><span>'+tr('件已找到新主人','items found new owners')+'</span></div></div>';
+    if(left.length>1) h+='<button class="cta mint" data-act="simall">'+tr('示範：新生買走全部','Demo: new students buy everything')+'</button>';
     return h;
   }
-  function screenFor(step){
-    switch(step){
-      case 0: return homeScreen(false);
-      case 1: return resultsScreen();
-      case 2: return detailScreen();
-      case 3: return reserveScreen();
-      case 4: return pickupScreen();
-      case 5: return returnScreen();
-      case 6: return homeScreen(true);
-      case 7: return myItemsScreen();
-      case 8: return soldScreen();
-      default: return impactScreen();
+  function screenFor(r){
+    switch(r.n){
+      case 'browse': return browseScreen();
+      case 'detail': return detailScreen();
+      case 'checkout': return checkoutScreen();
+      case 'orders': return ordersScreen();
+      case 'order': return orderScreen();
+      case 'me': return meScreen();
+      case 'mylist': return mylistScreen();
+      case 'newitem': return newitemScreen();
+      case 'moveout': return moveoutScreen();
+      case 'moveoutdone': return moveoutdoneScreen();
+      default: return homeScreen();
     }
   }
+  var TITLES={detail:['物品','Item'],checkout:['結帳','Checkout'],order:['訂單','Order'],mylist:['我的上架','My listings'],newitem:['上架','List'],moveout:['搬離專區','Move-out'],moveoutdone:['搬離專區','Move-out']};
 
-  /* ===== 渲染 / Render ===== */
-  function render(){
-    var st = steps(), cur = st[S.step];
+  /* ===== 講稿面板 / Presenter panel ===== */
+  function guide(){ return [
+   {n:tr('瀏覽校園物品','Browse campus items'),
+    h:tr('Amy 下週期中考，只需要一部計算機','Amy has midterms next week and needs a calculator for a few days'),
+    say:tr('「接著剛才的 Amy：她不想花 MOP 180 買一部只用一週的計算機。她打開 CampusLoop，搜尋或選分類。」','"Back to Amy: she does not want to pay MOP 180 for a calculator she will use for one week. She opens CampusLoop and searches or picks a category."'),
+    show:tr('在手機上點「計算機」分類，或到「瀏覽」輸入關鍵字，所有物品都來自 UM 同學。','On the phone, tap the Calculators category or type a keyword in Browse. Every item comes from a UM student.'),
+    to:function(){S.user='amy'; go('home');}},
+   {n:tr('看物品與狀態紀錄','Check item and condition record'),
+    h:tr('租之前就知道物品狀態，也知道總共要付多少','Amy sees the condition and the full cost before renting'),
+    say:tr('「物品頁有狀態紀錄。Amy 選租借天數，系統即時算出租金和可退還的押金，並顯示比買新的省多少。」','"The item page has a condition record. Amy picks the rental period and the app shows rent, refundable deposit and how much she saves compared with buying new."'),
+    show:tr('點科學計算機，切換 1／3／7／14 天看金額變化。','Open the scientific calculator and switch between 1, 3, 7 and 14 days.'),
+    to:function(){S.user='amy'; S.stack=[]; S.route={n:'detail',id:'calc1'}; flag('browse'); flag('detail'); render(true);}},
+   {n:tr('預約並支付押金','Reserve and pay the deposit'),
+    h:tr('押金和規則先講清楚，再付款','Deposit and rules are clear before payment'),
+    say:tr('「押金降低雙方風險：好好歸還就全額退還；逾期或損壞，按規則和狀態紀錄處理。」','"The deposit lowers risk for both sides: return the item in good condition and it is fully refunded. Late return or damage is handled by the rules and the condition record."'),
+    show:tr('按「預約租借」，再按「支付押金並預約」。想展示餘額不足，可以先選押金較高的物品（如繪圖計算機）。','Tap Reserve, then Pay deposit and reserve. To show the low-balance case, try a high-deposit item such as the graphing calculator.'),
+    to:function(){S.user='amy'; S.stack=[{n:'home'}]; S.route={n:'checkout',id:'calc1'}; render(true);}},
+   {n:tr('面交與狀態確認','Pickup and condition check'),
+    h:tr('面交時雙方一起確認物品狀態','Both sides confirm the condition at pickup'),
+    say:tr('「面交時 Amy 和 Jason 對照狀態紀錄逐項確認，並可拍照存證。之後有爭議，就有依據。」','"At pickup, Amy and Jason check each point against the record and can take a photo. If there is a dispute later, there is evidence."'),
+    show:tr('在「訂單」勾選每一項（或「全部符合」），按「確認狀態」。','In Orders, tick each point (or tap All match), then tap Confirm condition.'),
+    to:function(){S.user='amy'; var o=myOrders().filter(function(x){return x.status==='reserved';})[0]; if(o){S.stack=[]; S.route={n:'order',id:o.id}; render(true);} else {toast(tr('先預約一件物品。','Reserve an item first.'),true); go('browse');}}},
+   {n:tr('歸還、退押金、評分','Return, refund, rating'),
+    h:tr('歸還後押金退回，雙方評分，物品回到流通','After return the deposit is refunded, both sides rate, and the item circulates again'),
+    say:tr('「考試結束，Amy 歸還；狀態和紀錄相符，押金退回。評分累積成信任，下一位同學就能放心租。」','"Exams are over and Amy returns it. It matches the record, so the deposit is refunded. Ratings build trust, so the next student can rent with confidence."'),
+    show:tr('在訂單裡選歸還情況（準時、逾期、損壞都可以試），按「歸還物品」，然後評分並按「完成」。','In the order, pick how the return went (on time, late or damaged), tap Return item, then rate and tap Finish.'),
+    to:function(){S.user='amy'; var o=myOrders().filter(function(x){return x.status!=='closed';})[0]; if(o){S.stack=[]; S.route={n:'order',id:o.id}; render(true);} else {toast(tr('目前沒有進行中的訂單。','No order in progress.'),true); go('orders');}}},
+   {n:tr('Ken 要搬離宿舍','Ken is moving out'),
+    h:tr('另一邊：Ken 畢業，東西還能用，但沒時間處理','The other side: Ken is graduating with usable items and no time'),
+    say:tr('「Ken 要搬離宿舍，很多東西還能用，丟掉可惜，在大型二手平台逐件處理又太花時間。CampusLoop 在這時段提供搬離專區。」','"Ken is moving out. Many items still work, and throwing them away is a waste, while selling them one by one on a general platform takes too long. CampusLoop offers a move-out section for this period."'),
+    show:tr('切換成 Ken（我的 → 切換帳號），進入「搬離專區」。','Switch to Ken (Me, then Switch account) and open the Move-out section.'),
+    to:function(){S.user='ken'; S.stack=[]; S.route={n:'moveout'}; flag('moveout'); render(true);}},
+   {n:tr('一次上架多件物品','List many items at once'),
+    h:tr('勾選物品、確認價格，一次放進搬離批次','Tick items, confirm prices, and add them to one batch'),
+    say:tr('「Ken 勾選要出的物品，價格已有建議值，也可以自己改。一次提交，不用逐件寫文案、逐件談。」','"Ken ticks the items he wants to pass on, with suggested prices he can edit. One submission, with no need to write and negotiate item by item."'),
+    show:tr('勾選物品、改價格，按「加入搬離批次」。','Tick items, edit prices, then tap Add to move-out batch.'),
+    to:function(){S.user='ken'; S.stack=[]; S.route={n:'moveout'}; render(true);}},
+   {n:tr('新生接手','New students take over'),
+    h:tr('新生與返校同學接手，物品繼續被使用','New and returning students take over, and the items keep being used'),
+    say:tr('「物品出現在給新生的專區，很快有人購買。Ken 收回一點錢，宿舍也清空了，東西沒有被丟掉。這就是一個完整的循環。」','"The items appear in a section for new students and sell quickly. Ken earns some money, the room is cleared, and nothing is thrown away. That is one complete loop."'),
+    show:tr('按「示範：新生購買」，看收入與已售出數字變化。','Tap Demo: a new student buys, and watch earnings and the sold count change.'),
+    to:function(){S.user='ken'; S.stack=[]; S.route={n:'moveoutdone'}; render(true);}}
+  ]; }
+
+  function render(nav){
+    var g=guide(); var done=MILES.filter(function(k){return S.flags[k];}).length;
+    var cur = S.guide!==null ? S.guide : (function(){ for(var i=0;i<MILES.length;i++){ if(!S.flags[MILES[i]]) return i; } return MILES.length-1; })();
+    var cs=g[cur];
     document.documentElement.lang = S.lang==='zh'?'zh-Hant':'en';
     document.querySelectorAll('[data-lang]').forEach(function(b){b.setAttribute('aria-pressed', b.dataset.lang===S.lang);});
-    document.getElementById('grp').textContent = tr('第一組','Group 01');
-    document.getElementById('note').textContent = tr('示意資料：價格、評分與人物僅供 demo。','Demo data: prices, ratings and people are for demonstration only.');
-    document.title = 'CampusLoop Demo — '+tr('第一組','Group 01');
+    document.getElementById('grp').textContent=tr('第一組','Group 01');
+    document.getElementById('note').textContent=tr('示意資料：價格、評分與人物僅供 demo，所有按鈕都可以實際操作。','Demo data: prices, ratings and people are for demonstration only. Every button works.');
+    document.title='CampusLoop Demo — '+tr('第一組','Group 01');
 
-    var C = 2*Math.PI*29, off = C*(1-(S.step+1)/(LAST+1));
-    var rail = '<div class="progress"><div class="ring"><svg viewBox="0 0 68 68" aria-hidden="true"><circle class="bg" cx="34" cy="34" r="29" fill="none" stroke-width="7"/><circle class="fg" cx="34" cy="34" r="29" fill="none" stroke-width="7" stroke-dasharray="'+C.toFixed(1)+'" stroke-dashoffset="'+off.toFixed(1)+'"/></svg><div class="mid">'+(S.step===LAST?'✓':(S.step+1))+'</div></div>'+
-      '<div class="meta"><b>'+tr('第 '+(S.step+1)+' 步，共 '+(LAST+1)+' 步','Step '+(S.step+1)+' of '+(LAST+1))+'</b>'+(cur.g||st.slice(0,S.step+1).reverse().filter(function(x){return x.g;})[0].g)+'</div></div>';
-    rail += '<div class="scene"><h1>'+cur.h+'</h1><div class="cue say"><h2>'+tr('你說','Say')+'</h2><p>'+cur.say+'</p></div><div class="cue"><h2>'+tr('你點','Do')+'</h2><p>'+cur.show+'</p></div>'+
-      '<div class="navrow"><button class="btn ghost" data-act="prev" '+(S.step===0?'disabled':'')+'>'+tr('上一步','Previous')+'</button><button class="btn primary" data-act="next" '+(S.step===LAST?'disabled':'')+'>'+tr('下一步','Next step')+'</button></div><p class="hint" style="margin-top:8px">'+tr('可用鍵盤 ← → 切換步驟，也可直接在手機畫面上點擊。','Use the ← → keys to change steps, or tap directly inside the phone.')+'</p></div>';
-    rail += '<nav class="steps" aria-label="'+tr('步驟','Steps')+'"><h3>'+tr('整個 demo 流程','Demo flow')+'</h3><ol>';
-    st.forEach(function(s,i){
-      if(s.g) rail += '<li class="grp-gap" aria-hidden="true"><div class="grp">'+s.g+'</div></li>';
-      rail += '<li class="'+(i<S.step?'done':'')+(i===S.step?' now':'')+'"><button data-go="'+i+'">'+s.n+'</button></li>';
-    });
-    rail += '</ol></nav>';
-    document.getElementById('rail').innerHTML = rail;
+    var C=2*Math.PI*29, off=C*(1-done/MILES.length);
+    var rail='<div class="progress"><div class="ring"><svg viewBox="0 0 68 68" aria-hidden="true"><circle class="bg" cx="34" cy="34" r="29" fill="none" stroke-width="7"/><circle class="fg" cx="34" cy="34" r="29" fill="none" stroke-width="7" stroke-dasharray="'+C.toFixed(1)+'" stroke-dashoffset="'+off.toFixed(1)+'"/></svg><div class="mid">'+(done===MILES.length?'✓':done)+'</div></div><div class="meta"><b>'+tr('已完成 '+done+' / '+MILES.length+' 個關鍵步驟','Completed '+done+' of '+MILES.length+' key steps')+'</b>'+tr('在手機上實際操作，進度會自動更新','Use the phone for real, progress updates by itself')+'</div></div>';
+    rail+='<div class="scene"><h1>'+cs.h+'</h1><div class="cue say"><h2>'+tr('你說','Say')+'</h2><p>'+cs.say+'</p></div><div class="cue"><h2>'+tr('你點','Do')+'</h2><p>'+cs.show+'</p></div><div class="navrow"><button class="btn primary" data-act="gohere" data-i="'+cur+'">'+tr('帶我到這一步','Take me to this step')+'</button><button class="btn ghost" data-act="reset">'+tr('重設 demo','Reset demo')+'</button></div><p class="hint" style="margin-top:8px">'+tr('手機畫面可以自由操作，不必照順序。也可以點下方步驟查看講稿。','The phone is free to use in any order. Tap a step below to read its script.')+'</p></div>';
+    rail+='<nav class="steps" aria-label="'+tr('步驟','Steps')+'"><h3>'+tr('整個 demo 流程','Demo flow')+'</h3><ol>'+g.map(function(s,i){return '<li class="'+(S.flags[MILES[i]]?'done':'')+(i===cur?' now':'')+'"><button data-act="guide" data-i="'+i+'">'+s.n+'</button></li>';}).join('')+'</ol></nav>';
+    document.getElementById('rail').innerHTML=rail;
 
-    var scr = '<div class="status"><span>9:41</span><span>5G ▮▮▮</span></div>'+screenFor(S.step);
-    var el = document.getElementById('screen');
-    var prevScroll = el.querySelector('.body') ? el.querySelector('.body').scrollTop : 0;
-    el.innerHTML = scr;
-    var body = el.querySelector('.body');
-    if(body){ if(lastStep===S.step){ body.scrollTop = prevScroll; } else { body.classList.add('enter'); } }
-    lastStep = S.step;
-    try{ history.replaceState(null,'','#'+(S.step+1)); }catch(e){}
+    var el=document.getElementById('screen'), r=S.route;
+    var prev=el.querySelector('.body'), keep=(!nav && prev)? prev.scrollTop : 0;
+    var focusId = document.activeElement && document.activeElement.id;
+    var bar = TITLES[r.n] ? appbar(tr(TITLES[r.n][0],TITLES[r.n][1]),true) : appbar('',false);
+    el.innerHTML='<div class="status"><span>9:41</span><span>5G ▮▮▮</span></div>'+bar+'<div class="body">'+screenFor(r)+'</div>'+tabbar();
+    var body=el.querySelector('.body'); body.scrollTop=keep; if(nav) body.classList.add('enter');
+    if(r.n==='moveout') moveoutTotals();
+    if(!nav && focusId){ var f=document.getElementById(focusId); if(f){ f.focus(); if(f.setSelectionRange && f.type!=='number' && f.type!=='search'){} } }
   }
 
-  function go(n){ S.step = Math.max(0,Math.min(LAST,n)); render(); window.scrollTo({top:0,behavior:'smooth'}); }
-
-  document.addEventListener('click', function(e){
-    var t = e.target.closest('[data-act],[data-go],[data-lang],[data-days],[data-chk],[data-star],[data-sel]');
-    if(!t || t.disabled) return;
+  /* ===== 事件 / Events ===== */
+  document.addEventListener('click',function(e){
+    var t=e.target.closest('[data-act],[data-lang]'); if(!t||t.disabled) return;
     if(t.dataset.lang){ S.lang=t.dataset.lang; render(); return; }
-    if(t.dataset.go!==undefined){ go(+t.dataset.go); return; }
-    if(t.dataset.days){ S.days=+t.dataset.days; render(); return; }
-    if(t.dataset.chk!==undefined){ var i=+t.dataset.chk; S.checks[i]=!S.checks[i]; render(); return; }
-    if(t.dataset.star){ S.rating=+t.dataset.star; render(); return; }
-    if(t.dataset.sel){ S.sel[t.dataset.sel]=!S.sel[t.dataset.sel]; render(); return; }
-    var a = t.dataset.act;
-    if(a==='next') go(S.step+1);
-    else if(a==='prev' || a==='back') go(S.step-1);
-    else if(a==='checkall'){ S.checks=[true,true,true,true]; render(); }
-    else if(a==='restart'){ S.checks=[false,false,false,false]; S.rating=0; go(0); }
+    var a=t.dataset.act, d=t.dataset;
+    switch(a){
+      case 'tab': if(d.tab==='browse' && S.route.n!=='browse'){ S.f.q='';S.f.cat='all';S.f.mode='all';S.f.moveout=false; } go(d.tab); break;
+      case 'back': back(); break;
+      case 'go': go(d.to); break;
+      case 'open': S.f.days=3; go('detail',{id:d.id}); break;
+      case 'cat': S.f.cat=d.cat; S.f.moveout=false; go('browse'); break;
+      case 'mode': S.f.mode=d.mode; render(); break;
+      case 'moveoutfilter': S.f.moveout=!S.f.moveout || S.route.n!=='browse'; S.f.cat='all'; S.f.q=''; go('browse'); break;
+      case 'clear': S.f.q='';S.f.cat='all';S.f.mode='all';S.f.moveout=false; render(); break;
+      case 'days': S.f.days=+d.days; render(); break;
+      case 'checkout': go('checkout',{id:d.id}); break;
+      case 'pay': pay(d.id); break;
+      case 'topup': me().wallet+=200; render(); toast(tr('已儲值 MOP 200（示範）。','Topped up MOP 200 (demo).')); break;
+      case 'order': S.f.checks={}; S.f.photo=false; go('order',{id:d.id}); break;
+      case 'tick': S.f.checks[d.k]=!S.f.checks[d.k]; render(); break;
+      case 'tickall': var o1=orderById(S.route.id), it1=item(o1.itemId); it1.cond.forEach(function(k){S.f.checks[k]=true;}); render(); break;
+      case 'photo': S.f.photo=!S.f.photo; render(); break;
+      case 'pickup': confirmPickup(d.id); break;
+      case 'retopt': S.f.retopt=d.o; render(); break;
+      case 'return': returnItem(d.id); break;
+      case 'star': rate(d.id,+d.n); break;
+      case 'finish': finishOrder(d.id); break;
+      case 'switch': S.user=S.user==='amy'?'ken':'amy'; S.stack=[]; S.f.sel={}; S.f.price={}; S.route={n:'home'}; render(true); toast(tr('已切換成 '+myName()+'。','Switched to '+myName()+'.')); break;
+      case 'reset': S=fresh(S.lang); render(true); toast(tr('已重設。','Demo reset.')); break;
+      case 'nmode': S.f.nMode=d.m; render(); break;
+      case 'publish': publish(); break;
+      case 'shelf': S.f.sel[d.id]=!S.f.sel[d.id]; render(); break;
+      case 'submitmo': submitMoveout(); break;
+      case 'sim': simulateSale(d.id); break;
+      case 'simall': S.items.filter(function(i){return i.moveout&&i.owner===S.user&&i.status==='available';}).forEach(function(i){i.status='sold'; credit(i.owner,i.price);}); flag('sold'); render(); toast(tr('新生買走全部，收入已入帳（示範）。','New students bought everything. Earnings added (demo).')); break;
+      case 'guide': S.guide=+d.i; render(); break;
+      case 'gohere': guide()[+d.i].to(); S.guide=null; render(); break;
+    }
   });
-  document.addEventListener('keydown', function(e){
-    if(e.target.closest && e.target.closest('input,textarea')) return;
-    if(e.key==='ArrowRight') go(S.step+1);
-    if(e.key==='ArrowLeft') go(S.step-1);
+  document.addEventListener('input',function(e){
+    var t=e.target;
+    if(t.id==='q'){ S.f.q=t.value; var r=document.getElementById('results'); if(r) r.innerHTML=results(); return; }
+    if(t.dataset.bind){ S.f[t.dataset.bind]=t.value; if(t.dataset.bind==='nCat') return; return; }
+    if(t.dataset.price){ S.f.price[t.dataset.price]=t.value; moveoutTotals(); }
   });
+  document.addEventListener('keydown',function(e){
+    if((e.key==='Enter'||e.key===' ') && e.target.matches && e.target.matches('.chk[data-act="shelf"]')){ e.preventDefault(); e.target.click(); }
+  });
+  document.addEventListener('click',function(e){ if(e.target.closest('[data-price]')) e.stopPropagation(); },true);
 
-  var m = /^#(\d+)$/.exec(location.hash);
-  if(m){ S.step = Math.max(0,Math.min(LAST,(+m[1])-1)); }
-  render();
+  render(true);
 })();
 </script>
 </body>

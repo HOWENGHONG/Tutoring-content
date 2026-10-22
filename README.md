@@ -239,4 +239,4 @@
 
 | 檔案 | 說明 | 預覽連結 |
 |------|------|----------|
-| `campusloop/index.html` | CampusLoop（UM 校園物品租借與轉售平台）互動原型：手機畫面 + 講稿面板，兩個場景（租借計算機、畢業搬離轉售），中英切換 | [🔗 預覽](https://howenghong.github.io/Tutoring-content/campusloop/) |
+| `campusloop/index.html` | CampusLoop（UM 校園物品租借與轉售平台）可實際操作的互動原型：瀏覽搜尋、預約付押金、面交確認、歸還評分、上架物品、搬離批次，附講稿面板，中英切換 | [🔗 預覽](https://howenghong.github.io/Tutoring-content/campusloop/) |
