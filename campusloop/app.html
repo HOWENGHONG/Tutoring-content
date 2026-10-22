@@ -240,7 +240,8 @@
     {k:'appl', ico:'🔌', zh:'電器',   en:'Appliances'},
     {k:'tools',ico:'🔧', zh:'工具',   en:'Tools'},
     {k:'props',ico:'🎭', zh:'活動器材', en:'Event gear'},
-    {k:'dorm', ico:'🛏', zh:'宿舍用品', en:'Dorm'}
+    {k:'dorm', ico:'🛏', zh:'宿舍用品', en:'Dorm'},
+    {k:'books', ico:'📚', zh:'書籍', en:'Books'}
   ];
   var COND = {
     works: {zh:'功能正常', en:'Works as expected'},
@@ -262,14 +263,19 @@
     {id:'prop3',cat:'props',ico:'🪧',zh:'活動展板',en:'Event display board',owner:'mei',mode:'rent',price:15,deposit:100,newPrice:300,rating:4.7,n:11},
     {id:'dorm1',cat:'dorm',ico:'💡',zh:'書桌燈',en:'Desk lamp',owner:'sara',mode:'sell',price:40,newPrice:120,rating:4.6,n:4},
     {id:'dorm2',cat:'dorm',ico:'📦',zh:'收納箱（3 個）',en:'Storage boxes (set of 3)',owner:'yan',mode:'sell',price:20,newPrice:60,rating:4.6,n:5},
-    {id:'dorm3',cat:'dorm',ico:'🛏',zh:'床上用品組',en:'Bedding set',owner:'hao',mode:'sell',price:80,newPrice:250,rating:4.8,n:9}
+    {id:'dorm3',cat:'dorm',ico:'🛏',zh:'床上用品組',en:'Bedding set',owner:'hao',mode:'sell',price:80,newPrice:250,rating:4.8,n:9},
+    {id:'book1',cat:'books',ico:'📘',zh:'微積分教科書',en:'Calculus textbook',owner:'mei',mode:'rent',price:5,deposit:80,newPrice:450,rating:4.7,n:11},
+    {id:'book2',cat:'books',ico:'📗',zh:'創業學教科書',en:'Entrepreneurship textbook',owner:'sara',mode:'sell',price:90,newPrice:320,rating:4.6,n:4},
+    {id:'book3',cat:'books',ico:'📙',zh:'資料結構參考書',en:'Data structures reference',owner:'jason',mode:'rent',price:6,deposit:100,newPrice:380,rating:4.9,n:23},
+    {id:'book4',cat:'books',ico:'📖',zh:'英文詞典',en:'English dictionary',owner:'yan',mode:'sell',price:25,newPrice:95,rating:4.6,n:5}
   ].map(function(i){ i.status='available'; i.cond=['works','clean','nodmg']; if(i.mode==='rent'||i.cat==='appl') i.cond.push('acc'); return i; }); }
   function seedShelf(){ return [
     {id:'s-fridge',ico:'🧊',zh:'迷你雪櫃',en:'Mini fridge',price:200,newPrice:900,cat:'appl'},
     {id:'s-lamp',ico:'💡',zh:'書桌燈',en:'Desk lamp',price:40,newPrice:120,cat:'dorm'},
     {id:'s-kettle',ico:'🫖',zh:'電熱水壺',en:'Electric kettle',price:30,newPrice:90,cat:'appl'},
     {id:'s-cooker',ico:'🍚',zh:'小電鍋',en:'Mini rice cooker',price:60,newPrice:200,cat:'appl'},
-    {id:'s-boxes',ico:'📦',zh:'收納箱',en:'Storage boxes',price:20,newPrice:60,cat:'dorm'}
+    {id:'s-boxes',ico:'📦',zh:'收納箱',en:'Storage boxes',price:20,newPrice:60,cat:'dorm'},
+    {id:'s-books',ico:'📚',zh:'一疊課本',en:'Stack of textbooks',price:100,newPrice:400,cat:'books'}
   ]; }
 
   var MILES = ['browse','detail','reserve','pickup','rate','moveout','listed','sold'];
