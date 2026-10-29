@@ -268,7 +268,6 @@
     {id:'book4',cat:'books',ico:'📖',zh:'英文詞典',en:'English dictionary',owner:'yan',mode:'sell',price:25,newPrice:95,rating:4.6,n:5}
   ].map(function(i){ i.status='available'; i.cond=['works','clean','nodmg']; if(i.mode==='rent'||i.cat==='appl') i.cond.push('acc'); return i; }); }
   function seedShelf(){ return [
-    {id:'s-fridge',ico:'🧊',zh:'迷你雪櫃',en:'Mini fridge',price:200,newPrice:900,cat:'appl'},
     {id:'s-lamp',ico:'💡',zh:'書桌燈',en:'Desk lamp',price:40,newPrice:120,cat:'dorm'},
     {id:'s-kettle',ico:'🫖',zh:'電熱水壺',en:'Electric kettle',price:30,newPrice:90,cat:'appl'},
     {id:'s-cooker',ico:'🍚',zh:'小電鍋',en:'Mini rice cooker',price:60,newPrice:200,cat:'appl'},
