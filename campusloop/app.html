@@ -222,6 +222,20 @@
   .mission li i{font-style:normal;width:18px;flex-shrink:0;}
   .mission p{font-size:.74rem;color:var(--muted);margin-top:4px;}
   @media(max-width:520px){.screen{box-shadow:none;}}
+  .gal{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:6px 0;}
+  .gal .ph{border:1.5px solid var(--ink);border-radius:12px;overflow:hidden;padding:0;background:var(--paper);display:block;text-align:center;cursor:pointer;}
+  .gal .ph svg{display:block;width:100%;height:auto;aspect-ratio:4/3;}
+  .gal .ph span{display:block;font-size:.68rem;padding:3px 0;font-weight:700;}
+  .gal .slot{aspect-ratio:4/3;border:2px dashed var(--line);border-radius:12px;font-size:1.3rem;color:var(--muted);background:var(--paper);}
+  .lb{position:absolute;inset:0;background:rgba(14,27,46,.88);z-index:30;display:flex;align-items:center;justify-content:center;padding:16px;}
+  .lbin{background:var(--paper);border-radius:16px;overflow:hidden;width:100%;position:relative;}
+  .lbin>svg{display:block;width:100%;height:auto;aspect-ratio:4/3;}
+  .lbx{position:absolute;top:8px;right:8px;width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,.92);font-size:1rem;z-index:2;}
+  .lbc{padding:10px 14px 4px;font-size:.8rem;}
+  .lbc b{display:block;font-family:var(--display);font-size:.95rem;}
+  .lbc span{display:block;color:#0b6b50;margin-top:2px;}
+  .lbn{display:flex;justify-content:space-between;align-items:center;padding:6px 14px 12px;font-size:.8rem;color:var(--muted);}
+  .lbn button{width:44px;height:36px;border-radius:10px;border:1px solid var(--line);font-size:1.2rem;background:var(--paper);}
   @media(prefers-reduced-motion:reduce){*{animation:none !important;transition:none !important;}}
 </style>
 </head>
@@ -236,6 +250,44 @@
   var CFG = { amy:'Amy', ken:'Ken', lateFee:5, damage:30, startWallet:{amy:300, ken:50} };
   var NAMES = {jason:'Jason', mei:'Mei', hao:'Hao', sara:'Sara', marco:'Marco', yan:'Yan', lily:'Lily', amy:CFG.amy, ken:CFG.ken, campusloop:'CampusLoop'};
   var BUYBACK = 0.5;
+  var COMMISSION = 0.01;
+  function comm(x){ return Math.round(x*COMMISSION*100)/100; }
+  var PLACES=[['圖書館門口','Library entrance'],['宿舍大堂','Dorm lobby'],['學生餐廳門口','Canteen entrance']];
+  var MPLACES=[['宿舍大堂','Dorm lobby'],['圖書館門口','Library entrance']];
+  var MSLOTS=[['今晚 18:00–20:00','Tonight 18:00–20:00'],['明天 12:00–14:00','Tomorrow 12:00–14:00']];
+  var STAGES=[['已付款，並約好收貨','Paid, and collection booked'],['已收貨並檢查（拍照、記錄狀態）','Collected and checked (photos and condition record)'],['已清潔，存放在倉庫過暑假','Cleaned and kept in storage over the summer'],['開學：定價並上架給新生','New semester: priced and listed for new students']];
+  var HUE={calc:['#dbe8ff','#9db9f2'],appl:['#ffe9c7','#f3c37a'],tools:['#e3e8ee','#aab6c4'],props:['#ffd9e0','#f0a3b3'],dorm:['#dff3e8','#9fd6b8'],books:['#fff1c2','#ecd079']};
+  var PH_KINDS=['front','detail','acc'];
+  var PH_LABEL={front:['正面','Front'],detail:['近照','Close-up'],acc:['包裝與配件','Box and extras']};
+  function photoSvg(it,kind,stamp){
+    var c=HUE[it.cat]||HUE.calc, id='g'+Math.random().toString(36).slice(2,8);
+    var s='<svg viewBox="0 0 320 240" role="img" aria-label="photo"><defs><linearGradient id="'+id+'" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="'+c[0]+'"/><stop offset="1" stop-color="'+c[1]+'"/></linearGradient></defs><rect width="320" height="240" fill="url(#'+id+')"/><rect y="170" width="320" height="70" fill="rgba(255,255,255,.4)"/><ellipse cx="160" cy="192" rx="92" ry="11" fill="rgba(14,27,46,.16)"/>';
+    if(kind==='detail') s+='<text x="160" y="222" font-size="250" text-anchor="middle">'+it.ico+'</text><circle cx="160" cy="112" r="86" fill="none" stroke="#0e1b2e" stroke-width="4"/><path d="M222 175l36 36" stroke="#0e1b2e" stroke-width="9" stroke-linecap="round"/>';
+    else if(kind==='acc') s+='<text x="105" y="178" font-size="86" text-anchor="middle">'+it.ico+'</text><text x="212" y="176" font-size="58" text-anchor="middle">📦</text><text x="262" y="196" font-size="34" text-anchor="middle">🧾</text>';
+    else s+='<text x="160" y="176" font-size="128" text-anchor="middle">'+it.ico+'</text>';
+    if(stamp){ var w=26; for(var i=0;i<stamp.length;i++) w+= stamp.charCodeAt(i)>255?13:7.2; s+='<rect x="10" y="208" width="'+Math.round(w)+'" height="24" rx="12" fill="#0e1b2e" opacity=".85"/><text x="22" y="224" font-size="12.5" font-weight="700" fill="#fff">'+esc(stamp)+'</text>'; }
+    return s+'</svg>';
+  }
+  function nPhotos(it){ return it.custom ? (it.photos||0) : 3; }
+  function stampFor(it){ return it.moveout ? tr('✓ CampusLoop 收貨檢查','✓ Checked by CampusLoop') : (it.custom ? tr('賣家上傳','Seller photo') : tr('✓ 賣家上傳，已檢查','✓ Seller photo, checked')); }
+  function gallery(it){
+    var n=nPhotos(it);
+    if(!n) return '<div class="note info">'+tr('賣家沒有上傳照片。','The seller did not add photos.')+'</div>';
+    return '<div class="sec">📷 '+tr('狀態照片','Condition photos')+'</div><div class="gal">'+PH_KINDS.slice(0,n).map(function(k){return '<button class="ph" data-act="zoom" data-id="'+it.id+'" data-k="'+k+'" aria-label="'+tr(PH_LABEL[k][0],PH_LABEL[k][1])+'">'+photoSvg(it,k,stampFor(it))+'<span>'+tr(PH_LABEL[k][0],PH_LABEL[k][1])+'</span></button>';}).join('')+'</div><div class="ph-sub" style="margin-top:4px">'+tr('點照片放大。這是示意圖，實際使用時由賣家或 CampusLoop 拍攝。','Tap a photo to enlarge. These are illustrations; real photos come from the seller or CampusLoop.')+'</div>';
+  }
+  function zoomPhoto(id,k){
+    var it=item(id), el=document.getElementById('screen'), old=el.querySelector('.lb'); if(old) old.remove();
+    var n=nPhotos(it), i=Math.max(0,PH_KINDS.indexOf(k));
+    var d=document.createElement('div'); d.className='lb'; d.setAttribute('role','dialog'); d.setAttribute('data-act','unzoom');
+    d.innerHTML='<div class="lbin"><button class="lbx" data-act="unzoom" aria-label="Close">✕</button>'+photoSvg(it,k,stampFor(it))+'<div class="lbc"><b>'+nm(it)+' · '+tr(PH_LABEL[k][0],PH_LABEL[k][1])+'</b><span>'+it.cond.map(function(c){return '✓ '+tr(COND[c].zh,COND[c].en);}).join('　')+'</span></div><div class="lbn"><button data-act="zoomnav" data-id="'+id+'" data-k="'+PH_KINDS[(i+n-1)%n]+'" aria-label="Previous">‹</button><span>'+(i+1)+' / '+n+'</span><button data-act="zoomnav" data-id="'+id+'" data-k="'+PH_KINDS[(i+1)%n]+'" aria-label="Next">›</button></div></div>';
+    el.appendChild(d);
+  }
+  function advanceStock(){
+    var st=0;
+    S.items.forEach(function(i){ if(i.moveout && i.stage<4){ i.stage++; st=i.stage; if(i.stage===4) i.status='available'; } });
+    render();
+    if(st) toast(tr(STAGES[st-1][0],STAGES[st-1][1]));
+  }
   function offer(s){ return Math.max(5, Math.round(s.price*BUYBACK/5)*5); }
   var CATS = [
     {k:'calc', ico:'🧮', zh:'計算機', en:'Calculators'},
@@ -287,14 +339,14 @@
       items:seedItems(), orders:[], seq:1,
       users:{amy:{wallet:CFG.startWallet.amy, shelf:[]}, ken:{wallet:CFG.startWallet.ken, shelf:seedShelf()}},
       flags:{}, guide:null,
-      f:{q:'', cat:'all', mode:'all', moveout:false, days:3, retopt:'ontime', photo:false, checks:{}, sel:{}, price:{}, nName:'', nCat:'calc', nMode:'rent', nPrice:'', nDep:''}
+      f:{q:'', cat:'all', mode:'all', moveout:false, days:3, retopt:'ontime', photo:false, checks:{}, sel:{}, price:{}, nName:'', nCat:'calc', nMode:'rent', nPrice:'', nDep:'', nPhotos:0, place:0, mplace:0, mslot:0}
     };
   }
   var S = fresh(/^en/i.test(navigator.language||'') ? 'en' : 'zh');
 
   function tr(zh,en){return S.lang==='zh'?zh:en;}
   function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
-  function mop(n){return 'MOP '+n;}
+  function mop(n){return 'MOP '+(Math.round(n*100)/100);}
   function nm(it){return esc(tr(it.zh,it.en));}
   function item(id){return S.items.filter(function(i){return i.id===id;})[0];}
   function me(){return S.users[S.user];}
@@ -333,7 +385,7 @@
     if(it.status!=='available'){ render(); toast(tr('這件物品已被其他人預約。','Someone else already reserved this item.'),true); return; }
     if(u.wallet<total){ render(); toast(tr('餘額不足，請先儲值。','Not enough balance. Top up first.'),true); return; }
     u.wallet-=total; it.status='reserved';
-    var o={id:'o'+(S.seq++), itemId:id, buyer:S.user, mode:it.mode, days:S.f.days, fee: it.mode==='rent'?rentFee(it):it.price, deposit: it.mode==='rent'?it.deposit:0, total:total, status:'reserved', checks:{}, outcome:null, refund:0, rating:0};
+    var o={id:'o'+(S.seq++), itemId:id, buyer:S.user, mode:it.mode, days:S.f.days, fee: it.mode==='rent'?rentFee(it):it.price, deposit: it.mode==='rent'?it.deposit:0, total:total, status:'reserved', checks:{}, outcome:null, refund:0, rating:0, place:S.f.place, comm:0};
     S.orders.push(o); S.f.checks={}; S.f.photo=false;
     flag('reserve');
     S.stack=[]; S.route={n:'order',id:o.id}; render(true);
@@ -344,7 +396,8 @@
     var o=orderById(oid), it=item(o.itemId);
     o.status = o.mode==='rent' ? 'active' : 'done';
     it.status = o.mode==='rent' ? 'rented' : 'sold';
-    if(o.mode==='sell') credit(it.owner,o.fee);
+    o.comm = it.moveout ? 0 : comm(o.fee);
+    if(o.mode==='sell') credit(it.owner,o.fee-o.comm);
     S.f.checks={}; S.f.photo=false; flag('pickup');
     if(it.status==='sold' && S.users[it.owner]) flag('sold');
     render(); toast(o.mode==='rent'?tr('狀態已確認，開始使用。','Condition confirmed. Enjoy using it.'):tr('交易完成。','Purchase complete.'));
@@ -354,7 +407,8 @@
     if(S.f.retopt==='late') ded=CFG.lateFee; if(S.f.retopt==='dmg') ded=CFG.damage;
     ded=Math.min(ded,o.deposit);
     o.outcome=S.f.retopt; o.refund=o.deposit-ded; o.status='returned';
-    me().wallet+=o.refund; credit(it.owner,o.fee+ded);
+    o.comm = comm(o.fee);
+    me().wallet+=o.refund; credit(it.owner,o.fee+ded-o.comm);
     it.status='available'; S.f.retopt='ontime';
     render(); toast(tr('已歸還，押金已退回錢包。','Returned. Deposit refunded to your wallet.'));
   }
@@ -363,9 +417,9 @@
   function orderById(id){return S.orders.filter(function(o){return o.id===id;})[0];}
   function simulateSale(id){
     var it=item(id); if(!it||it.status!=='available'||it.mode!=='sell') return;
-    it.status='sold'; credit(it.owner,it.price);
+    it.status='sold'; if(!it.moveout) credit(it.owner,it.price-comm(it.price));
     if(S.users[it.owner]||it.moveout) flag('sold');
-    render(); toast(it.moveout?tr('新生在開學專賣買下了它（示範）。','A new student bought it in the semester-start sale (demo).'):tr('新生已購買，收入已進入錢包（示範）。','A new student bought it. Earnings added to your wallet (demo).'));
+    render(); toast(it.moveout?tr('新生在開學專賣買下了它（示範）。','A new student bought it in the semester-start sale (demo).'):tr('新生已購買，收入已進入錢包（已扣 1% 佣金）。','A new student bought it. Earnings added to your wallet (after the 1% commission).'));
   }
   function submitMoveout(){
     var u=me(), picked=u.shelf.filter(function(s){return S.f.sel[s.id];});
@@ -373,20 +427,20 @@
     var paid=0;
     picked.forEach(function(s){
       var o=offer(s); paid+=o;
-      S.items.push({id:'m-'+s.id+'-'+(S.seq++),cat:s.cat,ico:s.ico,zh:s.zh,en:s.en,owner:'campusloop',from:S.user,bought:o,mode:'sell',price:s.price,newPrice:s.newPrice,rating:4.8,n:0,status:'available',moveout:true,cond:['works','clean','nodmg']});
+      S.items.push({id:'m-'+s.id+'-'+(S.seq++),cat:s.cat,ico:s.ico,zh:s.zh,en:s.en,owner:'campusloop',from:S.user,bought:o,mode:'sell',price:s.price,newPrice:s.newPrice,rating:4.8,n:0,status:'stored',stage:1,collect:{p:S.f.mplace,t:S.f.mslot},moveout:true,cond:['works','clean','nodmg']});
     });
     u.wallet+=paid;
     u.shelf=u.shelf.filter(function(s){return !S.f.sel[s.id];});
     S.f.sel={}; S.f.price={}; flag('listed');
     S.stack=[]; S.route={n:'moveoutdone'}; render(true);
-    toast(tr('CampusLoop 已收購 '+picked.length+' 件，'+mop(paid)+' 已進入錢包。','CampusLoop bought '+picked.length+' item'+(picked.length>1?'s':'')+'. '+mop(paid)+' added to your wallet.'));
+    toast(tr('CampusLoop 已收購 '+picked.length+' 件，'+mop(paid)+' 已進入錢包。收貨時間已約好。','CampusLoop bought '+picked.length+' item'+(picked.length>1?'s':'')+'. '+mop(paid)+' added to your wallet. Collection is booked.'));
   }
   function publish(){
     var p=+S.f.nPrice, d=+S.f.nDep;
     if(!S.f.nName.trim() || !(p>0) || (S.f.nMode==='rent' && !(d>=0 && S.f.nDep!==''))){ toast(tr('請填寫物品名稱、價格（租借還需押金）。','Fill in the item name and price (rentals also need a deposit).'),true); return; }
     var c=cat(S.f.nCat);
-    S.items.push({id:'u-'+(S.seq++),cat:S.f.nCat,ico:c.ico,zh:S.f.nName.trim(),en:S.f.nName.trim(),owner:S.user,mode:S.f.nMode,price:p,deposit:S.f.nMode==='rent'?d:0,custom:true,rating:5.0,n:0,status:'available',cond:['works','clean','nodmg']});
-    S.f.nName='';S.f.nPrice='';S.f.nDep='';
+    S.items.push({id:'u-'+(S.seq++),cat:S.f.nCat,ico:c.ico,zh:S.f.nName.trim(),en:S.f.nName.trim(),owner:S.user,mode:S.f.nMode,price:p,deposit:S.f.nMode==='rent'?d:0,custom:true,photos:S.f.nPhotos,rating:5.0,n:0,status:'available',cond:['works','clean','nodmg']});
+    S.f.nName='';S.f.nPrice='';S.f.nDep='';S.f.nPhotos=0;
     S.stack=[]; S.route={n:'mylist'}; render(true);
     toast(tr('已上架，其他同學可以看到。','Published. Other students can see it now.'));
   }
@@ -407,8 +461,8 @@
   function itemCard(it){
     var off = it.status!=='available';
     var price = it.mode==='rent' ? mop(it.price)+tr('/天','/day')+'<small>'+tr('押金 ','Deposit ')+mop(it.deposit)+'</small>' : mop(it.price)+'<small>'+tr('二手出售','For sale')+'</small>';
-    var st = it.status==='sold' ? '<span class="badge r">'+tr('已售出','Sold')+'</span>' : (off?'<span class="badge g">'+tr('已被預約','Reserved')+'</span>':'');
-    return '<button class="card'+(off?' off':'')+'" data-act="open" data-id="'+it.id+'"><div class="thumb">'+it.ico+'</div><div><div class="t">'+nm(it)+'</div><div class="s">'+NAMES[it.owner]+' · ★ '+it.rating.toFixed(1)+(it.n?' ('+it.n+')':'')+'</div><span class="badge">'+tr('已檢查狀態','Condition checked')+'</span>'+(it.moveout?'<span class="badge y">'+tr('開學專賣','Semester sale')+'</span>':'')+st+'</div><div class="p">'+price+'</div></button>';
+    var st = it.status==='sold' ? '<span class="badge r">'+tr('已售出','Sold')+'</span>' : (it.status==='stored' ? '<span class="badge g">'+tr('開學上架','Coming at semester start')+'</span>' : (off?'<span class="badge g">'+tr('已被預約','Reserved')+'</span>':''));
+    return '<button class="card'+(off?' off':'')+'" data-act="open" data-id="'+it.id+'"><div class="thumb">'+it.ico+'</div><div><div class="t">'+nm(it)+'</div><div class="s">'+NAMES[it.owner]+' · ★ '+it.rating.toFixed(1)+(it.n?' ('+it.n+')':'')+'</div><span class="badge">'+tr('已檢查狀態','Condition checked')+'</span>'+(nPhotos(it)?'<span class="badge">📷 '+nPhotos(it)+'</span>':'')+(it.moveout?'<span class="badge y">'+tr('開學專賣','Semester sale')+'</span>':'')+st+'</div><div class="p">'+price+'</div></button>';
   }
   function empty(em,msg,btn){ return '<div class="empty"><span class="em">'+em+'</span>'+msg+(btn||'')+'</div>'; }
 
@@ -435,7 +489,7 @@
   function results(){
     var q=S.f.q.trim().toLowerCase();
     var list=S.items.filter(function(i){
-      if(i.status==='sold') return false;
+      if(i.status==='sold'||i.status==='stored') return false;
       if(S.f.cat!=='all' && i.cat!==S.f.cat) return false;
       if(S.f.mode!=='all' && i.mode!==(S.f.mode==='rent'?'rent':'sell')) return false;
       if(S.f.moveout && !i.moveout) return false;
@@ -458,6 +512,7 @@
     var it=item(S.route.id), mine=it.owner===S.user, r=it.mode==='rent';
     var h='<div class="tagcard"><span class="hole"></span><div class="big">'+it.ico+'</div><h2>'+nm(it)+'</h2><div class="own">'+NAMES[it.owner]+' · ★ '+it.rating.toFixed(1)+(it.n?' ('+it.n+')':'')+(it.moveout?' · '+tr('開學專賣','Semester-start sale'):'')+'</div>';
     h+='<ul class="record">'+it.cond.map(function(k){return '<li><b>✓</b> '+tr(COND[k].zh,COND[k].en)+'</li>';}).join('')+'</ul></div>';
+    h+=gallery(it);
     if(r){
       var fee=rentFee(it);
       h+='<div class="sec">'+tr('租借期','Rental period')+'</div><div class="seg">'+[1,3,7,14].map(function(d){return '<button data-act="days" data-days="'+d+'" aria-pressed="'+(S.f.days===d)+'">'+d+tr(' 天',' d')+'</button>';}).join('')+'</div>';
@@ -468,7 +523,7 @@
       if(!it.custom) h+='<div class="note good">'+tr('比買新的省 '+mop(it.newPrice-it.price)+'（新品約 '+mop(it.newPrice)+'）','Saves '+mop(it.newPrice-it.price)+' vs buying new (about '+mop(it.newPrice)+')')+'</div>';
     }
     if(mine) h+='<div class="note info">'+tr('這是你自己上架的物品。','This is your own listing.')+'</div>';
-    else if(it.status!=='available') h+='<button class="cta" disabled>'+(it.status==='sold'?tr('已售出','Sold'):tr('已被預約','Reserved'))+'</button>';
+    else if(it.status!=='available') h+='<button class="cta" disabled>'+(it.status==='sold'?tr('已售出','Sold'):(it.status==='stored'?tr('開學上架，敬請期待','Coming at semester start'):tr('已被預約','Reserved')))+'</button>';
     else h+='<button class="cta" data-act="checkout" data-id="'+it.id+'">'+(r?tr('預約租借','Reserve'):tr('購買','Buy now'))+'</button>';
     return h;
   }
@@ -485,6 +540,8 @@
     } else {
       h+='<div class="note info">'+tr('面交時雙方一起確認物品狀態，確認後交易完成。','You and the seller check the item together at pickup. The purchase completes after that.')+'</div>';
     }
+    h+='<div class="sec">'+tr('面交地點（與賣家確認）','Meet-up place (confirm with the seller)')+'</div><div class="seg">'+PLACES.map(function(p,i){return '<button data-act="place" data-i="'+i+'" aria-pressed="'+(S.f.place===i)+'">'+tr(p[0],p[1])+'</button>';}).join('')+'</div>';
+    if(!it.moveout) h+='<div class="rule"><i>🏷</i><div>'+tr('成交後，賣家付 1% 平台佣金（約 '+mop(comm(r?rentFee(it):it.price))+'）。押金不收佣金。','After the deal, the seller pays a 1% platform commission (about '+mop(comm(r?rentFee(it):it.price))+'). Deposits are not charged.')+'</div></div>';
     h+='<div class="lines" style="margin-top:10px"><div><span>'+tr('錢包餘額','Wallet balance')+'</span><span>'+mop(u.wallet)+'</span></div><div class="tot"><span>'+tr('現在付','Pay now')+'</span><span>'+mop(total)+'</span></div></div>';
     if(!ok) h+='<div class="note warn">'+tr('餘額不足，還差 '+mop(total-u.wallet)+'。','Not enough balance. You need '+mop(total-u.wallet)+' more.')+'</div><button class="cta mint" data-act="topup">'+tr('儲值 MOP 200（示範）','Top up MOP 200 (demo)')+'</button>';
     h+='<button class="cta" data-act="pay" data-id="'+it.id+'" '+(ok?'':'disabled')+'>'+(r?tr('支付押金並預約','Pay deposit and reserve'):tr('付款','Pay'))+'</button>';
@@ -511,10 +568,12 @@
     var h='<div class="card"><div class="thumb">'+it.ico+'</div><div><div class="t">'+nm(it)+'</div><div class="s">'+NAMES[it.owner]+' · '+(r?o.days+tr(' 天',' days'):tr('購買','Purchase'))+'</div></div><div class="p">'+mop(o.total)+'</div></div>';
     h+='<ul class="tl">'+labels.map(function(l,i){return '<li class="'+(i<idx||o.status==='closed'?'done':(i===idx?'now':''))+'">'+l+'</li>';}).join('')+'</ul>';
     if(o.status==='reserved'){
-      h+='<div class="sec">'+tr('面交：一起確認狀態','Pickup: check the item together')+'</div><div class="ph-sub">'+tr('與 ','With ')+NAMES[it.owner]+tr(' 在校園公共地點面交，對照狀態紀錄逐項確認。',' at a public spot on campus. Check each point against the condition record.')+'</div>';
+      h+='<div class="sec">'+tr('面交：一起確認狀態','Pickup: check the item together')+'</div><div class="ph-sub">'+tr('與 ','With ')+NAMES[it.owner]+tr(' 在「'+PLACES[o.place||0][0]+'」面交，對照下面的照片與狀態紀錄逐項確認。',' at the '+PLACES[o.place||0][1].toLowerCase()+'. Compare with the photos below and check each point against the record.')+'</div>';
+      h+=gallery(it);
       var all=it.cond.every(function(k){return S.f.checks[k];});
       h+=it.cond.map(function(k){return '<button class="chk" role="checkbox" aria-checked="'+!!S.f.checks[k]+'" data-act="tick" data-k="'+k+'"><span class="box">'+(S.f.checks[k]?'✓':'')+'</span>'+tr(COND[k].zh,COND[k].en)+'</button>';}).join('');
       h+='<button class="photo'+(S.f.photo?' on':'')+'" data-act="photo">'+(S.f.photo?'✓ '+tr('照片已存證（示範）','Photo saved (demo)'):'📷 '+tr('拍照存證（示範）','Take a condition photo (demo)'))+'</button>';
+      if(S.f.photo) h+='<div class="gal"><div class="ph">'+photoSvg(it,'front',tr('面交存證','Pickup photo'))+'<span>'+tr('面交時拍的照片','Photo taken at pickup')+'</span></div></div>';
       h+='<button class="cta small line" data-act="tickall">'+tr('全部符合','All match')+'</button>';
       h+='<button class="cta" data-act="pickup" data-id="'+o.id+'" '+(all?'':'disabled')+'>'+tr('確認狀態','Confirm condition')+'</button>';
     } else if(o.status==='active'){
@@ -525,12 +584,13 @@
       h+='<button class="cta" data-act="return" data-id="'+o.id+'">'+tr('歸還物品','Return item')+'</button>';
     } else if(o.status==='returned' || o.status==='done'){
       if(r){ h+='<div class="refund'+(o.refund<o.deposit?' part':'')+'"><span>'+tr('押金已退還','Deposit refunded')+'</span><span>'+mop(o.refund)+'</span></div>'; if(o.refund<o.deposit) h+='<div class="note warn">'+tr('已按規則扣除 '+mop(o.deposit-o.refund)+'。','Deducted '+mop(o.deposit-o.refund)+' under the rules.')+'</div>'; }
+      if(o.outcome==='dmg') h+='<div class="note info">'+tr('糾紛處理：對照上架時的狀態紀錄與照片，確認有損壞才扣押金。','Dispute check: the deposit is deducted only after comparing with the listing record and photos.')+'</div>'+gallery(it);
       h+='<div class="sec">'+tr('給 '+NAMES[it.owner]+' 評分','Rate '+NAMES[it.owner])+'</div><div class="stars" role="radiogroup" aria-label="Rating">';
       for(var i=1;i<=5;i++) h+='<button class="'+(i<=o.rating?'on':'')+'" data-act="star" data-id="'+o.id+'" data-n="'+i+'" role="radio" aria-checked="'+(i===o.rating)+'" aria-label="'+i+'">★</button>';
       h+='</div><button class="cta" data-act="finish" data-id="'+o.id+'" '+(o.rating?'':'disabled')+'>'+tr('完成','Finish')+'</button>';
     } else {
       h+='<div class="note good">'+tr('完成！物品已回到流通，下一位同學可以預約。','Done! The item is back in circulation for the next student.')+'</div>';
-      if(r) h+='<div class="lines" style="margin-top:8px"><div><span>'+tr('租金','Rent')+'</span><span>'+mop(o.fee)+'</span></div><div><span>'+tr('押金退回','Deposit returned')+'</span><span>'+mop(o.refund)+'</span></div></div>';
+      h+='<div class="lines" style="margin-top:8px"><div><span>'+(r?tr('租金','Rent'):tr('價錢','Price'))+'</span><span>'+mop(o.fee)+'</span></div>'+(o.comm?'<div><span>'+tr('平台佣金 1%（賣家支付）','Platform commission 1% (paid by seller)')+'</span><span>'+mop(o.comm)+'</span></div>':'')+(r?'<div><span>'+tr('押金退回','Deposit returned')+'</span><span>'+mop(o.refund)+'</span></div>':'')+'</div>';
       h+='<button class="cta" data-act="tab" data-tab="browse">'+tr('繼續瀏覽','Keep browsing')+'</button>';
     }
     return h;
@@ -563,7 +623,8 @@
     h+='<div class="seg"><button data-act="nmode" data-m="rent" aria-pressed="'+rent+'">'+tr('出租','Rent out')+'</button><button data-act="nmode" data-m="sell" aria-pressed="'+!rent+'">'+tr('出售','Sell')+'</button></div>';
     h+='<div class="field"><label for="nPrice">'+(rent?tr('每天租金（MOP）','Rent per day (MOP)'):tr('售價（MOP）','Price (MOP)'))+'</label><input id="nPrice" data-bind="nPrice" inputmode="numeric" type="number" min="1" value="'+esc(f.nPrice)+'"></div>';
     if(rent) h+='<div class="field"><label for="nDep">'+tr('押金（MOP，可退還）','Deposit (MOP, refundable)')+'</label><input id="nDep" data-bind="nDep" inputmode="numeric" type="number" min="0" value="'+esc(f.nDep)+'"></div>';
-    h+='<div class="note info">'+tr('上架時會建立狀態紀錄：功能正常、外觀乾淨、沒有明顯損壞。','A condition record is created at listing: works as expected, clean, no visible damage.')+'</div>';
+    h+='<div class="sec">📷 '+tr('狀態照片（選填，點一下加入）','Condition photos (optional, tap to add)')+'</div><div class="gal">'+[0,1,2].map(function(i){return i<f.nPhotos?'<button class="ph" data-act="nphoto" data-i="'+i+'">'+photoSvg({cat:f.nCat,ico:(cat(f.nCat)||CATS[0]).ico},PH_KINDS[i],tr('賣家上傳','Seller photo'))+'<span>'+tr(PH_LABEL[PH_KINDS[i]][0],PH_LABEL[PH_KINDS[i]][1])+'</span></button>':'<button class="slot" data-act="nphoto" data-i="'+i+'" aria-label="Add photo">＋</button>';}).join('')+'</div>';
+    h+='<div class="note info">'+tr('上架時會建立狀態紀錄：功能正常、外觀乾淨、沒有明顯損壞。成交後收 1% 佣金，押金不收。','A condition record is created at listing: works as expected, clean, no visible damage. A 1% commission is charged when the deal completes. Deposits are not charged.')+'</div>';
     h+='<button class="cta" data-act="publish">'+tr('上架','Publish listing')+'</button>';
     return h;
   }
@@ -579,9 +640,11 @@
       var on=!!S.f.sel[s.id];
       return '<div class="chk" role="checkbox" tabindex="0" aria-checked="'+on+'" data-act="shelf" data-id="'+s.id+'"><span class="box">'+(on?'✓':'')+'</span><span style="font-size:1.3rem">'+s.ico+'</span><span>'+esc(tr(s.zh,s.en))+'</span><b style="margin-left:auto;white-space:nowrap">'+mop(offer(s))+'</b></div>';
     }).join('');
+    h+='<div class="sec">'+tr('收貨地點','Collection place')+'</div><div class="seg">'+MPLACES.map(function(p,i){return '<button data-act="mplace" data-i="'+i+'" aria-pressed="'+(S.f.mplace===i)+'">'+tr(p[0],p[1])+'</button>';}).join('')+'</div>';
+    h+='<div class="sec">'+tr('收貨時間','Collection time')+'</div><div class="seg">'+MSLOTS.map(function(p,i){return '<button data-act="mslot" data-i="'+i+'" aria-pressed="'+(S.f.mslot===i)+'">'+tr(p[0],p[1])+'</button>';}).join('')+'</div>';
     h+='<div class="lines"><div class="tot"><span id="selN"></span><span id="selT"></span></div></div>';
     h+='<button class="cta" id="moBtn" data-act="submitmo">'+tr('賣給 CampusLoop','Sell to CampusLoop')+'</button>';
-    h+='<div class="note info">'+tr('收購價約為二手價的一半。這是示範數字。','The buy price is about half of the used price. Demo numbers.')+'</div>';
+    h+='<div class="note info">'+tr('這是初步報價，約為二手價的一半。收貨時我們會再看狀態和轉售價值。這是示範數字。','This is a first offer, about half of the used price. We check the condition and resale value at collection. Demo numbers.')+'</div>';
     return h;
   }
   function moveoutTotals(){
@@ -596,7 +659,13 @@
     var paid=mine.reduce(function(a,i){return a+i.bought;},0);
     var h='<div class="ph-h">'+tr('開學專賣','Semester-start sale')+'</div>';
     if(!mo.length) return h+empty('📦',tr('CampusLoop 還沒有收購的物品。','CampusLoop has not bought anything yet.'),'<br><button class="cta small" data-act="go" data-to="moveout">'+tr('賣給 CampusLoop','Sell to CampusLoop')+'</button>');
-    h+='<div class="ph-sub">'+tr('這是開學時新生看到的畫面：CampusLoop 收購、檢查過的二手好物。','This is what new students see at semester start: used items that CampusLoop bought and checked.')+'</div>'+mo.map(function(it){return itemCard(it)+(it.status==='available'?'<button class="cta small line" style="margin:-2px 0 8px" data-act="sim" data-id="'+it.id+'">'+tr('示範：新生購買 '+esc(it.zh),'Demo: a new student buys it')+'</button>':'');}).join('');
+    var pend=mo.filter(function(i){return i.stage<4;}), minS=pend.length?Math.min.apply(null,pend.map(function(i){return i.stage;})):4;
+    if(mine.length){
+      var ms=Math.min.apply(null,mine.map(function(i){return i.stage;})), c=mine[0].collect;
+      h+='<div class="sec">'+tr('你的物品現在在哪？','Where are your items now?')+'</div><ul class="tl">'+STAGES.map(function(x,i){return '<li class="'+(ms===4||i<ms-1?'done':(i===ms-1?'now':''))+'">'+tr(x[0],x[1])+(i===0&&c?'<br><small>'+tr(MPLACES[c.p][0]+' · '+MSLOTS[c.t][0],MPLACES[c.p][1]+' · '+MSLOTS[c.t][1])+'</small>':'')+'</li>';}).join('')+'</ul>';
+    }
+    if(pend.length) h+='<button class="cta mint" data-act="advance">'+tr('示範：下一步 → '+STAGES[minS][0],'Demo: next step → '+STAGES[minS][1])+'</button>';
+    h+='<div class="ph-sub" style="margin-top:8px">'+tr('這是開學時新生看到的畫面：CampusLoop 收購、檢查過的二手好物。','This is what new students see at semester start: used items that CampusLoop bought and checked.')+'</div>'+mo.map(function(it){return itemCard(it)+(it.status==='available'?'<button class="cta small line" style="margin:-2px 0 8px" data-act="sim" data-id="'+it.id+'">'+tr('示範：新生購買 '+esc(it.zh),'Demo: a new student buys it')+'</button>':'');}).join('');
     var left=mo.filter(function(i){return i.status==='available';});
     h+='<div class="imp"><div><b>'+mop(paid)+'</b><span>'+tr('你賣給 CampusLoop 的所得','You got from CampusLoop')+'</span></div><div><b>'+mo.filter(function(i){return i.status==='sold';}).length+'/'+mo.length+'</b><span>'+tr('件已賣給新生','items sold to new students')+'</span></div></div>';
     if(left.length>1) h+='<button class="cta mint" data-act="simall">'+tr('示範：新生買走全部','Demo: new students buy everything')+'</button>';
@@ -665,6 +734,13 @@
       case 'publish': publish(); break;
       case 'shelf': S.f.sel[d.id]=!S.f.sel[d.id]; render(); break;
       case 'submitmo': submitMoveout(); break;
+      case 'zoom': case 'zoomnav': zoomPhoto(d.id,d.k); break;
+      case 'unzoom': var lb=document.querySelector('.lb'); if(lb) lb.remove(); break;
+      case 'place': S.f.place=+d.i; render(); break;
+      case 'mplace': S.f.mplace=+d.i; render(); break;
+      case 'mslot': S.f.mslot=+d.i; render(); break;
+      case 'nphoto': S.f.nPhotos=(S.f.nPhotos===+d.i+1)?+d.i:+d.i+1; render(); break;
+      case 'advance': advanceStock(); break;
       case 'sim': simulateSale(d.id); break;
       case 'simall': S.items.filter(function(i){return i.moveout&&i.status==='available';}).forEach(function(i){i.status='sold';}); flag('sold'); render(); toast(tr('新生買走全部（示範）。','New students bought everything (demo).')); break;
     }
