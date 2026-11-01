@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>聲現象 溫習與練習 — 初二物理</title>
+<style>
+  :root {
+    --bg: #f7f7f5; --card: #ffffff; --text: #1f2328; --muted: #6b7280;
+    --line: #e5e7eb; --accent: #2563eb; --ok: #15803d; --warn: #b45309;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0f1115; --card: #181b22; --text: #e6e8eb; --muted: #9aa3b2;
+      --line: #2a2f3a; --accent: #7aa7ff; --ok: #4ade80; --warn: #fbbf24;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0f1115; --card: #181b22; --text: #e6e8eb; --muted: #9aa3b2;
+    --line: #2a2f3a; --accent: #7aa7ff; --ok: #4ade80; --warn: #fbbf24;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 16px/1.7 system-ui, -apple-system, "Segoe UI", "Noto Sans TC", sans-serif;
+  }
+  main { max-width: 880px; margin: 0 auto; padding: 28px 16px 56px; }
+  h1 { font-size: 1.7rem; margin: 0 0 4px; }
+  h2 { font-size: 1.25rem; margin: 0 0 10px; }
+  h3 { font-size: 1.02rem; margin: 18px 0 6px; }
+  .lead { color: var(--muted); margin: 0 0 20px; }
+  a { color: var(--accent); }
+  section {
+    background: var(--card); border: 1px solid var(--line);
+    border-radius: 12px; padding: 18px 20px; margin-bottom: 16px;
+  }
+  table { width: 100%; border-collapse: collapse; margin: 8px 0; font-size: .95rem; }
+  th, td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; vertical-align: top; }
+  th { background: rgba(127,127,127,.08); }
+  code, .formula {
+    font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+    background: rgba(127,127,127,.12); padding: 1px 6px; border-radius: 4px;
+  }
+  .formula { display: block; padding: 10px 12px; margin: 8px 0; overflow-x: auto; }
+  .tip {
+    border-left: 4px solid var(--accent); padding: 8px 12px; margin: 10px 0;
+    background: rgba(37,99,235,.06); border-radius: 6px;
+  }
+  .q { border-top: 1px solid var(--line); padding: 14px 0; }
+  .q:first-of-type { border-top: none; padding-top: 4px; }
+  .q p { margin: 0 0 6px; }
+  .opts { display: grid; grid-template-columns: 1fr 1fr; gap: 4px 16px; margin: 4px 0 0 4px; }
+  details { margin-top: 8px; }
+  summary {
+    cursor: pointer; color: var(--accent); font-weight: 600; user-select: none;
+  }
+  details[open] summary { color: var(--ok); }
+  .ans { margin: 8px 0 0; padding: 10px 12px; background: rgba(21,128,61,.07); border-radius: 6px; }
+  footer { color: var(--muted); font-size: .85rem; margin-top: 24px; }
+  @media (max-width: 560px) { .opts { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<main>
+  <p><a href="../index.html">← 返回總目錄</a></p>
+  <h1>聲現象 溫習與練習</h1>
+  <p class="lead">初二物理 · 上學期 · 包括聲音的產生與傳播、回聲計算、音調／響度／音色、超聲與次聲、噪音控制。</p>
+
+  <section>
+    <h2>一、重點溫習</h2>
+
+    <h3>1. 聲音的產生與傳播</h3>
+    <ul>
+      <li>聲音由<strong>物體振動</strong>產生；振動停止，聲音就停止。</li>
+      <li>聲音的傳播需要<strong>介質</strong>（氣體、液體、固體）；<strong>真空不能傳聲</strong>。</li>
+      <li>聲速與介質有關，一般是固體 &gt; 液體 &gt; 氣體。</li>
+    </ul>
+    <table>
+      <tr><th>介質</th><th>聲速（約）</th></tr>
+      <tr><td>空氣（約 15°C）</td><td>340 m/s</td></tr>
+      <tr><td>水</td><td>1500 m/s</td></tr>
+      <tr><td>鋼鐵</td><td>約 5000 m/s</td></tr>
+      <tr><td>真空</td><td>不能傳播</td></tr>
+    </table>
+
+    <h3>2. 回聲與距離計算</h3>
+    <ul>
+      <li>人耳要分辨原聲與回聲，兩者至少相隔 <strong>0.1 s</strong>。</li>
+      <li>聲音<strong>單程</strong>：<code>s = v·t</code></li>
+      <li>聽到回聲時，聲音走了<strong>來回兩段</strong>：<code>2s = v·t</code></li>
+    </ul>
+    <div class="tip"><strong>解題要點：</strong>先判斷聲音走了單程還是來回，再列式。回聲題常見錯誤是忘記除以 2。</div>
+
+    <h3>3. 聲源或聽者在移動時</h3>
+    <p>例：車向山崖駛去，司機在鳴笛後 <em>t</em> 秒聽到回聲。設鳴笛時車離山 <em>D</em>，聽到回聲時車離山 <em>d</em>：</p>
+    <ul>
+      <li>汽車行駛距離：<code>s_車 = v_車 · t</code></li>
+      <li>聲音走過的總路程（來回）：<code>s_聲 = v_聲 · t</code></li>
+      <li>聽到回聲時車離山的距離：<code>d = ½(s_聲 − s_車)</code></li>
+      <li>鳴笛時車離山的距離：<code>D = d + s_車</code></li>
+    </ul>
+
+    <h3>4. 音調、響度、音色</h3>
+    <table>
+      <tr><th>特性</th><th>由什麼決定</th><th>單位／表示</th><th>例子</th></tr>
+      <tr><td>音調（高低）</td><td>頻率</td><td>赫茲 Hz</td><td>頻率越高，音調越高</td></tr>
+      <tr><td>響度（強弱）</td><td>振幅</td><td>分貝 dB</td><td>敲音叉用力，響度增大</td></tr>
+      <tr><td>音色（音質）</td><td>波形</td><td>—</td><td>分辨不同樂器或不同人的聲音</td></tr>
+    </table>
+    <div class="tip">看波形圖時：<strong>疏密（每秒完成的振動次數）</strong>看音調，<strong>高低起伏（振幅）</strong>看響度。</div>
+
+    <h3>5. 超聲與次聲</h3>
+    <ul>
+      <li>人耳能聽到的頻率大約是 <strong>20 Hz – 20000 Hz</strong>。</li>
+      <li>低於 20 Hz 的是<strong>次聲</strong>；高於 20000 Hz 的是<strong>超聲</strong>。</li>
+      <li>超聲應用：B 超、超聲清潔、探測海底深度等。</li>
+    </ul>
+
+    <h3>6. 噪音控制</h3>
+    <table>
+      <tr><th>位置</th><th>方法</th></tr>
+      <tr><td>在聲源處</td><td>汽車排氣管安裝消聲器；在機器上加裝消聲設備</td></tr>
+      <tr><td>在傳播途中</td><td>道路旁設置隔音屏障；種植樹木；加裝隔音窗</td></tr>
+      <tr><td>在人耳處</td><td>戴耳塞、耳罩</td></tr>
+    </table>
+  </section>
+
+  <section>
+    <h2>二、例題（附解題步驟）</h2>
+
+    <div class="q">
+      <p><strong>例 1：</strong>一門炮射擊，炮彈在坦克上爆炸，有人看見爆炸後 2.1 s 才聽到爆炸聲（聲速 340 m/s）。求炮與坦克的距離。</p>
+      <details><summary>查看解答</summary>
+        <div class="ans">
+          聲音單程：<code>s = v·t = 340 × 2.1 = 714 m</code>
+        </div>
+      </details>
+    </div>
+
+    <div class="q">
+      <p><strong>例 2：</strong>人在山谷大喊，經 1 s 聽到左山壁的回聲，再經 1 s 聽到右山壁的回聲。求山谷的寬度（聲速 340 m/s）。</p>
+      <details><summary>查看解答</summary>
+        <div class="ans">
+          到左山壁（來回 1 s）：<code>s₁ = ½ × 340 × 1 = 170 m</code><br>
+          到右山壁（來回 2 s）：<code>s₂ = ½ × 340 × 2 = 340 m</code><br>
+          山谷寬度 = 170 + 340 = <strong>510 m</strong>
+        </div>
+      </details>
+    </div>
+
+    <div class="q">
+      <p><strong>例 3：</strong>一輛汽車以 54 km/h 向山駛去，司機在某處鳴笛，3 s 後聽到回聲（聲速 340 m/s）。求 (1) 鳴笛時車離山多遠；(2) 聽到回聲時車離山多遠。</p>
+      <details><summary>查看解答</summary>
+        <div class="ans">
+          車速 54 km/h = 15 m/s，3 s 內車行 <code>15 × 3 = 45 m</code>；聲音總路程 <code>340 × 3 = 1020 m</code><br>
+          (2) 聽到回聲時車離山：<code>d = ½(1020 − 45) = 487.5 m</code><br>
+          (1) 鳴笛時車離山：<code>D = 487.5 + 45 = 532.5 m</code>
+        </div>
+      </details>
+    </div>
+
+    <div class="q">
+      <p><strong>例 4：</strong>一根長 884 m 的金屬管，一端敲擊，另一端先後聽到兩次聲音，相隔 2.43 s。空氣中聲速 340 m/s。求 (1) 聲音在空氣中傳播的時間；(2) 聲音在金屬中的傳播速度。</p>
+      <details><summary>查看解答</summary>
+        <div class="ans">
+          (1) 空氣中：<code>t = 884 / 340 ≈ 2.6 s</code><br>
+          (2) 金屬中所用時間：<code>2.6 − 2.43 = 0.17 s</code>（較快的那次是金屬傳來）<br>
+          <code>v = 884 / 0.17 ≈ 5200 m/s</code>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <section>
+    <h2>三、練習題</h2>
+
+    <h3>A. 選擇題</h3>
+
+    <div class="q">
+      <p><strong>1.</strong> 聲音在下列哪種介質中傳播最快？</p>
+      <div class="opts"><span>(A) 空氣</span><span>(B) 水</span><span>(C) 鋼鐵</span><span>(D) 真空</span></div>
+      <details><summary>答案</summary><div class="ans">(C)。固體中聲速一般最快。</div></details>
+    </div>
+
+    <div class="q">
+      <p><strong>2.</strong> 敲擊音叉時用力較大，聲音變響，主要是因為音叉的哪一項改變了？</p>
+      <div class="opts"><span>(A) 頻率</span><span>(B) 振幅</span><span>(C) 波形</span><span>(D) 聲速</span></div>
+      <details><summary>答案</summary><div class="ans">(B)。振幅增大，響度增大；頻率與音調有關。</div></details>
+    </div>
+
+    <div class="q">
+      <p><strong>3.</strong> 人耳能聽到的頻率範圍大約是：</p>
+      <div class="opts"><span>(A) 0 – 20 Hz</span><span>(B) 20 – 20000 Hz</span><span>(C) 20000 – 100000 Hz</span><span>(D) 2000 – 200000 Hz</span></div>
+      <details><summary>答案</summary><div class="ans">(B)。</div></details>
+    </div>
+
+    <div class="q">
+      <p><strong>4.</strong> 下列哪項屬於在「傳播途中」控制噪音？</p>
+      <div class="opts"><span>(A) 在汽車排氣管安裝消聲器</span><span>(B) 在道路旁設置隔音屏障</span><span>(C) 戴上耳塞</span><span>(D) 在工地上安裝噪音監測裝置</span></div>
+      <details><summary>答案</summary><div class="ans">(B)。(A) 在聲源處；(C) 在人耳處；(D) 只是監測噪音，並不能減少噪音。</div></details>
+    </div>
+
+    <div class="q">
+      <p><strong>5.</strong> 人耳要分辨原聲和回聲，聲源到反射面的距離至少要多遠？（聲速 340 m/s）</p>
+      <div class="opts"><span>(A) 3.4 m</span><span>(B) 8.5 m</span><span>(C) 17 m</span><span>(D) 34 m</span></div>
+      <details><summary>答案</summary><div class="ans">(C)。來回至少 0.1 s，<code>2s = 340 × 0.1 = 34 m</code>，所以 <code>s = 17 m</code>。</div></details>
+    </div>
+
+    <div class="q">
+      <p><strong>6.</strong> 超聲波的頻率是：</p>
+      <div class="opts"><span>(A) 低於 20 Hz</span><span>(B) 介於 20 至 20000 Hz</span><span>(C) 高於 20000 Hz</span><span>(D) 高於 2000 Hz</span></div>
+      <details><summary>答案</summary><div class="ans">(C)。</div></details>
+    </div>
+
+    <h3>B. 填充題</h3>
+
+    <div class="q">
+      <p><strong>7.</strong> 聲音由物體的 ______ 產生。</p>
+      <details><summary>答案</summary><div class="ans">振動</div></details>
+    </div>
+    <div class="q">
+      <p><strong>8.</strong> 聲音的傳播需要 ______；真空不能傳聲。</p>
+      <details><summary>答案</summary><div class="ans">介質</div></details>
+    </div>
+    <div class="q">
+      <p><strong>9.</strong> 音調由 ______ 決定；響度由 ______ 決定。</p>
+      <details><summary>答案</summary><div class="ans">頻率；振幅</div></details>
+    </div>
+
+    <h3>C. 計算題</h3>
+
+    <div class="q">
+      <p><strong>10.</strong> 一人對著遠處山崖大喊，經 2 s 後聽到回聲（聲速 340 m/s）。他離山崖多遠？</p>
+      <details><summary>答案</summary><div class="ans"><code>2s = 340 × 2 = 680 m</code>，所以 <code>s = 340 m</code>。</div></details>
+    </div>
+
+    <div class="q">
+      <p><strong>11.</strong> 一艘船向海底垂直發出超聲波，4 s 後收到回波（海水中聲速 1500 m/s）。求海底的深度。</p>
+      <details><summary>答案</summary><div class="ans"><code>2s = 1500 × 4 = 6000 m</code>，所以 <code>s = 3000 m</code>。</div></details>
+    </div>
+
+    <div class="q">
+      <p><strong>12.</strong> 一輛火車以 90 km/h 向山崖駛去，司機鳴笛後 6 s 聽到回聲（聲速 340 m/s）。求：(1) 6 s 內火車行駛的距離；(2) 鳴笛時火車離山多遠；(3) 聽到回聲時火車離山多遠。</p>
+      <details><summary>答案</summary><div class="ans">
+        (1) 車速 90 km/h = 25 m/s，<code>s_車 = 25 × 6 = 150 m</code><br>
+        (2) 聲音總路程 <code>340 × 6 = 2040 m</code>；鳴笛時離山 <code>D = (2040 + 150) / 2 = 1095 m</code><br>
+        (3) 聽到回聲時離山 <code>d = 1095 − 150 = 945 m</code>
+      </div></details>
+    </div>
+
+    <div class="q">
+      <p><strong>13.</strong> 一根長 1700 m 的鐵管，一端敲擊，另一端先後聽到兩次聲音。已知空氣中聲速 340 m/s，鐵中聲速 5100 m/s。求兩次聲音相隔的時間。</p>
+      <details><summary>答案</summary><div class="ans">
+        空氣中：<code>1700 / 340 = 5 s</code><br>
+        鐵中：<code>1700 / 5100 ≈ 0.33 s</code><br>
+        相隔時間 <code>5 − 0.33 ≈ 4.67 s</code>
+      </div></details>
+    </div>
+  </section>
+
+  <section>
+    <h2>四、自我檢查清單</h2>
+    <ul>
+      <li>我能說出真空為什麼不能傳聲。</li>
+      <li>我知道回聲題是「單程」還是「來回」，並會列出 <code>s = vt</code> 或 <code>2s = vt</code>。</li>
+      <li>我能用 <code>d = ½(s_聲 − s_車)</code> 處理移動的車向山駛去的題目。</li>
+      <li>我能分辨音調（頻率）、響度（振幅）與音色（波形）。</li>
+      <li>我能說出超聲與次聲的頻率界線。</li>
+    </ul>
+  </section>
+
+  <footer>
+    本頁為自學輔導用途的練習，內容參考初二物理課程，不屬於官方試題。<br>
+    <a href="../index.html">返回總目錄</a>
+  </footer>
+</main>
+</body>
+</html>

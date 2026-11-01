@@ -79,6 +79,7 @@
 | `physics/form3_physics_study_pack.html` | 完整學習套裝（含例題） | [🔗 預覽](https://howenghong.github.io/Tutoring-content/physics/form3_physics_study_pack.html) |
 | `physics/form3_revision_targeted.html` | 重點溫習筆記（精華版） | [🔗 預覽](https://howenghong.github.io/Tutoring-content/physics/form3_revision_targeted.html) |
 | `physics/form3_waves_em_examples.html` | 波動與電磁波例題集 | [🔗 預覽](https://howenghong.github.io/Tutoring-content/physics/form3_waves_em_examples.html) |
+| `physics/sound_review.html` | 聲現象溫習與練習（初二）：重點、例題、選擇／填充／計算題與答案 | [🔗 預覽](https://howenghong.github.io/Tutoring-content/physics/sound_review.html) |
 
 ---
 
