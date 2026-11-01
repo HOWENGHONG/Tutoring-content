@@ -1,6 +1,6 @@
 # 📚 Tutoring Content — 中學理科自學資源庫
 
-> **數學 · 物理 · 化學 · 英文 · CISC3012 AI** 自學筆記與模擬試卷  
+> **數學 · 物理 · 化學 · 英文 · CISC3012 AI · CISC3028 創業學** 自學筆記與模擬試卷  
 > 所有資源均以 **HTML 自包含檔案** 形式發佈，透過 GitHub Pages 即可在線預覽，無需安裝任何軟件。
 
 [![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Online-brightgreen)](https://howenghong.github.io/Tutoring-content/)
@@ -19,6 +19,7 @@
   - [英文（中一）](#-英文中一)
   - [CISC3012 人工智能（AI）](#cisc3012-人工智能ai)
   - [CISC3011 數位影像處理（DIP）](#️-cisc3011-數位影像處理dip)
+  - [CISC3028 創業學（Entrepreneurship）](#-cisc3028-創業學entrepreneurship)
 - [如何使用](#如何使用)
 - [教學建議](#教學建議)
 - [貢獻與回饋](#貢獻與回饋)
@@ -39,6 +40,7 @@
 | 化學 | 中三/中四 | 中英對照 | 結構與鍵合、MCQ 練習、結構化問題 |
 | 英文 | 中一 | 英文 | 模擬試卷（共三卷，含新版） |
 | CISC3012 | 大學 | 中英對照 | AI 模擬測驗、期中溫習筆記、考試速記 |
+| CISC3028 | 大學 | 中英對照 | 創業學期中溫習筆記（Ch1–9）、Exercises 01–07、Socrative 01–04、Past Paper 詳解 |
 
 所有內容皆為 **單一 HTML 檔案**，無需額外依賴，開箱即用。適合學生自學、教師課堂補充，或家長輔導使用。
 
@@ -55,6 +57,7 @@
 | `english/` | 英文（中一）；`f1_english_paper_*` 為新版，`f1_english_mock_paper_*` 為初版 |
 | `cisc3012/` | CISC3012 人工智能（AI） |
 | `cisc3011/` | CISC3011 數位影像處理（DIP）多頁式溫習站 |
+| `cisc3028/` | CISC3028 創業學（Entrepreneurship）期中溫習筆記與 Past Paper 詳解 |
 | `LICENSE` | 授權說明 |
 
 在線首頁：[🔗 總目錄](https://howenghong.github.io/Tutoring-content/)
@@ -152,6 +155,23 @@
 
 ---
 
+### 💼 CISC3028 創業學（Entrepreneurship）
+
+期中考範圍：**Ch1–9、Exercises 01–07、Socrative 01–04**。下列資源已覆蓋 **Ch1–9 全部章節**、**Exercises 01–07**、**Socrative 01–04**（根據 UM Moodle 實際講義與 Attempt Review 整理）。
+
+| 檔案 | 說明 | 預覽連結 |
+|------|------|----------|
+| `cisc3028/midterm_notes.html` | 期中溫習筆記（Ch1–Ch9 全部九章：創業/組織/管理、創業準備、商業模式生成、產生想法與機會、落實商業點子、行銷、融資、智慧財產權、成長挑戰），中英對照 | [🔗 預覽](https://howenghong.github.io/Tutoring-content/cisc3028/midterm_notes.html) |
+| `cisc3028/exercises.html` | Exercise 01–07 複習（根據 UM Moodle Attempt Review 實際題目與正解整理），中英對照 | [🔗 預覽](https://howenghong.github.io/Tutoring-content/cisc3028/exercises.html) |
+| `cisc3028/socrative.html` | Socrative 01–04 課堂即時問答複習（Entrepreneur vs Manager；Bill Gross 創業成功五大因素；產業分析與定位；財務工具與籌資），中英對照 | [🔗 預覽](https://howenghong.github.io/Tutoring-content/cisc3028/socrative.html) |
+| `cisc3028/pastpaper.html` | Past Paper 逐題詳解（Part A MCQ、Part B Apple BMC 練習、Part C Essay），中英對照 | [🔗 預覽](https://howenghong.github.io/Tutoring-content/cisc3028/pastpaper.html) |
+| `cisc3028/quickreview.html` | 15 分鐘快速溫習（Ch1–9 精華、5 大陷阱、Part B／C 作答模板、10 題自測），中英對照 | [🔗 預覽](https://howenghong.github.io/Tutoring-content/cisc3028/quickreview.html) |
+| `cisc3028/mockpaper.html` | Mock Paper 模擬卷 2 套（各 20 題 MCQ + Part B BMC + Part C Essay，附中英答案解釋），仿 Past Paper 格式 | [🔗 預覽](https://howenghong.github.io/Tutoring-content/cisc3028/mockpaper.html) |
+
+> **⚠️ 待補事項**：Past Paper 中 Q9–Q18 因照片角度被裁切、選項不清楚，且目前沒有更清晰的版本可以補上，這部分解答無法提供。
+
+---
+
 ## 如何使用
 
 1. **在線預覽**：點擊上方表格中的「🔗 預覽」連結，即可在瀏覽器中直接打開對應的 HTML 頁面。
@@ -202,6 +222,8 @@
 
 | 日期 | 更新內容 |
 |------|----------|
+| 2026 年 10 月 | 新增 CISC3028 創業學系列：期中溫習筆記（Ch1–3）、Past Paper 詳解（Part A/B/C）；更新 README 與首頁導航 |
+| 2026 年 10 月 | CISC3028 創業學系列擴充完整：期中溫習筆記補齊 Ch4–9、新增 Exercises 01–07 與 Socrative 01–04 複習頁面、修正 Past Paper Q9–18 缺失說明 |
 | 2026 年 10 月 | 重新整理倉庫：檔案按科目分類至子資料夾，檔名統一為小寫英文；移除根目錄的舊檔名（舊連結失效）；備份版移至 `chemistry/archive/`；README 補上 Past Paper 詳解與英中術語對照的連結 |
 | 2026 年 7 月 | 新增 CISC3012 AI 系列：Mock Test 1-2、期中溫習筆記、考試速記；更新 README |
 | 2026 年 7 月 | 新增中一英文新版模擬卷（Paper 1-3）；更新 README |
@@ -211,3 +233,11 @@
 ---
 
 **最後更新**：2026 年 10 月
+
+---
+
+## CampusLoop Demo（CISC3028 Group 01）
+
+| 檔案 | 說明 | 預覽連結 |
+|------|------|----------|
+| `campusloop/index.html` | CampusLoop（UM 校園物品租借與轉售平台）可實際操作的互動原型：瀏覽搜尋、預約付押金、面交確認、歸還評分、上架物品、退宿收購（賣給 CampusLoop）、開學專賣，附講稿面板，中英切換 | [🔗 預覽](https://howenghong.github.io/Tutoring-content/campusloop/) |

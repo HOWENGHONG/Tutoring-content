@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CISC3028 Entrepreneurship Past Paper 詳解</title>
+<style>
+  :root{
+    --bg:#f4f6fb; --card:#ffffff; --primary:#1e3a8a; --primary-light:#3b82f6;
+    --accent:#f59e0b; --green:#059669; --red:#dc2626; --text:#1f2937; --muted:#6b7280; --border:#e5e7eb;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang TC","Microsoft JhengHei",sans-serif;background:var(--bg);color:var(--text);line-height:1.7;padding:20px;}
+  .container{max-width:1000px;margin:0 auto;}
+  header{background:linear-gradient(135deg,#1e3a8a,#3b82f6);color:#fff;padding:32px 28px;border-radius:16px;margin-bottom:24px;box-shadow:0 8px 24px rgba(30,58,138,.25);}
+  header h1{font-size:1.7rem;margin-bottom:8px;}
+  header p{opacity:.9;font-size:.95rem;}
+  header .badge{display:inline-block;background:rgba(255,255,255,.2);padding:4px 12px;border-radius:20px;font-size:.8rem;margin-top:10px;}
+  .notice{background:#fff7ed;border:1px solid #fdba74;border-left:5px solid var(--accent);border-radius:10px;padding:16px 20px;margin-bottom:24px;font-size:.9rem;}
+  .notice strong{color:#c2410c;}
+  .sidebar{position:fixed;top:0;left:0;height:100vh;width:260px;background:var(--card);border-right:1px solid var(--border);padding:72px 18px 24px;overflow-y:auto;z-index:100;transition:transform .25s ease;box-shadow:2px 0 14px rgba(0,0,0,.05);}
+  .sidebar.collapsed{transform:translateX(-100%);}
+  .sidebar h2{font-size:.95rem;color:var(--primary);margin-bottom:12px;line-height:1.4;}
+  .sidebar ul{list-style:none;display:flex;flex-direction:column;gap:3px;}
+  .sidebar a{display:block;color:var(--text);text-decoration:none;padding:8px 12px;border-radius:8px;font-size:.86rem;transition:.15s;}
+  .sidebar a:hover{background:#eff6ff;color:var(--primary);}
+  .sidebar-toggle{position:fixed;top:16px;left:16px;z-index:200;width:42px;height:42px;border-radius:10px;border:1px solid var(--border);background:var(--card);cursor:pointer;font-size:1.2rem;color:var(--primary);display:flex;align-items:center;justify-content:center;box-shadow:0 2px 10px rgba(0,0,0,.12);}
+  .page-wrap{margin-left:260px;transition:margin-left .25s ease;}
+  .page-wrap.full{margin-left:0;}
+  .chapter{background:var(--card);border-radius:14px;padding:26px;margin-bottom:28px;box-shadow:0 2px 12px rgba(0,0,0,.06);}
+  .chapter > h2{font-size:1.35rem;color:var(--primary);padding-bottom:12px;border-bottom:3px solid var(--primary-light);margin-bottom:20px;display:flex;align-items:center;gap:10px;}
+  .chapter > h2 .num{background:var(--primary);color:#fff;width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;}
+  .mcq{border:1px solid var(--border);border-radius:10px;margin-bottom:14px;overflow:hidden;}
+  .mcq .q{background:#f8fafc;padding:10px 16px;font-weight:600;color:var(--primary);font-size:.92rem;}
+  .mcq .opts{list-style:none;margin:0;padding:10px 16px;}
+  .mcq .opts li{padding:7px 12px;border-radius:7px;margin-bottom:5px;font-size:.87rem;background:#fff;border:1px solid var(--border);}
+  .mcq .opts li.correct{background:#f0fdf4;color:var(--green);font-weight:600;border-color:#bbf7d0;}
+  .mcq .opts li .letter{font-weight:700;margin-right:4px;}
+  .mcq .ans{background:#ecfdf5;border-top:1px solid #a7f3d0;padding:10px 16px;font-size:.88rem;}
+  .mcq .ans b{color:var(--green);}
+  .missing{background:#fef2f2;border:1px dashed var(--red);border-radius:10px;padding:14px 18px;margin-bottom:14px;font-size:.88rem;}
+  .missing b{color:var(--red);}
+  .example{border:1px solid var(--border);border-radius:12px;margin-bottom:20px;overflow:hidden;}
+  .example .head{background:#f8fafc;padding:12px 18px;font-weight:600;color:var(--primary);border-bottom:1px solid var(--border);font-size:.98rem;}
+  .example .body{padding:16px 18px;}
+  .answer{background:#eff6ff;border-left:4px solid var(--primary-light);padding:10px 14px;border-radius:0 8px 8px 0;font-size:.9rem;margin-bottom:10px;}
+  .answer strong{color:var(--primary);}
+  .answer em{color:var(--primary);font-style:normal;font-weight:600;}
+  table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.85rem;}
+  th,td{border:1px solid var(--border);padding:8px 10px;text-align:left;}
+  th{background:#f1f5f9;color:var(--primary);font-weight:600;}
+  tr:nth-child(even){background:#fafbfc;}
+  .tip{background:#fef2f2;border:1px dashed var(--red);padding:12px 16px;border-radius:8px;font-size:.88rem;margin:14px 0;}
+  .tip strong{color:var(--red);}
+  ul,ol{margin-left:20px;margin-bottom:10px;}
+  li{margin-bottom:4px;}
+  footer{text-align:center;color:var(--muted);font-size:.8rem;padding:20px;}
+  @media(max-width:860px){.sidebar{width:82vw;max-width:300px;box-shadow:4px 0 24px rgba(0,0,0,.18);}.page-wrap{margin-left:0 !important;}}
+  @media(max-width:600px){body{padding:10px;}header{padding:22px 18px;}header h1{font-size:1.3rem;}.chapter{padding:18px;}table{font-size:.78rem;}}
+  .zh{color:var(--muted);}
+</style>
+</head>
+<body>
+<button class="sidebar-toggle" id="sidebarToggle" aria-label="切換導航 Toggle navigation">☰</button>
+<nav class="sidebar" id="sidebar">
+  <h2>📑 快速導航<br>Quick Navigation</h2>
+  <ul>
+    <li><a href="#parta">Part A：MCQ 詳解</a></li>
+    <li><a href="#partb">Part B：Apple BMC 練習</a></li>
+    <li><a href="#partc">Part C：Essay 題</a></li>
+    <li><a href="midterm_notes.html">📖 期中溫習筆記（Ch1–9）</a></li>
+    <li><a href="exercises.html">📝 Exercises 01–07 複習</a></li>
+    <li><a href="socrative.html">🎤 Socrative 01–04 複習</a></li>
+    <li><a href="quickreview.html">⚡ 15 分鐘快速溫習</a></li>
+    <li><a href="mockpaper.html">🧪 Mock Paper 模擬卷</a></li>
+  </ul>
+</nav>
+<div class="page-wrap" id="pageWrap">
+<div class="container">
+
+<header>
+  <h1>📝 CISC3028 Entrepreneurship<br>Past Paper 詳解 Past Paper Walkthrough</h1>
+  <p>中英雙語 · Part A MCQ + Part B BMC + Part C Essay</p>
+  <span class="badge">根據上傳的試卷照片整理</span>
+</header>
+
+<div class="notice">
+  <strong>⚠️ 重要提醒：</strong>試卷照片中 <strong>Q9–Q18</strong> 的選項文字因為拍攝角度被裁切，看不清楚完整內容，所以這 10 題暫時沒有收錄在下面的詳解中。
+  <strong>這 10 題的選項目前無法補上</strong>（連你本人手上都沒有更清晰的版本），所以這部分會維持空缺，複習時請以 Q1–8、Q19–30（都已整理好答案與解釋）以及其他 Ch1–Ch9 筆記內容為主。
+</div>
+
+<!-- ================= Part A ================= -->
+<section class="chapter" id="parta">
+  <h2><span class="num">A</span>Part A — Multiple Choice（每題只有一個正確答案）</h2>
+
+  <div class="mcq">
+    <div class="q">1. Which situation demonstrates "efficiency"? <span class="zh">以下哪個情況體現「效率」（efficiency）？</span></div>
+    <ul class="opts">
+      <li><span class="letter">A.</span> Manager decides without consulting team <span class="zh">經理不諮詢團隊就做決定</span></li>
+      <li><span class="letter">B.</span> Product fails to attract customers <span class="zh">產品無法吸引顧客</span></li>
+      <li><span class="letter">C.</span> Project late but excellent quality <span class="zh">專案延遲完成但品質極佳</span></li>
+      <li class="correct"><span class="letter">D.</span> ✅ Department lowers energy/paper usage without reducing productivity <span class="zh">部門在不降低生產力的前提下減少能源／紙張用量</span></li>
+    </ul>
+    <div class="ans"><b>答案：D</b> — Efficiency = 用更少資源、產出不變或不降低。D 在「不犧牲產能」的前提下省資源，正是 efficient 的定義。A 和風格有關、B/C 都偏向「結果不好」，屬於 effectiveness 的問題，不是 efficiency。</div>
+  </div>
+
+  <div class="mcq">
+    <div class="q">2. Which represents "effectiveness"? <span class="zh">以下哪項代表「成效」（effectiveness）？</span></div>
+    <ul class="opts">
+      <li><span class="letter">A.</span> Cutting staff to reduce expenses <span class="zh">裁員以減少開支</span></li>
+      <li class="correct"><span class="letter">B.</span> ✅ Implementing a strategy that improves customer satisfaction and results <span class="zh">實施能提升顧客滿意度與成果的策略</span></li>
+      <li><span class="letter">C.</span> Automating without considering quality <span class="zh">只管自動化而不顧品質</span></li>
+      <li><span class="letter">D.</span> Reducing production time even if errors increase <span class="zh">縮短生產時間，即使錯誤增加</span></li>
+    </ul>
+    <div class="ans"><b>答案：B</b> — Effectiveness = 做對的事、達成目標／結果。B 直接講到「改善顧客滿意度與業績結果」，符合「doing the right things」。</div>
+  </div>
+
+  <div class="mcq">
+    <div class="q">3. Which is NOT an example of entrepreneurial innovation? <span class="zh">以下哪項「不是」創業創新的例子？</span></div>
+    <ul class="opts">
+      <li><span class="letter">A.</span> Opening a new market <span class="zh">開拓新市場</span></li>
+      <li><span class="letter">B.</span> Discovering a new raw material source <span class="zh">發現新的原料來源</span></li>
+      <li><span class="letter">C.</span> Creating a new form of organization <span class="zh">創造新的組織形式</span></li>
+      <li class="correct"><span class="letter">D.</span> ✅ Repeating existing business practices <span class="zh">重複現有的商業做法</span></li>
+    </ul>
+    <div class="ans"><b>答案：D</b> — 創新的五種形式是：新產品、新生產方式、新市場、新原料來源、新組織形式。「重複既有做法」正好和創新相反。</div>
+  </div>
+
+  <div class="mcq">
+    <div class="q">4. What is the main responsibility of a manager? <span class="zh">經理的主要責任是什麼？</span></div>
+    <ul class="opts">
+      <li><span class="letter">A.</span> Creating a new product idea <span class="zh">想出新產品點子</span></li>
+      <li><span class="letter">B.</span> Securing startup funding <span class="zh">取得創業資金</span></li>
+      <li class="correct"><span class="letter">C.</span> ✅ Growing or maintaining a business <span class="zh">成長或維持企業</span></li>
+      <li><span class="letter">D.</span> Taking business risks <span class="zh">承擔商業風險</span></li>
+    </ul>
+    <div class="ans"><b>答案：C</b> — 課堂筆記明確區分：entrepreneur＝start a business，manager＝grow or maintain a business。</div>
+  </div>
+
+  <div class="mcq">
+    <div class="q">5. What does a business plan primarily focus on? <span class="zh">商業計劃書主要專注於什麼？</span></div>
+    <ul class="opts">
+      <li><span class="letter">A.</span> Describing value proposition <span class="zh">描述價值主張</span></li>
+      <li class="correct"><span class="letter">B.</span> ✅ Presenting strategy and expected financial performance <span class="zh">呈現策略與預期財務表現</span></li>
+      <li><span class="letter">C.</span> Defining industry position <span class="zh">界定產業地位</span></li>
+      <li><span class="letter">D.</span> Explaining supply chain process <span class="zh">解釋供應鏈流程</span></li>
+    </ul>
+    <div class="ans"><b>答案：B</b> — Ch3 定義：business plan = a document presenting the company's strategy and expected financial performance for the years to come。</div>
+  </div>
+
+  <div class="mcq">
+    <div class="q">6. In the commission model, how does the company earn revenue? <span class="zh">在佣金模式（commission model）中，公司如何賺取收入？</span></div>
+    <ul class="opts">
+      <li><span class="letter">A.</span> Selling own products <span class="zh">出售自家產品</span></li>
+      <li><span class="letter">B.</span> Charging a monthly fee <span class="zh">收取月費</span></li>
+      <li class="correct"><span class="letter">C.</span> ✅ Acting as an intermediary and taking a cut of each sale <span class="zh">擔任中介，從每筆銷售中抽成</span></li>
+      <li><span class="letter">D.</span> Offering free products and selling upgrades <span class="zh">提供免費產品並出售升級版</span></li>
+    </ul>
+    <div class="ans"><b>答案：C</b> — Commission/distribution model 的定義就是「中介角色，每筆交易抽成」。（D 是 freemium 模式，不是 commission）</div>
+  </div>
+
+  <div class="mcq">
+    <div class="q">7. How is creativity best defined? <span class="zh">創造力（creativity）最佳的定義是什麼？</span></div>
+    <ul class="opts">
+      <li><span class="letter">A.</span> The process of selling products <span class="zh">銷售產品的過程</span></li>
+      <li><span class="letter">B.</span> The ability to manage a team <span class="zh">管理團隊的能力</span></li>
+      <li><span class="letter">C.</span> The act of analyzing market trends <span class="zh">分析市場趨勢的行為</span></li>
+      <li class="correct"><span class="letter">D.</span> ✅ The act of developing new and imaginative ideas into reality <span class="zh">把嶄新且富想像力的想法化為現實的行為</span></li>
+    </ul>
+    <div class="ans"><b>答案：D</b> — 創造力的標準定義：把新穎、有想像力的構想變成現實的過程。</div>
+  </div>
+
+  <div class="mcq">
+    <div class="q">8. What does "freewheeling" mean in the context of brainstorming? <span class="zh">腦力激盪中「freewheeling（自由發揮）」是什麼意思？</span></div>
+    <ul class="opts">
+      <li class="correct"><span class="letter">A.</span> ✅ Encouraging wild and creative ideas without judgment <span class="zh">鼓勵天馬行空的創意想法，不作評判</span></li>
+      <li><span class="letter">B.</span> Following a strict agenda <span class="zh">遵循嚴格的議程</span></li>
+      <li><span class="letter">C.</span> Limiting ideas to proven concepts <span class="zh">把想法限制在已證實的概念</span></li>
+      <li><span class="letter">D.</span> Discouraging controversial suggestions <span class="zh">不鼓勵有爭議的建議</span></li>
+    </ul>
+    <div class="ans"><b>答案：A</b> — Brainstorming 的經典規則之一就是 "freewheeling"：任何天馬行空的想法都先提出來，不批判。</div>
+  </div>
+
+  <div class="missing"><b>⚠️ Q9–Q18：</b>照片角度太斜，選項文字看不清楚，且目前沒有更清晰的版本可以補上，這 10 題的詳解暫時無法提供。</div>
+
+  <div class="mcq">
+    <div class="q">19. What do cash receipts and disbursements track? <span class="zh">現金收支（cash receipts and disbursements）追蹤什麼？</span></div>
+    <ul class="opts">
+      <li class="correct"><span class="letter">A.</span> ✅ When payments are received and made <span class="zh">款項何時收到與支付</span></li>
+      <li><span class="letter">B.</span> Only sales volume <span class="zh">只有銷量</span></li>
+      <li><span class="letter">C.</span> Only expenses <span class="zh">只有開支</span></li>
+      <li><span class="letter">D.</span> Only profits <span class="zh">只有利潤</span></li>
+    </ul>
+    <div class="ans"><b>答案：A</b> — Cash receipts/disbursements 記錄的是「現金何時收到、何時付出」，不只是銷售額或利潤。</div>
+  </div>
+
+  <div class="mcq">
+    <div class="q">20. What are liabilities? <span class="zh">什麼是負債（liabilities）？</span></div>
+    <ul class="opts">
+      <li class="correct"><span class="letter">A.</span> ✅ Money owed to others <span class="zh">欠他人的錢</span></li>
+      <li><span class="letter">B.</span> Company profits <span class="zh">公司利潤</span></li>
+      <li><span class="letter">C.</span> Owner equity <span class="zh">業主權益</span></li>
+      <li><span class="letter">D.</span> Inventory <span class="zh">存貨</span></li>
+    </ul>
+    <div class="ans"><b>答案：A</b> — Liabilities（負債）＝欠別人的錢。</div>
+  </div>
+
+  <div class="mcq">
+    <div class="q">21. What is breakeven analysis used for? <span class="zh">損益平衡分析（breakeven analysis）用來做什麼？</span></div>
+    <ul class="opts">
+      <li><span class="letter">A.</span> To set employee wages <span class="zh">訂定員工薪資</span></li>
+      <li class="correct"><span class="letter">B.</span> ✅ To determine when gross margin equals fixed expenses <span class="zh">判斷毛利何時等於固定開支</span></li>
+      <li><span class="letter">C.</span> To calculate taxes and benefits <span class="zh">計算稅項與福利</span></li>
+      <li><span class="letter">D.</span> To estimate startup costs <span class="zh">估算創業成本</span></li>
+    </ul>
+    <div class="ans"><b>答案：B</b> — Breakeven point＝毛利剛好等於固定成本的那個銷售量／金額，用來判斷何時開始獲利。</div>
+  </div>
+
+  <div class="mcq">
+    <div class="q">22. What does "Conditions" refer to in the Six Cs of Credit? <span class="zh">信用六 C 中的「Conditions（條件）」指什麼？</span></div>
+    <ul class="opts">
+      <li><span class="letter">A.</span> Payment amount and methods <span class="zh">付款金額與方式</span></li>
+      <li><span class="letter">B.</span> Marketing channels <span class="zh">行銷通路</span></li>
+      <li><span class="letter">C.</span> Employee benefits <span class="zh">員工福利</span></li>
+      <li class="correct"><span class="letter">D.</span> ✅ Loan terms and local economic climate <span class="zh">貸款條款與當地經濟環境</span></li>
+    </ul>
+    <div class="ans"><b>答案：D</b> — Six Cs of Credit 中的 "Conditions" 指的是貸款條件與當地經濟環境，會影響還款能力的外部因素。</div>
+  </div>
+
+  <div class="mcq">
+    <div class="q">23. Who are angel investors? <span class="zh">誰是天使投資人？</span></div>
+    <ul class="opts">
+      <li class="correct"><span class="letter">A.</span> ✅ Individuals who invest in promising companies <span class="zh">投資有潛力公司的個人</span></li>
+      <li><span class="letter">B.</span> Banks offering loans <span class="zh">提供貸款的銀行</span></li>
+      <li><span class="letter">C.</span> Government officials <span class="zh">政府官員</span></li>
+      <li><span class="letter">D.</span> Marketing consultants <span class="zh">行銷顧問</span></li>
+    </ul>
+    <div class="ans"><b>答案：A</b> — Angel investor＝用自己的錢投資有潛力新創公司的個人投資者。</div>
+  </div>
+
+  <div class="mcq">
+    <div class="q">24. Can copyright be co-owned? <span class="zh">版權可以共同擁有嗎？</span></div>
+    <ul class="opts">
+      <li class="correct"><span class="letter">A.</span> ✅ Yes, if created by a team <span class="zh">可以，如果由團隊創作</span></li>
+      <li><span class="letter">B.</span> No, it must belong to one person <span class="zh">不可以，必須屬於一個人</span></li>
+      <li><span class="letter">C.</span> Only if registered jointly <span class="zh">只有共同註冊才可以</span></li>
+      <li><span class="letter">D.</span> Only for published works <span class="zh">只適用於已出版作品</span></li>
+    </ul>
+    <div class="ans"><b>答案：A</b> — 團隊共同創作的作品，著作權可以共同擁有（joint authorship）。</div>
+  </div>
+
+  <div class="mcq">
+    <div class="q">25. Which of the following is an example of a non-patentable discovery? <span class="zh">以下哪項是「不可申請專利的發現」的例子？</span></div>
+    <ul class="opts">
+      <li><span class="letter">A.</span> Design of a new machine <span class="zh">新機器的設計</span></li>
+      <li><span class="letter">B.</span> Improvement of a product <span class="zh">產品的改良</span></li>
+      <li class="correct"><span class="letter">C.</span> ✅ Discovery of a natural substance <span class="zh">發現天然物質</span></li>
+      <li><span class="letter">D.</span> New manufacturing method <span class="zh">新的製造方法</span></li>
+    </ul>
+    <div class="ans"><b>答案：C</b> — 自然存在的物質本身（非人工發明）通常不能申請專利；A、B、D 都是人為發明/改良，可申請專利。</div>
+  </div>
+
+  <div class="mcq">
+    <div class="q">26. What increases during continuous growth? <span class="zh">持續成長階段（continuous growth）什麼會增加？</span></div>
+    <ul class="opts">
+      <li class="correct"><span class="letter">A.</span> ✅ Need for structure and formalization <span class="zh">對結構與正規化的需求</span></li>
+      <li><span class="letter">B.</span> Need for downsizing <span class="zh">縮編的需求</span></li>
+      <li><span class="letter">C.</span> Need for outsourcing and flexibility <span class="zh">對外包與彈性的需求</span></li>
+      <li><span class="letter">D.</span> Need for cost-cutting <span class="zh">削減成本的需求</span></li>
+    </ul>
+    <div class="ans"><b>答案：A</b> — 組織持續成長時，需要更多「結構化」與「正式化」的制度去管理複雜度。</div>
+  </div>
+
+  <div class="mcq">
+    <div class="q">27. Which is an advantage of internal growth? <span class="zh">以下哪項是內部成長（internal growth）的優點？</span></div>
+    <ul class="opts">
+      <li><span class="letter">A.</span> Rapid expansion <span class="zh">快速擴張</span></li>
+      <li class="correct"><span class="letter">B.</span> ✅ Preserves organizational culture <span class="zh">保留組織文化</span></li>
+      <li><span class="letter">C.</span> Access to new markets <span class="zh">進入新市場</span></li>
+      <li><span class="letter">D.</span> Reduced competition <span class="zh">減少競爭</span></li>
+    </ul>
+    <div class="ans"><b>答案：B</b> — Internal growth（有機成長）速度較慢，但能保留原本的組織文化；A/C/D 比較是外部成長（併購）帶來的好處。</div>
+  </div>
+
+  <div class="mcq">
+    <div class="q">28. Which of the following is NOT typically a trademark? <span class="zh">以下哪項通常「不是」商標？</span></div>
+    <ul class="opts">
+      <li><span class="letter">A.</span> A company name <span class="zh">公司名稱</span></li>
+      <li><span class="letter">B.</span> A product slogan <span class="zh">產品口號</span></li>
+      <li><span class="letter">C.</span> A logo <span class="zh">標誌（logo）</span></li>
+      <li class="correct"><span class="letter">D.</span> ✅ A manufacturing process <span class="zh">製造流程</span></li>
+    </ul>
+    <div class="ans"><b>答案：D</b> — 商標保護的是「品牌識別」（名稱/標語/標誌），生產製程屬於專利或商業機密的範疇，不是商標。</div>
+  </div>
+
+  <div class="mcq">
+    <div class="q">29. Which of the following is true about trade secrets? <span class="zh">關於商業秘密（trade secrets），以下哪項為真？</span></div>
+    <ul class="opts">
+      <li class="correct"><span class="letter">A.</span> ✅ They are protected without registration <span class="zh">不需註冊即受保護</span></li>
+      <li><span class="letter">B.</span> They must be patented <span class="zh">必須申請專利</span></li>
+      <li><span class="letter">C.</span> They require trademark protection <span class="zh">需要商標保護</span></li>
+      <li><span class="letter">D.</span> They are published for legal protection <span class="zh">為取得法律保護而公開</span></li>
+    </ul>
+    <div class="ans"><b>答案：A</b> — 商業機密的保護方式就是「保密」本身，不需要向政府註冊（這點和專利／商標不同）。</div>
+  </div>
+
+  <div class="mcq">
+    <div class="q">30. How does growth help attract and retain employees? <span class="zh">成長如何幫助吸引並留住員工？</span></div>
+    <ul class="opts">
+      <li><span class="letter">A.</span> It reduces workload <span class="zh">減輕工作量</span></li>
+      <li><span class="letter">B.</span> It eliminates training needs <span class="zh">免除培訓需求</span></li>
+      <li class="correct"><span class="letter">C.</span> ✅ It creates promotional opportunities <span class="zh">創造晉升機會</span></li>
+      <li><span class="letter">D.</span> It increases job security automatically <span class="zh">自動增加工作保障</span></li>
+    </ul>
+    <div class="ans"><b>答案：C</b> — 公司成長代表有更多職位和晉升機會，這是吸引與留住員工的重要原因。</div>
+  </div>
+</section>
+
+<!-- ================= Part B ================= -->
+<section class="chapter" id="partb">
+  <h2><span class="num">B</span>Part B — Business Model Exercise: Apple Inc.</h2>
+  <div class="example">
+    <div class="head">題目：分析 Apple 的商業模式，填寫 BMC 九宮格，並指出其模式的優點與缺點（至少 120 words）</div>
+    <div class="body">
+      <div class="answer">
+        <strong>1. What is Apple's business model based on？</strong><br>
+        Apple's business model is based on <em>tightly integrated hardware, software and services</em>, sold at a <em>premium price</em> within a closed ecosystem (a <em>production + accessories-style</em> model, reinforced by services/subscription revenue). 蘋果的商業模式核心是「軟硬體與服務高度整合」，以高價銷售產品，並透過封閉生態系綁住用戶，再加上服務／訂閱收入（如 App Store、iCloud、Apple Music）。
+      </div>
+      <table>
+        <tr><th>Block</th><th>Apple 範例</th></tr>
+        <tr><td>Value Proposition</td><td>Premium design, seamless integration across devices, privacy/security, ease of use 高端設計、跨裝置無縫整合、隱私與安全、易用性</td></tr>
+        <tr><td>Customer Segments</td><td>Mass-market premium consumers; creative professionals; developers 高端消費者、創作者、開發者</td></tr>
+        <tr><td>Channels</td><td>Apple Stores, apple.com, authorized resellers, carriers 直營門市、官網、授權經銷商、電信商</td></tr>
+        <tr><td>Customer Relationships</td><td>Self-service (App Store), AppleCare support, community/events 自助服務、AppleCare、社群與活動</td></tr>
+        <tr><td>Revenue Streams</td><td>Hardware sales (iPhone/Mac/iPad), Services (App Store, iCloud, Music, Apple TV+), accessories 硬體銷售、服務訂閱、配件</td></tr>
+        <tr><td>Key Resources</td><td>Brand, design/engineering talent, IP/patents, retail network, supply chain 品牌、設計與工程人才、專利、零售網絡、供應鏈</td></tr>
+        <tr><td>Key Activities</td><td>Product design, software development, marketing, supply chain management 產品設計、軟體開發、行銷、供應鏈管理</td></tr>
+        <tr><td>Key Partnerships</td><td>Component suppliers (e.g. TSMC, Foxconn), carriers, app developers 零組件供應商、電信商、App 開發者</td></tr>
+        <tr><td>Cost Structure</td><td>R&amp;D, manufacturing/component costs, marketing, retail operations 研發、製造/零件成本、行銷、門市營運</td></tr>
+      </table>
+      <div class="answer">
+        <strong>3. Strength(s)：</strong> The <em>ecosystem lock-in</em> creates high switching costs and strong customer loyalty, while <em>services revenue</em> is recurring and high-margin, reducing reliance on hardware upgrade cycles. 生態系鎖定效應讓用戶黏著度高，服務收入穩定且高毛利，降低對硬體換機潮的依賴。<br><br>
+        <strong>4. Weakness(es)：</strong> Heavy reliance on <em>premium pricing</em> makes Apple vulnerable in price-sensitive/emerging markets, and concentration with a few key suppliers/manufacturers (supply chain concentration, e.g. in China) creates geopolitical and operational risk. 高度依賴高價策略，在價格敏感或新興市場較弱勢；供應鏈過度集中在少數供應商/地區,也帶來地緣政治與營運風險。
+      </div>
+      <div class="tip"><strong>寫作提醒：</strong>這題要求至少 120 字，建議用英文作答為主（課堂投影片多為英文），中文翻譯僅供理解，可依老師要求調整作答語言。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= Part C ================= -->
+<section class="chapter" id="partc">
+  <h2><span class="num">C</span>Part C — Essay Question</h2>
+  <div class="example">
+    <div class="head">題目：選兩個你認為最相關、最有挑戰性、或修課前從未想過的概念，並討論（至少 100 words）</div>
+    <div class="body">
+      <div class="answer">
+        <strong>建議寫法（三段式）：</strong> ① 定義這個概念是什麼；② 為什麼對你來說「更相關/更有挑戰/是新觀念」；③ 舉一個具體例子（可以用自己的 CISC3028 project 或生活經驗）。<br><br>
+        <strong>範例概念 1：Efficient vs Effective</strong><br>
+        <em>English：</em> Before this course, I thought "working hard" and "working smart" were the same thing. The distinction between <em>efficient</em> (doing things right, saving resources) and <em>effective</em> (doing the right things, achieving real results) was new to me. For example, in our group project, we initially focused on building features quickly (efficient) without validating whether students actually wanted them (not effective) — this concept directly changed how we approached our business plan.<br>
+        <em>中文：</em>修課前我以為「努力」和「做對事」是同一件事。效率（把事情做對、節省資源）和效果（做對的事、真正達成目標）的分別對我來說是全新的概念——例如我們的分組專案一開始只顧著快速做出功能（有效率），卻沒先驗證學生是否真的需要（沒有效果），這個概念直接改變了我們後來規劃商業計劃的方式。<br><br>
+        <strong>範例概念 2：Necessity vs Opportunity Entrepreneurs</strong><br>
+        <em>English：</em> I had never considered that not all entrepreneurs start a business by choice — some are "necessity entrepreneurs" pushed into it by losing a job, while others are "opportunity entrepreneurs" driven by a genuine idea. This reframed how I judge a business plan's motivation and sustainability.<br>
+        <em>中文：</em>我以前從未想過不是所有創業者都是「自願」創業——有些是被迫失業後不得不創業的「必要型創業者」，有些則是出於真正渴望的「機會型創業者」。這讓我重新思考評估一個商業計劃動機與永續性的角度。
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  CISC3028 Entrepreneurship · Past Paper Walkthrough · 最後更新 2026-10 · Q9–18 選項資料缺失（無法補上）
+</footer>
+
+</div>
+</div>
+<script>
+(function(){
+  var sidebar=document.getElementById('sidebar');
+  var toggle=document.getElementById('sidebarToggle');
+  var wrap=document.getElementById('pageWrap');
+  function isMobile(){return window.innerWidth<=860;}
+  function setState(hidden){
+    sidebar.classList.toggle('collapsed',hidden);
+    wrap.classList.toggle('full',hidden||isMobile());
+    try{localStorage.setItem('cisc3028_sidebar_hidden',hidden?'1':'0');}catch(e){}
+  }
+  var saved=null;
+  try{saved=localStorage.getItem('cisc3028_sidebar_hidden');}catch(e){}
+  setState(isMobile() ? (saved===null ? true : saved==='1') : saved==='1');
+  toggle.addEventListener('click',function(){
+    setState(!sidebar.classList.contains('collapsed'));
+  });
+  sidebar.addEventListener('click',function(e){
+    if(e.target.tagName==='A' && isMobile()){ setState(true); }
+  });
+  window.addEventListener('resize',function(){
+    wrap.classList.toggle('full', sidebar.classList.contains('collapsed') || isMobile());
+  });
+})();
+</script>
+</body>
+</html>

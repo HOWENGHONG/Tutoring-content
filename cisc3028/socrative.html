@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CISC3028 Entrepreneurship Socrative 01-02 複習</title>
+<style>
+  :root{
+    --bg:#f4f6fb;
+    --card:#ffffff;
+    --primary:#1e3a8a;
+    --primary-light:#3b82f6;
+    --accent:#f59e0b;
+    --green:#059669;
+    --red:#dc2626;
+    --text:#1f2937;
+    --muted:#6b7280;
+    --border:#e5e7eb;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang TC","Microsoft JhengHei",sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.7;
+    padding:20px;
+  }
+  .container{max-width:1000px;margin:0 auto;}
+
+  header{
+    background:linear-gradient(135deg,#1e3a8a,#3b82f6);
+    color:#fff;
+    padding:32px 28px;
+    border-radius:16px;
+    margin-bottom:24px;
+    box-shadow:0 8px 24px rgba(30,58,138,.25);
+  }
+  header h1{font-size:1.7rem;margin-bottom:8px;}
+  header p{opacity:.9;font-size:.95rem;}
+  header .badge{
+    display:inline-block;
+    background:rgba(255,255,255,.2);
+    padding:4px 12px;
+    border-radius:20px;
+    font-size:.8rem;
+    margin-top:10px;
+  }
+
+  .notice{
+    background:#fff7ed;
+    border:1px solid #fdba74;
+    border-left:5px solid var(--accent);
+    border-radius:10px;
+    padding:16px 20px;
+    margin-bottom:24px;
+    font-size:.9rem;
+  }
+  .notice strong{color:#c2410c;}
+
+  .sidebar{
+    position:fixed;top:0;left:0;height:100vh;width:260px;
+    background:var(--card);border-right:1px solid var(--border);
+    padding:72px 18px 24px;overflow-y:auto;
+    z-index:100;transition:transform .25s ease;
+    box-shadow:2px 0 14px rgba(0,0,0,.05);
+  }
+  .sidebar.collapsed{transform:translateX(-100%);}
+  .sidebar h2{font-size:.95rem;color:var(--primary);margin-bottom:12px;line-height:1.4;}
+  .sidebar ul{list-style:none;display:flex;flex-direction:column;gap:3px;}
+  .sidebar a{
+    display:block;
+    color:var(--text);
+    text-decoration:none;
+    padding:8px 12px;
+    border-radius:8px;
+    font-size:.86rem;
+    transition:.15s;
+  }
+  .sidebar a:hover{background:#eff6ff;color:var(--primary);}
+  .sidebar-toggle{
+    position:fixed;top:16px;left:16px;z-index:200;
+    width:42px;height:42px;border-radius:10px;
+    border:1px solid var(--border);background:var(--card);
+    cursor:pointer;font-size:1.2rem;color:var(--primary);
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 2px 10px rgba(0,0,0,.12);
+  }
+  .page-wrap{margin-left:260px;transition:margin-left .25s ease;}
+  .page-wrap.full{margin-left:0;}
+
+  .chapter{
+    background:var(--card);
+    border-radius:14px;
+    padding:26px;
+    margin-bottom:28px;
+    box-shadow:0 2px 12px rgba(0,0,0,.06);
+  }
+  .chapter > h2{
+    font-size:1.35rem;
+    color:var(--primary);
+    padding-bottom:12px;
+    border-bottom:3px solid var(--primary-light);
+    margin-bottom:20px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .chapter > h2 .num{
+    background:var(--primary);
+    color:#fff;
+    width:36px;height:36px;
+    border-radius:50%;
+    display:flex;align-items:center;justify-content:center;
+    font-size:1rem;
+    flex-shrink:0;
+  }
+
+  .example{
+    border:1px solid var(--border);
+    border-radius:12px;
+    margin-bottom:20px;
+    overflow:hidden;
+  }
+  .example .head{
+    background:#f8fafc;
+    padding:12px 18px;
+    font-weight:600;
+    color:var(--primary);
+    border-bottom:1px solid var(--border);
+    font-size:.98rem;
+  }
+  .example .body{padding:16px 18px;}
+
+  .q{
+    background:#fffbeb;
+    border-left:4px solid var(--accent);
+    padding:10px 14px;
+    border-radius:0 8px 8px 0;
+    margin-bottom:14px;
+    font-size:.92rem;
+  }
+  .q strong{color:#b45309;}
+
+  .answer{
+    background:#eff6ff;
+    border-left:4px solid var(--primary-light);
+    padding:10px 14px;
+    border-radius:0 8px 8px 0;
+    font-size:.9rem;
+    margin-bottom:10px;
+  }
+  .answer strong{color:var(--primary);}
+  .answer em{color:var(--primary);font-style:normal;font-weight:600;}
+
+  table{
+    width:100%;
+    border-collapse:collapse;
+    margin:12px 0;
+    font-size:.85rem;
+  }
+  th,td{
+    border:1px solid var(--border);
+    padding:8px 10px;
+    text-align:left;
+    vertical-align:top;
+  }
+  th{background:#f1f5f9;color:var(--primary);font-weight:600;}
+  tr:nth-child(even){background:#fafbfc;}
+  td.correct{color:var(--green);font-weight:600;}
+
+  .tip{
+    background:#fef2f2;
+    border:1px dashed var(--red);
+    padding:12px 16px;
+    border-radius:8px;
+    font-size:.88rem;
+    margin:14px 0;
+  }
+  .tip strong{color:var(--red);}
+
+  .zh{color:var(--muted);}
+
+  .qa-list{display:flex;flex-direction:column;}
+  .qa-item{
+    padding-bottom:16px;
+    margin-bottom:16px;
+    border-bottom:1px dashed var(--border);
+  }
+  .qa-item:last-child{padding-bottom:0;margin-bottom:0;border-bottom:none;}
+  .qa-item .q{margin-bottom:8px;}
+  .opts{list-style:none;margin:0;padding:0;}
+  .opts li{
+    padding:7px 12px;
+    border-radius:7px;
+    margin-bottom:5px;
+    font-size:.87rem;
+    background:#f8fafc;
+    border:1px solid var(--border);
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    flex-wrap:wrap;
+  }
+  .opts li.correct{background:#f0fdf4;color:var(--green);font-weight:600;border-color:#bbf7d0;}
+  .opts li .letter{font-weight:700;margin-right:4px;}
+  .opts li .pct{color:var(--muted);font-size:.8rem;font-weight:500;white-space:nowrap;}
+  .opts li.correct .pct{color:var(--green);}
+
+  blockquote{
+    border-left:3px solid var(--border);
+    padding:6px 14px;
+    margin:8px 0;
+    font-size:.85rem;
+    color:var(--muted);
+    font-style:italic;
+  }
+
+  footer{
+    text-align:center;
+    color:var(--muted);
+    font-size:.8rem;
+    padding:20px;
+  }
+
+  @media(max-width:860px){
+    .sidebar{width:82vw;max-width:300px;box-shadow:4px 0 24px rgba(0,0,0,.18);}
+    .page-wrap{margin-left:0 !important;}
+  }
+  @media(max-width:600px){
+    body{padding:10px;}
+    header{padding:22px 18px;}
+    header h1{font-size:1.3rem;}
+    .chapter{padding:18px;}
+    table{font-size:.78rem;}
+  }
+</style>
+</head>
+<body>
+<button class="sidebar-toggle" id="sidebarToggle" aria-label="切換導航 Toggle navigation">☰</button>
+<nav class="sidebar" id="sidebar">
+  <h2>📑 快速導航<br>Quick Navigation</h2>
+  <ul>
+    <li><a href="#s1">Socrative 01：Entrepreneur vs Manager</a></li>
+    <li><a href="#s2">Socrative 02：Bill Gross — 創業成功的五大因素</a></li>
+    <li><a href="#s3">Socrative 03：Opportunity、產業分析</a></li>
+    <li><a href="#s4">Socrative 04：財務工具與籌資</a></li>
+    <li><a href="midterm_notes.html">📖 返回期中溫習筆記</a></li>
+    <li><a href="exercises.html">📝 Exercises 01–07 複習</a></li>
+    <li><a href="pastpaper.html">📄 Past Paper 詳解</a></li>
+    <li><a href="quickreview.html">⚡ 15 分鐘快速溫習</a></li>
+    <li><a href="mockpaper.html">🧪 Mock Paper 模擬卷</a></li>
+  </ul>
+</nav>
+<div class="page-wrap" id="pageWrap">
+<div class="container">
+
+<header>
+  <h1>🎤 CISC3028 Entrepreneurship<br>Socrative 01–04 複習</h1>
+  <p>中英雙語 · 根據課堂 Socrative 投票結果整理</p>
+  <span class="badge">Socrative 01、02、03、04 已齊</span>
+</header>
+
+<div class="notice">
+  <strong>✅ 已更新：</strong> Socrative <strong>01–04</strong> 全部整理完成（03、04 為老師 10 月 15 日課堂的 CS3028Ex03 / Ex04 投票結果）。每題列出全部選項、中文翻譯與全班投票數，✅ 為正確答案。
+</div>
+
+<!-- ============ Socrative 01 ============ -->
+<section class="chapter" id="s1">
+  <h2><span class="num">1</span>Socrative 01：Entrepreneur vs Manager（5 題）</h2>
+  <div class="example">
+    <div class="head">課堂即時問答 — 全班作答統計</div>
+    <div class="body">
+      <div class="qa-list">
+        <div class="qa-item">
+          <div class="q"><strong>Q1：</strong> How do entrepreneurs and managers differ? <span class="zh">全班答對率 44/46（96%）</span></div>
+          <ul class="opts">
+            <li><span><span class="letter">a.</span> Entrepreneurs and managers are synonymous, therefore both share the same concerns.</span><span class="pct">0/46</span></li>
+            <li><span><span class="letter">b.</span> Entrepreneur is about being effective while manager is about being efficient.</span><span class="pct">2/46</span></li>
+            <li class="correct"><span><span class="letter">c.</span> ✅ Entrepreneur is about what it takes to start a business, while manager is about what it takes to grow or maintain a business. 企業家是「從零開始」，經理是「維持與成長」</span><span class="pct">44/46</span></li>
+            <li><span><span class="letter">d.</span> Manager is about what it takes to start a business, while entrepreneur is about what it takes to grow or maintain a business.</span><span class="pct">0/46</span></li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q2：</strong> Jeremy Stoppelman and Russel Simmons, founders of Yelp, created a new type of business that did not exist before. They would best be described as <span class="zh">全班答對率 40/46（87%）</span></div>
+          <ul class="opts">
+            <li><span><span class="letter">a.</span> business developers.</span><span class="pct">4/46</span></li>
+            <li><span><span class="letter">b.</span> inventors.</span><span class="pct">2/46</span></li>
+            <li class="correct"><span><span class="letter">c.</span> ✅ entrepreneurs. 企業家</span><span class="pct">40/46</span></li>
+            <li><span><span class="letter">d.</span> managers.</span><span class="pct">0/46</span></li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q3：</strong> Elian, a restaurant manager who carefully scheduled staff and watched costs, is best described as a(n) ___ manager. <span class="zh">全班答對率 36/45（80%，全班最低）</span></div>
+          <ul class="opts">
+            <li class="correct"><span><span class="letter">a.</span> ✅ efficient 有效率的</span><span class="pct">36/45</span></li>
+            <li><span><span class="letter">b.</span> ethical</span><span class="pct">1/45</span></li>
+            <li><span><span class="letter">c.</span> innovative</span><span class="pct">0/45</span></li>
+            <li><span><span class="letter">d.</span> effective</span><span class="pct">8/45</span></li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q4：</strong> Why do all types of organizations need financial resources? <span class="zh">全班答對率 44/44（100%）</span></div>
+          <ul class="opts">
+            <li class="correct"><span><span class="letter">a.</span> ✅ To sustain operations and achieve objectives 維持運作、達成目標</span><span class="pct">44/44</span></li>
+            <li><span><span class="letter">b.</span> To exclusively pay taxes</span><span class="pct">0/44</span></li>
+            <li><span><span class="letter">c.</span> To distribute among stakeholders only</span><span class="pct">0/44</span></li>
+            <li><span><span class="letter">d.</span> To avoid any operational activities</span><span class="pct">0/44</span></li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q5：</strong> What distinguishes a mutual-benefit organization from a non-profit organization regarding financial goals? <span class="zh">全班答對率 43/44（98%）</span></div>
+          <ul class="opts">
+            <li><span><span class="letter">a.</span> Non-profits distribute profits to external individuals.</span><span class="pct">0/44</span></li>
+            <li><span><span class="letter">b.</span> Non-profits aim to primarily benefit members, while mutual-benefit organizations advance a social cause.</span><span class="pct">1/44</span></li>
+            <li><span><span class="letter">c.</span> Mutual-benefit organizations do not require any funds to operate.</span><span class="pct">0/44</span></li>
+            <li class="correct"><span><span class="letter">d.</span> ✅ Non-profits aim to advance a social cause, while mutual-benefit organizations primarily benefit members. 非營利組織推動社會公益；互惠組織主要是服務自己的成員</span><span class="pct">43/44</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="tip"><strong>複習重點：</strong>第3題是全班答對率最低的一題（80%）——記住「efficient = 省成本、把事情做對」，和「effective = 做對的事」要分清楚，這是整份課程最容易混淆的一組名詞，Part A 幾乎必考。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Socrative 02 ============ -->
+<section class="chapter" id="s2">
+  <h2><span class="num">2</span>Socrative 02：Bill Gross — Why Companies Succeed（創業成功的五大因素）</h2>
+  <div class="example">
+    <div class="head">背景：Bill Gross 的 TED 演講「The single biggest reason why start-ups succeed」</div>
+    <div class="body">
+      <div class="answer">
+        <strong>English：</strong> Bill Gross (Idealab founder) studied his own and others' startups and identified 5 key factors in startup success: <strong>Idea（想法）, Team/Execution（團隊/執行力）, Business Model（商業模式）, Funding（資金）, Timing（時機）</strong>. His data-driven conclusion, based on comparing many startups: <em>Timing</em> was the single biggest factor correlated with success (accounting for roughly 42% of the difference between success and failure in his sample), more than team, idea, business model, or funding. <em>Funding</em> was the least correlated with success.<br><br>
+        <strong>中文：</strong>Bill Gross（Idealab 創辦人）研究了自己與其他創業公司，歸納出創業成功的五大關鍵因素：想法（Idea）、團隊/執行力（Team）、商業模式（Business Model）、資金（Funding）、時機（Timing）。他以數據分析得出的結論是：<strong>時機（Timing）</strong>是與成功最相關的單一因素（在他的樣本中，大約能解釋成功與失敗差異中的42%），比團隊、想法、商業模式、資金都更關鍵；而<strong>資金（Funding）</strong>則是與成功相關性最低的因素。
+      </div>
+    </div>
+  </div>
+
+  <div class="example">
+    <div class="head">課堂投票結果 Class Poll Results</div>
+    <div class="body">
+      <div class="qa-list">
+        <div class="qa-item">
+          <div class="q"><strong>Q1：</strong> Which of the following companies were NOT mentioned in the video? <span class="zh">影片中實際提到的是 Airbnb、Instagram、LinkedIn、Uber、Z.com 等，Amazon 並未被提及</span></div>
+          <ul class="opts">
+            <li><span><span class="letter">a.</span> Airbnb</span><span class="pct">1/39</span></li>
+            <li><span><span class="letter">b.</span> Instagram</span><span class="pct">8/39</span></li>
+            <li class="correct"><span><span class="letter">c.</span> ✅ Amazon（未被提及）</span><span class="pct">21/39</span></li>
+            <li><span><span class="letter">d.</span> LinkedIn</span><span class="pct">7/39</span></li>
+            <li><span><span class="letter">e.</span> Uber</span><span class="pct">2/39</span></li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q2：</strong> Assuming the Top 5 factors in success found by Bill Gross, which one do you think is the <strong>most</strong> important? <span class="zh">這是意見題，沒有「正確答案」，以下是全班投票分布</span></div>
+          <ul class="opts">
+            <li class="correct"><span><span class="letter">a.</span> ✅ Timing 時機（全班最多人選）</span><span class="pct">26/39</span></li>
+            <li><span><span class="letter">b.</span> Team 團隊</span><span class="pct">2/39</span></li>
+            <li><span><span class="letter">c.</span> Ideas 想法</span><span class="pct">5/39</span></li>
+            <li><span><span class="letter">d.</span> Business Model 商業模式</span><span class="pct">7/39</span></li>
+            <li><span><span class="letter">e.</span> Funding 資金</span><span class="pct">0/39</span></li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q4：</strong> Assuming the Top 5 factors in success found by Bill Gross, which one do you think is the <strong>least</strong> important? <span class="zh">意見題，以下是全班投票分布</span></div>
+          <ul class="opts">
+            <li><span><span class="letter">a.</span> Timing 時機</span><span class="pct">0/37</span></li>
+            <li><span><span class="letter">b.</span> Team 團隊</span><span class="pct">3/37</span></li>
+            <li><span><span class="letter">c.</span> Ideas 想法</span><span class="pct">3/37</span></li>
+            <li><span><span class="letter">d.</span> Business Model 商業模式</span><span class="pct">7/37</span></li>
+            <li class="correct"><span><span class="letter">e.</span> ✅ Funding 資金（全班最多人選）</span><span class="pct">24/37</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="answer">
+        <strong>Q3 / Q5 是開放式申論題（Justify your answer）：</strong>以下整理幾個有代表性的同學論點，可以作為 Part C 申論題的寫作範例：
+      </div>
+      <blockquote>"Timing is the most important factor. Even with a good team, great ideas, a sound business model and sufficient funding, a startup will fail with poor timing... market timing is a time-sensitive opportunity that cannot easily be re-created." — CHOIIO LEONG</blockquote>
+      <blockquote>"Bill Gross once developed an online video platform Z.com. It had a solid idea, capable team and sufficient funding, yet failed because it launched too early... household broadband was not widespread and internet speed was too slow." — Leung Cheng Lam（舉 Bill Gross 自己失敗的案例佐證 timing 的重要性）</blockquote>
+      <blockquote>"Funding is just a starting point. Many new businesses fail without a workable business model... so funding is less important than a strong business model." — Lucas</blockquote>
+      <div class="tip"><strong>考試應用：</strong> Part C 申論題若考到「哪個創業成功因素最重要」，可以用這個「Bill Gross 五大因素」架構回答：先定義五個因素，再提出自己的立場（通常用 Timing 最容易論述，因為有 YouTube／Z.com／Airbnb 等現成例子可以舉），最後用一個例子佐證——這正好符合 Ch4（opportunity 必須 timely）和 Ch1（necessity vs opportunity entrepreneur）的概念，可以跨章節連結作答。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Socrative 03 ============ -->
+<section class="chapter" id="s3">
+  <h2><span class="num">3</span>Socrative 03：Opportunity、產業分析與定位（4 題）</h2>
+  <div class="example">
+    <div class="head">課堂即時問答 — 全班作答統計</div>
+    <div class="body">
+      <div class="qa-list">
+        <div class="qa-item">
+          <div class="q"><strong>Q1：</strong> Which of the following is correct regarding opportunities and ideas? <span class="zh">以下關於「機會」與「想法」的說法哪項正確？｜全班答對率 28/33（85%）</span></div>
+          <ul class="opts">
+            <li><span><span class="letter">a.</span> An opportunity and an idea are essentially the same thing <span class="zh">機會與想法本質上是同一回事</span></span><span class="pct">0/33</span></li>
+            <li class="correct"><span><span class="letter">b.</span> ✅ It's important to discern whether a particular idea meets the criteria for an opportunity. <span class="zh">重點是分辨某個想法是否符合「機會」的條件</span></span><span class="pct">28/33</span></li>
+            <li><span><span class="letter">c.</span> An opportunity is a thought, an impression, or a notion. While an idea almost always meets the criteria of an opportunity. <span class="zh">機會是一個念頭、印象或概念；而想法幾乎都符合機會的條件（❌ 兩者說反了）</span></span><span class="pct">2/33</span></li>
+            <li><span><span class="letter">d.</span> An idea is a favorable set of circumstances that creates a need for a new product, service, or business. <span class="zh">想法是一組有利的情勢，創造對新產品、服務或企業的需求（❌ 這是「機會」的定義）</span></span><span class="pct">3/33</span></li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q2：</strong> When studying an industry, the following are key questions an entrepreneur must answer before pursuing the idea of starting a firm EXCEPT: <span class="zh">研究一個產業時，以下都是創業者在開公司前必須回答的關鍵問題，但不包括：｜全班答對率 26/33（79%）</span></div>
+          <ul class="opts">
+            <li><span><span class="letter">a.</span> Is the industry a realistic place for a new venture to enter? <span class="zh">該產業是否是新創企業可實際進入的地方？</span></span><span class="pct">1/33</span></li>
+            <li><span><span class="letter">b.</span> Does the industry contain markets that are ripe for innovation or are under-served? <span class="zh">該產業是否包含成熟待創新或服務不足的市場？</span></span><span class="pct">1/33</span></li>
+            <li class="correct"><span><span class="letter">c.</span> ✅ Is the industry in the maturity stage of the industry life cycle? <span class="zh">該產業是否處於產業生命週期的成熟期？（不是必答的關鍵問題）</span></span><span class="pct">26/33</span></li>
+            <li><span><span class="letter">d.</span> Are there positions in the industry that will avoid some of the negative attributes of the industry as a whole? <span class="zh">產業中是否有位置能避開整體產業的一些負面特質？</span></span><span class="pct">5/33</span></li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q3：</strong> The video industry is becoming less attractive as movie studios perfect the technology enabling consumers to download movies via computer. This is best an example of which industry competitive force? <span class="zh">隨著電影公司完善讓消費者透過電腦下載電影的技術，影片行業吸引力下降。這最能代表哪一種產業競爭力量？｜全班答對率 24/33（73%）</span></div>
+          <ul class="opts">
+            <li class="correct"><span><span class="letter">a.</span> ✅ threat of substitutes <span class="zh">替代品威脅</span></span><span class="pct">24/33</span></li>
+            <li><span><span class="letter">b.</span> threat of new entrants <span class="zh">新進入者的威脅</span></span><span class="pct">7/33</span></li>
+            <li><span><span class="letter">c.</span> bargaining power of buyers <span class="zh">買方議價能力</span></span><span class="pct">1/33</span></li>
+            <li><span><span class="letter">d.</span> rivalry among existing firms <span class="zh">現有企業之間的競爭</span></span><span class="pct">1/33</span></li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q4：</strong> How a company is situated relative to its competitors is referred to as _____. <span class="zh">公司相對於競爭對手所處的位置稱為＿＿＿。｜全班答對率 18/33（55%，全班最低）</span></div>
+          <ul class="opts">
+            <li><span><span class="letter">a.</span> market share <span class="zh">市場佔有率</span></span><span class="pct">2/33</span></li>
+            <li class="correct"><span><span class="letter">b.</span> ✅ position <span class="zh">定位</span></span><span class="pct">18/33</span></li>
+            <li><span><span class="letter">c.</span> competitive advantage <span class="zh">競爭優勢（❌ 11 人誤選：競爭優勢是「有什麼勝過對手」，定位是「相對對手所處的位置」）</span></span><span class="pct">11/33</span></li>
+            <li><span><span class="letter">d.</span> brand leadership <span class="zh">品牌領導地位</span></span><span class="pct">2/33</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="tip"><strong>考試應用：</strong> 這 4 題在 Exercises 中也出現過（Q2＝Ex 的 industry key questions EXCEPT、Q3＝threat of substitutes、Q4＝position vs competitive advantage），屬高頻考點。<strong>易錯：</strong> Q4 全班只有 55% 答對——「position（定位）」是相對對手所處的位置，「competitive advantage（競爭優勢）」是你比對手強的地方，兩者別混淆。Q1 的重點是「想法 ≠ 機會」：想法只是念頭，機會是有利情勢，要先判斷想法是否符合機會的條件。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ Socrative 04 ============ -->
+<section class="chapter" id="s4">
+  <h2><span class="num">4</span>Socrative 04：財務工具與籌資（3 題）</h2>
+  <div class="example">
+    <div class="head">課堂即時問答 — 全班作答統計</div>
+    <div class="body">
+      <div class="qa-list">
+        <div class="qa-item">
+          <div class="q"><strong>Q1：</strong> Balance Sheet refers to: <span class="zh">資產負債表指的是：｜全班答對率 22/34（65%）</span></div>
+          <ul class="opts">
+            <li><span><span class="letter">a.</span> Showing the funds coming into and going out of your business. <span class="zh">顯示進出企業的資金（❌ 這是現金流量表）</span></span><span class="pct">1/34</span></li>
+            <li><span><span class="letter">b.</span> Showing how much profit or loss is generated. <span class="zh">顯示產生多少利潤或虧損（❌ 這是損益表）</span></span><span class="pct">2/34</span></li>
+            <li class="correct"><span><span class="letter">c.</span> ✅ Showing assets (what is owned), liabilities (what is owed) and your equity or net worth. <span class="zh">顯示資產（擁有的）、負債（欠下的）與權益／淨值</span></span><span class="pct">22/34</span></li>
+            <li><span><span class="letter">d.</span> All of the above. <span class="zh">以上皆是（❌ 9 人誤選：A、B 分別屬於其他報表）</span></span><span class="pct">9/34</span></li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q2：</strong> Breakeven analysis is a important financial tool that: <span class="zh">損益平衡分析是一項重要的財務工具，它：｜全班答對率 26/34（76%）</span></div>
+          <ul class="opts">
+            <li class="correct"><span><span class="letter">a.</span> ✅ points at which your gross margin (sales minus cost of sales) equals your fixed operating expenses. <span class="zh">找出毛利（銷售額減銷貨成本）剛好等於固定營運開支的那一點</span></span><span class="pct">26/34</span></li>
+            <li><span><span class="letter">b.</span> compares your company's financial information to the same information from similar companies or to industry norms or ratios. <span class="zh">把公司的財務資料與同類公司或產業標準／比率比較（❌ 這是標竿比較 benchmarking）</span></span><span class="pct">4/34</span></li>
+            <li><span><span class="letter">c.</span> performs a regular analysis of your financial statements such as monthly analysis of profit and loss. <span class="zh">定期分析財務報表，例如每月損益分析</span></span><span class="pct">2/34</span></li>
+            <li><span><span class="letter">d.</span> shows whether you have adequate funds to run and grow the business. <span class="zh">顯示是否有足夠資金經營與發展業務</span></span><span class="pct">2/34</span></li>
+          </ul>
+        </div>
+        <div class="qa-item">
+          <div class="q"><strong>Q3：</strong> Crowdfunding is the practice of funding by: <span class="zh">眾籌（crowdfunding）是透過什麼方式籌資？｜全班答對率 33/34（97%）</span></div>
+          <ul class="opts">
+            <li><span><span class="letter">a.</span> considering a business partner who can put money into your startup. <span class="zh">考慮找能投錢進你初創公司的商業夥伴</span></span><span class="pct">1/34</span></li>
+            <li class="correct"><span><span class="letter">b.</span> ✅ raising many small amounts of money from a large number of people, typically via the Internet. <span class="zh">向大量的人募集許多小額資金，通常透過互聯網</span></span><span class="pct">33/34</span></li>
+            <li><span><span class="letter">c.</span> using credit cards, but paying off the balance in full every month to avoid quick increase of the total balance. <span class="zh">使用信用卡，但每月全數還清以避免總餘額快速增加</span></span><span class="pct">0/34</span></li>
+            <li><span><span class="letter">d.</span> asking grants from the government. <span class="zh">向政府申請撥款</span></span><span class="pct">0/34</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="tip"><strong>考試應用：</strong> 資產負債表＝資產、負債、權益（某一時間點）；現金流量表＝資金進出；損益表＝利潤或虧損。Q1 有 9 人選「All of the above」，這是典型陷阱，三份報表各有各的功能。損益平衡點＝收入剛好能涵蓋開支；眾籌＝向大量人群募集小額資金（通常透過互聯網）。</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  CISC3028 Entrepreneurship · Socrative 01–04 複習 · 最後更新 2026-10
+</footer>
+
+</div>
+</div>
+<script>
+(function(){
+  var sidebar=document.getElementById('sidebar');
+  var toggle=document.getElementById('sidebarToggle');
+  var wrap=document.getElementById('pageWrap');
+  function isMobile(){return window.innerWidth<=860;}
+  function setState(hidden){
+    sidebar.classList.toggle('collapsed',hidden);
+    wrap.classList.toggle('full',hidden||isMobile());
+    try{localStorage.setItem('cisc3028_sidebar_hidden',hidden?'1':'0');}catch(e){}
+  }
+  var saved=null;
+  try{saved=localStorage.getItem('cisc3028_sidebar_hidden');}catch(e){}
+  setState(isMobile() ? (saved===null ? true : saved==='1') : saved==='1');
+  toggle.addEventListener('click',function(){
+    setState(!sidebar.classList.contains('collapsed'));
+  });
+  sidebar.addEventListener('click',function(e){
+    if(e.target.tagName==='A' && isMobile()){ setState(true); }
+  });
+  window.addEventListener('resize',function(){
+    wrap.classList.toggle('full', sidebar.classList.contains('collapsed') || isMobile());
+  });
+})();
+</script>
+</body>
+</html>
