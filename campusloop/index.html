@@ -61,6 +61,14 @@
   .btn.ghost:hover{background:var(--tile);}
   .hint{font-size:.82rem;color:var(--muted);}
 
+  .memo{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:14px 22px;}
+  .memo summary{cursor:pointer;font-size:.95rem;font-weight:700;color:var(--azul-deep);}
+  .memo table{width:100%;border-collapse:collapse;margin-top:10px;font-size:.88rem;}
+  .memo td{border-top:1px solid var(--line);padding:8px 6px;vertical-align:top;}
+  .memo td:first-child{white-space:nowrap;color:var(--muted);font-weight:600;width:1%;}
+  .memo td b{display:block;color:var(--azul-deep);margin-bottom:2px;}
+  .memo .sp{font-size:.98rem;line-height:1.5;}
+  .memo .dd{color:var(--muted);margin-top:4px;}
   .steps{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:18px 22px;}
   .steps h3{font-size:.95rem;font-weight:700;margin-bottom:8px;}
   .steps ol{list-style:none;}
@@ -831,10 +839,26 @@
   var TITLES={detail:['物品','Item'],checkout:['結帳','Checkout'],order:['訂單','Order'],mylist:['我的上架','My listings'],newitem:['上架','List'],moveout:['賣給 CampusLoop','Sell to us'],moveoutdone:['收購進度','Buyback status'],help:['客服中心','Help centre'],rules:['規則說明','Rules'],profile:['信用主頁','Profile']};
 
   /* ===== 講稿面板 / Presenter panel ===== */
+
+  var MEMO=[
+   ['0:00',['開場：示範','Open'],'Now, let us show our demo to you. Imagine a student with midterms next week. She needs a calculator for only a few days, but a new one costs MOP 180. That is too much for one week. So she opens CampusLoop.',['手機首頁，點「計算機」分類。','Phone home. Tap the Calculators category.']],
+   ['0:30',['看物品、選租期','Item and rental days'],'Every item comes from a UM student. She opens the scientific calculator. She can see the real condition and the photos. She chooses how many days to rent. The app shows the rent, the deposit, and how much she saves compared with buying new.',['打開科學計算機，切換 1／3／7／14 天。','Open the scientific calculator. Switch 1 / 3 / 7 / 14 days.']],
+   ['1:10',['預約、付押金','Reserve and deposit'],'The deposit is refundable. If she returns the item on time and in good condition, she gets all of it back. The rules are clear before she pays. This makes both sides feel safe.',['「預約租借」→「支付押金並預約」。','Reserve, then Pay deposit and reserve.']],
+   ['1:50',['面交、確認狀態','Handover check'],'At the handover, the two students check the item together. They compare it with the condition record, point by point. If there is a problem later, they have evidence.',['訂單 → 放大照片 → 勾選每項 →「確認狀態」。','Orders. Enlarge photos, tick each point, Confirm condition.']],
+   ['2:30',['歸還、退押金、評分','Return, refund, rating'],'After exams, she returns the calculator. The deposit comes back. Then both sides rate each other. These ratings build trust, so the next student can rent with confidence. If something goes wrong, like a late return, customer service can help.',['選「準時」→「歸還物品」→ 評分 →「完成」。','Pick On time, Return item, rate, Finish.']],
+   ['3:05',['Ken 退宿：我們收購','Ken moves out: we buy'],'Now the other side. Ken is graduating. His things still work, but he has no time to sell them one by one. So we buy them, like selling old books to a bookshop. Ken chooses his items and sends one request. We inspect them and give him a quote. He accepts, and we pay him. Then we clean the items and keep them safe. At the start of the semester, they go on sale, and a new student buys them at a much lower price.',['我的 → 切換帳號 → Ken →「賣給 CampusLoop」→ 勾選 →「提交申請」→「示範：下一步」×2 → 選收貨時間 →「接受報價」→「下一步」×2 →「示範：新生購買」。','Me, Switch account, Ken, Sell to CampusLoop. Tick items, Send request, Demo: next step x2, pick time, Accept, next step x2, Demo: a new student buys it.']],
+   ['4:20',['價值總結＋ QR','Value and QR'],'So here is the value of CampusLoop. Students save money. Graduating students clear their room without stress. Nothing useful is thrown away. And everyone can trust the deal because of condition records, deposits, ratings and support. We charge only 1% on student deals, and the deposit is not counted. Now please scan the QR code and try it yourself. Thank you.',['回首頁或投影 QR。','Back to home, or show the QR.']]
+  ];
+  document.addEventListener('toggle',function(e){ if(e.target.classList&&e.target.classList.contains('memo')) window.__memoOpen=e.target.open; },true);
+  function memoCard(){
+    var h='<details class="memo"'+(window.__memoOpen?' open':'')+'><summary>'+tr('講者備忘卡（5 分鐘）','Speaker memo card (5 min)')+'</summary><table>';
+    MEMO.forEach(function(r){ h+='<tr><td>'+r[0]+'</td><td><b>'+tr(r[1][0],r[1][1])+'</b><div class="sp">'+esc(r[2])+'</div><div class="dd">'+tr(r[3][0],r[3][1])+'</div></td></tr>'; });
+    return h+'</table></details>';
+  }
   function guide(){ return [
    {n:tr('瀏覽校園物品','Browse campus items'),
-    h:tr('Amy 下週期中考，只需要一部計算機','Amy has midterms next week and needs a calculator for a few days'),
-    say:tr('「接著剛才的 Amy：她不想花 MOP 180 買一部只用一週的計算機。她打開 CampusLoop，搜尋或選分類。」','"Back to Amy: she does not want to pay MOP 180 for a calculator she will use for one week. She opens CampusLoop and searches or picks a category."'),
+    h:tr('有同學下週期中考，只需要一部計算機','A student has midterms next week and needs a calculator for a few days'),
+    say:tr('「現在讓我們向大家示範我們的 demo。想像一位同學下週期中考，只需要計算機幾天，但新的要 MOP 180。她打開 CampusLoop。」','"Now, let us show our demo to you. Imagine a student with midterms next week. She needs a calculator for only a few days, but a new one costs MOP 180. That is too much for one week. So she opens CampusLoop."'),
     show:tr('在手機上點「計算機」分類，或到「瀏覽」輸入關鍵字，所有物品都來自 UM 同學。','On the phone, tap the Calculators category or type a keyword in Browse. Every item comes from a UM student.'),
     to:function(){S.user='amy'; go('home');}},
    {n:tr('看物品與狀態紀錄','Check item and condition record'),
@@ -888,6 +912,7 @@
     var rail='<div class="progress"><div class="ring"><svg viewBox="0 0 68 68" aria-hidden="true"><circle class="bg" cx="34" cy="34" r="29" fill="none" stroke-width="7"/><circle class="fg" cx="34" cy="34" r="29" fill="none" stroke-width="7" stroke-dasharray="'+C.toFixed(1)+'" stroke-dashoffset="'+off.toFixed(1)+'"/></svg><div class="mid">'+(done===MILES.length?'✓':done)+'</div></div><div class="meta"><b>'+tr('已完成 '+done+' / '+MILES.length+' 個關鍵步驟','Completed '+done+' of '+MILES.length+' key steps')+'</b>'+tr('在手機上實際操作，進度會自動更新','Use the phone for real, progress updates by itself')+'</div></div>';
     rail+='<div class="scene"><h1>'+cs.h+'</h1><div class="cue say"><h2>'+tr('你說','Say')+'</h2><p>'+cs.say+'</p></div><div class="cue"><h2>'+tr('你點','Do')+'</h2><p>'+cs.show+'</p></div><div class="navrow"><button class="btn primary" data-act="gohere" data-i="'+cur+'">'+tr('帶我到這一步','Take me to this step')+'</button><button class="btn ghost" data-act="reset">'+tr('重設 demo','Reset demo')+'</button></div><p class="hint" style="margin-top:8px">'+tr('手機畫面可以自由操作，不必照順序。也可以點下方步驟查看講稿。','The phone is free to use in any order. Tap a step below to read its script.')+'</p></div>';
     rail+='<nav class="steps" aria-label="'+tr('步驟','Steps')+'"><h3>'+tr('整個 demo 流程','Demo flow')+'</h3><ol>'+g.map(function(s,i){return '<li class="'+(S.flags[MILES[i]]?'done':'')+(i===cur?' now':'')+'"><button data-act="guide" data-i="'+i+'">'+s.n+'</button></li>';}).join('')+'</ol></nav>';
+    rail+=memoCard();
     document.getElementById('rail').innerHTML=rail;
 
     var el=document.getElementById('screen'), r=S.route;
