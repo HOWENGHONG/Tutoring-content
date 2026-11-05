@@ -126,8 +126,13 @@
 | `cisc3012/mock_test_2.html` | AI 模擬測驗（二） | [🔗 預覽](https://howenghong.github.io/Tutoring-content/cisc3012/mock_test_2.html) |
 | `cisc3012/ai_midterm_notes.html` | 期中溫習筆記 | [🔗 預覽](https://howenghong.github.io/Tutoring-content/cisc3012/ai_midterm_notes.html) |
 | `cisc3012/ai_midterm_cheatsheet.html` | 期中考試速記 | [🔗 預覽](https://howenghong.github.io/Tutoring-content/cisc3012/ai_midterm_cheatsheet.html) |
+| `cisc3012/ai_final_notes.html` | 期末中英雙語筆記（Ch1–6） | [🔗 預覽](https://howenghong.github.io/Tutoring-content/cisc3012/ai_final_notes.html) |
+| `cisc3012/ai_final_vocabulary.html` | 期末生字表（Ch1–6，99 詞） | [🔗 預覽](https://howenghong.github.io/Tutoring-content/cisc3012/ai_final_vocabulary.html) |
+| `cisc3012/ai_final_cheatsheet.html` | 期末重點筆記（Ch1–6） | [🔗 預覽](https://howenghong.github.io/Tutoring-content/cisc3012/ai_final_cheatsheet.html) |
+| `cisc3012/final_mock_test_1.html` | 期末模擬測驗（一） | [🔗 預覽](https://howenghong.github.io/Tutoring-content/cisc3012/final_mock_test_1.html) |
+| `cisc3012/final_mock_test_2.html` | 期末模擬測驗（二） | [🔗 預覽](https://howenghong.github.io/Tutoring-content/cisc3012/final_mock_test_2.html) |
 
-> **📝 使用建議**：建議先閱讀「期中溫習筆記」，再用「考試速記」快速複習，最後以兩份 Mock Test 進行自測。
+> **📝 使用建議**：期中：先讀「期中溫習筆記」，再用「考試速記」，最後做 Mock Test。期末（Ch1–6）：先讀「期末中英雙語筆記」與「生字表」，再看「重點筆記」，最後做期末 Mock Test 1–2（每份 Section A 長題 + 30 題 MCQ）。教授的 final review 於 11 月 26 日發佈後再對照補充。
 
 ---
 
@@ -222,6 +227,7 @@
 
 | 日期 | 更新內容 |
 |------|----------|
+| 2026 年 11 月 | 新增 CISC3012 期末（Ch1–6）系列：中英雙語筆記、生字表、重點筆記、Mock Final Test 1–2；更新 README 與首頁 |
 | 2026 年 10 月 | 新增 CISC3028 創業學系列：期中溫習筆記（Ch1–3）、Past Paper 詳解（Part A/B/C）；更新 README 與首頁導航 |
 | 2026 年 10 月 | CISC3028 創業學系列擴充完整：期中溫習筆記補齊 Ch4–9、新增 Exercises 01–07 與 Socrative 01–04 複習頁面、修正 Past Paper Q9–18 缺失說明 |
 | 2026 年 10 月 | 重新整理倉庫：檔案按科目分類至子資料夾，檔名統一為小寫英文；移除根目錄的舊檔名（舊連結失效）；備份版移至 `chemistry/archive/`；README 補上 Past Paper 詳解與英中術語對照的連結 |

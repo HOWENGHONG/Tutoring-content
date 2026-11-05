@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CISC3012 AI — Final Cheat Sheet (重點筆記)</title>
+<style>
+:root{--fg:#1a1a1a;--muted:#666;--accent:#1155CC;--border:#ddd;--bg:#fff;--bg2:#f7f7f9;--good:#0a7d2c;}
+*{box-sizing:border-box;}
+body{font-family:-apple-system,"Segoe UI","Noto Sans TC","PingFang TC","Microsoft JhengHei",Arial,sans-serif;
+  max-width:920px;margin:0 auto;padding:0 20px 60px;color:var(--fg);line-height:1.65;background:var(--bg);}
+h1{font-size:1.55em;margin:18px 0 4px;}
+.subtitle{color:var(--muted);font-size:0.95em;margin-bottom:14px;}
+h2{margin-top:2em;border-bottom:2px solid var(--accent);padding-bottom:6px;font-size:1.25em;}
+h3{margin-top:1.5em;color:var(--accent);font-size:1.05em;}
+h4{margin-top:1.2em;font-size:1em;}
+table{border-collapse:collapse;width:100%;margin:1em 0;font-size:0.95em;}
+th,td{border:1px solid var(--border);padding:7px 9px;text-align:left;vertical-align:top;}
+th{background:var(--bg2);}
+tr:nth-child(even) td{background:#fbfbfc;}
+ul{padding-left:1.3em;}
+li{margin-bottom:0.5em;}
+.toggle-bar{position:sticky;top:0;background:rgba(255,255,255,0.97);backdrop-filter:blur(4px);
+  padding:12px 0;border-bottom:1px solid var(--border);z-index:50;display:flex;gap:8px;align-items:center;
+  margin-bottom:1.2em;flex-wrap:wrap;}
+.toggle-label{font-size:0.82em;color:var(--muted);margin-right:2px;}
+.toggle-bar button{padding:6px 16px;border:1.5px solid var(--accent);background:#fff;color:var(--accent);
+  border-radius:20px;cursor:pointer;font-size:0.88em;font-weight:600;transition:all .15s;}
+.toggle-bar button.active{background:var(--accent);color:#fff;}
+.toggle-bar button:hover{opacity:0.85;}
+body.mode-en .lang-zh{display:none;}
+body.mode-zh .lang-en{display:none;}
+body.mode-en .sep, body.mode-zh .sep{display:none;}
+.zh{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;}
+.tag{display:inline-block;background:#eef2ff;color:var(--accent);border-radius:4px;padding:1px 7px;
+  font-size:0.78em;font-weight:700;margin-right:6px;}
+.hint{color:var(--muted);font-size:0.9em;}
+.note-box{background:var(--bg2);border-left:4px solid var(--accent);padding:10px 14px;margin:1em 0;border-radius:4px;}
+hr{border:none;border-top:1px solid var(--border);margin:2em 0;}
+.opt{margin:2px 0 2px 1.4em;}
+.qblock{margin-bottom:1.3em;padding-bottom:0.2em;}
+.qstem{font-weight:600;}
+.marks{color:var(--muted);font-weight:400;font-size:0.9em;}
+.answer-key{background:#f6fff6;border:1px solid #cfe9cf;border-radius:6px;padding:14px 18px;margin-top:1em;}
+.answer-key summary{cursor:pointer;font-weight:700;color:var(--good);padding:4px 0;}
+code{background:var(--bg2);padding:1px 5px;border-radius:3px;font-size:0.92em;}
+@media print{.toggle-bar{position:static;}}
+.tw{overflow-x:auto;}
+pre{background:var(--bg2);padding:10px 12px;border-radius:6px;overflow-x:auto;font-size:0.9em;}
+sup{font-size:.75em}
+
+</style>
+</head>
+<body class="mode-both">
+<h1>CISC3012 AI — Final Cheat Sheet (重點筆記)</h1>
+<div class="subtitle"><span class="lang-en">One-page key points for Chapters 1-6</span><span class="lang-zh zh"><br>第一至六章重點速記</span></div>
+<p class="hint"><a href="../index.html">← Home 首頁</a></p>
+<div class="toggle-bar">
+  <span class="toggle-label">Display 顯示：</span>
+  <button id="btn-both" class="active" onclick="setMode('both')">中英對照 Both</button>
+  <button id="btn-en" onclick="setMode('en')">English Only</button>
+  <button id="btn-zh" onclick="setMode('zh')">中文 Only</button>
+</div>
+<h2><span class="lang-en">Ch1–3 Must remember</span><span class="sep"> · </span><span class="lang-zh zh">第一至三章必記</span></h2><ul>
+<li><span class="lang-en">Turing Test needs NLP, knowledge representation, automated reasoning, machine learning; Total adds vision and robotics.</span><span class="sep"> — </span><span class="lang-zh zh">Turing Test 需要 NLP、知識表示、自動推理、機器學習;Total 再加視覺與機器人。</span></li>
+<li><span class="lang-en">Rationality depends on: performance measure, prior knowledge, actions, percept sequence.</span><span class="sep"> — </span><span class="lang-zh zh">Rationality 取決於:績效指標、先驗知識、動作、感知序列。</span></li>
+<li><span class="lang-en">Five agents: simple reflex → model-based reflex → goal-based → utility-based → learning.</span><span class="sep"> — </span><span class="lang-zh zh">五種 agent:簡單反射 → 模型反射 → 目標導向 → 效用導向 → 學習。</span></li>
+<li><span class="lang-en">Environment pairs: observable, deterministic, episodic, static, discrete, single/multi-agent.</span><span class="sep"> — </span><span class="lang-zh zh">環境六對性質:可觀察性、確定性、獨立性、靜態性、離散性、單/多 agent。</span></li>
+<li><span class="lang-en">Problem = initial state + successor function + goal test + path cost.</span><span class="sep"> — </span><span class="lang-zh zh">問題 = 初始狀態 + 後繼函數 + 目標測試 + 路徑成本。</span></li>
+<li><span class="lang-en">BFS O(b^(d+1)) both; UCS O(b^⌈C*/ε⌉); DFS O(b^m) time and O(bm) space; DLS O(b^l), O(bl); IDS O(b^d), O(bd); bidirectional O(b^(d/2)).</span><span class="sep"> — </span><span class="lang-zh zh">BFS 時間與空間 O(b^(d+1));UCS O(b^⌈C*/ε⌉);DFS 時間 O(b^m)、空間 O(bm);DLS O(b^l)、O(bl);IDS O(b^d)、O(bd);雙向 O(b^(d/2))。</span></li>
+<li><span class="lang-en">Only DFS and DLS are NOT complete; only DFS and DLS are NOT optimal (BFS/IDS optimal when step costs are equal).</span><span class="sep"> — </span><span class="lang-zh zh">只有 DFS 與 DLS 不 complete;只有 DFS 與 DLS 不 optimal(BFS/IDS 在 step cost 相同時 optimal)。</span></li>
+</ul>
+<h2><span class="lang-en">Ch4 Must remember</span><span class="sep"> · </span><span class="lang-zh zh">第四章必記</span></h2><ul>
+<li><span class="lang-en">Greedy f = h (not optimal, incomplete). A* f = g + h (complete and optimal if h is admissible).</span><span class="sep"> — </span><span class="lang-zh zh">Greedy f = h(不 optimal、不 complete)。A* f = g + h(h admissible 時 complete 且 optimal)。</span></li>
+<li><span class="lang-en">Romania: greedy 450, A* 418. A* stops when the goal is selected for expansion.</span><span class="sep"> — </span><span class="lang-zh zh">Romania:greedy 450、A* 418。A* 在 goal 被選出展開時才停。</span></li>
+<li><span class="lang-en">8-puzzle: h1 = misplaced tiles (8), h2 = Manhattan (18), true 26; h2 dominates h1.</span><span class="sep"> — </span><span class="lang-zh zh">8-puzzle:h1 = 錯位格數(8)、h2 = 曼哈頓(18)、真實 26;h2 dominates h1。</span></li>
+<li><span class="lang-en">b* smaller is better; N = 1 + b* + … + (b*)^d. If unsure, h = max(h1, …, hm).</span><span class="sep"> — </span><span class="lang-zh zh">b* 越小越好;N = 1 + b* + … + (b*)^d。不確定時用 h = max(h1, …, hm)。</span></li>
+<li><span class="lang-en">Hill-climbing fails at local maxima, ridges, plateaux; fix with random restart. Beam search: best k of m·k. GA: selection, crossover, mutation.</span><span class="sep"> — </span><span class="lang-zh zh">Hill-climbing 會卡在 local maxima、ridges、plateaux;用 random restart 補救。Beam search:m·k 中選最好 k 個。GA:selection、crossover、mutation。</span></li>
+</ul>
+<h2><span class="lang-en">Ch5 Must remember</span><span class="sep"> · </span><span class="lang-zh zh">第五章必記</span></h2><ul>
+<li><span class="lang-en">CSP = &lt;X, C&gt;; solution = complete + consistent; O(d^n) assignments (Australia 3^7).</span><span class="sep"> — </span><span class="lang-zh zh">CSP = &lt;X, C&gt;;解 = complete + consistent;O(d^n) 種指派(Australia 為 3^7)。</span></li>
+<li><span class="lang-en">Order: MRV first; degree heuristic to break the first tie (SA = 5); LCV for the value.</span><span class="sep"> — </span><span class="lang-zh zh">順序:先 MRV;第一步用 degree 破平手(SA = 5);選值用 LCV。</span></li>
+<li><span class="lang-en">FC prunes neighbours; AC also checks arcs between unassigned variables (NT–SA); AC is stronger.</span><span class="sep"> — </span><span class="lang-zh zh">FC 修剪鄰居;AC 還檢查未指派變數間的弧(NT–SA);AC 較強。</span></li>
+<li><span class="lang-en">WA = red, Q = green: NT, SA = {blue} (FC misses the NT–SA conflict, AC finds it). WA = red, Q = green, V = blue: Dom(SA) = { }.</span><span class="sep"> — </span><span class="lang-zh zh">WA = red、Q = green:NT、SA = {blue}(FC 看不出 NT–SA 衝突,AC 看得出)。WA = red、Q = green、V = blue:Dom(SA) = { }。</span></li>
+<li><span class="lang-en">Independent subproblems: O(d^n) → O(d^c · n/c); tree-structured CSP: linear time; min-conflicts: runtime independent of size.</span><span class="sep"> — </span><span class="lang-zh zh">獨立子問題:O(d^n) → O(d^c · n/c);樹狀 CSP:線性時間;min-conflicts:時間與規模無關。</span></li>
+</ul>
+<h2><span class="lang-en">Ch6 Must remember</span><span class="sep"> · </span><span class="lang-zh zh">第六章必記</span></h2><ul>
+<li><span class="lang-en">TELL adds, ASK queries; truth table 2^n rows; Wumpus KB has 7 symbols, 128 rows.</span><span class="sep"> — </span><span class="lang-zh zh">TELL 加入、ASK 查詢;truth table 有 2^n 列;Wumpus KB 有 7 個符號、128 列。</span></li>
+<li><span class="lang-en">¬B11 and B11 ⇔ (P12 ∨ P21) imply no pit at [1,2] or [2,1].</span><span class="sep"> — </span><span class="lang-zh zh">¬B11 且 B11 ⇔ (P12 ∨ P21) 推得 [1,2]、[2,1] 都沒有坑。</span></li>
+<li><span class="lang-en">P ⇒ Q is false only when P is true and Q is false.</span><span class="sep"> — </span><span class="lang-zh zh">P ⇒ Q 只有 P 真 Q 假時為 false。</span></li>
+<li><span class="lang-en">∀ with ⇒, ∃ with ∧. ∀x∃y ≠ ∃y∀x. ¬∀x P ≡ ∃x ¬P; ¬∃x P ≡ ∀x ¬P.</span><span class="sep"> — </span><span class="lang-zh zh">∀ 配 ⇒,∃ 配 ∧。∀x∃y ≠ ∃y∀x。¬∀x P ≡ ∃x ¬P;¬∃x P ≡ ∀x ¬P。</span></li>
+<li><span class="lang-en">PL lacks expressiveness; FOL adds objects, relations, functions, quantifiers, but not categories, time, events.</span><span class="sep"> — </span><span class="lang-zh zh">PL 缺乏表達力;FOL 加入 objects、relations、functions、量詞,但沒有 categories、time、events。</span></li>
+</ul>
+<script>
+function setMode(m){
+  document.body.classList.remove('mode-en','mode-zh','mode-both');
+  document.body.classList.add('mode-'+m);
+  document.querySelectorAll('.toggle-bar button').forEach(function(b){b.classList.remove('active');});
+  document.getElementById('btn-'+m).classList.add('active');
+}
+</script>
+</body>
+</html>

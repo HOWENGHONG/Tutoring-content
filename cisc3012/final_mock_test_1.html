@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CISC3012 AI — Mock Final Test 1</title>
+<style>
+:root{--fg:#1a1a1a;--muted:#666;--accent:#1155CC;--border:#ddd;--bg:#fff;--bg2:#f7f7f9;--good:#0a7d2c;}
+*{box-sizing:border-box;}
+body{font-family:-apple-system,"Segoe UI","Noto Sans TC","PingFang TC","Microsoft JhengHei",Arial,sans-serif;
+  max-width:920px;margin:0 auto;padding:0 20px 60px;color:var(--fg);line-height:1.65;background:var(--bg);}
+h1{font-size:1.55em;margin:18px 0 4px;}
+.subtitle{color:var(--muted);font-size:0.95em;margin-bottom:14px;}
+h2{margin-top:2em;border-bottom:2px solid var(--accent);padding-bottom:6px;font-size:1.25em;}
+h3{margin-top:1.5em;color:var(--accent);font-size:1.05em;}
+h4{margin-top:1.2em;font-size:1em;}
+table{border-collapse:collapse;width:100%;margin:1em 0;font-size:0.95em;}
+th,td{border:1px solid var(--border);padding:7px 9px;text-align:left;vertical-align:top;}
+th{background:var(--bg2);}
+tr:nth-child(even) td{background:#fbfbfc;}
+ul{padding-left:1.3em;}
+li{margin-bottom:0.5em;}
+.toggle-bar{position:sticky;top:0;background:rgba(255,255,255,0.97);backdrop-filter:blur(4px);
+  padding:12px 0;border-bottom:1px solid var(--border);z-index:50;display:flex;gap:8px;align-items:center;
+  margin-bottom:1.2em;flex-wrap:wrap;}
+.toggle-label{font-size:0.82em;color:var(--muted);margin-right:2px;}
+.toggle-bar button{padding:6px 16px;border:1.5px solid var(--accent);background:#fff;color:var(--accent);
+  border-radius:20px;cursor:pointer;font-size:0.88em;font-weight:600;transition:all .15s;}
+.toggle-bar button.active{background:var(--accent);color:#fff;}
+.toggle-bar button:hover{opacity:0.85;}
+body.mode-en .lang-zh{display:none;}
+body.mode-zh .lang-en{display:none;}
+body.mode-en .sep, body.mode-zh .sep{display:none;}
+.zh{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;}
+.tag{display:inline-block;background:#eef2ff;color:var(--accent);border-radius:4px;padding:1px 7px;
+  font-size:0.78em;font-weight:700;margin-right:6px;}
+.hint{color:var(--muted);font-size:0.9em;}
+.note-box{background:var(--bg2);border-left:4px solid var(--accent);padding:10px 14px;margin:1em 0;border-radius:4px;}
+hr{border:none;border-top:1px solid var(--border);margin:2em 0;}
+.opt{margin:2px 0 2px 1.4em;}
+.qblock{margin-bottom:1.3em;padding-bottom:0.2em;}
+.qstem{font-weight:600;}
+.marks{color:var(--muted);font-weight:400;font-size:0.9em;}
+.answer-key{background:#f6fff6;border:1px solid #cfe9cf;border-radius:6px;padding:14px 18px;margin-top:1em;}
+.answer-key summary{cursor:pointer;font-weight:700;color:var(--good);padding:4px 0;}
+code{background:var(--bg2);padding:1px 5px;border-radius:3px;font-size:0.92em;}
+@media print{.toggle-bar{position:static;}}
+.tw{overflow-x:auto;}
+pre{background:var(--bg2);padding:10px 12px;border-radius:6px;overflow-x:auto;font-size:0.9em;}
+sup{font-size:.75em}
+
+</style>
+</head>
+<body class="mode-both">
+<h1>CISC3012 AI — Mock Final Test 1</h1>
+<div class="subtitle"><span class="lang-en">Chapter 1-6 practice exam</span><span class="lang-zh zh"><br>第一至六章模擬期末考</span></div>
+<p class="hint"><a href="../index.html">← Home 首頁</a></p>
+<div class="toggle-bar">
+  <span class="toggle-label">Display 顯示：</span>
+  <button id="btn-both" class="active" onclick="setMode('both')">中英對照 Both</button>
+  <button id="btn-en" onclick="setMode('en')">English Only</button>
+  <button id="btn-zh" onclick="setMode('zh')">中文 Only</button>
+</div>
+<p><span class="lang-en"><strong>EN:</strong> <strong>Coverage:</strong> Chapter 1-6 (final exam scope) | <strong>Total: 100 marks</strong> | Suggested time: 90 minutes. Section A: 1 long question with 4 parts (40 marks). Section B: 30 MCQs × 2 marks (60 marks). Attempt everything before checking the Answer Key. This is a practice paper written from the lecture slides, not the real exam.</span><span class="lang-zh zh"><br><strong>中文：</strong><strong>範圍：</strong>第一至六章(期末考範圍) | <strong>總分:100分</strong> | 建議時間:90分鐘。Section A:1題長題(4小題,40分)。Section B:30題選擇題 × 2分(60分)。作答完畢再查看答案。本卷依講義內容編寫,不是真題。</span></p><hr>
+<h2>Section A — Long Question (40 marks)</h2>
+<p><span class="lang-en"><strong>EN:</strong> Use the following search problem for all parts. Edges (cost): S–A 1, S–B 4, A–B 2, A–C 5, A–G 12, B–C 2, C–G 3. S is the start, G is the goal. Heuristic h: S = 7, A = 6, B = 4, C = 2, G = 0.</span><span class="lang-zh zh"><br><strong>中文：</strong>以下搜尋問題供所有小題使用。邊(成本):S–A 1、S–B 4、A–B 2、A–C 5、A–G 12、B–C 2、C–G 3。S 為起點、G 為目標。啟發值 h:S = 7、A = 6、B = 4、C = 2、G = 0。</span></p>
+<p><strong>(a) [10 marks]</strong> <span class="lang-en"><strong>EN:</strong> Run A* search. Show every node you expand, the f = g + h values of the nodes on the frontier, and state the final path and its cost.</span><span class="lang-zh zh"><br><strong>中文：</strong>執行 A* 搜尋。列出每個被展開的節點、frontier 上節點的 f = g + h 值,並寫出最終路徑與成本。</span></p>
+<p><strong>(b) [10 marks]</strong> <span class="lang-en"><strong>EN:</strong> Run greedy best-first search on the same graph. State the path and cost, and explain why greedy search is not optimal here.</span><span class="lang-zh zh"><br><strong>中文：</strong>在同一個圖上執行 greedy best-first 搜尋。寫出路徑與成本,並解釋為什麼 greedy 在這裡不是 optimal。</span></p>
+<p><strong>(c) [10 marks]</strong> <span class="lang-en"><strong>EN:</strong> 8-puzzle. Start state (rows): 2 8 3 / 1 6 4 / 7 _ 5. Goal state: 1 2 3 / 8 _ 4 / 7 6 5. Compute h1 (number of misplaced tiles) and h2 (sum of Manhattan distances). Which heuristic dominates, and why are both admissible?</span><span class="lang-zh zh"><br><strong>中文：</strong>8-puzzle。起始狀態(逐列):2 8 3 / 1 6 4 / 7 _ 5。目標狀態:1 2 3 / 8 _ 4 / 7 6 5。計算 h1(錯位格數)與 h2(曼哈頓距離總和)。哪一個 dominates?為什麼兩者都 admissible?</span></p>
+<p><strong>(d) [10 marks]</strong> <span class="lang-en"><strong>EN:</strong> Map-colouring CSP with variables A, B, C, D, E, domains {R, G, B}, and constraints A≠B, B≠C, C≠D, B≠D, D≠E. Assign A = R, then B = G. After each assignment, show the domains after forward checking. Then use MRV to pick the next variable and complete the colouring.</span><span class="lang-zh zh"><br><strong>中文：</strong>地圖著色 CSP:變數 A、B、C、D、E,domain {R, G, B},constraints:A≠B、B≠C、C≠D、B≠D、D≠E。先指派 A = R,再指派 B = G。每次指派後寫出 forward checking 後的 domain。然後用 MRV 選下一個變數並完成著色。</span></p>
+<hr><h2>Section B — Multiple Choice Questions (30 × 2 = 60 marks)</h2>
+<div class="qblock"><div class="qstem"><span class="tag">Ch1</span>1. <span class="lang-en">Which ability is required only in the TOTAL Turing Test, not in the basic Turing Test?</span><span class="sep"> — </span><span class="lang-zh zh">哪一項能力只在 Total Turing Test 才需要,基本 Turing Test 不需要?</span></div>
+<div class="opt">A. <span class="lang-en">Natural language processing</span><span class="sep"> — </span><span class="lang-zh zh">自然語言處理</span></div>
+<div class="opt">B. <span class="lang-en">Knowledge representation</span><span class="sep"> — </span><span class="lang-zh zh">知識表示</span></div>
+<div class="opt">C. <span class="lang-en">Computer vision and robotics</span><span class="sep"> — </span><span class="lang-zh zh">電腦視覺與機器人</span></div>
+<div class="opt">D. <span class="lang-en">Machine learning</span><span class="sep"> — </span><span class="lang-zh zh">機器學習</span></div>
+</div>
+<div class="qblock"><div class="qstem"><span class="tag">Ch1</span>2. <span class="lang-en">Why does the course focus on rational agents instead of systems that think or act like humans?</span><span class="sep"> — </span><span class="lang-zh zh">為什麼課程聚焦 rational agent,而不是像人類一樣思考或行動的系統?</span></div>
+<div class="opt">A. <span class="lang-en">Human-like systems always cost more</span><span class="sep"> — </span><span class="lang-zh zh">人類式系統成本總是比較高</span></div>
+<div class="opt">B. <span class="lang-en">We have no precise theory of the mind, and humans do not always act rationally</span><span class="sep"> — </span><span class="lang-zh zh">我們沒有精確的心智理論,而且人類並不總是理性</span></div>
+<div class="opt">C. <span class="lang-en">Rational agents need no data or logic</span><span class="sep"> — </span><span class="lang-zh zh">Rational agent 不需要資料或邏輯</span></div>
+<div class="opt">D. <span class="lang-en">The Turing Test only works for rational agents</span><span class="sep"> — </span><span class="lang-zh zh">Turing Test 只適用於 rational agent</span></div>
+</div>
+<div class="qblock"><div class="qstem"><span class="tag">Ch1</span>3. <span class="lang-en">A rational agent is best described as one that…</span><span class="sep"> — </span><span class="lang-zh zh">Rational agent 的最佳描述是…</span></div>
+<div class="opt">A. <span class="lang-en">copies human behaviour as closely as possible</span><span class="sep"> — </span><span class="lang-zh zh">盡可能模仿人類行為</span></div>
+<div class="opt">B. <span class="lang-en">given facts as input, acts to achieve its given goals</span><span class="sep"> — </span><span class="lang-zh zh">給定事實(輸入)後,為達成既定目標而行動</span></div>
+<div class="opt">C. <span class="lang-en">never makes a mistake in any environment</span><span class="sep"> — </span><span class="lang-zh zh">在任何環境都不犯錯</span></div>
+<div class="opt">D. <span class="lang-en">always uses a neural network</span><span class="sep"> — </span><span class="lang-zh zh">一定使用神經網絡</span></div>
+</div>
+<div class="qblock"><div class="qstem"><span class="tag">Ch1</span>4. <span class="lang-en">Compared with a traditional algorithm, an AI program…</span><span class="sep"> — </span><span class="lang-zh zh">與傳統演算法相比,AI 程式…</span></div>
+<div class="opt">A. <span class="lang-en">is always designed by humans line by line</span><span class="sep"> — </span><span class="lang-zh zh">永遠由人逐行設計</span></div>
+<div class="opt">B. <span class="lang-en">can learn rules from data even when humans do not understand the problem</span><span class="sep"> — </span><span class="lang-zh zh">即使人類不懂問題,也能從資料學出規則</span></div>
+<div class="opt">C. <span class="lang-en">cannot be used for labour-intensive work</span><span class="sep"> — </span><span class="lang-zh zh">不能用在勞力密集的工作</span></div>
+<div class="opt">D. <span class="lang-en">needs no data to work</span><span class="sep"> — </span><span class="lang-zh zh">不需要資料也能運作</span></div>
+</div>
+<div class="qblock"><div class="qstem"><span class="tag">Ch1</span>5. <span class="lang-en">Which is listed as a risk of AI?</span><span class="sep"> — </span><span class="lang-zh zh">哪一項是講義列出的 AI 風險?</span></div>
+<div class="opt">A. <span class="lang-en">Reliability and misuse (e.g. fake news)</span><span class="sep"> — </span><span class="lang-zh zh">可靠性與濫用(例如假新聞)</span></div>
+<div class="opt">B. <span class="lang-en">AI is too cheap to deploy</span><span class="sep"> — </span><span class="lang-zh zh">AI 太便宜而無法部署</span></div>
+<div class="opt">C. <span class="lang-en">AI can only work in games</span><span class="sep"> — </span><span class="lang-zh zh">AI 只能用在遊戲</span></div>
+<div class="opt">D. <span class="lang-en">AI always replaces every job completely</span><span class="sep"> — </span><span class="lang-zh zh">AI 一定會完全取代所有工作</span></div>
+</div>
+<div class="qblock"><div class="qstem"><span class="tag">Ch2</span>6. <span class="lang-en">Which four items does the rationality of an agent depend on?</span><span class="sep"> — </span><span class="lang-zh zh">Agent 的 rationality 取決於哪四項?</span></div>
+<div class="opt">A. <span class="lang-en">Performance measure, prior knowledge, available actions, percept sequence</span><span class="sep"> — </span><span class="lang-zh zh">績效指標、先驗知識、可執行動作、感知序列</span></div>
+<div class="opt">B. <span class="lang-en">Speed, memory size, number of sensors, cost</span><span class="sep"> — </span><span class="lang-zh zh">速度、記憶體大小、感測器數量、成本</span></div>
+<div class="opt">C. <span class="lang-en">Goal, utility, learning rate, search depth</span><span class="sep"> — </span><span class="lang-zh zh">目標、效用、學習率、搜尋深度</span></div>
+<div class="opt">D. <span class="lang-en">Sensors, actuators, battery, environment size</span><span class="sep"> — </span><span class="lang-zh zh">感測器、執行器、電池、環境大小</span></div>
+</div>
+<div class="qblock"><div class="qstem"><span class="tag">Ch2</span>7. <span class="lang-en">Which agent type works only if the environment is fully observable?</span><span class="sep"> — </span><span class="lang-zh zh">哪種 agent 只在完全可觀察的環境有效?</span></div>
+<div class="opt">A. <span class="lang-en">Simple reflex agent</span><span class="sep"> — </span><span class="lang-zh zh">簡單反射 agent</span></div>
+<div class="opt">B. <span class="lang-en">Model-based reflex agent</span><span class="sep"> — </span><span class="lang-zh zh">基於模型的反射 agent</span></div>
+<div class="opt">C. <span class="lang-en">Goal-based agent</span><span class="sep"> — </span><span class="lang-zh zh">目標導向 agent</span></div>
+<div class="opt">D. <span class="lang-en">Learning agent</span><span class="sep"> — </span><span class="lang-zh zh">學習 agent</span></div>
+</div>
+<div class="qblock"><div class="qstem"><span class="tag">Ch2</span>8. <span class="lang-en">A model-based reflex agent adds what to a simple reflex agent?</span><span class="sep"> — </span><span class="lang-zh zh">基於模型的反射 agent 比簡單反射 agent 多了什麼?</span></div>
+<div class="opt">A. <span class="lang-en">A utility function</span><span class="sep"> — </span><span class="lang-zh zh">效用函數</span></div>
+<div class="opt">B. <span class="lang-en">An internal state that tracks the unobserved parts of the world</span><span class="sep"> — </span><span class="lang-zh zh">追蹤世界中未觀察部分的內部狀態</span></div>
+<div class="opt">C. <span class="lang-en">A learning element</span><span class="sep"> — </span><span class="lang-zh zh">學習元件</span></div>
+<div class="opt">D. <span class="lang-en">A bigger lookup table</span><span class="sep"> — </span><span class="lang-zh zh">更大的查表</span></div>
+</div>
+<div class="qblock"><div class="qstem"><span class="tag">Ch2</span>9. <span class="lang-en">Which describes the automated-taxi environment?</span><span class="sep"> — </span><span class="lang-zh zh">哪一項描述自動駕駛 taxi 的環境?</span></div>
+<div class="opt">A. <span class="lang-en">Deterministic</span><span class="sep"> — </span><span class="lang-zh zh">確定性</span></div>
+<div class="opt">B. <span class="lang-en">Stochastic</span><span class="sep"> — </span><span class="lang-zh zh">隨機性</span></div>
+<div class="opt">C. <span class="lang-en">Episodic</span><span class="sep"> — </span><span class="lang-zh zh">獨立事件式</span></div>
+<div class="opt">D. <span class="lang-en">Single-agent</span><span class="sep"> — </span><span class="lang-zh zh">單一 agent</span></div>
+</div>
+<div class="qblock"><div class="qstem"><span class="tag">Ch2</span>10. <span class="lang-en">When is a utility-based agent better than a goal-based agent?</span><span class="sep"> — </span><span class="lang-zh zh">何時效用導向 agent 比目標導向 agent 好?</span></div>
+<div class="opt">A. <span class="lang-en">When there is exactly one goal that is always reachable</span><span class="sep"> — </span><span class="lang-zh zh">只有一個必定可達的目標時</span></div>
+<div class="opt">B. <span class="lang-en">When goals conflict or none is certain, so trade-offs are needed</span><span class="sep"> — </span><span class="lang-zh zh">目標互相衝突或都不確定,需要取捨時</span></div>
+<div class="opt">C. <span class="lang-en">When the environment is fully observable</span><span class="sep"> — </span><span class="lang-zh zh">環境完全可觀察時</span></div>
+<div class="opt">D. <span class="lang-en">When no actions are available</span><span class="sep"> — </span><span class="lang-zh zh">沒有可用動作時</span></div>
+</div>
+<div class="qblock"><div class="qstem"><span class="tag">Ch3</span>11. <span class="lang-en">Which is NOT one of the four components of a well-defined problem?</span><span class="sep"> — </span><span class="lang-zh zh">哪一項不是 well-defined problem 的四個要素?</span></div>
+<div class="opt">A. <span class="lang-en">Initial state</span><span class="sep"> — </span><span class="lang-zh zh">初始狀態</span></div>
+<div class="opt">B. <span class="lang-en">Successor function</span><span class="sep"> — </span><span class="lang-zh zh">後繼函數</span></div>
+<div class="opt">C. <span class="lang-en">Heuristic function h(n)</span><span class="sep"> — </span><span class="lang-zh zh">啟發函數 h(n)</span></div>
+<div class="opt">D. <span class="lang-en">Path cost function</span><span class="sep"> — </span><span class="lang-zh zh">路徑成本函數</span></div>
+</div>
+<div class="qblock"><div class="qstem"><span class="tag">Ch3</span>12. <span class="lang-en">Why is depth-first search not complete?</span><span class="sep"> — </span><span class="lang-zh zh">為什麼 DFS 不是 complete?</span></div>
+<div class="opt">A. <span class="lang-en">It uses too much memory</span><span class="sep"> — </span><span class="lang-zh zh">它用太多記憶體</span></div>
+<div class="opt">B. <span class="lang-en">A path may be infinite or loop, so it never fails and backtracks</span><span class="sep"> — </span><span class="lang-zh zh">路徑可能無限或有迴圈,永遠不會失敗而回頭</span></div>
+<div class="opt">C. <span class="lang-en">It only expands the shallowest node</span><span class="sep"> — </span><span class="lang-zh zh">它只展開最淺的節點</span></div>
+<div class="opt">D. <span class="lang-en">It requires a heuristic</span><span class="sep"> — </span><span class="lang-zh zh">它需要啟發函數</span></div>
+</div>
+<div class="qblock"><div class="qstem"><span class="tag">Ch3</span>13. <span class="lang-en">According to the lecture table, BFS has time and space complexity…</span><span class="sep"> — </span><span class="lang-zh zh">依講義比較表,BFS 的時間與空間複雜度為…</span></div>
+<div class="opt">A. <span class="lang-en">O(b^d) and O(bd)</span><span class="sep"> — </span><span class="lang-zh zh">O(b^d) 與 O(bd)</span></div>
+<div class="opt">B. <span class="lang-en">O(b^(d+1)) and O(b^(d+1))</span><span class="sep"> — </span><span class="lang-zh zh">O(b^(d+1)) 與 O(b^(d+1))</span></div>
+<div class="opt">C. <span class="lang-en">O(b^m) and O(bm)</span><span class="sep"> — </span><span class="lang-zh zh">O(b^m) 與 O(bm)</span></div>
+<div class="opt">D. <span class="lang-en">O(b^(d/2)) and O(b^(d/2))</span><span class="sep"> — </span><span class="lang-zh zh">O(b^(d/2)) 與 O(b^(d/2))</span></div>
+</div>
+<div class="qblock"><div class="qstem"><span class="tag">Ch3</span>14. <span class="lang-en">Which strategy repeatedly runs depth-limited DFS with limit 0, 1, 2, …?</span><span class="sep"> — </span><span class="lang-zh zh">哪種策略以 limit 0, 1, 2… 重複做 depth-limited DFS?</span></div>
+<div class="opt">A. <span class="lang-en">Uniform-cost search</span><span class="sep"> — </span><span class="lang-zh zh">Uniform-cost search</span></div>
+<div class="opt">B. <span class="lang-en">Bidirectional search</span><span class="sep"> — </span><span class="lang-zh zh">雙向搜尋</span></div>
+<div class="opt">C. <span class="lang-en">Iterative deepening search</span><span class="sep"> — </span><span class="lang-zh zh">Iterative deepening search</span></div>
+<div class="opt">D. <span class="lang-en">Iterative lengthening search</span><span class="sep"> — </span><span class="lang-zh zh">Iterative lengthening search</span></div>
+</div>
+<div class="qblock"><div class="qstem"><span class="tag">Ch3</span>15. <span class="lang-en">Uniform-cost search always expands the node with the lowest…</span><span class="sep"> — </span><span class="lang-zh zh">Uniform-cost search 總是展開…最小的節點?</span></div>
+<div class="opt">A. <span class="lang-en">depth</span><span class="sep"> — </span><span class="lang-zh zh">深度</span></div>
+<div class="opt">B. <span class="lang-en">path cost g(n)</span><span class="sep"> — </span><span class="lang-zh zh">路徑成本 g(n)</span></div>
+<div class="opt">C. <span class="lang-en">heuristic h(n)</span><span class="sep"> — </span><span class="lang-zh zh">啟發值 h(n)</span></div>
+<div class="opt">D. <span class="lang-en">f(n) = g(n) + h(n)</span><span class="sep"> — </span><span class="lang-zh zh">f(n) = g(n) + h(n)</span></div>
+</div>
+<div class="qblock"><div class="qstem"><span class="tag">Ch4</span>16. <span class="lang-en">A* evaluates nodes with f(n) = …, and is optimal if h is …</span><span class="sep"> — </span><span class="lang-zh zh">A* 的 f(n) 與其保證 optimal 的條件?</span></div>
+<div class="opt">A. <span class="lang-en">h(n); consistent</span><span class="sep"> — </span><span class="lang-zh zh">h(n);一致</span></div>
+<div class="opt">B. <span class="lang-en">g(n); admissible</span><span class="sep"> — </span><span class="lang-zh zh">g(n);admissible</span></div>
+<div class="opt">C. <span class="lang-en">g(n) + h(n); admissible</span><span class="sep"> — </span><span class="lang-zh zh">g(n) + h(n);admissible</span></div>
+<div class="opt">D. <span class="lang-en">g(n) + h(n); always zero</span><span class="sep"> — </span><span class="lang-zh zh">g(n) + h(n);恆為零</span></div>
+</div>
+<div class="qblock"><div class="qstem"><span class="tag">Ch4</span>17. <span class="lang-en">Why is greedy best-first search not optimal?</span><span class="sep"> — </span><span class="lang-zh zh">為什麼 greedy best-first 不是 optimal?</span></div>
+<div class="opt">A. <span class="lang-en">It ignores the cost already paid and trusts only h(n)</span><span class="sep"> — </span><span class="lang-zh zh">它忽略已付成本,只相信 h(n)</span></div>
+<div class="opt">B. <span class="lang-en">It expands every node</span><span class="sep"> — </span><span class="lang-zh zh">它展開每個節點</span></div>
+<div class="opt">C. <span class="lang-en">It uses g(n) only</span><span class="sep"> — </span><span class="lang-zh zh">它只用 g(n)</span></div>
+<div class="opt">D. <span class="lang-en">It stores no nodes</span><span class="sep"> — </span><span class="lang-zh zh">它不存任何節點</span></div>
+</div>
+<div class="qblock"><div class="qstem"><span class="tag">Ch4</span>18. <span class="lang-en">8-puzzle: h1 = 8 (misplaced tiles), h2 = 18 (Manhattan), true cost 26. Which is correct?</span><span class="sep"> — </span><span class="lang-zh zh">8-puzzle:h1 = 8(錯位數)、h2 = 18(曼哈頓)、真實成本 26。哪項正確?</span></div>
+<div class="opt">A. <span class="lang-en">h1 is better because it is smaller</span><span class="sep"> — </span><span class="lang-zh zh">h1 較好,因為它較小</span></div>
+<div class="opt">B. <span class="lang-en">h2 dominates h1 and is still admissible</span><span class="sep"> — </span><span class="lang-zh zh">h2 dominates h1 且仍是 admissible</span></div>
+<div class="opt">C. <span class="lang-en">h2 overestimates the cost</span><span class="sep"> — </span><span class="lang-zh zh">h2 高估了成本</span></div>
+<div class="opt">D. <span class="lang-en">Neither is admissible</span><span class="sep"> — </span><span class="lang-zh zh">兩者都不是 admissible</span></div>
+</div>
+<div class="qblock"><div class="qstem"><span class="tag">Ch4</span>19. <span class="lang-en">Which is NOT a failure case of hill-climbing?</span><span class="sep"> — </span><span class="lang-zh zh">哪一項不是 hill-climbing 的失敗情形?</span></div>
+<div class="opt">A. <span class="lang-en">Local maxima</span><span class="sep"> — </span><span class="lang-zh zh">局部最大值</span></div>
+<div class="opt">B. <span class="lang-en">Ridges</span><span class="sep"> — </span><span class="lang-zh zh">山脊</span></div>
+<div class="opt">C. <span class="lang-en">Plateaux</span><span class="sep"> — </span><span class="lang-zh zh">平原</span></div>
+<div class="opt">D. <span class="lang-en">Crossover</span><span class="sep"> — </span><span class="lang-zh zh">交配</span></div>
+</div>
+<div class="qblock"><div class="qstem"><span class="tag">Ch4</span>20. <span class="lang-en">In a genetic algorithm, offspring are produced by…</span><span class="sep"> — </span><span class="lang-zh zh">Genetic algorithm 如何產生後代?</span></div>
+<div class="opt">A. <span class="lang-en">modifying a single state only</span><span class="sep"> — </span><span class="lang-zh zh">只修改單一狀態</span></div>
+<div class="opt">B. <span class="lang-en">combining two parent states (crossover) with occasional mutation</span><span class="sep"> — </span><span class="lang-zh zh">結合兩個 parent(crossover),偶爾加上 mutation</span></div>
+<div class="opt">C. <span class="lang-en">BFS from the root</span><span class="sep"> — </span><span class="lang-zh zh">從根節點做 BFS</span></div>
+<div class="opt">D. <span class="lang-en">exhaustive search</span><span class="sep"> — </span><span class="lang-zh zh">窮舉搜尋</span></div>
+</div>
+<div class="qblock"><div class="qstem"><span class="tag">Ch5</span>21. <span class="lang-en">A solution to a CSP is an assignment that is…</span><span class="sep"> — </span><span class="lang-zh zh">CSP 的解是一個…的指派?</span></div>
+<div class="opt">A. <span class="lang-en">partial and consistent</span><span class="sep"> — </span><span class="lang-zh zh">部分且一致</span></div>
+<div class="opt">B. <span class="lang-en">complete and consistent</span><span class="sep"> — </span><span class="lang-zh zh">完整且一致</span></div>
+<div class="opt">C. <span class="lang-en">complete only</span><span class="sep"> — </span><span class="lang-zh zh">只需完整</span></div>
+<div class="opt">D. <span class="lang-en">consistent only</span><span class="sep"> — </span><span class="lang-zh zh">只需一致</span></div>
+</div>
+<div class="qblock"><div class="qstem"><span class="tag">Ch5</span>22. <span class="lang-en">MRV (minimum remaining values) chooses…</span><span class="sep"> — </span><span class="lang-zh zh">MRV 選擇…</span></div>
+<div class="opt">A. <span class="lang-en">the variable with the fewest legal values</span><span class="sep"> — </span><span class="lang-zh zh">合法值最少的變數</span></div>
+<div class="opt">B. <span class="lang-en">the variable involved in the most constraints</span><span class="sep"> — </span><span class="lang-zh zh">牽涉最多 constraint 的變數</span></div>
+<div class="opt">C. <span class="lang-en">the value that rules out the fewest neighbour values</span><span class="sep"> — </span><span class="lang-zh zh">讓鄰居損失最少值的那個值</span></div>
+<div class="opt">D. <span class="lang-en">a random variable</span><span class="sep"> — </span><span class="lang-zh zh">隨機變數</span></div>
+</div>
+<div class="qblock"><div class="qstem"><span class="tag">Ch5</span>23. <span class="lang-en">On the Australia map, which variable does the degree heuristic pick first, and why?</span><span class="sep"> — </span><span class="lang-zh zh">Australia 地圖上,degree heuristic 先選哪個變數?為什麼?</span></div>
+<div class="opt">A. <span class="lang-en">T, because it has no constraints</span><span class="sep"> — </span><span class="lang-zh zh">T,因為沒有 constraint</span></div>
+<div class="opt">B. <span class="lang-en">SA, because it has the most constraints (degree 5)</span><span class="sep"> — </span><span class="lang-zh zh">SA,因為它的 constraint 最多(degree 5)</span></div>
+<div class="opt">C. <span class="lang-en">WA, because it is first alphabetically</span><span class="sep"> — </span><span class="lang-zh zh">WA,因為字母順序第一</span></div>
+<div class="opt">D. <span class="lang-en">NT, because it has the fewest values</span><span class="sep"> — </span><span class="lang-zh zh">NT,因為值最少</span></div>
+</div>
+<div class="qblock"><div class="qstem"><span class="tag">Ch5</span>24. <span class="lang-en">After WA = red and Q = green, forward checking leaves NT and SA with…</span><span class="sep"> — </span><span class="lang-zh zh">WA = red 且 Q = green 後,forward checking 讓 NT 與 SA 剩下…</span></div>
+<div class="opt">A. <span class="lang-en">{red, blue} each</span><span class="sep"> — </span><span class="lang-zh zh">各 {red, blue}</span></div>
+<div class="opt">B. <span class="lang-en">{blue} each</span><span class="sep"> — </span><span class="lang-zh zh">各 {blue}</span></div>
+<div class="opt">C. <span class="lang-en">{green} each</span><span class="sep"> — </span><span class="lang-zh zh">各 {green}</span></div>
+<div class="opt">D. <span class="lang-en">empty domains</span><span class="sep"> — </span><span class="lang-zh zh">空的 domain</span></div>
+</div>
+<div class="qblock"><div class="qstem"><span class="tag">Ch5</span>25. <span class="lang-en">Why is arc consistency stronger than forward checking?</span><span class="sep"> — </span><span class="lang-zh zh">為什麼 arc consistency 比 forward checking 強?</span></div>
+<div class="opt">A. <span class="lang-en">It also propagates through constraints between unassigned variables (e.g. NT–SA)</span><span class="sep"> — </span><span class="lang-zh zh">它也會透過未指派變數間的 constraint(如 NT–SA)傳播</span></div>
+<div class="opt">B. <span class="lang-en">It never needs repeating</span><span class="sep"> — </span><span class="lang-zh zh">它不需要重複執行</span></div>
+<div class="opt">C. <span class="lang-en">It assigns values randomly</span><span class="sep"> — </span><span class="lang-zh zh">它隨機指派值</span></div>
+<div class="opt">D. <span class="lang-en">It only checks unary constraints</span><span class="sep"> — </span><span class="lang-zh zh">它只檢查 unary constraint</span></div>
+</div>
+<div class="qblock"><div class="qstem"><span class="tag">Ch6</span>26. <span class="lang-en">In a knowledge-based agent, TELL and ASK are used to…</span><span class="sep"> — </span><span class="lang-zh zh">KB agent 中,TELL 與 ASK 用來…</span></div>
+<div class="opt">A. <span class="lang-en">TELL adds sentences to the KB; ASK queries what follows from it</span><span class="sep"> — </span><span class="lang-zh zh">TELL 把 sentence 加入 KB;ASK 查詢可推出什麼</span></div>
+<div class="opt">B. <span class="lang-en">TELL queries; ASK adds sentences</span><span class="sep"> — </span><span class="lang-zh zh">TELL 查詢;ASK 加入 sentence</span></div>
+<div class="opt">C. <span class="lang-en">Both delete sentences</span><span class="sep"> — </span><span class="lang-zh zh">兩者都是刪除 sentence</span></div>
+<div class="opt">D. <span class="lang-en">Both generate the truth table</span><span class="sep"> — </span><span class="lang-zh zh">兩者都是產生 truth table</span></div>
+</div>
+<div class="qblock"><div class="qstem"><span class="tag">Ch6</span>27. <span class="lang-en">A truth table for a KB with n symbols has how many rows?</span><span class="sep"> — </span><span class="lang-zh zh">n 個符號的 KB,truth table 有幾列?</span></div>
+<div class="opt">A. <span class="lang-en">n</span><span class="sep"> — </span><span class="lang-zh zh">n</span></div>
+<div class="opt">B. <span class="lang-en">n²</span><span class="sep"> — </span><span class="lang-zh zh">n²</span></div>
+<div class="opt">C. <span class="lang-en">2^n</span><span class="sep"> — </span><span class="lang-zh zh">2^n</span></div>
+<div class="opt">D. <span class="lang-en">n!</span><span class="sep"> — </span><span class="lang-zh zh">n!</span></div>
+</div>
+<div class="qblock"><div class="qstem"><span class="tag">Ch6</span>28. <span class="lang-en">How do you correctly write 'All kings are persons' in FOL?</span><span class="sep"> — </span><span class="lang-zh zh">「所有 king 都是 person」的正確 FOL 寫法?</span></div>
+<div class="opt">A. <span class="lang-en">∀x King(x) ∧ Person(x)</span><span class="sep"> — </span><span class="lang-zh zh">∀x King(x) ∧ Person(x)</span></div>
+<div class="opt">B. <span class="lang-en">∀x King(x) ⇒ Person(x)</span><span class="sep"> — </span><span class="lang-zh zh">∀x King(x) ⇒ Person(x)</span></div>
+<div class="opt">C. <span class="lang-en">∃x King(x) ⇒ Person(x)</span><span class="sep"> — </span><span class="lang-zh zh">∃x King(x) ⇒ Person(x)</span></div>
+<div class="opt">D. <span class="lang-en">∃x King(x) ∧ Person(x)</span><span class="sep"> — </span><span class="lang-zh zh">∃x King(x) ∧ Person(x)</span></div>
+</div>
+<div class="qblock"><div class="qstem"><span class="tag">Ch6</span>29. <span class="lang-en">What is the difference between ∀x∃y Loves(x,y) and ∃y∀x Loves(x,y)?</span><span class="sep"> — </span><span class="lang-zh zh">∀x∃y Loves(x,y) 與 ∃y∀x Loves(x,y) 有何不同?</span></div>
+<div class="opt">A. <span class="lang-en">None, they are equivalent</span><span class="sep"> — </span><span class="lang-zh zh">沒有差別,兩者等價</span></div>
+<div class="opt">B. <span class="lang-en">First: everybody loves somebody; second: somebody is loved by everybody</span><span class="sep"> — </span><span class="lang-zh zh">前者:每個人都愛某個人;後者:有某人被所有人愛</span></div>
+<div class="opt">C. <span class="lang-en">First: somebody is loved by everybody; second: everybody loves somebody</span><span class="sep"> — </span><span class="lang-zh zh">前者:有某人被所有人愛;後者:每個人都愛某個人</span></div>
+<div class="opt">D. <span class="lang-en">Both mean nobody loves anybody</span><span class="sep"> — </span><span class="lang-zh zh">兩者都表示沒有人愛任何人</span></div>
+</div>
+<div class="qblock"><div class="qstem"><span class="tag">Ch6</span>30. <span class="lang-en">Given R4: ¬B1,1 and R2: B1,1 ⇔ (P1,2 ∨ P2,1), what follows?</span><span class="sep"> — </span><span class="lang-zh zh">由 R4: ¬B1,1 與 R2: B1,1 ⇔ (P1,2 ∨ P2,1) 可推得?</span></div>
+<div class="opt">A. <span class="lang-en">P1,2 is a pit</span><span class="sep"> — </span><span class="lang-zh zh">P1,2 有坑</span></div>
+<div class="opt">B. <span class="lang-en">P2,1 is a pit</span><span class="sep"> — </span><span class="lang-zh zh">P2,1 有坑</span></div>
+<div class="opt">C. <span class="lang-en">Neither [1,2] nor [2,1] has a pit</span><span class="sep"> — </span><span class="lang-zh zh">[1,2] 與 [2,1] 都沒有坑</span></div>
+<div class="opt">D. <span class="lang-en">The wumpus is in [1,2]</span><span class="sep"> — </span><span class="lang-zh zh">wumpus 在 [1,2]</span></div>
+</div>
+<hr><div class="answer-key"><details><summary>Answer Key 答案(先作答再打開)</summary>
+<h4><span class="lang-en">Section A — Model answers</span><span class="lang-zh zh"><br>Section A——參考答案</span></h4>
+<p><span class="lang-en"><strong>EN:</strong> (a) Frontier values are f = g + h.<br>S: f = 0 + 7 = 7. Expand S → A (1 + 6 = 7), B (4 + 4 = 8).<br>Expand A (7) → B via A: g = 3, f = 3 + 4 = 7 (better than 8), C: g = 6, f = 8, G: g = 13, f = 13.<br>Expand B (7) → C via B: g = 5, f = 7 (better than 8).<br>Expand C (7) → G: g = 8, f = 8 (better than 13).<br>Expand G (8): goal. Path S–A–B–C–G, cost 1 + 2 + 2 + 3 = 8 (optimal). h is admissible: true costs to G are S 8, A 7, B 5, C 3 and every h is at most that.</span><span class="lang-zh zh"><br><strong>中文：</strong>(a) Frontier 的值是 f = g + h。<br>S:f = 0 + 7 = 7。展開 S → A(1 + 6 = 7)、B(4 + 4 = 8)。<br>展開 A(7)→ 經 A 到 B:g = 3、f = 3 + 4 = 7(比 8 好);C:g = 6、f = 8;G:g = 13、f = 13。<br>展開 B(7)→ 經 B 到 C:g = 5、f = 7(比 8 好)。<br>展開 C(7)→ G:g = 8、f = 8(比 13 好)。<br>展開 G(8):是 goal。路徑 S–A–B–C–G,成本 1 + 2 + 2 + 3 = 8(optimal)。h 是 admissible:到 G 的真實成本為 S 8、A 7、B 5、C 3,每個 h 都不超過。</span></p>
+<p><span class="lang-en"><strong>EN:</strong> (b) Greedy uses f = h only. S → A (6), B (4); pick B (4). Expand B → C (2), A (6); pick C (2). Expand C → G (0); pick G. Path S–B–C–G, cost 4 + 2 + 3 = 9, but the optimal cost is 8. Greedy ignores g(n): the cheap first edge S–A (1) looks bad only because h(A) = 6 is larger than h(B) = 4, so it never considers the cheaper route through A.</span><span class="lang-zh zh"><br><strong>中文：</strong>(b) Greedy 只用 f = h。S → A(6)、B(4);選 B(4)。展開 B → C(2)、A(6);選 C(2)。展開 C → G(0);選 G。路徑 S–B–C–G,成本 4 + 2 + 3 = 9,但最佳成本是 8。Greedy 忽略 g(n):便宜的第一步 S–A(1)只因為 h(A) = 6 比 h(B) = 4 大就被忽略,所以沒考慮經過 A 的較便宜路線。</span></p>
+<p><span class="lang-en"><strong>EN:</strong> (c) Start: 2 8 3 / 1 6 4 / 7 _ 5; goal: 1 2 3 / 8 _ 4 / 7 6 5.<br>h1: tiles 2, 8, 1, 6 are misplaced (3, 4, 7, 5 are in place) → h1 = 4.<br>h2: tile 2 is 1 square from its goal, 8 is 2 (one down, one left), 1 is 1, 6 is 1 → 1 + 2 + 1 + 1 = 5.<br>h2 ≥ h1 for every state, so h2 dominates h1 (smaller effective branching factor). Both are admissible: h1 comes from the relaxed rule 'a tile can jump to any square', h2 from 'a tile can move to any adjacent square', so each is at most the true cost.</span><span class="lang-zh zh"><br><strong>中文：</strong>(c) 起始:2 8 3 / 1 6 4 / 7 _ 5;目標:1 2 3 / 8 _ 4 / 7 6 5。<br>h1:2、8、1、6 位置錯誤(3、4、7、5 正確)→ h1 = 4。<br>h2:tile 2 離目標 1 格、8 離目標 2 格(一下一左)、1 離 1 格、6 離 1 格 → 1 + 2 + 1 + 1 = 5。<br>所有狀態都有 h2 ≥ h1,所以 h2 dominates h1(effective branching factor 較小)。兩者都 admissible:h1 對應放寬規則「tile 可跳到任何格」,h2 對應「tile 可移到任何相鄰格」,所以都不超過真實成本。</span></p>
+<p><span class="lang-en"><strong>EN:</strong> (d) Start: all domains {R, G, B}.<br>A = R → FC removes R from B: B {G, B}. Others unchanged.<br>B = G → FC: A done; C loses G → {R, B}; D loses G → {R, B}. E still {R, G, B}.<br>MRV: C and D both have 2 values; E has 3. Pick C (tie broken alphabetically). C = R → D loses R → D {B}.<br>MRV picks D (1 value): D = B → E loses B → E {R, G}. Assign E = R (or G).<br>Solution: A = R, B = G, C = R, D = B, E = R. Check: A≠B, B≠C, C≠D, B≠D, D≠E all hold.</span><span class="lang-zh zh"><br><strong>中文：</strong>(d) 起始:所有 domain 都是 {R, G, B}。<br>A = R → FC 把 R 從 B 刪掉:B {G, B}。其他不變。<br>B = G → FC:A 已指派;C 刪掉 G → {R, B};D 刪掉 G → {R, B}。E 仍是 {R, G, B}。<br>MRV:C、D 各有 2 個值;E 有 3 個。選 C(同分按字母順序)。C = R → D 刪掉 R → D {B}。<br>MRV 選 D(只剩 1 個值):D = B → E 刪掉 B → E {R, G}。指派 E = R(或 G)。<br>解:A = R、B = G、C = R、D = B、E = R。檢查:A≠B、B≠C、C≠D、B≠D、D≠E 全部成立。</span></p>
+<h4><span class="lang-en">Section B — MCQ Answers</span><span class="lang-zh zh"><br>Section B——選擇題答案</span></h4>
+<p>1-C, 2-B, 3-B, 4-B, 5-A, 6-A, 7-A, 8-B, 9-B, 10-B, 11-C, 12-B, 13-B, 14-C, 15-B, 16-C, 17-A, 18-B, 19-D, 20-B, 21-B, 22-A, 23-B, 24-B, 25-A, 26-A, 27-C, 28-B, 29-B, 30-C</p>
+<h4><span class="lang-en">Explanations</span><span class="lang-zh zh"><br>解釋</span></h4><ul>
+<li><strong>1-C</strong> (Ch1) <span class="lang-en">The basic test needs NLP, knowledge representation, automated reasoning and machine learning. The Total test adds computer vision and robotics.</span><span class="sep"> — </span><span class="lang-zh zh">基本測試需要 NLP、知識表示、自動推理、機器學習。Total 版本再加電腦視覺(看)和機器人(動)。</span></li>
+<li><strong>2-B</strong> (Ch1) <span class="lang-en">We understand our own brains only a little, and humans act irrationally, so human-like systems are unreliable. A rational agent is judged only by the correctness of its outcome.</span><span class="sep"> — </span><span class="lang-zh zh">我們對自己大腦所知有限,人類也會不理性,所以人類式系統不可靠。Rational agent 只看結果是否正確。</span></li>
+<li><strong>3-B</strong> (Ch1) <span class="lang-en">Rational means: given the facts (inputs), act in order to achieve the given goals. It does not mean imitating humans or being perfect.</span><span class="sep"> — </span><span class="lang-zh zh">Rational:給定 facts(inputs),為了達成給定的 goals(objectives)而行動。不是模仿人,也不保證零錯誤。</span></li>
+<li><strong>4-B</strong> (Ch1) <span class="lang-en">A traditional algorithm cannot be written if humans cannot solve the problem. An AI program can be learned from data directly (rules, trees or neural networks).</span><span class="sep"> — </span><span class="lang-zh zh">人不會解的問題寫不出傳統演算法。AI 可直接從資料學出規則、決策樹或神經網絡。</span></li>
+<li><strong>5-A</strong> (Ch1) <span class="lang-en">Risks include reliability, security, misuse such as fake news, and challenges to jobs. The lecture says humans are replaced largely but not completely.</span><span class="sep"> — </span><span class="lang-zh zh">風險包括可靠性、安全、假新聞等濫用,以及對工作的挑戰。講義說的是「大致取代、不是完全取代」。</span></li>
+<li><strong>6-A</strong> (Ch2) <span class="lang-en">The four items: performance measure P, prior knowledge of the environment, the actions the agent can perform, and the percept sequence so far.</span><span class="sep"> — </span><span class="lang-zh zh">四項:績效指標 P、對環境的先驗知識、可執行的動作、到目前為止的感知序列。</span></li>
+<li><strong>7-A</strong> (Ch2) <span class="lang-en">A simple reflex agent uses only condition-action rules with no memory, so it needs full observability (e.g. a chess board).</span><span class="sep"> — </span><span class="lang-zh zh">簡單反射 agent 只用 condition-action 規則、沒有記憶,所以需要完全可觀察(如棋盤)。</span></li>
+<li><strong>8-B</strong> (Ch2) <span class="lang-en">It keeps an internal state summarising the percept history, to handle partially observable worlds.</span><span class="sep"> — </span><span class="lang-zh zh">它保留總結感知歷史的內部狀態,用來處理部分可觀察的世界。</span></li>
+<li><strong>9-B</strong> (Ch2) <span class="lang-en">Taxi driving is stochastic (unobservable factors, noise), sequential and multi-agent.</span><span class="sep"> — </span><span class="lang-zh zh">Taxi 是 stochastic(有未觀察因素與雜訊)、sequential、多 agent。</span></li>
+<li><strong>10-B</strong> (Ch2) <span class="lang-en">A goal is only achieved or not. Utility maps a state to a real number, which handles conflicting goals and trade-offs.</span><span class="sep"> — </span><span class="lang-zh zh">目標只有達成/未達成。Utility 把狀態映射成實數,可處理目標衝突與取捨。</span></li>
+<li><strong>11-C</strong> (Ch3) <span class="lang-en">The four components are initial state, successor function, goal test and path cost. h(n) belongs to informed search (Ch4).</span><span class="sep"> — </span><span class="lang-zh zh">四要素:initial state、successor function、goal test、path cost。h(n) 屬於 Ch4 的 informed search。</span></li>
+<li><strong>12-B</strong> (Ch3) <span class="lang-en">On an infinite or looping path the search never reaches a dead end, so it never backtracks.</span><span class="sep"> — </span><span class="lang-zh zh">遇到無限或有迴圈的路徑時不會碰到 dead end,因此不會回溯。</span></li>
+<li><strong>13-B</strong> (Ch3) <span class="lang-en">BFS keeps a whole level in memory, so both are O(b^(d+1)). O(b^m)/O(bm) is DFS; O(b^(d/2)) is bidirectional.</span><span class="sep"> — </span><span class="lang-zh zh">BFS 要保留整層節點,time 與 space 都是 O(b^(d+1))。O(b^m)/O(bm) 是 DFS;O(b^(d/2)) 是雙向搜尋。</span></li>
+<li><strong>14-C</strong> (Ch3) <span class="lang-en">Iterative deepening: O(b^d) time, O(bd) space, complete, and optimal when all step costs are equal.</span><span class="sep"> — </span><span class="lang-zh zh">Iterative deepening:時間 O(b^d)、空間 O(bd),complete,step cost 相同時 optimal。</span></li>
+<li><strong>15-B</strong> (Ch3) <span class="lang-en">UCS orders by g(n). Ordering by h(n) is greedy search; g(n) + h(n) is A*.</span><span class="sep"> — </span><span class="lang-zh zh">UCS 依 g(n) 排序。依 h(n) 是 greedy,g + h 是 A*。</span></li>
+<li><strong>16-C</strong> (Ch4) <span class="lang-en">f = g + h, and A* is optimal when h never overestimates the cost to the goal (admissible).</span><span class="sep"> — </span><span class="lang-zh zh">f = g + h;h 永不高估到 goal 的成本(admissible)時 A* 為 optimal。</span></li>
+<li><strong>17-A</strong> (Ch4) <span class="lang-en">With f = h it only chases the estimated closest goal. Arad to Bucharest: greedy 450, A* 418.</span><span class="sep"> — </span><span class="lang-zh zh">f = h 只追逐估計最近的 goal。Arad→Bucharest:greedy 450,A* 418。</span></li>
+<li><strong>18-B</strong> (Ch4) <span class="lang-en">h2 ≥ h1 and h2 ≤ 26, so h2 dominates h1 and gives a smaller effective branching factor.</span><span class="sep"> — </span><span class="lang-zh zh">h2 ≥ h1 且 h2 ≤ 26,所以 h2 dominates h1,effective branching factor 更小。</span></li>
+<li><strong>19-D</strong> (Ch4) <span class="lang-en">Crossover is an operator of genetic algorithms, not a hill-climbing problem.</span><span class="sep"> — </span><span class="lang-zh zh">Crossover 是 genetic algorithm 的 operator,不是 hill-climbing 的問題。</span></li>
+<li><strong>20-B</strong> (Ch4) <span class="lang-en">Two parents are cut at a random point and joined; mutation changes a position with a small probability.</span><span class="sep"> — </span><span class="lang-zh zh">兩個 parent 在隨機切點接合;mutation 以小機率改變某一位。</span></li>
+<li><strong>21-B</strong> (Ch5) <span class="lang-en">Complete means every variable has a value; consistent means no constraint is violated.</span><span class="sep"> — </span><span class="lang-zh zh">Complete:每個變數都有值;consistent:不違反任何 constraint。</span></li>
+<li><strong>22-A</strong> (Ch5) <span class="lang-en">Fewest legal values is the fail-first idea. The second option is the degree heuristic, the third is least-constraining value.</span><span class="sep"> — </span><span class="lang-zh zh">合法值最少就是 fail-first。第二項是 degree heuristic,第三項是 least-constraining value。</span></li>
+<li><strong>23-B</strong> (Ch5) <span class="lang-en">At the start every variable has 3 values, so MRV cannot decide. SA touches five neighbours.</span><span class="sep"> — </span><span class="lang-zh zh">一開始每個變數都有 3 個值,MRV 分不出高下;SA 連著 5 個鄰居。</span></li>
+<li><strong>24-B</strong> (Ch5) <span class="lang-en">Both lose red and green. But NT and SA are adjacent, a conflict that only arc consistency catches early.</span><span class="sep"> — </span><span class="lang-zh zh">兩者都被刪掉 red 與 green。NT、SA 相鄰,這個衝突要 arc consistency 才能及早發現。</span></li>
+<li><strong>25-A</strong> (Ch5) <span class="lang-en">AC is applied repeatedly until no inconsistency remains; FC only updates neighbours of the assigned variable.</span><span class="sep"> — </span><span class="lang-zh zh">AC 重複執行到沒有不一致;FC 只更新被指派變數的鄰居。</span></li>
+<li><strong>26-A</strong> (Ch6) <span class="lang-en">TELL adds new percepts or sentences; ASK is answered by the inference engine.</span><span class="sep"> — </span><span class="lang-zh zh">TELL 加入新 percept/sentence;ASK 由 inference engine 回答。</span></li>
+<li><strong>27-C</strong> (Ch6) <span class="lang-en">Each symbol is true or false, giving 2^n rows, which is why large KBs use inference rules instead.</span><span class="sep"> — </span><span class="lang-zh zh">每個符號 true/false,共 2^n 列,所以大 KB 改用 inference rules。</span></li>
+<li><strong>28-B</strong> (Ch6) <span class="lang-en">∀ pairs with ⇒. With ∧ it would say everything is a king and a person. ∃ pairs with ∧.</span><span class="sep"> — </span><span class="lang-zh zh">∀ 配 ⇒。用 ∧ 會變成「所有東西都是 king 且是 person」。∃ 才配 ∧。</span></li>
+<li><strong>29-B</strong> (Ch6) <span class="lang-en">Quantifiers do not commute; use brackets to fix the order.</span><span class="sep"> — </span><span class="lang-zh zh">量詞順序不能交換;要指定順序就加括號。</span></li>
+<li><strong>30-C</strong> (Ch6) <span class="lang-en">B1,1 false makes P1,2 ∨ P2,1 false, so both are false.</span><span class="sep"> — </span><span class="lang-zh zh">B1,1 為 false → P1,2 ∨ P2,1 為 false → 兩者都為 false。</span></li>
+</ul></details></div>
+<script>
+function setMode(m){
+  document.body.classList.remove('mode-en','mode-zh','mode-both');
+  document.body.classList.add('mode-'+m);
+  document.querySelectorAll('.toggle-bar button').forEach(function(b){b.classList.remove('active');});
+  document.getElementById('btn-'+m).classList.add('active');
+}
+</script>
+</body>
+</html>

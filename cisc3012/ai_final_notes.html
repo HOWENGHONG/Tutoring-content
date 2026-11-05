@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CISC3012 AI — Final Study Notes (Ch1-6)</title>
+<style>
+:root{--fg:#1a1a1a;--muted:#666;--accent:#1155CC;--border:#ddd;--bg:#fff;--bg2:#f7f7f9;--good:#0a7d2c;}
+*{box-sizing:border-box;}
+body{font-family:-apple-system,"Segoe UI","Noto Sans TC","PingFang TC","Microsoft JhengHei",Arial,sans-serif;
+  max-width:920px;margin:0 auto;padding:0 20px 60px;color:var(--fg);line-height:1.65;background:var(--bg);}
+h1{font-size:1.55em;margin:18px 0 4px;}
+.subtitle{color:var(--muted);font-size:0.95em;margin-bottom:14px;}
+h2{margin-top:2em;border-bottom:2px solid var(--accent);padding-bottom:6px;font-size:1.25em;}
+h3{margin-top:1.5em;color:var(--accent);font-size:1.05em;}
+h4{margin-top:1.2em;font-size:1em;}
+table{border-collapse:collapse;width:100%;margin:1em 0;font-size:0.95em;}
+th,td{border:1px solid var(--border);padding:7px 9px;text-align:left;vertical-align:top;}
+th{background:var(--bg2);}
+tr:nth-child(even) td{background:#fbfbfc;}
+ul{padding-left:1.3em;}
+li{margin-bottom:0.5em;}
+.toggle-bar{position:sticky;top:0;background:rgba(255,255,255,0.97);backdrop-filter:blur(4px);
+  padding:12px 0;border-bottom:1px solid var(--border);z-index:50;display:flex;gap:8px;align-items:center;
+  margin-bottom:1.2em;flex-wrap:wrap;}
+.toggle-label{font-size:0.82em;color:var(--muted);margin-right:2px;}
+.toggle-bar button{padding:6px 16px;border:1.5px solid var(--accent);background:#fff;color:var(--accent);
+  border-radius:20px;cursor:pointer;font-size:0.88em;font-weight:600;transition:all .15s;}
+.toggle-bar button.active{background:var(--accent);color:#fff;}
+.toggle-bar button:hover{opacity:0.85;}
+body.mode-en .lang-zh{display:none;}
+body.mode-zh .lang-en{display:none;}
+body.mode-en .sep, body.mode-zh .sep{display:none;}
+.zh{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;}
+.tag{display:inline-block;background:#eef2ff;color:var(--accent);border-radius:4px;padding:1px 7px;
+  font-size:0.78em;font-weight:700;margin-right:6px;}
+.hint{color:var(--muted);font-size:0.9em;}
+.note-box{background:var(--bg2);border-left:4px solid var(--accent);padding:10px 14px;margin:1em 0;border-radius:4px;}
+hr{border:none;border-top:1px solid var(--border);margin:2em 0;}
+.opt{margin:2px 0 2px 1.4em;}
+.qblock{margin-bottom:1.3em;padding-bottom:0.2em;}
+.qstem{font-weight:600;}
+.marks{color:var(--muted);font-weight:400;font-size:0.9em;}
+.answer-key{background:#f6fff6;border:1px solid #cfe9cf;border-radius:6px;padding:14px 18px;margin-top:1em;}
+.answer-key summary{cursor:pointer;font-weight:700;color:var(--good);padding:4px 0;}
+code{background:var(--bg2);padding:1px 5px;border-radius:3px;font-size:0.92em;}
+@media print{.toggle-bar{position:static;}}
+.tw{overflow-x:auto;}
+pre{background:var(--bg2);padding:10px 12px;border-radius:6px;overflow-x:auto;font-size:0.9em;}
+sup{font-size:.75em}
+
+</style>
+</head>
+<body class="mode-both">
+<h1>CISC3012 AI — Final Study Notes (Ch1-6)</h1>
+<div class="subtitle"><span class="lang-en">Bilingual study notes for the final exam</span><span class="lang-zh zh"><br>期末考中英雙語筆記(第一至六章)</span></div>
+<p class="hint"><a href="../index.html">← Home 首頁</a></p>
+<div class="toggle-bar">
+  <span class="toggle-label">Display 顯示：</span>
+  <button id="btn-both" class="active" onclick="setMode('both')">中英對照 Both</button>
+  <button id="btn-en" onclick="setMode('en')">English Only</button>
+  <button id="btn-zh" onclick="setMode('zh')">中文 Only</button>
+</div>
+<p class="hint"><a href="#c1">Ch1</a> · <a href="#c2">Ch2</a> · <a href="#c3">Ch3</a> · <a href="#c4">Ch4</a> · <a href="#c5">Ch5</a> · <a href="#c6">Ch6</a></p>
+<h2 id="c1"><span class="lang-en">Chapter 1 — What is AI?</span><span class="sep"> · </span><span class="lang-zh zh">第一章 — 什麼是 AI?</span></h2>
+<h3><span class="lang-en">Definitions and approaches</span><span class="sep"> · </span><span class="lang-zh zh">定義與做法</span></h3>
+<ul>
+<li><span class="lang-en">There is no universal definition of AI. The four views are: think humanly, act humanly, think rationally, act rationally.</span><span class="sep"> — </span><span class="lang-zh zh">AI 沒有統一定義。四種觀點:像人一樣思考、像人一樣行動、理性地思考、理性地行動。</span></li>
+<li><span class="lang-en">Humanly systems are unreliable: we do not know how our brains work, and humans act irrationally. Rational systems only care about the correctness of the outcome and mostly use mathematical and logical models.</span><span class="sep"> — </span><span class="lang-zh zh">人類式系統不可靠:我們不懂大腦如何運作,人類也會不理性。Rational 系統只在乎結果是否正確,多用數學和邏輯模型。</span></li>
+<li><span class="lang-en">Turing Test: a human questioner communicates remotely and cannot tell whether a computer or a human is answering. It needs natural language processing, knowledge representation, automated reasoning and machine learning. The Total Turing Test adds computer vision and robotics.</span><span class="sep"> — </span><span class="lang-zh zh">Turing Test:提問者以遠端文字溝通,分不出對方是電腦還是人。需要自然語言處理、知識表示、自動推理、機器學習。Total Turing Test 再加電腦視覺與機器人。</span></li>
+<li><span class="lang-en">A rational agent perceives the environment and, given facts, acts to achieve its given goals. The reasoning in between is designed by humans, usually with maths and logic.</span><span class="sep"> — </span><span class="lang-zh zh">Rational agent 感知環境,給定事實後為達成既定目標而行動。中間的推理由人類設計,通常用數學與邏輯。</span></li>
+</ul>
+<h3><span class="lang-en">Capability, limits and risks</span><span class="sep"> · </span><span class="lang-zh zh">能力、限制與風險</span></h3>
+<ul>
+<li><span class="lang-en">AI has no limit in application, but limited capability: it can replace many labour-intensive jobs, while humans still do better in intelligence-intensive jobs.</span><span class="sep"> — </span><span class="lang-zh zh">AI 的應用沒有限制,但能力有限:可以取代許多勞力密集的工作,智力密集的工作人類仍然做得較好。</span></li>
+<li><span class="lang-en">State of the art: monitoring spacecraft, Go, driving, logistics planning (weeks to hours, up to 50,000 vehicles), surgical robotics, image classification, language and generative AI.</span><span class="sep"> — </span><span class="lang-zh zh">尖端應用:太空船監控、圍棋、駕駛、物流規劃(數週縮至數小時,最多 50,000 個車輛)、手術機器人、圖像分類、語言與生成式 AI。</span></li>
+<li><span class="lang-en">Risks: reliability, security, misuse such as fake news, and the impact on jobs and recruitment.</span><span class="sep"> — </span><span class="lang-zh zh">風險:可靠性、安全、假新聞等濫用,以及對工作與招聘的衝擊。</span></li>
+<li><span class="lang-en">AI vs traditional programs: traditional logic is designed by humans, so if humans cannot solve it, the algorithm cannot be written. AI learns rules or neural networks from data directly. With LLM agents, natural language becomes machine code, but we still learn programming, less intensively.</span><span class="sep"> — </span><span class="lang-zh zh">AI 與傳統程式:傳統邏輯由人設計,人不會解就寫不出。AI 直接從資料學出規則或神經網絡。有了 LLM agent,自然語言可轉成機器碼,但我們仍需學編程,只是不必那麼深入。</span></li>
+</ul>
+<h2 id="c2"><span class="lang-en">Chapter 2 — Intelligent Agents</span><span class="sep"> · </span><span class="lang-zh zh">第二章 — 智能代理</span></h2>
+<h3><span class="lang-en">Agents and rationality</span><span class="sep"> · </span><span class="lang-zh zh">Agent 與理性</span></h3>
+<ul>
+<li><span class="lang-en">An agent perceives the environment through sensors and acts on it through actuators. A lookup table cannot implement the agent function (infinite length), so an agent program is used.</span><span class="sep"> — </span><span class="lang-zh zh">Agent 透過感測器感知環境,並透過執行器作用於環境。查表無法實現 agent function(長度無限),所以用 agent program。</span></li>
+<li><span class="lang-en">Rationality depends on four things: the performance measure P, the agent's prior knowledge of the environment, the actions it can perform, and the percept sequence so far.</span><span class="sep"> — </span><span class="lang-zh zh">Rationality 取決於四件事:績效指標 P、agent 對環境的先驗知識、可執行的動作、到目前為止的感知序列。</span></li>
+<li><span class="lang-en">Vacuum world example: 1 point per clean square per time step over 10,000 steps with 2 squares gives a maximum of 20,000.</span><span class="sep"> — </span><span class="lang-zh zh">吸塵器世界例子:2 格、共 10,000 步、每步每個乾淨格 1 分,最高 20,000。</span></li>
+</ul>
+<h3><span class="lang-en">PEAS and environment properties</span><span class="sep"> · </span><span class="lang-zh zh">PEAS 與環境性質</span></h3>
+<ul>
+<li><span class="lang-en">PEAS = Performance measure, Environment, Actuators, Sensors. Taxi: actuators are accelerator, steering, braking, display; sensors include cameras, GPS and customer interaction.</span><span class="sep"> — </span><span class="lang-zh zh">PEAS = 績效指標、環境、執行器、感測器。Taxi:執行器為油門、轉向、剎車、顯示器;感測器包括攝影機、GPS 與乘客互動。</span></li>
+</ul>
+<div class="tw"><table><tr><th><span class="lang-en">Property pair</span><span class="sep"> — </span><span class="lang-zh zh">性質配對</span></th><th><span class="lang-en">Meaning</span><span class="sep"> — </span><span class="lang-zh zh">意思</span></th></tr><tr><td><span class="lang-en">Fully / partially observable</span><span class="sep"> — </span><span class="lang-zh zh">完全 / 部分可觀察</span></td><td><span class="lang-en">Sensors can / cannot see the complete state</span><span class="sep"> — </span><span class="lang-zh zh">感測器能 / 不能看到完整狀態</span></td></tr><tr><td><span class="lang-en">Deterministic / stochastic</span><span class="sep"> — </span><span class="lang-zh zh">確定性 / 隨機性</span></td><td><span class="lang-en">Next state fully determined by state + action, or not (taxi: stochastic)</span><span class="sep"> — </span><span class="lang-zh zh">下一狀態是否完全由當前狀態與動作決定(taxi:隨機)</span></td></tr><tr><td><span class="lang-en">Episodic / sequential</span><span class="sep"> — </span><span class="lang-zh zh">獨立 / 連續</span></td><td><span class="lang-en">Each episode independent, or current action affects the future (chess)</span><span class="sep"> — </span><span class="lang-zh zh">每個 episode 獨立,或目前動作影響未來(棋類)</span></td></tr><tr><td><span class="lang-en">Static / dynamic</span><span class="sep"> — </span><span class="lang-zh zh">靜態 / 動態</span></td><td><span class="lang-en">Environment does not / does change while the agent thinks</span><span class="sep"> — </span><span class="lang-zh zh">agent 思考時環境不變 / 會變</span></td></tr><tr><td><span class="lang-en">Discrete / continuous</span><span class="sep"> — </span><span class="lang-zh zh">離散 / 連續</span></td><td><span class="lang-en">Finite distinct percepts and actions, or real-valued</span><span class="sep"> — </span><span class="lang-zh zh">有限且明確的感知與動作,或實數值</span></td></tr><tr><td><span class="lang-en">Single / multi-agent</span><span class="sep"> — </span><span class="lang-zh zh">單 / 多 agent</span></td><td><span class="lang-en">Crossword = single; chess = competitive; taxi = cooperative</span><span class="sep"> — </span><span class="lang-zh zh">填字 = 單;西洋棋 = 競爭;taxi = 合作</span></td></tr></table></div>
+<h3><span class="lang-en">Five agent types</span><span class="sep"> · </span><span class="lang-zh zh">五種 agent</span></h3>
+<ul>
+<li><span class="lang-en">Simple reflex: condition-action rules, needs full observability. Model-based reflex: adds an internal state for partially observable worlds. Goal-based: chooses actions toward a goal. Utility-based: utility maps a state to a real number, so it handles conflicting goals and trade-offs. Learning agent: improves from environment feedback using machine learning.</span><span class="sep"> — </span><span class="lang-zh zh">Simple reflex:condition-action 規則,需要完全可觀察。Model-based reflex:多了內部狀態,用於部分可觀察世界。Goal-based:朝目標選擇動作。Utility-based:utility 把狀態映射成實數,能處理目標衝突與取捨。Learning agent:用機器學習根據環境回饋進步。</span></li>
+</ul>
+<h2 id="c3"><span class="lang-en">Chapter 3 — Rational Agent by Searching</span><span class="sep"> · </span><span class="lang-zh zh">第三章 — 以搜尋實現 Rational Agent</span></h2>
+<h3><span class="lang-en">Problem formulation</span><span class="sep"> · </span><span class="lang-zh zh">問題形式化</span></h3>
+<ul>
+<li><span class="lang-en">Goal-based agents are implemented as a search over states. The environment must be static, fully observable, discrete and deterministic.</span><span class="sep"> — </span><span class="lang-zh zh">目標導向 agent 以狀態搜尋實現。環境必須是靜態、完全可觀察、離散且確定性的。</span></li>
+<li><span class="lang-en">A well-defined problem has four components: initial state, successor function, goal test and path cost function g. A solution is a path from the initial state to a state satisfying the goal test; the optimal solution has the lowest path cost.</span><span class="sep"> — </span><span class="lang-zh zh">Well-defined problem 有四個要素:initial state、successor function、goal test、path cost function g。Solution 是從初始狀態到滿足 goal test 的路徑;optimal solution 是成本最低者。</span></li>
+<li><span class="lang-en">A node has five parts: STATE, PARENT-NODE, ACTION, PATH-COST g(n), DEPTH. The fringe is the set of unexpanded leaf nodes, kept in a queue.</span><span class="sep"> — </span><span class="lang-zh zh">Node 有五個部分:STATE、PARENT-NODE、ACTION、PATH-COST g(n)、DEPTH。Fringe 是尚未展開的 leaf nodes,存放在 queue。</span></li>
+<li><span class="lang-en">8-queens: incremental formulation starts from an empty board and adds queens; complete-state formulation starts with all 8 queens and moves attacked ones (at most 7! = 5040, about 2^12 states, instead of about 2^48 states). The formulation changes the search-space size a lot.</span><span class="sep"> — </span><span class="lang-zh zh">8-queens:incremental 從空盤加皇后;complete-state 從 8 個皇后開始再移動被攻擊的(狀態數由約 2^48 縮到約 2^12)。形式化方式大大改變搜尋空間大小。</span></li>
+</ul>
+<h3><span class="lang-en">Uninformed strategies</span><span class="sep"> · </span><span class="lang-zh zh">無資訊搜尋</span></h3>
+<div class="tw"><table><tr><th><span class="lang-en">Strategy</span><span class="sep"> — </span><span class="lang-zh zh">策略</span></th><th><span class="lang-en">Complete</span><span class="sep"> — </span><span class="lang-zh zh">Complete</span></th><th><span class="lang-en">Time</span><span class="sep"> — </span><span class="lang-zh zh">時間</span></th><th><span class="lang-en">Space</span><span class="sep"> — </span><span class="lang-zh zh">空間</span></th><th><span class="lang-en">Optimal</span><span class="sep"> — </span><span class="lang-zh zh">Optimal</span></th></tr><tr><td><span class="lang-en">Breadth-first</span><span class="sep"> — </span><span class="lang-zh zh">BFS</span></td><td>Yes</td><td>O(b^(d+1))</td><td>O(b^(d+1))</td><td><span class="lang-en">Yes if step costs equal</span><span class="sep"> — </span><span class="lang-zh zh">step cost 相同時是</span></td></tr><tr><td><span class="lang-en">Uniform-cost</span><span class="sep"> — </span><span class="lang-zh zh">UCS</span></td><td>Yes</td><td>O(b^⌈C*/ε⌉)</td><td>O(b^⌈C*/ε⌉)</td><td>Yes</td></tr><tr><td><span class="lang-en">Depth-first</span><span class="sep"> — </span><span class="lang-zh zh">DFS</span></td><td>No</td><td>O(b^m)</td><td>O(bm)</td><td>No</td></tr><tr><td><span class="lang-en">Depth-limited</span><span class="sep"> — </span><span class="lang-zh zh">DLS</span></td><td>No</td><td>O(b^l)</td><td>O(bl)</td><td>No</td></tr><tr><td><span class="lang-en">Iterative deepening</span><span class="sep"> — </span><span class="lang-zh zh">IDS</span></td><td>Yes</td><td>O(b^d)</td><td>O(bd)</td><td><span class="lang-en">Yes if step costs equal</span><span class="sep"> — </span><span class="lang-zh zh">step cost 相同時是</span></td></tr><tr><td><span class="lang-en">Bidirectional</span><span class="sep"> — </span><span class="lang-zh zh">雙向</span></td><td>Yes</td><td>O(b^(d/2))</td><td>O(b^(d/2))</td><td><span class="lang-en">Yes (both BFS)</span><span class="sep"> — </span><span class="lang-zh zh">是(兩邊用 BFS)</span></td></tr></table></div>
+<ul>
+<li><span class="lang-en">Why: BFS generates 1 + b + … + b^d nodes plus up to b^(d+1) − b more when the goal test happens at expansion, and keeps them all in memory. DFS keeps only one path plus siblings, about bm nodes. IDS repeats upper levels, N = (d+1)·1 + d·b + … + 1·b^d = O(b^d). Bidirectional searches to depth d/2 from both ends.</span><span class="sep"> — </span><span class="lang-zh zh">原因:BFS 產生 1 + b + … + b^d 個節點,再加上展開時才做 goal test 所多出的最多 b^(d+1) − b 個,且全部留在記憶體。DFS 只保存一條路徑加兄弟節點,約 bm 個。IDS 重複展開上層,N = (d+1)·1 + d·b + … + 1·b^d = O(b^d)。雙向搜尋從兩端各搜到深度 d/2。</span></li>
+<li><span class="lang-en">Avoiding repeated states: do not go back to the parent; do not generate a successor equal to its parent; best, keep a closed list of expanded states and discard repeats.</span><span class="sep"> — </span><span class="lang-zh zh">避免重複狀態:不回到 parent;不產生與 parent 相同的後繼;最好用 closed list 記錄已展開的 state,遇到重複就丟棄。</span></li>
+</ul>
+<h2 id="c4"><span class="lang-en">Chapter 4 — Informed Search and Local Search</span><span class="sep"> · </span><span class="lang-zh zh">第四章 — Informed Search 與 Local Search</span></h2>
+<h3><span class="lang-en">Informed search</span><span class="sep"> · </span><span class="lang-zh zh">Informed search</span></h3>
+<ul>
+<li><span class="lang-en">Best-first search orders the fringe by an evaluation function f(n). Greedy: f = h; incomplete, not optimal, poor. A*: f = g + h; complete and optimal when h is admissible (never overestimates). h_SLD is admissible.</span><span class="sep"> — </span><span class="lang-zh zh">Best-first 以評估函數 f(n) 排序 fringe。Greedy:f = h;incomplete、not optimal、表現差。A*:f = g + h;h 為 admissible(永不高估)時 complete 且 optimal。h_SLD 是 admissible。</span></li>
+</ul>
+<pre>Romania, Arad to Bucharest
+Greedy : Arad-Sibiu-Fagaras-Bucharest = 140+99+211 = 450 (not optimal)
+A*     : Arad-Sibiu-RV-Pitesti-Bucharest = 140+80+97+101 = 418 (optimal)</pre>
+<ul>
+<li><span class="lang-en">IDA* = iterative deepening + A*, cutoff on f-cost; the next cutoff is the smallest f that exceeded the previous one. It saves memory.</span><span class="sep"> — </span><span class="lang-zh zh">IDA* = iterative deepening + A*,以 f-cost 為 cutoff;下一個 cutoff 是上一輪超出者中最小的 f。可節省記憶體。</span></li>
+<li><span class="lang-en">Heuristic quality: effective branching factor b* from N = 1 + b* + (b*)² + … + (b*)^d; smaller b* is better. h2 dominates h1 if h2(n) ≥ h1(n) for all n, and both are admissible. Use the largest admissible h.</span><span class="sep"> — </span><span class="lang-zh zh">啟發函數品質:effective branching factor b* 由 N = 1 + b* + (b*)² + … + (b*)^d 定義;b* 越小越好。若 h2(n) ≥ h1(n) 對所有 n 成立且兩者都 admissible,則 h2 dominates h1。用最大的 admissible h。</span></li>
+<li><span class="lang-en">8-puzzle example: h1 = number of misplaced tiles = 8, h2 = sum of Manhattan distances = 3 + 1 + 2 + 2 + 2 + 3 + 3 + 2 = 18, true cost 26.</span><span class="sep"> — </span><span class="lang-zh zh">8-puzzle 例:h1 = 錯位格數 = 8,h2 = 曼哈頓距離總和 = 3 + 1 + 2 + 2 + 2 + 3 + 3 + 2 = 18,真實成本 26。</span></li>
+<li><span class="lang-en">Inventing heuristics: the exact cost of a relaxed problem is admissible for the original; if unsure, use h = max(h1, …, hm); the cost of a subproblem solution is also a lower bound.</span><span class="sep"> — </span><span class="lang-zh zh">設計啟發函數:放寬問題的精確解成本對原問題是 admissible;不確定時用 h = max(h1, …, hm);子問題的解成本也是下界。</span></li>
+</ul>
+<h3><span class="lang-en">Local search</span><span class="sep"> · </span><span class="lang-zh zh">Local search</span></h3>
+<ul>
+<li><span class="lang-en">Local search keeps only a current state and moves to neighbours. It uses constant memory and suits large or continuous spaces and optimisation. It is incomplete and not optimal in theory.</span><span class="sep"> — </span><span class="lang-zh zh">Local search 只保留目前狀態並移到鄰居。記憶體固定,適合大型或連續空間與最佳化。理論上 incomplete 且 not optimal。</span></li>
+<li><span class="lang-en">Hill-climbing moves to the best neighbour. Failures: local maxima, ridges, plateaux. Random-restart hill-climbing repeats from random starts and keeps the best.</span><span class="sep"> — </span><span class="lang-zh zh">Hill-climbing 移到最佳鄰居。失敗情形:local maxima、ridges、plateaux。Random-restart hill-climbing 從隨機起點重複並保留最佳結果。</span></li>
+<li><span class="lang-en">Local beam search keeps k states and picks the best k of all m·k successors (the searches cooperate). Stochastic beam search picks k at random.</span><span class="sep"> — </span><span class="lang-zh zh">Local beam search 保留 k 個 state,從所有 m·k 個後繼中挑最好的 k 個(搜尋之間會合作)。Stochastic beam search 隨機挑 k 個。</span></li>
+<li><span class="lang-en">Genetic algorithm: population of k strings; fitness (8-queens: non-attacking pairs, max 28); select parents by fitness (24, 23, 20, 11 gives 31%, 29%, 26%, 14%); crossover at a random point (32752/411 + 24748/552 gives 32748552); mutation with small probability; keep the best k of the 2k.</span><span class="sep"> — </span><span class="lang-zh zh">Genetic algorithm:k 個字串的 population;fitness(8-queens:互不攻擊的皇后對,最大 28);依 fitness 選 parent(24、23、20、11 對應 31%、29%、26%、14%);在隨機切點 crossover(32752/411 + 24748/552 得 32748552);以小機率 mutation;從 2k 個中保留最好的 k 個。</span></li>
+</ul>
+<h2 id="c5"><span class="lang-en">Chapter 5 — Constraint Satisfaction Problems</span><span class="sep"> · </span><span class="lang-zh zh">第五章 — 約束滿足問題 CSP</span></h2>
+<h3><span class="lang-en">Definitions</span><span class="sep"> · </span><span class="lang-zh zh">定義</span></h3>
+<ul>
+<li><span class="lang-en">A CSP is &lt;X, C&gt;: variables with domains and constraints. It gives a standard representation so general-purpose algorithms work. A solution is a complete and consistent assignment. Possible complete assignments: O(d^n), e.g. 3^7 for Australia.</span><span class="sep"> — </span><span class="lang-zh zh">CSP 是 &lt;X, C&gt;:有 domain 的變數與 constraints。它提供標準表示,讓通用演算法可用。Solution 是 complete 且 consistent 的指派。可能的 complete assignment:O(d^n),如 Australia 為 3^7。</span></li>
+<li><span class="lang-en">Unary constraints are preprocessed by removing values from the domain. Binary constraints form a constraint graph. Higher-order constraints (Alldiff, cryptarithmetic) need a hypergraph or are split into binary ones.</span><span class="sep"> — </span><span class="lang-zh zh">Unary constraint 以刪除 domain 的值預處理。Binary constraint 形成 constraint graph。Higher-order constraint(Alldiff、cryptarithmetic)需要 hypergraph,或拆成 binary。</span></li>
+</ul>
+<h3><span class="lang-en">Solving with backtracking</span><span class="sep"> · </span><span class="lang-zh zh">以 backtracking 求解</span></h3>
+<ul>
+<li><span class="lang-en">Incremental formulation: start from the empty assignment, choose an unassigned variable, assign a non-conflicting value. Solutions appear at depth n, so DFS (backtracking) is complete.</span><span class="sep"> — </span><span class="lang-zh zh">Incremental formulation:從空指派開始,選一個未指派變數,指派不衝突的值。解出現在深度 n,所以 DFS(backtracking)是 complete。</span></li>
+</ul>
+<div class="tw"><table><tr><th><span class="lang-en">Heuristic</span><span class="sep"> — </span><span class="lang-zh zh">方法</span></th><th><span class="lang-en">Idea</span><span class="sep"> — </span><span class="lang-zh zh">概念</span></th></tr><tr><td>MRV</td><td><span class="lang-en">Choose the variable with the fewest legal values (fail-first)</span><span class="sep"> — </span><span class="lang-zh zh">選合法值最少的變數(fail-first)</span></td></tr><tr><td><span class="lang-en">Degree heuristic</span><span class="sep"> — </span><span class="lang-zh zh">Degree</span></td><td><span class="lang-en">Choose the variable with the most constraints on unassigned variables; used for the first pick (SA has degree 5)</span><span class="sep"> — </span><span class="lang-zh zh">選牽涉最多未指派變數 constraint 的變數;用於第一步(SA degree = 5)</span></td></tr><tr><td><span class="lang-en">Least-constraining value</span><span class="sep"> — </span><span class="lang-zh zh">LCV</span></td><td><span class="lang-en">Choose the value that leaves neighbours the most choices</span><span class="sep"> — </span><span class="lang-zh zh">選讓鄰居保留最多選擇的值</span></td></tr><tr><td><span class="lang-en">Forward checking</span><span class="sep"> — </span><span class="lang-zh zh">FC</span></td><td><span class="lang-en">After assigning X, delete inconsistent values from neighbours' domains; empty domain means backtrack</span><span class="sep"> — </span><span class="lang-zh zh">指派 X 後,刪除鄰居 domain 中不一致的值;出現空 domain 就回溯</span></td></tr><tr><td><span class="lang-en">Arc consistency</span><span class="sep"> — </span><span class="lang-zh zh">AC</span></td><td><span class="lang-en">For every x in Dom(X) there is a compatible y in Dom(Y); also catches conflicts between unassigned variables (NT–SA); repeat until stable</span><span class="sep"> — </span><span class="lang-zh zh">Dom(X) 中每個 x 在 Dom(Y) 都有相容的 y;也能發現未指派變數間的衝突(NT–SA);重複到穩定</span></td></tr><tr><td><span class="lang-en">Min-conflicts</span><span class="sep"> — </span><span class="lang-zh zh">Min-conflicts</span></td><td><span class="lang-en">Local search on a complete assignment; pick the value with the fewest conflicts; runtime almost independent of size</span><span class="sep"> — </span><span class="lang-zh zh">在 complete assignment 上做 local search;選衝突最少的值;執行時間幾乎與問題大小無關</span></td></tr></table></div>
+<ul>
+<li><span class="lang-en">Example: WA = red, Q = green. FC leaves NT and SA with {blue}, but they are adjacent: arc consistency detects it at once, FC only after a further assignment. With WA = red, Q = green, V = blue, Dom(SA) is empty, so FC backtracks.</span><span class="sep"> — </span><span class="lang-zh zh">例:WA = red、Q = green。FC 讓 NT 與 SA 都只剩 {blue},但兩者相鄰:AC 立刻發現,FC 要再指派後才發現。WA = red、Q = green、V = blue 時 Dom(SA) 為空,FC 回溯。</span></li>
+</ul>
+<h3><span class="lang-en">Problem structure</span><span class="sep"> · </span><span class="lang-zh zh">問題結構</span></h3>
+<ul>
+<li><span class="lang-en">Independent subproblems (T in Australia) are solved separately: O(d^n) becomes O(d^c · n/c), linear in n. A tree-structured CSP is solved in linear time. To reduce a graph to a tree: remove nodes (fix SA) or combine nodes (tree decomposition with mega-variables). Decomposition rules: every variable and every constraint appears in some subproblem; a variable in two subproblems appears on the whole path between them.</span><span class="sep"> — </span><span class="lang-zh zh">獨立子問題(Australia 的 T)分開解:O(d^n) 變成 O(d^c · n/c),對 n 線性。Tree-structured CSP 可在線性時間解。把圖化成樹:移除節點(固定 SA)或合併節點(用 mega-variable 的 tree decomposition)。分解規則:每個變數與每個 constraint 都出現在某個子問題;變數出現在兩個子問題時,必須出現在兩者之間路徑上的所有子問題。</span></li>
+</ul>
+<h2 id="c6"><span class="lang-en">Chapter 6 — Logical Agents</span><span class="sep"> · </span><span class="lang-zh zh">第六章 — 邏輯代理</span></h2>
+<h3><span class="lang-en">Knowledge-based agents and Wumpus world</span><span class="sep"> · </span><span class="lang-zh zh">知識型 agent 與 Wumpus world</span></h3>
+<ul>
+<li><span class="lang-en">A KB is a set of sentences. TELL adds sentences, ASK queries them, and the inference engine answers. This helps in partially observable environments.</span><span class="sep"> — </span><span class="lang-zh zh">KB 是一組 sentence。TELL 加入 sentence,ASK 查詢,inference engine 回答。對部分可觀察環境很有幫助。</span></li>
+<li><span class="lang-en">Wumpus PEAS: +1000 for gold, −1000 for death, −1 per action, −10 for the arrow; 4×4 grid starting at [1,1]; actions Forward, Turn, Grab, Shoot (one arrow); percepts [Stench, Breeze, Glitter, Bump, Scream]. About 21% of worlds have no safe solution.</span><span class="sep"> — </span><span class="lang-zh zh">Wumpus PEAS:拿到金子 +1000、死亡 −1000、每個動作 −1、用掉箭 −10;4×4 格,從 [1,1] 出發;動作 Forward、Turn、Grab、Shoot(一支箭);感知 [Stench, Breeze, Glitter, Bump, Scream]。約 21% 的世界沒有安全解。</span></li>
+</ul>
+<h3><span class="lang-en">Propositional logic</span><span class="sep"> · </span><span class="lang-zh zh">命題邏輯</span></h3>
+<ul>
+<li><span class="lang-en">Symbols and connectives ¬ ∧ ∨ ⇒ ⇔. In P ⇒ Q, P is the antecedent and Q the consequent. A truth table with n symbols has 2^n rows, which is too big, so use inference rules (Modus Ponens, And-Elimination) and equivalences (De Morgan, contraposition, implication elimination).</span><span class="sep"> — </span><span class="lang-zh zh">符號與連接詞 ¬ ∧ ∨ ⇒ ⇔。P ⇒ Q 中 P 是 antecedent、Q 是 consequent。n 個符號的 truth table 有 2^n 列,太大,所以用 inference rules(Modus Ponens、And-Elimination)與等價式(De Morgan、contraposition、implication elimination)。</span></li>
+</ul>
+<pre>KB: R1 ¬P11; R2 B11 &lt;=&gt; (P12 v P21); R3 B21 &lt;=&gt; (P11 v P22 v P31); R4 ¬B11; R5 B21
+7 symbols -&gt; 2^7 = 128 rows. From R4 and R2: P12 = false and P21 = false,
+so KB entails ¬P12: square [1,2] has no pit.</pre>
+<ul>
+<li><span class="lang-en">Weakness: lack of expressiveness. Every square and orientation needs its own propositions (1000+ rules even for 4×4).</span><span class="sep"> — </span><span class="lang-zh zh">弱點:缺乏表達力。每個格子與朝向都要各自的命題(4×4 就要上千條規則)。</span></li>
+</ul>
+<h3><span class="lang-en">First-order logic</span><span class="sep"> · </span><span class="lang-zh zh">一階邏輯</span></h3>
+<ul>
+<li><span class="lang-en">FOL adds objects, relations (predicates), functions and quantifiers, so one rule covers a whole class of objects. A model also contains a domain of objects (the example has 5 objects, 2 binary relations, 3 unary relations and 1 function). FOL lacks mechanisms for categories, time and events.</span><span class="sep"> — </span><span class="lang-zh zh">FOL 加入 objects、relations(predicates)、functions 與量詞,一條規則就能涵蓋一整類物件。Model 還包含 objects 的 domain(例子有 5 個 objects、2 個 binary relations、3 個 unary relations、1 個 function)。FOL 沒有 categories、time、events 的機制。</span></li>
+<li><span class="lang-en">∀ pairs with ⇒: ∀x King(x) ⇒ Person(x). ∃ pairs with ∧: ∃x Crown(x) ∧ OnHead(x, John). Quantifiers do not commute: ∀x∃y Loves(x,y) means everybody loves somebody; ∃y∀x Loves(x,y) means somebody is loved by everybody.</span><span class="sep"> — </span><span class="lang-zh zh">∀ 配 ⇒:∀x King(x) ⇒ Person(x)。∃ 配 ∧:∃x Crown(x) ∧ OnHead(x, John)。量詞不可交換:∀x∃y Loves(x,y) 是每個人都愛某個人;∃y∀x Loves(x,y) 是有某人被所有人愛。</span></li>
+<li><span class="lang-en">De Morgan for quantifiers: ¬∀x P ≡ ∃x ¬P; ¬∃x P ≡ ∀x ¬P; ∀x P ≡ ¬∃x ¬P; ∃x P ≡ ¬∀x ¬P. Prolog uses only ∀.</span><span class="sep"> — </span><span class="lang-zh zh">量詞的 De Morgan:¬∀x P ≡ ∃x ¬P;¬∃x P ≡ ∀x ¬P;∀x P ≡ ¬∃x ¬P;∃x P ≡ ¬∀x ¬P。Prolog 只用 ∀。</span></li>
+</ul>
+<script>
+function setMode(m){
+  document.body.classList.remove('mode-en','mode-zh','mode-both');
+  document.body.classList.add('mode-'+m);
+  document.querySelectorAll('.toggle-bar button').forEach(function(b){b.classList.remove('active');});
+  document.getElementById('btn-'+m).classList.add('active');
+}
+</script>
+</body>
+</html>

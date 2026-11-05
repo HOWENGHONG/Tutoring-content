@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CISC3012 AI — Final Vocabulary (生字表)</title>
+<style>
+:root{--fg:#1a1a1a;--muted:#666;--accent:#1155CC;--border:#ddd;--bg:#fff;--bg2:#f7f7f9;--good:#0a7d2c;}
+*{box-sizing:border-box;}
+body{font-family:-apple-system,"Segoe UI","Noto Sans TC","PingFang TC","Microsoft JhengHei",Arial,sans-serif;
+  max-width:920px;margin:0 auto;padding:0 20px 60px;color:var(--fg);line-height:1.65;background:var(--bg);}
+h1{font-size:1.55em;margin:18px 0 4px;}
+.subtitle{color:var(--muted);font-size:0.95em;margin-bottom:14px;}
+h2{margin-top:2em;border-bottom:2px solid var(--accent);padding-bottom:6px;font-size:1.25em;}
+h3{margin-top:1.5em;color:var(--accent);font-size:1.05em;}
+h4{margin-top:1.2em;font-size:1em;}
+table{border-collapse:collapse;width:100%;margin:1em 0;font-size:0.95em;}
+th,td{border:1px solid var(--border);padding:7px 9px;text-align:left;vertical-align:top;}
+th{background:var(--bg2);}
+tr:nth-child(even) td{background:#fbfbfc;}
+ul{padding-left:1.3em;}
+li{margin-bottom:0.5em;}
+.toggle-bar{position:sticky;top:0;background:rgba(255,255,255,0.97);backdrop-filter:blur(4px);
+  padding:12px 0;border-bottom:1px solid var(--border);z-index:50;display:flex;gap:8px;align-items:center;
+  margin-bottom:1.2em;flex-wrap:wrap;}
+.toggle-label{font-size:0.82em;color:var(--muted);margin-right:2px;}
+.toggle-bar button{padding:6px 16px;border:1.5px solid var(--accent);background:#fff;color:var(--accent);
+  border-radius:20px;cursor:pointer;font-size:0.88em;font-weight:600;transition:all .15s;}
+.toggle-bar button.active{background:var(--accent);color:#fff;}
+.toggle-bar button:hover{opacity:0.85;}
+body.mode-en .lang-zh{display:none;}
+body.mode-zh .lang-en{display:none;}
+body.mode-en .sep, body.mode-zh .sep{display:none;}
+.zh{font-family:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;}
+.tag{display:inline-block;background:#eef2ff;color:var(--accent);border-radius:4px;padding:1px 7px;
+  font-size:0.78em;font-weight:700;margin-right:6px;}
+.hint{color:var(--muted);font-size:0.9em;}
+.note-box{background:var(--bg2);border-left:4px solid var(--accent);padding:10px 14px;margin:1em 0;border-radius:4px;}
+hr{border:none;border-top:1px solid var(--border);margin:2em 0;}
+.opt{margin:2px 0 2px 1.4em;}
+.qblock{margin-bottom:1.3em;padding-bottom:0.2em;}
+.qstem{font-weight:600;}
+.marks{color:var(--muted);font-weight:400;font-size:0.9em;}
+.answer-key{background:#f6fff6;border:1px solid #cfe9cf;border-radius:6px;padding:14px 18px;margin-top:1em;}
+.answer-key summary{cursor:pointer;font-weight:700;color:var(--good);padding:4px 0;}
+code{background:var(--bg2);padding:1px 5px;border-radius:3px;font-size:0.92em;}
+@media print{.toggle-bar{position:static;}}
+.tw{overflow-x:auto;}
+pre{background:var(--bg2);padding:10px 12px;border-radius:6px;overflow-x:auto;font-size:0.9em;}
+sup{font-size:.75em}
+
+</style>
+</head>
+<body class="mode-both">
+<h1>CISC3012 AI — Final Vocabulary (生字表)</h1>
+<div class="subtitle"><span class="lang-en">Key terms for Chapters 1-6</span><span class="lang-zh zh"><br>第一至六章重點詞彙</span></div>
+<p class="hint"><a href="../index.html">← Home 首頁</a></p>
+<div class="toggle-bar">
+  <span class="toggle-label">Display 顯示：</span>
+  <button id="btn-both" class="active" onclick="setMode('both')">中英對照 Both</button>
+  <button id="btn-en" onclick="setMode('en')">English Only</button>
+  <button id="btn-zh" onclick="setMode('zh')">中文 Only</button>
+</div>
+<p class="hint">99 terms. Click a chapter to jump. 共 99 個詞彙。</p>
+<p class="hint"><a href="#v1">Ch1</a> · <a href="#v2">Ch2</a> · <a href="#v3">Ch3</a> · <a href="#v4">Ch4</a> · <a href="#v5">Ch5</a> · <a href="#v6">Ch6</a></p>
+<h2 id="v1">Ch1 What is AI?</h2><div class="tw"><table><tr><th>Term</th><th>中文</th><th>Meaning 意思</th></tr>
+<tr><td><strong>Artificial Intelligence (AI)</strong></td><td class="zh">人工智能</td><td><span class="lang-en">Systems that think or act humanly or rationally</span><span class="sep"> — </span><span class="lang-zh zh">像人或理性地思考與行動的系統</span></td></tr>
+<tr><td><strong>Turing Test</strong></td><td class="zh">圖靈測試</td><td><span class="lang-en">A questioner cannot tell whether a computer or a human is answering</span><span class="sep"> — </span><span class="lang-zh zh">提問者分不出回答者是電腦還是人</span></td></tr>
+<tr><td><strong>Total Turing Test</strong></td><td class="zh">完整圖靈測試</td><td><span class="lang-en">Turing Test plus computer vision and robotics</span><span class="sep"> — </span><span class="lang-zh zh">Turing Test 加上電腦視覺與機器人</span></td></tr>
+<tr><td><strong>Rational agent</strong></td><td class="zh">理性代理</td><td><span class="lang-en">Acts on given facts to achieve its given goals</span><span class="sep"> — </span><span class="lang-zh zh">依事實行動以達成既定目標</span></td></tr>
+<tr><td><strong>Machine learning</strong></td><td class="zh">機器學習</td><td><span class="lang-en">Learning rules/models from data</span><span class="sep"> — </span><span class="lang-zh zh">從資料學出規則或模型</span></td></tr>
+<tr><td><strong>Knowledge representation</strong></td><td class="zh">知識表示</td><td><span class="lang-en">Storing data as knowledge so it can be retrieved</span><span class="sep"> — </span><span class="lang-zh zh">把資料存成可檢索的知識</span></td></tr>
+<tr><td><strong>Automated reasoning</strong></td><td class="zh">自動推理</td><td><span class="lang-en">Concluding answers from existing knowledge</span><span class="sep"> — </span><span class="lang-zh zh">由已有知識推出答案</span></td></tr>
+<tr><td><strong>Generative AI (AIGC)</strong></td><td class="zh">生成式 AI</td><td><span class="lang-en">AI that creates text, images or code from prompts</span><span class="sep"> — </span><span class="lang-zh zh">依提示生成文字、圖像或程式碼</span></td></tr>
+</table></div>
+<h2 id="v2">Ch2 Intelligent Agents</h2><div class="tw"><table><tr><th>Term</th><th>中文</th><th>Meaning 意思</th></tr>
+<tr><td><strong>Agent</strong></td><td class="zh">代理</td><td><span class="lang-en">Perceives with sensors, acts with actuators</span><span class="sep"> — </span><span class="lang-zh zh">以感測器感知、以執行器行動</span></td></tr>
+<tr><td><strong>Percept</strong></td><td class="zh">感知</td><td><span class="lang-en">The agent's input at a time step</span><span class="sep"> — </span><span class="lang-zh zh">agent 在某時間步的輸入</span></td></tr>
+<tr><td><strong>Actuator</strong></td><td class="zh">執行器</td><td><span class="lang-en">Device through which an agent acts</span><span class="sep"> — </span><span class="lang-zh zh">agent 用來行動的裝置</span></td></tr>
+<tr><td><strong>Performance measure</strong></td><td class="zh">績效指標</td><td><span class="lang-en">Function that scores the results of actions</span><span class="sep"> — </span><span class="lang-zh zh">為行動結果打分的函數</span></td></tr>
+<tr><td><strong>PEAS</strong></td><td class="zh">PEAS</td><td><span class="lang-en">Performance, Environment, Actuators, Sensors</span><span class="sep"> — </span><span class="lang-zh zh">績效指標、環境、執行器、感測器</span></td></tr>
+<tr><td><strong>Fully / partially observable</strong></td><td class="zh">完全 / 部分可觀察</td><td><span class="lang-en">Whether sensors see the whole state</span><span class="sep"> — </span><span class="lang-zh zh">感測器是否能看到完整狀態</span></td></tr>
+<tr><td><strong>Deterministic / stochastic</strong></td><td class="zh">確定性 / 隨機性</td><td><span class="lang-en">Whether the next state is fully determined</span><span class="sep"> — </span><span class="lang-zh zh">下一狀態是否完全確定</span></td></tr>
+<tr><td><strong>Episodic / sequential</strong></td><td class="zh">獨立 / 連續</td><td><span class="lang-en">Whether actions affect later decisions</span><span class="sep"> — </span><span class="lang-zh zh">行動是否影響後續決策</span></td></tr>
+<tr><td><strong>Static / dynamic</strong></td><td class="zh">靜態 / 動態</td><td><span class="lang-en">Whether the environment changes meanwhile</span><span class="sep"> — </span><span class="lang-zh zh">環境是否在過程中變化</span></td></tr>
+<tr><td><strong>Discrete / continuous</strong></td><td class="zh">離散 / 連續</td><td><span class="lang-en">Finite distinct values or real-valued</span><span class="sep"> — </span><span class="lang-zh zh">有限明確的值或實數值</span></td></tr>
+<tr><td><strong>Simple reflex agent</strong></td><td class="zh">簡單反射代理</td><td><span class="lang-en">Uses condition-action rules only</span><span class="sep"> — </span><span class="lang-zh zh">只用條件-動作規則</span></td></tr>
+<tr><td><strong>Model-based reflex agent</strong></td><td class="zh">基於模型的反射代理</td><td><span class="lang-en">Adds an internal state</span><span class="sep"> — </span><span class="lang-zh zh">多了內部狀態</span></td></tr>
+<tr><td><strong>Goal-based agent</strong></td><td class="zh">目標導向代理</td><td><span class="lang-en">Chooses actions toward a goal</span><span class="sep"> — </span><span class="lang-zh zh">朝目標選擇動作</span></td></tr>
+<tr><td><strong>Utility-based agent</strong></td><td class="zh">效用導向代理</td><td><span class="lang-en">Maximises a utility value</span><span class="sep"> — </span><span class="lang-zh zh">最大化效用值</span></td></tr>
+<tr><td><strong>Learning agent</strong></td><td class="zh">學習代理</td><td><span class="lang-en">Improves from feedback</span><span class="sep"> — </span><span class="lang-zh zh">依回饋改進</span></td></tr>
+</table></div>
+<h2 id="v3">Ch3 Search</h2><div class="tw"><table><tr><th>Term</th><th>中文</th><th>Meaning 意思</th></tr>
+<tr><td><strong>Initial state</strong></td><td class="zh">初始狀態</td><td><span class="lang-en">Where the agent starts</span><span class="sep"> — </span><span class="lang-zh zh">agent 的起點</span></td></tr>
+<tr><td><strong>Successor function</strong></td><td class="zh">後繼函數</td><td><span class="lang-en">All possible actions and resulting states</span><span class="sep"> — </span><span class="lang-zh zh">所有可能的動作與結果狀態</span></td></tr>
+<tr><td><strong>Goal test</strong></td><td class="zh">目標測試</td><td><span class="lang-en">Checks whether a state is a goal</span><span class="sep"> — </span><span class="lang-zh zh">檢查是否為目標狀態</span></td></tr>
+<tr><td><strong>Path cost</strong></td><td class="zh">路徑成本</td><td><span class="lang-en">Sum of step costs, g(n)</span><span class="sep"> — </span><span class="lang-zh zh">各步成本總和 g(n)</span></td></tr>
+<tr><td><strong>State space</strong></td><td class="zh">狀態空間</td><td><span class="lang-en">All states reachable from the initial state</span><span class="sep"> — </span><span class="lang-zh zh">從初始狀態可到達的所有狀態</span></td></tr>
+<tr><td><strong>Fringe / frontier</strong></td><td class="zh">邊界</td><td><span class="lang-en">Unexpanded leaf nodes</span><span class="sep"> — </span><span class="lang-zh zh">尚未展開的 leaf nodes</span></td></tr>
+<tr><td><strong>Expand</strong></td><td class="zh">展開</td><td><span class="lang-en">Apply the successor function to a node</span><span class="sep"> — </span><span class="lang-zh zh">對節點套用後繼函數</span></td></tr>
+<tr><td><strong>Branching factor (b)</strong></td><td class="zh">分支因子</td><td><span class="lang-en">Number of successors per node</span><span class="sep"> — </span><span class="lang-zh zh">每個節點的後繼數</span></td></tr>
+<tr><td><strong>Completeness</strong></td><td class="zh">完備性</td><td><span class="lang-en">Guaranteed to find a solution if one exists</span><span class="sep"> — </span><span class="lang-zh zh">有解就保證找得到</span></td></tr>
+<tr><td><strong>Optimality</strong></td><td class="zh">最佳性</td><td><span class="lang-en">Finds the lowest-cost solution</span><span class="sep"> — </span><span class="lang-zh zh">找到成本最低的解</span></td></tr>
+<tr><td><strong>Breadth-first search (BFS)</strong></td><td class="zh">廣度優先搜尋</td><td><span class="lang-en">Expands shallowest node first, FIFO</span><span class="sep"> — </span><span class="lang-zh zh">先展開最淺的節點,FIFO</span></td></tr>
+<tr><td><strong>Uniform-cost search</strong></td><td class="zh">一致成本搜尋</td><td><span class="lang-en">Expands the lowest g(n)</span><span class="sep"> — </span><span class="lang-zh zh">先展開 g(n) 最小者</span></td></tr>
+<tr><td><strong>Depth-first search (DFS)</strong></td><td class="zh">深度優先搜尋</td><td><span class="lang-en">Expands deepest node first, LIFO</span><span class="sep"> — </span><span class="lang-zh zh">先展開最深的節點,LIFO</span></td></tr>
+<tr><td><strong>Depth-limited search</strong></td><td class="zh">限深搜尋</td><td><span class="lang-en">DFS with a depth limit</span><span class="sep"> — </span><span class="lang-zh zh">有深度上限的 DFS</span></td></tr>
+<tr><td><strong>Iterative deepening search</strong></td><td class="zh">迭代加深搜尋</td><td><span class="lang-en">Repeats DFS with limits 0, 1, 2, …</span><span class="sep"> — </span><span class="lang-zh zh">以上限 0, 1, 2… 重複做 DFS</span></td></tr>
+<tr><td><strong>Bidirectional search</strong></td><td class="zh">雙向搜尋</td><td><span class="lang-en">Forward from start and backward from goal</span><span class="sep"> — </span><span class="lang-zh zh">從起點正向、從目標反向</span></td></tr>
+<tr><td><strong>Closed list</strong></td><td class="zh">已展開表</td><td><span class="lang-en">Set of expanded states used to discard repeats</span><span class="sep"> — </span><span class="lang-zh zh">存放已展開 state 以丟棄重複</span></td></tr>
+</table></div>
+<h2 id="v4">Ch4 Informed & Local Search</h2><div class="tw"><table><tr><th>Term</th><th>中文</th><th>Meaning 意思</th></tr>
+<tr><td><strong>Informed (heuristic) search</strong></td><td class="zh">有資訊(啟發式)搜尋</td><td><span class="lang-en">Uses problem-specific information</span><span class="sep"> — </span><span class="lang-zh zh">使用與問題相關的資訊</span></td></tr>
+<tr><td><strong>Evaluation function f(n)</strong></td><td class="zh">評估函數</td><td><span class="lang-en">Ranks nodes for expansion</span><span class="sep"> — </span><span class="lang-zh zh">為節點的展開順序排序</span></td></tr>
+<tr><td><strong>Heuristic function h(n)</strong></td><td class="zh">啟發函數</td><td><span class="lang-en">Estimated cost from n to the goal</span><span class="sep"> — </span><span class="lang-zh zh">n 到目標的估計成本</span></td></tr>
+<tr><td><strong>Greedy best-first search</strong></td><td class="zh">貪心最佳優先搜尋</td><td><span class="lang-en">f(n) = h(n)</span><span class="sep"> — </span><span class="lang-zh zh">f(n) = h(n)</span></td></tr>
+<tr><td><strong>A* search</strong></td><td class="zh">A* 搜尋</td><td><span class="lang-en">f(n) = g(n) + h(n)</span><span class="sep"> — </span><span class="lang-zh zh">f(n) = g(n) + h(n)</span></td></tr>
+<tr><td><strong>Admissible heuristic</strong></td><td class="zh">可採納啟發函數</td><td><span class="lang-en">Never overestimates the cost to the goal</span><span class="sep"> — </span><span class="lang-zh zh">永不高估到目標的成本</span></td></tr>
+<tr><td><strong>Straight-line distance (h_SLD)</strong></td><td class="zh">直線距離</td><td><span class="lang-en">An admissible heuristic for route finding</span><span class="sep"> — </span><span class="lang-zh zh">路徑問題的 admissible 啟發函數</span></td></tr>
+<tr><td><strong>IDA*</strong></td><td class="zh">IDA*</td><td><span class="lang-en">Iterative deepening with f-cost cutoff</span><span class="sep"> — </span><span class="lang-zh zh">以 f-cost 為 cutoff 的迭代加深</span></td></tr>
+<tr><td><strong>Effective branching factor (b*)</strong></td><td class="zh">有效分支因子</td><td><span class="lang-en">Average branching factor measuring heuristic quality</span><span class="sep"> — </span><span class="lang-zh zh">衡量啟發函數品質的平均分支因子</span></td></tr>
+<tr><td><strong>Dominates</strong></td><td class="zh">支配</td><td><span class="lang-en">h2(n) ≥ h1(n) for all n</span><span class="sep"> — </span><span class="lang-zh zh">對所有 n 有 h2(n) ≥ h1(n)</span></td></tr>
+<tr><td><strong>Manhattan distance</strong></td><td class="zh">曼哈頓距離</td><td><span class="lang-en">Horizontal + vertical distance</span><span class="sep"> — </span><span class="lang-zh zh">橫向加直向距離</span></td></tr>
+<tr><td><strong>Relaxed problem</strong></td><td class="zh">放寬問題</td><td><span class="lang-en">A problem with fewer restrictions on operators</span><span class="sep"> — </span><span class="lang-zh zh">對動作限制較少的問題</span></td></tr>
+<tr><td><strong>Local search</strong></td><td class="zh">局部搜尋</td><td><span class="lang-en">Keeps only a current state</span><span class="sep"> — </span><span class="lang-zh zh">只保留目前狀態</span></td></tr>
+<tr><td><strong>Hill-climbing</strong></td><td class="zh">爬山法</td><td><span class="lang-en">Moves to the best neighbour</span><span class="sep"> — </span><span class="lang-zh zh">移到最佳鄰居</span></td></tr>
+<tr><td><strong>Local maximum</strong></td><td class="zh">局部最大值</td><td><span class="lang-en">Peak lower than the global maximum</span><span class="sep"> — </span><span class="lang-zh zh">低於全域最大的山峰</span></td></tr>
+<tr><td><strong>Ridge</strong></td><td class="zh">山脊</td><td><span class="lang-en">Narrow rising line causing oscillation</span><span class="sep"> — </span><span class="lang-zh zh">造成來回震盪的窄長上升帶</span></td></tr>
+<tr><td><strong>Plateau / shoulder</strong></td><td class="zh">平原 / 肩部</td><td><span class="lang-en">Flat region of the evaluation function</span><span class="sep"> — </span><span class="lang-zh zh">評估函數持平的區域</span></td></tr>
+<tr><td><strong>Random-restart hill-climbing</strong></td><td class="zh">隨機重啟爬山法</td><td><span class="lang-en">Repeat from random starts, keep the best</span><span class="sep"> — </span><span class="lang-zh zh">從隨機起點重複,保留最佳</span></td></tr>
+<tr><td><strong>Local beam search</strong></td><td class="zh">局部束搜尋</td><td><span class="lang-en">Keeps k states, picks best k of m·k successors</span><span class="sep"> — </span><span class="lang-zh zh">保留 k 個 state,從 m·k 個後繼挑最好的 k 個</span></td></tr>
+<tr><td><strong>Genetic algorithm (GA)</strong></td><td class="zh">遺傳演算法</td><td><span class="lang-en">Population search with crossover and mutation</span><span class="sep"> — </span><span class="lang-zh zh">用 crossover 與 mutation 的族群搜尋</span></td></tr>
+<tr><td><strong>Fitness</strong></td><td class="zh">適應度</td><td><span class="lang-en">Goodness of an individual</span><span class="sep"> — </span><span class="lang-zh zh">個體的好壞</span></td></tr>
+<tr><td><strong>Crossover</strong></td><td class="zh">交配</td><td><span class="lang-en">Combine two parents at a random point</span><span class="sep"> — </span><span class="lang-zh zh">在隨機切點結合兩個 parent</span></td></tr>
+<tr><td><strong>Mutation</strong></td><td class="zh">突變</td><td><span class="lang-en">Random small change of a state</span><span class="sep"> — </span><span class="lang-zh zh">對 state 做隨機小改變</span></td></tr>
+</table></div>
+<h2 id="v5">Ch5 CSP</h2><div class="tw"><table><tr><th>Term</th><th>中文</th><th>Meaning 意思</th></tr>
+<tr><td><strong>Constraint satisfaction problem (CSP)</strong></td><td class="zh">約束滿足問題</td><td><span class="lang-en">Variables, domains and constraints</span><span class="sep"> — </span><span class="lang-zh zh">變數、domain 與 constraints</span></td></tr>
+<tr><td><strong>Domain</strong></td><td class="zh">值域</td><td><span class="lang-en">Possible values of a variable</span><span class="sep"> — </span><span class="lang-zh zh">變數的可能值</span></td></tr>
+<tr><td><strong>Constraint</strong></td><td class="zh">約束</td><td><span class="lang-en">Allowed combinations of values</span><span class="sep"> — </span><span class="lang-zh zh">允許的值組合</span></td></tr>
+<tr><td><strong>Consistent assignment</strong></td><td class="zh">一致指派</td><td><span class="lang-en">Violates no constraint</span><span class="sep"> — </span><span class="lang-zh zh">不違反任何 constraint</span></td></tr>
+<tr><td><strong>Complete assignment</strong></td><td class="zh">完整指派</td><td><span class="lang-en">Every variable has a value</span><span class="sep"> — </span><span class="lang-zh zh">每個變數都有值</span></td></tr>
+<tr><td><strong>Constraint graph</strong></td><td class="zh">約束圖</td><td><span class="lang-en">Nodes = variables, arcs = constraints</span><span class="sep"> — </span><span class="lang-zh zh">節點 = 變數,弧 = constraint</span></td></tr>
+<tr><td><strong>Unary / binary constraint</strong></td><td class="zh">一元 / 二元約束</td><td><span class="lang-en">Involves one / two variables</span><span class="sep"> — </span><span class="lang-zh zh">涉及一個 / 兩個變數</span></td></tr>
+<tr><td><strong>Backtracking search</strong></td><td class="zh">回溯搜尋</td><td><span class="lang-en">DFS that assigns one variable at a time</span><span class="sep"> — </span><span class="lang-zh zh">一次指派一個變數的 DFS</span></td></tr>
+<tr><td><strong>MRV</strong></td><td class="zh">最少剩餘值</td><td><span class="lang-en">Fewest legal values first</span><span class="sep"> — </span><span class="lang-zh zh">先選合法值最少的變數</span></td></tr>
+<tr><td><strong>Degree heuristic</strong></td><td class="zh">度啟發法</td><td><span class="lang-en">Most constraints on unassigned variables</span><span class="sep"> — </span><span class="lang-zh zh">牽涉最多未指派變數的 constraint</span></td></tr>
+<tr><td><strong>Least-constraining value</strong></td><td class="zh">最少約束值</td><td><span class="lang-en">Value that leaves most options</span><span class="sep"> — </span><span class="lang-zh zh">讓鄰居保留最多選擇的值</span></td></tr>
+<tr><td><strong>Forward checking (FC)</strong></td><td class="zh">前向檢查</td><td><span class="lang-en">Prune neighbours' domains after assignment</span><span class="sep"> — </span><span class="lang-zh zh">指派後修剪鄰居的 domain</span></td></tr>
+<tr><td><strong>Arc consistency (AC)</strong></td><td class="zh">弧一致性</td><td><span class="lang-en">Every value has a compatible partner across an arc</span><span class="sep"> — </span><span class="lang-zh zh">每個值在弧另一端都有相容的值</span></td></tr>
+<tr><td><strong>Min-conflicts</strong></td><td class="zh">最少衝突</td><td><span class="lang-en">Local-search value choice with fewest conflicts</span><span class="sep"> — </span><span class="lang-zh zh">衝突最少的 local-search 選值</span></td></tr>
+<tr><td><strong>Tree decomposition</strong></td><td class="zh">樹分解</td><td><span class="lang-en">Group variables into subproblems arranged as a tree</span><span class="sep"> — </span><span class="lang-zh zh">把變數分成排成樹狀的子問題</span></td></tr>
+<tr><td><strong>Mega-variable</strong></td><td class="zh">超級變數</td><td><span class="lang-en">A subproblem treated as one variable</span><span class="sep"> — </span><span class="lang-zh zh">被當成一個變數的子問題</span></td></tr>
+</table></div>
+<h2 id="v6">Ch6 Logical Agents</h2><div class="tw"><table><tr><th>Term</th><th>中文</th><th>Meaning 意思</th></tr>
+<tr><td><strong>Knowledge base (KB)</strong></td><td class="zh">知識庫</td><td><span class="lang-en">A set of sentences</span><span class="sep"> — </span><span class="lang-zh zh">一組 sentence</span></td></tr>
+<tr><td><strong>TELL / ASK</strong></td><td class="zh">告知 / 詢問</td><td><span class="lang-en">Add to / query the KB</span><span class="sep"> — </span><span class="lang-zh zh">加入 / 查詢 KB</span></td></tr>
+<tr><td><strong>Inference engine</strong></td><td class="zh">推理引擎</td><td><span class="lang-en">Answers queries from the KB</span><span class="sep"> — </span><span class="lang-zh zh">依 KB 回答查詢</span></td></tr>
+<tr><td><strong>Wumpus world</strong></td><td class="zh">Wumpus 世界</td><td><span class="lang-en">Partially observable grid world with pits and a wumpus</span><span class="sep"> — </span><span class="lang-zh zh">有坑與 wumpus 的部分可觀察格子世界</span></td></tr>
+<tr><td><strong>Percept (stench, breeze, glitter, bump, scream)</strong></td><td class="zh">感知(臭味、風、閃光、撞牆、尖叫)</td><td><span class="lang-en">The five Wumpus percepts</span><span class="sep"> — </span><span class="lang-zh zh">Wumpus 的五種感知</span></td></tr>
+<tr><td><strong>Propositional logic (PL)</strong></td><td class="zh">命題邏輯</td><td><span class="lang-en">Boolean variables and connectives</span><span class="sep"> — </span><span class="lang-zh zh">布林變數與連接詞</span></td></tr>
+<tr><td><strong>Atomic sentence / literal</strong></td><td class="zh">原子句 / 文字</td><td><span class="lang-en">One symbol only</span><span class="sep"> — </span><span class="lang-zh zh">只含一個符號</span></td></tr>
+<tr><td><strong>Implication (⇒)</strong></td><td class="zh">蘊含</td><td><span class="lang-en">P ⇒ Q false only if P true and Q false</span><span class="sep"> — </span><span class="lang-zh zh">只有 P 真 Q 假時為 false</span></td></tr>
+<tr><td><strong>Antecedent / consequent</strong></td><td class="zh">前件 / 後件</td><td><span class="lang-en">Premise / conclusion</span><span class="sep"> — </span><span class="lang-zh zh">前提 / 結論</span></td></tr>
+<tr><td><strong>Truth table</strong></td><td class="zh">真值表</td><td><span class="lang-en">Lists all 2^n truth assignments</span><span class="sep"> — </span><span class="lang-zh zh">列出全部 2^n 種真值指派</span></td></tr>
+<tr><td><strong>Model</strong></td><td class="zh">模型</td><td><span class="lang-en">An assignment of truth values</span><span class="sep"> — </span><span class="lang-zh zh">真值的一組指派</span></td></tr>
+<tr><td><strong>Entailment (⊨)</strong></td><td class="zh">蘊含(推論)</td><td><span class="lang-en">KB ⊨ α if α is true in every model of KB</span><span class="sep"> — </span><span class="lang-zh zh">α 在 KB 的每個 model 都為真</span></td></tr>
+<tr><td><strong>Inference rule</strong></td><td class="zh">推理規則</td><td><span class="lang-en">Pattern deriving B from A</span><span class="sep"> — </span><span class="lang-zh zh">由 A 推出 B 的模式</span></td></tr>
+<tr><td><strong>Modus Ponens</strong></td><td class="zh">肯定前件</td><td><span class="lang-en">From α ⇒ β and α infer β</span><span class="sep"> — </span><span class="lang-zh zh">由 α ⇒ β 與 α 推得 β</span></td></tr>
+<tr><td><strong>First-order logic (FOL)</strong></td><td class="zh">一階邏輯</td><td><span class="lang-en">Objects, relations, functions, quantifiers</span><span class="sep"> — </span><span class="lang-zh zh">objects、relations、functions、量詞</span></td></tr>
+<tr><td><strong>Predicate</strong></td><td class="zh">謂詞</td><td><span class="lang-en">A relation over objects</span><span class="sep"> — </span><span class="lang-zh zh">物件之間的關係</span></td></tr>
+<tr><td><strong>Term</strong></td><td class="zh">項</td><td><span class="lang-en">Constant, variable or function of terms</span><span class="sep"> — </span><span class="lang-zh zh">常數、變數或函數</span></td></tr>
+<tr><td><strong>Universal quantifier (∀)</strong></td><td class="zh">全稱量詞</td><td><span class="lang-en">For all</span><span class="sep"> — </span><span class="lang-zh zh">對所有</span></td></tr>
+<tr><td><strong>Existential quantifier (∃)</strong></td><td class="zh">存在量詞</td><td><span class="lang-en">There exists</span><span class="sep"> — </span><span class="lang-zh zh">存在</span></td></tr>
+<tr><td><strong>Domain of a model</strong></td><td class="zh">模型的值域</td><td><span class="lang-en">The set of objects in the world</span><span class="sep"> — </span><span class="lang-zh zh">世界中物件的集合</span></td></tr>
+</table></div>
+<script>
+function setMode(m){
+  document.body.classList.remove('mode-en','mode-zh','mode-both');
+  document.body.classList.add('mode-'+m);
+  document.querySelectorAll('.toggle-bar button').forEach(function(b){b.classList.remove('active');});
+  document.getElementById('btn-'+m).classList.add('active');
+}
+</script>
+</body>
+</html>
